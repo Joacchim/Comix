@@ -4,7 +4,7 @@
 """
  --------------------------------------------------------------------------
 
- Comix 3.5.1 - GTK Comic Book Viewer
+ Comix SVN - GTK Comic Book Viewer
  Copyright (C) 2005-2006 Pontus Ekberg
  <herrekberg@users.sourceforge.net>
 
@@ -169,7 +169,7 @@ class Comix:
     # =======================================================
     # Various shared variables used throughout the program.
     # =======================================================
-    version = '3.5.1'
+    version = 'SVN'
     base_dir = ''
     path = ''
     archive_type = ''
@@ -538,22 +538,23 @@ class Comix:
         self.toolbutton_go = gtk.ToolButton(gtk.STOCK_JUMP_TO)
         
         self.toolbutton_fitscreen = \
-            gtk.RadioToolButton(None, 'fitscreen')
+            gtk.RadioToolButton(None, 'comix-fitscreen')
         self.toolbutton_fitscreen.set_label(_('Fit-to-screen mode'))
         self.toolbutton_fitwidth = \
-            gtk.RadioToolButton(self.toolbutton_fitscreen, 'fitwidth')
+            gtk.RadioToolButton(self.toolbutton_fitscreen, 'comix-fitwidth')
         self.toolbutton_fitwidth.set_label(_('Fit width mode'))
         self.toolbutton_fitheight = \
-            gtk.RadioToolButton(self.toolbutton_fitwidth, 'fitheight')
+            gtk.RadioToolButton(self.toolbutton_fitwidth, 'comix-fitheight')
         self.toolbutton_fitheight.set_label(_('Fit height mode'))
         self.toolbutton_fitnone = \
-            gtk.RadioToolButton(self.toolbutton_fitheight, 'fitnone')
+            gtk.RadioToolButton(self.toolbutton_fitheight, 'comix-fitnone')
         self.toolbutton_fitnone.set_label(_('Manual zoom mode'))
-        self.toolbutton_double_page = gtk.ToggleToolButton('double_page')
+        self.toolbutton_double_page = \
+            gtk.ToggleToolButton('comix-double-page')
         self.toolbutton_double_page.set_label(_('Double page mode'))
-        self.toolbutton_manga = gtk.ToggleToolButton('manga')
+        self.toolbutton_manga = gtk.ToggleToolButton('comix-manga')
         self.toolbutton_manga.set_label(_('Manga mode'))
-        self.toolbutton_lens = gtk.ToggleToolButton('lens')
+        self.toolbutton_lens = gtk.ToggleToolButton('comix-lens')
         self.toolbutton_lens.set_label(_('Magnifying lens'))
         
         self.toolbutton_first.connect_object("clicked", self.first_page, None)
@@ -7555,14 +7556,19 @@ class Comix:
                     <menuitem action="fit_height_mode" />
                     <menuitem action="fit_manual_mode" />
                     <separator />
+                    <menuitem action="Slideshow" />
+                    <separator />
                     <menuitem action="Lens" />
                     <separator />
-                    <menuitem action="Menubar" />
-                    <menuitem action="Toolbar" />
-                    <menuitem action="Statusbar" />
-                    <menuitem action="Scrollbars" />
-                    <menuitem action="Thumbnails" />
-                    <menuitem action="Hide_all" />
+                    <menu action="menu_toolbars">
+                        <menuitem action="Menubar" />
+                        <menuitem action="Toolbar" />
+                        <menuitem action="Statusbar" />
+                        <menuitem action="Scrollbars" />
+                        <menuitem action="Thumbnails" />
+                        <separator />
+                        <menuitem action="Hide_all" />
+                    </menu>
                 </menu>
                 <menu action="Transform">
                     <menuitem action="Rotate_90" />
@@ -7598,8 +7604,6 @@ class Comix:
                 <menuitem action="File" />
                 <menuitem action="Comments" />
                 <menuitem action="Thumbnail_dialog" />
-                <separator />
-                <menuitem action="Slideshow" />
                 <separator />
                 <menuitem action="Add_to_library" />
                 <menuitem action="Convert" />
@@ -7682,6 +7686,8 @@ class Comix:
                     <menuitem action="fit_height_mode" />
                     <menuitem action="fit_manual_mode" />
                     <separator />
+                    <menuitem action="Slideshow" />
+                    <separator />
                     <menuitem action="Lens" />
                     <separator />
                     <menu action="Transform">
@@ -7702,14 +7708,15 @@ class Comix:
                         <menuitem action="Zfit" />
                     </menu>
                     <separator />
-                    <menuitem action="Slideshow" />
-                    <separator />
-                    <menuitem action="Menubar" />
-                    <menuitem action="Toolbar" />
-                    <menuitem action="Statusbar" />
-                    <menuitem action="Scrollbars" />
-                    <menuitem action="Thumbnails" />
-                    <menuitem action="Hide_all" />
+                    <menu action="menu_toolbars">
+                        <menuitem action="Menubar" />
+                        <menuitem action="Toolbar" />
+                        <menuitem action="Statusbar" />
+                        <menuitem action="Scrollbars" />
+                        <menuitem action="Thumbnails" />
+                        <separator />
+                        <menuitem action="Hide_all" />
+                    </menu>
                 </menu>
                 <menu action="menu_go">
                     <menuitem action="Next" />
@@ -10338,142 +10345,147 @@ class Comix:
                 gtk.gdk.pixbuf_new_from_file(
                 os.path.join(icon_path, 'flip-horizontal.png'))
             iconset = gtk.IconSet(pixbuf)
-            factory.add('stock-flip-horiz', iconset)
+            factory.add('comix-flip-horiz', iconset)
             pixbuf = \
                 gtk.gdk.pixbuf_new_from_file(
                 os.path.join(icon_path, 'flip-vertical.png'))
             iconset = gtk.IconSet(pixbuf)
-            factory.add('stock-flip-vert', iconset)
+            factory.add('comix-flip-vert', iconset)
             pixbuf = \
                 gtk.gdk.pixbuf_new_from_file(
                 os.path.join(icon_path, 'rotate-180.png'))
             iconset = gtk.IconSet(pixbuf)
-            factory.add('stock-rotate-180', iconset)
+            factory.add('comix-rotate-180', iconset)
             pixbuf = \
                 gtk.gdk.pixbuf_new_from_file(
                 os.path.join(icon_path, 'rotate-270.png'))
             iconset = gtk.IconSet(pixbuf)
-            factory.add('stock-rotate-270', iconset)
+            factory.add('comix-rotate-270', iconset)
             pixbuf = \
                 gtk.gdk.pixbuf_new_from_file(
                 os.path.join(icon_path, 'rotate-90.png'))
             iconset = gtk.IconSet(pixbuf)
-            factory.add('stock-rotate-90', iconset)
+            factory.add('comix-rotate-90', iconset)
             pixbuf = \
                 gtk.gdk.pixbuf_new_from_file(
                 os.path.join(icon_path, 'rotate-90-jpeg.png'))
             iconset = gtk.IconSet(pixbuf)
-            factory.add('stock-rotate-90-jpeg', iconset)
+            factory.add('comix-rotate-90-jpeg', iconset)
             pixbuf = \
                 gtk.gdk.pixbuf_new_from_file(
                 os.path.join(icon_path, 'rotate-270-jpeg.png'))
             iconset = gtk.IconSet(pixbuf)
-            factory.add('stock-rotate-270-jpeg', iconset)
+            factory.add('comix-rotate-270-jpeg', iconset)
             pixbuf = \
                 gtk.gdk.pixbuf_new_from_file(
                 os.path.join(icon_path, 'flip-horizontal-jpeg.png'))
             iconset = gtk.IconSet(pixbuf)
-            factory.add('stock-flip-horizontal-jpeg', iconset)
+            factory.add('comix-flip-horizontal-jpeg', iconset)
             pixbuf = \
                 gtk.gdk.pixbuf_new_from_file(
                 os.path.join(icon_path, 'flip-vertical-jpeg.png'))
             iconset = gtk.IconSet(pixbuf)
-            factory.add('stock-flip-vertical-jpeg', iconset)
+            factory.add('comix-flip-vertical-jpeg', iconset)
             pixbuf = \
                 gtk.gdk.pixbuf_new_from_file(
                 os.path.join(icon_path, 'silk-library.png'))
             iconset = gtk.IconSet(pixbuf)
-            factory.add('library', iconset)
+            factory.add('comix-library', iconset)
             pixbuf = \
                 gtk.gdk.pixbuf_new_from_file(
-                os.path.join(icon_path, 'silk-library_add.png'))
+                os.path.join(icon_path, 'silk-library-add.png'))
             iconset = gtk.IconSet(pixbuf)
-            factory.add('library_add', iconset)
+            factory.add('comix-library-add', iconset)
             pixbuf = \
                 gtk.gdk.pixbuf_new_from_file(
                 os.path.join(icon_path, 'silk-slideshow.png'))
             iconset = gtk.IconSet(pixbuf)
-            factory.add('slideshow', iconset)
+            factory.add('comix-slideshow', iconset)
             pixbuf = \
                 gtk.gdk.pixbuf_new_from_file(
                 os.path.join(icon_path, 'silk-bookmarks.png'))
             iconset = gtk.IconSet(pixbuf)
-            factory.add('bookmarks', iconset)
+            factory.add('comix-bookmarks', iconset)
             pixbuf = \
                 gtk.gdk.pixbuf_new_from_file(
                 os.path.join(icon_path, 'silk-desaturate.png'))
             iconset = gtk.IconSet(pixbuf)
-            factory.add('desaturate', iconset)
+            factory.add('comix-desaturate', iconset)
             pixbuf = \
                 gtk.gdk.pixbuf_new_from_file(
-                os.path.join(icon_path, 'silk-file_operations.png'))
+                os.path.join(icon_path, 'silk-file-operations.png'))
             iconset = gtk.IconSet(pixbuf)
-            factory.add('file_operations', iconset)
+            factory.add('comix-file-operations', iconset)
             pixbuf = \
                 gtk.gdk.pixbuf_new_from_file(
                 os.path.join(icon_path, 'silk-thumbnails.png'))
             iconset = gtk.IconSet(pixbuf)
-            factory.add('thumbnails', iconset)
+            factory.add('comix-thumbnails', iconset)
             pixbuf = \
                 gtk.gdk.pixbuf_new_from_file(
                 os.path.join(icon_path, 'silk-view.png'))
             iconset = gtk.IconSet(pixbuf)
-            factory.add('view', iconset)
+            factory.add('comix-view', iconset)
             pixbuf = \
                 gtk.gdk.pixbuf_new_from_file(
                 os.path.join(icon_path, 'silk-zoom.png'))
             iconset = gtk.IconSet(pixbuf)
-            factory.add('zoom', iconset)
+            factory.add('comix-zoom', iconset)
             pixbuf = \
                 gtk.gdk.pixbuf_new_from_file(
                 os.path.join(icon_path, 'silk-transform.png'))
             iconset = gtk.IconSet(pixbuf)
-            factory.add('transform', iconset)
+            factory.add('comix-transform', iconset)
             pixbuf = \
                 gtk.gdk.pixbuf_new_from_file(
-                os.path.join(icon_path, 'silk-recent_files.png'))
+                os.path.join(icon_path, 'silk-recent-files.png'))
             iconset = gtk.IconSet(pixbuf)
-            factory.add('recent_files', iconset)
+            factory.add('comix-recent-files', iconset)
             pixbuf = \
                 gtk.gdk.pixbuf_new_from_file(
-                os.path.join(icon_path, 'silk-edit_bookmarks.png'))
+                os.path.join(icon_path, 'silk-edit-bookmarks.png'))
             iconset = gtk.IconSet(pixbuf)
-            factory.add('edit_bookmarks', iconset)
+            factory.add('comix-edit-bookmarks', iconset)
+            pixbuf = \
+                gtk.gdk.pixbuf_new_from_file(
+                os.path.join(icon_path, 'silk-toolbars.png'))
+            iconset = gtk.IconSet(pixbuf)
+            factory.add('comix-toolbars', iconset)
             pixbuf = \
                 gtk.gdk.pixbuf_new_from_file(
                 os.path.join(icon_path, 'lens.png'))
             iconset = gtk.IconSet(pixbuf)
-            factory.add('lens', iconset)
+            factory.add('comix-lens', iconset)
             pixbuf = \
                 gtk.gdk.pixbuf_new_from_file(
-                os.path.join(icon_path, 'double_page.png'))
+                os.path.join(icon_path, 'double-page.png'))
             iconset = gtk.IconSet(pixbuf)
-            factory.add('double_page', iconset)
+            factory.add('comix-double-page', iconset)
             pixbuf = \
                 gtk.gdk.pixbuf_new_from_file(
                 os.path.join(icon_path, 'manga.png'))
             iconset = gtk.IconSet(pixbuf)
-            factory.add('manga', iconset)
+            factory.add('comix-manga', iconset)
             pixbuf = \
                 gtk.gdk.pixbuf_new_from_file(
                 os.path.join(icon_path, 'fitscreen.png'))
             iconset = gtk.IconSet(pixbuf)
-            factory.add('fitscreen', iconset)
+            factory.add('comix-fitscreen', iconset)
             pixbuf = \
                 gtk.gdk.pixbuf_new_from_file(
                 os.path.join(icon_path, 'fitwidth.png'))
             iconset = gtk.IconSet(pixbuf)
-            factory.add('fitwidth', iconset)
+            factory.add('comix-fitwidth', iconset)
             pixbuf = \
                 gtk.gdk.pixbuf_new_from_file(
                 os.path.join(icon_path, 'fitheight.png'))
             iconset = gtk.IconSet(pixbuf)
-            factory.add('fitheight', iconset)
+            factory.add('comix-fitheight', iconset)
             pixbuf = \
                 gtk.gdk.pixbuf_new_from_file(
                 os.path.join(icon_path, 'fitnone.png'))
             iconset = gtk.IconSet(pixbuf)
-            factory.add('fitnone', iconset)
+            factory.add('comix-fitnone', iconset)
             factory.add_default()
         except:
             print 'Could not load icons.'
@@ -10634,7 +10646,7 @@ class Comix:
                 None, self.last_page),
             ('Go', gtk.STOCK_JUMP_TO, _('_Go to page...'), 'g',
                 None, self.go_to_page_dialog_open),
-            ('Zoom', 'zoom', _('Manual _Zoom')),
+            ('Zoom', 'comix-zoom', _('Manual _Zoom')),
             ('Zin', gtk.STOCK_ZOOM_IN, _('_Zoom in'), 'KP_Add',
                 None, self.zoom_in),
             ('Zout', gtk.STOCK_ZOOM_OUT, _('Zoom _out'), 'KP_Subtract',
@@ -10651,13 +10663,15 @@ class Comix:
                 None, self.add_menu_thumb),
             ('Clear_book', gtk.STOCK_CLEAR, _('Clear bookmarks'), '',
                 None, self.clear_bookmarks),
-            ('Bookmark_manager', 'edit_bookmarks', _('_Edit bookmarks...'),
-                '<Control>b', None, self.bookmark_dialog_open),
+            ('Bookmark_manager', 'comix-edit-bookmarks',
+                _('_Edit bookmarks...'), '<Control>b', None,
+                self.bookmark_dialog_open),
             ('Options', gtk.STOCK_PREFERENCES, _('Pr_eferences'), '',
                 None, self.preferences_dialog_open),
             ('About', gtk.STOCK_ABOUT, _('_About'), '',
                 None, self.about_dialog_open),
-            ('Thumbnail_dialog', 'thumbnails', _('_Manage thumbnails...'),
+            ('Thumbnail_dialog', 'comix-thumbnails',
+                _('_Manage thumbnails...'),
                 '', None, self.thumbnail_maintenance_dialog_open),
             ('File', gtk.STOCK_PROPERTIES, _('Proper_ties'), '<Alt>Return',
                 None, self.properties_dialog_open),
@@ -10665,12 +10679,12 @@ class Comix:
                 None, self.comment_switch),
             ('Open', gtk.STOCK_OPEN, _('_Open...'), '<Control>o',
                 None, self.file_chooser_open),
-            ('Recent', 'recent_files', _('_Recent files')),
+            ('Recent', 'comix-recent-files', _('_Recent files')),
             ('Clear_recent', gtk.STOCK_CLEAR, _('Clear recent files'), '',
                 None, self.clear_recent_files),
-            ('Library', 'library', _('Open _library...'), '<Control>l',
+            ('Library', 'comix-library', _('Open _library...'), '<Control>l',
                 None, self.library_load_files),
-            ('Add_to_library', 'library_add', _('_Add to library'), '',
+            ('Add_to_library', 'comix-library-add', _('_Add to library'), '',
                 None, self.library_add_helper),
             ('Convert', gtk.STOCK_CONVERT, _('Con_vert...'), '',
                 None, self.convert_dialog_open),
@@ -10680,61 +10694,62 @@ class Comix:
                 None, self.close_file),
             ('Quit', gtk.STOCK_QUIT, _('_Quit'), '<Control>q',
                 None, self.close_application),
-            ('Slideshow', 'slideshow', _('Slideshow'), '<Control>S', 
+            ('Slideshow', 'comix-slideshow', _('Slideshow'), '<Control>S', 
                 None, self.start_slideshow),
             ('Delete', gtk.STOCK_DELETE, _('Delete image...'), None,
                 None, self.delete_file),
-            ('file_rot_90', 'stock-rotate-90-jpeg',
+            ('file_rot_90', 'comix-rotate-90-jpeg',
                 _('CW lossless JPEG rotation...'), '<Alt>r',
                 None, self.rotate_file_90),
-            ('file_rot_270', 'stock-rotate-270-jpeg',
+            ('file_rot_270', 'comix-rotate-270-jpeg',
                 _('CCW lossless JPEG rotation...'),
                 '<Alt><Shift>r', None, self.rotate_file_270),
-            ('file_flip_horiz', 'stock-flip-horizontal-jpeg',
+            ('file_flip_horiz', 'comix-flip-horizontal-jpeg',
                 _('Horizontal lossless JPEG flip...'),
                 None, None, self.flip_file_horizontal),
-            ('file_flip_vert', 'stock-flip-vertical-jpeg',
+            ('file_flip_vert', 'comix-flip-vertical-jpeg',
                 _('Vertical lossless JPEG flip...'),
                 None, None, self.flip_file_vertical),
-            ('file_desaturate', 'desaturate',
+            ('file_desaturate', 'comix-desaturate',
                 _('Convert JPEG to greyscale...'),
                 None, None, self.desaturate_file),
             ('menu_bookmarks', None, _('_Bookmarks')),
-            ('menu_bookmarks_popup', 'bookmarks', _('_Bookmarks')),
+            ('menu_toolbars', 'comix-toolbars', _('_Toolbars')),
+            ('menu_bookmarks_popup', 'comix-bookmarks', _('_Bookmarks')),
             ('menu_edit', None, _('_Edit')),
-            ('menu_file_operations', 'file_operations',
+            ('menu_file_operations', 'comix-file-operations',
                 _('File o_perations')),
             ('menu_file', None, _('_File')),
             ('menu_view', None, _('_View')),
-            ('menu_view_popup', 'view', _('_View')),
+            ('menu_view_popup', 'comix-view', _('_View')),
             ('menu_go', None, _('_Go')),
             ('menu_go_popup', gtk.STOCK_GO_FORWARD, _('_Go')),
             ('menu_help', None, _('_Help')),
-            ('Transform', 'transform', _('_Transform')),
-            ('Rotate_90', 'stock-rotate-90', _('_Rotate 90 degrees CW'), 'r',
+            ('Transform', 'comix-transform', _('_Transform')),
+            ('Rotate_90', 'comix-rotate-90', _('_Rotate 90 degrees CW'), 'r',
                 None, self.rotate_90),
-            ('Rotate_180','stock-rotate-180', _('Rotate 180 de_grees'), None,
+            ('Rotate_180','comix-rotate-180', _('Rotate 180 de_grees'), None,
                 None, self.rotate_180),
-            ('Rotate_270', 'stock-rotate-270', _('Rotat_e 90 degrees CCW'),
+            ('Rotate_270', 'comix-rotate-270', _('Rotat_e 90 degrees CCW'),
                 '<Shift>r', None, self.rotate_270),
-            ('Flip_horiz', 'stock-flip-horiz', _('Fli_p horizontally'), None,
+            ('Flip_horiz', 'comix-flip-horiz', _('Fli_p horizontally'), None,
                 None, self.flip_horizontally),
-            ('Flip_vert', 'stock-flip-vert', _('Flip _vertically'), None,
+            ('Flip_vert', 'comix-flip-vert', _('Flip _vertically'), None,
                 None, self.flip_vertically)])
         self.actiongroup.add_toggle_actions([
             ('Fullscreen', None, _('_Fullscreen'), 'f',
                 None, self.fullscreen_switch),
             ('Double', None, _('_Double page mode'), 'd',
                 None, self.double_page_switch),
-            ('Toolbar', None, _('_Toolbar'), '',
+            ('Toolbar', None, _('_Toolbar'), None,
                 None, self.toolbar_switch),
-            ('Menubar', None, _('_Menubar'), '',
+            ('Menubar', None, _('_Menubar'), None,
                 None, self.menubar_switch),
-            ('Statusbar', None, _('St_atusbar'), '',
+            ('Statusbar', None, _('St_atusbar'), None,
                 None, self.statusbar_switch),
-            ('Scrollbars', None, _('S_crollbars'), '',
+            ('Scrollbars', None, _('S_crollbars'), None,
                 None, self.scrollbars_switch),
-            ('Thumbnails', None, _('Th_umbnails'), '',
+            ('Thumbnails', None, _('Th_umbnails'), 'F9',
                 None, self.thumbnail_switch),
             ('Hide_all', None, _('H_ide all'), 'i',
                 None, self.hide_all_switch),
