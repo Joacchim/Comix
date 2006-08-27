@@ -1,0 +1,195 @@
+#!/usr/bin/env python
+
+# Comicthumb 0.1
+# Create thumbnails for comic book archives (cbz, cbt and cbr).
+#
+# usage: comicthumb /path/to/archive.cbt outputfile [-s size ]
+#
+# Copyright (c) 2006 Christoph Wolk <christoph.wolk@googlemail.com> 
+#                  & Pontus Ekberg
+#
+# Released under the GNU General Public License
+#
+# Known Issues:
+# - errors with interlaced pngs (due to PIL)
+# - lack of error handling
+# - cover guessing could be improved
+
+import os
+import sys
+import zipfile
+import tarfile
+import StringIO
+import re
+import shutil
+try:
+    import Image
+except:
+    print 'You need PIL to create thumbnails.'
+    sys.exit(1)
+   
+THUMB_SIZE = 128
+TYPE = False
+
+if len(sys.argv) == 4:
+    if sys.argv[3].isdigit():
+        THUMB_SIZE = int(sys.argv[3])
+
+# get paths
+in_file_path = sys.argv[1]
+out_file_path = sys.argv[2]
+
+# temp directory needed for multiple archives
+if not os.path.exists('/tmp/comicthumb/'):
+	os.makedirs('/tmp/comicthumb/')
+	os.chmod('/tmp/comicthumb/', 0700)
+
+# return the first image in the list
+def first_image (filelist):
+    exts = re.compile(r'\.(jpg|png|jpeg|gif|tif|tiff)\s*$',
+        re.IGNORECASE)
+    for file in filelist:
+        if exts.search(file):
+            return file
+    return False
+
+# return the first archive in the list
+def first_archive (filelist):
+    exts = re.compile(
+        r'\.(zip|cbz|rar|cbr|tar|tar\.gz|tar\.bz2|tgz|tbz|cbt)\s*$',
+        re.IGNORECASE)    
+    for file in filelist:
+        if exts.search(file):
+            return file
+    return False
+
+# try to find the cover, if nothing good is found take first
+# very basic, should e.g. not get backcover.jpg if theres a better match
+def guessCover (filelist):
+    p = re.compile('cover|front', re.IGNORECASE)
+    coverlist = filter(p.search, filelist)
+    coverlist = [s for s in coverlist if 'back' not in s.lower()]
+    firstcover = first_image(coverlist)
+    if firstcover:
+        return firstcover
+    elif first_image(filelist):
+        return first_image(filelist)
+    else:
+        return False
+
+# take compressed archive, return cover image
+# if only archives are found, take the first and continue the search there
+def get_image(compressed_file, depth):
+    global TYPE
+    if zipfile.is_zipfile(compressed_file):
+       TYPE = TYPE or 'cbz'
+       zip = zipfile.ZipFile(compressed_file, "r")
+       zipfiles = zip.namelist()
+       zipfiles.sort()
+       cover = guessCover(zipfiles)
+       if cover:
+            picture = StringIO.StringIO(zip.read(cover))
+            zip.close()
+       else:
+           subarchive = first_archive(zipfiles)
+           if subarchive:
+                output = open("/tmp/comicthumb/archive" + str(depth), "wb")
+                output.write(zip.read(subarchive))
+                output.close()
+                return get_image("/tmp/comicthumb/archive" + str(depth), 
+                    depth +1)
+    elif tarfile.is_tarfile(compressed_file):
+        TYPE = TYPE or 'cbt'
+        file = open(compressed_file, 'rb')
+        tar = tarfile.open(compressed_file, "r")
+        tarfiles = tar.getnames()
+        tarfiles.sort()
+        cover = guessCover(tarfiles)
+        if cover:
+            picture = StringIO.StringIO(tar.extractfile(cover).read())
+            tar.close()
+        else:
+            subarchive = first_archive(tarfiles)
+            if subarchive:
+                output = open("/tmp/comicthumb/archive" + str(depth), "wb")
+                output.write(tar.extractfile(subarchive).read())
+                output.close()
+                return get_image("/tmp/comicthumb/archive" + 
+                    str(depth), depth+1) 
+    elif open(compressed_file, 'rb').read(4) == 'Rar!':
+        TYPE = TYPE or 'cbr'
+        # Make sure rar/unrar is installed
+        rar = ""
+        for path in os.getenv("PATH").split(":"):
+            if os.path.isfile(os.path.join(path, "unrar")):
+                rar = "unrar"
+                break
+            elif os.path.isfile(os.path.join(path, "rar")):
+                rar = "rar"
+                break
+        if not rar:
+            print "You must install unrar or rar to thumbnail RAR archives."
+            sys.exit(1)
+        rarfiles = os.popen(rar + ' vb "' + compressed_file + '"').readlines()
+        for i in range(len(rarfiles)):
+            rarfiles[i] = rarfiles[i].rstrip("\n")
+        rarfiles.sort()
+        cover = guessCover(rarfiles)
+        if cover:
+            picture = StringIO.StringIO(os.popen(rar + ' p -inul "' +
+                compressed_file + '" "' + cover + '"', "r").read())
+        else:
+            subarchive = first_archive(rarfiles)
+            if subarchive:
+                os.popen(rar + ' p -inul "' + compressed_file + '" "' + 
+                    subarchive + '" >  /tmp/comicthumb/archive' 
+                    + str(depth)+ '"', "r")
+                return get_image("/tmp/comicthumb/archive" + 
+                    str(depth), depth +1 )
+    return picture
+
+# main
+try:   
+    # get cover from archive
+    image = Image.open(get_image(in_file_path, 0))
+
+    # thumbnail it
+    if image.size[0] > image.size[1]:
+        x = THUMB_SIZE
+        y = THUMB_SIZE * image.size[1] / image.size[0]
+    else:
+        x = THUMB_SIZE * image.size[0] / image.size[1]
+        y = THUMB_SIZE
+    image = image.resize((x, y), Image.ANTIALIAS)
+    image = image.convert('RGB')
+    
+    # apply type info speech bubble
+    try:
+        if os.path.exists('../share/pixmaps/comix/' + TYPE + '.png'):
+            overlay_path = '../share/pixmaps/comix/' + TYPE + '.png'
+        elif os.path.exists('/usr/local/share/pixmaps/comix/' + TYPE + '.png'):
+            overlay_path = '/usr/local/share/pixmaps/comix/' + TYPE + '.png'
+        elif os.path.exists('/usr/share/pixmaps/comix/' + TYPE + '.png'):
+            overlay_path = '/usr/share/pixmaps/comix/' + TYPE + '.png'
+        
+        overlay_image=Image.open(overlay_path)
+        image_canvas = \
+            Image.new('RGBA', (image.size[0], image.size[1]), (0, 0, 0, 0))
+        image_canvas.paste(overlay_image, 
+            (image.size[0] - 35, image.size[1] - 30))
+        image = Image.composite(image_canvas, image, image_canvas)
+    except:
+        pass
+    
+    # save it
+    image.save(out_file_path, 'PNG')
+    exit_flag = 0
+except:
+   exit_flag = 1
+   
+# remove tempory stuff
+if os.path.isdir('/tmp/comicthumb/'):
+	shutil.rmtree('/tmp/comicthumb/')
+
+# and exit
+sys.exit(exit_flag)
