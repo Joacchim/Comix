@@ -110,7 +110,7 @@ class Comix:
         'window height': gtk.gdk.screen_get_default().get_height() * 3 / 4, 
         'window x': 0,
         'window y': 0,
-        'save window pos': 0,
+        'save window pos': 1,
         'default open path': os.getenv('HOME'),
         'default zoom mode': 1,
         'zoom scale': 100,
@@ -249,15 +249,14 @@ class Comix:
     slideshow_stopped_by_mouse = False
     pil_font = ImageFont.load_default()
     lens_update_counter = 0
+    window_width = 0
+    window_height = 0
     
     def close_application(self, widget, event=None):
         
         ''' Catches termination events and closes the GTK main
         loop. Saves data to files. '''
         
-        self.window.show()
-        self.prefs['window x'], self.prefs['window y'] = \
-            self.window.get_position()
         if self.file_exists:
             self.prefs['path to last file'] = self.path
         else:
@@ -277,7 +276,6 @@ class Comix:
         
         # FIXME: The data that is never saved should not be a
         # part of self.prefs in the first place!
-        del self.prefs['fullscreen']
         del self.prefs['double page']
         del self.prefs['zoom scale']
         del self.prefs['zoom mode']
@@ -293,6 +291,7 @@ class Comix:
             del self.prefs['window height']
             del self.prefs['window x']
             del self.prefs['window y']
+            del self.prefs['fullscreen']
         if not os.path.exists(os.environ['HOME'] + '/.comix'):
             os.mkdir(os.environ['HOME'] + '/.comix')
         config = \
@@ -2320,10 +2319,16 @@ class Comix:
         if self.exit:
             return False
         
-        if (allocation.width != self.prefs['window width'] or
-            allocation.height != self.prefs['window height']):
-            self.prefs['window width'] = allocation.width
-            self.prefs['window height'] = allocation.height
+        if not self.prefs['fullscreen']:
+            self.prefs['window x'], self.prefs['window y'] = \
+                self.window.get_position()
+        if (allocation.width != self.window_width or
+            allocation.height != self.window_height):
+            if not self.prefs['fullscreen']:
+                self.prefs['window width'] = allocation.width
+                self.prefs['window height'] = allocation.height
+            self.window_width = allocation.width
+            self.window_height = allocation.height
             self.resize_event = 1
             self.refresh_image()
             self.resize_event = 0
@@ -7600,9 +7605,9 @@ class Comix:
                     <menuitem action="Clear_book" />
                 </menu>
                 <separator />
-                <menuitem action="Options" />
                 <menuitem action="File" />
                 <menuitem action="Comments" />
+                <menuitem action="Options" />
                 <menuitem action="Thumbnail_dialog" />
                 <separator />
                 <menuitem action="Add_to_library" />
@@ -10888,7 +10893,7 @@ class Comix:
             self.actiongroup.get_action('Hide_all').set_active(True)
 
         # Default fullscreen.
-        if self.prefs['default fullscreen']:
+        if self.prefs['default fullscreen'] or self.prefs['fullscreen']:
             self.window.resize(self.prefs['window width'],
                 self.prefs['window height'])
             # Some window managers place the window (without decorations) 
@@ -10898,6 +10903,8 @@ class Comix:
             if not self.prefs['save window pos']:
                 self.window.move(50, 50)
             self.window.show()
+            if self.prefs['fullscreen']:
+                self.prefs['fullscreen'] = 0
             self.actiongroup.get_action('Fullscreen').set_active(True)
         
         if len(self.bookmarks) == 0:

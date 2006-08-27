@@ -1,11 +1,20 @@
+Comix 3.6
+    
+    - Improved the "Save window position and size" and "Default fullscreen"
+    preferences.
+    
+    - Changed the "Save window position and size" preference to on by default.
+    
+    - Changed the menus a bit.
+
 Comix 3.5.1
 
     - Fixed a bug that caused the mode of all images to be reported as
      "unknown" instead of RGB/CMYK etc.
      
-     - Fixed a bug that could cause an error when trying to quit Comix under
-     certain circumstances (i.e. when there is no ~/.comix/menu_thumbnails/
-     directory present).
+    - Fixed a bug that could cause an error when trying to quit Comix under
+    certain circumstances (i.e. when there is no ~/.comix/menu_thumbnails/
+    directory present).
 
 Comix 3.5
    
