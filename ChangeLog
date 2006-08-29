@@ -6,6 +6,12 @@ Comix 3.6
     - Changed the "Save window position and size" preference to on by default.
     
     - Changed the menus a bit.
+    
+    - Improved autocontrast (slightly heavier contrast change).
+    
+    - Fixed a bug that could cause an error message when going back to a
+    previous archive by flipping backwards in double page mode and directly
+    switching to single page mode afterwards.
 
 Comix 3.5.1
 

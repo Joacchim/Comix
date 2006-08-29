@@ -3266,7 +3266,7 @@ class Comix:
             try:
                 self.number_of_cached.pop()
                 self.number_of_cached.pop()
-            except TypeError:
+            except:
                 pass
             self.number_of_cached.append(self.file_number + 1)
         else:
@@ -9449,11 +9449,14 @@ class Comix:
                         
                         if self.prefs['autocontrast'] and mode == 'RGB':
                             pil_image = \
-                                ImageOps.autocontrast(pil_image, cutoff=0)
+                                ImageOps.autocontrast(pil_image, cutoff=1)
                         elif self.prefs['contrast'] != 100:
                             pil_image = \
                                 ImageEnhance.Contrast(pil_image).enhance(
                                 self.prefs['contrast'] / 100.0)
+
+                        #pil_image = \
+                        #    ImageEnhance.Sharpness(pil_image).enhance(2.0)
                         
                         imagestr = pil_image.tostring()
                         IS_RGBA = pil_image.mode == 'RGBA'
@@ -9907,7 +9910,7 @@ class Comix:
                         
                         if self.prefs['autocontrast'] and mode == 'RGB':
                             pil_image = \
-                                ImageOps.autocontrast(pil_image, cutoff=0)
+                                ImageOps.autocontrast(pil_image, cutoff=1)
                         elif self.prefs['contrast'] != 100:
                             pil_image = \
                                 ImageEnhance.Contrast(pil_image).enhance(
@@ -9915,7 +9918,7 @@ class Comix:
                         
                         if self.prefs['autocontrast'] and mode2 == 'RGB':
                             pil_image2 = \
-                                ImageOps.autocontrast(pil_image2, cutoff=0)
+                                ImageOps.autocontrast(pil_image2, cutoff=1)
                         elif self.prefs['contrast'] != 100:
                             pil_image2 = \
                                 ImageEnhance.Contrast(pil_image2).enhance(
