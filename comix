@@ -399,7 +399,7 @@ class Comix:
     
     def create_main_window(self):
         
-        ''' Creates the main window and all it's widgets. '''
+        ''' Creates the main window and all its widgets. '''
         
         # =======================================================
         # Create main display area widgets.
@@ -574,8 +574,8 @@ class Comix:
         self.toolbar.insert(sep, -1)
         sep.show()
 
-        self.toolbutton_go.connect_object("clicked", self.go_to_page_dialog_open,
-            None)
+        self.toolbutton_go.connect_object("clicked",
+            self.go_to_page_dialog_open, None)
         self.toolbar.insert(self.toolbutton_go, -1)
         self.toolbutton_go.show()
         item = gtk.ToolItem()
@@ -649,7 +649,7 @@ class Comix:
     
     def create_library_window(self):
         
-        ''' Creates the library window and all it's widgets. '''
+        ''' Creates the library window and all its widgets. '''
         
         # =======================================================
         # Create widgets.
@@ -868,7 +868,7 @@ class Comix:
     
     def create_preferences_dialog(self):
         
-        ''' Creates the preferences dialog and all it's widgets. '''
+        ''' Creates the preferences dialog and all its widgets. '''
         
         # =======================================================
         # Create all publically available widgets.
@@ -1312,9 +1312,37 @@ class Comix:
         
         self.preferences_dialog.vbox.show_all()
     
+    def create_colour_adjust_dialog(self):
+        
+        ''' Creates the colour adjustment dialog and all its widgets. '''
+        
+        self.colour_adjust_dialog = \
+            gtk.Dialog(_('Adjust colour'), self.window, False,)
+        self.colour_adjust_dialog.add_buttons(
+            _('Default'), gtk.RESPONSE_NO,
+            gtk.STOCK_OK, gtk.RESPONSE_OK)
+        self.colour_adjust_dialog.set_resizable(False)
+        self.colour_adjust_dialog.set_has_separator(False)
+        
+        hbox = gtk.HBox(False, 5)
+        self.colour_adjust_dialog.vbox.add(hbox)
+        vbox_left = gtk.VBox(False, 2)
+        vbox_right = gtk.VBox(False, 2)
+        hbox.pack_start(vbox_left, False, False, 2)
+        hbox.pack_start(vbox_right, True, True, 2)
+        
+        label = gtk.Label(_('Contrast') + ':')
+        vbox_left.pack_start(label, True, False, 2)
+        adj = gtk.Adjustment(1.0, 0, 2.0, 0.01, 0.1)
+        self.contrast_scale = gtk.HScale(adj)
+        self.contrast_scale.set_digits(2)
+        vbox_right.pack_start(self.contrast_scale, True, False, 2)
+
+        self.colour_adjust_dialog.vbox.show_all()
+
     def create_properties_dialog(self):
         
-        ''' Creates the properties dialog and all it's widgets. '''
+        ''' Creates the properties dialog and all its widgets. '''
         
         self.properties_dialog = \
             (gtk.Dialog(_("Properties"), self.window, 0, (gtk.STOCK_CLOSE,
@@ -1332,7 +1360,7 @@ class Comix:
     
     def create_go_to_page_dialog(self):
         
-        ''' Creates the go-to-page dialog and all it's widgets. '''
+        ''' Creates the go-to-page dialog and all its widgets. '''
         
         self.go_to_page_dialog = \
             gtk.Dialog(_("Go to page"), self.window, 0, (gtk.STOCK_CANCEL,
@@ -1356,7 +1384,7 @@ class Comix:
     
     def create_bookmark_dialog(self):
         
-        ''' Creates the bookmark dialog and all it's widgets. '''
+        ''' Creates the bookmark dialog and all its widgets. '''
         
         self.bookmark_dialog = \
             gtk.Dialog(_("Edit bookmarks"), self.window, 0, (gtk.STOCK_ADD,
@@ -1390,7 +1418,7 @@ class Comix:
     
     def create_about_dialog(self):
         
-        ''' Creates the about dialog and all it's widgets. '''
+        ''' Creates the about dialog and all its widgets. '''
         
         # =======================================================
         # About tab.
@@ -1485,7 +1513,7 @@ class Comix:
     
     def create_thumbnail_dialog(self):
         
-        ''' Creates the thumbnail maintenance dialog and all it's
+        ''' Creates the thumbnail maintenance dialog and all its
         widgets. '''
         
         self.thumbnail_dialog = \
@@ -1587,7 +1615,7 @@ class Comix:
     def create_progress_dialog(self):
         
         ''' Creates the thumbnail maintenance progress dialog and all
-        it's widgets. '''
+        its widgets. '''
         
         self.progress_dialog = \
             gtk.Dialog(_("Removing thumbnails"), self.window, 0,
@@ -1608,7 +1636,7 @@ class Comix:
     def create_lib_progress_dialog(self):
         
         ''' Creates the library maintenance progress dialog and all
-        it's widgets. '''
+        its widgets. '''
         
         self.lib_progress_dialog = \
             gtk.Dialog('', self.lib_window, 0, (gtk.STOCK_CLOSE,
@@ -1628,7 +1656,7 @@ class Comix:
     
     def create_convert_dialog(self):
         
-        ''' Creates the convert dialog and all it's widgets. '''        
+        ''' Creates the convert dialog and all its widgets. '''        
         
         self.convert_dialog = gtk.FileChooserDialog(title=_("Convert"),
             action=gtk.FILE_CHOOSER_ACTION_SAVE,
@@ -1678,7 +1706,7 @@ class Comix:
     
     def create_extract_dialog(self):
         
-        ''' Creates the extract image dialog and all it's widgets. '''        
+        ''' Creates the extract image dialog and all its widgets. '''        
         
         self.extract_dialog = gtk.FileChooserDialog(
             action=gtk.FILE_CHOOSER_ACTION_SAVE,
@@ -1690,7 +1718,7 @@ class Comix:
     def create_permission_dialog(self):
         
         ''' Creates the invalid permissions warning dialog and all
-        it's widgets. '''
+        its widgets. '''
         
         self.permission_dialog = \
             gtk.Dialog(_("Permission denied"), self.window, 0,
@@ -1715,7 +1743,7 @@ class Comix:
     def create_are_you_sure_dialog(self):
         
         ''' Creates the pestering "are you sure?" warning dialog and all
-        it's widgets. '''
+        its widgets. '''
         
         self.are_you_sure_dialog = \
             gtk.Dialog(_("Confirm operation"), self.window, gtk.DIALOG_MODAL,
@@ -7181,6 +7209,39 @@ class Comix:
         
         self.extract_dialog.hide()
     
+    def colour_adjust_open(self, *args):
+        
+        ''' Opens the colour adjust dialog. '''
+
+        if self.exit:
+            return False
+
+        self.colour_adjust_dialog.show()
+
+    def colour_adjust_close(self, *args):
+
+        ''' Hides the colour adjust dialog. '''
+
+        if self.exit:
+            return False
+
+        self.colour_adjust_dialog.hide()
+        return True
+
+    def colour_adjust_response(self, dialog, response):
+        
+        ''' Simply hides the colour adjust dialog. Changes are made in
+        real-time, so we don't have to do anything here. '''
+        
+        if self.exit:
+            return False
+
+        if response == int(gtk.RESPONSE_OK):
+            self.colour_adjust_close()
+        else:
+            # FIXME: Set default values
+            pass
+        
     def open_bookmark(self, event):
         
         ''' Opens a bookmark. '''
@@ -7543,9 +7604,9 @@ class Comix:
         ui_description = """<ui>
             <popup name="Pop">
                 <menu action="menu_go_popup">
-                    <menuitem action="Next" />
-                    <menuitem action="Previous" />
                     <menuitem action="First" />
+                    <menuitem action="Previous" />
+                    <menuitem action="Next" />
                     <menuitem action="Last" />
                     <separator />
                     <menuitem action="Go" />
@@ -7678,8 +7739,10 @@ class Comix:
                     <menuitem action="Quit" />
                 </menu>
                 <menu action="menu_edit">
-                    <menuitem action="Options" />
                     <menuitem action="Thumbnail_dialog" />
+                    <menuitem action="colour_adjust" />
+                    <separator />
+                    <menuitem action="Options" />
                 </menu>
                 <menu action="menu_view">
                     <menuitem action="Fullscreen" />
@@ -7724,9 +7787,9 @@ class Comix:
                     </menu>
                 </menu>
                 <menu action="menu_go">
-                    <menuitem action="Next" />
-                    <menuitem action="Previous" />
                     <menuitem action="First" />
+                    <menuitem action="Previous" />
+                    <menuitem action="Next" />
                     <menuitem action="Last" />
                     <separator />
                     <menuitem action="Go" />
@@ -10562,6 +10625,7 @@ class Comix:
         self.create_lib_progress_dialog()
         self.create_extract_dialog()
         self.create_are_you_sure_dialog()
+        self.create_colour_adjust_dialog()
         
         # =======================================================
         # Apply event masks and connect event handlers.
@@ -10639,6 +10703,10 @@ class Comix:
         self.button_release_event_id = \
             self.layout.connect('button_release_event',
             self.mouse_button_release_event)
+        self.colour_adjust_dialog.connect('response',
+            self.colour_adjust_response)
+        self.colour_adjust_dialog.connect('delete_event',
+            self.colour_adjust_close)
         
         # =======================================================
         # Create actions for the menus.
@@ -10702,6 +10770,8 @@ class Comix:
                 None, self.close_file),
             ('Quit', gtk.STOCK_QUIT, _('_Quit'), '<Control>q',
                 None, self.close_application),
+            ('colour_adjust', None, _('_Adjust colour...'), None,
+                None, self.colour_adjust_open),
             ('Slideshow', 'comix-slideshow', _('Slideshow'), '<Control>S', 
                 None, self.start_slideshow),
             ('Delete', gtk.STOCK_DELETE, _('Delete image...'), None,
