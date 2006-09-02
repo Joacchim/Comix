@@ -100,8 +100,10 @@ class Comix:
         'hide in fullscreen': 1,
         'double page': 0,
         'default double page': 0,
-        'saturation': 100,
-        'contrast': 100,
+        'saturation': 1.0,
+        'contrast': 1.0,
+        'brightness': 1.0,
+        'sharpness': 1.0,
         'save saturation and contrast': 0,
         'cache': 1,
         'manga': 0,
@@ -251,6 +253,7 @@ class Comix:
     lens_update_counter = 0
     window_width = 0
     window_height = 0
+    colour_adjust_signal_kill = False
     
     def close_application(self, widget, event=None):
         
@@ -286,6 +289,8 @@ class Comix:
         if not self.prefs['save saturation and contrast']:
             del self.prefs['saturation']
             del self.prefs['contrast']
+            del self.prefs['brightness']
+            del self.prefs['sharpness']
         if not self.prefs['save window pos']:
             del self.prefs['window width']
             del self.prefs['window height']
@@ -916,13 +921,8 @@ class Comix:
             gtk.CheckButton(_("Hide cursor in fullscreen mode"))
         self.button_open_last = \
             gtk.CheckButton(_("Open last viewed file on start"))
-        self.button_save_satcon = \
-            gtk.CheckButton(
-            _("Save saturation and contrast for future sessions"))
         self.button_show_pagenumber = \
             gtk.CheckButton(_("Show page numbers on thumbnails"))
-        self.button_autocontrast = \
-            gtk.CheckButton(_("Automatically adjust contrast"))
         self.button_fake_double = \
             gtk.CheckButton(
             _("Always use smart scrolling as if in double page mode"))
@@ -1039,12 +1039,6 @@ class Comix:
         label.set_alignment(0, 0)
         vbox_display.pack_start(label, False, False, 0)
         
-        self.button_autocontrast.connect("toggled",
-            self.preferences_dialog_change_settings, 26)
-        vbox_display.pack_start(self.button_autocontrast, False, False, 2)
-        self.button_save_satcon.connect("toggled",
-            self.preferences_dialog_change_settings, 24)
-        vbox_display.pack_start(self.button_save_satcon, False, False, 2)
         self.button_hide_cursor.connect("toggled",
             self.preferences_dialog_change_settings, 15)
         vbox_display.pack_start(self.button_hide_cursor, False, False, 2)
@@ -1324,19 +1318,75 @@ class Comix:
         self.colour_adjust_dialog.set_resizable(False)
         self.colour_adjust_dialog.set_has_separator(False)
         
-        hbox = gtk.HBox(False, 5)
-        self.colour_adjust_dialog.vbox.add(hbox)
-        vbox_left = gtk.VBox(False, 2)
-        vbox_right = gtk.VBox(False, 2)
+        vbox = gtk.VBox(False, 10)
+        vbox.set_border_width(10)
+        self.colour_adjust_dialog.vbox.add(vbox)
+        hbox = gtk.HBox(False, 10)
+        vbox.pack_start(hbox, False, False, 2)
+        vbox_left = gtk.VBox(False, 10)
+        vbox_right = gtk.VBox(False, 10)
+        vbox_right.set_size_request(200, -1)
         hbox.pack_start(vbox_left, False, False, 2)
         hbox.pack_start(vbox_right, True, True, 2)
+
+        label = gtk.Label(_('Brightness') + ':')
+        label.set_alignment(1, 0.5)
+        vbox_left.pack_start(label, True, False, 2)
+        adj = gtk.Adjustment(1.0, 0, 2.0, 0.01, 0.1)
+        self.brightness_scale = gtk.HScale(adj)
+        self.brightness_scale.set_digits(2)
+        self.brightness_scale.set_value_pos(gtk.POS_RIGHT)
+        self.brightness_scale.connect('value-changed',
+            self.colour_adjust_change_value, 'brightness')
+        vbox_right.pack_start(self.brightness_scale, True, False, 2)
         
         label = gtk.Label(_('Contrast') + ':')
+        label.set_alignment(1, 0.5)
         vbox_left.pack_start(label, True, False, 2)
         adj = gtk.Adjustment(1.0, 0, 2.0, 0.01, 0.1)
         self.contrast_scale = gtk.HScale(adj)
         self.contrast_scale.set_digits(2)
+        self.contrast_scale.set_value_pos(gtk.POS_RIGHT)
+        self.contrast_scale.connect('value-changed',
+            self.colour_adjust_change_value, 'contrast')
         vbox_right.pack_start(self.contrast_scale, True, False, 2)
+
+        label = gtk.Label(_('Saturation') + ':')
+        label.set_alignment(1, 0.5)
+        vbox_left.pack_start(label, True, False, 2)
+        adj = gtk.Adjustment(1.0, 0, 2.0, 0.01, 0.1)
+        self.saturation_scale = gtk.HScale(adj)
+        self.saturation_scale.set_digits(2)
+        self.saturation_scale.set_value_pos(gtk.POS_RIGHT)
+        self.saturation_scale.connect('value-changed',
+            self.colour_adjust_change_value, 'saturation')
+        vbox_right.pack_start(self.saturation_scale, True, False, 2)
+
+        label = gtk.Label(_('Sharpness') + ':')
+        label.set_alignment(1, 0.5)
+        vbox_left.pack_start(label, True, False, 2)
+        adj = gtk.Adjustment(1.0, 0, 2.0, 0.01, 0.1)
+        self.sharpness_scale = gtk.HScale(adj)
+        self.sharpness_scale.set_digits(2)
+        self.sharpness_scale.set_value_pos(gtk.POS_RIGHT)
+        self.sharpness_scale.connect('value-changed',
+            self.colour_adjust_change_value, 'sharpness')
+        vbox_right.pack_start(self.sharpness_scale, True, False, 2)
+        
+        vbox.pack_start(gtk.HSeparator())
+        
+        self.button_autocontrast = \
+            gtk.CheckButton(_('Automatically adjust contrast'))
+        vbox.pack_start(self.button_autocontrast, False, False, 2)
+        self.button_autocontrast.connect("toggled",
+            self.colour_adjust_change_value, 'autocontrast')
+
+        self.button_save_satcon = \
+            gtk.CheckButton(
+            _('Save values for future sessions'))
+        vbox.pack_start(self.button_save_satcon, False, False, 2)
+        self.button_save_satcon.connect("toggled",
+            self.colour_adjust_change_value, 'save')     
 
         self.colour_adjust_dialog.vbox.show_all()
 
@@ -4751,6 +4801,8 @@ class Comix:
         
         if self.exit:
             return False
+
+        # FIXME: Rewrite this.
         
         if data == 0:
             if self.button_fullscreen.get_active():
@@ -4837,23 +4889,15 @@ class Comix:
             self.temp_prefs['open defaults to last browsed'] = 0
         elif data == 23:
             self.temp_prefs['open defaults to last browsed'] = 1
-        elif data == 24:
-            if self.button_save_satcon.get_active():
-                self.temp_prefs['save saturation and contrast'] = 1
-            else:
-                self.temp_prefs['save saturation and contrast'] = 0
+        #elif data == 24:
+        # FREE!
         elif data == 25:
             if self.button_show_pagenumber.get_active():
                 self.temp_prefs['show page numbers on thumbnails'] = 1
             else:
                 self.temp_prefs['show page numbers on thumbnails'] = 0
-        elif data == 26:
-            if self.button_autocontrast.get_active():
-                self.temp_prefs['autocontrast'] = 1
-                self.button_contrast.set_sensitive(False)
-            else:
-                self.temp_prefs['autocontrast'] = 0
-                self.button_contrast.set_sensitive(True)
+        #elif data == 26:
+        # FREE!
         elif data == 27:
             if self.button_fake_double.get_active():
                 self.temp_prefs['emulate double page'] = 1
@@ -7215,6 +7259,16 @@ class Comix:
 
         if self.exit:
             return False
+        
+        self.colour_adjust_signal_kill = True
+        self.contrast_scale.set_value(self.prefs['contrast'])
+        self.saturation_scale.set_value(self.prefs['saturation'])
+        self.brightness_scale.set_value(self.prefs['brightness'])
+        self.sharpness_scale.set_value(self.prefs['sharpness'])
+        self.button_save_satcon.set_active(
+            self.prefs['save saturation and contrast'])
+        self.button_autocontrast.set_active(self.prefs['autocontrast'])
+        self.colour_adjust_signal_kill = False
 
         self.colour_adjust_dialog.show()
 
@@ -7230,18 +7284,39 @@ class Comix:
 
     def colour_adjust_response(self, dialog, response):
         
-        ''' Simply hides the colour adjust dialog. Changes are made in
-        real-time, so we don't have to do anything here. '''
+        ''' Handles button presses (i.e. OK or Default) '''
         
         if self.exit:
             return False
-
-        if response == int(gtk.RESPONSE_OK):
+        
+        if response in [int(gtk.RESPONSE_OK), int(gtk.RESPONSE_DELETE_EVENT)]:
             self.colour_adjust_close()
         else:
-            # FIXME: Set default values
-            pass
+            self.colour_adjust_signal_kill = True
+            self.contrast_scale.set_value(1.0)
+            self.saturation_scale.set_value(1.0)
+            self.brightness_scale.set_value(1.0)
+            self.sharpness_scale.set_value(1.0)
+            self.button_save_satcon.set_active(False)
+            self.button_autocontrast.set_active(False)
+            self.colour_adjust_signal_kill = False
+            self.refresh_image()
+
+    def colour_adjust_change_value(self, scale, operation):
         
+        if operation == 'save':
+            self.prefs['save saturation and contrast'] = \
+                self.button_save_satcon.get_active()
+        elif operation == 'autocontrast':
+            self.prefs['autocontrast'] = \
+                self.button_autocontrast.get_active()
+            self.contrast_scale.set_sensitive(not self.prefs['autocontrast'])
+        else:
+            self.prefs[operation] = scale.get_value()
+        if not self.colour_adjust_signal_kill and not operation == 'save':
+            self.refresh_image()
+
+
     def open_bookmark(self, event):
         
         ''' Opens a bookmark. '''
@@ -9485,7 +9560,10 @@ class Comix:
                     if (self.prefs['rotation'] != 0 or
                         self.prefs['flip horiz'] or
                         self.prefs['flip vert'] or
-                        self.prefs['contrast'] != 100 or
+                        self.prefs['contrast'] != 1.0 or
+                        self.prefs['sharpness'] != 1.0 or 
+                        self.prefs['saturation'] != 1.0 or
+                        self.prefs['brightness'] != 1.0 or
                         self.prefs['autocontrast']):
                         assert(pixbuf.get_colorspace() ==
                             gtk.gdk.COLORSPACE_RGB)
@@ -9513,14 +9591,22 @@ class Comix:
                         if self.prefs['autocontrast'] and mode == 'RGB':
                             pil_image = \
                                 ImageOps.autocontrast(pil_image, cutoff=1)
-                        elif self.prefs['contrast'] != 100:
+                        elif self.prefs['contrast'] != 1.0:
                             pil_image = \
                                 ImageEnhance.Contrast(pil_image).enhance(
-                                self.prefs['contrast'] / 100.0)
-
-                        #pil_image = \
-                        #    ImageEnhance.Sharpness(pil_image).enhance(2.0)
-                        
+                                self.prefs['contrast'])
+                        if self.prefs['saturation'] != 1.0:
+                            pil_image = \
+                                ImageEnhance.Color(pil_image).enhance(
+                                self.prefs['saturation'])
+                        if self.prefs['brightness'] != 1.0:
+                            pil_image = \
+                                ImageEnhance.Brightness(pil_image).enhance(
+                                self.prefs['brightness'])
+                        if self.prefs['sharpness'] != 1.0:
+                            pil_image = \
+                                ImageEnhance.Sharpness(pil_image).enhance(
+                                self.prefs['sharpness'])
                         imagestr = pil_image.tostring()
                         IS_RGBA = pil_image.mode == 'RGBA'
                         pixbuf = \
@@ -9528,9 +9614,6 @@ class Comix:
                             gtk.gdk.COLORSPACE_RGB, IS_RGBA, 8,
                             pil_image.size[0], pil_image.size[1],
                             (IS_RGBA and 4 or 3) * pil_image.size[0])
-                    
-                    pixbuf.saturate_and_pixelate(pixbuf,
-                        self.prefs['saturation'] / 100.0, False)
                     
                     # =======================================================
                     # Store the width and height of the scaled image. Resize
@@ -9925,7 +10008,10 @@ class Comix:
                     if (self.prefs['rotation'] != 0 or
                         self.prefs['flip horiz'] or
                         self.prefs['flip vert'] or
-                        self.prefs['contrast'] != 100 or
+                        self.prefs['contrast'] != 1.0 or
+                        self.prefs['sharpness'] != 1.0 or 
+                        self.prefs['saturation'] != 1.0 or
+                        self.prefs['brightness'] != 1.0 or
                         self.prefs['autocontrast']):
                         assert(pixbuf.get_colorspace() ==
                             gtk.gdk.COLORSPACE_RGB)
@@ -9974,19 +10060,39 @@ class Comix:
                         if self.prefs['autocontrast'] and mode == 'RGB':
                             pil_image = \
                                 ImageOps.autocontrast(pil_image, cutoff=1)
-                        elif self.prefs['contrast'] != 100:
+                        elif self.prefs['contrast'] != 1.0:
                             pil_image = \
                                 ImageEnhance.Contrast(pil_image).enhance(
-                                self.prefs['contrast'] / 100.0)
-                        
+                                self.prefs['contrast'])
                         if self.prefs['autocontrast'] and mode2 == 'RGB':
                             pil_image2 = \
                                 ImageOps.autocontrast(pil_image2, cutoff=1)
-                        elif self.prefs['contrast'] != 100:
+                        elif self.prefs['contrast'] != 1.0:
                             pil_image2 = \
                                 ImageEnhance.Contrast(pil_image2).enhance(
-                                self.prefs['contrast'] / 100.0)
-                        
+                                self.prefs['contrast'])
+                        if self.prefs['saturation'] != 1.0:
+                            pil_image = \
+                                ImageEnhance.Color(pil_image).enhance(
+                                self.prefs['saturation'])
+                            pil_image2 = \
+                                ImageEnhance.Color(pil_image2).enhance(
+                                self.prefs['saturation'])
+                        if self.prefs['brightness'] != 1.0:
+                            pil_image = \
+                                ImageEnhance.Brightness(pil_image).enhance(
+                                self.prefs['brightness'])
+                            pil_image2 = \
+                                ImageEnhance.Brightness(pil_image2).enhance(
+                                self.prefs['brightness'])
+                        if self.prefs['sharpness'] != 1.0:
+                            pil_image = \
+                                ImageEnhance.Sharpness(pil_image).enhance(
+                                self.prefs['sharpness'])
+                            pil_image2 = \
+                                ImageEnhance.Sharpness(pil_image2).enhance(
+                                self.prefs['sharpness']) 
+
                         imagestr = pil_image.tostring()
                         imagestr2 = pil_image2.tostring()
                         IS_RGBA = pil_image.mode == 'RGBA'
@@ -10002,10 +10108,6 @@ class Comix:
                             pil_image2.size[0], pil_image2.size[1],
                             (IS_RGBA2 and 4 or 3) * pil_image2.size[0])
                     
-                    pixbuf.saturate_and_pixelate(pixbuf,
-                        self.prefs['saturation'] / 100.0, False)
-                    pixbuf2.saturate_and_pixelate(pixbuf2,
-                        self.prefs['saturation'] / 100.0, False)
                     self.image1_scaled_width = pixbuf.get_width()
                     self.image1_scaled_height = pixbuf.get_height()
                     self.image2_scaled_width = pixbuf2.get_width()
