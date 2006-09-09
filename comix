@@ -4260,9 +4260,13 @@ class Comix:
                                 files.append(temp_file)
                             loop = 1
                             break
-                for file in files:
+                for i, file in enumerate(files):
                     file = self.to_unicode(file)
-                    new_zip.write(file, file.encode('cp437'))
+                    try:
+                        name = file.encode('cp437')
+                    except:
+                        name = str(i) + '_unknown_encoding'
+                    new_zip.write(file, name)
                 new_zip.close()
                 os.chdir(dir)
             
@@ -8697,20 +8701,31 @@ class Comix:
             # Zip archive.
             # =======================================================
             if archive_type == 'zip':
-                zip = zipfile.ZipFile(src_path)
-                zipfiles = zip.namelist()
-                for x in zipfiles:
+                zipf = zipfile.ZipFile(src_path)
+                zipfiles = zipf.namelist()
+                for i, x in enumerate(zipfiles):
                     # FIXME: Other possible encodings?
                     dst = unicode(x, 'cp437')
-                    dst = dst.encode(sys.getfilesystemencoding())
-                    if zip.getinfo(x).file_size > 0:
+                    found_encoding = False
+                    for enc in (sys.getfilesystemencoding(),
+                        sys.getdefaultencoding(), 'utf8', 'latin-1'):
+                        try:
+                            dst = dst.encode(enc)
+                        except:
+                            pass
+                        else:
+                            found_encoding = True
+                            break
+                    if not found_encoding:
+                        dst = str(i) + '_unknown_encoding'
+                    if zipf.getinfo(x).file_size > 0:
                         if not os.path.exists(
                             os.path.dirname(dst_path + dst)):
                             os.makedirs(os.path.dirname(dst_path + dst))
                         new = open(dst_path + dst, 'w')
-                        new.write(zip.read(x))
+                        new.write(zipf.read(x))
                         new.close()
-                zip.close()
+                zipf.close()
                 return _("Zip archive")
             
             # =======================================================

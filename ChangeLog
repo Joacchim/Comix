@@ -12,6 +12,9 @@ Comix 3.6
     
     - Improved autocontrast (slightly heavier contrast change).
     
+    - Improved handling of Zip files containing files with filenames of an 
+    unknown character encoding. 
+    
     - Fixed a bug that could cause an error message when going back to a
     previous archive by flipping backwards in double page mode and directly
     switching to single page mode afterwards.
