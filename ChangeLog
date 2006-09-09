@@ -1,4 +1,7 @@
 Comix 3.6
+
+    - Added an "Adjust colour" dialog that lets you specify values for
+    brightness, contrast, saturation and sharpness.
     
     - Improved the "Save window position and size" and "Default fullscreen"
     preferences.
@@ -16,14 +19,14 @@ Comix 3.6
 Comix 3.5.1
 
     - Fixed a bug that caused the mode of all images to be reported as
-     "unknown" instead of RGB/CMYK etc.
-     
+    "unknown" instead of RGB/CMYK etc.
+    
     - Fixed a bug that could cause an error when trying to quit Comix under
     certain circumstances (i.e. when there is no ~/.comix/menu_thumbnails/
     directory present).
 
 Comix 3.5
-   
+
     - Added a bunch of new icons, including a new "logo".
     
     - The magnifying lens code has been polished a bit. It is now

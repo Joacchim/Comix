@@ -254,6 +254,7 @@ class Comix:
     window_width = 0
     window_height = 0
     colour_adjust_signal_kill = False
+    colour_adjust_dialog_displayed = False
     
     def close_application(self, widget, event=None):
         
@@ -291,6 +292,7 @@ class Comix:
             del self.prefs['contrast']
             del self.prefs['brightness']
             del self.prefs['sharpness']
+            del self.prefs['autocontrast']
         if not self.prefs['save window pos']:
             del self.prefs['window width']
             del self.prefs['window height']
@@ -1321,11 +1323,17 @@ class Comix:
         vbox = gtk.VBox(False, 10)
         vbox.set_border_width(10)
         self.colour_adjust_dialog.vbox.add(vbox)
+        
+        self.colour_adjust_histogram = gtk.Image()
+        vbox.pack_start(self.colour_adjust_histogram, True, True, 2)
+        
+        vbox.pack_start(gtk.HSeparator())
+
         hbox = gtk.HBox(False, 10)
         vbox.pack_start(hbox, False, False, 2)
         vbox_left = gtk.VBox(False, 10)
         vbox_right = gtk.VBox(False, 10)
-        vbox_right.set_size_request(200, -1)
+        vbox_right.set_size_request(230, -1)
         hbox.pack_start(vbox_left, False, False, 2)
         hbox.pack_start(vbox_right, True, True, 2)
 
@@ -1338,8 +1346,9 @@ class Comix:
         self.brightness_scale.set_value_pos(gtk.POS_RIGHT)
         self.brightness_scale.connect('value-changed',
             self.colour_adjust_change_value, 'brightness')
+        self.brightness_scale.set_update_policy(gtk.UPDATE_DELAYED)
         vbox_right.pack_start(self.brightness_scale, True, False, 2)
-        
+
         label = gtk.Label(_('Contrast') + ':')
         label.set_alignment(1, 0.5)
         vbox_left.pack_start(label, True, False, 2)
@@ -1349,6 +1358,7 @@ class Comix:
         self.contrast_scale.set_value_pos(gtk.POS_RIGHT)
         self.contrast_scale.connect('value-changed',
             self.colour_adjust_change_value, 'contrast')
+        self.contrast_scale.set_update_policy(gtk.UPDATE_DELAYED)
         vbox_right.pack_start(self.contrast_scale, True, False, 2)
 
         label = gtk.Label(_('Saturation') + ':')
@@ -1360,6 +1370,7 @@ class Comix:
         self.saturation_scale.set_value_pos(gtk.POS_RIGHT)
         self.saturation_scale.connect('value-changed',
             self.colour_adjust_change_value, 'saturation')
+        self.saturation_scale.set_update_policy(gtk.UPDATE_DELAYED)
         vbox_right.pack_start(self.saturation_scale, True, False, 2)
 
         label = gtk.Label(_('Sharpness') + ':')
@@ -1371,6 +1382,7 @@ class Comix:
         self.sharpness_scale.set_value_pos(gtk.POS_RIGHT)
         self.sharpness_scale.connect('value-changed',
             self.colour_adjust_change_value, 'sharpness')
+        self.sharpness_scale.set_update_policy(gtk.UPDATE_DELAYED)
         vbox_right.pack_start(self.sharpness_scale, True, False, 2)
         
         vbox.pack_start(gtk.HSeparator())
@@ -6051,7 +6063,7 @@ class Comix:
         self.properties_dialog.hide()
         return True
     
-    def draw_histogram(self, pixbuf, file_number):
+    def draw_histogram(self, pixbuf, file_number=None):
         
         ''' Draws a histogram from pixbuf and returns it as another
         pixbuf together with some statistics. '''
@@ -6064,9 +6076,9 @@ class Comix:
             Image.frombuffer(mode, dimensions, pixels, 'raw', mode, stride, 1)
         hist_data = pil_image.histogram()
         hist_rgb_im = Image.new('RGB', (256, 150), (50, 50, 50))
-        y_scale = \
-            float(150) / max(hist_data[1:254] + hist_data[257:510] + 
-            hist_data[513:-1])
+        maximum = \
+            max(hist_data + [1])
+        y_scale = float(150) / maximum
         for x in xrange(256):
             r = int(hist_data[x] * y_scale)
             g = int(hist_data[x + 256] * y_scale)
@@ -6074,6 +6086,10 @@ class Comix:
             for y, val in enumerate(reversed(xrange(150))):
                 hist_rgb_im.putpixel((x, y), (255 * (r > val),
                     255 * (g > val), 255 * (b > val)))
+        maxstr = 'max: ' + str(maximum)
+        draw = ImageDraw.Draw(hist_rgb_im)
+        draw.rectangle((0, 0, len(maxstr) * 6 + 2, 10), fill=(0, 0, 0))
+        draw.text((2, 0), maxstr, fill=(255, 255, 255))
         hist_rgb_im = ImageOps.expand(hist_rgb_im, 2, (50, 50, 50))
         hist_rgb_im = ImageOps.expand(hist_rgb_im, 1, (0, 0, 0))
         imagestr = hist_rgb_im.tostring()
@@ -7269,7 +7285,10 @@ class Comix:
             self.prefs['save saturation and contrast'])
         self.button_autocontrast.set_active(self.prefs['autocontrast'])
         self.colour_adjust_signal_kill = False
-
+        self.colour_adjust_dialog_displayed = True
+        if self.file_exists:
+            # To get histogram. FIXME: Too costly.
+            self.refresh_image()
         self.colour_adjust_dialog.show()
 
     def colour_adjust_close(self, *args):
@@ -7280,6 +7299,7 @@ class Comix:
             return False
 
         self.colour_adjust_dialog.hide()
+        self.colour_adjust_dialog_displayed = False
         return True
 
     def colour_adjust_response(self, dialog, response):
@@ -7316,7 +7336,38 @@ class Comix:
         if not self.colour_adjust_signal_kill and not operation == 'save':
             self.refresh_image()
 
-
+    def colour_adjust_draw_histogram(self, pixbuf):
+        
+        dimensions = pixbuf.get_width(), pixbuf.get_height()
+        stride = pixbuf.get_rowstride()
+        pixels = pixbuf.get_pixels()
+        mode = pixbuf.get_has_alpha() and 'RGBA' or 'RGB'
+        pil_image = \
+            Image.frombuffer(mode, dimensions, pixels, 'raw', mode, stride, 1)
+        hist_data = pil_image.histogram()
+        hist_rgb_im = Image.new('RGB', (256, 150), (50, 50, 50))
+        maximum = \
+            max(hist_data + [1])
+        y_scale = float(150) / maximum
+        for x in xrange(256):
+            r = int(hist_data[x] * y_scale)
+            g = int(hist_data[x + 256] * y_scale)
+            b = int(hist_data[x + 512] * y_scale)
+            for y, val in enumerate(reversed(xrange(150))):
+                hist_rgb_im.putpixel((x, y), (255 * (r > val),
+                    255 * (g > val), 255 * (b > val)))
+        maxstr = 'max: ' + str(maximum)
+        hist_rgb_im = ImageOps.expand(hist_rgb_im, 2, (50, 50, 50))
+        hist_rgb_im = ImageOps.expand(hist_rgb_im, 1, (0, 0, 0))
+        imagestr = hist_rgb_im.tostring()
+        IS_RGBA = hist_rgb_im.mode == 'RGBA'
+        hist_rgb_pixbuf = \
+            gtk.gdk.pixbuf_new_from_data(imagestr,
+            gtk.gdk.COLORSPACE_RGB, IS_RGBA, 8,
+            hist_rgb_im.size[0], hist_rgb_im.size[1],
+            (IS_RGBA and 4 or 3) * hist_rgb_im.size[0])
+        self.colour_adjust_histogram.set_from_pixbuf(hist_rgb_pixbuf)
+    
     def open_bookmark(self, event):
         
         ''' Opens a bookmark. '''
@@ -7699,6 +7750,8 @@ class Comix:
                     <separator />
                     <menuitem action="Slideshow" />
                     <separator />
+                    <menuitem action="colour_adjust" />
+                    <separator />
                     <menuitem action="Lens" />
                     <separator />
                     <menu action="menu_toolbars">
@@ -7815,8 +7868,6 @@ class Comix:
                 </menu>
                 <menu action="menu_edit">
                     <menuitem action="Thumbnail_dialog" />
-                    <menuitem action="colour_adjust" />
-                    <separator />
                     <menuitem action="Options" />
                 </menu>
                 <menu action="menu_view">
@@ -7830,6 +7881,8 @@ class Comix:
                     <menuitem action="fit_manual_mode" />
                     <separator />
                     <menuitem action="Slideshow" />
+                    <separator />
+                    <menuitem action="colour_adjust" />
                     <separator />
                     <menuitem action="Lens" />
                     <separator />
@@ -8608,6 +8661,7 @@ class Comix:
             self.layout.move(self.comix_image, 
                 max(0, self.main_layout_x_size // 2 - 150),
                 max(0, self.main_layout_y_size // 2 - 150))
+            self.colour_adjust_histogram.clear()
             self.comix_image.show()
 
     def is_image_file(self, path):
@@ -9634,6 +9688,9 @@ class Comix:
                         pixbuf.get_height())
                     self.layout.move(self.image_box, x_move, y_move)
                     
+                    if self.colour_adjust_dialog_displayed:
+                        self.colour_adjust_draw_histogram(pixbuf)
+
                     # =======================================================
                     # Create a pixmap, draw the pixbuf on it and then convert
                     # it back to a pixbuf. It is an *ugly* hack, but it gives
@@ -10136,6 +10193,9 @@ class Comix:
                     self.layout.set_size(pixbuf.get_width() +
                         pixbuf2.get_width(), height)
                     
+                    if self.colour_adjust_dialog_displayed:
+                        self.colour_adjust_draw_histogram(pixbuf)
+
                     # =======================================================
                     # Create pixmaps, draw the pixbufs on them and then
                     # convert them back to pixbufs. It is an *ugly* hack, but
@@ -10626,6 +10686,11 @@ class Comix:
             factory.add('comix-toolbars', iconset)
             pixbuf = \
                 gtk.gdk.pixbuf_new_from_file(
+                os.path.join(icon_path, 'silk-colour-adjust.png'))
+            iconset = gtk.IconSet(pixbuf)
+            factory.add('comix-colour-adjust', iconset)
+            pixbuf = \
+                gtk.gdk.pixbuf_new_from_file(
                 os.path.join(icon_path, 'lens.png'))
             iconset = gtk.IconSet(pixbuf)
             factory.add('comix-lens', iconset)
@@ -10872,8 +10937,8 @@ class Comix:
                 None, self.close_file),
             ('Quit', gtk.STOCK_QUIT, _('_Quit'), '<Control>q',
                 None, self.close_application),
-            ('colour_adjust', None, _('_Adjust colour...'), None,
-                None, self.colour_adjust_open),
+            ('colour_adjust', 'comix-colour-adjust', _('_Adjust colour...'),
+                'j', None, self.colour_adjust_open),
             ('Slideshow', 'comix-slideshow', _('Slideshow'), '<Control>S', 
                 None, self.start_slideshow),
             ('Delete', gtk.STOCK_DELETE, _('Delete image...'), None,
@@ -10983,7 +11048,7 @@ class Comix:
         self.tooltips.set_tip(self.button_open_last, _('Automatically open the last viewed page when Comix is started.'))
         self.tooltips.set_tip(self.button_latest_path, _('Automatically go to the same directory as last time when opening the "Open" dialog.'))
         self.tooltips.set_tip(self.button_default_path, _('Automatically go to this directory when opening the "Open" dialog.'))
-        self.tooltips.set_tip(self.button_save_satcon, _('Automatically restore the saturation and contrast values the next time Comix is started.'))
+        self.tooltips.set_tip(self.button_save_satcon, _('Automatically restore these values the next time Comix is started.'))
         self.tooltips.set_tip(self.button_show_pagenumber, _('Show the page number in the upper left corner of each thumbnail.'))
         self.tooltips.set_tip(self.button_autocontrast, _('Automatically adjust the contrast of the images so that the darkest pixel is completely black and the lightest pixel is completely white. This only works with images without an alpha channel.'))
         self.tooltips.set_tip(self.button_fake_double, _('The space key uses smart scrolling as if in double page mode even when in single page mode. This can be useful for comics with two scanned pages in each image. The pages are assumed to be of equal size'))
