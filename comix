@@ -8071,7 +8071,7 @@ class Comix:
         (or .thumblocal) as proposed by the freedesktop.org standard
         (http://jens.triq.net/thumbnail-spec). '''
 
-        # FIXME: Rewrite this, it has some rediculous indentations.
+        # FIXME: Rewrite this, it has some ridiculous indentations.
         
         if self.exit:
             return False
