@@ -3,14 +3,17 @@ Comix 3.6
     - Added an "Adjust colour" dialog that lets you specify values for
     brightness, contrast, saturation and sharpness.
     
-    - Improved the "Save window position and size" and "Default fullscreen"
-    preferences.
+    - Improved the behaviour of the "Save window position and size" and
+    "Default fullscreen" preferences.
     
     - Changed the "Save window position and size" preference to on by default.
     
     - Changed the menus a bit.
     
     - Improved autocontrast (slightly heavier contrast change).
+    
+    - Changed the UI of the properties dialog a bit to better suit low
+    resolution screens.	
     
     - Improved handling of Zip files containing files with filenames of an 
     unknown character encoding. 
