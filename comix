@@ -1923,7 +1923,6 @@ class Comix:
                     self.vadjust.set_value(self.vadjust.get_value() + 20)
             else:
                 self.next_page(None)
-        
         elif event.keyval == gtk.keysyms.Up:
             if not self.prefs['zoom mode'] == 1 or self.show_comments:
                 if self.vadjust.get_value() - 20 < 0:
@@ -1932,7 +1931,6 @@ class Comix:
                     self.vadjust.set_value(self.vadjust.get_value() - 20)
             else:
                 self.previous_page(None)
-        
         elif event.keyval == gtk.keysyms.Right:
             if not self.prefs['zoom mode'] == 1 or self.show_comments:
                 if (self.hadjust.get_value() + 20 >
@@ -1943,7 +1941,6 @@ class Comix:
                     self.hadjust.set_value(self.hadjust.get_value() + 20)
             else:
                 self.next_page(None)
-        
         elif event.keyval == gtk.keysyms.Left:
             if not self.prefs['zoom mode'] == 1 or self.show_comments:
                 if self.hadjust.get_value() - 20 < 0:
@@ -1961,6 +1958,9 @@ class Comix:
         # It also has a "smart scrolling mode", in which we also
         # scroll sideways.
         # See the tooltip for the preference for more info.
+        #
+        # FIXME: Can't this be made cleaner? And get rid of the
+        # damn Indentations-From-Outer-Space (TM) as well.
         # =======================================================
         elif event.keyval == gtk.keysyms.space:
             if self.prefs['zoom mode'] == 1 and not self.show_comments:
@@ -2403,7 +2403,7 @@ class Comix:
     
     def area_resize_event(self, widget, allocation):
         
-        ''' Handles resizings of the main window. '''
+        ''' Handles events from resizing and moving the main window. '''
         
         if self.exit:
             return False
@@ -2480,6 +2480,7 @@ class Comix:
         if self.exit:
             return False
         
+        # Remove any existing timers.
         if self.cursor_timer_id != None:
             gobject.source_remove(self.cursor_timer_id)
         
@@ -2491,6 +2492,7 @@ class Comix:
             self.zooming_lens(event.x, event.y, event.time)
         else:
             if self.prefs['fullscreen'] and self.prefs['hide cursor']:
+                # Show pointer and set a timer to hide it after a while.
                 for x in gtk.gdk.window_get_toplevels():
                     x.set_cursor(None)
                 self.layout.window.set_cursor(None)
@@ -2499,7 +2501,7 @@ class Comix:
     
     def update_sizes(self):
         
-        ''' Calculates the current dimensions of all widgets in the
+        ''' Calculates the current relevant dimensions of all widgets in the
         main window that define the size of the main display area. '''
         
         if self.exit:
@@ -2664,8 +2666,8 @@ class Comix:
         # distances from the top left corner on the first image in
         # the scale of the first original image. x2 and y2 are
         # distances from the top left corner of the second image
-        # in the scale of the second original image (in double page
-        # mode.)
+        # in the scale of the second original image (if in double
+        # page mode.)
         # =======================================================
         if (not self.prefs['double page'] or
             self.file_number == len(self.file) - 1):
@@ -2921,9 +2923,6 @@ class Comix:
             else:
                 both_pages = True
 
-                # FIXME: This should use the subpixbuf() method as well since
-                # it is faster, instead of copy_area().
-                
                 # =======================================================
                 # Map pointer position to area on the first image.
                 # =======================================================
@@ -2995,12 +2994,6 @@ class Comix:
                 # =======================================================
                 # Copy area to a new pixbuf and scale it to the lens size.
                 # =======================================================
-                #pixbuf = \
-                #    gtk.gdk.Pixbuf(gtk.gdk.COLORSPACE_RGB, True, 8,
-                #    int(width), int(height))
-                #self.stored_pixbuf.copy_area(int(src_x), int(src_y),
-                #    int(width), int(height), pixbuf, 0, 0)
-
                 pixbuf = \
                     self.stored_pixbuf.subpixbuf(int(src_x), int(src_y),
                     int(width), int(height))
@@ -3092,12 +3085,6 @@ class Comix:
                 # =======================================================
                 # Copy area to a new pixbuf and scale it to the lens size.
                 # =======================================================
-                #pixbuf2 = \
-                #    gtk.gdk.Pixbuf(gtk.gdk.COLORSPACE_RGB, True, 8,
-                #    int(width), int(height))
-                #self.stored_pixbuf2.copy_area(int(src_x), int(src_y),
-                #    int(width), int(height), pixbuf2, 0, 0)
-
                 pixbuf2 = \
                     self.stored_pixbuf2.subpixbuf(int(src_x), int(src_y),
                     int(width), int(height))
@@ -3125,7 +3112,6 @@ class Comix:
         # pixbufs. We still have to add a border, possibly
         # rotate and/or flip the images and do some other things.
         # =======================================================
-        assert(pixbuf.get_colorspace() == gtk.gdk.COLORSPACE_RGB)
         stride = pixbuf.get_rowstride()
         pixels = pixbuf.get_pixels()
         mode = pixbuf.get_has_alpha() and 'RGBA' or 'RGB'
@@ -3147,6 +3133,11 @@ class Comix:
         # If we had two different pixbufs (i.e. data from both
         # pages) we have to transform the second one as well and
         # then add then merge them together.
+        #
+        # FIXME: Does newer version of PyGTK (2.10?) support rotating/
+        # flipping of pixbufs? It should be faster to use those
+        # methods directly and skip the PIL step. A conditional with
+        # the pygtk version might do the trick.
         # =======================================================
         if both_pages:
             assert(pixbuf2.get_colorspace() == gtk.gdk.COLORSPACE_RGB)
@@ -3184,7 +3175,7 @@ class Comix:
             pil_image = pil_image_canvas
 
         # =======================================================
-        # Add nice black border and convert back to pixbuf.
+        # Add a nice border and convert back to pixbuf.
         # =======================================================
         pil_image = ImageOps.expand(pil_image, border=1, fill=(255, 255, 255))
         pil_image = ImageOps.expand(pil_image, border=1, fill=(0, 0, 0))
@@ -3216,10 +3207,10 @@ class Comix:
         # Python GC will normally do. It is a quite costly operation
         # though, so we won't do it too often. This will introduce
         # a small periodic "hack" in the lens update flow, but it
-        # will be hardly noticible and is preferable to wasting 
-        # MBs of memory.
+        # will not be *that* annoying and is preferable to wasting 
+        # many MBs of memory.
         #
-        # NOTE: Is once every 30 times a good compromise?
+        # FIXME: Is once every 30 times a good compromise?
         # =======================================================
         if self.lens_update_counter > 30:
             gc.collect()
@@ -3230,8 +3221,9 @@ class Comix:
 
     def zooming_lens_manga_flip(self):
         
-        ''' Flips positions of the two images in the variables. Helps
-        to keep zooming_lens() logic a little cleaner. '''
+        ''' Helper method to zooming_lens().
+        Flips positions of the two images in the variables. Helps
+        to keep zooming_lens() logic a little bit cleaner. '''
         
         if self.exit:
             return False
@@ -3256,6 +3248,9 @@ class Comix:
     def drag_image(self, event):
         
         ''' Handles dragging of the image with the mouse. '''
+
+        # FIXME: This is relatively costly on CPU resources, can't it be
+        # made more efficient?
         
         if self.exit:
             return False
@@ -3641,10 +3636,8 @@ class Comix:
         if self.exit:
             return False
         
-        if self.button_reg_expr.get_active():
-            self.prefs['library filter on full path'] = 1
-        else:
-            self.prefs['library filter on full path'] = 0
+        self.prefs['library filter on full path'] = \
+            self.button_reg_expr.get_active()
     
     def rotate_90(self, data=None):
         
@@ -3653,14 +3646,7 @@ class Comix:
         if self.exit:
             return False
         
-        if self.prefs['rotation'] == 0:
-            self.prefs['rotation'] = 1
-        elif self.prefs['rotation'] == 1:
-            self.prefs['rotation'] = 2
-        elif self.prefs['rotation'] == 2:
-            self.prefs['rotation'] = 3
-        elif self.prefs['rotation'] == 3:
-            self.prefs['rotation'] = 0
+        self.prefs['rotation'] = (self.prefs['rotation'] + 1) % 4
         self.refresh_image()
     
     def rotate_180(self, data=None):
@@ -3670,14 +3656,7 @@ class Comix:
         if self.exit:
             return False
         
-        if self.prefs['rotation'] == 0:
-            self.prefs['rotation'] = 2
-        elif self.prefs['rotation'] == 1:
-            self.prefs['rotation'] = 3
-        elif self.prefs['rotation'] == 2:
-            self.prefs['rotation'] = 0
-        elif self.prefs['rotation'] == 3:
-            self.prefs['rotation'] = 1
+        self.prefs['rotation'] = (self.prefs['rotation'] + 2) % 4
         self.refresh_image()
     
     def rotate_270(self, data=None):
@@ -3687,14 +3666,7 @@ class Comix:
         if self.exit:
             return False
         
-        if self.prefs['rotation'] == 0:
-            self.prefs['rotation'] = 3
-        elif self.prefs['rotation'] == 1:
-            self.prefs['rotation'] = 0
-        elif self.prefs['rotation'] == 2:
-            self.prefs['rotation'] = 1
-        elif self.prefs['rotation'] == 3:
-            self.prefs['rotation'] = 2
+        self.prefs['rotation'] = (self.prefs['rotation'] + 3) % 4
         self.refresh_image()
     
     def flip_horizontally(self, data=None):
