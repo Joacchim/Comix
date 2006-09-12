@@ -134,6 +134,7 @@ for opt, value in opts:
     if opt == "--installdir":
         install_dir = value
         if not os.path.isdir(install_dir):
+            print "\n*** Error:", install_dir, "does not exist.\n" 
             info()
     elif opt == "--no-mime":
         no_mime = True
