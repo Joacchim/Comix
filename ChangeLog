@@ -16,7 +16,14 @@ Comix 3.6
     resolution screens.	
     
     - Improved handling of Zip files containing files with filenames of an 
-    unknown character encoding. 
+    unknown character encoding.
+    
+    - Added extra error message to install.py that is displayed when trying to
+    install into a non-existing directory.
+    
+    - Fixed a bug that caused icons to not be loaded when starting Comix
+    through a symbolic link not located in the same directory as the `comix`
+    executable.
     
     - Fixed a bug that could cause an error message when going back to a
     previous archive by flipping backwards in double page mode and directly

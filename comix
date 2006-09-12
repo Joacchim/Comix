@@ -10507,6 +10507,12 @@ class Comix:
         # regular system.
         # =======================================================
         self.refresh_activated = False
+        
+        # =======================================================
+        # Eliminate symbolic links so that we know where to look
+        # for icons etc.
+        # =======================================================
+        sys.argv[0] = os.path.realpath(sys.argv[0])
 
         # =======================================================
         # Use gettext translations as found in the source dir,
