@@ -2574,14 +2574,10 @@ class Comix:
         
         if self.prefs['fullscreen']:
             self.main_layout_x_size = \
-                gtk.gdk.screen_get_default().get_monitor_geometry(
-                gtk.gdk.screen_get_default().get_monitor_at_window(
-                gtk.gdk.window_get_toplevels()[0])).width - \
+                self.window.get_screen().get_width() - \
                 self.vscroll_size - self.thumb_vscroll_size - self.thumb_size
             self.main_layout_y_size = \
-                gtk.gdk.screen_get_default().get_monitor_geometry(
-                gtk.gdk.screen_get_default().get_monitor_at_window(
-                gtk.gdk.window_get_toplevels()[0])).height - \
+                self.window.get_screen().get_height() - \
                 self.hscroll_size - self.menu_size - self.tool_size - \
                 self.status_size
         else:
@@ -9071,13 +9067,9 @@ class Comix:
             gtk.gdk.Color(self.prefs['red bg'], self.prefs['green bg'],
             self.prefs['blue bg']), False, True))
         self.layout.move(self.slideshow_label_box,
-            gtk.gdk.screen_get_default().get_monitor_geometry(
-            gtk.gdk.screen_get_default().get_monitor_at_window(
-            gtk.gdk.window_get_toplevels()[0])).width -
+            self.window.get_screen().get_width() -
             self.slideshow_label_box.size_request()[0],
-            gtk.gdk.screen_get_default().get_monitor_geometry(
-            gtk.gdk.screen_get_default().get_monitor_at_window(
-            gtk.gdk.window_get_toplevels()[0])).height - 
+            self.window.get_screen().get_height() - 
             self.slideshow_label_box.size_request()[1])
 
     def to_unicode(self, string):
