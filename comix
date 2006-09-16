@@ -954,12 +954,6 @@ class Comix:
         self.button_lens_update = \
             gtk.SpinButton(gtk.Adjustment(30, 0, 150, 1, 1, page_size=0),
             climb_rate=0.0, digits=0)
-        self.button_saturation = \
-            gtk.SpinButton(gtk.Adjustment(1.0, 0, 3, 0.01, 0.01,
-            page_size=0), climb_rate=0.0, digits=2)
-        self.button_contrast = \
-            gtk.SpinButton(gtk.Adjustment(1.0, 0, 3, 0.01, 0.01,
-            page_size=0), climb_rate=0.0, digits=2)
         self.button_thumb_size = \
             gtk.SpinButton(gtk.Adjustment(1, 20, 128, 1, 1, page_size=0),
             climb_rate=0.0, digits=0)
@@ -1011,14 +1005,6 @@ class Comix:
         hbox.pack_start(label_box, True, True, 0)
         hbox.pack_start(entry_box, True, True, 0)
         
-        label = gtk.Label(_("Saturation (default 1.0):"))
-        label.set_alignment(0, 0.5)
-        label_box.pack_start(label, True, True, 0)
-        entry_box.pack_start(self.button_saturation, True, True, 2)
-        label = gtk.Label(_("Contrast (default 1.0):"))
-        label.set_alignment(0, 0.5)
-        label_box.pack_start(label, True, True, 0)
-        entry_box.pack_start(self.button_contrast, True, True, 2)
         label = gtk.Label(_("Background colour:"))
         label.set_alignment(0, 0.5)
         label_box.pack_start(label, True, False, 0)
@@ -1454,6 +1440,9 @@ class Comix:
         self.liststore = gtk.ListStore(str, str, gtk.gdk.Pixbuf)
         self.bookmark_manager_tree_view = gtk.TreeView(self.liststore)
         self.bookmark_manager_tree_view.set_rules_hint(True)
+        # FIXME: Rows should be reorderable, and the changes should be
+        # mirrored everywhere.
+        #self.bookmark_manager_tree_view.set_reorderable(True)
         self.bookmark_column = gtk.TreeViewColumn(_('Title'))
         self.bookmark_column2 = gtk.TreeViewColumn(_('Page'))
         self.cellpb = gtk.CellRendererPixbuf()
@@ -4477,10 +4466,6 @@ class Comix:
             self.button_fake_double.set_sensitive(True)
         else:
             self.button_fake_double.set_sensitive(False)
-        if self.prefs['autocontrast']:
-            self.button_contrast.set_sensitive(False)
-        else:
-            self.button_contrast.set_sensitive(True)
         if self.prefs['open defaults to last browsed']:
             self.button_latest_path.set_active(True)
         else:
@@ -4501,8 +4486,6 @@ class Comix:
             self.button_fit_width_default.set_active(True)
         else:
             self.button_fit_height_default.set_active(True)
-        self.button_saturation.set_value(self.prefs['saturation'] / 100.0)
-        self.button_contrast.set_value(self.prefs['contrast'] / 100.0)
         self.button_thumb_size.set_value(self.prefs['thumbnail size'])
         self.button_lib_thumb_size.set_value(self.prefs['library cover size'])
         self.button_lens_zoom.set_value(self.prefs['lens magnification'])
@@ -4603,8 +4586,6 @@ class Comix:
                 self.two_page_scan = None
             self.change_thumb_selection = 1
         
-        self.prefs['saturation'] = self.button_saturation.get_value() * 100
-        self.prefs['contrast'] = self.button_contrast.get_value() * 100
         self.prefs['slideshow delay'] = \
             self.button_slideshow_delay.get_value()
         self.prefs['thumbnail size'] = \

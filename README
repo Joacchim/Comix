@@ -29,7 +29,7 @@ Example:
 # cd comix-x.y
 # python install.py install
 
-You can even run the "comix" script file by it self from any location, but if
+You can even run the "comix" script file by itself from any location, but if
 you want the custom icons and translations to be available you should either
 run it in the source directory, or install it.
 
@@ -41,8 +41,8 @@ Comix needs PyGTK 2.8 or newer and PIL (Python Imaging Library) 1.1.4 or
 newer to function. 
 
 You also need `unrar` or `rar` if you wish to read RAR (.cbr) archives, and
-`jpegtran` (usually a part of the jpeg library) in order to perform lossless
-operations on JPEG images.
+`jpegtran` (usually a part of the jpeg library) in order to perform permanent
+lossless operations on JPEG images.
 
 
 
