@@ -21,6 +21,9 @@ Comix 3.6
     - Added extra error message to install.py that is displayed when trying to
     install into a non-existing directory.
     
+    - Fixed a bug that could cause Comix to scale images to the wrong 
+    dimensions on a dual-screen setup. Thanks to Vegard Eriksen for this fix.
+    
     - Fixed a bug that caused icons to not be loaded when starting Comix
     through a symbolic link not located in the same directory as the `comix`
     executable.

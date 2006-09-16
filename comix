@@ -2562,11 +2562,15 @@ class Comix:
             self.vscroll_size = self.vscroll.size_request()[0]
         
         if self.prefs['fullscreen']:
+            screen = self.window.get_screen()
+            monitor = \
+                screen.get_monitor_geometry(screen.get_monitor_at_point(
+                *self.window.get_position()))
             self.main_layout_x_size = \
-                self.window.get_screen().get_width() - \
+                monitor.width - \
                 self.vscroll_size - self.thumb_vscroll_size - self.thumb_size
             self.main_layout_y_size = \
-                self.window.get_screen().get_height() - \
+                monitor.height - \
                 self.hscroll_size - self.menu_size - self.tool_size - \
                 self.status_size
         else:
