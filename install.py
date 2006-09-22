@@ -5,14 +5,19 @@ import sys
 import getopt
 import shutil
 
-usage_info = """This script installs or uninstalls Comix on your system.
+usage_info = """
+This script installs or uninstalls Comix on your system.
 If you encounter any bugs, please report them to herrekberg@users.sf.net.
+
+--------------------------------------------------------------------------------
 
 Usage:
 
  ./install.py install              ---      Install to /usr/local
 
  ./install.py uninstall            ---      Uninstall from /usr/local
+
+--------------------------------------------------------------------------------
 
 Options:
 
@@ -23,6 +28,10 @@ Options:
                                             or register new mime types for
                                             x-cbz, x-cbt and x-cbr archive
                                             files.
+
+ --no-balloons                     ---      Nautilus thumbnailer does not add
+                                            a balloon with the archive type
+                                            (cbz, cbt or cbr) to the thumbnails.
 """
 
 def info():
@@ -121,13 +130,15 @@ def check_dependencies():
 
 install_dir = "/usr/local/"
 no_mime = False
+no_balloons = False
 ISO_CODES = \
     ("sv", "es", "zh_CN", "zh_TW", "pt_BR", "de", "it", "nl", "fr", "pl",
     "el", "ca")
 
 try:
     opts, args = \
-        getopt.gnu_getopt(sys.argv[1:], "", ["installdir=", "no-mime"])
+        getopt.gnu_getopt(sys.argv[1:], "",
+        ["installdir=", "no-mime", "no-balloons"])
 except getopt.GetoptError:
     info()
 for opt, value in opts:
@@ -138,6 +149,8 @@ for opt, value in opts:
             info()
     elif opt == "--no-mime":
         no_mime = True
+    elif opt == "--no-balloons":
+        no_balloons = True
 
 if args == ["install"]:
     check_dependencies()
@@ -151,6 +164,8 @@ if args == ["install"]:
         "share/icons/hicolor/scalable/apps/comix.svg")
     print 'Installed some spam'
     for imagefile in os.listdir('images'):
+        if no_balloons and imagefile in ["cbz.png", "cbt.png", "cbr.png"]:
+            continue
         if os.path.isfile(os.path.join('images', imagefile)):
             install(os.path.join('images', imagefile),
                 os.path.join('share/pixmaps/comix', imagefile))

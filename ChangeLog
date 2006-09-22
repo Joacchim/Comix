@@ -13,13 +13,19 @@ Comix 3.6
     - Improved autocontrast (slightly heavier contrast change).
     
     - Changed the UI of the properties dialog a bit to better suit low
-    resolution screens.	
+    resolution screens.
+    
+    - Italian translation updated by GhePeU.
     
     - Improved handling of Zip files containing files with filenames of an 
     unknown character encoding.
     
     - Added extra error message to install.py that is displayed when trying to
     install into a non-existing directory.
+    
+    - Added a --no-balloons option to install.py that causes it to not install
+    the balloon images normally applied to the thumbnails by the Nautilus
+    thumbnailer.
     
     - Fixed a bug that could cause Comix to scale images to the wrong 
     dimensions on a dual-screen setup. Thanks to Vegard Eriksen for this fix.

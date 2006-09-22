@@ -1543,7 +1543,7 @@ class Comix:
             ('Marcelo Góes', _('Brazilian Portuguese translation')),
             ('Christoph Wolk',
             _('German translation and Nautilus thumbnailer')),
-            ('Raimondo Giammanco', _('Italian translation')),
+            ('Raimondo Giammanco &amp; GhePeU', _('Italian translation')),
             ('Arthur Nieuwland', _('Dutch translation')),
             ('Achraf Cherti', _('French translation')),
             ('Kamil Leduchowski', _('Polish translation')),
