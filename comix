@@ -6046,7 +6046,7 @@ class Comix:
         hist_data = pil_image.histogram()
         hist_rgb_im = Image.new('RGB', (256, 150), (50, 50, 50))
         maximum = \
-            max(hist_data + [1])
+            max(hist_data[:768] + [1])
         y_scale = float(150) / maximum
         for x in xrange(256):
             r = int(hist_data[x] * y_scale)
@@ -7316,7 +7316,7 @@ class Comix:
         hist_data = pil_image.histogram()
         hist_rgb_im = Image.new('RGB', (256, 150), (50, 50, 50))
         maximum = \
-            max(hist_data + [1])
+            max(hist_data[:768] + [1])
         y_scale = float(150) / maximum
         for x in xrange(256):
             r = int(hist_data[x] * y_scale)
