@@ -7964,7 +7964,7 @@ class Comix:
                 fd = open(path, 'rb')
                 magic = fd.read(4)
                 fd.close()
-                if tarfile.is_tarfile(path):
+                if tarfile.is_tarfile(path) and os.path.getsize(path) > 0:
                     if magic[:3] == 'BZh':
                         return 'bzip2'
                     if magic[:2] == '\037\213':

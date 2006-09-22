@@ -37,6 +37,9 @@ Comix 3.6
     - Fixed a bug that could cause an error message when going back to a
     previous archive by flipping backwards in double page mode and directly
     switching to single page mode afterwards.
+    
+    - Fixed a bug that caused Comix to treat empty files as tar archives.
+    Thanks to Christoph Wolk for this fix.
 
 Comix 3.5.1
 
