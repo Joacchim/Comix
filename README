@@ -22,27 +22,35 @@ when uninstalling.
 
 There is also an option, --no-mime, that can be used to tell install.py that
 it should not register new mime types for cbz, cbr and cbt archives or install
-the thumbnail creation script for these files used by some file managers.
+the thumbnail creation script for these files used by some file managers
+(currently only Nautilus).
 
-Example:
-# tar -xzf comix-x.y.tar.gz
-# cd comix-x.y
-# python install.py install
+If you have not specified --no-mime you can use --no-balloons to tell install.py
+to not install the balloon images normally impressed on the Nautilus thumbnails.
+Some people like the thumbnails plain, and this option is for them.
+
+    Example:
+    # tar -xzf comix-x.y.tar.gz
+    # cd comix-x.y
+    # python install.py install
 
 You can even run the "comix" script file by itself from any location, but if
 you want the custom icons and translations to be available you should either
-run it in the source directory, or install it.
+run it in the source directory, or install it. For an example you could place
+this source directory anywhere and create a symlink somewhere in your PATH
+pointing to the "comix" script file.
 
 
 
 Dependencies
 --------------------------------------------------------------------------------
-Comix needs PyGTK 2.8 or newer and PIL (Python Imaging Library) 1.1.4 or
+Comix needs PyGTK 2.8.0 or newer and PIL (Python Imaging Library) 1.1.4 or
 newer to function. 
 
 You also need `unrar` or `rar` if you wish to read RAR (.cbr) archives, and
 `jpegtran` (usually a part of the jpeg library) in order to perform permanent
-lossless operations on JPEG images.
+lossless operations on JPEG images. These dependencies are optional but
+recommended.
 
 
 

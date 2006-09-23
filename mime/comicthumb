@@ -3,7 +3,7 @@
 # Comicthumb 0.1
 # Create thumbnails for comic book archives (cbz, cbt and cbr).
 #
-# usage: comicthumb /path/to/archive.cbt outputfile [-s size ]
+# usage: comicthumb /path/to/archive.cbt outputfile [ -s size ]
 #
 # Copyright (c) 2006 Christoph Wolk <christoph.wolk@googlemail.com> 
 #                  & Pontus Ekberg
@@ -64,7 +64,7 @@ def first_archive (filelist):
     return False
 
 # try to find the cover, if nothing good is found take first
-# very basic, should e.g. not get backcover.jpg if theres a better match
+# FIXME: Could be improved
 def guessCover (filelist):
     p = re.compile('cover|front', re.IGNORECASE)
     coverlist = filter(p.search, filelist)
@@ -160,13 +160,21 @@ try:
     else:
         x = THUMB_SIZE * image.size[0] / image.size[1]
         y = THUMB_SIZE
+    # at least one pixel
+    x = max(1, x)
+    y = max(1, y)
     image = image.resize((x, y), Image.ANTIALIAS)
     image = image.convert('RGB')
     
-    # apply type info speech bubble
+    # apply type info balloon
     try:
-        if os.path.exists('../share/pixmaps/comix/' + TYPE + '.png'):
-            overlay_path = '../share/pixmaps/comix/' + TYPE + '.png'
+        if os.path.exists(os.path.join(
+            os.path.dirname(os.path.dirname(os.path.realpath(sys.argv[0]))),
+            'share/pixmaps/comix', TYPE + '.png')):
+            overlay_path = \
+                os.path.join(
+                os.path.dirname(os.path.dirname(os.path.realpath(sys.argv[0]))),
+                'share/pixmaps/comix', TYPE + '.png')
         elif os.path.exists('/usr/local/share/pixmaps/comix/' + TYPE + '.png'):
             overlay_path = '/usr/local/share/pixmaps/comix/' + TYPE + '.png'
         elif os.path.exists('/usr/share/pixmaps/comix/' + TYPE + '.png'):
