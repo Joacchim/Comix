@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2006-09-22 12:57+CEST\n"
+"POT-Creation-Date: 2006-09-26 20:16+CEST\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -754,8 +754,8 @@ msgstr ""
 msgid "not recognized."
 msgstr ""
 
-#: comix:8902
-msgid "No viewable files in"
+#: comix:8902 comix:11161
+msgid "No images in \"%s\""
 msgstr ""
 
 #: comix:9385
@@ -1192,9 +1192,5 @@ msgstr ""
 
 #: comix:11057
 msgid "Go to page..."
-msgstr ""
-
-#: comix:11161
-msgid "No images in"
 msgstr ""
 

@@ -8899,8 +8899,8 @@ class Comix:
         if len(self.file) == 0:
             if self.archive_type != '':
                 if not self.failed_to_open_file:
-                    self.statusbar.push(0, _('No viewable files in') + ' "' +
-                        self.to_unicode(os.path.basename(path)) + '".')
+                    self.statusbar.push(0, _('No images in "%s"') % 
+                    self.to_unicode(os.path.basename(path)))
                 self.filetype_error = 1
             self.set_file_exists(False)
         
@@ -11158,8 +11158,8 @@ class Comix:
                     if stop:
                         break
                 if not stop:
-                    self.statusbar.push(0, _('No images in') + ' "' +
-                        self.to_unicode(os.path.basename(path)) + '"')
+                    self.statusbar.push(0, _('No images in "%s"') %
+                        self.to_unicode(os.path.basename(path)))
                     self.filetype_error = 1
                 else:
                     self.load_file(path, -2)
