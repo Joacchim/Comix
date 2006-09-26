@@ -29,9 +29,9 @@ Options:
                                             x-cbz, x-cbt and x-cbr archive
                                             files.
 
- --no-balloon                      ---      Nautilus thumbnailer does not add
-                                            a balloon with the archive type
-                                            (cbz, cbt or cbr) to the thumbnails.
+ --no-balloon                      ---      Nautilus thumbnailer does not
+                                            imprint a balloon on the thumbnails
+                                            by default.
 """
 
 def info():

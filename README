@@ -25,9 +25,9 @@ it should not register new mime types for cbz, cbr and cbt archives or install
 the thumbnail creation script for these files used by some file managers
 (currently only Nautilus).
 
-If you have not specified --no-mime you can use --no-balloons to tell install.py
-to not install the balloon images normally impressed on the Nautilus thumbnails.
-Some people like the thumbnails plain, and this option is for them.
+If you have not specified --no-mime, you can use --no-balloon to tell the 
+Nautilus thumbnailer to not imprint balloon images on the thumbnails by default.
+If you like your thumbnails plain this option is for you.
 
     Example:
     # tar -xzf comix-x.y.tar.gz
