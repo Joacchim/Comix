@@ -41,6 +41,9 @@ Comix 3.6
     - Fixed a bug that caused Comix to treat empty files as tar archives.
     Thanks to Christoph Wolk for this fix.
 
+    - Fixed a bug in comicthumb with thumbnailing rar archives, plus
+    some cleanup. (Christoph Wolk)
+
 Comix 3.5.1
 
     - Fixed a bug that caused the mode of all images to be reported as

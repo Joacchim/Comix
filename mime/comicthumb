@@ -31,18 +31,22 @@ except:
 THUMB_SIZE = 128
 TYPE = False
 
-if len(sys.argv) == 4:
-    if sys.argv[3].isdigit():
-        THUMB_SIZE = int(sys.argv[3])
-
-# get paths
-in_file_path = sys.argv[1]
-out_file_path = sys.argv[2]
+## set thumbnail size and paths
+try:
+    if len(sys.argv) == 4:
+        if sys.argv[3].isdigit():
+            THUMB_SIZE = int(sys.argv[3])
+    in_file_path = sys.argv[1]
+    out_file_path = sys.argv[2]
+except: 
+    print "Usage:"
+    print "comicthumb /path/to/archive.cbt outputfile [ -s size ]"
+    sys.exit(1)
 
 # temp directory needed for multiple archives
 if not os.path.exists('/tmp/comicthumb/'):
-	os.makedirs('/tmp/comicthumb/')
-	os.chmod('/tmp/comicthumb/', 0700)
+    os.makedirs('/tmp/comicthumb/')
+    os.chmod('/tmp/comicthumb/', 0700)
 
 # return the first image in the list
 def first_image (filelist):
@@ -68,7 +72,7 @@ def first_archive (filelist):
 def guessCover (filelist):
     p = re.compile('cover|front', re.IGNORECASE)
     coverlist = filter(p.search, filelist)
-    coverlist = [s for s in coverlist if 'back' not in s.lower()]
+    coverlist = [s for s in coverlist if 'back' not in s.lower()] or coverlist
     firstcover = first_image(coverlist)
     if firstcover:
         return firstcover
@@ -82,12 +86,12 @@ def guessCover (filelist):
 def get_image(compressed_file, depth):
     global TYPE
     if zipfile.is_zipfile(compressed_file):
-       TYPE = TYPE or 'cbz'
-       zip = zipfile.ZipFile(compressed_file, "r")
-       zipfiles = zip.namelist()
-       zipfiles.sort()
-       cover = guessCover(zipfiles)
-       if cover:
+        TYPE = TYPE or 'cbz'
+        zip = zipfile.ZipFile(compressed_file, "r")
+        zipfiles = zip.namelist()
+        zipfiles.sort()
+        cover = guessCover(zipfiles)
+        if cover:
             picture = StringIO.StringIO(zip.read(cover))
             zip.close()
        else:
@@ -142,7 +146,7 @@ def get_image(compressed_file, depth):
             subarchive = first_archive(rarfiles)
             if subarchive:
                 os.popen(rar + ' p -inul "' + compressed_file + '" "' + 
-                    subarchive + '" >  /tmp/comicthumb/archive' 
+                    subarchive + '" >  "/tmp/comicthumb/archive' 
                     + str(depth)+ '"', "r")
                 return get_image("/tmp/comicthumb/archive" + 
                     str(depth), depth +1 )
@@ -197,7 +201,7 @@ except:
    
 # remove tempory stuff
 if os.path.isdir('/tmp/comicthumb/'):
-	shutil.rmtree('/tmp/comicthumb/')
+    shutil.rmtree('/tmp/comicthumb/')
 
 # and exit
 sys.exit(exit_flag)
