@@ -94,7 +94,7 @@ def get_image(compressed_file, depth):
         if cover:
             picture = StringIO.StringIO(zip.read(cover))
             zip.close()
-       else:
+        else:
            subarchive = first_archive(zipfiles)
            if subarchive:
                 output = open("/tmp/comicthumb/archive" + str(depth), "wb")
