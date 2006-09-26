@@ -29,7 +29,7 @@ Options:
                                             x-cbz, x-cbt and x-cbr archive
                                             files.
 
- --no-balloons                     ---      Nautilus thumbnailer does not add
+ --no-balloon                      ---      Nautilus thumbnailer does not add
                                             a balloon with the archive type
                                             (cbz, cbt or cbr) to the thumbnails.
 """
@@ -130,7 +130,7 @@ def check_dependencies():
 
 install_dir = "/usr/local/"
 no_mime = False
-no_balloons = False
+no_balloon = False
 ISO_CODES = \
     ("sv", "es", "zh_CN", "zh_TW", "pt_BR", "de", "it", "nl", "fr", "pl",
     "el", "ca")
@@ -138,7 +138,7 @@ ISO_CODES = \
 try:
     opts, args = \
         getopt.gnu_getopt(sys.argv[1:], "",
-        ["installdir=", "no-mime", "no-balloons"])
+        ["installdir=", "no-mime", "no-balloon"])
 except getopt.GetoptError:
     info()
 for opt, value in opts:
@@ -149,8 +149,8 @@ for opt, value in opts:
             info()
     elif opt == "--no-mime":
         no_mime = True
-    elif opt == "--no-balloons":
-        no_balloons = True
+    elif opt == "--no-balloon":
+        no_balloon = True
 
 if args == ["install"]:
     check_dependencies()
@@ -164,8 +164,6 @@ if args == ["install"]:
         "share/icons/hicolor/scalable/apps/comix.svg")
     print 'Installed some spam'
     for imagefile in os.listdir('images'):
-        if no_balloons and imagefile in ["cbz.png", "cbt.png", "cbr.png"]:
-            continue
         if os.path.isfile(os.path.join('images', imagefile)):
             install(os.path.join('images', imagefile),
                 os.path.join('share/pixmaps/comix', imagefile))
@@ -180,9 +178,11 @@ if args == ["install"]:
             os.path.join(install_dir, "share/mime'"))
         print
         print "Updated mime database."
+        schemas = \
+            no_balloon and "comicbook-no-balloon.schemas" or "comicbook.schemas"
         os.popen("export GCONF_CONFIG_SOURCE=`gconftool-2 "
                  "--get-default-source 2>/dev/null` && gconftool-2 "
-                 "--makefile-install-rule ./mime/comicbook.schemas 2>/dev/null")
+                 "--makefile-install-rule ./mime/%s 2>/dev/null" % schemas)
         print
         print "Registered comic archive thumbnailer in gconf (if available)."
         print "The thumbnailer is at this point supported by Nautilus only."

@@ -23,9 +23,8 @@ Comix 3.6
     - Added extra error message to install.py that is displayed when trying to
     install into a non-existing directory.
     
-    - Added a --no-balloons option to install.py that causes it to not install
-    the balloon images normally applied to the thumbnails by the Nautilus
-    thumbnailer.
+    - Added a --no-balloon option to install.py that tells the Nautilus 
+    thumbnailer to not imprint balloon images on thumbnails by default.
     
     - Fixed a bug that could cause Comix to scale images to the wrong 
     dimensions on a dual-screen setup. Thanks to Vegard Eriksen for this fix.
