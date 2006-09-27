@@ -3,7 +3,7 @@
 # Comicthumb 0.1
 # Create thumbnails for comic book archives (cbz, cbt and cbr).
 #
-# usage: comicthumb /path/to/archive.cbt outputfile [ -s size ]
+# usage: comicthumb /path/to/archive.cbt outputfile [ size | --no-balloon ]
 #
 # Copyright (c) 2006 Christoph Wolk <christoph.wolk@googlemail.com> 
 #                  & Pontus Ekberg
@@ -30,17 +30,21 @@ except:
    
 THUMB_SIZE = 128
 TYPE = False
+BALLOON = True
 
 ## set thumbnail size and paths
 try:
-    if len(sys.argv) == 4:
-        if sys.argv[3].isdigit():
-            THUMB_SIZE = int(sys.argv[3])
+    for argument in (3, 4):
+    	if len(sys.argv) > (argument):
+            if sys.argv[argument].isdigit():
+                THUMB_SIZE = int(sys.argv[argument])
+            elif sys.argv[argument] == "--no-balloon":
+            	BALLOON = False
     in_file_path = sys.argv[1]
     out_file_path = sys.argv[2]
 except: 
     print "Usage:"
-    print "comicthumb /path/to/archive.cbt outputfile [ -s size ]"
+    print "comicthumb /path/to/archive.cbt outputfile [ size | --no-balloon]"
     sys.exit(1)
 
 # temp directory needed for multiple archives
@@ -95,13 +99,13 @@ def get_image(compressed_file, depth):
             picture = StringIO.StringIO(zip.read(cover))
             zip.close()
         else:
-           subarchive = first_archive(zipfiles)
-           if subarchive:
-                output = open("/tmp/comicthumb/archive" + str(depth), "wb")
+            subarchive = first_archive(zipfiles)
+            if subarchive:
+                output = open("/tmp/comicthumb/archive%d" % (depth), "wb")
                 output.write(zip.read(subarchive))
                 output.close()
-                return get_image("/tmp/comicthumb/archive" + str(depth), 
-                    depth +1)
+                return get_image("/tmp/comicthumb/archive%d" % (depth),
+                    depth + 1)
     elif tarfile.is_tarfile(compressed_file):
         TYPE = TYPE or 'cbt'
         file = open(compressed_file, 'rb')
@@ -115,11 +119,11 @@ def get_image(compressed_file, depth):
         else:
             subarchive = first_archive(tarfiles)
             if subarchive:
-                output = open("/tmp/comicthumb/archive" + str(depth), "wb")
+                output = open("/tmp/comicthumb/archive%d" % (depth), "wb")
                 output.write(tar.extractfile(subarchive).read())
                 output.close()
-                return get_image("/tmp/comicthumb/archive" + 
-                    str(depth), depth+1) 
+                return get_image("/tmp/comicthumb/archive%d" % (depth),
+                    depth + 1)
     elif open(compressed_file, 'rb').read(4) == 'Rar!':
         TYPE = TYPE or 'cbr'
         # Make sure rar/unrar is installed
@@ -134,26 +138,26 @@ def get_image(compressed_file, depth):
         if not rar:
             print "You must install unrar or rar to thumbnail RAR archives."
             sys.exit(1)
-        rarfiles = os.popen(rar + ' vb "' + compressed_file + '"').readlines()
+        rarfiles = os.popen('%s vb "%s"' % (rar, compressed_file)).readlines()
         for i in range(len(rarfiles)):
             rarfiles[i] = rarfiles[i].rstrip("\n")
         rarfiles.sort()
         cover = guessCover(rarfiles)
         if cover:
-            picture = StringIO.StringIO(os.popen(rar + ' p -inul "' +
-                compressed_file + '" "' + cover + '"', "r").read())
+            picture = StringIO.StringIO(os.popen('%s p -inul "%s" "%s"' 
+                % (rar, compressed_file, cover), "r").read())
         else:
             subarchive = first_archive(rarfiles)
             if subarchive:
-                os.popen(rar + ' p -inul "' + compressed_file + '" "' + 
-                    subarchive + '" >  "/tmp/comicthumb/archive' 
-                    + str(depth)+ '"', "r")
-                return get_image("/tmp/comicthumb/archive" + 
-                    str(depth), depth +1 )
+                os.popen('%s p -inul "%s" "%s" > "/tmp/comicthumb/archive%d"'
+                    % (rar, compressed_file, subarchive, depth), "r")
+                return get_image("/tmp/comicthumb/archive%d" % (depth), 
+                    depth + 1)
     return picture
 
 # main
 try:   
+
     # get cover from archive
     image = Image.open(get_image(in_file_path, 0))
 
@@ -171,34 +175,37 @@ try:
     image = image.convert('RGB')
     
     # apply type info balloon
-    try:
-        if os.path.exists(os.path.join(
-            os.path.dirname(os.path.dirname(os.path.realpath(sys.argv[0]))),
-            'share/pixmaps/comix', TYPE + '.png')):
-            overlay_path = \
-                os.path.join(
+    if BALLOON:
+        try:
+            if os.path.exists(os.path.join(
                 os.path.dirname(os.path.dirname(os.path.realpath(sys.argv[0]))),
-                'share/pixmaps/comix', TYPE + '.png')
-        elif os.path.exists('/usr/local/share/pixmaps/comix/' + TYPE + '.png'):
-            overlay_path = '/usr/local/share/pixmaps/comix/' + TYPE + '.png'
-        elif os.path.exists('/usr/share/pixmaps/comix/' + TYPE + '.png'):
-            overlay_path = '/usr/share/pixmaps/comix/' + TYPE + '.png'
-        
-        overlay_image=Image.open(overlay_path)
-        image_canvas = \
-            Image.new('RGBA', (image.size[0], image.size[1]), (0, 0, 0, 0))
-        image_canvas.paste(overlay_image, 
-            (image.size[0] - 35, image.size[1] - 30))
-        image = Image.composite(image_canvas, image, image_canvas)
-    except:
-        pass
-    
+                'share/pixmaps/comix', TYPE + '.png')):
+                overlay_path = \
+                    os.path.join(os.path.dirname(os.path.dirname(
+                    	os.path.realpath(sys.argv[0]))),
+                    'share/pixmaps/comix', TYPE + '.png')
+            elif os.path.exists('/usr/local/share/pixmaps/comix/' + TYPE + 
+            	'.png'):
+                overlay_path = '/usr/local/share/pixmaps/comix/' + TYPE + '.png'
+            elif os.path.exists('/usr/share/pixmaps/comix/' + TYPE + '.png'):
+                overlay_path = '/usr/share/pixmaps/comix/' + TYPE + '.png'
+            
+            overlay_image=Image.open(overlay_path)
+            image_canvas = \
+                Image.new('RGBA', (image.size[0], image.size[1]), (0, 0, 0, 0))
+            image_canvas.paste(overlay_image, 
+                (image.size[0] - 35, image.size[1] - 30))
+            image = Image.composite(image_canvas, image, image_canvas)
+        except:
+            pass
+
     # save it
     image.save(out_file_path, 'PNG')
     exit_flag = 0
 except:
-   exit_flag = 1
-   
+    print "There was an error."
+    exit_flag = 1
+
 # remove tempory stuff
 if os.path.isdir('/tmp/comicthumb/'):
     shutil.rmtree('/tmp/comicthumb/')
