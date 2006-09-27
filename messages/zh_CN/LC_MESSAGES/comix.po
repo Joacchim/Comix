@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Comix 3.3\n"
 "POT-Creation-Date: 2006-09-26 20:16+CEST\n"
-"PO-Revision-Date: 2006-08-13 13:59+0800\n"
+"PO-Revision-Date: 2006-09-27 11:31+0800\n"
 "Last-Translator: Xie Yanbo <xieyanbo@gmail.com>\n"
 "Language-Team: Xie Yanbo <xieyanbo@gmail.com>\n"
 "MIME-Version: 1.0\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: pygettext.py 1.5\n"
 "X-Poedit-Language: Chinese\n"
-"X-Poedit-Basepath: /home/xyb/develop/comix/comix-3.4-working\n"
+"X-Poedit-Basepath: /home/xyb/develop/comix/comix\n"
 
 #: comix:547 comix:11046
 msgid "Fit-to-screen mode"
@@ -376,27 +376,27 @@ msgstr "缩略图"
 
 #: comix:1301
 msgid "Adjust colour"
-msgstr ""
+msgstr "调整色彩"
 
 #: comix:1303
 msgid "Default"
-msgstr ""
+msgstr "默认"
 
 #: comix:1325
 msgid "Brightness"
-msgstr ""
+msgstr "亮度"
 
 #: comix:1337
 msgid "Contrast"
-msgstr ""
+msgstr "对比度"
 
 #: comix:1349
 msgid "Saturation"
-msgstr ""
+msgstr "饱和度"
 
 #: comix:1361
 msgid "Sharpness"
-msgstr ""
+msgstr "锐度"
 
 #: comix:1376
 msgid "Automatically adjust contrast"
@@ -404,7 +404,7 @@ msgstr "自动调整对比度"
 
 #: comix:1383
 msgid "Save values for future sessions"
-msgstr ""
+msgstr "为以后的进程保存设置"
 
 #: comix:1395
 msgid "Properties"
@@ -760,7 +760,7 @@ msgstr "无法识别。"
 
 #: comix:8902 comix:11161
 msgid "No images in \"%s\""
-msgstr ""
+msgstr "“%s”中没有任何图像"
 
 #: comix:9385
 msgid "Comment file"
@@ -892,7 +892,7 @@ msgstr "退出(_Q)"
 
 #: comix:10922
 msgid "_Adjust colour..."
-msgstr ""
+msgstr "调整色彩(_A)..."
 
 #: comix:10924
 msgid "Slideshow"
@@ -928,7 +928,7 @@ msgstr "书签(_B)"
 
 #: comix:10944
 msgid "_Toolbars"
-msgstr ""
+msgstr "工具栏(_T)"
 
 #: comix:10946
 msgid "_Edit"
@@ -1187,7 +1187,7 @@ msgstr "当打开“打开”对话框时自动跳到这个目录。"
 
 #: comix:11033
 msgid "Automatically restore these values the next time Comix is started."
-msgstr ""
+msgstr "下次 Comix 启动时自动恢复这些设置。"
 
 #: comix:11034
 msgid "Show the page number in the upper left corner of each thumbnail."
@@ -1302,40 +1302,3 @@ msgstr "最后一页"
 msgid "Go to page..."
 msgstr "跳到页面..."
 
-#~ msgid "No viewable files in"
-#~ msgstr "没有可以查看的文件"
-
-#~ msgid "No images in"
-#~ msgstr "不包含图像："
-
-#~ msgid "Save saturation and contrast for future sessions"
-#~ msgstr "为以后的进程保存饱和度和对比度"
-
-#~ msgid "Saturation (default 1.0):"
-#~ msgstr "饱和度（默认 1.0）："
-
-#~ msgid "Contrast (default 1.0):"
-#~ msgstr "对比度（默认 1.0）："
-
-#~ msgid "Clear"
-#~ msgstr "清除"
-
-#~ msgid "Advanced"
-#~ msgstr "高级"
-
-#~ msgid ""
-#~ "Automatically restore the saturation and contrast values the next time "
-#~ "Comix is started."
-#~ msgstr "下次 Comix 启动时自动恢复这个饱和度和对比度值。"
-
-#~ msgid "Permanently remove"
-#~ msgstr "永久删除"
-
-#~ msgid "Perform lossless JPEG rotation on"
-#~ msgstr "要无损旋转JPEG文件"
-
-#~ msgid "Some images might be trimmed a bit during the rotation."
-#~ msgstr "一些图像在转换过程中可能会被少许削减。"
-
-#~ msgid "_Zoom"
-#~ msgstr "缩放(_Z)"
