@@ -191,8 +191,8 @@ msgstr ""
 #: comix:910
 msgid "Flip page when scrolling off the top or bottom of page"
 msgstr ""
-"Pasar de página cuando se desplaza fuera de los límites superior e inferior "
-"de la página"
+"Pasar de página cuando se desplaza fuera de los límites superior e "
+"inferior de la página"
 
 #: comix:912
 msgid "Hide thumbnail scrollbar"
@@ -389,27 +389,27 @@ msgstr "Miniaturas"
 
 #: comix:1301
 msgid "Adjust colour"
-msgstr ""
+msgstr "Ajuste de color"
 
 #: comix:1303
 msgid "Default"
-msgstr ""
+msgstr "Predeterminado"
 
 #: comix:1325
 msgid "Brightness"
-msgstr ""
+msgstr "Brillo"
 
 #: comix:1337
 msgid "Contrast"
-msgstr ""
+msgstr "Contraste"
 
 #: comix:1349
 msgid "Saturation"
-msgstr ""
+msgstr "Saturación"
 
 #: comix:1361
 msgid "Sharpness"
-msgstr ""
+msgstr "Enfoque"
 
 #: comix:1376
 msgid "Automatically adjust contrast"
@@ -417,7 +417,7 @@ msgstr "Ajustar el contraste automáticamente"
 
 #: comix:1383
 msgid "Save values for future sessions"
-msgstr ""
+msgstr "Guardar los valores para las sesiones futuras"
 
 #: comix:1395
 msgid "Properties"
@@ -446,7 +446,8 @@ msgstr "Acerca de"
 #: comix:1515
 msgid "Comix is an image viewer specifically designed to handle comic books."
 msgstr ""
-"Comix es un visor de imágenes específicamente diseñado para manipular cómics."
+"Comix es un visor de imágenes específicamente diseñado para manipular "
+"cómics."
 
 #: comix:1517
 msgid "It reads ZIP, RAR and tar archives (also gzip or bzip2 compressed)"
@@ -777,7 +778,7 @@ msgstr "no reconocido."
 
 #: comix:8902 comix:11161
 msgid "No images in \"%s\""
-msgstr ""
+msgstr "No hay imágenes en \"%s\""
 
 #: comix:9385
 msgid "Comment file"
@@ -909,7 +910,7 @@ msgstr "_Salir"
 
 #: comix:10922
 msgid "_Adjust colour..."
-msgstr ""
+msgstr "_Ajuste de color..."
 
 #: comix:10924
 msgid "Slideshow"
@@ -945,7 +946,7 @@ msgstr "_Marcadores"
 
 #: comix:10944
 msgid "_Toolbars"
-msgstr ""
+msgstr "Barra de _herramientas"
 
 #: comix:10946
 msgid "_Edit"
@@ -1061,11 +1062,13 @@ msgstr "Entrar automáticamente al modo de página doble al iniciar Comix."
 
 #: comix:11009
 msgid "Enter manual zoom mode automatically when Comix is started."
-msgstr "Entrar automáticamente al modo de ampliación manual al iniciar Comix."
+msgstr ""
+"Entrar automáticamente al modo de ampliación manual al iniciar Comix."
 
 #: comix:11010
 msgid "Enter fit-to-screen mode automatically when Comix is started."
-msgstr "Entrar automáticamente al modo ajustar a la pantalla al iniciar Comix."
+msgstr ""
+"Entrar automáticamente al modo ajustar a la pantalla al iniciar Comix."
 
 #: comix:11011
 msgid "Enter fit width mode automatically when Comix is started."
@@ -1078,11 +1081,11 @@ msgstr ""
 
 #: comix:11013
 msgid ""
-"Also scale images to a size that is larger than their original size in fit-"
-"to-screen mode, fit width mode and fit height mode."
+"Also scale images to a size that is larger than their original size in "
+"fit-to-screen mode, fit width mode and fit height mode."
 msgstr ""
-"También escalar la imagen a un tamaño que supere su tamaño original en los "
-"modos ajustar a la pantalla, ajustar a la anchura, y ajustar a la altura."
+"También escalar la imagen a un tamaño que supere su tamaño original en "
+"los modos ajustar a la pantalla, ajustar a la anchura, y ajustar a la altura."
 
 #: comix:11014
 msgid ""
@@ -1091,8 +1094,8 @@ msgid ""
 "that is given."
 msgstr ""
 "Escalar las imágenes independientemente cuando se esté en modo de página "
-"doble y en el modo ajustar a la pantalla. La más pequeña de las dos imágenes "
-"se escalará hasta cubrir cualquier espacio extra."
+"doble y en el modo ajustar a la pantalla. La más pequeña de las dos "
+"imágenes se escalará hasta cubrir cualquier espacio extra."
 
 #: comix:11015
 msgid "Automatically show any available comments when opening a new file."
@@ -1125,8 +1128,8 @@ msgid ""
 "by whether you use manga mode or not."
 msgstr ""
 "Mueve la barra horizontal en vez de la barra vertical cuando se usa la rueda "
-"del ratón en las partes superior o inferior de una página. La dirección se "
-"determinará dependiendo de si se está en modo manga o no."
+"del ratón en las partes superior o inferior de una página. La dirección "
+"se determinará dependiendo de si se está en modo manga o no."
 
 #: comix:11019
 msgid ""
@@ -1134,9 +1137,10 @@ msgid ""
 "not in fit-to-screen mode. It takes three \"steps\" with the scroll wheel to "
 "trigger this behaviour."
 msgstr ""
-"Voltea las páginas cuando se desplaza «fuera de la página» con la rueda del "
-"ratón, incluso cuando no se esté en el modo ajustar a la pantalla. Debe dar "
-"tres «pasos» con la rueda del ratón para desencadenar este comportamiento."
+"Voltea las páginas cuando se desplaza «fuera de la página» con la rueda "
+"del ratón, incluso cuando no se esté en el modo ajustar a la pantalla. "
+"Debe dar tres «pasos» con la rueda del ratón para desencadenar este "
+"comportamiento."
 
 #: comix:11020
 msgid ""
@@ -1154,9 +1158,9 @@ msgid ""
 "archive."
 msgstr ""
 "Abre automáticamente el siguiente archivador en el directorio cuando se "
-"desplace fuera de la última página del archivador, y abre automáticamente el "
-"archivador anterior en el directorio cuando se desplace fuera de la primera "
-"página del archivador actual."
+"desplace fuera de la última página del archivador, y abre automáticamente "
+"el archivador anterior en el directorio cuando se desplace fuera de la "
+"primera página del archivador actual."
 
 #: comix:11022
 msgid "Hide the cursor when in fullscreen mode."
@@ -1200,13 +1204,13 @@ msgstr ""
 "cuyo caso cambia de página. Cuando esta opción se activa, automáticamente "
 "Comix trata de seguir el flujo de lectura del cómic. Cuando se presione la "
 "barra espaciadora no solamente se desplazará hacia abajo sino también "
-"horizontalmente hacia el borde de la página (izquierdo o derecho dependiendo "
-"de si se está en el modo manga o no). En el modo de página doble irá hasta "
-"el borde de la primera página si está en la vista, en otro caso irá al borde "
-"de la segunda página. También, en el modo de página doble con esta opción, "
-"Comix no intercambiará páginas a menos que se esté en la parte inferior de "
-"la segunda página. En la parte inferior de la primera página irá al comienzo "
-"de la segunda página."
+"horizontalmente hacia el borde de la página (izquierdo o derecho "
+"dependiendo de si se está en el modo manga o no). En el modo de página "
+"doble irá hasta el borde de la primera página si está en la vista, en "
+"otro caso irá al borde de la segunda página. También, en el modo de "
+"página doble con esta opción, Comix no intercambiará páginas a menos que "
+"se esté en la parte inferior de la segunda página. En la parte inferior de "
+"la primera página irá al comienzo de la segunda página."
 
 #: comix:11029
 msgid "Always hide the thumbnail scrollbar."
@@ -1219,8 +1223,8 @@ msgstr ""
 
 #: comix:11031
 msgid ""
-"Automatically go to the same directory as last time when opening the \"Open"
-"\" dialog."
+"Automatically go to the same directory as last time when opening the "
+"\"Open\" dialog."
 msgstr ""
 "Va automáticamente al mismo directorio de la última vez cuando se abre el "
 "diálogo «Abrir»."
@@ -1233,6 +1237,8 @@ msgstr ""
 #: comix:11033
 msgid "Automatically restore these values the next time Comix is started."
 msgstr ""
+"Automáticamente restaura estos valores para la próxima vez que Comix se "
+"inicie. "
 
 #: comix:11034
 msgid "Show the page number in the upper left corner of each thumbnail."
@@ -1257,9 +1263,9 @@ msgid ""
 "each image. The pages are assumed to be of equal size"
 msgstr ""
 "La barra espaciadora usa el desplazamiento inteligente del modo de página "
-"doble aún en el modo de página simple. Esto puede ser útil en comics con dos "
-"páginas digitalizadas por cada imagen. Se asume que las páginas tienen el "
-"mismo tamaño."
+"doble aún en el modo de página simple. Esto puede ser útil en comics con "
+"dos páginas digitalizadas por cada imagen. Se asume que las páginas tienen "
+"el mismo tamaño."
 
 #: comix:11037
 msgid "Adjust the lens magnification factor."
@@ -1270,8 +1276,8 @@ msgid ""
 "Set the lens width and height in pixels. A larger lens will use more CPU "
 "resources than a small one."
 msgstr ""
-"Define el ancho y el alto de la lupa en píxeles. Una lupa grande usará más "
-"recursos de CPU que una más pequeña."
+"Define el ancho y el alto de la lupa en píxeles. Una lupa grande usará "
+"más recursos de CPU que una más pequeña."
 
 #: comix:11039
 msgid ""
@@ -1280,10 +1286,10 @@ msgid ""
 "mouse quickly. Setting the value too high can cause the lens to appear "
 "choppy."
 msgstr ""
-"Define la máxima frecuencia de actualización para la lupa, en milisegundos. "
-"Colocar aquí un valor muy bajo puede hacer que la lupa se retrase respecto "
-"al movimiento rápido del ratón. Colocar un valor muy alto puede hacer que la "
-"lupa parezca fragmentada."
+"Define la máxima frecuencia de actualización para la lupa, en "
+"milisegundos. Colocar aquí un valor muy bajo puede hacer que la lupa se "
+"retrase respecto al movimiento rápido del ratón. Colocar un valor muy alto "
+"puede hacer que la lupa parezca fragmentada."
 
 #: comix:11040
 msgid ""
@@ -1298,11 +1304,11 @@ msgid ""
 msgstr ""
 "Lee y escribe miniaturas en el directorio ~/.thumbnails como lo propone el "
 "estándar de freedesktop.org. Con esta preferencia activa, Comix usará las "
-"miniaturas ya almacenadas allí para hacer la carga de las mismas más rápida. "
-"Si no hay miniaturas, Comix las creará y las almacenará. Cómix puede usar "
-"las miniaturas creadas por otras aplicaciones y viceversa. Si esta "
-"preferencia no se activa, Comix creará miniaturas al vuelo cada vez que se "
-"abra un directorio."
+"miniaturas ya almacenadas allí para hacer la carga de las mismas más "
+"rápida. Si no hay miniaturas, Comix las creará y las almacenará. Cómix "
+"puede usar las miniaturas creadas por otras aplicaciones y viceversa. Si "
+"esta preferencia no se activa, Comix creará miniaturas al vuelo cada vez "
+"que se abra un directorio."
 
 #: comix:11041
 msgid ""
@@ -1313,9 +1319,9 @@ msgid ""
 msgstr ""
 "También usa miniaturas almacenadas para imágenes en archivadores de una "
 "manera similar. Debido a restricciones en el estándar de freedesktop.org, "
-"estas miniaturas se almacenarán en ~/.comix y sólo las usará Comix. Si esta "
-"preferencia no se activa, Comix creará miniaturas al vuelo cada vez que se "
-"abra un archivador."
+"estas miniaturas se almacenarán en ~/.comix y sólo las usará Comix. Si "
+"esta preferencia no se activa, Comix creará miniaturas al vuelo cada vez "
+"que se abra un archivador."
 
 #: comix:11042
 msgid ""
@@ -1323,9 +1329,9 @@ msgid ""
 "pages. An image is assumed to consist of two pages if its width is greater "
 "than its height."
 msgstr ""
-"Sólo muestra una imagen en el modo de página doble si la imagen consiste en "
-"dos páginas. Se asume que una imagen consiste en dos páginas si su anchura "
-"es mayor que su altura."
+"Sólo muestra una imagen en el modo de página doble si la imagen consiste "
+"en dos páginas. Se asume que una imagen consiste en dos páginas si su "
+"anchura es mayor que su altura."
 
 #: comix:11043
 msgid "Filter out archives with regular expressions."
