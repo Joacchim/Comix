@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "POT-Creation-Date: 2006-09-26 20:16+CEST\n"
-"PO-Revision-Date: 2006-08-13 23:50+0200\n"
+"PO-Revision-Date: 2006-09-27 10:18+0200\n"
 "Last-Translator: Paul Chatzidimitriou <paulmedic555@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -14,35 +14,44 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: pygettext.py 1.5\n"
 
-#: comix:547 comix:11046
+#: comix:547
+#: comix:11046
 msgid "Fit-to-screen mode"
 msgstr "Προσαρμοζμένη στην οθόνη προβολή"
 
-#: comix:550 comix:11047
+#: comix:550
+#: comix:11047
 msgid "Fit width mode"
 msgstr "Προσαρμοζμένη κατά πλάτος προβολή"
 
-#: comix:553 comix:11048
+#: comix:553
+#: comix:11048
 msgid "Fit height mode"
 msgstr "Προσαρμοζμένη κατά ύψος προβολή"
 
-#: comix:556 comix:10990 comix:11049
+#: comix:556
+#: comix:10990
+#: comix:11049
 msgid "Manual zoom mode"
 msgstr "Χειροκίνητη προβολή ζουμ"
 
-#: comix:559 comix:11050
+#: comix:559
+#: comix:11050
 msgid "Double page mode"
 msgstr "Προβολή διπλής σελίδας"
 
-#: comix:561 comix:11052
+#: comix:561
+#: comix:11052
 msgid "Manga mode"
 msgstr "Προβολή Magna"
 
-#: comix:563 comix:11051
+#: comix:563
+#: comix:11051
 msgid "Magnifying lens"
 msgstr "Μεγενθυτικοί φακοί"
 
-#: comix:664 comix:6620
+#: comix:664
+#: comix:6620
 msgid "Library"
 msgstr "Βιβλιοθήκη"
 
@@ -58,7 +67,9 @@ msgstr "Προσθήκη αρχείων στην βιβλιοθήκη."
 msgid "Remove selected archive from library."
 msgstr "Αφαίρεση επιλεγμένου αρχείου απο την βιβλιοθήκη."
 
-#: comix:709 comix:1608 comix:1651
+#: comix:709
+#: comix:1608
+#: comix:1651
 msgid "Clean up"
 msgstr "Εκκαθάριση"
 
@@ -126,7 +137,12 @@ msgstr "Εικόνα XBM"
 msgid "ZIP archive"
 msgstr "Αρχείο ZIP"
 
-#: comix:857 comix:6702 comix:7054 comix:7105 comix:7453 comix:8723
+#: comix:857
+#: comix:6702
+#: comix:7054
+#: comix:7105
+#: comix:7453
+#: comix:8723
 msgid "RAR archive"
 msgstr "Αρχείο RAR"
 
@@ -176,8 +192,7 @@ msgstr "Γρήγορο φόρτωμα σελίδων για γρηγορότερ
 
 #: comix:907
 msgid "Scroll wheel scrolls horizontally at top and bottom of page"
-msgstr ""
-"Ο τροχός κύλισης κυλάει οριζόντια στην κορυφή και στον πάτο της σελίδας"
+msgstr "Ο τροχός κύλισης κυλάει οριζόντια στην κορυφή και στον πάτο της σελίδας"
 
 #: comix:910
 msgid "Flip page when scrolling off the top or bottom of page"
@@ -193,8 +208,7 @@ msgstr "Το πλήκτρο κενού να χρησιμοποιεί έξυπν�
 
 #: comix:917
 msgid "Save window position and size for future sessions"
-msgstr ""
-"Σώσιμο της θέσης του παραθύρου και του μεγέθους του για μελλοντική χρήση"
+msgstr "Σώσιμο της θέσης του παραθύρου και του μεγέθους του για μελλοντική χρήση"
 
 #: comix:920
 msgid "Go to the next archive in directory after last page"
@@ -226,9 +240,7 @@ msgstr "Χρησιμοποίηση αποθηκευμένων μικρογραφ
 
 #: comix:937
 msgid "Display only one page in double page mode if the image is wide"
-msgstr ""
-"Εμφάνιση μόνο μίας σελίδας στην προβολή διπλής σελίδας αν η εικόνα έχει "
-"μεγάλο πλάτος"
+msgstr "Εμφάνιση μόνο μίας σελίδας στην προβολή διπλής σελίδας αν η εικόνα έχει μεγάλο πλάτος"
 
 #: comix:940
 msgid "Store recently opened files"
@@ -290,11 +302,13 @@ msgstr "Ετικέτες κουμπιών εργαλειοθήκης:"
 msgid "Icons only"
 msgstr "Μόνο εικονίδια"
 
-#: comix:1018 comix:4613
+#: comix:1018
+#: comix:4613
 msgid "Text only"
 msgstr "Μόνο κείμενο"
 
-#: comix:1019 comix:4615
+#: comix:1019
+#: comix:4615
 msgid "Icons and text"
 msgstr "Εικονίδια και κείμενο"
 
@@ -330,7 +344,12 @@ msgstr "Σχόλια"
 msgid "Space key scrolls"
 msgstr "Το πλήκτρο κενού κυλάει"
 
-#: comix:1201 comix:3974 comix:9386 comix:9415 comix:9418 comix:9425
+#: comix:1201
+#: comix:3974
+#: comix:9386
+#: comix:9415
+#: comix:9418
+#: comix:9425
 #: comix:9427
 msgid "of"
 msgstr "απο"
@@ -377,27 +396,27 @@ msgstr "Προεπισκοπήσεις"
 
 #: comix:1301
 msgid "Adjust colour"
-msgstr ""
+msgstr "Ρύθμιση χρώματος"
 
 #: comix:1303
 msgid "Default"
-msgstr ""
+msgstr "Προεπιλογή"
 
 #: comix:1325
 msgid "Brightness"
-msgstr ""
+msgstr "Φωτεινότητα"
 
 #: comix:1337
 msgid "Contrast"
-msgstr ""
+msgstr "Αντίθεση"
 
 #: comix:1349
 msgid "Saturation"
-msgstr ""
+msgstr "Κορεσμός"
 
 #: comix:1361
 msgid "Sharpness"
-msgstr ""
+msgstr "Οξύτητα"
 
 #: comix:1376
 msgid "Automatically adjust contrast"
@@ -405,7 +424,7 @@ msgstr "Αυτόματη ρύθμιση της αντίθεσης"
 
 #: comix:1383
 msgid "Save values for future sessions"
-msgstr ""
+msgstr "Σώσιμο τιμών για μελλοντική χρήσεις"
 
 #: comix:1395
 msgid "Properties"
@@ -423,19 +442,20 @@ msgstr "Επεξεργασία σελιδοδεικτών"
 msgid "Title"
 msgstr "Τίτλος"
 
-#: comix:1447 comix:5380 comix:5732
+#: comix:1447
+#: comix:5380
+#: comix:5732
 msgid "Page"
 msgstr "Σελίδα"
 
-#: comix:1477 comix:1530
+#: comix:1477
+#: comix:1530
 msgid "About"
 msgstr "Περί"
 
 #: comix:1515
 msgid "Comix is an image viewer specifically designed to handle comic books."
-msgstr ""
-"Το Comix είναι ένας προβολέας εικόνων με συγκεκριμένο σκοπό το να χειρίζεται "
-"βιβλία κόμικ."
+msgstr "Το Comix είναι ένας προβολέας εικόνων με συγκεκριμένο σκοπό το να χειρίζεται βιβλία κόμικ."
 
 #: comix:1517
 msgid "It reads ZIP, RAR and tar archives (also gzip or bzip2 compressed)"
@@ -505,11 +525,13 @@ msgstr "Συνεργάτες"
 msgid "Manage thumbnails"
 msgstr "Διαχείριση μικρογραφιών"
 
-#: comix:1603 comix:1646
+#: comix:1603
+#: comix:1646
 msgid "Remove all stored thumbnails:"
 msgstr "Αφαίρεση όλων των αποθηκευμένων μικρογραφιών:"
 
-#: comix:1613 comix:1656
+#: comix:1613
+#: comix:1656
 msgid "Remove orphaned thumbnails:"
 msgstr "Αφαίρεση όλων των ορφανών μικρογραφιών:"
 
@@ -537,23 +559,47 @@ msgstr "Τύπος αρχείου"
 msgid "Extension"
 msgstr "Κατάληξη"
 
-#: comix:1733 comix:4304 comix:4340 comix:6694 comix:7044 comix:7095
-#: comix:7451 comix:8694
+#: comix:1733
+#: comix:4304
+#: comix:4340
+#: comix:6694
+#: comix:7044
+#: comix:7095
+#: comix:7451
+#: comix:8694
 msgid "Zip archive"
 msgstr "Αρχείο zip"
 
-#: comix:1734 comix:4307 comix:4346 comix:6696 comix:7046 comix:7097
-#: comix:7455 comix:8710
+#: comix:1734
+#: comix:4307
+#: comix:4346
+#: comix:6696
+#: comix:7046
+#: comix:7097
+#: comix:7455
+#: comix:8710
 msgid "Tar archive"
 msgstr "Αρχείο tar"
 
-#: comix:1735 comix:4311 comix:4342 comix:6698 comix:7049 comix:7100
-#: comix:7456 comix:8706
+#: comix:1735
+#: comix:4311
+#: comix:4342
+#: comix:6698
+#: comix:7049
+#: comix:7100
+#: comix:7456
+#: comix:8706
 msgid "Gzip compressed tar archive"
 msgstr "Συμπιεσμένο αρχείο tar gzip"
 
-#: comix:1737 comix:4314 comix:4344 comix:6700 comix:7052 comix:7103
-#: comix:7457 comix:8708
+#: comix:1737
+#: comix:4314
+#: comix:4344
+#: comix:6700
+#: comix:7052
+#: comix:7103
+#: comix:7457
+#: comix:8708
 msgid "Bzip2 compressed tar archive"
 msgstr "Συμπιεσμένο αρχείο tar bzip2"
 
@@ -561,7 +607,9 @@ msgstr "Συμπιεσμένο αρχείο tar bzip2"
 msgid "Delete old archive/directory"
 msgstr "Διαγραφή παλιών αρχείων/καταλόγων"
 
-#: comix:1774 comix:6095 comix:6100
+#: comix:1774
+#: comix:6095
+#: comix:6100
 msgid "Permission denied"
 msgstr "Απαγορεύεται η πρόσβαση"
 
@@ -577,38 +625,63 @@ msgstr "Μόνιμη διαγραφή %s;"
 msgid "Perform lossless JPEG operation on %s?"
 msgstr "Εκτέλεση λειτουργίας χωρίς απώλειες εικόνας JPEG  σε %s; "
 
-#: comix:4081 comix:4086
+#: comix:4081
+#: comix:4086
 msgid "Some images might be trimmed a bit during the operation."
-msgstr ""
-"Μερικές εικόνες μπορεί να περικοπούν λίγο κατα την διάρκεια της λειτουργίας"
+msgstr "Μερικές εικόνες μπορεί να περικοπούν λίγο κατα την διάρκεια της λειτουργίας"
 
 #: comix:4084
 msgid "Permanently convert %s to greyscale?"
 msgstr "Μόνιμη μετατροπή %s σε ασπρόμαυρη εικόνα συνεχών τόνων του γκρί;"
 
-#: comix:4946 comix:4957
+#: comix:4946
+#: comix:4957
 msgid "Location:"
 msgstr "Τοποθεσία:"
 
-#: comix:4947 comix:4958
+#: comix:4947
+#: comix:4958
 msgid "Quantity:"
 msgstr "Ποσότητα:"
 
-#: comix:4947 comix:4958
+#: comix:4947
+#: comix:4958
 msgid "Total size:"
 msgstr "Συνολικό μέγεθος:"
 
-#: comix:4993 comix:5004 comix:5008 comix:5019 comix:5038 comix:5043
-#: comix:5047 comix:5058 comix:5069 comix:5073 comix:5084 comix:5102
-#: comix:5107 comix:5111 comix:6414 comix:6442 comix:6448
+#: comix:4993
+#: comix:5004
+#: comix:5008
+#: comix:5019
+#: comix:5038
+#: comix:5043
+#: comix:5047
+#: comix:5058
+#: comix:5069
+#: comix:5073
+#: comix:5084
+#: comix:5102
+#: comix:5107
+#: comix:5111
+#: comix:6414
+#: comix:6442
+#: comix:6448
 msgid "Removed:"
 msgstr "Αφαιρέθηκε:"
 
-#: comix:5009 comix:5048 comix:5074 comix:5112 comix:6362 comix:6449
+#: comix:5009
+#: comix:5048
+#: comix:5074
+#: comix:5112
+#: comix:6362
+#: comix:6449
 msgid "Done!"
 msgstr "Έγινε!"
 
-#: comix:5213 comix:6687 comix:7042 comix:7093
+#: comix:5213
+#: comix:6687
+#: comix:7042
+#: comix:7093
 msgid "pages"
 msgstr "Σελίδες"
 
@@ -620,7 +693,9 @@ msgstr "σχόλιο"
 msgid "comments"
 msgstr "σχόλια"
 
-#: comix:5247 comix:5433 comix:5786
+#: comix:5247
+#: comix:5433
+#: comix:5786
 msgid "Location"
 msgstr "Τοποθεσία"
 
@@ -628,11 +703,13 @@ msgstr "Τοποθεσία"
 msgid "Yes"
 msgstr "Ναί"
 
-#: comix:5260 comix:5263
+#: comix:5260
+#: comix:5263
 msgid "In library"
 msgstr "Στην βιβλιοθήκη"
 
-#: comix:5263 comix:5278
+#: comix:5263
+#: comix:5278
 msgid "No"
 msgstr "Όχι"
 
@@ -640,23 +717,32 @@ msgstr "Όχι"
 msgid "Yes, page"
 msgstr "Ναί, σελίδα"
 
-#: comix:5273 comix:5278
+#: comix:5273
+#: comix:5278
 msgid "Bookmarked"
 msgstr "Ο σελιδοδείκτης προστέθηκε"
 
-#: comix:5286 comix:5442 comix:5795
+#: comix:5286
+#: comix:5442
+#: comix:5795
 msgid "Accessed"
 msgstr "Η πρόσβαση πραγματοποιήθηκε"
 
-#: comix:5296 comix:5453 comix:5806
+#: comix:5296
+#: comix:5453
+#: comix:5806
 msgid "Modified"
 msgstr "Τροποποιήθηκε"
 
-#: comix:5306 comix:5464 comix:5817
+#: comix:5306
+#: comix:5464
+#: comix:5817
 msgid "Permissions"
 msgstr "Άδειες χρήσης"
 
-#: comix:5315 comix:5474 comix:5827
+#: comix:5315
+#: comix:5474
+#: comix:5827
 msgid "Owner"
 msgstr "Ιδιοκτήτης"
 
@@ -664,31 +750,38 @@ msgstr "Ιδιοκτήτης"
 msgid "Archive"
 msgstr "Αρχείο"
 
-#: comix:5491 comix:5844
+#: comix:5491
+#: comix:5844
 msgid "Mode"
 msgstr "Τρόπος"
 
-#: comix:5498 comix:5851
+#: comix:5498
+#: comix:5851
 msgid "Pixel count"
 msgstr "Πλήθος εικονοστοιχείων"
 
-#: comix:5511 comix:5864
+#: comix:5511
+#: comix:5864
 msgid "Pixel sum"
 msgstr "Άθροισμα εικονοστοιχείων"
 
-#: comix:5542 comix:5895
+#: comix:5542
+#: comix:5895
 msgid "Extrema"
 msgstr "Ακραίο"
 
-#: comix:5581 comix:5934
+#: comix:5581
+#: comix:5934
 msgid "Mean"
 msgstr "Σημαίνω"
 
-#: comix:5609 comix:5962
+#: comix:5609
+#: comix:5962
 msgid "Median"
 msgstr "διάμεσος (διάμεση τιμή)"
 
-#: comix:5637 comix:5990
+#: comix:5637
+#: comix:5990
 msgid "Standard deviation"
 msgstr "Πρώτυπη απόκλιση"
 
@@ -708,7 +801,8 @@ msgstr "Εικόνα 2"
 msgid "Could not delete"
 msgstr "Δεν μπορεί να διαγραφεί"
 
-#: comix:6097 comix:6102
+#: comix:6097
+#: comix:6102
 msgid "Please check your permissions."
 msgstr "Παρακαλώ ελέγξτε τις άδειες χρήσης σας."
 
@@ -716,7 +810,10 @@ msgstr "Παρακαλώ ελέγξτε τις άδειες χρήσης σας.
 msgid "Could not create"
 msgstr "Δεν μπορούν να δημιουργηθούν"
 
-#: comix:6213 comix:6223 comix:6357 comix:6361
+#: comix:6213
+#: comix:6223
+#: comix:6357
+#: comix:6361
 msgid "Added:"
 msgstr "Προσθέθηκε:"
 
@@ -737,12 +834,8 @@ msgid "page"
 msgstr "σελίδα"
 
 #: comix:8721
-msgid ""
-"Could not find the unrar executable. Please install it if you wish to open "
-"RAR archives."
-msgstr ""
-"Δεν μπόρεσε να βρεθεί το εκτελέσιμο unrar. Παρακαλώ εγκαταστήστε το αν "
-"επιθυμείτε να ανοίξετε αρχεία RAR."
+msgid "Could not find the unrar executable. Please install it if you wish to open RAR archives."
+msgstr "Δεν μπόρεσε να βρεθεί το εκτελέσιμο unrar. Παρακαλώ εγκαταστήστε το αν επιθυμείτε να ανοίξετε αρχεία RAR."
 
 #: comix:8726
 msgid "Could not open"
@@ -764,9 +857,10 @@ msgstr "Τύπος αρχείου του"
 msgid "not recognized."
 msgstr "δεν αναγνωρίζεται."
 
-#: comix:8902 comix:11161
+#: comix:8902
+#: comix:11161
 msgid "No images in \"%s\""
-msgstr ""
+msgstr "Όχι εικόνες σε \"%s\""
 
 #: comix:9385
 msgid "Comment file"
@@ -776,7 +870,10 @@ msgstr "Σχολιασμός αρχείου"
 msgid "Could not read"
 msgstr "Δεν ήταν δυνατή η ανάγνωση"
 
-#: comix:9414 comix:9417 comix:9424 comix:9426
+#: comix:9414
+#: comix:9417
+#: comix:9424
+#: comix:9426
 msgid "Comment"
 msgstr "Σχόλιο"
 
@@ -898,7 +995,7 @@ msgstr "_Έξοδος"
 
 #: comix:10922
 msgid "_Adjust colour..."
-msgstr ""
+msgstr "_Ρύθμιση χρώματος..."
 
 #: comix:10924
 msgid "Slideshow"
@@ -928,13 +1025,14 @@ msgstr "Κάθετη αναστροφή εικόνας JPEG χωρίς απώλ�
 msgid "Convert JPEG to greyscale..."
 msgstr "Μετατροπή εικόνας JPEG σε ασπρόμαυρη εικόνα συνεχών τόνων του γκρί"
 
-#: comix:10943 comix:10945
+#: comix:10943
+#: comix:10945
 msgid "_Bookmarks"
 msgstr "_Σελιδοδείκτες"
 
 #: comix:10944
 msgid "_Toolbars"
-msgstr ""
+msgstr "_Εργαλειοθήκες"
 
 #: comix:10946
 msgid "_Edit"
@@ -948,11 +1046,13 @@ msgstr "Λειτουργίες α_ρχείου"
 msgid "_File"
 msgstr "_Αρχείο"
 
-#: comix:10950 comix:10951
+#: comix:10950
+#: comix:10951
 msgid "_View"
 msgstr "_Προβολή"
 
-#: comix:10952 comix:10953
+#: comix:10952
+#: comix:10953
 msgid "_Go"
 msgstr "_Πήγαινε"
 
@@ -1065,131 +1165,59 @@ msgid "Enter fit height mode automatically when Comix is started."
 msgstr "Αυτόματη προσαρμοζμένη κατά ύψος προβολή με την εκκίνηση του Comix."
 
 #: comix:11013
-msgid ""
-"Also scale images to a size that is larger than their original size in fit-"
-"to-screen mode, fit width mode and fit height mode."
-msgstr ""
-"Επίσης αυξομείωση μεγέθους εικόνων σε ένα μέγεθος το οποίο είναι μεγαλύτερο "
-"απο το αρχικό μέγεθος σε προσαρμοζμένη στην οθόνη προβολή, προσαρμοζμένη "
-"κατά πλάτος προβολή και προσαρμοζμένη κατά ύψος προβολή."
+msgid "Also scale images to a size that is larger than their original size in fit-to-screen mode, fit width mode and fit height mode."
+msgstr "Επίσης αυξομείωση μεγέθους εικόνων σε ένα μέγεθος το οποίο είναι μεγαλύτερο απο το αρχικό μέγεθος σε προσαρμοζμένη στην οθόνη προβολή, προσαρμοζμένη κατά πλάτος προβολή και προσαρμοζμένη κατά ύψος προβολή."
 
 #: comix:11014
-msgid ""
-"Scale the images independently when in double page mode and fit-to-screen "
-"mode. The smaller of the two images will scale up to fill any extra space "
-"that is given."
-msgstr ""
-"Αυξομείωση μεγέθους των εικόνων ανεξάρτητα απο όταν είναι σε προβολή διπλής "
-"σελίδας και σε προσαρμοζμένη στην οθόνη προβολή.Το μικρότερο απο τις δύο "
-"εικόνες θα αυξομειωθεί για να γεμίσει οποιοδήποτε πρόσθετο χώρο που δίνεται."
+msgid "Scale the images independently when in double page mode and fit-to-screen mode. The smaller of the two images will scale up to fill any extra space that is given."
+msgstr "Αυξομείωση μεγέθους των εικόνων ανεξάρτητα απο όταν είναι σε προβολή διπλής σελίδας και σε προσαρμοζμένη στην οθόνη προβολή.Το μικρότερο απο τις δύο εικόνες θα αυξομειωθεί για να γεμίσει οποιοδήποτε πρόσθετο χώρο που δίνεται."
 
 #: comix:11015
 msgid "Automatically show any available comments when opening a new file."
 msgstr "Αυτόματη εμφάνιση τυχών σχολίων, στο ανοίγμα νέου αρχείου."
 
 #: comix:11016
-msgid ""
-"Automatically hide scrollbars, menubar, toolbar, statusbar and thumbnails "
-"when in fullscreen mode."
-msgstr ""
-"Αυτόματη απόκρυψη μενού, γραμμών κύλισης, εργαλείων, και προεπίσκοπήσεων σε "
-"προβολή πλήρης οθόνης."
+msgid "Automatically hide scrollbars, menubar, toolbar, statusbar and thumbnails when in fullscreen mode."
+msgstr "Αυτόματη απόκρυψη μενού, γραμμών κύλισης, εργαλείων, και προεπίσκοπήσεων σε προβολή πλήρης οθόνης."
 
 #: comix:11017
-msgid ""
-"Cache the next page in the archive/directory to increase the perceived "
-"speed. This is generally recommended unless you are running low on RAM."
-msgstr ""
-"Γρήγορη φόρτωση, επομένης σελίδας σε αρχείο/κατάλογο, για αύξηση της "
-"ταχύτητας. Συνιστάται, εκτός και αν υπάρχει μικρή ποσότητα RAM."
+msgid "Cache the next page in the archive/directory to increase the perceived speed. This is generally recommended unless you are running low on RAM."
+msgstr "Γρήγορη φόρτωση, επομένης σελίδας σε αρχείο/κατάλογο, για αύξηση της ταχύτητας. Συνιστάται, εκτός και αν υπάρχει μικρή ποσότητα RAM."
 
 #: comix:11018
-msgid ""
-"Move the horizontal scrollbar instead of the vertical when using the scroll "
-"wheel at the top or the bottom of the page. The direction will be determined "
-"by whether you use manga mode or not."
-msgstr ""
-"Μετακίνηση της οριζόντιας γραμμής κύλισης αντί της κάθετης όταν "
-"χρισημοποιείται ο τροχός κύλισης στο πάνω ή κάτω μέρος της σελίδας. Η "
-"κατευθύνση θα καθορίζεται απο το εάν χρησιμοποιείται προβολή manga ή όχι."
+msgid "Move the horizontal scrollbar instead of the vertical when using the scroll wheel at the top or the bottom of the page. The direction will be determined by whether you use manga mode or not."
+msgstr "Μετακίνηση της οριζόντιας γραμμής κύλισης αντί της κάθετης όταν χρισημοποιείται ο τροχός κύλισης στο πάνω ή κάτω μέρος της σελίδας. Η κατευθύνση θα καθορίζεται απο το εάν χρησιμοποιείται προβολή manga ή όχι."
 
 #: comix:11019
-msgid ""
-"Flip pages when scrolling \"off the page\" with the scroll wheel, even when "
-"not in fit-to-screen mode. It takes three \"steps\" with the scroll wheel to "
-"trigger this behaviour."
-msgstr ""
-"Αλλάγη σελίδας όταν γίνεται κύλιση \"εκτός της τρέχουσας σελίδας\" με τον "
-"τροχό κύλισης, ακόμη και αν η προβολή δεν είναι σε προβολή προσαρμοζμένη "
-"στην οθόνη. Απαιτούνται τρία \"βήματα\" του τροχού κύλισης για να συμβεί το "
-"παραπάνω."
+msgid "Flip pages when scrolling \"off the page\" with the scroll wheel, even when not in fit-to-screen mode. It takes three \"steps\" with the scroll wheel to trigger this behaviour."
+msgstr "Αλλάγη σελίδας όταν γίνεται κύλιση \"εκτός της τρέχουσας σελίδας\" με τον τροχό κύλισης, ακόμη και αν η προβολή δεν είναι σε προβολή προσαρμοζμένη στην οθόνη. Απαιτούνται τρία \"βήματα\" του τροχού κύλισης για να συμβεί το παραπάνω."
 
 #: comix:11020
-msgid ""
-"Save the position and the size of the window for the next time you start "
-"Comix."
-msgstr ""
-"Αποθήκευση θέσης και μεγέθους παραθύρου, για την επομενή φορά που θα "
-"ανοίξετε το Comix."
+msgid "Save the position and the size of the window for the next time you start Comix."
+msgstr "Αποθήκευση θέσης και μεγέθους παραθύρου, για την επομενή φορά που θα ανοίξετε το Comix."
 
 #: comix:11021
-msgid ""
-"Automatically open the next archive in the directory when scrolling past the "
-"last page of the current archive, and automatically open the previous "
-"archive in the directory when scrolling past the first page of the current "
-"archive."
-msgstr ""
-"Αυτόματο ανοίγμα επόμενου αρχείου στον φάκελο, μετά την τελευταία σελίδα του "
-"τρέχοντος αρχείου, και αυτόματο άνοιγμα του προηγουμένου αρχείου στον "
-"φάκελο, πρίν την πρώτη σελίδα του τρέχοντος αρχείου."
+msgid "Automatically open the next archive in the directory when scrolling past the last page of the current archive, and automatically open the previous archive in the directory when scrolling past the first page of the current archive."
+msgstr "Αυτόματο ανοίγμα επόμενου αρχείου στον φάκελο, μετά την τελευταία σελίδα του τρέχοντος αρχείου, και αυτόματο άνοιγμα του προηγουμένου αρχείου στον φάκελο, πρίν την πρώτη σελίδα του τρέχοντος αρχείου."
 
 #: comix:11022
 msgid "Hide the cursor when in fullscreen mode."
 msgstr "Απόκρυψη κέρσορα σε προβολή πλήρης οθόνης."
 
-#: comix:11023 comix:11024 comix:11025 comix:11026
-msgid ""
-"Set the image scaling method. The best choice is often \"Tiles\", it is "
-"quite quick and produces almost as good results as \"Bilinear\" or \"Hyper\"."
-msgstr ""
-"Ρυθμισή μεθόδου αυξομείωσης μεγέθους εικόνας.Συνιστόμενο:\"Tiles\", είναι "
-"αρκετά γρήγορο και παράγει σχεδόν εξίσου καλό αποτέλεσμα με το \"Bilinear\" "
-"ή το \"Hyper\"."
+#: comix:11023
+#: comix:11024
+#: comix:11025
+#: comix:11026
+msgid "Set the image scaling method. The best choice is often \"Tiles\", it is quite quick and produces almost as good results as \"Bilinear\" or \"Hyper\"."
+msgstr "Ρυθμισή μεθόδου αυξομείωσης μεγέθους εικόνας.Συνιστόμενο:\"Tiles\", είναι αρκετά γρήγορο και παράγει σχεδόν εξίσου καλό αποτέλεσμα με το \"Bilinear\" ή το \"Hyper\"."
 
 #: comix:11027
-msgid ""
-"Treat files with the following extensions as comment files. Extensions "
-"should be separated by whitespaces. They are not case sensitive."
-msgstr ""
-"Μεταχείριση αρχείων με τις παρακάτω καταλήξεις, ως αρχεία-σχόλια. Οι "
-"καταλήξεις θα πρέπει να χωρίζονται με κενά. Τα γράμματα μπορεί να είναι είτε "
-"κεφαλαία είτε μικρά."
+msgid "Treat files with the following extensions as comment files. Extensions should be separated by whitespaces. They are not case sensitive."
+msgstr "Μεταχείριση αρχείων με τις παρακάτω καταλήξεις, ως αρχεία-σχόλια. Οι καταλήξεις θα πρέπει να χωρίζονται με κενά. Τα γράμματα μπορεί να είναι είτε κεφαλαία είτε μικρά."
 
 #: comix:11028
-msgid ""
-"Use smart scrolling with the space key. Pressing the space key normally "
-"scrolls straight down one window height unless at the bottom of the page "
-"where it flips pages instead. When this option is set Comix automatically "
-"tries to follow the reading flow of the comic book. When pressing the space "
-"key it will not only scroll down but will also scroll horizontally to the "
-"edge of the page (left or right depending on whether you use manga mode). In "
-"double page mode it will go to the edge of the first page if it is in view, "
-"otherwise it will go to the edge of the second page. Also, in double page "
-"mode with this option, Comix will not flip pages unless at the bottom of the "
-"second page. At the bottom of the first page it will instead go to the top "
-"of the second page."
-msgstr ""
-"Χρήση έξυπνης κύλισης με το πλήκτρο κενού.Το πάτημα του πλήκτρου κενού "
-"κανονικά παράγει κύλιση κατά το ύψος απο πάνω εως κάτω ενός παραθύρου εκτός "
-"και αν βρισκόμαστε στον πάτο της σελίδας, οπότε πάει στην επόμενη. Όταν αυτή "
-"η ρύθμιση είναι επιλεγμένη το Comix αυτόματα προσπαθεί να ακολουθήσει την "
-"ροή αναγνωσής του κόμικ.Με το πάτημα του πλήκτρου κενού δεν θα κυλίσει μόνο "
-"κατώ αλλα και οριζόντια στην ακρη της σελίδας (είτε αριστερά είτε δεξιά, "
-"εξαρταταί από το αν η κατάσταση είναι manga ή όχι).Σε προβολή διπλής "
-"σελίδας, θα κυλίσει στο άκρο της πρώτης σελίδας αν αυτό φαίνεται, αλλίως στο "
-"άκρο της δευτερής.Επίσης, σε προβολή διπλής σελίδας με αυτήν την επιλογή το "
-"Comix δεν θα αλλάζει σελίδες εκτός αν βρεθεί στο τέλος της δεύτερης σελίδας."
-"Αντίθετα απο το τέλος της πρώτης σελίδας, θα πηγαίνει στην αρχή της δευτερής."
+msgid "Use smart scrolling with the space key. Pressing the space key normally scrolls straight down one window height unless at the bottom of the page where it flips pages instead. When this option is set Comix automatically tries to follow the reading flow of the comic book. When pressing the space key it will not only scroll down but will also scroll horizontally to the edge of the page (left or right depending on whether you use manga mode). In double page mode it will go to the edge of the first page if it is in view, otherwise it will go to the edge of the second page. Also, in double page mode with this option, Comix will not flip pages unless at the bottom of the second page. At the bottom of the first page it will instead go to the top of the second page."
+msgstr "Χρήση έξυπνης κύλισης με το πλήκτρο κενού.Το πάτημα του πλήκτρου κενού κανονικά παράγει κύλιση κατά το ύψος απο πάνω εως κάτω ενός παραθύρου εκτός και αν βρισκόμαστε στον πάτο της σελίδας, οπότε πάει στην επόμενη. Όταν αυτή η ρύθμιση είναι επιλεγμένη το Comix αυτόματα προσπαθεί να ακολουθήσει την ροή αναγνωσής του κόμικ.Με το πάτημα του πλήκτρου κενού δεν θα κυλίσει μόνο κατώ αλλα και οριζόντια στην ακρη της σελίδας (είτε αριστερά είτε δεξιά, εξαρταταί από το αν η κατάσταση είναι manga ή όχι).Σε προβολή διπλής σελίδας, θα κυλίσει στο άκρο της πρώτης σελίδας αν αυτό φαίνεται, αλλίως στο άκρο της δευτερής.Επίσης, σε προβολή διπλής σελίδας με αυτήν την επιλογή το Comix δεν θα αλλάζει σελίδες εκτός αν βρεθεί στο τέλος της δεύτερης σελίδας.Αντίθετα απο το τέλος της πρώτης σελίδας, θα πηγαίνει στην αρχή της δευτερής."
 
 #: comix:11029
 msgid "Always hide the thumbnail scrollbar."
@@ -1197,118 +1225,55 @@ msgstr "Απόκρυψη πάντα της γραμμής κύλισης μικ�
 
 #: comix:11030
 msgid "Automatically open the last viewed page when Comix is started."
-msgstr ""
-"Αυτόματο ανοιγμά της τελευταίας προβληθείστας σελίδας κατά την εκκίνηση του "
-"Comix."
+msgstr "Αυτόματο ανοιγμά της τελευταίας προβληθείστας σελίδας κατά την εκκίνηση του Comix."
 
 #: comix:11031
-msgid ""
-"Automatically go to the same directory as last time when opening the \"Open"
-"\" dialog."
-msgstr ""
-"Αυτόματο ανοιγμά του τελευταίου φακέλου, όταν χρισιμοποιείται το \"Ανοιγμά\"."
+msgid "Automatically go to the same directory as last time when opening the \"Open\" dialog."
+msgstr "Αυτόματο ανοιγμά του τελευταίου φακέλου, όταν χρισιμοποιείται το \"Ανοιγμά\"."
 
 #: comix:11032
 msgid "Automatically go to this directory when opening the \"Open\" dialog."
-msgstr ""
-"Αυτόματο ανοιγμά αυτού του φακέλου, όταν χρισιμοποιείται το \"Ανοιγμά\"."
+msgstr "Αυτόματο ανοιγμά αυτού του φακέλου, όταν χρισιμοποιείται το \"Ανοιγμά\"."
 
 #: comix:11033
 msgid "Automatically restore these values the next time Comix is started."
-msgstr ""
+msgstr "Αυτόματη επαναφορά αυτών των τιμών την επόμενη φορά που το Comix θα ξεκινήσει."
 
 #: comix:11034
 msgid "Show the page number in the upper left corner of each thumbnail."
 msgstr "Εμφάνιση αριθμού σελίδας στην πάνω αριστερή γωνία κάθε μικρογραφίας."
 
 #: comix:11035
-msgid ""
-"Automatically adjust the contrast of the images so that the darkest pixel is "
-"completely black and the lightest pixel is completely white. This only works "
-"with images without an alpha channel."
-msgstr ""
-"Αυτόματη ρύθμιση της αντίθεσης των εικόνων, ετσί ώστε το πιο σκούρο "
-"εικονοστοιχείο να είναι μαύρο, και το πιο ανοιχτό εικονοστοιχείο λευκό. Αυτό "
-"λειτουργεί μόνο για εικόνες χωρίς alpha channel."
+msgid "Automatically adjust the contrast of the images so that the darkest pixel is completely black and the lightest pixel is completely white. This only works with images without an alpha channel."
+msgstr "Αυτόματη ρύθμιση της αντίθεσης των εικόνων, ετσί ώστε το πιο σκούρο εικονοστοιχείο να είναι μαύρο, και το πιο ανοιχτό εικονοστοιχείο λευκό. Αυτό λειτουργεί μόνο για εικόνες χωρίς alpha channel."
 
 #: comix:11036
-msgid ""
-"The space key uses smart scrolling as if in double page mode even when in "
-"single page mode. This can be useful for comics with two scanned pages in "
-"each image. The pages are assumed to be of equal size"
-msgstr ""
-"Το πλήκτρο κενού χρησιμοποιεί έξυπνη κύλιση όταν βρισκόμαστε σε προβολή "
-"διπλής σελίδας ακόμα και σε προβολή απλής σελίδας. Αυτό μπορεί να φανεί "
-"χρήσιμο για κόμικ με δύο σκανάρισμένες σελίδες σε κάθε εικόνα.Υποτίθεται ότι "
-"οι εικόνες έχουν ίσο μέγεθος."
+msgid "The space key uses smart scrolling as if in double page mode even when in single page mode. This can be useful for comics with two scanned pages in each image. The pages are assumed to be of equal size"
+msgstr "Το πλήκτρο κενού χρησιμοποιεί έξυπνη κύλιση όταν βρισκόμαστε σε προβολή διπλής σελίδας ακόμα και σε προβολή απλής σελίδας. Αυτό μπορεί να φανεί χρήσιμο για κόμικ με δύο σκανάρισμένες σελίδες σε κάθε εικόνα.Υποτίθεται ότι οι εικόνες έχουν ίσο μέγεθος."
 
 #: comix:11037
 msgid "Adjust the lens magnification factor."
 msgstr "Ρύθμιση παράγοντα μεγέθυνσης των φακών."
 
 #: comix:11038
-msgid ""
-"Set the lens width and height in pixels. A larger lens will use more CPU "
-"resources than a small one."
-msgstr ""
-"Ρύθμιση πλάτους και ύψους των φακών σε εικονοστοιχεία.Όσο μεγαλύτερος ο "
-"φακός τόσο περισσότεροι πόροι του επεξεργαστή χρεισιμοποιούνται."
+msgid "Set the lens width and height in pixels. A larger lens will use more CPU resources than a small one."
+msgstr "Ρύθμιση πλάτους και ύψους των φακών σε εικονοστοιχεία.Όσο μεγαλύτερος ο φακός τόσο περισσότεροι πόροι του επεξεργαστή χρεισιμοποιούνται."
 
 #: comix:11039
-msgid ""
-"Set the maximum update frequency for the magnification lens in milliseconds. "
-"Setting the value too low can cause the lens to lag behind when moving the "
-"mouse quickly. Setting the value too high can cause the lens to appear "
-"choppy."
-msgstr ""
-"Ρύθμιση της μέγιστης συχνότητας ανανέωσης για τους φακούς μεγένθυσης, σε "
-"χιλιοστά του δευτερολέπτου. Πολύ μικρή τιμή μπορεί να προκαλέσει χρονική "
-"καθυστέρηση των φακών στην γρήγορη κίνηση του ποντικιού.Πολύ μεγάλη τιμή "
-"μπορεί να κανεί τους φακούς να φαίνονται ασταθείς."
+msgid "Set the maximum update frequency for the magnification lens in milliseconds. Setting the value too low can cause the lens to lag behind when moving the mouse quickly. Setting the value too high can cause the lens to appear choppy."
+msgstr "Ρύθμιση της μέγιστης συχνότητας ανανέωσης για τους φακούς μεγένθυσης, σε χιλιοστά του δευτερολέπτου. Πολύ μικρή τιμή μπορεί να προκαλέσει χρονική καθυστέρηση των φακών στην γρήγορη κίνηση του ποντικιού.Πολύ μεγάλη τιμή μπορεί να κανεί τους φακούς να φαίνονται ασταθείς."
 
 #: comix:11040
-msgid ""
-"Read and write thumbnails in the ~/.thumbnails directory as proposed by the "
-"freedesktop.org standard. With this preference set, Comix will use the "
-"thumbnails already stored there to speed up thumbnail loading. If there are "
-"no thumbnails, Comix will create them and save them there. This is a "
-"standard that many applications conform to, thumbnails created by other "
-"applications can be used by Comix and vice versa. If this preference is not "
-"set, Comix will create thumbnails on the fly every time a directory is "
-"opened."
-msgstr ""
-"Ανάγνωση και εγγραφή μικρογραφιών στον κατάλογο ~/.thumbnails όπως "
-"προτείνεται από το στάνταρ του freedesktop.org. Με επιλεγμένη αυτήν την "
-"ρύθμιση, το Comix θα χρησιμοποιεί τις ήδη αποθηκευμένες εκεί μικρογραφίες "
-"για ταχύτερο φόρτωμα των μικρογραφιών.Αν δεν βρεθούν προεπισκοπήσεις, το "
-"Comix θα τις δημιουργήσει και θα τις αποθηκεύσει εκεί.Αυτό είναι ένα στάνταρ "
-"που χρησιμοποιείται από πολλές εφαρμογές, μικρογραφίες φτιαγμένες από άλλες "
-"εφαρμογές μπορούν να χρησιμοποιηθούν από το Comix και αντίστροφα.Αν αυτή η "
-"ρύθμιση δεν έχει επιλεγεί, το Comix θα δημιουργεί τις προεπισκοπήσεις κάθε "
-"φορά που ανοίγεται ένα αρχείο."
+msgid "Read and write thumbnails in the ~/.thumbnails directory as proposed by the freedesktop.org standard. With this preference set, Comix will use the thumbnails already stored there to speed up thumbnail loading. If there are no thumbnails, Comix will create them and save them there. This is a standard that many applications conform to, thumbnails created by other applications can be used by Comix and vice versa. If this preference is not set, Comix will create thumbnails on the fly every time a directory is opened."
+msgstr "Ανάγνωση και εγγραφή μικρογραφιών στον κατάλογο ~/.thumbnails όπως προτείνεται από το στάνταρ του freedesktop.org. Με επιλεγμένη αυτήν την ρύθμιση, το Comix θα χρησιμοποιεί τις ήδη αποθηκευμένες εκεί μικρογραφίες για ταχύτερο φόρτωμα των μικρογραφιών.Αν δεν βρεθούν προεπισκοπήσεις, το Comix θα τις δημιουργήσει και θα τις αποθηκεύσει εκεί.Αυτό είναι ένα στάνταρ που χρησιμοποιείται από πολλές εφαρμογές, μικρογραφίες φτιαγμένες από άλλες εφαρμογές μπορούν να χρησιμοποιηθούν από το Comix και αντίστροφα.Αν αυτή η ρύθμιση δεν έχει επιλεγεί, το Comix θα δημιουργεί τις προεπισκοπήσεις κάθε φορά που ανοίγεται ένα αρχείο."
 
 #: comix:11041
-msgid ""
-"Also use stored thumbnails for images in archives in a similiar way. Due to "
-"restrictions in the freedesktop.org standard, these thumbnails will be "
-"stored in ~/.comix and will only be used by Comix. If this preference is not "
-"set, Comix will create thumbnails on the fly every time an archive is opened."
-msgstr ""
-"Χρησιμοποίηση αποθηκευμένων μικρογραφιών για τις εικόνες σε αρχεία με "
-"παρόμοιο τρόπο. Λόγω περιορισμών στο στάνταρ freedesktop.org, οι "
-"προεπισκοπήσεις αυτές θα αποθηκεύονται στο ~/.comix και θα χρησιμοποιούνται "
-"μόνο από το Comix. Αν αυτή η ρύθμιση δεν έχει επιλεγεί, το Comix θα "
-"δημιουργεί τις προεπισκοπήσεις κάθε φορά που ανοίγεται ένα αρχείο."
+msgid "Also use stored thumbnails for images in archives in a similiar way. Due to restrictions in the freedesktop.org standard, these thumbnails will be stored in ~/.comix and will only be used by Comix. If this preference is not set, Comix will create thumbnails on the fly every time an archive is opened."
+msgstr "Χρησιμοποίηση αποθηκευμένων μικρογραφιών για τις εικόνες σε αρχεία με παρόμοιο τρόπο. Λόγω περιορισμών στο στάνταρ freedesktop.org, οι προεπισκοπήσεις αυτές θα αποθηκεύονται στο ~/.comix και θα χρησιμοποιούνται μόνο από το Comix. Αν αυτή η ρύθμιση δεν έχει επιλεγεί, το Comix θα δημιουργεί τις προεπισκοπήσεις κάθε φορά που ανοίγεται ένα αρχείο."
 
 #: comix:11042
-msgid ""
-"Only display a single image in double page mode if the image consists of two "
-"pages. An image is assumed to consist of two pages if its width is greater "
-"than its height."
-msgstr ""
-"Παρουσίαση μόνο μιας εικόνας σε προβολή διπλής σελίδας αν η εικόνα "
-"αποτελείται από δύο σελίδες.Μια εικόνα θεωρείται ότι αποτελείται από δύο "
-"σελίδες όταν το πλάτος της είναι μεγαλύτερο από το ύψος της."
+msgid "Only display a single image in double page mode if the image consists of two pages. An image is assumed to consist of two pages if its width is greater than its height."
+msgstr "Παρουσίαση μόνο μιας εικόνας σε προβολή διπλής σελίδας αν η εικόνα αποτελείται από δύο σελίδες.Μια εικόνα θεωρείται ότι αποτελείται από δύο σελίδες όταν το πλάτος της είναι μεγαλύτερο από το ύψος της."
 
 #: comix:11043
 msgid "Filter out archives with regular expressions."
@@ -1319,12 +1284,8 @@ msgid "Apply filters on full paths rather than filenames."
 msgstr "Εφαρμογή φίλτρων σε ολόκληρα τα μονοπάτια αντί για ονόματα αρχείων."
 
 #: comix:11045
-msgid ""
-"Store a list of the 10 last opened files that can be accessed through the "
-"menus."
-msgstr ""
-"Αποθήκευση λίστας των 10 τελευταίων αρχείων η οποία θα είναι προσβάσιμη μέσω "
-"των μενού."
+msgid "Store a list of the 10 last opened files that can be accessed through the menus."
+msgstr "Αποθήκευση λίστας των 10 τελευταίων αρχείων η οποία θα είναι προσβάσιμη μέσω των μενού."
 
 #: comix:11053
 msgid "First page"
@@ -1348,42 +1309,32 @@ msgstr "Πήγαινε στην σελίδα..."
 
 #~ msgid "No viewable files in"
 #~ msgstr "Δεν υπάρχουν αρχεία προς προβολή σε"
-
 #~ msgid "No images in"
 #~ msgstr "Δεν υπάρχουν εικόνες σε"
-
 #~ msgid "Save saturation and contrast for future sessions"
 #~ msgstr "Αποθήκευση κορεσμού και αντίθεσης για μελλοντική χρήση"
-
 #~ msgid "Saturation (default 1.0):"
 #~ msgstr "Κορεσμός (προεπιλογή 1.0):"
-
 #~ msgid "Contrast (default 1.0):"
 #~ msgstr "Αντίθεση (προεπιλογή 1.0):"
-
 #~ msgid "Clear"
 #~ msgstr "Καθαρισμός"
-
 #~ msgid "Advanced"
 #~ msgstr "Προχωρημένο"
-
 #~ msgid ""
 #~ "Automatically restore the saturation and contrast values the next time "
 #~ "Comix is started."
 #~ msgstr ""
 #~ "Αυτόματη αποκατάσταση των τιμών κορεσμού και αντίθεσης την επόμενη φορά "
 #~ "που θα εκκινήσει το Comix."
-
 #~ msgid "Permanently remove"
 #~ msgstr "Μόνιμη αφαίρεση"
-
 #~ msgid "Perform lossless JPEG rotation on"
 #~ msgstr "Εκτέλεση περιστροφής JPEG χωρίς απώλειες σε"
-
 #~ msgid "Some images might be trimmed a bit during the rotation."
 #~ msgstr ""
 #~ "Μερικές εικόνες μπορεί να περικοπούν λίγο κατα την διάρκεια της "
 #~ "περιστροφής"
-
 #~ msgid "_Zoom"
 #~ msgstr "_Ζουμ"
+
