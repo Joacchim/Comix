@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: Comix 3.5\n"
+"Project-Id-Version: Comix 3.6\n"
 "POT-Creation-Date: 2006-09-26 20:16+CEST\n"
-"PO-Revision-Date: 2006-08-13 10:50+0800\n"
+"PO-Revision-Date: 2006-10-01 14:15+0800\n"
 "Last-Translator: Hsin-lin Cheng <lancetw@gmail.com>\n"
 "Language-Team: Hsin-lin Cheng <lancetw@gmail.com>\n"
 "MIME-Version: 1.0\n"
@@ -371,35 +371,35 @@ msgstr "縮圖"
 
 #: comix:1301
 msgid "Adjust colour"
-msgstr ""
+msgstr "顏色"
 
 #: comix:1303
 msgid "Default"
-msgstr ""
+msgstr "預設"
 
 #: comix:1325
 msgid "Brightness"
-msgstr ""
+msgstr "亮度"
 
 #: comix:1337
 msgid "Contrast"
-msgstr ""
+msgstr "對比"
 
 #: comix:1349
 msgid "Saturation"
-msgstr ""
+msgstr "飽和度"
 
 #: comix:1361
 msgid "Sharpness"
-msgstr ""
+msgstr "清晰度"
 
 #: comix:1376
 msgid "Automatically adjust contrast"
-msgstr "自動調整對比度"
+msgstr "自動調整對比"
 
 #: comix:1383
 msgid "Save values for future sessions"
-msgstr ""
+msgstr "為未來的作業階段儲存設定值"
 
 #: comix:1395
 msgid "Properties"
@@ -755,7 +755,7 @@ msgstr "尚未識別。"
 
 #: comix:8902 comix:11161
 msgid "No images in \"%s\""
-msgstr ""
+msgstr "在「%s」中沒有圖片"
 
 #: comix:9385
 msgid "Comment file"
@@ -887,7 +887,7 @@ msgstr "離開 (_Q)"
 
 #: comix:10922
 msgid "_Adjust colour..."
-msgstr ""
+msgstr "色彩校正... (_A)"
 
 #: comix:10924
 msgid "Slideshow"
@@ -923,7 +923,7 @@ msgstr "書籤 (_B)"
 
 #: comix:10944
 msgid "_Toolbars"
-msgstr ""
+msgstr "工具列 (_T)"
 
 #: comix:10946
 msgid "_Edit"
@@ -1181,7 +1181,7 @@ msgstr "當打開「開啟」對話視窗時自動顯示此資料夾。"
 
 #: comix:11033
 msgid "Automatically restore these values the next time Comix is started."
-msgstr ""
+msgstr "下一次啟動 Comix 時自動還原這些設定值。"
 
 #: comix:11034
 msgid "Show the page number in the upper left corner of each thumbnail."
@@ -1238,7 +1238,7 @@ msgid ""
 "opened."
 msgstr ""
 "依 freedesktop.org 所建議的標準於 ~/.thumbnails 資料夾中存取縮圖。以此偏好設"
-"定，Comix 將會使用 已經儲存的縮圖來加速縮圖的載入。若無縮圖，Comix 將會建立並"
+"定，Comix 將會使用已經儲存的縮圖來加速縮圖的載入。若無縮圖，Comix 將會建立並"
 "儲存。許多的應用程式遵照此標準，故由其他應用程式建立的縮圖可被 Comix 利用，反"
 "之亦然。如果此偏好尚未設定，Comix 將會於每次資料夾開啟，不工作時建立縮圖。"
 

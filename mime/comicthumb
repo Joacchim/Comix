@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 
-# Comicthumb 0.1
+# Comicthumb 2006-09-27
 # Create thumbnails for comic book archives (cbz, cbt and cbr).
 #
 # usage: comicthumb /path/to/archive.cbt outputfile [ size | --no-balloon ]

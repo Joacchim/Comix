@@ -29,10 +29,13 @@ If you have not specified --no-mime, you can use --no-balloon to tell the
 Nautilus thumbnailer to not imprint balloon images on the thumbnails by default.
 If you like your thumbnails plain this option is for you.
 
-    Example:
+
+Example installation:
+    
     # tar -xzf comix-x.y.tar.gz
     # cd comix-x.y
     # python install.py install
+
 
 You can even run the "comix" script file by itself from any location, but if
 you want the custom icons and translations to be available you should either

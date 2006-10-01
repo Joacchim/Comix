@@ -15,8 +15,6 @@ Comix 3.6
     - Changed the UI of the properties dialog a bit to better suit low
     resolution screens.
     
-    - Italian translation updated by GhePeU.
-    
     - Improved handling of Zip files containing files with filenames of an 
     unknown character encoding.
     
