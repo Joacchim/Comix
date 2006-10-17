@@ -4,7 +4,7 @@
 """
  --------------------------------------------------------------------------
 
- Comix 3.6 - GTK Comic Book Viewer
+ Comix 3.6.1 - GTK Comic Book Viewer
  Copyright (C) 2005-2006 Pontus Ekberg
  <herrekberg@users.sourceforge.net>
 
@@ -170,7 +170,7 @@ class Comix:
     # =======================================================
     # Various shared variables used throughout the program.
     # =======================================================
-    version = '3.6'
+    version = '3.6.1'
     base_dir = ''
     path = ''
     archive_type = ''
