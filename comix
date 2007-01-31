@@ -4,8 +4,8 @@
 """
  --------------------------------------------------------------------------
 
- Comix 3.6.1 - GTK Comic Book Viewer
- Copyright (C) 2005-2006 Pontus Ekberg
+ Comix 3.6.2 - GTK Comic Book Viewer
+ Copyright (C) 2005-2007 Pontus Ekberg
  <herrekberg@users.sourceforge.net>
 
  --------------------------------------------------------------------------
@@ -170,7 +170,7 @@ class Comix:
     # =======================================================
     # Various shared variables used throughout the program.
     # =======================================================
-    version = '3.6.1'
+    version = '3.6.2'
     base_dir = ''
     path = ''
     archive_type = ''
@@ -1520,7 +1520,7 @@ class Comix:
         "\n" +
         _("Comix is licensed under the GNU General Public License.") + "\n" +
         "\n" +
-        "<small>Copyright © 2005-2006 Pontus Ekberg\n\n" +
+        "<small>Copyright © 2005-2007 Pontus Ekberg\n\n" +
         "herrekberg@users.sourceforge.net</small>\n" +
         "<small>http://comix.sourceforge.net</small>\n")
         box.pack_start(label, True, True, 0)
