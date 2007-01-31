@@ -1549,7 +1549,8 @@ class Comix:
             ('Kamil Leduchowski', _('Polish translation')),
             ('Paul Chatzidimitriou', _('Greek translation')),
             ('Carles Escrig', _('Catalan translation')),
-            ('Hsin-Lin Cheng', _('Traditional Chinese translation'))
+            ('Hsin-Lin Cheng', _('Traditional Chinese translation')),
+            ('Mamoru Tasaka', _('Japanese Translation'))
             ):
             label = gtk.Label()
             label.set_markup('<b>' + nice_person[0] + ':</b>   ' +
