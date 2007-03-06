@@ -4,6 +4,8 @@ Comix 3.6.3
     
     - Fixed a bug with opening certain Zip files. Thanks to Steve Juranich for
     the fix.
+    
+    - Fixed a bug concerning %'s in filenames.
 
 Comix 3.6.2
     

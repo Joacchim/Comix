@@ -8742,8 +8742,6 @@ class Comix:
         if self.exit:
             return False
         
-        path = urllib.url2pathname(path)
-        
         self.set_cursor_type('watch')
         self.path = path
         self.file = []
