@@ -23,7 +23,7 @@ when uninstalling.
 There is also an option, --no-mime, that can be used to tell install.py that
 it should not register new mime types for cbz, cbr and cbt archives or install
 the thumbnail creation script for these files used by some file managers
-(currently only Nautilus).
+(currently only Nautilus and Thunar as far as I know).
 
 If you have not specified --no-mime, you can use --no-balloon to tell the 
 Nautilus thumbnailer to not imprint balloon images on the thumbnails by default.

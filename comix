@@ -4,7 +4,7 @@
 """
  --------------------------------------------------------------------------
 
- Comix 3.6.2 - GTK Comic Book Viewer
+ Comix 3.6.3 - GTK Comic Book Viewer
  Copyright (C) 2005-2007 Pontus Ekberg
  <herrekberg@users.sourceforge.net>
 
@@ -170,7 +170,7 @@ class Comix:
     # =======================================================
     # Various shared variables used throughout the program.
     # =======================================================
-    version = '3.6.2'
+    version = '3.6.3'
     base_dir = ''
     path = ''
     archive_type = ''
@@ -8670,6 +8670,9 @@ class Comix:
                 zipf = zipfile.ZipFile(src_path)
                 zipfiles = zipf.namelist()
                 for i, x in enumerate(zipfiles):
+                    # Caught the directory descriptor. Skip it.
+                    if x.endswith('/'):
+                        continue
                     # FIXME: Other possible encodings?
                     dst = unicode(x, 'cp437')
                     found_encoding = False
