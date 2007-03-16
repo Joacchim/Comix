@@ -1826,8 +1826,8 @@ class Comix:
         if self.exit:
             return False
         
-        self.scroll_events_down = 0
-        self.scroll_events_up = 0
+        #self.scroll_events_down = 0
+        #self.scroll_events_up = 0
         self.update_sizes()
         if self.slideshow_started:
             self.stop_slideshow()
@@ -1905,9 +1905,16 @@ class Comix:
         # fit-to-screen mode where they flip pages.
         # =======================================================
         elif event.keyval == gtk.keysyms.Down:
+            self.scroll_events_up = 0
             if not self.prefs['zoom mode'] == 1 or self.show_comments:
                 height = self.layout.get_size()[1]
-                if (self.vadjust.get_value() + 20 > height -
+                if (self.vadjust.get_value() >= height - self.main_layout_y_size):
+                     if self.prefs['flip with wheel']:
+                         self.scroll_events_down += 1
+                         if self.scroll_events_down > 2:
+                             self.next_page(None)
+                             self.scroll_events_down = 0
+                elif (self.vadjust.get_value() + 20 > height -
                     self.main_layout_y_size):
                     self.vadjust.set_value(height - self.main_layout_y_size)
                 else:
@@ -1915,8 +1922,15 @@ class Comix:
             else:
                 self.next_page(None)
         elif event.keyval == gtk.keysyms.Up:
+            self.scroll_events_down = 0
             if not self.prefs['zoom mode'] == 1 or self.show_comments:
-                if self.vadjust.get_value() - 20 < 0:
+                if self.vadjust.get_value() <= 0:
+                    if self.prefs['flip with wheel']:
+                        self.scroll_events_up += 1
+                        if self.scroll_events_up > 2:
+                            self.previous_page(None)
+                            self.scroll_events_up = 0
+                elif self.vadjust.get_value() - 20 < 0:
                     self.vadjust.set_value(0)
                 else:
                     self.vadjust.set_value(self.vadjust.get_value() - 20)
@@ -11019,7 +11033,7 @@ class Comix:
         self.tooltips.set_tip(self.button_hide_bars, _('Automatically hide scrollbars, menubar, toolbar, statusbar and thumbnails when in fullscreen mode.'))
         self.tooltips.set_tip(self.button_cache_next, _('Cache the next page in the archive/directory to increase the perceived speed. This is generally recommended unless you are running low on RAM.'))
         self.tooltips.set_tip(self.button_scroll_horiz, _('Move the horizontal scrollbar instead of the vertical when using the scroll wheel at the top or the bottom of the page. The direction will be determined by whether you use manga mode or not.'))
-        self.tooltips.set_tip(self.button_scroll_flips, _('Flip pages when scrolling "off the page" with the scroll wheel, even when not in fit-to-screen mode. It takes three "steps" with the scroll wheel to trigger this behaviour.'))
+        self.tooltips.set_tip(self.button_scroll_flips, _('Flip pages when scrolling "off the page" with the scroll wheel, as well as with the arrow keys, even when not in fit-to-screen mode. It takes three "steps" with the scroll wheel or arrow keys to trigger this behaviour.'))
         self.tooltips.set_tip(self.button_save_size, _('Save the position and the size of the window for the next time you start Comix.'))
         self.tooltips.set_tip(self.button_next_archive, _('Automatically open the next archive in the directory when scrolling past the last page of the current archive, and automatically open the previous archive in the directory when scrolling past the first page of the current archive.'))
         self.tooltips.set_tip(self.button_hide_cursor, _('Hide the cursor when in fullscreen mode.'))
