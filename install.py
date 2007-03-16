@@ -24,7 +24,7 @@ Options:
  --installdir <directory>          ---      Install or uninstall in <directory>
                                             instead of /usr/local
 
- --no-mime                         ---      Do not install Nautilus thumbnailer
+ --no-mime                         ---      Do not install file manager thumbnailer
                                             or register new mime types for
                                             x-cbz, x-cbt and x-cbr archive
                                             files.
@@ -133,7 +133,7 @@ no_mime = False
 no_balloon = False
 ISO_CODES = \
     ("sv", "es", "zh_CN", "zh_TW", "pt_BR", "de", "it", "nl", "fr", "pl",
-    "el", "ca", "ja")
+    "el", "ca", "ja", "hu")
 
 try:
     opts, args = \
@@ -167,6 +167,7 @@ if args == ["install"]:
         if os.path.isfile(os.path.join('images', imagefile)):
             install(os.path.join('images', imagefile),
                 os.path.join('share/pixmaps/comix', imagefile))
+    print 'Installed some spam, spam, eggs and spam'
     for lang in ISO_CODES:
         install("messages/" + lang + "/LC_MESSAGES/comix.mo",
             "share/locale/" + lang + "/LC_MESSAGES/comix.mo")
@@ -185,8 +186,8 @@ if args == ["install"]:
                  "--makefile-install-rule ./mime/%s 2>/dev/null" % schemas)
         print
         print "Registered comic archive thumbnailer in gconf (if available)."
-        print "The thumbnailer is at this point supported by Nautilus only."
-        print "You have to restart Nautilus before it is activated."
+        print "The thumbnailer is to my knowledge supported by Nautilus and Thunar only."
+        print "You might have to restart your file manager before it is activated."
 elif args == ["uninstall"]:
     print "Uninstalling Comix from", install_dir, "...\n"
     uninstall("bin/comix")

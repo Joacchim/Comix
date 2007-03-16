@@ -1,3 +1,16 @@
+Comix 3.6.3
+    
+    - Added a Hungarian translation by Ern≈ë Drabik.
+    
+    - Added a patch by Abdullah Hamed that fixes so that the arrow keys can be used
+    to flip pages also when not in fit-to-screen mode when the corresponding preference
+    is set. Just like was possible only with the scroll wheel before.
+    
+    - Fixed a bug with opening certain Zip files. Thanks to Steve Juranich for
+    the fix. (NOT MERGED!)
+    
+    - Fixed a bug concerning %'s in filenames. (NOT MERGED!)
+
 Comix 3.6.2
     
     - Added Japanese translation by Mamoru Tasaka.
@@ -230,7 +243,7 @@ Comix 3.1.1
     
     - Applied a workaround for a bug(?) in unrar that caused problems with
     some RAR archives containing directories with invalid filename encodings.
-    Thanks to FranÁois Ingelrest.
+    Thanks to Fran√ßois Ingelrest.
     
     - Updated French translation by Achraf Cherti.
     
@@ -297,7 +310,7 @@ Comix 3.0
     - Fixed a bug which caused the recommended name for a converted directory
     of images to be the same as one of the image files plus filename extension
     instead of the name of the directory plus filename extension. Thanks to 
-    Manuel QuiÒones.
+    Manuel Qui√±ones.
     
     - Fixed a bug with the magnifying lens which could appear when using it in
     double page mode and manga mode, possibly showing the images as if not in
@@ -397,7 +410,7 @@ Comix 2.7
     
     - Saturation adjustment now affects the magnifying lens also.
     
-    - Added Brazilian Portuguese translation by Marcelo GÛes.
+    - Added Brazilian Portuguese translation by Marcelo G√≥es.
     
     - Added German translation by Christoph Wolk.
     
