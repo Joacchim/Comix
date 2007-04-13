@@ -144,12 +144,12 @@ def get_image(compressed_file, depth):
         rarfiles.sort()
         cover = guessCover(rarfiles)
         if cover:
-            picture = StringIO.StringIO(os.popen('%s p -inul "%s" "%s"' 
+            picture = StringIO.StringIO(os.popen('%s p -inul -- "%s" "%s"' 
                 % (rar, compressed_file, cover), "r").read())
         else:
             subarchive = first_archive(rarfiles)
             if subarchive:
-                os.popen('%s p -inul "%s" "%s" > "/tmp/comicthumb/archive%d"'
+                os.popen('%s p -inul -- "%s" "%s" > "/tmp/comicthumb/archive%d"'
                     % (rar, compressed_file, subarchive, depth), "r")
                 return get_image("/tmp/comicthumb/archive%d" % (depth), 
                     depth + 1)
