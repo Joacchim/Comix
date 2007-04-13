@@ -6302,7 +6302,7 @@ class Comix:
                                 break
                     if cover != None:
                         if type == 'rar':
-                            os.popen(self.rar + ' p -inul "' + path + '" "' +
+                            os.popen(self.rar + ' p -inul -- "' + path + '" "' +
                                 cover + '" > "' + thumb_dir +
                                 '/temp" 2>/dev/null', "r").close()
                             image = Image.open(thumb_dir + '/temp')
