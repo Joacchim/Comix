@@ -2,29 +2,14 @@
 # -*- coding: utf-8 -*-
 
 """
- --------------------------------------------------------------------------
-
- Comix 4.0dev - GTK Comic Book Viewer
- Copyright (C) 2005-2007 Pontus Ekberg
- <herrekberg@users.sourceforge.net>
-
- --------------------------------------------------------------------------
-
- This program is free software; you can redistribute it and/or modify
- it under the terms of the GNU General Public License as published by
- the Free Software Foundation; either version 2 of the License, or
- (at your option) any later version.
-
- This program is distributed in the hope that it will be useful,
- but WITHOUT ANY WARRANTY; without even the implied warranty of
- MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- GNU General Public License for more details.
-
- You should have received a copy of the GNU General Public License
- along with this program; if not, write to the Free Software
- Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
-
- --------------------------------------------------------------------------
+ ###########################################################################
+ This file contains changes by Maciej Katafiasz. Changes concering Glade and
+ the toolbar is not yet merged and will be adopted slowly into the main 
+ `comix.py' file. 
+ 
+ This file is not kept up to date with other changes and is kept as a
+ reference to Maciej's work on these topics. 
+ ###########################################################################
 """
 
 import os
@@ -172,7 +157,7 @@ class Comix:
     # =======================================================
     # Various shared variables used throughout the program.
     # =======================================================
-    version = '4.0dev'
+    version = 'glade src'
     base_dir = ''
     path = ''
     archive_type = ''
@@ -489,9 +474,11 @@ class Comix:
         # =======================================================
         self.vadjust = self.layout.get_vadjustment()
         self.hadjust = self.layout.get_hadjustment()
-        self.layout_scroll = self.xml.get_widget("layout_scroll")
-        self.hscroll = self.layout_scroll.get_hscrollbar()
-        self.vscroll = self.layout_scroll.get_vscrollbar()
+        #self.layout_scroll = self.xml.get_widget("layout_scroll")
+        self.hscroll = self.xml.get_widget("hscroll")
+        self.vscroll = self.xml.get_widget("vscroll")
+        #self.hscroll = self.layout_scroll.get_hscrollbar()
+        #self.vscroll = self.layout_scroll.get_vscrollbar()
         
         # =======================================================
         # Create background tile used for transparent images.
@@ -734,7 +721,7 @@ class Comix:
         ''' Creates the preferences dialog and all its widgets. '''
         self.preferences_dialog = self.xml.get_widget("pref_dialogue")
         self.preferences_dialog.connect("delete-event", 
-					self.preferences_dialog_close)
+                                        self.preferences_dialog_close)
 
         # =======================================================
         # Create all publically available widgets.
@@ -1496,7 +1483,7 @@ class Comix:
         elif (event.keyval in [gtk.keysyms._0, gtk.keysyms.KP_0] and 
             'GDK_CONTROL_MASK' in event.state.value_names):
             self.zoom_original(None)
-	
+        
                 
         # =======================================================
         # Arrow keys scroll the image, except in
@@ -2120,7 +2107,7 @@ class Comix:
             else:
                 self.thumb_size = 0
         
-	    self.main_layout_x_size = self.layout_scroll.allocation.width
+            self.main_layout_x_size = self.layout_scroll.allocation.width
         self.main_layout_y_size = self.layout_scroll.allocation.height
 
     
@@ -2875,10 +2862,10 @@ class Comix:
 
         if self.prefs['double page']:
             self.actiongroup.get_action('Delete').set_sensitive(False)
-	    self.jpegtran_activate(False)
+            self.jpegtran_activate(False)
         elif self.archive_type == '':
             self.actiongroup.get_action('Delete').set_sensitive(True)
-	    self.jpegtran_activate(bool(self.jpegtran))
+            self.jpegtran_activate(bool(self.jpegtran))
 
         self.change_thumb_selection = 2
         self.refresh_image()
@@ -2888,9 +2875,9 @@ class Comix:
         self.prefs['zoom mode'] = data.get_current_value()
 
         if self.prefs['zoom mode'] == 0:
-	    toggle = True
+            toggle = True
         else:
-	    toggle = False
+            toggle = False
 
         self.actiongroup.get_action('Zin').set_sensitive(toggle)
         self.actiongroup.get_action('Zout').set_sensitive(toggle)
@@ -2900,9 +2887,9 @@ class Comix:
         self.actiongroup.get_action('Zfit').set_sensitive(toggle)
             
         if self.prefs['zoom mode'] == 0:
-	    self.actiongroup.get_action('Scrollbars').set_sensitive(True)
+            self.actiongroup.get_action('Scrollbars').set_sensitive(True)
         elif self.prefs['zoom mode'] == 1:
-	    self.actiongroup.get_action('Scrollbars').set_sensitive(False)
+            self.actiongroup.get_action('Scrollbars').set_sensitive(False)
 
         self.vadjust.set_value(0)
         if self.prefs['manga'] and not self.show_comments:
@@ -3004,11 +2991,9 @@ class Comix:
 
         ''' Switch scrollbars visibility on/off. '''
         if visible:
-            self.layout_scroll.set_policy(gtk.POLICY_AUTOMATIC,
-                gtk.POLICY_AUTOMATIC)
+            self.prefs['hide scrollbars'] = 0
         else:
-            self.layout_scroll.set_policy(gtk.POLICY_NEVER,
-                gtk.POLICY_NEVER)
+            self.prefs['hide scrollbars'] = 1
 
     def toggle_thumb_scrollbars(self, visible):
 
@@ -3922,7 +3907,7 @@ class Comix:
             gtk.gdk.Color(self.prefs['red bg'], self.prefs['green bg'],
             self.prefs['blue bg']), False, True))
 
-	self.filechooser_button.set_filename(self.prefs['default open path'])
+        self.filechooser_button.set_filename(self.prefs['default open path'])
 
         if self.prefs['toolbar style'] == gtk.TOOLBAR_TEXT:
             self.combobox_tool.set_active(1)
@@ -7112,7 +7097,7 @@ class Comix:
                     <separator />
                     <toolitem action="Go" />
 
-		    <separator expand="true"/>
+                    <separator expand="true"/>
 
                     <separator />
                     <toolitem action="fit_screen_mode" />
@@ -7345,10 +7330,10 @@ class Comix:
         
         vbox = self.xml.get_widget("vbox")
         vbox.pack_start(self.ui.get_widget('/Menu'), 
-			     expand=False, fill=True)
-	self.toolbar = self.ui.get_widget('/Tool')
+                             expand=False, fill=True)
+        self.toolbar = self.ui.get_widget('/Tool')
         vbox.pack_start(self.toolbar,
-			     expand=False, fill=True)
+                             expand=False, fill=True)
 
         if not self.bookmarks:
             self.actiongroup.get_action('Clear_book').set_sensitive(False)
@@ -7963,12 +7948,12 @@ class Comix:
             self.actiongroup.get_action('Slideshow').set_sensitive(True)
             if self.archive_type == '' and not self.prefs['double page']:
                 self.actiongroup.get_action('Delete').set_sensitive(True)
-		self.jpegtran_activate(bool(self.jpegtran))
+                self.jpegtran_activate(bool(self.jpegtran))
             else:
                 self.actiongroup.get_action('Delete').set_sensitive(False)
-		self.jpegtran_activate(False)
-		
-	    if self.archive_type != '':
+                self.jpegtran_activate(False)
+                
+            if self.archive_type != '':
                 self.actiongroup.get_action('Add_to_library').set_sensitive(
                     True)
             else:
@@ -8632,7 +8617,7 @@ class Comix:
         '''
         if size <= 0 or osize <= 0:
             return (0, 0, 0)
-	    
+            
         ratio = float(req_size) / size
         oratio = float(req_osize) / osize
         if (int(osize * ratio) > req_osize):
@@ -8686,9 +8671,9 @@ class Comix:
             self.archive_type == '' and
             self.is_image_file(self.file[self.file_number]) == 'image/jpeg'
             and self.jpegtran):
-	    self.jpegtran_activate(True)
+            self.jpegtran_activate(True)
         else:
-	    self.jpegtran_activate(False)
+            self.jpegtran_activate(False)
         
         # =======================================================
         # Hide/unhide toolbar, scrollbars etc. depending on the
@@ -8708,8 +8693,8 @@ class Comix:
             self.ui.get_widget('/Menu').hide()
             self.toolbar.hide()
             self.statusbar.hide()
-	    self.toggle_scrollbars(False)
-	    self.toggle_thumb_scrollbars(False)
+            self.toggle_scrollbars(False)
+            self.toggle_thumb_scrollbars(False)
             self.thumb_scroll.hide()
         
         # Else hide/show according to each corresponding option.
@@ -8722,13 +8707,13 @@ class Comix:
             if self.prefs['show thumbnails']:
                 self.thumb_scroll.show()
                 self.toggle_thumb_scrollbars(
-		    self.prefs['hide thumbnail scrollbar'])
+                    self.prefs['hide thumbnail scrollbar'])
             else:
                 self.thumb_scroll.hide()
             if self.prefs['hide scrollbar']:
                 self.toggle_scrollbars(False)
             else:
-		self.toggle_scrollbars(True)
+                self.toggle_scrollbars(True)
             if not self.prefs['show menubar']:
                 self.ui.get_widget('/Menu').hide()
             else:
@@ -8921,42 +8906,42 @@ class Comix:
                     # current zoom level.
                     # =======================================================
                     
-		    spacing = self.layout_scroll.\
-			style_get_property("scrollbar-spacing")
-		    vscroll = self.vscroll.size_request()[0] + spacing
-		    hscroll = self.hscroll.size_request()[1] + spacing
-		    pix_w = pixbuf.get_width()
-		    pix_h = pixbuf.get_height()
-		    stretch = self.prefs['stretch']
-		    zmode = self.prefs['zoom mode']
-		    zscale = self.prefs['zoom scale']
-		    
+                    spacing = self.layout_scroll.\
+                        style_get_property("scrollbar-spacing")
+                    vscroll = self.vscroll.size_request()[0] + spacing
+                    hscroll = self.hscroll.size_request()[1] + spacing
+                    pix_w = pixbuf.get_width()
+                    pix_h = pixbuf.get_height()
+                    stretch = self.prefs['stretch']
+                    zmode = self.prefs['zoom mode']
+                    zscale = self.prefs['zoom scale']
+                    
                     # Flip width and height if page is to be rotated 90
                     # or 270 degrees.
                     if self.prefs['rotation'] in [1, 3]:
                         pix_w, pix_h = pix_h, pix_w
                         x,y = y,x
-		    self.image1_width = pix_w
-		    self.image1_height = pix_h
+                    self.image1_width = pix_w
+                    self.image1_height = pix_h
                     if ((pix_w > x or pix_h > y or stretch) and zmode == 1
-			or
+                        or
                         (pix_w > x or stretch) and zmode == 2
-			or
+                        or
                         (pix_h > y or stretch) and zmode == 3
-			or
+                        or
                         (zscale != 100 and not zmode)):
                         if zmode == 1:
                             ratio = min(x / float(pix_w), y / float(pix_h))
-			    width = int(pix_w * ratio)
-			    height = int(pix_h * ratio)
+                            width = int(pix_w * ratio)
+                            height = int(pix_h * ratio)
                         elif zmode == 2:
                             width, height, ratio = \
-			    self.calculate_fit_dimensions(x, pix_w, y, pix_h, vscroll)
+                            self.calculate_fit_dimensions(x, pix_w, y, pix_h, vscroll)
                         elif zmode == 3:
                             height, width, ratio = \
-			    self.calculate_fit_dimensions(y, pix_h, x, pix_w, hscroll)
-			else:
-			    width = \
+                            self.calculate_fit_dimensions(y, pix_h, x, pix_w, hscroll)
+                        else:
+                            width = \
                                 int(pixbuf.get_width() * zscale / 100)
                             height = \
                                 int(pixbuf.get_height() * zscale / 100)
@@ -8966,9 +8951,9 @@ class Comix:
                             width = 1
                         if height < 1:
                             height = 1
-			print self.prefs['interp type']
-			print width, height, ratio
-			print x, y
+                        print self.prefs['interp type']
+                        print width, height, ratio
+                        print x, y
                         pixbuf = \
                             pixbuf.scale_simple(width, height,
                             self.prefs['interp type'])
@@ -9648,8 +9633,8 @@ class Comix:
             # =======================================================
             else:
                 self.window.set_title("Comix")
-		self.image.hide()
-		self.image2.hide()
+                self.image.hide()
+                self.image2.hide()
                 self.layout.move(self.comix_image, 
                     max(0, self.main_layout_x_size // 2 - 150),
                     max(0, self.main_layout_y_size // 2 - 150))
@@ -9690,18 +9675,18 @@ class Comix:
                     self.file_number)
             
             self.change_thumb_selection = 0
-	    # Workaround bug in PyGTK not allowing column to be none
-	    col = self.thumb_tree_view.get_columns()[0]
-	    cell = self.thumb_tree_view.get_cell_area(self.file_number, col)
-	    rect = self.thumb_tree_view.get_visible_rect()
-	    # FIXME: Doesn't work right
-# 	    print cell.y, rect.y, (cell.y + cell.height), (rect.y + rect.height)
-	    if  cell.y < rect.y or \
-	       (cell.y + cell.height) > (rect.y + rect.height):
-		# Current cell not visible, scroll
-		self.thumb_tree_view.scroll_to_cell(self.file_number, 
-						    row_align=0.5, 
-						    use_align=True)
+            # Workaround bug in PyGTK not allowing column to be none
+            col = self.thumb_tree_view.get_columns()[0]
+            cell = self.thumb_tree_view.get_cell_area(self.file_number, col)
+            rect = self.thumb_tree_view.get_visible_rect()
+            # FIXME: Doesn't work right
+#             print cell.y, rect.y, (cell.y + cell.height), (rect.y + rect.height)
+            if  cell.y < rect.y or \
+               (cell.y + cell.height) > (rect.y + rect.height):
+                # Current cell not visible, scroll
+                self.thumb_tree_view.scroll_to_cell(self.file_number, 
+                                                    row_align=0.5, 
+                                                    use_align=True)
         
         old_file_number_cache_temp = self.old_file_number
         self.old_file_number = self.file_number

@@ -1,15 +1,23 @@
+Comix 4.0
+
+    - Fixed broken tempdir creation so that multiple users now can use Comix
+    at the same time. Thanks to Maciej Katafiasz.
+    
+    - Various cleanup. Thanks to Maciej Katafiasz.
+
 Comix 3.6.3
     
     - Added a Hungarian translation by Ernő Drabik.
     
-    - Added a patch by Abdullah Hamed that fixes so that the arrow keys can be used
-    to flip pages also when not in fit-to-screen mode when the corresponding preference
-    is set. Just like was possible only with the scroll wheel before.
+    - Added a patch by Abdullah Hamed that fixes so that the arrow keys can be
+    used to flip pages also when not in fit-to-screen mode when the
+    corresponding preference is set. Just like was possible only with the
+    scroll wheel before.
     
     - Fixed a bug with opening certain Zip files. Thanks to Steve Juranich for
-    the fix. (NOT MERGED!)
+    the fix.
     
-    - Fixed a bug concerning %'s in filenames. (NOT MERGED!)
+    - Fixed a bug concerning %'s in filenames.
 
 Comix 3.6.2
     
