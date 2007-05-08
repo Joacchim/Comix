@@ -133,7 +133,7 @@ no_mime = False
 no_balloon = False
 ISO_CODES = \
     ("sv", "es", "zh_CN", "zh_TW", "pt_BR", "de", "it", "nl", "fr", "pl",
-    "el", "ca", "ja", "hu")
+    "el", "ca", "ja", "hu", "ru")
 
 try:
     opts, args = \
