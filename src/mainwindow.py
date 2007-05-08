@@ -1,5 +1,12 @@
 # -*- coding: utf-8 -*-
 
+"""
+This file yet contain most of the Comix source. In time things will move to
+separate files as I untangle the code. In the end it will hopefully contain
+only the code to handle the main window.
+
+"""
+
 
 import os
 import sys
