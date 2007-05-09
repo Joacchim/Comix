@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"POT-Creation-Date: \n"
+"POT-Creation-Date: 2007-05-09 14:55+CEST\n"
 "PO-Revision-Date: 2007-01-31 23:30+0900\n"
 "Last-Translator: Mamoru Tasaka <mtasaka@ioa.s.u-tokyo.ac.jp>\n"
 "Language-Team: \n"
@@ -12,44 +12,35 @@ msgstr ""
 "X-Poedit-Country: JAPAN\n"
 "X-Poedit-SourceCharset: utf-8\n"
 
-#: comix:547
-#: comix:11046
+#: comix:547 comix:11064
 msgid "Fit-to-screen mode"
 msgstr "スクリーンに合わせる"
 
-#: comix:550
-#: comix:11047
+#: comix:550 comix:11065
 msgid "Fit width mode"
 msgstr "横幅を合わせる"
 
-#: comix:553
-#: comix:11048
+#: comix:553 comix:11066
 msgid "Fit height mode"
 msgstr "縦幅を合わせる"
 
-#: comix:556
-#: comix:10990
-#: comix:11049
+#: comix:556 comix:11008 comix:11067
 msgid "Manual zoom mode"
 msgstr "手動でズームを調整"
 
-#: comix:559
-#: comix:11050
+#: comix:559 comix:11068
 msgid "Double page mode"
 msgstr "見開き表示"
 
-#: comix:561
-#: comix:11052
+#: comix:561 comix:11070
 msgid "Manga mode"
 msgstr "マンガのページ順に表示"
 
-#: comix:563
-#: comix:11051
+#: comix:563 comix:11069
 msgid "Magnifying lens"
 msgstr "レンズで拡大"
 
-#: comix:664
-#: comix:6620
+#: comix:664 comix:6637
 msgid "Library"
 msgstr "ライブラリ"
 
@@ -65,9 +56,7 @@ msgstr "書庫をライブラリに追加"
 msgid "Remove selected archive from library."
 msgstr "選択した書庫をライブラリから削除"
 
-#: comix:709
-#: comix:1608
-#: comix:1651
+#: comix:709 comix:1611 comix:1654
 msgid "Clean up"
 msgstr "クリーンアップ"
 
@@ -135,12 +124,7 @@ msgstr "XBM画像"
 msgid "ZIP archive"
 msgstr "ZIP書庫"
 
-#: comix:857
-#: comix:6702
-#: comix:7054
-#: comix:7105
-#: comix:7453
-#: comix:8723
+#: comix:857 comix:6719 comix:7071 comix:7122 comix:7470 comix:8743
 msgid "RAR archive"
 msgstr "RAR書庫"
 
@@ -300,13 +284,11 @@ msgstr "ツールバーのボタンのラベル："
 msgid "Icons only"
 msgstr "アイコンのみ"
 
-#: comix:1018
-#: comix:4613
+#: comix:1018 comix:4630
 msgid "Text only"
 msgstr "テキストのみ"
 
-#: comix:1019
-#: comix:4615
+#: comix:1019 comix:4632
 msgid "Icons and text"
 msgstr "アイコンとテキスト"
 
@@ -342,13 +324,8 @@ msgstr "コメント"
 msgid "Space key scrolls"
 msgstr "スペースキーでのスクロール量："
 
-#: comix:1201
-#: comix:3974
-#: comix:9386
-#: comix:9415
-#: comix:9418
-#: comix:9425
-#: comix:9427
+#: comix:1201 comix:3991 comix:9404 comix:9433 comix:9436 comix:9443
+#: comix:9445
 msgid "of"
 msgstr "of"
 
@@ -440,14 +417,11 @@ msgstr "ブックマークを編集"
 msgid "Title"
 msgstr "タイトル"
 
-#: comix:1447
-#: comix:5380
-#: comix:5732
+#: comix:1447 comix:5397 comix:5749
 msgid "Page"
 msgstr "ページ"
 
-#: comix:1477
-#: comix:1530
+#: comix:1477 comix:1530
 msgid "About"
 msgstr "Comixについて"
 
@@ -517,800 +491,839 @@ msgstr "カタロニア語への翻訳"
 msgid "Traditional Chinese translation"
 msgstr "正体中国語への翻訳"
 
-#: comix:1561
+#: comix:1553
+msgid "Japanese translation"
+msgstr ""
+
+#: comix:1554
+msgid "Hungarian translation"
+msgstr ""
+
+#: comix:1555
+msgid "Russian translation"
+msgstr ""
+
+#: comix:1564
 msgid "Credits"
 msgstr "クレジット"
 
-#: comix:1570
+#: comix:1573
 msgid "Manage thumbnails"
 msgstr "サムネイルを編集"
 
-#: comix:1603
-#: comix:1646
+#: comix:1606 comix:1649
 msgid "Remove all stored thumbnails:"
 msgstr "記録された全サムネイルを削除："
 
-#: comix:1613
-#: comix:1656
+#: comix:1616 comix:1659
 msgid "Remove orphaned thumbnails:"
 msgstr "古いサムネイルを削除："
 
-#: comix:1618
+#: comix:1621
 msgid "Directories"
 msgstr "ディレクトリ"
 
-#: comix:1661
+#: comix:1664
 msgid "Archives"
 msgstr "書庫"
 
-#: comix:1671
+#: comix:1674
 msgid "Removing thumbnails"
 msgstr "サムネイルを削除"
 
-#: comix:1711
+#: comix:1714
 msgid "Convert"
 msgstr "変換"
 
-#: comix:1720
+#: comix:1723
 msgid "File type"
 msgstr "ファイルの種類"
 
-#: comix:1721
+#: comix:1724
 msgid "Extension"
 msgstr "拡張子"
 
-#: comix:1733
-#: comix:4304
-#: comix:4340
-#: comix:6694
-#: comix:7044
-#: comix:7095
-#: comix:7451
-#: comix:8694
+#: comix:1736 comix:4321 comix:4357 comix:6711 comix:7061 comix:7112
+#: comix:7468 comix:8714
 msgid "Zip archive"
 msgstr "Zip書庫"
 
-#: comix:1734
-#: comix:4307
-#: comix:4346
-#: comix:6696
-#: comix:7046
-#: comix:7097
-#: comix:7455
-#: comix:8710
+#: comix:1737 comix:4324 comix:4363 comix:6713 comix:7063 comix:7114
+#: comix:7472 comix:8730
 msgid "Tar archive"
 msgstr "Tar書庫"
 
-#: comix:1735
-#: comix:4311
-#: comix:4342
-#: comix:6698
-#: comix:7049
-#: comix:7100
-#: comix:7456
-#: comix:8706
+#: comix:1738 comix:4328 comix:4359 comix:6715 comix:7066 comix:7117
+#: comix:7473 comix:8726
 msgid "Gzip compressed tar archive"
 msgstr "GzipされたTar書庫"
 
-#: comix:1737
-#: comix:4314
-#: comix:4344
-#: comix:6700
-#: comix:7052
-#: comix:7103
-#: comix:7457
-#: comix:8708
+#: comix:1740 comix:4331 comix:4361 comix:6717 comix:7069 comix:7120
+#: comix:7474 comix:8728
 msgid "Bzip2 compressed tar archive"
 msgstr "Bzip2されたTar書庫"
 
-#: comix:1749
+#: comix:1752
 msgid "Delete old archive/directory"
 msgstr "古い書庫やディレクトリを削除"
 
-#: comix:1774
-#: comix:6095
-#: comix:6100
+#: comix:1777 comix:6112 comix:6117
 msgid "Permission denied"
 msgstr "パーミッションが拒否されました"
 
-#: comix:1799
+#: comix:1802
 msgid "Confirm operation"
 msgstr "操作の確認"
 
-#: comix:4075
+#: comix:4092
 msgid "Permanently remove %s?"
 msgstr "永久に%sを削除しますか？"
 
-#: comix:4079
+#: comix:4096
 msgid "Perform lossless JPEG operation on %s?"
 msgstr "無損失のJPEG画像の操作を%sに行いますか？"
 
-#: comix:4081
-#: comix:4086
+#: comix:4098 comix:4103
 msgid "Some images might be trimmed a bit during the operation."
 msgstr "画像によっては画像操作の時トリミングされる事があります"
 
-#: comix:4084
+#: comix:4101
 msgid "Permanently convert %s to greyscale?"
 msgstr "永久に%sをgreyscaleにしますか？"
 
-#: comix:4946
-#: comix:4957
+#: comix:4963 comix:4974
 msgid "Location:"
 msgstr "場所："
 
-#: comix:4947
-#: comix:4958
+#: comix:4964 comix:4975
 msgid "Quantity:"
 msgstr "ファイル数："
 
-#: comix:4947
-#: comix:4958
+#: comix:4964 comix:4975
 msgid "Total size:"
 msgstr "合計サイズ："
 
-#: comix:4993
-#: comix:5004
-#: comix:5008
-#: comix:5019
-#: comix:5038
-#: comix:5043
-#: comix:5047
-#: comix:5058
-#: comix:5069
-#: comix:5073
-#: comix:5084
-#: comix:5102
-#: comix:5107
-#: comix:5111
-#: comix:6414
-#: comix:6442
-#: comix:6448
+#: comix:5010 comix:5021 comix:5025 comix:5036 comix:5055 comix:5060
+#: comix:5064 comix:5075 comix:5086 comix:5090 comix:5101 comix:5119
+#: comix:5124 comix:5128 comix:6431 comix:6459 comix:6465
 msgid "Removed:"
 msgstr "削除されました："
 
-#: comix:5009
-#: comix:5048
-#: comix:5074
-#: comix:5112
-#: comix:6362
-#: comix:6449
+#: comix:5026 comix:5065 comix:5091 comix:5129 comix:6379 comix:6466
 msgid "Done!"
 msgstr "完了しました"
 
-#: comix:5213
-#: comix:6687
-#: comix:7042
-#: comix:7093
+#: comix:5230 comix:6704 comix:7059 comix:7110
 msgid "pages"
 msgstr "ページ"
 
-#: comix:5219
+#: comix:5236
 msgid "comment"
 msgstr "コメント"
 
-#: comix:5223
+#: comix:5240
 msgid "comments"
 msgstr "コメント"
 
-#: comix:5247
-#: comix:5433
-#: comix:5786
+#: comix:5264 comix:5450 comix:5803
 msgid "Location"
 msgstr "場所"
 
-#: comix:5260
+#: comix:5277
 msgid "Yes"
 msgstr "あります"
 
-#: comix:5260
-#: comix:5263
+#: comix:5277 comix:5280
 msgid "In library"
 msgstr "ライブラリに"
 
-#: comix:5263
-#: comix:5278
+#: comix:5280 comix:5295
 msgid "No"
 msgstr "ありません"
 
-#: comix:5273
+#: comix:5290
 msgid "Yes, page"
 msgstr "あります、 ページ"
 
-#: comix:5273
-#: comix:5278
+#: comix:5290 comix:5295
 msgid "Bookmarked"
 msgstr "ブックマークに"
 
-#: comix:5286
-#: comix:5442
-#: comix:5795
+#: comix:5303 comix:5459 comix:5812
 msgid "Accessed"
 msgstr "最終アクセス時"
 
-#: comix:5296
-#: comix:5453
-#: comix:5806
+#: comix:5313 comix:5470 comix:5823
 msgid "Modified"
 msgstr "最終修正時"
 
-#: comix:5306
-#: comix:5464
-#: comix:5817
+#: comix:5323 comix:5481 comix:5834
 msgid "Permissions"
 msgstr "パーミッション"
 
-#: comix:5315
-#: comix:5474
-#: comix:5827
+#: comix:5332 comix:5491 comix:5844
 msgid "Owner"
 msgstr "所有者"
 
-#: comix:5325
+#: comix:5342
 msgid "Archive"
 msgstr "書庫"
 
-#: comix:5491
-#: comix:5844
+#: comix:5508 comix:5861
 msgid "Mode"
 msgstr "モード"
 
-#: comix:5498
-#: comix:5851
+#: comix:5515 comix:5868
 msgid "Pixel count"
 msgstr "ピクセル数"
 
-#: comix:5511
-#: comix:5864
+#: comix:5528 comix:5881
 msgid "Pixel sum"
 msgstr "ピクセル数総和"
 
-#: comix:5542
-#: comix:5895
+#: comix:5559 comix:5912
 msgid "Extrema"
 msgstr "範囲"
 
-#: comix:5581
-#: comix:5934
+#: comix:5598 comix:5951
 msgid "Mean"
 msgstr "平均"
 
-#: comix:5609
-#: comix:5962
+#: comix:5626 comix:5979
 msgid "Median"
 msgstr "メディアン"
 
-#: comix:5637
-#: comix:5990
+#: comix:5654 comix:6007
 msgid "Standard deviation"
 msgstr "標準偏差"
 
-#: comix:5669
+#: comix:5686
 msgid "Image"
 msgstr "画像"
 
-#: comix:5672
+#: comix:5689
 msgid "Image 1"
 msgstr "画像1"
 
-#: comix:6020
+#: comix:6037
 msgid "Image 2"
 msgstr "画像2"
 
-#: comix:6096
+#: comix:6113
 msgid "Could not delete"
 msgstr "削除出来ませんでした"
 
-#: comix:6097
-#: comix:6102
+#: comix:6114 comix:6119
 msgid "Please check your permissions."
 msgstr "パーミッションを確認してください"
 
-#: comix:6101
+#: comix:6118
 msgid "Could not create"
 msgstr "作成出来ませんでした"
 
-#: comix:6213
-#: comix:6223
-#: comix:6357
-#: comix:6361
+#: comix:6230 comix:6240 comix:6374 comix:6378
 msgid "Added:"
 msgstr "追加しました:"
 
-#: comix:6214
+#: comix:6231
 msgid "Adding library entries"
 msgstr "ライブラリの項目を追加"
 
-#: comix:6415
+#: comix:6432
 msgid "Removing library entries"
 msgstr "ライブラリの項目を削除"
 
-#: comix:7196
+#: comix:7213
 msgid "Extract page"
 msgstr "ページを抽出"
 
-#: comix:7623
+#: comix:7640
 msgid "page"
 msgstr "ページ"
 
-#: comix:8721
-msgid "Could not find the unrar executable. Please install it if you wish to open RAR archives."
+#: comix:8741
+msgid ""
+"Could not find the unrar executable. Please install it if you wish to open "
+"RAR archives."
 msgstr "unrarがありません。RAR書庫を開きたい時はインストールしてください。"
 
-#: comix:8726
+#: comix:8746
 msgid "Could not open"
 msgstr "開けません"
 
-#: comix:8774
+#: comix:8792
 msgid "is not a file."
 msgstr "はファイルではありません"
 
-#: comix:8777
+#: comix:8795
 msgid "does not exist."
 msgstr "は存在しません"
 
-#: comix:8885
+#: comix:8903
 msgid "Filetype of"
 msgstr "次のファイルの種類"
 
-#: comix:8887
+#: comix:8905
 msgid "not recognized."
 msgstr "は認識出来ません"
 
-#: comix:8902
-#: comix:11161
+#: comix:8920 comix:11179
 msgid "No images in \"%s\""
 msgstr "\"%s\"には画像がありません"
 
-#: comix:9385
+#: comix:9403
 msgid "Comment file"
 msgstr "ファイルにコメントを加える"
 
-#: comix:9401
+#: comix:9419
 msgid "Could not read"
 msgstr "読み込めません"
 
-#: comix:9414
-#: comix:9417
-#: comix:9424
-#: comix:9426
+#: comix:9432 comix:9435 comix:9442 comix:9444
 msgid "Comment"
 msgstr "コメント"
 
-#: comix:10864
+#: comix:10882
 msgid "_Next page"
 msgstr "次のページ(_N)"
 
-#: comix:10866
+#: comix:10884
 msgid "_Previous page"
 msgstr "前のページ(_P)"
 
-#: comix:10868
+#: comix:10886
 msgid "_First page"
 msgstr "最初のページ(_F)"
 
-#: comix:10870
+#: comix:10888
 msgid "_Last page"
 msgstr "最後のページ(_L)"
 
-#: comix:10872
+#: comix:10890
 msgid "_Go to page..."
 msgstr "ページを指定して移動...(_G)"
 
-#: comix:10874
+#: comix:10892
 msgid "Manual _Zoom"
 msgstr "手動でズームを調整(_Z)"
 
-#: comix:10875
+#: comix:10893
 msgid "_Zoom in"
 msgstr "ズームイン(_Z)"
 
-#: comix:10877
+#: comix:10895
 msgid "Zoom _out"
 msgstr "ズームアウト(_o)"
 
-#: comix:10879
+#: comix:10897
 msgid "_Normal size"
 msgstr "通常のサイズ(_N)"
 
-#: comix:10881
+#: comix:10899
 msgid "Fit _width"
 msgstr "横幅を合わせる(_w)"
 
-#: comix:10883
+#: comix:10901
 msgid "Fit _height"
 msgstr "縦幅を合わせる(_h)"
 
-#: comix:10885
+#: comix:10903
 msgid "_Best fit"
 msgstr "ベストフィット(_B)"
 
-#: comix:10887
+#: comix:10905
 msgid "_Add bookmark"
 msgstr "ブックマークに追加(_A)"
 
-#: comix:10889
+#: comix:10907
 msgid "Clear bookmarks"
 msgstr "ブックマークを削除"
 
-#: comix:10892
+#: comix:10910
 msgid "_Edit bookmarks..."
 msgstr "ブックマークの編集(_E)"
 
-#: comix:10894
+#: comix:10912
 msgid "Pr_eferences"
 msgstr "設定(_e)"
 
-#: comix:10896
+#: comix:10914
 msgid "_About"
 msgstr "Comixについて(_A)"
 
-#: comix:10899
+#: comix:10917
 msgid "_Manage thumbnails..."
 msgstr "サムネイルを編集(_M)"
 
-#: comix:10901
+#: comix:10919
 msgid "Proper_ties"
 msgstr "プロパティ(_t)"
 
-#: comix:10903
+#: comix:10921
 msgid "View _comments"
 msgstr "コメントを表示(_c)"
 
-#: comix:10905
+#: comix:10923
 msgid "_Open..."
 msgstr "開く(_O)"
 
-#: comix:10907
+#: comix:10925
 msgid "_Recent files"
 msgstr "最近開いたファイル(_R)"
 
-#: comix:10908
+#: comix:10926
 msgid "Clear recent files"
 msgstr "最近開いたファイルをクリア"
 
-#: comix:10910
+#: comix:10928
 msgid "Open _library..."
 msgstr "ライブラリを開く(_l)"
 
-#: comix:10912
+#: comix:10930
 msgid "_Add to library"
 msgstr "ライブラリに追加(_A)"
 
-#: comix:10914
+#: comix:10932
 msgid "Con_vert..."
 msgstr "画像や書庫を変換...(_v)"
 
-#: comix:10916
+#: comix:10934
 msgid "E_xtract image..."
 msgstr "画像を抽出(_x)"
 
-#: comix:10918
+#: comix:10936
 msgid "_Close"
 msgstr "閉じる(_C)"
 
-#: comix:10920
+#: comix:10938
 msgid "_Quit"
 msgstr "終了(_Q)"
 
-#: comix:10922
+#: comix:10940
 msgid "_Adjust colour..."
 msgstr "色の調整(_A)"
 
-#: comix:10924
+#: comix:10942
 msgid "Slideshow"
 msgstr "スライドショー"
 
-#: comix:10926
+#: comix:10944
 msgid "Delete image..."
 msgstr "画像を削除"
 
-#: comix:10929
+#: comix:10947
 msgid "CW lossless JPEG rotation..."
 msgstr "無損失のJPEG画像の回転（右回り）..."
 
-#: comix:10932
+#: comix:10950
 msgid "CCW lossless JPEG rotation..."
 msgstr "無損失のJPEG画像の回転（左回り）..."
 
-#: comix:10935
+#: comix:10953
 msgid "Horizontal lossless JPEG flip..."
 msgstr "無損失のJPEG画像の左右のフリップ..."
 
-#: comix:10938
+#: comix:10956
 msgid "Vertical lossless JPEG flip..."
 msgstr "無損失のJPEG画像の上下のフリップ..."
 
-#: comix:10941
+#: comix:10959
 msgid "Convert JPEG to greyscale..."
 msgstr "JPEGファイルをgreyscaleに変換..."
 
-#: comix:10943
-#: comix:10945
+#: comix:10961 comix:10963
 msgid "_Bookmarks"
 msgstr "ブックマーク(_B)"
 
-#: comix:10944
+#: comix:10962
 msgid "_Toolbars"
 msgstr "ツールバー(_T)"
 
-#: comix:10946
+#: comix:10964
 msgid "_Edit"
 msgstr "編集(_E)"
 
-#: comix:10948
+#: comix:10966
 msgid "File o_perations"
 msgstr "ファイル操作(_p)"
 
-#: comix:10949
+#: comix:10967
 msgid "_File"
 msgstr "ファイル(_F)"
 
-#: comix:10950
-#: comix:10951
+#: comix:10968 comix:10969
 msgid "_View"
 msgstr "表示(_V)"
 
-#: comix:10952
-#: comix:10953
+#: comix:10970 comix:10971
 msgid "_Go"
 msgstr "移動(_G)"
 
-#: comix:10954
+#: comix:10972
 msgid "_Help"
 msgstr "ヘルプ(_H)"
 
-#: comix:10955
+#: comix:10973
 msgid "_Transform"
 msgstr "画像の回転(_T)"
 
-#: comix:10956
+#: comix:10974
 msgid "_Rotate 90 degrees CW"
 msgstr "右回りに90度回転(_R)"
 
-#: comix:10958
+#: comix:10976
 msgid "Rotate 180 de_grees"
 msgstr "180度回転(_g)"
 
-#: comix:10960
+#: comix:10978
 msgid "Rotat_e 90 degrees CCW"
 msgstr "左回りに90度回転(_e)"
 
-#: comix:10962
+#: comix:10980
 msgid "Fli_p horizontally"
 msgstr "左右をフリップ(_p)"
 
-#: comix:10964
+#: comix:10982
 msgid "Flip _vertically"
 msgstr "上下をフリップ(_v)"
 
-#: comix:10967
+#: comix:10985
 msgid "_Fullscreen"
 msgstr "全画面表示(_F)"
 
-#: comix:10969
+#: comix:10987
 msgid "_Double page mode"
 msgstr "見開き表示(_D)"
 
-#: comix:10971
+#: comix:10989
 msgid "_Toolbar"
 msgstr "ツールバー(_T)"
 
-#: comix:10973
+#: comix:10991
 msgid "_Menubar"
 msgstr "メニューバー(_M)"
 
-#: comix:10975
+#: comix:10993
 msgid "St_atusbar"
 msgstr "ステータスバー(_a)"
 
-#: comix:10977
+#: comix:10995
 msgid "S_crollbars"
 msgstr "スクロールバー(_c)"
 
-#: comix:10979
+#: comix:10997
 msgid "Th_umbnails"
 msgstr "サムネイル(_u)"
 
-#: comix:10981
+#: comix:10999
 msgid "H_ide all"
 msgstr "全て隠す(_i)"
 
-#: comix:10983
+#: comix:11001
 msgid "_Manga mode"
 msgstr "マンガのページ順に表示(_M)"
 
-#: comix:10985
+#: comix:11003
 msgid "_Keep transformation"
 msgstr "回転の状態を維持する(_K)"
 
-#: comix:10987
+#: comix:11005
 msgid "Magnifying _lens"
 msgstr "レンズで拡大(_l)"
 
-#: comix:10991
+#: comix:11009
 msgid "Fit-to-_screen mode"
 msgstr "スクリーンに合わせる(_s)"
 
-#: comix:10992
+#: comix:11010
 msgid "Fit _width mode"
 msgstr "横幅を合わせる(_w)"
 
-#: comix:10993
+#: comix:11011
 msgid "Fit _height mode"
 msgstr "縦幅を合わせる(_h)"
 
-#: comix:11007
+#: comix:11025
 msgid "Enter fullscreen mode automatically when Comix is started."
 msgstr "起動時に自動で全画面表示にする"
 
-#: comix:11008
+#: comix:11026
 msgid "Enter double page mode automatically when Comix is started."
 msgstr "起動時に自動で見開き表示にする"
 
-#: comix:11009
+#: comix:11027
 msgid "Enter manual zoom mode automatically when Comix is started."
 msgstr "起動時に自動で、手動でズームを設定する表示にする"
 
-#: comix:11010
+#: comix:11028
 msgid "Enter fit-to-screen mode automatically when Comix is started."
 msgstr "起動時に自動で画像をスクリーンに合わせる表示にする"
 
-#: comix:11011
+#: comix:11029
 msgid "Enter fit width mode automatically when Comix is started."
 msgstr "起動時に自動で横幅を合わせる表示にする"
 
-#: comix:11012
+#: comix:11030
 msgid "Enter fit height mode automatically when Comix is started."
 msgstr "起動時に自動で縦幅を合わせる表示にする"
 
-#: comix:11013
-msgid "Also scale images to a size that is larger than their original size in fit-to-screen mode, fit width mode and fit height mode."
-msgstr "スクリーン、又は横幅、縦幅に画像を合わせる表示で、元画像の方が小さい場合は拡大させる"
+#: comix:11031
+msgid ""
+"Also scale images to a size that is larger than their original size in fit-"
+"to-screen mode, fit width mode and fit height mode."
+msgstr ""
+"スクリーン、又は横幅、縦幅に画像を合わせる表示で、元画像の方が小さい場合は拡"
+"大させる"
 
-#: comix:11014
-msgid "Scale the images independently when in double page mode and fit-to-screen mode. The smaller of the two images will scale up to fill any extra space that is given."
-msgstr "見開き表示やスクリーンに合わせる表示の時、画像を別々にスケールする。小さい方の画像は一つの隙間が埋まるまで拡大されます。"
+#: comix:11032
+msgid ""
+"Scale the images independently when in double page mode and fit-to-screen "
+"mode. The smaller of the two images will scale up to fill any extra space "
+"that is given."
+msgstr ""
+"見開き表示やスクリーンに合わせる表示の時、画像を別々にスケールする。小さい方"
+"の画像は一つの隙間が埋まるまで拡大されます。"
 
-#: comix:11015
+#: comix:11033
 msgid "Automatically show any available comments when opening a new file."
 msgstr "新しいファイルを開く時、コメントがあれば自動的に表示する"
 
-#: comix:11016
-msgid "Automatically hide scrollbars, menubar, toolbar, statusbar and thumbnails when in fullscreen mode."
-msgstr "全画面表示の時にスクロール、メニュー、ツール、ステータス、サムネイルの全バーを隠す"
+#: comix:11034
+msgid ""
+"Automatically hide scrollbars, menubar, toolbar, statusbar and thumbnails "
+"when in fullscreen mode."
+msgstr ""
+"全画面表示の時にスクロール、メニュー、ツール、ステータス、サムネイルの全バー"
+"を隠す"
 
-#: comix:11017
-msgid "Cache the next page in the archive/directory to increase the perceived speed. This is generally recommended unless you are running low on RAM."
-msgstr "スピードを上げるため書庫やディレクトリの次のページをキャッシュする。RAMの性能が低くない限り推奨します。"
+#: comix:11035
+msgid ""
+"Cache the next page in the archive/directory to increase the perceived "
+"speed. This is generally recommended unless you are running low on RAM."
+msgstr ""
+"スピードを上げるため書庫やディレクトリの次のページをキャッシュする。RAMの性能"
+"が低くない限り推奨します。"
 
-#: comix:11018
-msgid "Move the horizontal scrollbar instead of the vertical when using the scroll wheel at the top or the bottom of the page. The direction will be determined by whether you use manga mode or not."
-msgstr "ページの一番上や下に来た時左右方向のスクロールバーを動かす。動かす方向はマンガ表示になっているかで判断されます。"
+#: comix:11036
+msgid ""
+"Move the horizontal scrollbar instead of the vertical when using the scroll "
+"wheel at the top or the bottom of the page. The direction will be determined "
+"by whether you use manga mode or not."
+msgstr ""
+"ページの一番上や下に来た時左右方向のスクロールバーを動かす。動かす方向はマン"
+"ガ表示になっているかで判断されます。"
 
-#: comix:11019
-msgid "Flip pages when scrolling \"off the page\" with the scroll wheel, even when not in fit-to-screen mode. It takes three \"steps\" with the scroll wheel to trigger this behaviour."
-msgstr "スクリーンに合わせる表示でないときも、スクロールがページの外に出た時はページを移動する。「３回」スクロールを動かせばページを移動します。"
+#: comix:11037
+msgid ""
+"Flip pages when scrolling \"off the page\" with the scroll wheel, as well as "
+"with the arrow keys, even when not in fit-to-screen mode. It takes three "
+"\"steps\" with the scroll wheel or arrow keys to trigger this behaviour."
+msgstr ""
 
-#: comix:11020
-msgid "Save the position and the size of the window for the next time you start Comix."
+#: comix:11038
+msgid ""
+"Save the position and the size of the window for the next time you start "
+"Comix."
 msgstr "次回ウィンドウを同じ位置、同じ大きさで起動する"
 
-#: comix:11021
-msgid "Automatically open the next archive in the directory when scrolling past the last page of the current archive, and automatically open the previous archive in the directory when scrolling past the first page of the current archive."
-msgstr "現在の書庫の最後のページでスクロールが一番下まで動いた時、同じディレクトリにある次の書庫を自動的に開く（最初のページの時も同様）。"
+#: comix:11039
+msgid ""
+"Automatically open the next archive in the directory when scrolling past the "
+"last page of the current archive, and automatically open the previous "
+"archive in the directory when scrolling past the first page of the current "
+"archive."
+msgstr ""
+"現在の書庫の最後のページでスクロールが一番下まで動いた時、同じディレクトリに"
+"ある次の書庫を自動的に開く（最初のページの時も同様）。"
 
-#: comix:11022
+#: comix:11040
 msgid "Hide the cursor when in fullscreen mode."
 msgstr "全画面表示の時カーソルを隠す"
 
-#: comix:11023
-#: comix:11024
-#: comix:11025
-#: comix:11026
-msgid "Set the image scaling method. The best choice is often \"Tiles\", it is quite quick and produces almost as good results as \"Bilinear\" or \"Hyper\"."
-msgstr "画像のスケーリング法を設定する。大抵の場合、最良なのはタイル補間です。これは描画が早く、双一次補間やハイパー補間と同程度の画質が出ます。"
+#: comix:11041 comix:11042 comix:11043 comix:11044
+msgid ""
+"Set the image scaling method. The best choice is often \"Tiles\", it is "
+"quite quick and produces almost as good results as \"Bilinear\" or \"Hyper\"."
+msgstr ""
+"画像のスケーリング法を設定する。大抵の場合、最良なのはタイル補間です。これは"
+"描画が早く、双一次補間やハイパー補間と同程度の画質が出ます。"
 
-#: comix:11027
-msgid "Treat files with the following extensions as comment files. Extensions should be separated by whitespaces. They are not case sensitive."
-msgstr "次の拡張子を持つファイルをコメントとして扱う。拡張子はホワイトスペースで区切られている必要があります。大文字小文字を区別しません。"
+#: comix:11045
+msgid ""
+"Treat files with the following extensions as comment files. Extensions "
+"should be separated by whitespaces. They are not case sensitive."
+msgstr ""
+"次の拡張子を持つファイルをコメントとして扱う。拡張子はホワイトスペースで区切"
+"られている必要があります。大文字小文字を区別しません。"
 
-#: comix:11028
-msgid "Use smart scrolling with the space key. Pressing the space key normally scrolls straight down one window height unless at the bottom of the page where it flips pages instead. When this option is set Comix automatically tries to follow the reading flow of the comic book. When pressing the space key it will not only scroll down but will also scroll horizontally to the edge of the page (left or right depending on whether you use manga mode). In double page mode it will go to the edge of the first page if it is in view, otherwise it will go to the edge of the second page. Also, in double page mode with this option, Comix will not flip pages unless at the bottom of the second page. At the bottom of the first page it will instead go to the top of the second page."
+#: comix:11046
+msgid ""
+"Use smart scrolling with the space key. Pressing the space key normally "
+"scrolls straight down one window height unless at the bottom of the page "
+"where it flips pages instead. When this option is set Comix automatically "
+"tries to follow the reading flow of the comic book. When pressing the space "
+"key it will not only scroll down but will also scroll horizontally to the "
+"edge of the page (left or right depending on whether you use manga mode). In "
+"double page mode it will go to the edge of the first page if it is in view, "
+"otherwise it will go to the edge of the second page. Also, in double page "
+"mode with this option, Comix will not flip pages unless at the bottom of the "
+"second page. At the bottom of the first page it will instead go to the top "
+"of the second page."
 msgstr ""
 "スペースキーでスマート・スクロールを用いる。\n"
-"通常スペースキーを押すと、スクロールが下で設定された量ずつ下に動き、ページの一番下に来るとページを移動します。\n"
-"この設定を行うと、Comixは本を読む流れを自動的に追おうとします。スペースキーを押すと、上下方向のスクロールだけでなく、左右方向のスクロールも行います（どちらに動くかは、マンガ表示になっているかに依ります）。見開き表示の時は、先ず初めのページの端まで移動し、次に２ページ目のページの端まで移動します。２ページ目の一番端に移動するまではページをフリップしません。１ページ目の端に来た時は、次に２ページの一番上に移動します。"
+"通常スペースキーを押すと、スクロールが下で設定された量ずつ下に動き、ページの"
+"一番下に来るとページを移動します。\n"
+"この設定を行うと、Comixは本を読む流れを自動的に追おうとします。スペースキーを"
+"押すと、上下方向のスクロールだけでなく、左右方向のスクロールも行います（どち"
+"らに動くかは、マンガ表示になっているかに依ります）。見開き表示の時は、先ず初"
+"めのページの端まで移動し、次に２ページ目のページの端まで移動します。２ページ"
+"目の一番端に移動するまではページをフリップしません。１ページ目の端に来た時"
+"は、次に２ページの一番上に移動します。"
 
-#: comix:11029
+#: comix:11047
 msgid "Always hide the thumbnail scrollbar."
 msgstr "サムネイルのスクロールバーを常に隠す"
 
-#: comix:11030
+#: comix:11048
 msgid "Automatically open the last viewed page when Comix is started."
 msgstr "起動時に自動で最後に見た画像を開く"
 
-#: comix:11031
-msgid "Automatically go to the same directory as last time when opening the \"Open\" dialog."
+#: comix:11049
+msgid ""
+"Automatically go to the same directory as last time when opening the \"Open"
+"\" dialog."
 msgstr "「開く」を選んだ時自動的に最後に開いたディレクトリを選択する"
 
-#: comix:11032
+#: comix:11050
 msgid "Automatically go to this directory when opening the \"Open\" dialog."
 msgstr "「開く」を選んだ時自動的に次のディレクトリを選択する："
 
-#: comix:11033
+#: comix:11051
 msgid "Automatically restore these values the next time Comix is started."
 msgstr "次の起動時にこれらの値を自動的に呼び込む"
 
-#: comix:11034
+#: comix:11052
 msgid "Show the page number in the upper left corner of each thumbnail."
 msgstr "サムネイルの左上にページを表示する"
 
-#: comix:11035
-msgid "Automatically adjust the contrast of the images so that the darkest pixel is completely black and the lightest pixel is completely white. This only works with images without an alpha channel."
-msgstr "最も暗いピクセルが黒、明るいピクセルが白になるよう、自動的にコントラストを調整する。画像にアルファ・チャンネルがないときに有効となります。"
+#: comix:11053
+msgid ""
+"Automatically adjust the contrast of the images so that the darkest pixel is "
+"completely black and the lightest pixel is completely white. This only works "
+"with images without an alpha channel."
+msgstr ""
+"最も暗いピクセルが黒、明るいピクセルが白になるよう、自動的にコントラストを調"
+"整する。画像にアルファ・チャンネルがないときに有効となります。"
 
-#: comix:11036
-msgid "The space key uses smart scrolling as if in double page mode even when in single page mode. This can be useful for comics with two scanned pages in each image. The pages are assumed to be of equal size"
-msgstr "単独ページ表示の時も見開き表示同様に、スペースキーでスマート・スクロールを行う。１つの画像の中に２枚スキャンしたページがあるマンガを見る時に便利です。２つのページは同じサイズとして扱われます。"
+#: comix:11054
+msgid ""
+"The space key uses smart scrolling as if in double page mode even when in "
+"single page mode. This can be useful for comics with two scanned pages in "
+"each image. The pages are assumed to be of equal size"
+msgstr ""
+"単独ページ表示の時も見開き表示同様に、スペースキーでスマート・スクロールを行"
+"う。１つの画像の中に２枚スキャンしたページがあるマンガを見る時に便利です。２"
+"つのページは同じサイズとして扱われます。"
 
-#: comix:11037
+#: comix:11055
 msgid "Adjust the lens magnification factor."
 msgstr "レンズの拡大率を設定する"
 
-#: comix:11038
-msgid "Set the lens width and height in pixels. A larger lens will use more CPU resources than a small one."
-msgstr "レンズの横幅と縦幅をピクセルで設定する。レンズを大きくするとよりCPUを消費します。"
-
-#: comix:11039
-msgid "Set the maximum update frequency for the magnification lens in milliseconds. Setting the value too low can cause the lens to lag behind when moving the mouse quickly. Setting the value too high can cause the lens to appear choppy."
-msgstr "レンズ表示を更新する頻度を設定する。頻度が低過ぎると、マウスが早く動く時にレンズとのラグが生じます。逆に高過ぎるとレンズがぶれて見えます。"
-
-#: comix:11040
-msgid "Read and write thumbnails in the ~/.thumbnails directory as proposed by the freedesktop.org standard. With this preference set, Comix will use the thumbnails already stored there to speed up thumbnail loading. If there are no thumbnails, Comix will create them and save them there. This is a standard that many applications conform to, thumbnails created by other applications can be used by Comix and vice versa. If this preference is not set, Comix will create thumbnails on the fly every time a directory is opened."
+#: comix:11056
+msgid ""
+"Set the lens width and height in pixels. A larger lens will use more CPU "
+"resources than a small one."
 msgstr ""
-"freedesktop.orgの規格に従い、サムネイルを~/.thumbnails以下に記録する。この時、Comixは記録されたサムネイルを利用する事で呼び込みが早くなります。サムネイルがないときはこれを作成して記録します。\n"
-"これは多くのアプリケーションが従っている方法で、他のアプリケーションで作成されたサムネイルはComixで利用出来、又その逆も出来ます。\n"
+"レンズの横幅と縦幅をピクセルで設定する。レンズを大きくするとよりCPUを消費しま"
+"す。"
+
+#: comix:11057
+msgid ""
+"Set the maximum update frequency for the magnification lens in milliseconds. "
+"Setting the value too low can cause the lens to lag behind when moving the "
+"mouse quickly. Setting the value too high can cause the lens to appear "
+"choppy."
+msgstr ""
+"レンズ表示を更新する頻度を設定する。頻度が低過ぎると、マウスが早く動く時にレ"
+"ンズとのラグが生じます。逆に高過ぎるとレンズがぶれて見えます。"
+
+#: comix:11058
+msgid ""
+"Read and write thumbnails in the ~/.thumbnails directory as proposed by the "
+"freedesktop.org standard. With this preference set, Comix will use the "
+"thumbnails already stored there to speed up thumbnail loading. If there are "
+"no thumbnails, Comix will create them and save them there. This is a "
+"standard that many applications conform to, thumbnails created by other "
+"applications can be used by Comix and vice versa. If this preference is not "
+"set, Comix will create thumbnails on the fly every time a directory is "
+"opened."
+msgstr ""
+"freedesktop.orgの規格に従い、サムネイルを~/.thumbnails以下に記録する。この"
+"時、Comixは記録されたサムネイルを利用する事で呼び込みが早くなります。サムネイ"
+"ルがないときはこれを作成して記録します。\n"
+"これは多くのアプリケーションが従っている方法で、他のアプリケーションで作成さ"
+"れたサムネイルはComixで利用出来、又その逆も出来ます。\n"
 "この設定を行わない時、Comixはディレクトリを開く度にサムネイルを作成します。"
 
-#: comix:11041
-msgid "Also use stored thumbnails for images in archives in a similiar way. Due to restrictions in the freedesktop.org standard, these thumbnails will be stored in ~/.comix and will only be used by Comix. If this preference is not set, Comix will create thumbnails on the fly every time an archive is opened."
-msgstr "書庫内の画像に対しても、同様に記録されたサムネイルを用いる。freedesktop.orgの規格による制限の為、このサムネイルは~/.comix以下に記録され、Comixにしか利用出来ません。この設定を行わない時は、Comixは書庫が開かれる度にサムネイルを作成します。"
+#: comix:11059
+msgid ""
+"Also use stored thumbnails for images in archives in a similiar way. Due to "
+"restrictions in the freedesktop.org standard, these thumbnails will be "
+"stored in ~/.comix and will only be used by Comix. If this preference is not "
+"set, Comix will create thumbnails on the fly every time an archive is opened."
+msgstr ""
+"書庫内の画像に対しても、同様に記録されたサムネイルを用いる。freedesktop.orgの"
+"規格による制限の為、このサムネイルは~/.comix以下に記録され、Comixにしか利用出"
+"来ません。この設定を行わない時は、Comixは書庫が開かれる度にサムネイルを作成し"
+"ます。"
 
-#: comix:11042
-msgid "Only display a single image in double page mode if the image consists of two pages. An image is assumed to consist of two pages if its width is greater than its height."
-msgstr "見開き表示で、２ページからなる画像がある時は１枚だけ表示する。横幅が縦幅より大きいときは２ページからなると判断されます。"
+#: comix:11060
+msgid ""
+"Only display a single image in double page mode if the image consists of two "
+"pages. An image is assumed to consist of two pages if its width is greater "
+"than its height."
+msgstr ""
+"見開き表示で、２ページからなる画像がある時は１枚だけ表示する。横幅が縦幅より"
+"大きいときは２ページからなると判断されます。"
 
-#: comix:11043
+#: comix:11061
 msgid "Filter out archives with regular expressions."
 msgstr "次の正規表現で書庫をフィルターアウトする"
 
-#: comix:11044
+#: comix:11062
 msgid "Apply filters on full paths rather than filenames."
 msgstr "フィルターをファイル名でなく全パス名に適用する"
 
-#: comix:11045
-msgid "Store a list of the 10 last opened files that can be accessed through the menus."
+#: comix:11063
+msgid ""
+"Store a list of the 10 last opened files that can be accessed through the "
+"menus."
 msgstr "アクセスしたファイルの内最後の10個を記録する"
 
-#: comix:11053
+#: comix:11071
 msgid "First page"
 msgstr "最初のページ"
 
-#: comix:11054
+#: comix:11072
 msgid "Previous page"
 msgstr "前のページ"
 
-#: comix:11055
+#: comix:11073
 msgid "Next page"
 msgstr "次のページ"
 
-#: comix:11056
+#: comix:11074
 msgid "Last page"
 msgstr "最後のページ"
 
-#: comix:11057
+#: comix:11075
 msgid "Go to page..."
 msgstr "ページを指定して移動..."
 
-
+#~ msgid ""
+#~ "Flip pages when scrolling \"off the page\" with the scroll wheel, even "
+#~ "when not in fit-to-screen mode. It takes three \"steps\" with the scroll "
+#~ "wheel to trigger this behaviour."
+#~ msgstr ""
+#~ "スクリーンに合わせる表示でないときも、スクロールがページの外に出た時はペー"
+#~ "ジを移動する。「３回」スクロールを動かせばページを移動します。"
