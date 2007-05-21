@@ -4,8 +4,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Comix 3.6.3\n"
-"POT-Creation-Date: 2006-09-26 20:16+CEST\n"
-"PO-Revision-Date: 2007-05-03 21:52+0300\n"
+"POT-Creation-Date: 2007-05-09 14:55+CEST\n"
+"PO-Revision-Date: 2007-05-22 00:53-0300\n"
 "Last-Translator: Artyom Smirnov <smirnoffjr@gmail.com>\n"
 "Language-Team: Artyom Smirnov <smirnoffjr@gmail.com>\n"
 "MIME-Version: 1.0\n"
@@ -170,7 +170,7 @@ msgstr "Полноэкранный режим по умолчанию"
 
 #: comix:893
 msgid "Double page mode as default"
-msgstr "Две страницы по умолчанию"
+msgstr "Двухстраничный режим по-умолчанию"
 
 #: comix:895
 msgid "Stretch small images"
@@ -202,7 +202,7 @@ msgstr "Колесо мыши листает по-горизонтали вве�
 
 #: comix:912
 msgid "Hide thumbnail scrollbar"
-msgstr "Скрыть полусу прокрутки миниатюр"
+msgstr "Скрыть полосу прокрутки миниатюр"
 
 #: comix:914
 msgid "Space key uses smart scrolling"
@@ -230,7 +230,7 @@ msgstr "Показывать номера страниц на миниатюра
 
 #: comix:929
 msgid "Always use smart scrolling as if in double page mode"
-msgstr "Всегда использовать умное скроллирование в режимк двух страниц"
+msgstr "Всегда использовать умное скроллирование в режиме двух страниц"
 
 #: comix:932
 msgid "Use stored thumbnails for images in directories"
@@ -238,7 +238,7 @@ msgstr "Использовать сохраненные миниатюры дл�
 
 #: comix:934
 msgid "Use stored thumbnails for images in archives"
-msgstr "Использовать сохраненные миниатбры для изображений в архивах"
+msgstr "Использовать сохраненные миниатюры для изображений в архивах"
 
 #: comix:937
 msgid "Display only one page in double page mode if the image is wide"
@@ -294,7 +294,7 @@ msgstr "Цвет фона:"
 
 #: comix:1011
 msgid "Background colour"
-msgstr "Цвет фона:"
+msgstr "Цвет фона"
 
 #: comix:1013
 msgid "Toolbar button labels:"
@@ -414,7 +414,7 @@ msgstr "Контрастность"
 
 #: comix:1349
 msgid "Saturation"
-msgstr "Насышеность"
+msgstr "Насыщеность"
 
 #: comix:1361
 msgid "Sharpness"
@@ -473,57 +473,69 @@ msgstr "Comix распространяется согласно лицензии
 
 #: comix:1539
 msgid "Developer and Swedish translation"
-msgstr "Разработчики и Шведский перевод"
+msgstr "Разработчик и перевод на Шведский"
 
 #: comix:1541
 msgid "Simplified Chinese translation"
-msgstr "Упрощенный Китайский перевод"
+msgstr "Упрощенный перевод на Китайский"
 
 #: comix:1542
 msgid "Spanish translation"
-msgstr "Испанский перевод"
+msgstr "Перевод на Испанский"
 
 #: comix:1543
 msgid "Brazilian Portuguese translation"
-msgstr "Бразильский Португальский перевод"
+msgstr "Перевод на Бразильский и Португальский "
 
 #: comix:1545
 msgid "German translation and Nautilus thumbnailer"
-msgstr "Немецкий перевод и генератор миниатюр для Nautilus"
+msgstr "Превод на Немецкий и генератор миниатюр для Nautilus"
 
 #: comix:1546
 msgid "Italian translation"
-msgstr "Итальянский перевод"
+msgstr "Превод на Итальянский"
 
 #: comix:1547
 msgid "Dutch translation"
-msgstr "Голландский перевод"
+msgstr "Перевод на Голландский"
 
 #: comix:1548
 msgid "French translation"
-msgstr "Французский перевод"
+msgstr "Перевод на Французский"
 
 #: comix:1549
 msgid "Polish translation"
-msgstr "Польский перевод"
+msgstr "Перевод на Польский"
 
 #: comix:1550
 msgid "Greek translation"
-msgstr "Греческий перевод"
+msgstr "Перевод на Греческий"
 
 #: comix:1551
 msgid "Catalan translation"
-msgstr "Каталанский перевод"
+msgstr "Перевод на Каталанский"
 
 #: comix:1552
 msgid "Traditional Chinese translation"
-msgstr "Традиционный Китайский перевод"
+msgstr "Перевод на Традиционный Китайский "
 
-#: comix:1561
+#: comix:1553
+msgid "Japanese translation"
+msgstr "Перевод на японский "
+
+#: comix:1554
+msgid "Hungarian translation"
+msgstr "Перевод на венгерский "
+
+#: comix:1555
+msgid "Russian translation"
+msgstr "Перевод на русский"
+
+#: comix:1564
 msgid "Credits"
 msgstr "Разработчики"
 
-#: comix:1570
+#: comix:1573
 msgid "Manage thumbnails"
 msgstr "Управление миниатюрами"
 
@@ -837,7 +849,7 @@ msgstr "страница"
 
 #: comix:8721
 msgid "Could not find the unrar executable. Please install it if you wish to open RAR archives."
-msgstr "Не могу найти программу unrar. Пожалуйста установите ее, если Вы хотите работать с RAR архивами"
+msgstr "Не могу найти программу unrar. Пожалуйста установите ее, если  хотите работать с RAR архивами"
 
 #: comix:8726
 msgid "Could not open"
@@ -1108,7 +1120,7 @@ msgstr "_Строка статуса"
 
 #: comix:10977
 msgid "S_crollbars"
-msgstr "С_кроллеры"
+msgstr "Полосы про_крутки"
 
 #: comix:10979
 msgid "Th_umbnails"
@@ -1188,11 +1200,11 @@ msgstr "Кэшировать следующую страницу в архиве
 
 #: comix:11018
 msgid "Move the horizontal scrollbar instead of the vertical when using the scroll wheel at the top or the bottom of the page. The direction will be determined by whether you use manga mode or not."
-msgstr "Двигать горизонтальную полосу прокрутки вместо вертикальной при использовании колеса, когда курсор находится вверзу или внизу страницы. Направление будет зависеть используете ли Вы режим манги или нет."
+msgstr "Двигать горизонтальную полосу прокрутки вместо вертикальной при использовании колеса, когда курсор находится вверху или внизу страницы. Направление будет зависеть используете ли Вы режим манги или нет."
 
 #: comix:11019
 msgid "Flip pages when scrolling \"off the page\" with the scroll wheel, even when not in fit-to-screen mode. It takes three \"steps\" with the scroll wheel to trigger this behaviour."
-msgstr "Перелистывать страницы при дохождении до края при прокручивании колесом иыши, даже если не в режиме растягивания на весь экран. Колесо мыши должно сделать три \"шага\" для перелистывании на следующую страницу."
+msgstr "Перелистывать страницы колесом при дохождении границы, даже если не в режиме растягивания на весь экран."
 
 #: comix:11020
 msgid "Save the position and the size of the window for the next time you start Comix."
@@ -1259,16 +1271,16 @@ msgstr "Настроить коэффициент увеличения линз�
 
 #: comix:11038
 msgid "Set the lens width and height in pixels. A larger lens will use more CPU resources than a small one."
-msgstr "Установить высоту и ширину линзы в пикселях. Большая линза требует больше процессорного времени чем маленькая."
+msgstr "Устанавливает высоту и ширину линзы в пикселях. Большая линза требует больше процессорного времени чем маленькая."
 
 #: comix:11039
 #, fuzzy
 msgid "Set the maximum update frequency for the magnification lens in milliseconds. Setting the value too low can cause the lens to lag behind when moving the mouse quickly. Setting the value too high can cause the lens to appear choppy."
-msgstr "Установить максимальную частоту обновления для линзы в миллисекундах. "
+msgstr "Устанавливает максимальную частоту обновления для линзы в миллисекундах. "
 
 #: comix:11040
 msgid "Read and write thumbnails in the ~/.thumbnails directory as proposed by the freedesktop.org standard. With this preference set, Comix will use the thumbnails already stored there to speed up thumbnail loading. If there are no thumbnails, Comix will create them and save them there. This is a standard that many applications conform to, thumbnails created by other applications can be used by Comix and vice versa. If this preference is not set, Comix will create thumbnails on the fly every time a directory is opened."
-msgstr "Использовать для хранения миниатюр каталог ~/.thumbnails как указывает стандарт freedesktop.org. C этой опцией Comix будет использовать уже сохраненные миниатюры для ускорения показа. Если мниатюр нет, то Comix будет создавать их и сохранять там. Иначе Comix будет создавать миниатюры каждый раз \"на лету\"."
+msgstr "Использовать для хранения миниатюр каталог ~/.thumbnails как указывает стандарт freedesktop.org. C этой опцией Comix будет использовать уже сохраненные миниатюры для ускорения показа. Если миниатюр нет, то Comix будет создавать их и сохранять там. Иначе Comix будет создавать миниатюры каждый раз \"на лету\"."
 
 #: comix:11041
 msgid "Also use stored thumbnails for images in archives in a similiar way. Due to restrictions in the freedesktop.org standard, these thumbnails will be stored in ~/.comix and will only be used by Comix. If this preference is not set, Comix will create thumbnails on the fly every time an archive is opened."
