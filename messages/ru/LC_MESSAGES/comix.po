@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Comix 3.6.3\n"
 "POT-Creation-Date: 2007-05-09 14:55+CEST\n"
-"PO-Revision-Date: 2007-05-22 00:53-0300\n"
+"PO-Revision-Date: 2007-05-22 01:58-0000\n"
 "Last-Translator: Artyom Smirnov <smirnoffjr@gmail.com>\n"
 "Language-Team: Artyom Smirnov <smirnoffjr@gmail.com>\n"
 "MIME-Version: 1.0\n"
@@ -521,15 +521,15 @@ msgstr "Перевод на Традиционный Китайский "
 
 #: comix:1553
 msgid "Japanese translation"
-msgstr "Перевод на японский "
+msgstr "Перевод на Японский "
 
 #: comix:1554
 msgid "Hungarian translation"
-msgstr "Перевод на венгерский "
+msgstr "Перевод на Венгерский "
 
 #: comix:1555
 msgid "Russian translation"
-msgstr "Перевод на русский"
+msgstr "Перевод на Русский"
 
 #: comix:1564
 msgid "Credits"
