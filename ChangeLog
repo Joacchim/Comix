@@ -1,3 +1,14 @@
+Comix 3.6.4
+    
+    - Added a Russian translation by Artyom Smirnov.
+    
+    - Added a Croatian translation by Adrian C.
+    
+    - Fixed a bug in the thumbnailer, comicthumb, failing to create thumbnails
+    for Zip and tar archives.
+    
+    - Some minor changes.
+
 Comix 3.6.3
     
     - Added a Hungarian translation by Ernő Drabik.

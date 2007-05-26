@@ -4,7 +4,7 @@
 """
  --------------------------------------------------------------------------
 
- Comix 3.6.3 - GTK Comic Book Viewer
+ Comix 3.6.4 - GTK Comic Book Viewer
  Copyright (C) 2005-2007 Pontus Ekberg
  <herrekberg@users.sourceforge.net>
 
@@ -170,7 +170,7 @@ class Comix:
     # =======================================================
     # Various shared variables used throughout the program.
     # =======================================================
-    version = '3.6.3'
+    version = '3.6.4'
     base_dir = ''
     path = ''
     archive_type = ''
@@ -1525,7 +1525,6 @@ class Comix:
         "<small>http://comix.sourceforge.net</small>\n")
         box.pack_start(label, True, True, 0)
         label.set_justify(gtk.JUSTIFY_CENTER)
-        label.set_selectable(True)
         
         notebook.insert_page(box, gtk.Label(_("About")))
         
@@ -1552,14 +1551,14 @@ class Comix:
             ('Hsin-Lin Cheng', _('Traditional Chinese translation')),
             ('Mamoru Tasaka', _('Japanese translation')),
             ('Ernő Drabik', _('Hungarian translation')),
-            ('Artyom Smirnov', _('Russian translation'))
+            ('Artyom Smirnov', _('Russian translation')),
+            ('Adrian C.', _('Croatian translation'))
             ):
             label = gtk.Label()
             label.set_markup('<b>' + nice_person[0] + ':</b>   ' +
                 nice_person[1])
             box.pack_start(label, False, False, 0)
             label.set_alignment(0, 0)
-            label.set_selectable(True)
 
         notebook.insert_page(box, gtk.Label(_("Credits")))
         self.about_dialog.vbox.show_all()

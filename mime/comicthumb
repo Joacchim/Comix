@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 
-# Comicthumb 2007-04-13
+# Comicthumb 2007-05-26
 # Create thumbnails for comic book archives (cbz, cbt and cbr).
 #
 # usage: comicthumb /path/to/archive.cbt outputfile [ size | --no-balloon ]
@@ -153,16 +153,14 @@ def get_image(compressed_file, depth):
                     % (rar, compressed_file, subarchive, depth), "r")
                 return get_image("/tmp/comicthumb/archive%d" % (depth), 
                     depth + 1)
-        
-        print picture.getvalue()
-        return picture
+    return picture
 
 # main
 try:   
-
+    
     # get cover from archive
     image = Image.open(get_image(in_file_path, 0))
-
+    
     # thumbnail it
     if image.size[0] > image.size[1]:
         x = THUMB_SIZE
@@ -200,7 +198,7 @@ try:
             image = Image.composite(image_canvas, image, image_canvas)
         except:
             pass
-
+    
     # save it
     image.save(out_file_path, 'PNG')
     exit_flag = 0
