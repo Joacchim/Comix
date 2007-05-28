@@ -477,7 +477,7 @@ msgstr "Разработчик и перевод на Шведский"
 
 #: comix:1541
 msgid "Simplified Chinese translation"
-msgstr "Упрощенный перевод на Китайский"
+msgstr "Перевод на упрощенный Китайский"
 
 #: comix:1542
 msgid "Spanish translation"
