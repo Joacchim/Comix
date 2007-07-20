@@ -94,7 +94,8 @@ class Aboutdialog(gtk.Dialog):
             ('Mamoru Tasaka', _('Japanese translation')),
             ('Ernő Drabik', _('Hungarian translation')),
             ('Artyom Smirnov', _('Russian translation')),
-            ('Adrian C.', _('Croatian translation'))
+            ('Adrian C.', _('Croatian translation')),
+            ('Jan Nekvasil', _('Czech translation'))
             ):
             label = gtk.Label()
             label.set_markup('<b>' + nice_person[0] + ':</b>   ' +
