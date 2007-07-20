@@ -4,7 +4,7 @@
 """
  --------------------------------------------------------------------------
 
- Comix 3.6.4 - GTK Comic Book Viewer
+ Comix 3.6.5 - GTK Comic Book Viewer
  Copyright (C) 2005-2007 Pontus Ekberg
  <herrekberg@users.sourceforge.net>
 
@@ -170,7 +170,7 @@ class Comix:
     # =======================================================
     # Various shared variables used throughout the program.
     # =======================================================
-    version = '3.6.4'
+    version = '3.6.5'
     base_dir = ''
     path = ''
     archive_type = ''
@@ -1552,7 +1552,8 @@ class Comix:
             ('Mamoru Tasaka', _('Japanese translation')),
             ('Ernő Drabik', _('Hungarian translation')),
             ('Artyom Smirnov', _('Russian translation')),
-            ('Adrian C.', _('Croatian translation'))
+            ('Adrian C.', _('Croatian translation')),
+            ('Jan Nekvasil', _('Czech translation'))
             ):
             label = gtk.Label()
             label.set_markup('<b>' + nice_person[0] + ':</b>   ' +

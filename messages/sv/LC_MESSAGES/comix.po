@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Comix 2.7\n"
-"POT-Creation-Date: 2007-05-09 14:55+CEST\n"
+"POT-Creation-Date: 2007-07-20 16:52+CEST\n"
 "PO-Revision-Date: 2006-09-26 20:12+0100\n"
 "Last-Translator: Pontus Ekberg <herrekberg@users.sourceforge.net>\n"
 "Language-Team: Swedish <LL@li.org>\n"
@@ -423,7 +423,7 @@ msgstr "Titel"
 msgid "Page"
 msgstr "Sida"
 
-#: comix:1477 comix:1530
+#: comix:1477 comix:1529
 msgid "About"
 msgstr "Om"
 
@@ -444,64 +444,72 @@ msgstr "såväl som vanliga bildfiler."
 msgid "Comix is licensed under the GNU General Public License."
 msgstr "Comix är licenserat under GNU General Public License."
 
-#: comix:1539
+#: comix:1538
 msgid "Developer and Swedish translation"
 msgstr "Utvecklare och svensk översättning"
 
-#: comix:1541
+#: comix:1540
 msgid "Simplified Chinese translation"
 msgstr "Förenklad kinesisk översättning"
 
-#: comix:1542
+#: comix:1541
 msgid "Spanish translation"
 msgstr "Spansk översättning"
 
-#: comix:1543
+#: comix:1542
 msgid "Brazilian Portuguese translation"
 msgstr "Brasiliansk-portugisisk översättning"
 
-#: comix:1545
+#: comix:1544
 msgid "German translation and Nautilus thumbnailer"
 msgstr "Tysk översättning och miniatyrbildsskapare för Nautilus"
 
-#: comix:1546
+#: comix:1545
 msgid "Italian translation"
 msgstr "Italiensk översättning"
 
-#: comix:1547
+#: comix:1546
 msgid "Dutch translation"
 msgstr "Nederländsk översättning"
 
-#: comix:1548
+#: comix:1547
 msgid "French translation"
 msgstr "Fransk översättning"
 
-#: comix:1549
+#: comix:1548
 msgid "Polish translation"
 msgstr "Polsk översättning"
 
-#: comix:1550
+#: comix:1549
 msgid "Greek translation"
 msgstr "Grekisk översättning"
 
-#: comix:1551
+#: comix:1550
 msgid "Catalan translation"
 msgstr "Katalansk översättning"
 
-#: comix:1552
+#: comix:1551
 msgid "Traditional Chinese translation"
 msgstr "Traditionell kinesisk översättning"
 
-#: comix:1553
+#: comix:1552
 msgid "Japanese translation"
 msgstr ""
 
-#: comix:1554
+#: comix:1553
 msgid "Hungarian translation"
 msgstr ""
 
-#: comix:1555
+#: comix:1554
 msgid "Russian translation"
+msgstr ""
+
+#: comix:1555
+msgid "Croatian translation"
+msgstr ""
+
+#: comix:1556
+msgid "Czech translation"
 msgstr ""
 
 #: comix:1564
