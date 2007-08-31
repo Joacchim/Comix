@@ -26,9 +26,13 @@
 
  --------------------------------------------------------------------------
 """
+import os
+import sys
+import gettext
 
-import mainwindow
-
+# =======================================================
+# Check for PyGTK and PIL dependencies.
+# =======================================================
 try:
     import pygtk
     pygtk.require('2.0')
@@ -65,12 +69,21 @@ except:
     sys.exit(1)
 
 
-def main():
-    
-    gtk.main()    
-    return 0
-
 if __name__ == '__main__':
-    mainwindow.Mainwindow()
-    main()
+
+    # =======================================================
+    # Use gettext translations as found in the source dir,
+    # otherwise based on the install path.
+    # =======================================================
+    exec_path = os.path.realpath(sys.argv[0])
+    base_dir = os.path.dirname(os.path.dirname(exec_path))
+    if os.path.isdir(os.path.join(base_dir, 'messages')):
+        gettext.install('comix', os.path.join(base_dir, 'messages'),
+            unicode=True)
+    else:
+        gettext.install('comix', os.path.join(base_dir, '/share/locale'),
+            unicode=True)
+
+    import main
+    main.start()
 

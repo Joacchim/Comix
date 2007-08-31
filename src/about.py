@@ -6,6 +6,8 @@ import sys
 
 import constants
 
+dialog = None
+
 class Aboutdialog(gtk.Dialog):
 
     def __init__(self, window):
@@ -14,6 +16,9 @@ class Aboutdialog(gtk.Dialog):
         
         gtk.Dialog.__init__(self, _("About"), window, 0, (gtk.STOCK_CLOSE,
             gtk.RESPONSE_CLOSE))
+
+        self.connect('response', dialog_close)
+        self.connect('delete_event', dialog_close)
         
         # =======================================================
         # About tab.
@@ -76,7 +81,7 @@ class Aboutdialog(gtk.Dialog):
         box = gtk.VBox(False, 5)
         box.set_border_width(5)
 
-        for nice_person in (
+        for nice_person, description in (
             ('Pontus Ekberg', _('Developer and Swedish translation')),
             ('Emfox Zhou &amp; Xie Yanbo',
             _('Simplified Chinese translation')),
@@ -98,11 +103,25 @@ class Aboutdialog(gtk.Dialog):
             ('Jan Nekvasil', _('Czech translation'))
             ):
             label = gtk.Label()
-            label.set_markup('<b>' + nice_person[0] + ':</b>   ' +
-                nice_person[1])
+            label.set_markup('<b>' + nice_person + ':</b>   ' +
+                description)
             box.pack_start(label, False, False, 0)
             label.set_alignment(0, 0)
 
         notebook.insert_page(box, gtk.Label(_("Credits")))
+        self.action_area.get_children()[0].grab_focus()
         self.vbox.show_all()
+        
+
+def dialog_open(*args):
+    global dialog
+    if dialog == None:
+        dialog = Aboutdialog(None)
+        dialog.show()
+
+def dialog_close(*args):
+    global dialog
+    if dialog != None:
+        dialog.destroy()
+        dialog = None
 

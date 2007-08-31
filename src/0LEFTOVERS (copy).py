@@ -1,16 +1,12 @@
-#!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
 """
- ###########################################################################
- This file contains changes by Maciej Katafiasz. Changes concering Glade and
- the toolbar is not yet merged and will be adopted slowly into the main 
- `comix.py' file. 
- 
- This file is not kept up to date with other changes and is kept as a
- reference to Maciej's work on these topics. 
- ###########################################################################
+This file yet contain most of the Comix source. In time things will move to
+separate files as I untangle the code. In the end it will hopefully contain
+only the code to handle the main window.
+
 """
+
 
 import os
 import sys
@@ -30,51 +26,24 @@ import time
 import pwd
 import cPickle
 
-try:
-    import pygtk
-    pygtk.require('2.0')
-    import gtk
-    assert gtk.gtk_version >= (2, 8, 0)
-    assert gtk.pygtk_version >= (2, 8, 0)
-    import gtk.glade as glade
-    import pango
-    import gobject
-except AssertionError:
-    print ('You do not have the required versions of GTK+ and/or PyGTK ' +
-    'installed.\n\n' +
-    'Installed GTK+ version is ' + 
-    '.'.join([str(n) for n in gtk.gtk_version]) + '\n' +
-    'Required GTK+ version is 2.8.0 or higher\n\n'
-    'Installed PyGTK version is ' + 
-    '.'.join([str(n) for n in gtk.pygtk_version]) + '\n' +
-    'Required PyGTK version is 2.8.0 or higher')
-    sys.exit(1)
-except:
-    print 'PyGTK version 2.8.0 or higher is required to run Comix.'
-    print 'No version of PyGTK was found on your system.'
-    sys.exit(1)
+import pygtk
+pygtk.require('2.0')
+import gtk
+import pango
+import gobject
+import Image
+import ImageEnhance
+import ImageDraw
+import ImageOps
+import ImageStat
+import ImageFont
 
-try:
-    import Image
-    assert Image.VERSION >= '1.1.4'
-    import ImageEnhance
-    import ImageDraw
-    import ImageOps
-    import ImageStat
-    import ImageFont
-except AssertionError:
-    print ('You do not have the required version of the Python Imaging ' +
-    'Library installed.\n\n' + 
-    'Installed Python Imaging Library version is ' + Image.VERSION + '\n' +
-    'Required Python Imaging Library version is 1.1.4 or higher')
-    sys.exit(1)
-except:
-    print 'Python Imaging Library 1.1.4 or higher is required to run Comix.'
-    print 'No version of the Python Imaging Library was found on your system.'
-    sys.exit(1)
+import about
+import properties
+import constants
 
 
-class Comix:
+class Mainwindow:
     
     # =======================================================
     # All the preferences are stored here.
@@ -157,7 +126,6 @@ class Comix:
     # =======================================================
     # Various shared variables used throughout the program.
     # =======================================================
-    version = 'glade src'
     base_dir = ''
     path = ''
     archive_type = ''
@@ -206,6 +174,9 @@ class Comix:
     tool_size = 0
     status_size = 0
     thumb_size = 0
+    thumb_vscroll_size = 0
+    vscroll_size = 0
+    hscroll_size = 0
     old_vadjust_value = 0
     old_hadjust_value = 0
     vadjust_upper = 0
@@ -287,7 +258,8 @@ class Comix:
             'wb')
         os.chmod(os.path.join(os.environ['HOME'], '.comix/preferences_data'),
             0600)
-        cPickle.dump(self.version, config, protocol=cPickle.HIGHEST_PROTOCOL)
+        cPickle.dump(constants.version, config,
+            protocol=cPickle.HIGHEST_PROTOCOL)
         cPickle.dump(self.prefs, config, protocol=cPickle.HIGHEST_PROTOCOL)
         config.close()
         
@@ -348,10 +320,6 @@ class Comix:
         # =======================================================
         if os.path.exists(self.base_dir):
             shutil.rmtree(self.base_dir)
-        if os.path.isdir('/tmp/comix'):
-            if len(os.listdir('/tmp/comix')) == 0:
-                shutil.rmtree('/tmp/comix')
-
         
         # =======================================================
         # Remove some legacy files in .comix/ that was used in
@@ -392,22 +360,20 @@ class Comix:
         # =======================================================
         # Create main display area widgets.
         # =======================================================
-        self.xml = glade.XML(self.bin_dir + "/comix.glade")
-
-        self.window = self.xml.get_widget("main_window")
-        self.window.realize()        
+        self.window = gtk.Window(gtk.WINDOW_TOPLEVEL)
+        self.window.realize()
         if self.prefs['save window pos']:
             self.window.move(self.prefs['window x'], self.prefs['window y'])
         self.window.set_size_request(300, 300)
         self.tooltips = gtk.Tooltips()
-        self.image = self.xml.get_widget("image")
-        self.image2 = self.xml.get_widget("image2")
+        self.image = gtk.Image()
+        self.image2 = gtk.Image()
 
         self.comix_image = gtk.Image()
-        if os.path.isfile(os.path.join(os.path.dirname(sys.argv[0]),
-            'images/logo/comix.svg')):
+        if os.path.isfile(os.path.join(os.path.dirname(os.path.dirname(
+            sys.argv[0])), 'images/logo/comix.svg')):
             icon_path = \
-                os.path.join(os.path.dirname(sys.argv[0]),
+                os.path.join(os.path.dirname(os.path.dirname(sys.argv[0])),
                 'images/logo/comix.svg')
         else:
             for prefix in [os.path.dirname(os.path.dirname(sys.argv[0])),
@@ -428,10 +394,23 @@ class Comix:
         except:
             pass
 
-        self.layout = self.xml.get_widget("layout")
-        self.image_box = self.xml.get_widget("image_box")
-        self.comment_label = self.xml.get_widget("comment_label")
-        self.slideshow_label_box = self.xml.get_widget("slideshow_label_box")
+        self.image_box = gtk.HBox(False, 2)
+        self.image_box.show()
+        self.image_box.add(self.image)
+        self.image_box.add(self.image2)
+        self.comment_label = gtk.Label()
+        label = gtk.Label()
+        ebox = gtk.EventBox()
+        self.slideshow_label_box = gtk.EventBox()
+        ebox.set_border_width(4)
+        self.slideshow_label_box.add(ebox)
+        ebox.add(label)
+        label.show()
+        ebox.show()
+        self.layout = gtk.Layout()
+        self.layout.put(self.image_box, 0, 0)
+        self.layout.put(self.comment_label, 0, 0)
+        self.layout.put(self.slideshow_label_box, 0, 0)
         self.layout.put(self.comix_image, 0, 0)
         self.layout.modify_bg(gtk.STATE_NORMAL,
             gtk.gdk.colormap_get_system().alloc_color(
@@ -442,43 +421,50 @@ class Comix:
         self.recent_actiongroup = gtk.ActionGroup('')
         self.accelgroup = 0
         self.merge_id = -1
-        self.statusbar = self.xml.get_widget("statusbar")
+        self.toolbar = gtk.Toolbar()
+        self.statusbar = gtk.Statusbar()
         
         # =======================================================
         # Create thumbnail sidebar widgets.
         # =======================================================
-
         self.thumb_liststore = gtk.ListStore(gtk.gdk.Pixbuf)
-
         self.thumb_tree_view = gtk.TreeView(self.thumb_liststore)
         self.thumb_column = gtk.TreeViewColumn(None)
         self.thumb_cell = gtk.CellRendererPixbuf()
+        self.thumb_layout = gtk.Layout()
+        self.thumb_layout.put(self.thumb_tree_view, 0, 0)
+        self.thumb_tree_view.show()
         self.thumb_column.set_sizing(gtk.TREE_VIEW_COLUMN_FIXED)
-        self.thumb_column.set_fixed_width(self.prefs['thumbnail size'])
+        self.thumb_column.set_fixed_width(self.prefs['thumbnail size'] + 7)
         self.thumb_tree_view.append_column(self.thumb_column)
         self.thumb_column.pack_start(self.thumb_cell, True)
         self.thumb_column.set_attributes(self.thumb_cell, pixbuf=0)
-
-        self.thumb_scroll = self.xml.get_widget("thumb_scroll")
-        self.thumb_scroll.add(self.thumb_tree_view)
-
+        self.thumb_layout.set_size_request(
+            self.prefs['thumbnail size'] + 7, 0)
         self.thumb_tree_view.get_selection().set_mode(gtk.SELECTION_MULTIPLE)
         self.thumb_tree_view.set_headers_visible(False)
+        self.thumb_vadjust = self.thumb_layout.get_vadjustment()
+        self.thumb_vadjust.step_increment = 15
+        self.thumb_vadjust.page_increment = 1
+        self.thumb_vscroll = gtk.VScrollbar(None)
+        self.thumb_vscroll.set_adjustment(self.thumb_vadjust)
         self.thumb_selection_handler = \
             self.thumb_tree_view.get_selection().connect(
             'changed', self.thumb_selection_event)
-        self.thumb_tree_view.show()
         
         # =======================================================
         # Create scrollbar widgets.
         # =======================================================
         self.vadjust = self.layout.get_vadjustment()
         self.hadjust = self.layout.get_hadjustment()
-        #self.layout_scroll = self.xml.get_widget("layout_scroll")
-        self.hscroll = self.xml.get_widget("hscroll")
-        self.vscroll = self.xml.get_widget("vscroll")
-        #self.hscroll = self.layout_scroll.get_hscrollbar()
-        #self.vscroll = self.layout_scroll.get_vscrollbar()
+        self.vadjust.step_increment = 15
+        self.vadjust.page_increment = 1
+        self.hadjust.step_increment = 15
+        self.hadjust.page_increment = 1
+        self.hscroll = gtk.HScrollbar(None)
+        self.hscroll.set_adjustment(self.hadjust)
+        self.vscroll = gtk.VScrollbar(None)
+        self.vscroll.set_adjustment(self.vadjust)
         
         # =======================================================
         # Create background tile used for transparent images.
@@ -496,6 +482,126 @@ class Comix:
         self.gdk_gc = gtk.gdk.GC(pixmap_tiles, gtk.gdk.Color(0,0,0),
             gtk.gdk.Color(255,255,255), None, gtk.gdk.COPY,
             gtk.gdk.TILED, pixmap_tiles)
+        
+        # =======================================================
+        # Create and add buttons to the toolbar.
+        # =======================================================
+        self.toolbutton_previous = gtk.ToolButton(gtk.STOCK_GO_BACK)
+        self.toolbutton_next = gtk.ToolButton(gtk.STOCK_GO_FORWARD)
+        self.toolbutton_first = gtk.ToolButton(gtk.STOCK_GOTO_FIRST)
+        self.toolbutton_last = gtk.ToolButton(gtk.STOCK_GOTO_LAST)
+        self.toolbutton_go = gtk.ToolButton(gtk.STOCK_JUMP_TO)
+        
+        self.toolbutton_fitscreen = \
+            gtk.RadioToolButton(None, 'comix-fitscreen')
+        self.toolbutton_fitscreen.set_label(_('Fit-to-screen mode'))
+        self.toolbutton_fitwidth = \
+            gtk.RadioToolButton(self.toolbutton_fitscreen, 'comix-fitwidth')
+        self.toolbutton_fitwidth.set_label(_('Fit width mode'))
+        self.toolbutton_fitheight = \
+            gtk.RadioToolButton(self.toolbutton_fitwidth, 'comix-fitheight')
+        self.toolbutton_fitheight.set_label(_('Fit height mode'))
+        self.toolbutton_fitnone = \
+            gtk.RadioToolButton(self.toolbutton_fitheight, 'comix-fitnone')
+        self.toolbutton_fitnone.set_label(_('Manual zoom mode'))
+        self.toolbutton_double_page = \
+            gtk.ToggleToolButton('comix-double-page')
+        self.toolbutton_double_page.set_label(_('Double page mode'))
+        self.toolbutton_manga = gtk.ToggleToolButton('comix-manga')
+        self.toolbutton_manga.set_label(_('Manga mode'))
+        self.toolbutton_lens = gtk.ToggleToolButton('comix-lens')
+        self.toolbutton_lens.set_label(_('Magnifying lens'))
+        
+        self.toolbutton_first.connect_object("clicked", self.first_page, None)
+        self.toolbar.insert(self.toolbutton_first, -1)
+        self.toolbutton_first.show()
+        self.toolbutton_previous.connect_object("clicked", self.previous_page,
+            None)
+        self.toolbar.insert(self.toolbutton_previous, -1)
+        self.toolbutton_previous.show()
+        self.toolbutton_next.connect_object("clicked", self.next_page, None)
+        self.toolbar.insert(self.toolbutton_next, -1)
+        self.toolbutton_next.show()
+        self.toolbutton_last.connect_object("clicked", self.last_page, None)
+        self.toolbar.insert(self.toolbutton_last, -1)
+        self.toolbutton_last.show()
+
+        sep = gtk.SeparatorToolItem()
+        self.toolbar.insert(sep, -1)
+        sep.show()
+
+        self.toolbutton_go.connect_object("clicked",
+            self.go_to_page_dialog_open, None)
+        self.toolbar.insert(self.toolbutton_go, -1)
+        self.toolbutton_go.show()
+        item = gtk.ToolItem()
+        item.show()
+        item.set_expand(True)
+        self.toolbar.insert(item, -1)
+
+        self.toolbutton_fitscreen.connect_object("clicked", 
+            self.zoom_mode_switch_tool, 1)
+        self.toolbar.insert(self.toolbutton_fitscreen, -1)
+        self.toolbutton_fitscreen.show()
+        self.toolbutton_fitwidth.connect_object("clicked", 
+            self.zoom_mode_switch_tool, 2)
+        self.toolbar.insert(self.toolbutton_fitwidth, -1)
+        self.toolbutton_fitwidth.show()
+        self.toolbutton_fitheight.connect_object("clicked", 
+            self.zoom_mode_switch_tool, 3)
+        self.toolbar.insert(self.toolbutton_fitheight, -1)
+        self.toolbutton_fitheight.show()
+        self.toolbutton_fitnone.connect_object("clicked", 
+            self.zoom_mode_switch_tool, 0)
+        self.toolbar.insert(self.toolbutton_fitnone, -1)
+        self.toolbutton_fitnone.show()
+
+        sep = gtk.SeparatorToolItem()
+        self.toolbar.insert(sep, -1)
+        sep.show()
+
+        self.toolbutton_double_page.connect_object("clicked", 
+            self.double_page_switch_tool, None)
+        self.toolbar.insert(self.toolbutton_double_page, -1)
+        self.toolbutton_double_page.show()
+        self.toolbutton_manga.connect_object("clicked", 
+            self.manga_mode_switch_tool, None)
+        self.toolbar.insert(self.toolbutton_manga, -1)
+        self.toolbutton_manga.show()
+
+        sep = gtk.SeparatorToolItem()
+        self.toolbar.insert(sep, -1)
+        sep.show()
+
+        self.toolbutton_lens.connect_object("clicked", 
+            self.lens_switch_tool, None)
+        self.toolbar.insert(self.toolbutton_lens, -1)
+        self.toolbutton_lens.show()
+                
+        # Needed unless space key should activate buttons
+        self.toolbar.set_focus_child(self.toolbutton_next)
+        
+        # =======================================================
+        # Attach widgets to the main table.
+        # =======================================================
+        self.table = gtk.Table(2, 2, False)
+        self.table.attach(self.thumb_layout, 0, 1, 2, 5, gtk.FILL,
+            gtk.FILL|gtk.EXPAND, 0, 0)
+        self.table.attach(self.thumb_vscroll, 1, 2, 2, 4, gtk.FILL|gtk.SHRINK,
+            gtk.FILL|gtk.SHRINK, 0, 0)
+        self.table.attach(self.layout, 2, 3, 2, 3, gtk.FILL|gtk.EXPAND,
+            gtk.FILL|gtk.EXPAND, 0, 0)
+        self.table.attach(self.vscroll, 3, 4, 2, 3, gtk.FILL|gtk.SHRINK,
+            gtk.FILL|gtk.SHRINK, 0, 0)
+        self.table.attach(self.hscroll, 2, 3, 4, 5, gtk.FILL|gtk.SHRINK,
+            gtk.FILL|gtk.SHRINK, 0, 0)
+        self.table.attach(self.toolbar, 0, 4, 1, 2, gtk.FILL|gtk.SHRINK,
+            gtk.FILL|gtk.SHRINK, 0, 0)
+        self.table.attach(self.statusbar, 0, 4, 5, 6, gtk.FILL|gtk.SHRINK,
+            gtk.FILL|gtk.SHRINK, 0, 0)
+        self.window.add(self.table)
+        self.table.show()
+        self.layout.show()
     
     def create_library_window(self):
         
@@ -719,164 +825,423 @@ class Comix:
     def create_preferences_dialog(self):
         
         ''' Creates the preferences dialog and all its widgets. '''
-        self.preferences_dialog = self.xml.get_widget("pref_dialogue")
-        self.preferences_dialog.connect("delete-event", 
-                                        self.preferences_dialog_close)
-
+        
         # =======================================================
         # Create all publically available widgets.
         # =======================================================
-        self.button_fullscreen = self.xml.get_widget("button_fullscreen")
-        self.button_page = self.xml.get_widget("button_page")
-        self.button_stretch = self.xml.get_widget("button_stretch")
-        self.button_smart_scale = self.xml.get_widget("button_smart_scale")
-        self.button_comment = self.xml.get_widget("button_comment")
-        self.button_hide_bars = self.xml.get_widget("button_hide_bars")
-        self.button_cache_next = self.xml.get_widget("button_cache_next")
-        self.button_scroll_horiz = self.xml.get_widget("button_scroll_horiz")
-        self.button_scroll_flips = self.xml.get_widget("button_scroll_flips")
-        self.button_thumb_scroll = self.xml.get_widget("button_thumb_scroll")
-        self.button_smart_space = self.xml.get_widget("button_smart_space")
-        self.button_save_size = self.xml.get_widget("button_save_size")
-        self.button_next_archive = self.xml.get_widget("button_next_archive")
-        self.button_hide_cursor = self.xml.get_widget("button_hide_cursor")
-        self.button_open_last = self.xml.get_widget("button_open_last")
-        self.button_show_pagenumber = self.xml.get_widget("button_show_pagenumber")
-        self.button_fake_double = self.xml.get_widget("button_fake_double")
-        self.button_cache_thumbs = self.xml.get_widget("button_cache_thumbs")
-        self.button_cache_arch_thumbs = self.xml.get_widget("button_cache_arch_thumbs")
-        self.button_two_page_scans = self.xml.get_widget("button_two_page_scans")
-        self.button_store_recent = self.xml.get_widget("button_store_recent")
-        self.button_default_path = self.xml.get_widget("button_default_path")
-        self.button_latest_path = self.xml.get_widget("button_latest_path")
-        self.button_tiles = self.xml.get_widget("button_tiles")
-        self.button_bilinear = self.xml.get_widget("button_bilinear")
-        self.button_nearest = self.xml.get_widget("button_nearest")
-        self.button_hyper = self.xml.get_widget("button_hyper")
-        self.button_fit_manual_default = self.xml.get_widget("button_fit_manual_default")
-        self.button_fit_screen_default = self.xml.get_widget("button_fit_screen_default")
-        self.button_fit_width_default = self.xml.get_widget("button_fit_width_default")
-        self.button_fit_height_default = self.xml.get_widget("button_fit_height_default")
-        self.notebook = self.xml.get_widget("notebook")
-        self.colorbutton = self.xml.get_widget("colorbutton")
-        self.button_lens_zoom = self.xml.get_widget("button_lens_zoom")
-        self.button_lens_size = self.xml.get_widget("button_lens_size")
-        self.button_lens_update = self.xml.get_widget("button_lens_update")
-        self.button_thumb_size = self.xml.get_widget("button_thumb_size")
-        self.button_lib_thumb_size = self.xml.get_widget("button_lib_thumb_size")
-        self.button_slideshow_delay = self.xml.get_widget("button_slideshow_delay")
-        self.spin_space_scroll = self.xml.get_widget("spin_space_scroll")
-        self.comment_extensions_entry = self.xml.get_widget("comment_extensions_entry")
-        self.button_apply = self.xml.get_widget("button_apply")
-        self.filechooser_button = self.xml.get_widget("filechooser_button")
-        self.combobox_tool = self.xml.get_widget("combobox_tool")
-        self.combo_space_scroll = self.xml.get_widget("combo_space_scroll")
+        self.preferences_dialog = \
+            gtk.Dialog(_("Preferences"), self.window, 0,())
+        self.preferences_dialog.set_has_separator(False)
+        self.preferences_dialog.set_resizable(False)
+        self.preferences_dialog.action_area.set_size_request(0, 0)
+        self.notebook = gtk.Notebook()
+        self.select_default_folder_dialog = \
+            gtk.FileChooserDialog(_("Select folder"), self.window,
+            gtk.FILE_CHOOSER_ACTION_SELECT_FOLDER, (gtk.STOCK_CANCEL,
+            gtk.RESPONSE_CANCEL, gtk.STOCK_OK, gtk.RESPONSE_OK))
+        self.button_fullscreen = gtk.CheckButton(_("Fullscreen as default"))
+        self.button_page = gtk.CheckButton(_("Double page mode as default"))
+        self.button_stretch = \
+            gtk.CheckButton(_("Stretch small images"))
+        self.button_smart_scale = \
+            gtk.CheckButton(_("Use smart scaling in double page mode"))
+        self.button_comment = \
+            gtk.CheckButton(_("Always view comments when opening a new file"))
+        self.button_hide_bars = \
+            gtk.CheckButton(
+            _("Hide menubar, scrollbars etc. in fullscreen mode"))
+        self.button_cache_next = \
+            gtk.CheckButton(_("Cache pages for faster forward flipping"))
+        self.button_scroll_horiz = \
+            gtk.CheckButton(
+            _("Scroll wheel scrolls horizontally at top and bottom of page"))
+        self.button_scroll_flips = \
+            gtk.CheckButton(
+            _("Flip page when scrolling off the top or bottom of page"))
+        self.button_thumb_scroll = \
+            gtk.CheckButton(_("Hide thumbnail scrollbar"))
+        self.button_smart_space = \
+            gtk.CheckButton(_("Space key uses smart scrolling"))
+        self.button_save_size = \
+            gtk.CheckButton(
+            _("Save window position and size for future sessions"))
+        self.button_next_archive = \
+            gtk.CheckButton(
+            _("Go to the next archive in directory after last page"))
+        self.button_hide_cursor = \
+            gtk.CheckButton(_("Hide cursor in fullscreen mode"))
+        self.button_open_last = \
+            gtk.CheckButton(_("Open last viewed file on start"))
+        self.button_show_pagenumber = \
+            gtk.CheckButton(_("Show page numbers on thumbnails"))
+        self.button_fake_double = \
+            gtk.CheckButton(
+            _("Always use smart scrolling as if in double page mode"))
+        self.button_cache_thumbs = \
+            gtk.CheckButton(
+            _("Use stored thumbnails for images in directories"))
+        self.button_cache_arch_thumbs = \
+            gtk.CheckButton(_("Use stored thumbnails for images in archives"))
+        self.button_two_page_scans = \
+            gtk.CheckButton(
+            _("Display only one page in double page mode if the image is wide"))
+        self.button_store_recent = \
+            gtk.CheckButton(
+            _("Store recently opened files"))
+        self.button_default_path = \
+            gtk.RadioButton(None,
+            _('Always go to this directory in the "Open" dialog:'))
+        self.button_latest_path = \
+            gtk.RadioButton(self.button_default_path,
+            _('Always go to the latest directory in the "Open" dialog'))
+        self.colorbutton = gtk.ColorButton(color=gtk.gdk.Color(0,0,0))
+        self.button_lens_zoom = \
+            gtk.SpinButton(gtk.Adjustment(2.0, 1.01, 5, 0.01, 0.01,
+            page_size=0), climb_rate=0.0, digits=2)
+        self.button_lens_size = \
+            gtk.SpinButton(gtk.Adjustment(150, 20, 300, 1, 1, page_size=0),
+            climb_rate=0.0, digits=0)
+        self.button_lens_update = \
+            gtk.SpinButton(gtk.Adjustment(30, 0, 150, 1, 1, page_size=0),
+            climb_rate=0.0, digits=0)
+        self.button_thumb_size = \
+            gtk.SpinButton(gtk.Adjustment(1, 20, 128, 1, 1, page_size=0),
+            climb_rate=0.0, digits=0)
+        self.button_lib_thumb_size = \
+            gtk.SpinButton(gtk.Adjustment(1, 20, 128, 1, 1, page_size=0),
+            climb_rate=0.0, digits=0)
+        self.button_slideshow_delay = \
+            gtk.SpinButton(gtk.Adjustment(6.0, 1.0, 300.0, 0.1, 0.1,
+            page_size=0), climb_rate=0.0, digits=1)
+        self.spin_space_scroll = \
+            gtk.SpinButton(gtk.Adjustment(100, 1, 100, 1, 1,
+            page_size=0), climb_rate=1, digits=0)
+        self.button_1 = \
+            gtk.RadioButton(None, _('Nearest (quickest, worst quality)'))
+        self.button_2 = gtk.RadioButton(self.button_1, _("Tiles"))
+        self.button_3 = gtk.RadioButton(self.button_2, _("Bilinear"))
+        self.button_4 = \
+            gtk.RadioButton(self.button_3, _('Hyper (slowest, best quality)'))
+        self.button_fit_manual_default = \
+            gtk.RadioButton(None, _('Manual zoom mode as default'))
+        self.button_fit_screen_default = \
+            gtk.RadioButton(self.button_fit_manual_default,
+            _('Fit-to-screen mode as default'))
+        self.button_fit_width_default = \
+            gtk.RadioButton(self.button_fit_screen_default,
+            _('Fit width mode as default'))
+        self.button_fit_height_default = \
+            gtk.RadioButton(self.button_fit_width_default,
+            _('Fit height mode as default'))
+        self.comment_extensions_entry = gtk.Entry(max=100)
+        self.button_apply = gtk.Button(stock=gtk.STOCK_APPLY)
+        self.filechooser_button = gtk.Button()
+        self.combobox_tool = gtk.combo_box_new_text()
+        self.combo_space_scroll = gtk.combo_box_new_text()
+        box = gtk.VBox(False, 0)
+        box.set_border_width(1)
+        self.preferences_dialog.vbox.pack_start(box, False, False, 2)
+        box.pack_start(self.notebook, False, False, 2)
         
         # =======================================================
         # Put the display tab together.
         # =======================================================
+        vbox_display = gtk.VBox(False, 5)
+        vbox_display.set_border_width(12)
+        hbox = gtk.HBox(False, 0)
+        vbox_display.pack_start(hbox, False, False, 0)
+        label_box = gtk.VBox(False, 0)
+        entry_box = gtk.VBox(False, 0)
+        hbox.pack_start(label_box, True, True, 0)
+        hbox.pack_start(entry_box, True, True, 0)
+        
+        label = gtk.Label(_("Background colour:"))
+        label.set_alignment(0, 0.5)
+        label_box.pack_start(label, True, False, 0)
+        self.colorbutton.set_title(_("Background colour"))
+        entry_box.pack_start(self.colorbutton, True, True, 2)
+        label = gtk.Label(_("Toolbar button labels:"))
+        label.set_alignment(0, 0.5)
+        label_box.pack_start(label, True, True, 0)
+        entry_box.pack_start(self.combobox_tool, True, True, 2)
+        self.combobox_tool.append_text(_('Icons only'))
+        self.combobox_tool.append_text(_('Text only'))
+        self.combobox_tool.append_text(_('Icons and text'))
+        label = gtk.Label(_('Slideshow delay:'))
+        label.set_alignment(0, 0.5)
+        label_box.pack_start(label, True, True, 0)
+        entry_box.pack_start(self.button_slideshow_delay, True, True, 2)
+        
+        label = gtk.Label("")
+        label.set_alignment(0, 0)
+        vbox_display.pack_start(label, False, False, 0)
         
         self.button_hide_cursor.connect("toggled",
             self.preferences_dialog_change_settings, 15)
+        vbox_display.pack_start(self.button_hide_cursor, False, False, 2)
         self.button_hide_bars.connect("toggled",
             self.preferences_dialog_change_settings, 12)
+        vbox_display.pack_start(self.button_hide_bars, False, False, 2)
+        
+        self.notebook.insert_page(vbox_display, gtk.Label(_("Display")))
         
         # =======================================================
         # Put the behaviour tab together.
         # =======================================================
+        vbox = gtk.VBox(False, 5)
+        vbox.set_border_width(12)
         
         self.button_fullscreen.connect("toggled",
             self.preferences_dialog_change_settings, 0)
+        vbox.pack_start(self.button_fullscreen, False, False, 2)
         self.button_page.connect("toggled",
             self.preferences_dialog_change_settings, 1)
+        vbox.pack_start(self.button_page, False, False, 2)
         self.button_save_size.connect("toggled",
             self.preferences_dialog_change_settings, 10)
+        vbox.pack_start(self.button_save_size, False, False, 2)
         self.button_open_last.connect("toggled",
             self.preferences_dialog_change_settings, 21)
+        vbox.pack_start(self.button_open_last, False, False, 2)
         self.button_cache_next.connect("toggled",
             self.preferences_dialog_change_settings, 7)
+        vbox.pack_start(self.button_cache_next, False, False, 2)
         self.button_two_page_scans.connect("toggled",
             self.preferences_dialog_change_settings, 30)
+        vbox.pack_start(self.button_two_page_scans, False, False, 2)
         self.button_store_recent.connect("toggled",
             self.preferences_dialog_change_settings, 31)
-
+        vbox.pack_start(self.button_store_recent, False, False, 2)
+        
+        label = gtk.Label('')
+        label.set_alignment(0, 0)
+        vbox.pack_start(label, False, False, 0)
+        
         self.button_default_path.connect("toggled",
             self.preferences_dialog_change_settings, 22)
+        vbox.pack_start(self.button_default_path, False, False, 2)
         
+        hbox = gtk.HBox(False, 2)
+        vbox.pack_start(hbox, False, False, 0)
+        padding_box = gtk.VBox(False, 0)
+        padding_box.set_border_width(10)
+        hbox.pack_start(padding_box, False, False, 0)
+        filechooser_box = gtk.VBox(False, 0)
+        hbox.pack_start(filechooser_box, True, True, 0)
+        
+        self.filechooser_button.connect_object("clicked",
+            self.default_folder_chooser_dialog_open, None)
+        self.filechooser_button.set_use_underline(False)
+        filechooser_box.pack_start(self.filechooser_button, False, True, 0)
         self.button_latest_path.connect("toggled",
             self.preferences_dialog_change_settings, 23)
+        vbox.pack_start(self.button_latest_path, False, False, 2)
+        
+        self.notebook.insert_page(vbox, gtk.Label(_("Behaviour")))
         
         # =======================================================
         # Put the scaling tab together.
         # =======================================================
+        vbox_scaling = gtk.VBox(False, 5)
+        vbox_scaling.set_border_width(12)
+        
         self.button_fit_manual_default.connect('toggled',
             self.preferences_dialog_change_settings, 32)
+        vbox_scaling.pack_start(self.button_fit_manual_default, False,
+            False, 2)
         self.button_fit_screen_default.connect('toggled',
             self.preferences_dialog_change_settings, 33)
+        vbox_scaling.pack_start(self.button_fit_screen_default, False,
+            False, 2)
         self.button_fit_width_default.connect('toggled',
             self.preferences_dialog_change_settings, 34)
+        vbox_scaling.pack_start(self.button_fit_width_default, False,
+            False, 2)
         self.button_fit_height_default.connect('toggled',
             self.preferences_dialog_change_settings, 35)
+        vbox_scaling.pack_start(self.button_fit_height_default, False,
+            False, 2)
             
+        label = gtk.Label('')
+        label.set_alignment(0, 0)
+        vbox_scaling.pack_start(label, False, False, 0)
+        
         self.button_stretch.connect("toggled",
             self.preferences_dialog_change_settings, 9)
+        vbox_scaling.pack_start(self.button_stretch, False, False, 2)
         self.button_smart_scale.connect("toggled",
             self.preferences_dialog_change_settings, 19)
+        vbox_scaling.pack_start(self.button_smart_scale, False, False, 2)
         
-        self.button_tiles.connect("toggled",
+        label = gtk.Label()
+        label.set_markup('\n<b>' + _('Scaling quality') + '</b>\n')
+        label.set_alignment(0, 0)
+        vbox_scaling.pack_start(label, False, False, 0)
+        
+        hbox = gtk.HBox(False, 2)
+        vbox_scaling.pack_start(hbox, False, False, 0)
+        padding_box = gtk.VBox(False, 0)
+        padding_box.set_border_width(10)
+        hbox.pack_start(padding_box, False, False, 0)
+        button_box = gtk.VBox(True, 5)
+        hbox.pack_start(button_box, True, True, 0)
+        
+        self.button_1.connect("toggled",
             self.preferences_dialog_change_settings, 2)
-        self.button_bilinear.connect("toggled",
+        button_box.pack_start(self.button_1, False, False, 2)
+        self.button_2.connect("toggled",
             self.preferences_dialog_change_settings, 3)
-        self.button_nearest.connect("toggled",
+        button_box.pack_start(self.button_2, False, False, 2)
+        self.button_3.connect("toggled",
             self.preferences_dialog_change_settings, 4)
-        self.button_hyper.connect("toggled",
+        button_box.pack_start(self.button_3, False, False, 2)
+        self.button_4.connect("toggled",
             self.preferences_dialog_change_settings, 5)
+        button_box.pack_start(self.button_4, False, False, 2)
+        
+        self.notebook.insert_page(vbox_scaling, gtk.Label(_("Scaling")))
         
         # =======================================================
         # Put the comments tab together.
         # =======================================================
+        vbox_comments = gtk.VBox(False, 5)
+        vbox_comments.set_border_width(12)
         
         self.button_comment.connect("toggled",
             self.preferences_dialog_change_settings, 16)
+        vbox_comments.pack_start(self.button_comment, False, False, 2)
+        
+        label = \
+            gtk.Label('\n' +
+            _('Treat files with the following extensions as comments:'))
+        label.set_alignment(0, 0)
+        vbox_comments.pack_start(label, False, False, 0)
+        vbox_comments.pack_start(self.comment_extensions_entry, False, False,
+            0)
+        
+        self.notebook.insert_page(vbox_comments, gtk.Label(_("Comments")))
         
         # =======================================================
         # Put the scroll tab together.
         # =======================================================
+        vbox_scroll = gtk.VBox(False, 5)
+        vbox_scroll.set_border_width(12)
         
         self.button_next_archive.connect("toggled",
             self.preferences_dialog_change_settings, 14)
+        vbox_scroll.pack_start(self.button_next_archive, False, False, 2)
         self.button_scroll_horiz.connect("toggled",
             self.preferences_dialog_change_settings, 17)
+        vbox_scroll.pack_start(self.button_scroll_horiz, False, False, 2)
         self.button_scroll_flips.connect("toggled",
             self.preferences_dialog_change_settings, 18)
+        vbox_scroll.pack_start(self.button_scroll_flips, False, False, 2)
         self.button_smart_space.connect("toggled",
             self.preferences_dialog_change_settings, 13)
+        vbox_scroll.pack_start(self.button_smart_space, False, False, 2)
         self.button_fake_double.connect("toggled",
             self.preferences_dialog_change_settings, 27)
+        vbox_scroll.pack_start(self.button_fake_double, False, False, 2)
+        hbox = gtk.HBox(False, 2)
+        vbox_scroll.pack_start(hbox, False, False, 2)
+        label = gtk.Label(_('Space key scrolls'))
+        label.set_alignment(0, 0.5)
+        hbox.pack_start(label, False, False, 2)
+        hbox.pack_start(self.spin_space_scroll, False, False, 2)
+        label = gtk.Label('% ' + _('of'))
+        label.set_alignment(0, 0.5)
+        hbox.pack_start(label, False, False, 2)
+        hbox.pack_start(self.combo_space_scroll, False, False, 2)
+        self.combo_space_scroll.append_text(_('Window size'))
+        self.combo_space_scroll.append_text(_('Page size'))
+
+        self.notebook.insert_page(vbox_scroll, gtk.Label(_("Scroll")))
+        
+        # =======================================================
+        # Put the lens tab together.
+        # =======================================================
+        vbox_lens = gtk.VBox(False, 5)
+        vbox_lens.set_border_width(12)
+        hbox = gtk.HBox(False, 0)
+        vbox_lens.pack_start(hbox, False, False, 0)
+        label_box = gtk.VBox(False, 0)
+        entry_box = gtk.VBox(False, 0)
+        hbox.pack_start(label_box, True, True, 0)
+        hbox.pack_start(entry_box, True, True, 0)
+        
+        label = gtk.Label(_("Magnification factor:"))
+        label.set_alignment(0, 0.5)
+        label_box.pack_start(label, True, True, 0)
+        entry_box.pack_start(self.button_lens_zoom, True, True, 2)
+        label = gtk.Label(_("Lens size (px):"))
+        label.set_alignment(0, 0.5)
+        label_box.pack_start(label, True, True, 0)
+        entry_box.pack_start(self.button_lens_size, True, True, 2)
+        label = gtk.Label(_("Update interval (milliseconds):"))
+        label.set_alignment(0, 0.5)
+        label_box.pack_start(label, True, True, 0)
+        entry_box.pack_start(self.button_lens_update, True, True, 2)
+        
+        self.notebook.insert_page(vbox_lens, gtk.Label(_("Lens")))
         
         # =======================================================
         # Put the thumbnails tab together.
         # =======================================================
+        vbox_thumbs = gtk.VBox(False, 5)
+        vbox_thumbs.set_border_width(12)
+        hbox = gtk.HBox(False, 0)
+        vbox_thumbs.pack_start(hbox, False, False, 0)
+        label_box = gtk.VBox(False, 0)
+        entry_box = gtk.VBox(False, 0)
+        hbox.pack_start(label_box, True, True, 0)
+        hbox.pack_start(entry_box, True, True, 0)
+        
+        label = gtk.Label(_("Thumbnail sizes (px):"))
+        label.set_alignment(0, 0.5)
+        label_box.pack_start(label, True, True, 0)
+        entry_box.pack_start(self.button_thumb_size, True, True, 2)
+        
+        label = gtk.Label(_("Library thumbnail sizes (px):"))
+        label.set_alignment(0, 0.5)
+        label_box.pack_start(label, True, True, 0)
+        entry_box.pack_start(self.button_lib_thumb_size, True, True, 2)
         
         self.button_thumb_scroll.connect("toggled",
             self.preferences_dialog_change_settings, 20)
+        vbox_thumbs.pack_start(self.button_thumb_scroll, False, False, 2)
         self.button_show_pagenumber.connect("toggled",
             self.preferences_dialog_change_settings, 25)
+        vbox_thumbs.pack_start(self.button_show_pagenumber, False, False, 2)
         self.button_cache_thumbs.connect("toggled",
             self.preferences_dialog_change_settings, 28)
+        vbox_thumbs.pack_start(self.button_cache_thumbs, False, False, 2)
         self.button_cache_arch_thumbs.connect("toggled",
             self.preferences_dialog_change_settings, 29)
+        vbox_thumbs.pack_start(self.button_cache_arch_thumbs, False, False, 2)
+        
+        self.notebook.insert_page(vbox_thumbs, gtk.Label(_("Thumbnails")))
         
         # =======================================================
         # Add dialog buttons.
         # =======================================================
+        hbox = gtk.HBox(True, 0)
+        self.preferences_dialog.vbox.pack_start(hbox, False, False, 0)
         
-        button = self.xml.get_widget("button_cancel")
+        self.button_apply.connect_object("clicked",
+            self.preferences_dialog_save_and_close, None)
+        hbox.pack_start(self.button_apply, False, True, 0)
+        alignment = gtk.Alignment(0.0, 0.0, 1.0, 0.0)
+        hbox.pack_start(alignment, True, True, 0)
+        button = gtk.Button(stock=gtk.STOCK_CANCEL)
         button.connect_object("clicked", self.preferences_dialog_close,
             None, None)
-        button = self.xml.get_widget("button_ok")
+        hbox.pack_start(button, False, True, 0)
+        button = gtk.Button(stock=gtk.STOCK_OK)
         button.connect_object("clicked",
             self.preferences_dialog_save_and_close, 'close')
+        hbox.pack_start(button, False, True, 0)
+        
+        self.preferences_dialog.vbox.show_all()
     
     def create_colour_adjust_dialog(self):
         
@@ -971,24 +1336,6 @@ class Comix:
             self.colour_adjust_change_value, 'save')     
 
         self.colour_adjust_dialog.vbox.show_all()
-
-    def create_properties_dialog(self):
-        
-        ''' Creates the properties dialog and all its widgets. '''
-        
-        self.properties_dialog = \
-            (gtk.Dialog(_("Properties"), self.window, 0, (gtk.STOCK_CLOSE,
-            gtk.RESPONSE_CLOSE)))
-        self.properties_dialog.set_resizable(False)
-        self.properties_label = gtk.Label()
-        self.properties_label2 = gtk.Label()
-        self.properties_notebook = gtk.Notebook()
-        self.properties_dialog.vbox.pack_start(
-            self.properties_notebook, False, False, 0)
-        
-        self.properties_dialog.set_has_separator(False)
-        self.properties_label.set_justify(gtk.JUSTIFY_RIGHT)
-        self.properties_dialog.vbox.show_all()
     
     def create_go_to_page_dialog(self):
         
@@ -1050,102 +1397,6 @@ class Comix:
         self.bookmark_column2.set_attributes(self.cell2, text=1)
         self.bookmark_column.set_attributes(self.cellpb, pixbuf=2)
         self.bookmark_dialog.vbox.show_all()
-    
-    def create_about_dialog(self):
-        
-        ''' Creates the about dialog and all its widgets. '''
-        
-        # =======================================================
-        # About tab.
-        # =======================================================
-        self.about_dialog = \
-            gtk.Dialog(_("About"), self.window, 0, (gtk.STOCK_CLOSE,
-            gtk.RESPONSE_CLOSE))
-        self.about_dialog.set_has_separator(False)
-        self.about_dialog.set_resizable(False)
-        box = gtk.VBox(False, 0)
-        box.set_border_width(5)
-        notebook = gtk.Notebook()
-        self.about_dialog.vbox.pack_start(notebook, False, False, 0)
-        
-        if os.path.isfile(os.path.join(os.path.dirname(sys.argv[0]),
-            'images/logo/comix.svg')):
-            icon_path = \
-                os.path.join(os.path.dirname(sys.argv[0]),
-                'images/logo/comix.svg')
-        else:
-            for prefix in [os.path.dirname(os.path.dirname(sys.argv[0])),
-                '/usr', '/usr/local', '/usr/X11R6']:
-                icon_path = \
-                    os.path.join(prefix,
-                    'share/icons/hicolor/scalable/apps/comix.svg')
-                if os.path.isfile(icon_path):
-                    break
-        try:
-            icon_pixbuf = \
-                gtk.gdk.pixbuf_new_from_file_at_size(icon_path, 150, 150)
-            icon_image = gtk.Image()
-            icon_image.set_from_pixbuf(icon_pixbuf)
-            box.pack_start(icon_image, False, False, 10)
-        except:
-            pass
-        
-        label = gtk.Label()
-        label.set_markup(
-        '<big><big><big><big><b><span foreground="#333333">Com</span>' +
-        '<span foreground="#79941b">ix</span> <span foreground="#333333">' +
-        self.version +
-        '</span></b></big></big></big></big>\n' +
-        "\n" +
-        _("Comix is an image viewer specifically designed to handle comic books.") +
-        "\n" +
-        _("It reads ZIP, RAR and tar archives (also gzip or bzip2 compressed)") +
-        "\n" +
-        _("as well as plain image files.") + "\n" +
-        "\n" +
-        _("Comix is licensed under the GNU General Public License.") + "\n" +
-        "\n" +
-        "<small>Copyright © 2005-2007 Pontus Ekberg\n\n" +
-        "herrekberg@users.sourceforge.net</small>\n" +
-        "<small>http://comix.sourceforge.net</small>\n")
-        box.pack_start(label, True, True, 0)
-        label.set_justify(gtk.JUSTIFY_CENTER)
-        label.set_selectable(True)
-        
-        notebook.insert_page(box, gtk.Label(_("About")))
-        
-        # =======================================================
-        # Credits tab.
-        # =======================================================
-        box = gtk.VBox(False, 5)
-        box.set_border_width(5)
-
-        for nice_person in (
-            ('Pontus Ekberg', _('Developer and Swedish translation')),
-            ('Emfox Zhou &amp; Xie Yanbo',
-            _('Simplified Chinese translation')),
-            ('Manuel Quiñones', _('Spanish translation')),
-            ('Marcelo Góes', _('Brazilian Portuguese translation')),
-            ('Christoph Wolk',
-            _('German translation and Nautilus thumbnailer')),
-            ('Raimondo Giammanco &amp; GhePeU', _('Italian translation')),
-            ('Arthur Nieuwland', _('Dutch translation')),
-            ('Achraf Cherti', _('French translation')),
-            ('Kamil Leduchowski', _('Polish translation')),
-            ('Paul Chatzidimitriou', _('Greek translation')),
-            ('Carles Escrig', _('Catalan translation')),
-            ('Hsin-Lin Cheng', _('Traditional Chinese translation')),
-            ('Mamoru Tasaka', _('Japanese Translation'))
-            ):
-            label = gtk.Label()
-            label.set_markup('<b>' + nice_person[0] + ':</b>   ' +
-                nice_person[1])
-            box.pack_start(label, False, False, 0)
-            label.set_alignment(0, 0)
-            label.set_selectable(True)
-
-        notebook.insert_page(box, gtk.Label(_("Credits")))
-        self.about_dialog.vbox.show_all()
     
     def create_thumbnail_dialog(self):
         
@@ -1484,7 +1735,6 @@ class Comix:
             'GDK_CONTROL_MASK' in event.state.value_names):
             self.zoom_original(None)
         
-                
         # =======================================================
         # Arrow keys scroll the image, except in
         # fit-to-screen mode where they flip pages.
@@ -1494,11 +1744,11 @@ class Comix:
             if not self.prefs['zoom mode'] == 1 or self.show_comments:
                 height = self.layout.get_size()[1]
                 if (self.vadjust.get_value() >= height - self.main_layout_y_size):
-                    if self.prefs['flip with wheel']:
-                        self.scroll_events_down += 1
-                        if self.scroll_events_down > 2:
-                            self.next_page(None)
-                            self.scroll_events_down = 0
+                     if self.prefs['flip with wheel']:
+                         self.scroll_events_down += 1
+                         if self.scroll_events_down > 2:
+                             self.next_page(None)
+                             self.scroll_events_down = 0
                 elif (self.vadjust.get_value() + 20 > height -
                     self.main_layout_y_size):
                     self.vadjust.set_value(height - self.main_layout_y_size)
@@ -1928,6 +2178,29 @@ class Comix:
             else:
                 self.lib_vadjust.set_value(self.lib_vadjust.get_value() + 60)
     
+    def thumb_scroll_wheel_event(self, view, event, data=None):
+        
+        ''' Handles scroll wheel events in the thumbnail sidebar. '''
+        
+        if self.exit:
+            return False
+        
+        if event.direction == gtk.gdk.SCROLL_UP:
+            if self.thumb_vadjust.get_value() > 0:
+                if self.thumb_vadjust.get_value() - 60 < 0:
+                    self.thumb_vadjust.set_value(0)
+                else:
+                    self.thumb_vadjust.set_value(
+                        self.thumb_vadjust.get_value() - 60)
+        elif event.direction == gtk.gdk.SCROLL_DOWN:
+            if self.thumb_vadjust.get_value() < self.thumb_vadjust_upper:
+                if (self.thumb_vadjust.get_value() + 60 >
+                    self.thumb_vadjust_upper):
+                    self.thumb_vadjust.set_value(self.thumb_vadjust_upper)
+                else:
+                    self.thumb_vadjust.set_value(
+                        self.thumb_vadjust.get_value() + 60)
+    
     def thumb_selection_event(self, data):
         
         ''' Handles selections of thumbnails in the thumbnail
@@ -2089,10 +2362,23 @@ class Comix:
                 self.statusbar.size_request()[1]
             if self.prefs['show thumbnails']:
                 self.thumb_size = \
-                    (self.thumb_scroll.get_size_request()[0]) * \
+                    (self.prefs['thumbnail size'] + 7) * \
+                    (1 - self.prefs['hide in fullscreen'])
+                self.thumb_vscroll_size = \
+                    self.thumb_vscroll.size_request()[0] * \
+                    (1 - self.prefs['hide thumbnail scrollbar']) * \
                     (1 - self.prefs['hide in fullscreen'])
             else:
                 self.thumb_size = 0
+                self.thumb_vscroll_size = 0
+            if (self.prefs['hide in fullscreen'] or 
+                self.prefs['hide scrollbar'] or 
+                self.prefs['zoom mode'] == 1):
+                self.vscroll_size = 0
+                self.hscroll_size = 0
+            else:
+                self.vscroll_size = self.vscroll.size_request()[0]
+                self.hscroll_size = self.hscroll.size_request()[1]
         else:
             self.menu_size = \
                 self.prefs['show menubar'] * \
@@ -2103,13 +2389,48 @@ class Comix:
                 self.prefs['show statusbar'] * \
                 self.statusbar.size_request()[1]
             if self.prefs['show thumbnails']:
-                self.thumb_size = self.thumb_scroll.get_size_request()[0]
+                self.thumb_size = (self.prefs['thumbnail size'] + 7)
+                self.thumb_vscroll_size = \
+                    self.thumb_vscroll.size_request()[0] * \
+                    (1 - self.prefs['hide thumbnail scrollbar'])
             else:
                 self.thumb_size = 0
+                self.thumb_vscroll_size = 0
+            if self.prefs['hide scrollbar'] or self.prefs['zoom mode'] == 1:
+                self.vscroll_size = 0
+                self.hscroll_size = 0
+            elif self.prefs['zoom mode'] == 2:
+                self.vscroll_size = self.vscroll.size_request()[0]
+                self.hscroll_size = 0
+            elif self.prefs['zoom mode'] == 3:
+                self.vscroll_size = 0
+                self.hscroll_size = self.hscroll.size_request()[1]
+            else:
+                self.vscroll_size = self.vscroll.size_request()[0]
+                self.hscroll_size = self.hscroll.size_request()[1]
+        if self.show_comments:
+            self.hscroll_size = self.hscroll.size_request()[1]
+            self.vscroll_size = self.vscroll.size_request()[0]
         
-            self.main_layout_x_size = self.layout_scroll.allocation.width
-        self.main_layout_y_size = self.layout_scroll.allocation.height
-
+        if self.prefs['fullscreen']:
+            screen = self.window.get_screen()
+            monitor = \
+                screen.get_monitor_geometry(screen.get_monitor_at_point(
+                *self.window.get_position()))
+            self.main_layout_x_size = \
+                monitor.width - \
+                self.vscroll_size - self.thumb_vscroll_size - self.thumb_size
+            self.main_layout_y_size = \
+                monitor.height - \
+                self.hscroll_size - self.menu_size - self.tool_size - \
+                self.status_size
+        else:
+            self.main_layout_x_size = \
+                self.window.get_size()[0] - self.vscroll_size - \
+                self.thumb_vscroll_size - self.thumb_size
+            self.main_layout_y_size = \
+                self.window.get_size()[1] - self.hscroll_size - \
+                self.menu_size - self.tool_size - self.status_size
     
     def zooming_lens(self, event_x, event_y, millisecs):
         
@@ -2818,9 +3139,24 @@ class Comix:
         self.set_cursor_type('normal')
         if not self.z_pressed:
             self.z_pressed = 1
-            self.actiongroup.get_action('Lens').set_active(True)
+            self.toolbutton_lens.set_active(True)
         else:
             self.z_pressed = 0
+            self.toolbutton_lens.set_active(False)
+
+    def lens_switch_tool(self, *args):
+        
+        if self.exit:
+            return False
+
+        if (self.z_pressed and self.toolbutton_lens.get_active() or
+            not self.z_pressed and 
+            not self.toolbutton_lens.get_active()):
+            return
+
+        if self.toolbutton_lens.get_active():
+            self.actiongroup.get_action('Lens').set_active(True)
+        else:
             self.actiongroup.get_action('Lens').set_active(False)
     
     def fullscreen_switch(self, event):
@@ -2867,11 +3203,32 @@ class Comix:
             self.actiongroup.get_action('Delete').set_sensitive(True)
             self.jpegtran_activate(bool(self.jpegtran))
 
+        if self.prefs['double page']:
+            self.toolbutton_double_page.set_active(True)
+        else:
+            self.toolbutton_double_page.set_active(False)
+
         self.change_thumb_selection = 2
         self.refresh_image()
 
-    def zoom_mode_switch(self, event, data):
+    def double_page_switch_tool(self, *args):
+        
+        if self.exit:
+            return False
 
+        if (self.prefs['double page'] and
+            self.toolbutton_double_page.get_active() or
+            not self.prefs['double page'] and 
+            not self.toolbutton_double_page.get_active()):
+            return
+
+        if self.toolbutton_double_page.get_active():
+            self.actiongroup.get_action('Double').set_active(True)
+        else:
+            self.actiongroup.get_action('Double').set_active(False)
+
+    def zoom_mode_switch(self, event, data):
+        
         self.prefs['zoom mode'] = data.get_current_value()
 
         if self.prefs['zoom mode'] == 0:
@@ -2885,12 +3242,15 @@ class Comix:
         self.actiongroup.get_action('Zwidth').set_sensitive(toggle)
         self.actiongroup.get_action('Zheight').set_sensitive(toggle)
         self.actiongroup.get_action('Zfit').set_sensitive(toggle)
-            
-        if self.prefs['zoom mode'] == 0:
-            self.actiongroup.get_action('Scrollbars').set_sensitive(True)
-        elif self.prefs['zoom mode'] == 1:
-            self.actiongroup.get_action('Scrollbars').set_sensitive(False)
 
+        if self.prefs['zoom mode'] == 0:
+            self.toolbutton_fitnone.set_active(True)
+        elif self.prefs['zoom mode'] == 1:
+            self.toolbutton_fitscreen.set_active(True)
+        elif self.prefs['zoom mode'] == 2:
+            self.toolbutton_fitwidth.set_active(True)
+        else:
+            self.toolbutton_fitheight.set_active(True)
         self.vadjust.set_value(0)
         if self.prefs['manga'] and not self.show_comments:
             self.hadjust.set_value(self.hadjust_upper)
@@ -2898,6 +3258,27 @@ class Comix:
             self.hadjust.set_value(0)
         self.refresh_image()
 
+    def zoom_mode_switch_tool(self, type):
+        
+        if self.exit:
+            return False
+        
+        if (self.prefs['zoom mode'] == type or not True in 
+            [self.toolbutton_fitnone.get_active(),
+             self.toolbutton_fitscreen.get_active(),
+             self.toolbutton_fitwidth.get_active(),
+             self.toolbutton_fitheight.get_active()]):
+            return
+
+        if type == 0:
+            self.actiongroup.get_action('fit_manual_mode').set_active(True)
+        elif type == 1:
+            self.actiongroup.get_action('fit_screen_mode').set_active(True)
+        elif type == 2:
+            self.actiongroup.get_action('fit_width_mode').set_active(True)
+        else:
+            self.actiongroup.get_action('fit_height_mode').set_active(True)   
+    
     def menubar_switch(self, event):
         
         ''' Switch menubar visibility on/off. '''
@@ -2987,24 +3368,6 @@ class Comix:
         self.load_thumbnails()
         self.refresh_image()
     
-    def toggle_scrollbars(self, visible):
-
-        ''' Switch scrollbars visibility on/off. '''
-        if visible:
-            self.prefs['hide scrollbars'] = 0
-        else:
-            self.prefs['hide scrollbars'] = 1
-
-    def toggle_thumb_scrollbars(self, visible):
-
-        ''' Switch scrollbars visibility on/off. '''
-        if visible:
-            self.thumb_scroll.set_policy(gtk.POLICY_NEVER,
-                gtk.POLICY_NEVER)
-        else:
-            self.thumb_scroll.set_policy(gtk.POLICY_NEVER,
-                gtk.POLICY_AUTOMATIC)
-
     def hide_all_switch(self, event):
         
         ''' Switch visibility of all on/off. '''
@@ -3039,10 +3402,27 @@ class Comix:
             
         if self.prefs['manga']:
             self.prefs['manga'] = 0
+            self.toolbutton_manga.set_active(False)
         else:
             self.prefs['manga'] = 1
+            self.toolbutton_manga.set_active(True)
         if self.prefs['double page']:
             self.refresh_image()
+
+    def manga_mode_switch_tool(self, *args):
+        
+        if self.exit:
+            return False
+
+        if (self.prefs['manga'] and self.toolbutton_manga.get_active() or
+            not self.prefs['manga'] and not
+            self.toolbutton_manga.get_active()):
+            return
+
+        if self.toolbutton_manga.get_active():
+            self.actiongroup.get_action('manga_mode').set_active(True)
+        else:
+            self.actiongroup.get_action('manga_mode').set_active(False)
     
     def keep_transformation_switch(self, event):
         
@@ -3330,6 +3710,8 @@ class Comix:
                     self.prefs['flip horiz'] = 0
                     self.prefs['flip vert'] = 0
                 self.refresh_image()
+                self.vadjust.set_value(self.layout.get_size()[1] -
+                    self.main_layout_y_size)
             
             # =======================================================
             # Go to previous archive.
@@ -3347,6 +3729,8 @@ class Comix:
                             file, -1)
                         if self.file_exists:
                             self.refresh_image()
+                            self.vadjust.set_value(self.layout.get_size()[1] -
+                                self.main_layout_y_size)
                         else:
                             self.close_file()
                         break
@@ -3537,6 +3921,43 @@ class Comix:
         del pixbuf_file
         gc.collect()
         
+    def default_folder_chooser_dialog_open(self, data):
+        
+        ''' Opens the default folder chooser dialog. '''
+        
+        if self.exit:
+            return False
+        
+        if os.path.isdir(self.temp_prefs['default open path']):
+            self.select_default_folder_dialog.set_current_folder(
+                self.temp_prefs['default open path'])
+        else:
+            self.select_default_folder_dialog.set_current_folder(
+                os.getenv('HOME'))
+        response = self.select_default_folder_dialog.run()
+        # For some reason we need int()
+        if int(response) == int(gtk.RESPONSE_OK):
+            if (len(self.to_unicode(
+                self.select_default_folder_dialog.get_filename())) > 50):
+                self.filechooser_button.set_label('... ' + self.to_unicode(
+                    self.select_default_folder_dialog.get_filename())[-47:])
+            else:
+                self.filechooser_button.set_label(self.to_unicode(
+                    self.select_default_folder_dialog.get_filename()))
+            self.temp_prefs['default open path'] = \
+                self.select_default_folder_dialog.get_filename()
+        self.select_default_folder_dialog.hide()
+    
+    def default_folder_chooser_dialog_close(self, event, data=None):
+        
+        ''' Hides the default folder chooser dialog. '''
+        
+        if self.exit:
+            return False
+        
+        self.select_default_folder_dialog.hide()
+        return True
+    
     def convert_dialog_open(self, event):
         
         ''' Opens the convert archive dialog. '''
@@ -3876,13 +4297,13 @@ class Comix:
         else:
             self.button_default_path.set_active(True)
         if self.prefs['interp type'] == gtk.gdk.INTERP_NEAREST:
-            self.button_nearest.set_active(True)
+            self.button_1.set_active(True)
         elif self.prefs['interp type'] == gtk.gdk.INTERP_HYPER:
-            self.button_hyper.set_active(True)
+            self.button_4.set_active(True)
         elif self.prefs['interp type'] == gtk.gdk.INTERP_BILINEAR:
-            self.button_bilinear.set_active(True)
+            self.button_3.set_active(True)
         else:
-            self.button_tiles.set_active(True)
+            self.button_2.set_active(True)
         if self.prefs['default zoom mode'] == 0:
             self.button_fit_manual_default.set_active(True)
         elif self.prefs['default zoom mode'] == 1:
@@ -3906,16 +4327,19 @@ class Comix:
         self.colorbutton.set_color(gtk.gdk.colormap_get_system().alloc_color(
             gtk.gdk.Color(self.prefs['red bg'], self.prefs['green bg'],
             self.prefs['blue bg']), False, True))
-
-        self.filechooser_button.set_filename(self.prefs['default open path'])
-
+        if len(self.to_unicode(self.prefs['default open path'])) > 50:
+            self.filechooser_button.set_label('... ' +
+                self.to_unicode(self.prefs['default open path'])[-47:])
+        else:
+            self.filechooser_button.set_label(self.to_unicode(
+                self.prefs['default open path']))
         if self.prefs['toolbar style'] == gtk.TOOLBAR_TEXT:
             self.combobox_tool.set_active(1)
         elif self.prefs['toolbar style'] == gtk.TOOLBAR_BOTH:
             self.combobox_tool.set_active(2)
         else:
             self.combobox_tool.set_active(0)
-
+        
         self.preferences_dialog.show()
     
     def preferences_dialog_save_and_close(self, data):
@@ -4070,9 +4494,12 @@ class Comix:
             self.thumb_tree_view.get_selection().disconnect(
                 self.thumb_selection_handler)
             self.thumb_column.set_fixed_width(
-                self.prefs['thumbnail size'])
+                self.prefs['thumbnail size'] + 7)
+            self.thumb_layout.set_size_request(
+                self.prefs['thumbnail size'] + 7, 0)
             self.change_thumb_selection = 1
             self.number_of_thumbs_loaded = 0
+            self.thumb_vadjust.set_value(0)
             self.thumb_liststore.clear()
             self.thumb_heights = []
             self.thumb_total_height = 0
@@ -4142,9 +4569,12 @@ class Comix:
         if (thumb_numbers != self.prefs['show page numbers on thumbnails'] or
             thumb_size != self.prefs['thumbnail size']):
             self.thumb_column.set_fixed_width(
-                self.prefs['thumbnail size'])
+                self.prefs['thumbnail size'] + 7)
+            self.thumb_layout.set_size_request(
+                self.prefs['thumbnail size'] + 7, 0)
             self.change_thumb_selection = 1
             self.number_of_thumbs_loaded = 0
+            self.thumb_vadjust.set_value(0)
             self.thumb_liststore.clear()
             self.thumb_heights = []
             self.thumb_total_height = 0
@@ -4299,27 +4729,7 @@ class Comix:
             self.temp_prefs['interp type'] = gtk.gdk.INTERP_BILINEAR
         elif data == 5:
             self.temp_prefs['interp type'] = gtk.gdk.INTERP_HYPER
-    
-    def about_dialog_open(self, data=None):
         
-        ''' Opens the about dialog. '''
-        
-        if self.exit:
-            return False
-        
-        self.about_dialog.action_area.get_children()[0].grab_focus()
-        self.about_dialog.show()
-    
-    def about_dialog_close(self, event, data=None):
-        
-        ''' Hides the about dialog. '''
-        
-        if self.exit:
-            return False
-        
-        self.about_dialog.hide()
-        return True
-    
     def thumbnail_maintenance_dialog_open(self, data=None):
         
         ''' Opens the thumbnail maintenance dialog. '''
@@ -4525,896 +4935,6 @@ class Comix:
         self.progress_dialog.hide()
         return True
     
-    def properties_dialog_open(self, data=None):
-        
-        ''' Opens the properties dialog and updates it's information. '''
-        
-        if self.exit:
-            return False
-        
-        # FIXME: This is ugly code.
-
-        for child in self.properties_notebook.get_children():
-            child.destroy()
-        
-        # =======================================================
-        # Archive tab.
-        # =======================================================
-        if self.archive_type != '':
-            main_box = gtk.VBox(False, 10)
-            main_box.set_border_width(10)
-            hbox = gtk.HBox(False, 10)
-            main_box.pack_start(hbox, False, False, 0)
-            try:
-                cover_pixbuf = \
-                    gtk.gdk.pixbuf_new_from_file_at_size(self.file[0],
-                    200, 128)
-                pixmap = \
-                    gtk.gdk.Pixmap(self.window.window,
-                    cover_pixbuf.get_width() + 2,
-                    cover_pixbuf.get_height() + 2, -1)
-                pixmap.draw_rectangle(self.gdk_gc, True, 0, 0,
-                    cover_pixbuf.get_width() + 2,
-                    cover_pixbuf.get_height() + 2)
-                pixmap.draw_pixbuf(None, cover_pixbuf, 0, 0, 1, 1, -1, -1,
-                    gtk.gdk.RGB_DITHER_MAX, 0, 0)
-                gc = pixmap.new_gc(gtk.gdk.Color(0, 0, 0))
-                pixmap.draw_line(gc, 0, 0, cover_pixbuf.get_width() + 1, 0)
-                pixmap.draw_line(gc, 0, 0, 0, cover_pixbuf.get_height() + 1)
-                pixmap.draw_line(gc, cover_pixbuf.get_width() + 1, 0,
-                    cover_pixbuf.get_width() + 1,
-                    cover_pixbuf.get_height() + 1)
-                pixmap.draw_line(gc, 0, cover_pixbuf.get_height() + 1,
-                    cover_pixbuf.get_width() + 1,
-                    cover_pixbuf.get_height() + 1)
-                cover_pixbuf = \
-                    gtk.gdk.Pixbuf(gtk.gdk.COLORSPACE_RGB, False, 8,
-                    cover_pixbuf.get_width() + 2,
-                    cover_pixbuf.get_height() + 2)
-                cover_pixbuf.get_from_drawable(pixmap,
-                    gtk.gdk.colormap_get_system(), 0, 0, 0, 0, -1, -1)
-                cover_image = gtk.Image()
-                cover_image.set_from_pixbuf(cover_pixbuf)
-            except:
-                cover_image = None
-            if cover_image != None:
-                hbox.pack_start(cover_image, False, False, 2)
-            vbox = gtk.VBox(False, 2)
-            vbox.set_border_width(6)
-            ebox = gtk.EventBox()
-            ebox.set_border_width(1)
-            map = ebox.get_colormap()
-            ebox.modify_bg(gtk.STATE_NORMAL, map.alloc_color('#eadfc6'))
-            ebox.add(vbox)
-            ebox2 = gtk.EventBox()
-            ebox2.modify_bg(gtk.STATE_NORMAL, map.alloc_color('#888888'))
-            ebox2.add(ebox)
-            hbox.pack_start(ebox2, True, True, 2)
-            filename = \
-                ' ' + self.to_unicode(os.path.basename(self.path))
-            if len(filename) > 35:
-                filename = filename[:32] + '...'
-            label = gtk.Label(filename)
-            label.set_alignment(0, 0.5)
-            attrlist = pango.AttrList()
-            attrlist.insert(pango.AttrWeight(pango.WEIGHT_BOLD, 0,
-                len(label.get_text())))
-            label.set_attributes(attrlist)
-            vbox.pack_start(label, False, False, 2)
-            vbox.pack_start(gtk.Alignment(0, 0, 0, 0), True, False, 0)
-            label = gtk.Label(' ' + str(len(self.file)) + ' ' + _('pages'))
-            label.set_alignment(0, 0.5)
-            attrlist = pango.AttrList()
-            label.set_attributes(attrlist)
-            vbox.pack_start(label, False, False, 2)
-            if len(self.comment) == 1:
-                label = gtk.Label(' ' + '1 ' + _('comment'))
-            else:
-                label = \
-                    gtk.Label(' ' + str(len(self.comment)) + ' ' +
-                    _('comments'))
-            label.set_alignment(0, 0.5)
-            attrlist = pango.AttrList()
-            label.set_attributes(attrlist)
-            vbox.pack_start(label, False, False, 2)
-            label = gtk.Label(' ' + self.archive_type)
-            label.set_alignment(0, 0.5)
-            attrlist = pango.AttrList()
-            label.set_attributes(attrlist)
-            vbox.pack_start(label, False, False, 2)
-            label = \
-                gtk.Label(' ' + str('%.1f' %
-                (os.path.getsize(self.path) / 1048576.0)) + ' MiB')
-            label.set_alignment(0, 0.5)
-            attrlist = pango.AttrList()
-            label.set_attributes(attrlist)
-            vbox.pack_start(label, False, False, 2)
-            
-            vbox = gtk.VBox(False, 6)
-            main_box.pack_start(vbox, False, False, 2)
-            filename = ' ' + self.to_unicode(os.path.dirname(self.path))
-            if len(filename) > 45:
-                filename = filename[:42] + '...'
-            label = \
-                gtk.Label(_('Location') + ':  ' + filename)
-            label.set_alignment(0, 0.5)
-            attrlist = pango.AttrList()
-            attrlist.insert(pango.AttrWeight(pango.WEIGHT_BOLD, 0,
-                label.get_text().index(':') + 1))
-            label.set_attributes(attrlist)
-            vbox.pack_start(label, False, False, 2)
-            
-            hash = md5.new()
-            hash.update(self.path)
-            hash = hash.hexdigest()
-            if os.path.isfile(os.getenv('HOME') + '/.comix/library/' + hash):
-                label = \
-                    gtk.Label(_('In library') + ':  ' + _('Yes'))
-            else:
-                label = \
-                    gtk.Label(_('In library') + ':  ' + _('No'))
-            label.set_alignment(0, 0.5)
-            attrlist = pango.AttrList()
-            attrlist.insert(pango.AttrWeight(pango.WEIGHT_BOLD, 0,
-                label.get_text().index(':') + 1))
-            label.set_attributes(attrlist)
-            vbox.pack_start(label, False, False, 2)
-            
-            if self.path in self.bookmarks:
-                label = \
-                    gtk.Label(_('Bookmarked') + ':  ' + _('Yes, page') + ' ' +
-                    str(self.bookmark_numbers[self.bookmarks.index(
-                    self.path)]))
-            else:
-                label = \
-                    gtk.Label(_('Bookmarked') + ':  ' + _('No'))
-            label.set_alignment(0, 0.5)
-            attrlist = pango.AttrList()
-            attrlist.insert(pango.AttrWeight(pango.WEIGHT_BOLD, 0,
-                label.get_text().index(':') + 1))
-            label.set_attributes(attrlist)
-            vbox.pack_start(label, False, False, 2)
-            label = \
-                gtk.Label(_('Accessed') + ':  ' +
-                    time.strftime('%Y-%m-%d   [%H:%M:%S]',
-                    time.localtime(os.stat(self.path)[stat.ST_ATIME])))
-            label.set_alignment(0, 0.5)
-            attrlist = pango.AttrList()
-            attrlist.insert(pango.AttrWeight(pango.WEIGHT_BOLD, 0,
-                label.get_text().index(':') + 1))
-            label.set_attributes(attrlist)
-            vbox.pack_start(label, False, False, 2)
-            label = \
-                gtk.Label(_('Modified') + ':  ' +
-                    time.strftime('%Y-%m-%d   [%H:%M:%S]',
-                    time.localtime(os.stat(self.path)[stat.ST_MTIME])))
-            label.set_alignment(0, 0.5)
-            attrlist = pango.AttrList()
-            attrlist.insert(pango.AttrWeight(pango.WEIGHT_BOLD, 0,
-                label.get_text().index(':') + 1))
-            label.set_attributes(attrlist)
-            vbox.pack_start(label, False, False, 2)
-            label = \
-                gtk.Label(_('Permissions') + ':  ' +
-                    str(oct(stat.S_IMODE(os.stat(self.path)[stat.ST_MODE]))))
-            label.set_alignment(0, 0.5)
-            attrlist = pango.AttrList()
-            attrlist.insert(pango.AttrWeight(pango.WEIGHT_BOLD, 0,
-                label.get_text().index(':') + 1))
-            label.set_attributes(attrlist)
-            vbox.pack_start(label, False, False, 2)
-            label = \
-                gtk.Label(_('Owner') + ':  ' +
-                    pwd.getpwuid(os.stat(self.path)[stat.ST_UID])[0])
-            label.set_alignment(0, 0.5)
-            attrlist = pango.AttrList()
-            attrlist.insert(pango.AttrWeight(pango.WEIGHT_BOLD, 0,
-                label.get_text().index(':') + 1))
-            label.set_attributes(attrlist)
-            vbox.pack_start(label, False, False, 2)
-            
-            self.properties_notebook.insert_page(main_box,
-                gtk.Label(_('Archive')))
-        
-        # =======================================================
-        # Image (1) tab
-        # =======================================================
-        top_hbox = gtk.HBox(False, 5)
-        main_box = gtk.VBox(False, 10)
-        top_hbox.pack_start(main_box)
-        top_hbox.set_border_width(10)
-        hbox = gtk.HBox(False, 10)
-        main_box.pack_start(hbox, False, False, 0)
-        try:
-            cover_pixbuf = \
-                gtk.gdk.pixbuf_new_from_file_at_size(
-                self.file[self.file_number], 200, 128)
-            pixmap = \
-                gtk.gdk.Pixmap(self.window.window,
-                cover_pixbuf.get_width() + 2,
-                cover_pixbuf.get_height() + 2, -1)
-            pixmap.draw_rectangle(self.gdk_gc, True, 0, 0,
-                cover_pixbuf.get_width() + 2,
-                cover_pixbuf.get_height() + 2)
-            pixmap.draw_pixbuf(None, cover_pixbuf, 0, 0, 1, 1, -1, -1,
-                gtk.gdk.RGB_DITHER_MAX, 0, 0)
-            gc = pixmap.new_gc(gtk.gdk.Color(0, 0, 0))
-            pixmap.draw_line(gc, 0, 0, cover_pixbuf.get_width() + 1, 0)
-            pixmap.draw_line(gc, 0, 0, 0, cover_pixbuf.get_height() + 1)
-            pixmap.draw_line(gc, cover_pixbuf.get_width() + 1, 0,
-                cover_pixbuf.get_width() + 1, cover_pixbuf.get_height() + 1)
-            pixmap.draw_line(gc, 0, cover_pixbuf.get_height() + 1,
-                cover_pixbuf.get_width() + 1, cover_pixbuf.get_height() + 1)
-            cover_pixbuf = \
-                gtk.gdk.Pixbuf(gtk.gdk.COLORSPACE_RGB, False, 8,
-                cover_pixbuf.get_width() + 2, cover_pixbuf.get_height() + 2)
-            cover_pixbuf.get_from_drawable(pixmap,
-                gtk.gdk.colormap_get_system(), 0, 0, 0, 0, -1, -1)
-            cover_image = gtk.Image()
-            cover_image.set_from_pixbuf(cover_pixbuf)
-        except:
-            cover_image = None
-        if cover_image != None:
-            hbox.pack_start(cover_image, False, False, 2)
-        vbox = gtk.VBox(False, 2)
-        vbox.set_border_width(6)
-        ebox = gtk.EventBox()
-        ebox.set_border_width(1)
-        map = ebox.get_colormap()
-        ebox.modify_bg(gtk.STATE_NORMAL, map.alloc_color('#eadfc6'))
-        ebox.add(vbox)
-        ebox2 = gtk.EventBox()
-        ebox2.modify_bg(gtk.STATE_NORMAL, map.alloc_color('#888888'))
-        ebox2.add(ebox)
-        hbox.pack_start(ebox2, True, True, 2)
-        if self.archive_type != '':
-            label = \
-                gtk.Label(' ' + _('Page') + ' ' + str(self.file_number + 1))
-        else:
-            filename = \
-                ' ' + self.to_unicode(os.path.basename(
-                self.file[self.file_number]))
-            if len(filename) > 35:
-                filename = filename[:32] + '...'
-            label = gtk.Label(filename)
-        label.set_alignment(0, 0)
-        attrlist = pango.AttrList()
-        attrlist.insert(pango.AttrWeight(pango.WEIGHT_BOLD, 0,
-            len(label.get_text())))
-        label.set_attributes(attrlist)
-        vbox.pack_start(label, False, False, 2)
-        vbox.pack_start(gtk.Alignment(0, 0, 0, 0), True, False, 0)
-        label = \
-            gtk.Label(' ' + str(self.image1_width) + 'x' +
-            str(self.image1_height) + ' px')
-        label.set_alignment(0, 0.5)
-        attrlist = pango.AttrList()
-        label.set_attributes(attrlist)
-        vbox.pack_start(label, False, False, 2)
-        label = \
-            gtk.Label(' ' + str(self.image1_scaled_width) + 'x' +
-            str(self.image1_scaled_height) + ' px (' +
-            str('%.1f' % (100.0 * self.image1_scaled_width /
-            self.image1_width)) + ' %)')
-        label.set_alignment(0, 0.5)
-        attrlist = pango.AttrList()
-        label.set_attributes(attrlist)
-        vbox.pack_start(label, False, False, 2)
-        label = gtk.Label(' ' + gtk.gdk.pixbuf_get_file_info(self.file
-            [self.file_number])[0]['mime_types'][0][6:].upper())
-        label.set_alignment(0, 0.5)
-        attrlist = pango.AttrList()
-        label.set_attributes(attrlist)
-        vbox.pack_start(label, False, False, 2)
-        label = \
-            gtk.Label(' ' + str('%.1f' %
-            (os.path.getsize(self.file[self.file_number]) /
-            1024.0)) + ' kiB')
-        label.set_alignment(0, 0.5)
-        attrlist = pango.AttrList()
-        label.set_attributes(attrlist)
-        vbox.pack_start(label, False, False, 2)
-        
-        vbox = gtk.VBox(False, 6)
-        main_box.pack_start(vbox, True, True, 2)
-        filename = \
-            ' ' + self.to_unicode(os.path.dirname(
-            self.file[self.file_number]))
-        if len(filename) > 45:
-            filename = filename[:42] + '...'
-        label = gtk.Label(_('Location') + ':  ' + filename)
-        label.set_alignment(0, 0.5)
-        attrlist = pango.AttrList()
-        attrlist.insert(pango.AttrWeight(pango.WEIGHT_BOLD, 0,
-            label.get_text().index(':') + 1))
-        label.set_attributes(attrlist)
-        vbox.pack_start(label, False, False, 2)
-        
-        label = \
-            gtk.Label(_('Accessed') + ':  ' +
-                time.strftime('%Y-%m-%d   [%H:%M:%S]',
-                time.localtime(os.stat(self.file[self.file_number])
-                [stat.ST_ATIME])))
-        label.set_alignment(0, 0.5)
-        attrlist = pango.AttrList()
-        attrlist.insert(pango.AttrWeight(pango.WEIGHT_BOLD, 0,
-            label.get_text().index(':') + 1))
-        label.set_attributes(attrlist)
-        vbox.pack_start(label, False, False, 2)
-        label = \
-            gtk.Label(_('Modified') + ':  ' +
-                time.strftime('%Y-%m-%d   [%H:%M:%S]',
-                time.localtime(os.stat(self.file[self.file_number])
-                [stat.ST_MTIME])))
-        label.set_alignment(0, 0.5)
-        attrlist = pango.AttrList()
-        attrlist.insert(pango.AttrWeight(pango.WEIGHT_BOLD, 0,
-            label.get_text().index(':') + 1))
-        label.set_attributes(attrlist)
-        vbox.pack_start(label, False, False, 2)
-        label = \
-            gtk.Label(_('Permissions') + ':  ' +
-                str(oct(stat.S_IMODE(os.stat(self.file[self.file_number])
-                [stat.ST_MODE]))))
-        label.set_alignment(0, 0.5)
-        attrlist = pango.AttrList()
-        attrlist.insert(pango.AttrWeight(pango.WEIGHT_BOLD, 0,
-            label.get_text().index(':') + 1))
-        label.set_attributes(attrlist)
-        vbox.pack_start(label, False, False, 2)
-        label = \
-            gtk.Label(_('Owner') + ':  ' +
-                pwd.getpwuid(os.stat(self.file[self.file_number])
-                [stat.ST_UID])[0])
-        label.set_alignment(0, 0.5)
-        attrlist = pango.AttrList()
-        attrlist.insert(pango.AttrWeight(pango.WEIGHT_BOLD, 0,
-            label.get_text().index(':') + 1))
-        label.set_attributes(attrlist)
-        vbox.pack_start(label, False, False, 2)
-        
-        top_hbox.pack_start(gtk.VSeparator(), False, False, 5)
-        expander = gtk.Expander()
-        top_hbox.pack_start(expander, False, False, 0)
-        hist_box = gtk.VBox(False, 2)
-        hist_image, mean, median, stddev, pixels, sum, extrema, mode = \
-            self.draw_histogram(self.stored_pixbuf, self.file_number)
-        
-        label = gtk.Label(_('Mode') + ':  ' + mode)
-        attrs = pango.AttrList()
-        attrs.insert(pango.AttrWeight(pango.WEIGHT_BOLD, 0,
-            label.get_text().index(':') + 1))
-        label.set_attributes(attrs)
-        label.set_alignment(0, 0.5)
-        hist_box.pack_start(label, False, False, 2)
-        label = gtk.Label(_('Pixel count') + ':  ' + str(pixels))
-        attrs = pango.AttrList()
-        attrs.insert(pango.AttrWeight(pango.WEIGHT_BOLD, 0,
-            label.get_text().index(':') + 1))
-        label.set_attributes(attrs)
-        label.set_alignment(0, 0.5)
-        hist_box.pack_start(label, False, False, 2)
-
-        hist_box.pack_start(gtk.HSeparator(), False, False, 6)
-        hbox = gtk.HBox(False, 30)
-        hist_box.pack_start(hbox)
-
-        label_box = gtk.VBox(False, 2)
-        label = gtk.Label(_('Pixel sum'))
-        attrs = pango.AttrList()
-        attrs.insert(pango.AttrWeight(pango.WEIGHT_BOLD, 0,
-            len(label.get_text())))
-        label.set_attributes(attrs)
-        label.set_alignment(0, 0.5)
-        label_box.pack_start(label, False, False, 2)
-        label = \
-            gtk.Label('R' + ':  ' + str(int(sum[0])))
-        attrs = pango.AttrList()
-        attrs.insert(pango.AttrWeight(pango.WEIGHT_BOLD, 0, 2))
-        label.set_attributes(attrs)
-        label.set_alignment(0, 0.5)
-        label_box.pack_start(label, False, False, 2)
-        label = \
-            gtk.Label('G' + ':  ' + str(int(sum[1])))
-        attrs = pango.AttrList()
-        attrs.insert(pango.AttrWeight(pango.WEIGHT_BOLD, 0, 2))
-        label.set_attributes(attrs)
-        label.set_alignment(0, 0.5)
-        label_box.pack_start(label, False, False, 2)
-        label = \
-            gtk.Label('B' + ':  ' + str(int(sum[2])))
-        attrs = pango.AttrList()
-        attrs.insert(pango.AttrWeight(pango.WEIGHT_BOLD, 0, 2))
-        label.set_attributes(attrs)
-        label.set_alignment(0, 0.5)
-        label_box.pack_start(label, False, False, 2)
-        hbox.pack_start(label_box, False, False, 2)
-        
-        label_box = gtk.VBox(False, 2)
-        label = gtk.Label(_('Extrema'))
-        attrs = pango.AttrList()
-        attrs.insert(pango.AttrWeight(pango.WEIGHT_BOLD, 0,
-            len(label.get_text())))
-        label.set_attributes(attrs)
-        label.set_alignment(0, 0.5)
-        label_box.pack_start(label, False, False, 2)
-        label = \
-            gtk.Label('R' + ':  ' + str(extrema[0][0]) + '  -  ' +
-            str(extrema[0][1]))
-        attrs = pango.AttrList()
-        attrs.insert(pango.AttrWeight(pango.WEIGHT_BOLD, 0, 2))
-        label.set_attributes(attrs)
-        label.set_alignment(0, 0.5)
-        label_box.pack_start(label, False, False, 2)
-        label = \
-            gtk.Label('G' + ':  ' + str(extrema[1][0]) + '  -  ' +
-            str(extrema[1][1]))
-        attrs = pango.AttrList()
-        attrs.insert(pango.AttrWeight(pango.WEIGHT_BOLD, 0, 2))
-        label.set_attributes(attrs)
-        label.set_alignment(0, 0.5)
-        label_box.pack_start(label, False, False, 2)
-        label = \
-            gtk.Label('B' + ':  ' + str(extrema[2][0]) + '  -  ' +
-            str(extrema[2][1]))
-        attrs = pango.AttrList()
-        attrs.insert(pango.AttrWeight(pango.WEIGHT_BOLD, 0, 2))
-        label.set_attributes(attrs)
-        label.set_alignment(0, 0.5)
-        label_box.pack_start(label, False, False, 2)
-        hbox.pack_start(label_box, False, False, 2)
-
-        hist_image.set_alignment(0, 0.5)
-        hist_box.pack_start(hist_image, False, False, 10)
-        hbox = gtk.HBox(False, 20)
-        hist_box.pack_start(hbox, False, False, 2)
-
-        label_box = gtk.VBox(False, 2)
-        label = gtk.Label(_('Mean'))
-        attrs = pango.AttrList()
-        attrs.insert(pango.AttrWeight(pango.WEIGHT_BOLD, 0,
-            len(label.get_text())))
-        label.set_attributes(attrs)
-        label.set_alignment(0, 0.5)
-        label_box.pack_start(label, False, False, 2)
-        label = gtk.Label('R:  ' + '%3.1f' % mean[0])
-        attrs = pango.AttrList()
-        attrs.insert(pango.AttrWeight(pango.WEIGHT_BOLD, 0, 2))
-        label.set_attributes(attrs)
-        label.set_alignment(0, 0.5)
-        label_box.pack_start(label, False, False, 2)
-        label = gtk.Label('G:  ' + '%3.1f' % mean[1])
-        attrs = pango.AttrList()
-        attrs.insert(pango.AttrWeight(pango.WEIGHT_BOLD, 0, 2))
-        label.set_attributes(attrs)
-        label.set_alignment(0, 0.5)
-        label_box.pack_start(label, False, False, 2)
-        label = gtk.Label('B:  ' + '%3.1f' % mean[2])
-        attrs = pango.AttrList()
-        attrs.insert(pango.AttrWeight(pango.WEIGHT_BOLD, 0, 2))
-        label.set_attributes(attrs)
-        label.set_alignment(0, 0.5)
-        label_box.pack_start(label, False, False, 2)
-        hbox.pack_start(label_box, False, False, 0)
-
-        label_box = gtk.VBox(False, 2)
-        label = gtk.Label(_('Median'))
-        attrs = pango.AttrList()
-        attrs.insert(pango.AttrWeight(pango.WEIGHT_BOLD, 0,
-            len(label.get_text())))
-        label.set_attributes(attrs)
-        label.set_alignment(0, 0.5)
-        label_box.pack_start(label, False, False, 2)
-        label = gtk.Label('R:  ' + str(median[0]))
-        attrs = pango.AttrList()
-        attrs.insert(pango.AttrWeight(pango.WEIGHT_BOLD, 0, 2))
-        label.set_attributes(attrs)
-        label.set_alignment(0, 0.5)
-        label_box.pack_start(label, False, False, 2)
-        label = gtk.Label('G:  ' + str(median[1]))
-        attrs = pango.AttrList()
-        attrs.insert(pango.AttrWeight(pango.WEIGHT_BOLD, 0, 2))
-        label.set_attributes(attrs)
-        label.set_alignment(0, 0.5)
-        label_box.pack_start(label, False, False, 2)
-        label = gtk.Label('B:  ' + str(median[2]))
-        attrs = pango.AttrList()
-        attrs.insert(pango.AttrWeight(pango.WEIGHT_BOLD, 0, 2))
-        label.set_attributes(attrs)
-        label.set_alignment(0, 0.5)
-        label_box.pack_start(label, False, False, 2)
-        hbox.pack_start(label_box, False, False, 0)
-
-        label_box = gtk.VBox(False, 2)
-        label = gtk.Label(_('Standard deviation'))
-        attrs = pango.AttrList()
-        attrs.insert(pango.AttrWeight(pango.WEIGHT_BOLD, 0,
-            len(label.get_text())))
-        label.set_attributes(attrs)
-        label.set_alignment(0, 0.5)
-        label_box.pack_start(label, False, False, 2)
-        label = gtk.Label('R:  ' + '%3.1f' % stddev[0])
-        attrs = pango.AttrList()
-        attrs.insert(pango.AttrWeight(pango.WEIGHT_BOLD, 0, 2))
-        label.set_attributes(attrs)
-        label.set_alignment(0, 0.5)
-        label_box.pack_start(label, False, False, 2)
-        label = gtk.Label('G:  ' + '%3.1f' % stddev[1])
-        attrs = pango.AttrList()
-        attrs.insert(pango.AttrWeight(pango.WEIGHT_BOLD, 0, 2))
-        label.set_attributes(attrs)
-        label.set_alignment(0, 0.5)
-        label_box.pack_start(label, False, False, 2)
-        label = gtk.Label('B:  ' + '%3.1f' % stddev[2])
-        attrs = pango.AttrList()
-        attrs.insert(pango.AttrWeight(pango.WEIGHT_BOLD, 0, 2))
-        label.set_attributes(attrs)
-        label.set_alignment(0, 0.5)
-        label_box.pack_start(label, False, False, 2)
-        hbox.pack_start(label_box, False, False, 0)
-        
-        expander.add(hist_box)
-
-        if (not self.prefs['double page'] or
-            self.file_number == len(self.file) - 1):
-            self.properties_notebook.insert_page(top_hbox,
-                gtk.Label(_('Image')))
-        else:
-            self.properties_notebook.insert_page(top_hbox,
-                gtk.Label(_('Image 1')))
-        
-        # =======================================================
-        # Image (2) tab
-        # =======================================================
-        if (self.prefs['double page'] and 
-            self.file_number != len(self.file) - 1):
-            top_hbox = gtk.HBox(False, 5)
-            main_box = gtk.VBox(False, 10)
-            top_hbox.pack_start(main_box)
-            top_hbox.set_border_width(10)
-            hbox = gtk.HBox(False, 10)
-            main_box.pack_start(hbox, False, False, 0)
-            try:
-                cover_pixbuf = \
-                    gtk.gdk.pixbuf_new_from_file_at_size(
-                    self.file[self.file_number + 1], 200, 128)
-                pixmap = \
-                    gtk.gdk.Pixmap(self.window.window,
-                    cover_pixbuf.get_width() + 2,
-                    cover_pixbuf.get_height() + 2, -1)
-                pixmap.draw_rectangle(self.gdk_gc, True, 0, 0,
-                    cover_pixbuf.get_width() + 2,
-                    cover_pixbuf.get_height() + 2)
-                pixmap.draw_pixbuf(None, cover_pixbuf, 0, 0, 1, 1, -1, -1,
-                    gtk.gdk.RGB_DITHER_MAX, 0, 0)
-                gc = pixmap.new_gc(gtk.gdk.Color(0, 0, 0))
-                pixmap.draw_line(gc, 0, 0, cover_pixbuf.get_width() + 1, 0)
-                pixmap.draw_line(gc, 0, 0, 0, cover_pixbuf.get_height() + 1)
-                pixmap.draw_line(gc, cover_pixbuf.get_width() + 1, 0,
-                    cover_pixbuf.get_width() + 1,
-                    cover_pixbuf.get_height() + 1)
-                pixmap.draw_line(gc, 0, cover_pixbuf.get_height() + 1,
-                    cover_pixbuf.get_width() + 1,
-                    cover_pixbuf.get_height() + 1)
-                cover_pixbuf = \
-                    gtk.gdk.Pixbuf(gtk.gdk.COLORSPACE_RGB, False, 8,
-                    cover_pixbuf.get_width() + 2,
-                    cover_pixbuf.get_height() + 2)
-                cover_pixbuf.get_from_drawable(pixmap,
-                    gtk.gdk.colormap_get_system(), 0, 0, 0, 0, -1, -1)
-                cover_image = gtk.Image()
-                cover_image.set_from_pixbuf(cover_pixbuf)
-            except:
-                cover_image = None
-            if cover_image != None:
-                hbox.pack_start(cover_image, False, False, 2)
-            vbox = gtk.VBox(False, 2)
-            vbox.set_border_width(6)
-            ebox = gtk.EventBox()
-            ebox.set_border_width(1)
-            map = ebox.get_colormap()
-            ebox.modify_bg(gtk.STATE_NORMAL, map.alloc_color('#eadfc6'))
-            ebox.add(vbox)
-            ebox2 = gtk.EventBox()
-            ebox2.modify_bg(gtk.STATE_NORMAL, map.alloc_color('#888888'))
-            ebox2.add(ebox)
-            hbox.pack_start(ebox2, True, True, 2)
-            if self.archive_type != '':
-                label = \
-                    gtk.Label(' ' + _('Page') + ' ' +
-                    str(self.file_number + 2))
-            else:
-                filename = \
-                    ' ' + self.to_unicode(os.path.basename(
-                    self.file[self.file_number + 1]))
-                if len(filename) > 35:
-                    filename = filename[:32] + '...'
-                label = gtk.Label(filename)
-            label.set_alignment(0, 0)
-            attrlist = pango.AttrList()
-            attrlist.insert(pango.AttrWeight(pango.WEIGHT_BOLD, 0,
-                len(label.get_text())))
-            label.set_attributes(attrlist)
-            vbox.pack_start(label, False, False, 2)
-            vbox.pack_start(gtk.Alignment(0, 0, 0, 0), True, False, 0)
-            label = \
-                gtk.Label(' ' + str(self.image2_width) + 'x' +
-                str(self.image2_height) + ' px')
-            label.set_alignment(0, 0.5)
-            attrlist = pango.AttrList()
-            label.set_attributes(attrlist)
-            vbox.pack_start(label, False, False, 2)
-            label = \
-                gtk.Label(' ' + str(self.image2_scaled_width) + 'x' +
-                str(self.image2_scaled_height) + ' px (' +
-                str('%.1f' % (100.0 * self.image2_scaled_width /
-                self.image2_width)) + ' %)')
-            label.set_alignment(0, 0.5)
-            attrlist = pango.AttrList()
-            label.set_attributes(attrlist)
-            vbox.pack_start(label, False, False, 2)
-            label = gtk.Label(' ' + gtk.gdk.pixbuf_get_file_info(self.file
-                [self.file_number + 1])[0]['mime_types'][0][6:].upper())
-            label.set_alignment(0, 0.5)
-            attrlist = pango.AttrList()
-            label.set_attributes(attrlist)
-            vbox.pack_start(label, False, False, 2)
-            label = \
-                gtk.Label(' ' + str('%.1f' %
-                (os.path.getsize(self.file[self.file_number + 1]) /
-                1024.0)) + ' kiB')
-            label.set_alignment(0, 0.5)
-            attrlist = pango.AttrList()
-            label.set_attributes(attrlist)
-            vbox.pack_start(label, False, False, 2)
-            
-            vbox = gtk.VBox(False, 6)
-            main_box.pack_start(vbox, True, True, 2)
-            filename = \
-                ' ' + self.to_unicode(os.path.dirname(
-                self.file[self.file_number + 1]))
-            if len(filename) > 45:
-                filename = filename[:42] + '...'
-            label = gtk.Label(_('Location') + ':  ' + filename)
-            label.set_alignment(0, 0.5)
-            attrlist = pango.AttrList()
-            attrlist.insert(pango.AttrWeight(pango.WEIGHT_BOLD, 0,
-                label.get_text().index(':') + 1))
-            label.set_attributes(attrlist)
-            vbox.pack_start(label, False, False, 2)
-            
-            label = \
-                gtk.Label(_('Accessed') + ':  ' +
-                    time.strftime('%Y-%m-%d   [%H:%M:%S]',
-                    time.localtime(os.stat(self.file[self.file_number + 1])
-                    [stat.ST_ATIME])))
-            label.set_alignment(0, 0.5)
-            attrlist = pango.AttrList()
-            attrlist.insert(pango.AttrWeight(pango.WEIGHT_BOLD, 0,
-                label.get_text().index(':') + 1))
-            label.set_attributes(attrlist)
-            vbox.pack_start(label, False, False, 2)
-            label = \
-                gtk.Label(_('Modified') + ':  ' +
-                    time.strftime('%Y-%m-%d   [%H:%M:%S]',
-                    time.localtime(os.stat(self.file[self.file_number + 1])
-                    [stat.ST_MTIME])))
-            label.set_alignment(0, 0.5)
-            attrlist = pango.AttrList()
-            attrlist.insert(pango.AttrWeight(pango.WEIGHT_BOLD, 0,
-                label.get_text().index(':') + 1))
-            label.set_attributes(attrlist)
-            vbox.pack_start(label, False, False, 2)
-            label = \
-                gtk.Label(_('Permissions') + ':  ' +
-                str(oct(stat.S_IMODE(os.stat(
-                self.file[self.file_number + 1])[stat.ST_MODE]))))
-            label.set_alignment(0, 0.5)
-            attrlist = pango.AttrList()
-            attrlist.insert(pango.AttrWeight(pango.WEIGHT_BOLD, 0,
-                label.get_text().index(':') + 1))
-            label.set_attributes(attrlist)
-            vbox.pack_start(label, False, False, 2)
-            label = \
-                gtk.Label(_('Owner') + ':  ' +
-                    pwd.getpwuid(os.stat(self.file[self.file_number + 1])
-                    [stat.ST_UID])[0])
-            label.set_alignment(0, 0.5)
-            attrlist = pango.AttrList()
-            attrlist.insert(pango.AttrWeight(pango.WEIGHT_BOLD, 0,
-                label.get_text().index(':') + 1))
-            label.set_attributes(attrlist)
-            vbox.pack_start(label, False, False, 2)
-            
-            top_hbox.pack_start(gtk.VSeparator(), False, False, 5)
-            expander = gtk.Expander()
-            top_hbox.pack_start(expander, False, False, 0)
-            hist_box = gtk.VBox(False, 2)
-            hist_image, mean, median, stddev, pixels, sum, extrema, mode = \
-                self.draw_histogram(self.stored_pixbuf2, self.file_number + 1)
-            
-            label = gtk.Label(_('Mode') + ':  ' + mode)
-            attrs = pango.AttrList()
-            attrs.insert(pango.AttrWeight(pango.WEIGHT_BOLD, 0,
-                label.get_text().index(':') + 1))
-            label.set_attributes(attrs)
-            label.set_alignment(0, 0.5)
-            hist_box.pack_start(label, False, False, 2)
-            label = gtk.Label(_('Pixel count') + ':  ' + str(pixels))
-            attrs = pango.AttrList()
-            attrs.insert(pango.AttrWeight(pango.WEIGHT_BOLD, 0,
-                label.get_text().index(':') + 1))
-            label.set_attributes(attrs)
-            label.set_alignment(0, 0.5)
-            hist_box.pack_start(label, False, False, 2)
-
-            hist_box.pack_start(gtk.HSeparator(), False, False, 6)
-            hbox = gtk.HBox(False, 30)
-            hist_box.pack_start(hbox)
-
-            label_box = gtk.VBox(False, 2)
-            label = gtk.Label(_('Pixel sum'))
-            attrs = pango.AttrList()
-            attrs.insert(pango.AttrWeight(pango.WEIGHT_BOLD, 0,
-                len(label.get_text())))
-            label.set_attributes(attrs)
-            label.set_alignment(0, 0.5)
-            label_box.pack_start(label, False, False, 2)
-            label = \
-                gtk.Label('R' + ':  ' + str(int(sum[0])))
-            attrs = pango.AttrList()
-            attrs.insert(pango.AttrWeight(pango.WEIGHT_BOLD, 0, 2))
-            label.set_attributes(attrs)
-            label.set_alignment(0, 0.5)
-            label_box.pack_start(label, False, False, 2)
-            label = \
-                gtk.Label('G' + ':  ' + str(int(sum[1])))
-            attrs = pango.AttrList()
-            attrs.insert(pango.AttrWeight(pango.WEIGHT_BOLD, 0, 2))
-            label.set_attributes(attrs)
-            label.set_alignment(0, 0.5)
-            label_box.pack_start(label, False, False, 2)
-            label = \
-                gtk.Label('B' + ':  ' + str(int(sum[2])))
-            attrs = pango.AttrList()
-            attrs.insert(pango.AttrWeight(pango.WEIGHT_BOLD, 0, 2))
-            label.set_attributes(attrs)
-            label.set_alignment(0, 0.5)
-            label_box.pack_start(label, False, False, 2)
-            hbox.pack_start(label_box, False, False, 2)
-            
-            label_box = gtk.VBox(False, 2)
-            label = gtk.Label(_('Extrema'))
-            attrs = pango.AttrList()
-            attrs.insert(pango.AttrWeight(pango.WEIGHT_BOLD, 0,
-                len(label.get_text())))
-            label.set_attributes(attrs)
-            label.set_alignment(0, 0.5)
-            label_box.pack_start(label, False, False, 2)
-            label = \
-                gtk.Label('R' + ':  ' + str(extrema[0][0]) + '  -  ' +
-                str(extrema[0][1]))
-            attrs = pango.AttrList()
-            attrs.insert(pango.AttrWeight(pango.WEIGHT_BOLD, 0, 2))
-            label.set_attributes(attrs)
-            label.set_alignment(0, 0.5)
-            label_box.pack_start(label, False, False, 2)
-            label = \
-                gtk.Label('G' + ':  ' + str(extrema[1][0]) + '  -  ' +
-                str(extrema[1][1]))
-            attrs = pango.AttrList()
-            attrs.insert(pango.AttrWeight(pango.WEIGHT_BOLD, 0, 2))
-            label.set_attributes(attrs)
-            label.set_alignment(0, 0.5)
-            label_box.pack_start(label, False, False, 2)
-            label = \
-                gtk.Label('B' + ':  ' + str(extrema[2][0]) + '  -  ' +
-                str(extrema[2][1]))
-            attrs = pango.AttrList()
-            attrs.insert(pango.AttrWeight(pango.WEIGHT_BOLD, 0, 2))
-            label.set_attributes(attrs)
-            label.set_alignment(0, 0.5)
-            label_box.pack_start(label, False, False, 2)
-            hbox.pack_start(label_box, False, False, 2)
-
-            hist_image.set_alignment(0, 0.5)
-            hist_box.pack_start(hist_image, False, False, 10)
-            hbox = gtk.HBox(False, 20)
-            hist_box.pack_start(hbox, False, False, 2)
-
-            label_box = gtk.VBox(False, 2)
-            label = gtk.Label(_('Mean'))
-            attrs = pango.AttrList()
-            attrs.insert(pango.AttrWeight(pango.WEIGHT_BOLD, 0,
-                len(label.get_text())))
-            label.set_attributes(attrs)
-            label.set_alignment(0, 0.5)
-            label_box.pack_start(label, False, False, 2)
-            label = gtk.Label('R:  ' + '%3.1f' % mean[0])
-            attrs = pango.AttrList()
-            attrs.insert(pango.AttrWeight(pango.WEIGHT_BOLD, 0, 2))
-            label.set_attributes(attrs)
-            label.set_alignment(0, 0.5)
-            label_box.pack_start(label, False, False, 2)
-            label = gtk.Label('G:  ' + '%3.1f' % mean[1])
-            attrs = pango.AttrList()
-            attrs.insert(pango.AttrWeight(pango.WEIGHT_BOLD, 0, 2))
-            label.set_attributes(attrs)
-            label.set_alignment(0, 0.5)
-            label_box.pack_start(label, False, False, 2)
-            label = gtk.Label('B:  ' + '%3.1f' % mean[2])
-            attrs = pango.AttrList()
-            attrs.insert(pango.AttrWeight(pango.WEIGHT_BOLD, 0, 2))
-            label.set_attributes(attrs)
-            label.set_alignment(0, 0.5)
-            label_box.pack_start(label, False, False, 2)
-            hbox.pack_start(label_box, False, False, 0)
-
-            label_box = gtk.VBox(False, 2)
-            label = gtk.Label(_('Median'))
-            attrs = pango.AttrList()
-            attrs.insert(pango.AttrWeight(pango.WEIGHT_BOLD, 0,
-                len(label.get_text())))
-            label.set_attributes(attrs)
-            label.set_alignment(0, 0.5)
-            label_box.pack_start(label, False, False, 2)
-            label = gtk.Label('R:  ' + str(median[0]))
-            attrs = pango.AttrList()
-            attrs.insert(pango.AttrWeight(pango.WEIGHT_BOLD, 0, 2))
-            label.set_attributes(attrs)
-            label.set_alignment(0, 0.5)
-            label_box.pack_start(label, False, False, 2)
-            label = gtk.Label('G:  ' + str(median[1]))
-            attrs = pango.AttrList()
-            attrs.insert(pango.AttrWeight(pango.WEIGHT_BOLD, 0, 2))
-            label.set_attributes(attrs)
-            label.set_alignment(0, 0.5)
-            label_box.pack_start(label, False, False, 2)
-            label = gtk.Label('B:  ' + str(median[2]))
-            attrs = pango.AttrList()
-            attrs.insert(pango.AttrWeight(pango.WEIGHT_BOLD, 0, 2))
-            label.set_attributes(attrs)
-            label.set_alignment(0, 0.5)
-            label_box.pack_start(label, False, False, 2)
-            hbox.pack_start(label_box, False, False, 0)
-
-            label_box = gtk.VBox(False, 2)
-            label = gtk.Label(_('Standard deviation'))
-            attrs = pango.AttrList()
-            attrs.insert(pango.AttrWeight(pango.WEIGHT_BOLD, 0,
-                len(label.get_text())))
-            label.set_attributes(attrs)
-            label.set_alignment(0, 0.5)
-            label_box.pack_start(label, False, False, 2)
-            label = gtk.Label('R:  ' + '%3.1f' % stddev[0])
-            attrs = pango.AttrList()
-            attrs.insert(pango.AttrWeight(pango.WEIGHT_BOLD, 0, 2))
-            label.set_attributes(attrs)
-            label.set_alignment(0, 0.5)
-            label_box.pack_start(label, False, False, 2)
-            label = gtk.Label('G:  ' + '%3.1f' % stddev[1])
-            attrs = pango.AttrList()
-            attrs.insert(pango.AttrWeight(pango.WEIGHT_BOLD, 0, 2))
-            label.set_attributes(attrs)
-            label.set_alignment(0, 0.5)
-            label_box.pack_start(label, False, False, 2)
-            label = gtk.Label('B:  ' + '%3.1f' % stddev[2])
-            attrs = pango.AttrList()
-            attrs.insert(pango.AttrWeight(pango.WEIGHT_BOLD, 0, 2))
-            label.set_attributes(attrs)
-            label.set_alignment(0, 0.5)
-            label_box.pack_start(label, False, False, 2)
-            hbox.pack_start(label_box, False, False, 0)
-            
-            expander.add(hist_box)
-
-            self.properties_notebook.insert_page(top_hbox,
-                gtk.Label(_('Image 2')))
-        
-        self.properties_dialog.action_area.get_children()[0].grab_focus()
-        self.properties_dialog.show_all()
-    
-    def properties_dialog_close(self, event, data=None):
         
         ''' Hides the properties dialog. '''
         
@@ -5710,16 +5230,16 @@ class Comix:
                         image.size[1],
                         (IS_RGBA and 4 or 3) * image.size[0])
                     pixbuf.save(thumb_dir + hash + '.pngcomix_' +
-                        self.version + '_temp', 'png', {
+                        constants.version + '_temp', 'png', {
                         'tEXt::Thumb::URI':'file://' +
                         urllib.pathname2url(path),
                         'tEXt::Thumb::MTime':mtime,
                         'tEXt::Thumb::Size':size,
-                        'tEXt::Software':'Comix ' + self.version})
+                        'tEXt::Software':'Comix ' + constants.version})
                     os.chmod(thumb_dir + hash + '.pngcomix_' +
-                        self.version + '_temp', 0600)
+                        constants.version + '_temp', 0600)
                     os.rename(thumb_dir + hash + '.pngcomix_' +
-                        self.version + '_temp',
+                        constants.version + '_temp',
                         thumb_dir + hash + '.png')
                     name = self.to_unicode(path)
                     pages = str(len(filter(exts.search, files)))
@@ -6365,7 +5885,7 @@ class Comix:
                         'tEXt::Thumb::Size':str(os.stat(file)[stat.ST_SIZE]),
                         'tEXt::Thumb::Mimetype':gtk.gdk.pixbuf_get_file_info(
                             file)[0]['mime_types'][0],
-                        'tEXt::Software':'Comix ' + self.version},
+                        'tEXt::Software':'Comix ' + constants.version},
                         None, 128, True)
                     image_width = str(image_width)
                     image_height = str(image_height)
@@ -7089,29 +6609,6 @@ class Comix:
         
         self.ui = gtk.UIManager()
         ui_description = """<ui>
-            <toolbar name="Tool">
-                    <toolitem action="First" />
-                    <toolitem action="Previous" />
-                    <toolitem action="Next" />
-                    <toolitem action="Last" />
-                    <separator />
-                    <toolitem action="Go" />
-
-                    <separator expand="true"/>
-
-                    <separator />
-                    <toolitem action="fit_screen_mode" />
-                    <toolitem action="fit_width_mode" />
-                    <toolitem action="fit_height_mode" />
-                    <toolitem action="fit_manual_mode" />
-                    <separator />
-                    <toolitem action="Double" />
-                    <toolitem action="manga_mode" />
-                    <separator />
-                    <toolitem action="Lens" />
-                    <separator />
-                <separator />
-            </toolbar>
             <popup name="Pop">
                 <menu action="menu_go_popup">
                     <menuitem action="First" />
@@ -7328,13 +6825,9 @@ class Comix:
         self.ui.insert_action_group(self.actiongroup, 0)
         self.ui.insert_action_group(self.recent_actiongroup, 1)
         
-        vbox = self.xml.get_widget("vbox")
-        vbox.pack_start(self.ui.get_widget('/Menu'), 
-                             expand=False, fill=True)
-        self.toolbar = self.ui.get_widget('/Tool')
-        vbox.pack_start(self.toolbar,
-                             expand=False, fill=True)
-
+        self.table.attach(self.ui.get_widget('/Menu'), 0, 4, 0, 1,
+            gtk.FILL|gtk.SHRINK, gtk.FILL|gtk.SHRINK, 0, 0)
+        
         if not self.bookmarks:
             self.actiongroup.get_action('Clear_book').set_sensitive(False)
             self.bookmark_dialog.action_area.get_children()[1].set_sensitive(
@@ -7605,7 +7098,7 @@ class Comix:
                                 'tEXt::Thumb::Mimetype':
                                 gtk.gdk.pixbuf_get_file_info(file)
                                 [0]['mime_types'][0],
-                                'tEXt::Software':'Comix ' + self.version}
+                                'tEXt::Software':'Comix ' + constants.version}
                                 , pixbuf_size = self.prefs['thumbnail size'])
                     
                     # =======================================================
@@ -7681,7 +7174,7 @@ class Comix:
                                 [0]['mime_types'][0],
                                 'tEXt::Thumb::Document::Pages':
                                 str(len(self.file)),
-                                'tEXt::Software':'Comix ' + self.version}
+                                'tEXt::Software':'Comix ' + constants.version}
                                 , pixbuf_size = self.prefs['thumbnail size'])
                         
                     # =======================================================
@@ -7773,9 +7266,14 @@ class Comix:
                     self.thumb_total_height + \
                     self.thumb_tree_view.get_background_area(i,
                     self.thumb_column).height
+                self.thumb_layout.set_size((self.prefs['thumbnail size'] + 7),
+                    self.thumb_total_height)
                 self.thumb_heights.append(
                     self.thumb_tree_view.get_background_area(i,
                     self.thumb_column).height)
+                self.thumb_vadjust_upper = \
+                    self.thumb_vadjust.upper - self.window.get_size()[1] + \
+                    self.status_size + self.tool_size + self.menu_size
                 self.number_of_thumbs_loaded = \
                     self.number_of_thumbs_loaded + 1
             
@@ -7857,12 +7355,13 @@ class Comix:
                 if not os.path.isdir(os.path.dirname(dst_path)):
                     os.makedirs(os.path.dirname(dst_path))
                     os.chmod(os.path.dirname(dst_path), 0700)
-                pixbuf.save(dst_path + 'comix_' + self.version + '_temp',
+                pixbuf.save(dst_path + 'comix_' + constants.version + '_temp',
                     'png', tEXt_dict)
                 # To assure the users privacy we chmod it 600.
-                os.chmod(dst_path + 'comix_' + self.version + '_temp', 0600)
+                os.chmod(dst_path + 'comix_' + constants.version + '_temp',
+                    0600)
                 # Then we rename it to the final name (atom operation.)
-                os.rename(dst_path + 'comix_' + self.version + '_temp',
+                os.rename(dst_path + 'comix_' + constants.version + '_temp',
                     dst_path)
                 
             # =======================================================
@@ -7952,13 +7451,17 @@ class Comix:
             else:
                 self.actiongroup.get_action('Delete').set_sensitive(False)
                 self.jpegtran_activate(False)
-                
             if self.archive_type != '':
                 self.actiongroup.get_action('Add_to_library').set_sensitive(
                     True)
             else:
                 self.actiongroup.get_action('Add_to_library').set_sensitive(
                     False)
+            self.toolbutton_previous.set_sensitive(True)
+            self.toolbutton_next.set_sensitive(True)
+            self.toolbutton_first.set_sensitive(True)
+            self.toolbutton_last.set_sensitive(True)
+            self.toolbutton_go.set_sensitive(True)
             self.bookmark_dialog.action_area.get_children()[2].set_sensitive(
                 True)
             if len(self.comment) > 0:
@@ -7990,15 +7493,22 @@ class Comix:
             self.actiongroup.get_action('Add_to_library').set_sensitive(False)
             self.actiongroup.get_action('Slideshow').set_sensitive(False)
             self.actiongroup.get_action('Delete').set_sensitive(False)
-
+            self.toolbutton_previous.set_sensitive(False)
+            self.toolbutton_next.set_sensitive(False)
+            self.toolbutton_first.set_sensitive(False)
+            self.toolbutton_last.set_sensitive(False)
+            self.toolbutton_go.set_sensitive(False)
             self.bookmark_dialog.action_area.get_children()[2].set_sensitive(
                 False)
             self.thumb_liststore.clear()
+            self.thumb_vadjust.set_value(0)
             self.thumb_liststore.clear()
             self.thumb_heights = []
             self.stored_pixbuf = 0
             if self.thumb_total_height != 0:
                 self.thumb_total_height = 0
+                self.thumb_layout.set_size(
+                    (self.prefs['thumbnail size'] + 7), 0)
             self.update_sizes()
             self.layout.move(self.comix_image, 
                 max(0, self.main_layout_x_size // 2 - 150),
@@ -8042,6 +7552,9 @@ class Comix:
                 zipf = zipfile.ZipFile(src_path)
                 zipfiles = zipf.namelist()
                 for i, x in enumerate(zipfiles):
+                    # Caught the directory descriptor. Skip it.
+                    if x.endswith('/'):
+                        continue
                     # FIXME: Other possible encodings?
                     dst = unicode(x, 'cp437')
                     found_encoding = False
@@ -8110,8 +7623,6 @@ class Comix:
         if self.exit:
             return False
         
-        path = urllib.url2pathname(path)
-        
         self.set_cursor_type('watch')
         self.path = path
         self.file = []
@@ -8125,6 +7636,7 @@ class Comix:
         self.change_scroll_adjustment = 1
         self.change_thumb_selection = 1
         self.number_of_thumbs_loaded = 0
+        self.thumb_vadjust.set_value(0)
         self.thumb_liststore.clear()
         self.thumb_heights = []
         self.thumb_total_height = 0
@@ -8488,9 +8000,12 @@ class Comix:
         self.refresh_image()
         self.thumb_tree_view.get_selection().disconnect(
             self.thumb_selection_handler)
-        self.thumb_column.set_fixed_width(self.prefs['thumbnail size'])
+        self.thumb_column.set_fixed_width(self.prefs['thumbnail size'] + 7)
+        self.thumb_layout.set_size_request(
+            self.prefs['thumbnail size'] + 7, 0)
         self.change_thumb_selection = 1
         self.number_of_thumbs_loaded = 0
+        self.thumb_vadjust.set_value(0)
         self.thumb_liststore.clear()
         self.thumb_heights = []
         self.thumb_total_height = 0
@@ -8504,6 +8019,7 @@ class Comix:
     def jpegtran_activate(self, activate):
 
         ''' Activate image operations if jpegtran is installed'''
+
         self.actiongroup.get_action('file_rot_90').\
             set_sensitive(activate)
         self.actiongroup.get_action('file_rot_270').\
@@ -8552,9 +8068,12 @@ class Comix:
         self.refresh_image()
         self.thumb_tree_view.get_selection().disconnect(
             self.thumb_selection_handler)
-        self.thumb_column.set_fixed_width(self.prefs['thumbnail size'])
+        self.thumb_column.set_fixed_width(self.prefs['thumbnail size'] + 7)
+        self.thumb_layout.set_size_request(
+            self.prefs['thumbnail size'] + 7, 0)
         self.change_thumb_selection = 1
         self.number_of_thumbs_loaded = 0
+        self.thumb_vadjust.set_value(0)
         self.thumb_liststore.clear()
         self.thumb_heights = []
         self.thumb_total_height = 0
@@ -8600,38 +8119,6 @@ class Comix:
 
         self.jpegtran_operation('-grayscale')
 
-    def calculate_fit_dimensions(self, req_size, size, req_osize, osize,
-        scroll_size):
-
-        ''' Calculate actual dimensions to use in fit-to-{width, height}
-        modes. It takes care of all the ugly details such as accommodating
-        for possible scrollbar being there.
-        
-        Params:
-        * req_size: ideal size to fit to
-        * size: source size
-        * osize: sizes for the "other" dimension (ie. vertical for
-          fit-to-width)
-        * scroll_size: size a scrollbar would take if present
-        
-        '''
-        if size <= 0 or osize <= 0:
-            return (0, 0, 0)
-            
-        ratio = float(req_size) / size
-        oratio = float(req_osize) / osize
-        if (int(osize * ratio) > req_osize):
-            # Scrollbar
-            rq = req_size - scroll_size
-            ratio = float(rq) / size
-            if (int(osize * ratio) < req_osize):
-                # Edge case, scrollbar disappears as we shrink
-                a, b, ratio = \
-                    self.calculate_fit_dimensions(req_osize, osize, req_size,
-                    size, scroll_size)
-        print (int(size * ratio), int(osize * ratio), ratio)
-        return (int(size * ratio), int(osize * ratio), ratio)
-
     def refresh_image(self):
 
         ''' Loads image files, from memory or from disk, scales them and does
@@ -8674,7 +8161,7 @@ class Comix:
             self.jpegtran_activate(True)
         else:
             self.jpegtran_activate(False)
-        
+
         # =======================================================
         # Hide/unhide toolbar, scrollbars etc. depending on the
         # set preferences and then update all the stored pixel
@@ -8693,9 +8180,10 @@ class Comix:
             self.ui.get_widget('/Menu').hide()
             self.toolbar.hide()
             self.statusbar.hide()
-            self.toggle_scrollbars(False)
-            self.toggle_thumb_scrollbars(False)
-            self.thumb_scroll.hide()
+            self.hscroll.hide()
+            self.vscroll.hide()
+            self.thumb_layout.hide()
+            self.thumb_vscroll.hide()
         
         # Else hide/show according to each corresponding option.
         else:
@@ -8705,15 +8193,26 @@ class Comix:
             self.actiongroup.get_action('Scrollbars').set_sensitive(True)
             self.actiongroup.get_action('Thumbnails').set_sensitive(True)
             if self.prefs['show thumbnails']:
-                self.thumb_scroll.show()
-                self.toggle_thumb_scrollbars(
-                    self.prefs['hide thumbnail scrollbar'])
+                self.thumb_layout.show()
+                if self.prefs['hide thumbnail scrollbar']:
+                    self.thumb_vscroll.hide()
+                else:
+                    self.thumb_vscroll.show()
             else:
-                self.thumb_scroll.hide()
-            if self.prefs['hide scrollbar']:
-                self.toggle_scrollbars(False)
+                self.thumb_layout.hide()
+                self.thumb_vscroll.hide()
+            if self.prefs['hide scrollbar'] or self.prefs['zoom mode'] == 1:
+                self.hscroll.hide()
+                self.vscroll.hide()
+            elif self.prefs['zoom mode'] == 2:
+                self.hscroll.hide()
+                self.vscroll.show()
+            elif self.prefs['zoom mode'] == 3:
+                self.vscroll.hide()
+                self.hscroll.show()
             else:
-                self.toggle_scrollbars(True)
+                self.hscroll.show()
+                self.vscroll.show()
             if not self.prefs['show menubar']:
                 self.ui.get_widget('/Menu').hide()
             else:
@@ -8729,7 +8228,8 @@ class Comix:
             
             # Always show scrollbars when viewing comments
             if self.show_comments:
-                self.toggle_scrollbars(True)
+                self.hscroll.show()
+                self.vscroll.show()
         
         self.toolbar.set_style(self.prefs['toolbar style'])
         self.update_sizes()
@@ -8905,59 +8405,69 @@ class Comix:
                     # Scale the image to fit the display area or to the
                     # current zoom level.
                     # =======================================================
-                    
-                    spacing = self.layout_scroll.\
-                        style_get_property("scrollbar-spacing")
-                    vscroll = self.vscroll.size_request()[0] + spacing
-                    hscroll = self.hscroll.size_request()[1] + spacing
-                    pix_w = pixbuf.get_width()
-                    pix_h = pixbuf.get_height()
-                    stretch = self.prefs['stretch']
-                    zmode = self.prefs['zoom mode']
-                    zscale = self.prefs['zoom scale']
+                    temp_x = x
+                    temp_y = y
                     
                     # Flip width and height if page is to be rotated 90
                     # or 270 degrees.
-                    if self.prefs['rotation'] in [1, 3]:
-                        pix_w, pix_h = pix_h, pix_w
-                        x,y = y,x
-                    self.image1_width = pix_w
-                    self.image1_height = pix_h
-                    if ((pix_w > x or pix_h > y or stretch) and zmode == 1
-                        or
-                        (pix_w > x or stretch) and zmode == 2
-                        or
-                        (pix_h > y or stretch) and zmode == 3
-                        or
-                        (zscale != 100 and not zmode)):
-                        if zmode == 1:
-                            ratio = min(x / float(pix_w), y / float(pix_h))
-                            width = int(pix_w * ratio)
-                            height = int(pix_h * ratio)
-                        elif zmode == 2:
-                            width, height, ratio = \
-                            self.calculate_fit_dimensions(x, pix_w, y, pix_h, vscroll)
-                        elif zmode == 3:
-                            height, width, ratio = \
-                            self.calculate_fit_dimensions(y, pix_h, x, pix_w, hscroll)
+                    if self.prefs['rotation'] in [0, 2]:
+                        self.image1_width = pixbuf.get_width()
+                        self.image1_height = pixbuf.get_height()
+                    else:
+                        self.image1_height = pixbuf.get_width()
+                        self.image1_width = pixbuf.get_height()
+                        x = temp_y
+                        y = temp_x
+                    if ((pixbuf.get_width() > x or pixbuf.get_height() > y or
+                        self.prefs['stretch']) and 
+                        self.prefs['zoom mode'] == 1 or
+                        (pixbuf.get_width() > x or
+                        self.prefs['stretch']) and 
+                        self.prefs['zoom mode'] == 2 or
+                        (pixbuf.get_height() > y or
+                        self.prefs['stretch']) and 
+                        self.prefs['zoom mode'] == 3 or
+                        (self.prefs['zoom scale'] != 100 and
+                        not self.prefs['zoom mode'])):
+                        if self.prefs['zoom mode'] == 1:
+                            if (1.0 * pixbuf.get_width() / x >
+                                1.0 * pixbuf.get_height() / y):
+                                width = x
+                                height = \
+                                    pixbuf.get_height() * x / \
+                                    pixbuf.get_width()
+                            else:
+                                width = \
+                                    pixbuf.get_width() * y/ \
+                                    pixbuf.get_height()
+                                height = y
+                        elif self.prefs['zoom mode'] == 2:
+                            width = x
+                            height = \
+                                pixbuf.get_height() * x / \
+                                pixbuf.get_width()
+                        elif self.prefs['zoom mode'] == 3:
+                            width = \
+                                pixbuf.get_width() * y/ \
+                                pixbuf.get_height()
+                            height = y
                         else:
                             width = \
-                                int(pixbuf.get_width() * zscale / 100)
+                                int(pixbuf.get_width() * \
+                                self.prefs['zoom scale'] / 100)
                             height = \
-                                int(pixbuf.get_height() * zscale / 100)
-
+                                int(pixbuf.get_height() * \
+                                self.prefs['zoom scale'] / 100)
                         # At least one pixel big or things will get nasty.
                         if width < 1:
                             width = 1
                         if height < 1:
                             height = 1
-                        print self.prefs['interp type']
-                        print width, height, ratio
-                        print x, y
                         pixbuf = \
                             pixbuf.scale_simple(width, height,
                             self.prefs['interp type'])
-                    x,y = y,x
+                    x = temp_x
+                    y = temp_y
                     
                     # =======================================================
                     # Convert image data to a PIL object and perform
@@ -9064,7 +8574,7 @@ class Comix:
                     self.image.set_from_pixmap(pixmap, None)
                     self.image2.hide()
                     self.image.show()
-
+                    
                     # =======================================================
                     # Set window title and statusbar message.
                     # =======================================================
@@ -9649,11 +9159,15 @@ class Comix:
         # =======================================================
         self.vadjust_upper = \
             self.vadjust.upper - self.window.get_size()[1] + \
-            self.status_size + self.tool_size + \
+            self.hscroll_size + self.status_size + self.tool_size + \
             self.menu_size
         self.hadjust_upper = \
             self.hadjust.upper - self.window.get_size()[0] + \
+            self.vscroll_size + self.thumb_vscroll_size + \
             self.thumb_size
+        self.thumb_vadjust_upper = \
+            self.thumb_vadjust.upper - self.window.get_size()[1] + \
+            self.status_size + self.tool_size + self.menu_size
         
         self.set_cursor_type('normal')
         
@@ -9674,19 +9188,31 @@ class Comix:
                 self.thumb_tree_view.get_selection().select_path(
                     self.file_number)
             
+            if self.change_thumb_selection:
+                lower = 0
+                upper = 0
+                if (self.prefs['double page'] and self.file_number !=
+                    len(self.file) - 1):
+                    for i in range(self.file_number):
+                        lower = lower + self.thumb_heights[i]
+                    upper = \
+                        lower + self.thumb_heights[self.file_number] + \
+                        self.thumb_heights[self.file_number + 1]
+                else:
+                    for i in range(self.file_number):
+                        lower = lower + self.thumb_heights[i]
+                    upper = lower + self.thumb_heights[self.file_number]
+                if (self.thumb_vadjust.get_value() > lower or
+                    self.thumb_vadjust.get_value() <
+                    upper - y + self.hscroll_size):
+                    if (lower + (upper - lower - y + self.hscroll_size) / 2 >
+                        self.thumb_vadjust_upper):
+                        self.thumb_vadjust.set_value(self.thumb_vadjust_upper)
+                    else:
+                        self.thumb_vadjust.set_value(lower + (
+                            upper - lower - y + self.hscroll_size) / 2)
+            
             self.change_thumb_selection = 0
-            # Workaround bug in PyGTK not allowing column to be none
-            col = self.thumb_tree_view.get_columns()[0]
-            cell = self.thumb_tree_view.get_cell_area(self.file_number, col)
-            rect = self.thumb_tree_view.get_visible_rect()
-            # FIXME: Doesn't work right
-#             print cell.y, rect.y, (cell.y + cell.height), (rect.y + rect.height)
-            if  cell.y < rect.y or \
-               (cell.y + cell.height) > (rect.y + rect.height):
-                # Current cell not visible, scroll
-                self.thumb_tree_view.scroll_to_cell(self.file_number, 
-                                                    row_align=0.5, 
-                                                    use_align=True)
         
         old_file_number_cache_temp = self.old_file_number
         self.old_file_number = self.file_number
@@ -9829,9 +9355,10 @@ class Comix:
         # Use gettext translations as found in the source dir,
         # otherwise based on the install path.
         # =======================================================
-        if os.path.isdir(os.path.dirname(sys.argv[0]) + '/messages'):
-            gettext.install('comix', os.path.dirname(sys.argv[0]) + 
-                '/messages', unicode=True)
+        if os.path.isdir(os.path.dirname(os.path.dirname(sys.argv[0])) +
+            '/messages'):
+            gettext.install('comix', os.path.dirname(os.path.dirname(
+                sys.argv[0])) + '/messages', unicode=True)
         else:
             gettext.install('comix', os.path.dirname(os.path.dirname(
                 sys.argv[0])) + '/share/locale', unicode=True)
@@ -9873,10 +9400,10 @@ class Comix:
         # =======================================================
         # Set the window icon, if an icon is found.
         # =======================================================
-        if os.path.isfile(os.path.join(os.path.dirname(sys.argv[0]),
-            'images/logo/comix.png')):
+        if os.path.isfile(os.path.join(os.path.dirname(os.path.dirname(
+            sys.argv[0])), 'images/logo/comix.png')):
             icon_path = \
-                os.path.join(os.path.dirname(sys.argv[0]),
+                os.path.join(os.path.dirname(os.path.dirname(sys.argv[0])),
                 'images/logo/comix.png')
         else:
             for prefix in [os.path.dirname(os.path.dirname(sys.argv[0])),
@@ -9893,10 +9420,11 @@ class Comix:
         # =======================================================
         # Set icons for the transform action, if found.
         # =======================================================
-        if os.path.isfile(os.path.join(os.path.dirname(sys.argv[0]),
-            'images/lens.png')):
+        if os.path.isfile(os.path.join(os.path.dirname(os.path.dirname(
+            sys.argv[0])), 'images/lens.png')):
             icon_path = \
-                os.path.join(os.path.dirname(sys.argv[0]), 'images')
+                os.path.join(os.path.dirname(os.path.dirname(sys.argv[0])),
+                'images')
         else:
             for prefix in [os.path.dirname(os.path.dirname(sys.argv[0])),
                 '/usr', '/usr/local', '/usr/X11R6']:
@@ -10113,10 +9641,11 @@ class Comix:
         self.create_library_window()
         self.create_open_dialog()
         self.create_preferences_dialog()
-        self.create_properties_dialog()
+        #self.create_properties_dialog()
         self.create_go_to_page_dialog()
         self.create_bookmark_dialog()
-        self.create_about_dialog()
+        #self.create_about_dialog()
+        #self.about_dialog = about.Aboutdialog(self.window)
         self.create_convert_dialog()
         self.create_permission_dialog()
         self.create_thumbnail_dialog()
@@ -10152,6 +9681,8 @@ class Comix:
         self.lib_layout.connect('drag_data_received', self.lib_drag_n_drop)
         self.scroll_wheel_event_id = \
             self.layout.connect('scroll_event', self.scroll_wheel_event)
+        self.thumb_layout.connect('scroll_event',
+            self.thumb_scroll_wheel_event)
         self.preferences_dialog.connect('delete_event',
             self.preferences_dialog_close)
         self.file_select.connect('delete_event', self.file_chooser_cancel)
@@ -10161,12 +9692,6 @@ class Comix:
             self.wrong_permissions_dialog_close)
         self.permission_dialog.connect('delete_event',
             self.wrong_permissions_dialog_close)
-        self.properties_dialog.connect('response',
-            self.properties_dialog_close)
-        self.properties_dialog.connect('delete_event',
-            self.properties_dialog_close)
-        self.about_dialog.connect('response', self.about_dialog_close)
-        self.about_dialog.connect('delete_event', self.about_dialog_close)
         self.thumbnail_dialog.connect('response',
             self.thumbnail_maintenance_dialog_close)
         self.thumbnail_dialog.connect('delete_event',
@@ -10187,6 +9712,8 @@ class Comix:
             self.bookmark_dialog_button_press)
         self.bookmark_dialog.connect('delete_event',
             self.bookmark_dialog_close)
+        self.select_default_folder_dialog.connect('delete_event',
+            self.default_folder_chooser_dialog_close)
         self.convert_dialog.connect('response',
             self.convert_dialog_save_and_close)
         self.convert_dialog.connect('delete_event', self.convert_dialog_close)
@@ -10208,15 +9735,15 @@ class Comix:
         # =======================================================
         self.actiongroup.add_actions([
             ('Next', gtk.STOCK_GO_FORWARD, _('_Next page'), 'Page_Down',
-                _('Next page'), self.next_page),
+                None, self.next_page),
             ('Previous', gtk.STOCK_GO_BACK, _('_Previous page'), 'Page_Up',
-                _('Previous page'), self.previous_page),
+                None, self.previous_page),
             ('First', gtk.STOCK_GOTO_FIRST, _('_First page'), 'Home',
-                _('First page'), self.first_page),
+                None, self.first_page),
             ('Last',gtk.STOCK_GOTO_LAST, _('_Last page'), 'End',
-                _('Last page'), self.last_page),
+                None, self.last_page),
             ('Go', gtk.STOCK_JUMP_TO, _('_Go to page...'), 'g',
-                _('Go to page...'), self.go_to_page_dialog_open),
+                None, self.go_to_page_dialog_open),
             ('Zoom', 'comix-zoom', _('Manual _Zoom')),
             ('Zin', gtk.STOCK_ZOOM_IN, _('_Zoom in'), 'KP_Add',
                 None, self.zoom_in),
@@ -10240,12 +9767,12 @@ class Comix:
             ('Options', gtk.STOCK_PREFERENCES, _('Pr_eferences'), '',
                 None, self.preferences_dialog_open),
             ('About', gtk.STOCK_ABOUT, _('_About'), '',
-                None, self.about_dialog_open),
+                None, about.dialog_open),
             ('Thumbnail_dialog', 'comix-thumbnails',
                 _('_Manage thumbnails...'),
                 '', None, self.thumbnail_maintenance_dialog_open),
             ('File', gtk.STOCK_PROPERTIES, _('Proper_ties'), '<Alt>Return',
-                None, self.properties_dialog_open),
+                None, properties.dialog_open),
             ('Comments', gtk.STOCK_INFO, _('View _comments'), 'c',
                 None, self.comment_switch),
             ('Open', gtk.STOCK_OPEN, _('_Open...'), '<Control>o',
@@ -10312,8 +9839,8 @@ class Comix:
         self.actiongroup.add_toggle_actions([
             ('Fullscreen', None, _('_Fullscreen'), 'f',
                 None, self.fullscreen_switch),
-            ('Double', 'comix-double-page', _('_Double page mode'), 'd',
-                _('Double page mode'), self.double_page_switch),
+            ('Double', None, _('_Double page mode'), 'd',
+                None, self.double_page_switch),
             ('Toolbar', None, _('_Toolbar'), None,
                 None, self.toolbar_switch),
             ('Menubar', None, _('_Menubar'), None,
@@ -10326,21 +9853,17 @@ class Comix:
                 None, self.thumbnail_switch),
             ('Hide_all', None, _('H_ide all'), 'i',
                 None, self.hide_all_switch),
-            ('manga_mode', 'comix-manga', _('_Manga mode'), 'm',
-                _('Manga mode'), self.manga_mode_switch),
+            ('manga_mode', None, _('_Manga mode'), 'm',
+                None, self.manga_mode_switch),
             ('Keep_rotation', None, _('_Keep transformation'), 'k',
                 None, self.keep_transformation_switch),
-            ('Lens', 'comix-lens', _('Magnifying _lens'), 'z',
-                _('Magnifying lens'), self.lens_switch)])
+            ('Lens', None, _('Magnifying _lens'), 'z',
+                None, self.lens_switch)])
         self.actiongroup.add_radio_actions([
-            ('fit_manual_mode', 'comix-fitnone', _('Manual zoom mode'),
-                'a', _("Manual zoom mode"), 0),
-            ('fit_screen_mode', 'comix-fitscreen', _('Fit-to-_screen mode'),
-                's', _('Fit-to-screen mode'), 1),
-            ('fit_width_mode', 'comix-fitwidth', _('Fit _width mode'),
-                'w', _('Fit width mode'), 2),
-            ('fit_height_mode', 'comix-fitheight', _('Fit _height mode'),
-                'h', _('Fit height mode'), 3)],
+            ('fit_manual_mode', None, _('Manual zoom mode'), 'a', None, 0),
+            ('fit_screen_mode', None, _('Fit-to-_screen mode'), 's', None, 1),
+            ('fit_width_mode', None, _('Fit _width mode'), 'w', None, 2),
+            ('fit_height_mode', None, _('Fit _height mode'), 'h', None, 3)],
             0, self.zoom_mode_switch)
         
         # =======================================================
@@ -10370,10 +9893,10 @@ class Comix:
         self.tooltips.set_tip(self.button_save_size, _('Save the position and the size of the window for the next time you start Comix.'))
         self.tooltips.set_tip(self.button_next_archive, _('Automatically open the next archive in the directory when scrolling past the last page of the current archive, and automatically open the previous archive in the directory when scrolling past the first page of the current archive.'))
         self.tooltips.set_tip(self.button_hide_cursor, _('Hide the cursor when in fullscreen mode.'))
-        self.tooltips.set_tip(self.button_nearest, _('Set the image scaling method. The best choice is often "Tiles", it is quite quick and produces almost as good results as "Bilinear" or "Hyper".'))
-        self.tooltips.set_tip(self.button_tiles, _('Set the image scaling method. The best choice is often "Tiles", it is quite quick and produces almost as good results as "Bilinear" or "Hyper".'))
-        self.tooltips.set_tip(self.button_bilinear, _('Set the image scaling method. The best choice is often "Tiles", it is quite quick and produces almost as good results as "Bilinear" or "Hyper".'))
-        self.tooltips.set_tip(self.button_hyper, _('Set the image scaling method. The best choice is often "Tiles", it is quite quick and produces almost as good results as "Bilinear" or "Hyper".'))
+        self.tooltips.set_tip(self.button_1, _('Set the image scaling method. The best choice is often "Tiles", it is quite quick and produces almost as good results as "Bilinear" or "Hyper".'))
+        self.tooltips.set_tip(self.button_2, _('Set the image scaling method. The best choice is often "Tiles", it is quite quick and produces almost as good results as "Bilinear" or "Hyper".'))
+        self.tooltips.set_tip(self.button_3, _('Set the image scaling method. The best choice is often "Tiles", it is quite quick and produces almost as good results as "Bilinear" or "Hyper".'))
+        self.tooltips.set_tip(self.button_4, _('Set the image scaling method. The best choice is often "Tiles", it is quite quick and produces almost as good results as "Bilinear" or "Hyper".'))
         self.tooltips.set_tip(self.comment_extensions_entry, _('Treat files with the following extensions as comment files. Extensions should be separated by whitespaces. They are not case sensitive.'))
         self.tooltips.set_tip(self.button_smart_space, _('Use smart scrolling with the space key. Pressing the space key normally scrolls straight down one window height unless at the bottom of the page where it flips pages instead. When this option is set Comix automatically tries to follow the reading flow of the comic book. When pressing the space key it will not only scroll down but will also scroll horizontally to the edge of the page (left or right depending on whether you use manga mode). In double page mode it will go to the edge of the first page if it is in view, otherwise it will go to the edge of the second page. Also, in double page mode with this option, Comix will not flip pages unless at the bottom of the second page. At the bottom of the first page it will instead go to the top of the second page.'))
         self.tooltips.set_tip(self.button_thumb_scroll, _('Always hide the thumbnail scrollbar.'))
@@ -10393,6 +9916,18 @@ class Comix:
         self.tooltips.set_tip(self.lib_search_box, _("Filter out archives with regular expressions."))
         self.tooltips.set_tip(self.button_reg_expr, _("Apply filters on full paths rather than filenames."))
         self.tooltips.set_tip(self.button_store_recent, _("Store a list of the 10 last opened files that can be accessed through the menus."))
+        self.toolbutton_fitscreen.set_tooltip(self.tooltips, _("Fit-to-screen mode"))
+        self.toolbutton_fitwidth.set_tooltip(self.tooltips, _("Fit width mode"))
+        self.toolbutton_fitheight.set_tooltip(self.tooltips, _("Fit height mode"))
+        self.toolbutton_fitnone.set_tooltip(self.tooltips, _("Manual zoom mode"))
+        self.toolbutton_double_page.set_tooltip(self.tooltips, _("Double page mode"))
+        self.toolbutton_lens.set_tooltip(self.tooltips, _("Magnifying lens"))
+        self.toolbutton_manga.set_tooltip(self.tooltips, _("Manga mode"))
+        self.toolbutton_first.set_tooltip(self.tooltips, _("First page"))
+        self.toolbutton_previous.set_tooltip(self.tooltips, _("Previous page"))
+        self.toolbutton_next.set_tooltip(self.tooltips, _("Next page"))
+        self.toolbutton_last.set_tooltip(self.tooltips, _("Last page"))
+        self.toolbutton_go.set_tooltip(self.tooltips, _("Go to page..."))
         
         # =======================================================
         # Do some tasks depending on the the information parsed
@@ -10512,12 +10047,5 @@ class Comix:
         else:
             self.set_file_exists(False)
 
-def main():
-    
-    gtk.main()    
-    return 0
 
-if __name__ == '__main__':
-    Comix()
-    main()
 

@@ -1,0 +1,342 @@
+import sys
+import os
+import shutil
+import time
+
+import gtk
+
+import filehandler
+import preferences
+#import toolbar
+import icons
+import ui
+import scale
+import event
+
+window = None
+
+class Mainwindow(gtk.Window):
+    
+    def __init__(self):
+        
+        gtk.Window.__init__(self, gtk.WINDOW_TOPLEVEL)
+        self.connect('delete_event', terminate_program)
+        self.connect('key_press_event', event.key_press_event)
+        self.connect('configure_event', event.resize_event)
+
+        self.set_title('Comix')
+        
+        self.is_fullscreen = False
+        self.double_page = False 
+        self.manga_mode = False
+        self.zoom_mode = 'fit'
+        self.manual_zoom = 1.0
+        #self.layout_width = None
+        #self.layout_height = None
+        self.width, self.height = self.get_size()
+
+        # =======================================================
+        # Create main display area widgets.
+        # =======================================================
+        self.realize()
+        if preferences.prefs['save window pos']:
+            self.move(preferences.prefs['window x'],
+                preferences.prefs['window y'])
+        self.set_size_request(300, 300)
+        self.resize(preferences.prefs['window width'],
+            preferences.prefs['window height'])
+        #self.tooltips = gtk.Tooltips()
+
+        self.left_image = gtk.Image()
+        self.right_image = gtk.Image()
+        self.comment_label = gtk.Label()
+        self.statusbar = gtk.Statusbar()
+        self.main_layout = gtk.Layout()
+        self.ui_manager = ui.MainUI()
+        self.add_accel_group(self.ui_manager.get_accel_group())
+        self.actiongroup = self.ui_manager.get_action_groups()[0]
+        self.menubar = self.ui_manager.get_widget('/Menu')
+        self.toolbar = self.ui_manager.get_widget('/Tool')
+        # This is a hack to get the focus away from the toolbar so that
+        # we don't activate it with space.
+        self.toolbar.set_focus_child(
+            self.ui_manager.get_widget('/Tool/expander'))
+
+        self.image_box = gtk.HBox(False, 2)
+        self.image_box.show()
+        self.image_box.add(self.left_image)
+        self.image_box.add(self.right_image)
+        self.image_box.show_all()
+        
+        self.main_layout.put(self.image_box, 0, 0)
+        self.main_layout.put(self.comment_label, 0, 0)
+        self.main_layout.modify_bg(gtk.STATE_NORMAL,
+            gtk.gdk.colormap_get_system().alloc_color(gtk.gdk.Color(
+            preferences.prefs['red bg'], preferences.prefs['green bg'],
+            preferences.prefs['blue bg']), False, True))
+        
+        # =======================================================
+        # Create thumbnail sidebar widgets.
+        # =======================================================
+        self.thumb_liststore = gtk.ListStore(gtk.gdk.Pixbuf)
+        self.thumb_tree_view = gtk.TreeView(self.thumb_liststore)
+        self.thumb_column = gtk.TreeViewColumn(None)
+        self.thumb_cell = gtk.CellRendererPixbuf()
+        self.thumb_layout = gtk.Layout()
+        self.thumb_layout.put(self.thumb_tree_view, 0, 0)
+        self.thumb_tree_view.show()
+        self.thumb_column.set_sizing(gtk.TREE_VIEW_COLUMN_FIXED)
+        self.thumb_column.set_fixed_width(
+            preferences.prefs['thumbnail size'] + 7)
+        self.thumb_tree_view.append_column(self.thumb_column)
+        self.thumb_column.pack_start(self.thumb_cell, True)
+        self.thumb_column.set_attributes(self.thumb_cell, pixbuf=0)
+        self.thumb_layout.set_size_request(
+            preferences.prefs['thumbnail size'] + 7, 0)
+        self.thumb_tree_view.get_selection().set_mode(gtk.SELECTION_MULTIPLE)
+        self.thumb_tree_view.set_headers_visible(False)
+        self.thumb_vadjust = self.thumb_layout.get_vadjustment()
+        self.thumb_vadjust.step_increment = 15
+        self.thumb_vadjust.page_increment = 1
+        self.thumb_scroll = gtk.VScrollbar(None)
+        self.thumb_scroll.set_adjustment(self.thumb_vadjust)
+        #self.thumb_selection_handler = \
+        #    self.thumb_tree_view.get_selection().connect(
+        #    'changed', self.thumb_selection_event)
+        
+        # =======================================================
+        # Create scrollbar widgets.
+        # =======================================================
+        self.vadjust = self.main_layout.get_vadjustment()
+        self.hadjust = self.main_layout.get_hadjustment()
+        self.vadjust.step_increment = 15
+        self.vadjust.page_increment = 1
+        self.hadjust.step_increment = 15
+        self.hadjust.page_increment = 1
+        self.hscroll = gtk.HScrollbar(None)
+        self.hscroll.set_adjustment(self.hadjust)
+        self.vscroll = gtk.VScrollbar(None)
+        self.vscroll.set_adjustment(self.vadjust)
+        
+        # =======================================================
+        # Attach widgets to the main table.
+        # =======================================================
+        self.table = gtk.Table(2, 2, False)
+        self.table.attach(self.thumb_layout, 0, 1, 2, 5, gtk.FILL,
+            gtk.FILL|gtk.EXPAND, 0, 0)
+        self.table.attach(self.thumb_scroll, 1, 2, 2, 4, gtk.FILL|gtk.SHRINK,
+            gtk.FILL|gtk.SHRINK, 0, 0)
+        self.table.attach(self.main_layout, 2, 3, 2, 3, gtk.FILL|gtk.EXPAND,
+            gtk.FILL|gtk.EXPAND, 0, 0)
+        self.table.attach(self.vscroll, 3, 4, 2, 3, gtk.FILL|gtk.SHRINK,
+            gtk.FILL|gtk.SHRINK, 0, 0)
+        self.table.attach(self.hscroll, 2, 3, 4, 5, gtk.FILL|gtk.SHRINK,
+            gtk.FILL|gtk.SHRINK, 0, 0)
+        self.table.attach(self.toolbar, 0, 4, 1, 2, gtk.FILL|gtk.SHRINK,
+            gtk.FILL|gtk.SHRINK, 0, 0)
+        self.table.attach(self.statusbar, 0, 4, 5, 6, gtk.FILL|gtk.SHRINK,
+            gtk.FILL|gtk.SHRINK, 0, 0)
+        self.table.attach(self.menubar, 0, 4, 0, 1, gtk.FILL|gtk.SHRINK,
+            gtk.FILL|gtk.SHRINK, 0, 0)
+
+        self.add(self.table)
+        self.table.show()
+        self.main_layout.show()
+        self.display_active_widgets()
+
+    def display_active_widgets(self):
+        if not preferences.prefs['hide all']:
+            if preferences.prefs['show toolbar']:
+                self.toolbar.show_all()
+            else:
+                self.toolbar.hide_all()
+            if preferences.prefs['show statusbar']:
+                self.statusbar.show_all()
+            else:
+                self.statusbar.hide_all()
+            if preferences.prefs['show thumbnails']:
+                self.thumb_layout.show_all()
+                if preferences.prefs['hide thumbnail scrollbar']:
+                    self.thumb_scroll.hide_all()
+                else:
+                    self.thumb_scroll.show_all()
+            else:
+                self.thumb_layout.hide_all()
+                self.thumb_scroll.hide_all()
+            if preferences.prefs['show menubar']:
+                self.menubar.show_all()
+            else:
+                self.menubar.hide_all()
+            if (preferences.prefs['show scrollbar'] and
+              self.zoom_mode == 'width'):
+                self.vscroll.show_all()
+                self.hscroll.hide_all()
+            elif (preferences.prefs['show scrollbar'] and
+              self.zoom_mode == 'height'):
+                self.vscroll.hide_all()
+                self.hscroll.show_all()
+            elif (preferences.prefs['show scrollbar'] and
+              self.zoom_mode == 'manual'):
+                self.vscroll.show_all()
+                self.hscroll.show_all()
+            else:
+                self.vscroll.hide_all()
+                self.hscroll.hide_all()
+        else:
+            self.toolbar.hide_all()
+            self.statusbar.hide_all()
+            self.thumb_layout.hide_all()
+
+    def get_layout_size(self):
+        width, height = self.get_size()
+        if not preferences.prefs['hide all']:
+            if preferences.prefs['show toolbar']:
+                height -= self.toolbar.size_request()[1]
+            if preferences.prefs['show statusbar']:
+                height -= self.statusbar.size_request()[1]
+            if preferences.prefs['show thumbnails']:
+                width -= self.thumb_layout.size_request()[0]
+                if not preferences.prefs['hide thumbnail scrollbar']:
+                    width -= self.thumb_scroll.size_request()[0]
+            if preferences.prefs['show menubar']:
+                height -= self.menubar.size_request()[1]
+            if (preferences.prefs['show scrollbar'] and
+              self.zoom_mode == 'width'):
+                width -= self.vscroll.size_request()[0]
+            elif (preferences.prefs['show scrollbar'] and
+              self.zoom_mode == 'height'):
+                height -= self.hscroll.size_request()[1]
+            elif (preferences.prefs['show scrollbar'] and
+              self.zoom_mode == 'manual'):
+                width -= self.vscroll.size_request()[0]
+                height -= self.hscroll.size_request()[1]
+        return width, height
+
+    def draw_image(self):
+        self.display_active_widgets()
+        if not filehandler.file_loaded:
+            return
+        print 'draw'
+        width, height = self.get_layout_size()
+        scale_width = self.zoom_mode == 'height' and -1 or width
+        scale_height = self.zoom_mode == 'width' and -1 or height
+        
+        if self.double_page and not filehandler.is_last_page():
+            if self.manga_mode:
+                right_pixbuf, left_pixbuf = filehandler.get_pixbufs()
+            else:
+                left_pixbuf, right_pixbuf = filehandler.get_pixbufs()
+
+            if self.zoom_mode == 'manual':
+                scale_width = self.manual_zoom * (
+                    left_pixbuf.get_width() + right_pixbuf.get_width())
+                scale_height = self.manual_zoom * max(
+                    left_pixbuf.get_height(), right_pixbuf.get_height())
+
+            left_pixbuf, right_pixbuf = scale.fit_2_in_rectangle(
+                left_pixbuf, right_pixbuf, scale_width, scale_height)
+            self.left_image.set_from_pixbuf(left_pixbuf)
+            self.right_image.set_from_pixbuf(right_pixbuf)
+            x_padding = (width - left_pixbuf.get_width() -
+                right_pixbuf.get_width()) / 2
+            y_padding = (height - max(left_pixbuf.get_height(),
+                right_pixbuf.get_height())) / 2
+        else:
+            pixbuf = filehandler.get_pixbufs()
+
+            if self.zoom_mode == 'manual':
+                scale_width = self.manual_zoom * pixbuf.get_width()
+                scale_height = self.manual_zoom * pixbuf.get_height()
+
+            pixbuf = scale.fit_in_rectangle(pixbuf, scale_width, scale_height)
+            self.left_image.set_from_pixbuf(pixbuf)
+            self.right_image.clear()
+            x_padding = (width - pixbuf.get_width()) / 2
+            y_padding = (height - pixbuf.get_height()) / 2
+        
+        self.main_layout.move(self.image_box, max(0, x_padding),
+            max(0, y_padding))
+        self.main_layout.set_size(*self.image_box.size_request())
+        self.vadjust.set_value(0)
+        self.hadjust.set_value(0)
+        
+        self.set_title(os.path.basename(filehandler.archive_path) + 
+            '  [%d / %d]  -  Comix' % (filehandler.current_image + 1,
+            len(filehandler.image_files)))
+
+        while gtk.events_pending():
+            gtk.main_iteration(False)
+        filehandler.do_cacheing()
+
+def next_page(*args):
+    if filehandler.next_page():
+        window.draw_image()
+
+def previous_page(*args):
+    if filehandler.previous_page():
+        window.draw_image()
+
+def first_page(*args):
+    if filehandler.first_page():
+        window.draw_image()
+
+def last_page(*args):
+    if filehandler.last_page():
+        window.draw_image()
+
+def change_double_page(toggleaction):
+    window.double_page = toggleaction.get_active()
+    window.draw_image()
+
+def change_manga_mode(toggleaction):
+    window.manga_mode = toggleaction.get_active()
+    window.draw_image()
+
+def change_zoom_mode(radioaction, *args):
+    mode = radioaction.get_current_value()
+    old_mode = window.zoom_mode
+    if mode == 0:
+        window.zoom_mode = 'manual'
+    elif mode == 1:
+        window.zoom_mode = 'fit'
+    elif mode == 2:
+        window.zoom_mode = 'width'
+    else:
+        window.zoom_mode = 'height'
+    if old_mode != window.zoom_mode:
+        window.draw_image()
+
+def change_fullscreen(toggleaction):
+    window.is_fullscreen = toggleaction.get_active()
+    if window.is_fullscreen:
+        window.fullscreen()
+    else:
+        window.unfullscreen()
+
+def terminate_program(*args):
+    print 'Bye!'
+    gtk.main_quit()
+    shutil.rmtree(filehandler.tmp_dir)
+    sys.exit(0)
+
+def start():
+    global window
+    window = Mainwindow()
+    window.show()
+    if preferences.prefs['default double page']:
+        window.actiongroup.get_action('double').activate()
+    if preferences.prefs['default fullscreen']:
+        window.actiongroup.get_action('fullscreen').activate()
+    if preferences.prefs['default manga mode']:
+        window.actiongroup.get_action('manga_mode').activate()
+    if preferences.prefs['default zoom mode'] == 'manual':
+        window.actiongroup.get_action('fit_manual_mode').activate()
+    elif preferences.prefs['default zoom mode'] == 'fit':
+        window.actiongroup.get_action('fit_screen_mode').activate()
+    elif preferences.prefs['default zoom mode'] == 'width':
+        window.actiongroup.get_action('fit_width_mode').activate()
+    else:
+        window.actiongroup.get_action('fit_height_mode').activate()
+
+    gtk.main()
+
