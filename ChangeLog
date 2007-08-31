@@ -1,6 +1,9 @@
 Comix 3.6.5
     
     - Added a Czech translation by Jan Nekvasil.
+    
+    - Added a preference to intelligently handle double-page scans in
+    fit-to-width mode. Thanks to GhePeU for this patch.
 
 Comix 3.6.4
     

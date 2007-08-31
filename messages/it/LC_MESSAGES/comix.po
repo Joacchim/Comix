@@ -2,11 +2,11 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: 2007-07-20 16:52+CEST\n"
-"PO-Revision-Date: 2006-09-26 23:57+0100\n"
+"PO-Revision-Date: 2007-08-28 00:31+CEST\n"
 "Last-Translator: GhePeU <ghepeu@virgilio.it>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=utf-8\n"
+"Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
 #: comix:547 comix:11064
@@ -156,6 +156,10 @@ msgstr "Ingrandisci le immagini piccole"
 #: comix:897
 msgid "Use smart scaling in double page mode"
 msgstr "Usa ingrandimento intelligente nella modalità pagina doppia"
+
+#: comix:
+msgid "Use smart scaling for double pages in fit width mode"
+msgstr "Usa ingrandimento intelligente per le pagine doppie nella modalità adatta larghezza"
 
 #: comix:899
 msgid "Always view comments when opening a new file"
@@ -504,23 +508,23 @@ msgstr "Traduzione in Cinese tradizionale"
 
 #: comix:1552
 msgid "Japanese translation"
-msgstr ""
+msgstr "Traduzione in giapponese"
 
 #: comix:1553
 msgid "Hungarian translation"
-msgstr ""
+msgstr "Traduzione in ungherese"
 
 #: comix:1554
 msgid "Russian translation"
-msgstr ""
+msgstr "Traduzione in russo"
 
 #: comix:1555
 msgid "Croatian translation"
-msgstr ""
+msgstr "Traduzione in croato"
 
 #: comix:1556
 msgid "Czech translation"
-msgstr ""
+msgstr "Traduzione in ceco"
 
 #: comix:1564
 msgid "Credits"
@@ -1113,6 +1117,14 @@ msgstr ""
 "riempimento dello schermo. La più piccola delle due immagini sarà ingrandita "
 "per riempire qualsiasi spazio rimanente. "
 
+#: comix:
+msgid ""
+"Recognize the images representing double pages and scale them so that each "
+"half image will fit to the screen width."
+msgstr ""
+"Riconosci le immagini che mostrano pagine doppie e ridimensionale in modo che "
+"ciascuna metà dell'immagine sia pari alla larghezza dello schermo."
+
 #: comix:11033
 msgid "Automatically show any available comments when opening a new file."
 msgstr ""
@@ -1153,6 +1165,10 @@ msgid ""
 "with the arrow keys, even when not in fit-to-screen mode. It takes three "
 "\"steps\" with the scroll wheel or arrow keys to trigger this behaviour."
 msgstr ""
+"Volta pagina quando si scorre \"al di là della pagina\" con la rotellina del "
+"mouse o con i tasti freccia, anche quando non in modalità riempi schermo. "
+"Bisogna compiere tre \"scatti\" con la rotellina del mouse o con i tasti "
+"freccia per voltare pagina."
 
 #: comix:11038
 msgid ""
@@ -1383,26 +1399,26 @@ msgstr "Ultima pagina"
 msgid "Go to page..."
 msgstr "Vai a pagina..."
 
-#~ msgid ""
-#~ "Flip pages when scrolling \"off the page\" with the scroll wheel, even "
-#~ "when not in fit-to-screen mode. It takes three \"steps\" with the scroll "
-#~ "wheel to trigger this behaviour."
-#~ msgstr ""
-#~ "Volta pagina quando si scorre \"al di là della pagina\" con la rotellina "
-#~ "del mouse, anche quando non in modalità riempi schermo. Bisogna compiere "
-#~ "tre \"scatti\" con la rotellina del mouse per voltare pagina."
+msgid ""
+"Flip pages when scrolling \"off the page\" with the scroll wheel, even when "
+"not in fit-to-screen mode. It takes three \"steps\" with the scroll wheel to "
+"trigger this behaviour."
+msgstr ""
+"Volta pagina quando si scorre \"al di là della pagina\" con la rotellina del "
+"mouse, anche quando non in modalità riempi schermo. Bisogna compiere tre "
+"\"scatti\" con la rotellina del mouse per voltare pagina."
 
-#~ msgid "No viewable files in"
-#~ msgstr "Nessun archivio visualizzabile in: "
+msgid "No viewable files in"
+msgstr "Nessun archivio visualizzabile in: "
 
-#~ msgid "No images in"
-#~ msgstr "Nessuna immagine in"
+msgid "No images in"
+msgstr "Nessuna immagine in"
 
-#~ msgid "Saturation (default 1.0):"
-#~ msgstr "Saturazione (predefinita 1.0):"
+msgid "Saturation (default 1.0):"
+msgstr "Saturazione (predefinita 1.0):"
 
-#~ msgid "Contrast (default 1.0):"
-#~ msgstr "Contrasto (predefinito 1.0):"
+msgid "Contrast (default 1.0):"
+msgstr "Contrasto (predefinito 1.0):"
 
-#~ msgid "Advanced"
-#~ msgstr "Avanzate"
+msgid "Advanced"
+msgstr "Avanzate"

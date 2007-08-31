@@ -130,6 +130,7 @@ class Comix:
         'flip with wheel': 0,
         'scroll wheel horiz': 0,
         'smart double page scaling': 0,
+        'smart double page fit width': 0,
         'toolbar style': gtk.TOOLBAR_ICONS,
         'smart space scroll': 0,
         'show thumbnails': 1,
@@ -895,6 +896,8 @@ class Comix:
             gtk.CheckButton(_("Stretch small images"))
         self.button_smart_scale = \
             gtk.CheckButton(_("Use smart scaling in double page mode"))
+        self.button_smart_double_page = \
+            gtk.CheckButton(_("Use smart scaling for double pages in fit width mode"))
         self.button_comment = \
             gtk.CheckButton(_("Always view comments when opening a new file"))
         self.button_hide_bars = \
@@ -1122,7 +1125,10 @@ class Comix:
         self.button_smart_scale.connect("toggled",
             self.preferences_dialog_change_settings, 19)
         vbox_scaling.pack_start(self.button_smart_scale, False, False, 2)
-        
+        self.button_smart_double_page.connect("toggled",
+            self.preferences_dialog_change_settings, 24)
+        vbox_scaling.pack_start(self.button_smart_double_page, False, False, 2)
+            
         label = gtk.Label()
         label.set_markup('\n<b>' + _('Scaling quality') + '</b>\n')
         label.set_alignment(0, 0)
@@ -4465,6 +4471,8 @@ class Comix:
         self.button_scroll_horiz.set_active(self.prefs['scroll wheel horiz'])
         self.button_smart_scale.set_active(
             self.prefs['smart double page scaling'])
+        self.button_smart_double_page.set_active(
+            self.prefs['smart double page fit width'])
         self.button_smart_space.set_active(self.prefs['smart space scroll'])
         self.button_thumb_scroll.set_active(
             self.prefs['hide thumbnail scrollbar'])
@@ -4874,8 +4882,11 @@ class Comix:
             self.temp_prefs['open defaults to last browsed'] = 0
         elif data == 23:
             self.temp_prefs['open defaults to last browsed'] = 1
-        #elif data == 24:
-        # FREE!
+        elif data == 24:
+            if self.button_smart_double_page.get_active():
+                self.temp_prefs['smart double page fit width'] = 1
+            else:
+                self.temp_prefs['smart double page fit width'] = 0
         elif data == 25:
             if self.button_show_pagenumber.get_active():
                 self.temp_prefs['show page numbers on thumbnails'] = 1
@@ -9573,10 +9584,20 @@ class Comix:
                                     pixbuf.get_height()
                                 height = y
                         elif self.prefs['zoom mode'] == 2:
-                            width = x
-                            height = \
-                                pixbuf.get_height() * x / \
-                                pixbuf.get_width()
+                            if (pixbuf.get_width() > pixbuf.get_height() and
+                                self.prefs['smart double page fit width']):
+                                width = 2 * x
+                                height = \
+                                    pixbuf.get_height() * 2 * x / \
+                                    pixbuf.get_width()
+                                if (not self.prefs['fullscreen']):
+                                    self.hscroll_size = self.hscroll.size_request()[1]
+                                    self.hscroll.show()
+                            else:
+                                width = x
+                                height = \
+                                    pixbuf.get_height() * x / \
+                                    pixbuf.get_width()
                         elif self.prefs['zoom mode'] == 3:
                             width = \
                                 pixbuf.get_width() * y/ \
@@ -11030,6 +11051,7 @@ class Comix:
         self.tooltips.set_tip(self.button_fit_height_default, _('Enter fit height mode automatically when Comix is started.'))
         self.tooltips.set_tip(self.button_stretch, _('Also scale images to a size that is larger than their original size in fit-to-screen mode, fit width mode and fit height mode.'))
         self.tooltips.set_tip(self.button_smart_scale, _('Scale the images independently when in double page mode and fit-to-screen mode. The smaller of the two images will scale up to fill any extra space that is given.'))
+        self.tooltips.set_tip(self.button_smart_double_page, _('Recognize the images representing double pages and scale them so that each half image will fit to the screen width.'))
         self.tooltips.set_tip(self.button_comment, _('Automatically show any available comments when opening a new file.'))
         self.tooltips.set_tip(self.button_hide_bars, _('Automatically hide scrollbars, menubar, toolbar, statusbar and thumbnails when in fullscreen mode.'))
         self.tooltips.set_tip(self.button_cache_next, _('Cache the next page in the archive/directory to increase the perceived speed. This is generally recommended unless you are running low on RAM.'))
