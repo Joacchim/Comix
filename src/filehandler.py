@@ -113,7 +113,9 @@ def next_page():
 
     global image_files
     global current_image
-    
+
+    if not file_loaded:
+        return False
     old_image = current_image
     step = main.window.double_page and 2 or 1
     if current_image >= len(image_files) - step:
@@ -136,7 +138,9 @@ def previous_page():
 
     global image_files
     global current_image
-
+    
+    if not file_loaded:
+        return False
     old_image = current_image
     step = main.window.double_page and 2 or 1
     if current_image <= step - 1:
@@ -157,7 +161,9 @@ def first_page():
     '''
 
     global current_image
-
+    
+    if not file_loaded:
+        return False
     old_image = current_image
     current_image = 0
     return old_image != current_image
@@ -170,7 +176,9 @@ def last_page():
 
     global current_image
     global image_files
-
+    
+    if not file_loaded:
+        return False
     old_image = current_image
     offset = main.window.double_page and 2 or 1
     current_image = max(0, len(image_files) - offset)

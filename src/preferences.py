@@ -18,7 +18,7 @@ prefs = {
     'default double page': False,
     'default fullscreen': False,
     'default open path': os.getenv('HOME'),
-    'default zoom mode': 'fit',
+    'default zoom mode': 'fit', # fit, width, height or manual
     'default manga mode': False,
     'emulate double page': False,
     'flip with wheel': False,
@@ -57,7 +57,7 @@ prefs = {
     'slideshow delay': 6.0,
     'smart space scroll': False,
     'space scroll length': 75,
-    'space scroll type': 0,
+    'space scroll type': 'window', # window or image
     'stored hide all values': (True, True, True, True, True),
     'store recent file info': True,
     'stretch': False,

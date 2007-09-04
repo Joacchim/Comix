@@ -7,7 +7,6 @@ import gtk
 
 import filehandler
 import preferences
-#import toolbar
 import icons
 import ui
 import scale
@@ -30,7 +29,7 @@ class Mainwindow(gtk.Window):
         self.double_page = False 
         self.manga_mode = False
         self.zoom_mode = 'fit'
-        self.manual_zoom = 1.0
+        self.manual_zoom = 100
         #self.layout_width = None
         #self.layout_height = None
         self.width, self.height = self.get_size()
@@ -212,7 +211,7 @@ class Mainwindow(gtk.Window):
                 height -= self.hscroll.size_request()[1]
         return width, height
 
-    def draw_image(self):
+    def draw_image(self, at_bottom=False):
         self.display_active_widgets()
         if not filehandler.file_loaded:
             return
@@ -220,6 +219,7 @@ class Mainwindow(gtk.Window):
         width, height = self.get_layout_size()
         scale_width = self.zoom_mode == 'height' and -1 or width
         scale_height = self.zoom_mode == 'width' and -1 or height
+        scale_up = preferences.prefs['stretch']
         
         if self.double_page and not filehandler.is_last_page():
             if self.manga_mode:
@@ -228,37 +228,54 @@ class Mainwindow(gtk.Window):
                 left_pixbuf, right_pixbuf = filehandler.get_pixbufs()
 
             if self.zoom_mode == 'manual':
-                scale_width = self.manual_zoom * (
-                    left_pixbuf.get_width() + right_pixbuf.get_width())
-                scale_height = self.manual_zoom * max(
-                    left_pixbuf.get_height(), right_pixbuf.get_height())
+                scale_width = int(self.manual_zoom * (
+                    left_pixbuf.get_width() + right_pixbuf.get_width()) // 100)
+                scale_height = int(self.manual_zoom * max(
+                    left_pixbuf.get_height(), right_pixbuf.get_height()) // 100)
+                scale_up = True
 
             left_pixbuf, right_pixbuf = scale.fit_2_in_rectangle(
-                left_pixbuf, right_pixbuf, scale_width, scale_height)
+                left_pixbuf, right_pixbuf, scale_width, scale_height,
+                scale_up=scale_up)
             self.left_image.set_from_pixbuf(left_pixbuf)
             self.right_image.set_from_pixbuf(right_pixbuf)
             x_padding = (width - left_pixbuf.get_width() -
                 right_pixbuf.get_width()) / 2
             y_padding = (height - max(left_pixbuf.get_height(),
                 right_pixbuf.get_height())) / 2
+            self.right_image.show()
         else:
             pixbuf = filehandler.get_pixbufs()
 
             if self.zoom_mode == 'manual':
-                scale_width = self.manual_zoom * pixbuf.get_width()
-                scale_height = self.manual_zoom * pixbuf.get_height()
+                scale_width = int(self.manual_zoom * pixbuf.get_width() // 100)
+                scale_height = int(self.manual_zoom * pixbuf.get_height()
+                    // 100)
+                scale_up = True
 
-            pixbuf = scale.fit_in_rectangle(pixbuf, scale_width, scale_height)
+            pixbuf = scale.fit_in_rectangle(pixbuf, scale_width, scale_height,
+                scale_up=scale_up)
             self.left_image.set_from_pixbuf(pixbuf)
             self.right_image.clear()
+            self.right_image.hide()
             x_padding = (width - pixbuf.get_width()) / 2
             y_padding = (height - pixbuf.get_height()) / 2
         
         self.main_layout.move(self.image_box, max(0, x_padding),
             max(0, y_padding))
         self.main_layout.set_size(*self.image_box.size_request())
-        self.vadjust.set_value(0)
-        self.hadjust.set_value(0)
+        if at_bottom:
+            self.vadjust.set_value(self.vadjust.upper - height)
+            if self.manga_mode:
+                self.hadjust.set_value(0)
+            else:
+                self.hadjust.set_value(self.hadjust.upper - width)
+        else:
+            self.vadjust.set_value(0)
+            if self.manga_mode:
+                self.hadjust.set_value(self.hadjust.upper - width)
+            else:
+                self.hadjust.set_value(0)
         
         self.set_title(os.path.basename(filehandler.archive_path) + 
             '  [%d / %d]  -  Comix' % (filehandler.current_image + 1,
@@ -274,7 +291,7 @@ def next_page(*args):
 
 def previous_page(*args):
     if filehandler.previous_page():
-        window.draw_image()
+        window.draw_image(at_bottom=True)
 
 def first_page(*args):
     if filehandler.first_page():
@@ -313,6 +330,44 @@ def change_fullscreen(toggleaction):
     else:
         window.unfullscreen()
 
+def manual_zoom_in(*args):
+    new_zoom = window.manual_zoom * 1.15
+    if 95 < new_zoom < 105: # To compensate for rounding errors
+        new_zoom = 100
+    if new_zoom > 1000:
+        return
+    window.manual_zoom = new_zoom
+    window.draw_image()
+
+def manual_zoom_out(*args):
+    new_zoom = window.manual_zoom / 1.15
+    if 95 < new_zoom < 105: # To compensate for rounding errors
+        new_zoom = 100
+    if new_zoom < 10:
+        return
+    window.manual_zoom = new_zoom
+    window.draw_image()
+
+def manual_zoom_original(*args):
+    window.manual_zoom = 100
+    window.draw_image()
+
+def scroll(x, y):
+    old_hadjust = window.hadjust.get_value()
+    old_vadjust = window.vadjust.get_value()
+    layout_width, layout_height = window.get_layout_size()
+    hadjust_upper = window.hadjust.upper - layout_width
+    vadjust_upper = window.vadjust.upper - layout_height
+    new_hadjust = old_hadjust + x
+    new_vadjust = old_vadjust + y
+    new_hadjust = max(0, new_hadjust)
+    new_vadjust = max(0, new_vadjust)
+    new_hadjust = min(hadjust_upper, new_hadjust)
+    new_vadjust = min(vadjust_upper, new_vadjust)
+    window.vadjust.set_value(new_vadjust)
+    window.hadjust.set_value(new_hadjust)
+    return old_vadjust != new_vadjust or old_hadjust != new_hadjust
+
 def terminate_program(*args):
     print 'Bye!'
     gtk.main_quit()
@@ -337,6 +392,5 @@ def start():
         window.actiongroup.get_action('fit_width_mode').activate()
     else:
         window.actiongroup.get_action('fit_height_mode').activate()
-
     gtk.main()
 

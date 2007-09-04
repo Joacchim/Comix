@@ -11,7 +11,7 @@ import sys
 import gtk
 
 # Some heuristics to find the path to the image files.
-cwd = os.path.realpath(os.curdir)
+cwd = os.path.dirname(os.path.realpath(sys.argv[0]))
 if os.path.isfile(os.path.join(os.path.dirname(cwd), 'images/lens.png')):
     icon_path = os.path.join(os.path.dirname(cwd), 'images')
 else:
