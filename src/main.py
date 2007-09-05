@@ -30,8 +30,6 @@ class Mainwindow(gtk.Window):
         self.manga_mode = False
         self.zoom_mode = 'fit'
         self.manual_zoom = 100
-        #self.layout_width = None
-        #self.layout_height = None
         self.width, self.height = self.get_size()
 
         # =======================================================
@@ -57,7 +55,7 @@ class Mainwindow(gtk.Window):
         self.menubar = self.ui_manager.get_widget('/Menu')
         self.toolbar = self.ui_manager.get_widget('/Tool')
         # This is a hack to get the focus away from the toolbar so that
-        # we don't activate it with space.
+        # we don't activate it with space or some other key.
         self.toolbar.set_focus_child(
             self.ui_manager.get_widget('/Tool/expander'))
 
@@ -155,10 +153,7 @@ class Mainwindow(gtk.Window):
                 self.statusbar.hide_all()
             if preferences.prefs['show thumbnails']:
                 self.thumb_layout.show_all()
-                if preferences.prefs['hide thumbnail scrollbar']:
-                    self.thumb_scroll.hide_all()
-                else:
-                    self.thumb_scroll.show_all()
+                self.thumb_scroll.show_all()
             else:
                 self.thumb_layout.hide_all()
                 self.thumb_scroll.hide_all()
@@ -195,8 +190,7 @@ class Mainwindow(gtk.Window):
                 height -= self.statusbar.size_request()[1]
             if preferences.prefs['show thumbnails']:
                 width -= self.thumb_layout.size_request()[0]
-                if not preferences.prefs['hide thumbnail scrollbar']:
-                    width -= self.thumb_scroll.size_request()[0]
+                width -= self.thumb_scroll.size_request()[0]
             if preferences.prefs['show menubar']:
                 height -= self.menubar.size_request()[1]
             if (preferences.prefs['show scrollbar'] and
@@ -221,7 +215,7 @@ class Mainwindow(gtk.Window):
         scale_height = self.zoom_mode == 'width' and -1 or height
         scale_up = preferences.prefs['stretch']
         
-        if self.double_page and not filehandler.is_last_page():
+        if is_double():
             if self.manga_mode:
                 right_pixbuf, left_pixbuf = filehandler.get_pixbufs()
             else:
@@ -353,6 +347,11 @@ def manual_zoom_original(*args):
     window.draw_image()
 
 def scroll(x, y):
+
+    ''' Scrolls <x> px horizontally and <y> px vertically.
+    Returns True if call resulted in new adjustment values, False otherwise.
+    '''
+
     old_hadjust = window.hadjust.get_value()
     old_vadjust = window.vadjust.get_value()
     layout_width, layout_height = window.get_layout_size()
@@ -368,13 +367,90 @@ def scroll(x, y):
     window.hadjust.set_value(new_hadjust)
     return old_vadjust != new_vadjust or old_hadjust != new_hadjust
 
+def scroll_to_fixed(horiz=None, vert=None):
+    
+    ''' If either <horiz> or <vert> is not None, the display is scrolled as
+    follows:
+
+    horiz: 'left'        = left end of display
+           'middle'      = middle of the display
+           'right'       = rigth end of display
+           'startfirst'  = start of first page
+           'endfirst'    = end of first page
+           'startsecond' = start of second page
+           'endsecond'   = end of second page
+    
+    vert:  'top'         = top of display
+           'middle'      = middle of display
+           'bottom'      = bottom of display
+
+    Scrolling to the second page is, of course, only applicable in double
+    page mode. What is considered "start" and "end" depends on whether we
+    are using manga mode or not.
+    '''
+
+    layout_width, layout_height = window.get_layout_size()
+    vadjust_upper = window.vadjust.upper - layout_height
+    hadjust_upper = window.hadjust.upper - layout_width
+
+    if vert == 'top':
+        window.vadjust.set_value(0)
+    elif vert == 'middle':
+        window.vadjust.set_value(vadjust_upper / 2)
+    elif vert == 'bottom':
+        window.vadjust.set_value(vadjust_upper)
+    
+    # Manga transformations.
+    if window.manga_mode and is_double():
+        horiz = {'left':        'left',
+                 'middle':      'middle',
+                 'right':       'right',
+                 'startfirst':  'endsecond',
+                 'endfirst':    'startsecond',
+                 'startsecond': 'endfirst',
+                 'endsecond':   'startfirst'}[horiz]
+    elif window.manga_mode:
+        horiz = {'left':        'left',
+                 'middle':      'middle',
+                 'right':       'right',
+                 'startfirst':  'endfirst',
+                 'endfirst':    'startfirst'}[horiz]
+    
+    if horiz == 'left':
+        window.hadjust.set_value(0)
+    elif horiz == 'middle':
+        window.hadjust.set_value(hadjust_upper / 2)
+    elif horiz == 'right':
+        window.hadjust.set_value(hadjust_upper)
+    elif horiz == 'startfirst':
+        window.hadjust.set_value(0)
+    elif horiz == 'endfirst':
+        if is_double():
+            window.hadjust.set_value(
+                window.left_image.size_request()[0] - layout_width)
+        else:
+            window.hadjust.set_value(hadjust_upper)
+    elif horiz == 'startsecond':
+        window.hadjust.set_value(window.left_image.size_request()[0] + 2)
+    elif horiz == 'endsecond':
+        window.hadjust.set_value(vadjust_upper)
+
+def is_double():
+    return window.double_page and not filehandler.is_last_page()
+
 def terminate_program(*args):
+    
+    ''' Runs clean-up tasks and exits the program. '''
+
     print 'Bye!'
     gtk.main_quit()
     shutil.rmtree(filehandler.tmp_dir)
     sys.exit(0)
 
 def start():
+
+    ''' Runs setup tasks and starts the main loop. '''
+
     global window
     window = Mainwindow()
     window.show()

@@ -29,12 +29,6 @@ def key_press_event(widget, event, *args):
     ''' Catches key press events and takes the appropriate
     actions. '''
     
-    #print event.keyval
-    
-    layout_width, layout_height = main.window.get_layout_size()
-    vadjust_upper = main.window.vadjust.upper - layout_height
-    hadjust_upper = main.window.hadjust.upper - layout_width
-
     #if self.slideshow_started:
     #    self.stop_slideshow()
     #    self.window.emit_stop_by_name("key_press_event")
@@ -48,37 +42,25 @@ def key_press_event(widget, event, *args):
     
     # =======================================================
     # Numpad aligns the image depending on the key. 
-    #
-    # FIXME: Nobody knows about this, I don't even think about
-    # it myself. Write that damn documentation some time!
     # =======================================================
     if event.keyval == gtk.keysyms.KP_1:
-        main.window.vadjust.set_value(vadjust_upper)
-        main.window.hadjust.set_value(0)
+        main.scroll_to_fixed(horiz='left', vert='bottom')
     elif event.keyval == gtk.keysyms.KP_2:
-        main.window.vadjust.set_value(vadjust_upper)
-        main.window.hadjust.set_value(hadjust_upper / 2)
+        main.scroll_to_fixed(horiz='middle', vert='bottom')
     elif event.keyval == gtk.keysyms.KP_3:
-        main.window.vadjust.set_value(vadjust_upper)
-        main.window.hadjust.set_value(hadjust_upper)
+        main.scroll_to_fixed(horiz='right', vert='bottom')
     elif event.keyval == gtk.keysyms.KP_4:
-        main.window.vadjust.set_value(vadjust_upper / 2)
-        main.window.hadjust.set_value(0)
+        main.scroll_to_fixed(horiz='left', vert='middle')
     elif event.keyval == gtk.keysyms.KP_5:
-        main.window.vadjust.set_value(vadjust_upper / 2)
-        main.window.hadjust.set_value(hadjust_upper / 2)
+        main.scroll_to_fixed(horiz='middle', vert='middle')
     elif event.keyval == gtk.keysyms.KP_6:
-        main.window.vadjust.set_value(vadjust_upper / 2)
-        main.window.hadjust.set_value(hadjust_upper)
+        main.scroll_to_fixed(horiz='right', vert='middle')
     elif event.keyval == gtk.keysyms.KP_7:
-        main.window.vadjust.set_value(0)
-        main.window.hadjust.set_value(0)
+        main.scroll_to_fixed(horiz='left', vert='top')
     elif event.keyval == gtk.keysyms.KP_8:
-        main.window.vadjust.set_value(0)
-        main.window.hadjust.set_value(hadjust_upper / 2)
+        main.scroll_to_fixed(horiz='middle', vert='top')
     elif event.keyval == gtk.keysyms.KP_9:
-        main.window.vadjust.set_value(0)
-        main.window.hadjust.set_value(hadjust_upper)
+        main.scroll_to_fixed(horiz='right', vert='top')
     
     # =======================================================
     # Enter/exit fullscreen. 'f' is also a valid key,
@@ -99,7 +81,7 @@ def key_press_event(widget, event, *args):
     elif event.keyval == gtk.keysyms.minus:
         main.window.actiongroup.get_action('zout').activate()
     elif (event.keyval in [gtk.keysyms._0, gtk.keysyms.KP_0] and 
-        'GDK_CONTROL_MASK' in event.state.value_names):
+      'GDK_CONTROL_MASK' in event.state.value_names):
         main.window.actiongroup.get_action('zoriginal').activate()
     
     # =======================================================
@@ -132,30 +114,44 @@ def key_press_event(widget, event, *args):
     # or the image height at a time.
     # When at the bottom it flips to the next page. 
     # 
-    # It also has a "smart scrolling mode", in which we also
-    # scroll sideways.
+    # It also has a "smart scrolling mode" in which we try
+    # to follow the flow of the comic.
     # =======================================================
     elif event.keyval == gtk.keysyms.space:
         if preferences.prefs['space scroll type'] == 'window':
-            distance = preferences.prefs['space scroll length'] * \
-                main.window.get_layout_size()[1] // 100
+            x_step, y_step = main.window.get_layout_size()
         elif preferences.prefs['space scroll type'] == 'image':
-            distance = preferences.prefs['space scroll length'] * \
-                main.window.main_layout.get_size()[1] // 100
+            x_step, y_step = main.window.main_layout.get_size()
+        x_step = x_step * preferences.prefs['space scroll length'] // 100
+        y_step = y_step * preferences.prefs['space scroll length'] // 100
         if 'GDK_SHIFT_MASK' in event.state.value_names:
-            distance *= -1
+            next_page_function = main.previous_page
+            startfirst = 'endfirst'
+            x_step *= -1
+            y_step *= -1
+        else:
+            next_page_function = main.next_page
+            startfirst = 'startfirst'
+            
+        
+        if main.window.manga_mode:
+            x_step *= -1
+        if preferences.prefs['smart space scroll']:
+            if not main.is_double():
+                if not main.scroll(x_step, 0):
+                    if not main.scroll(0, y_step):
+                        next_page_function()
+                    else:
+                        main.scroll_to_fixed(horiz=startfirst)
 
-        if main.window.zoom_mode == 'fit' or not main.scroll(0, distance):
-            if 'GDK_SHIFT_MASK' in event.state.value_names:
-                main.previous_page()
-            else:
-                main.next_page()
-
+        else:           
+            if main.window.zoom_mode == 'fit' or not main.scroll(0, y_step):
+                next_page_function()
 
     # =======================================================
     # We kill the signals here for the Up, Down, Space and 
-    # Enter keys. Otherwise they will start moving
-    # the thumbnail selector, we don't want that.
+    # Enter keys. Otherwise they will start fiddling with
+    # the thumbnail selector - we don't want that.
     # =======================================================
     if (event.keyval in [gtk.keysyms.Up, gtk.keysyms.Down,
       gtk.keysyms.space, gtk.keysyms.KP_Enter] or 

@@ -43,7 +43,7 @@ def get_pixbufs():
             raw_pixbufs[current_image] = gtk.image_new_from_stock(
                 gtk.STOCK_MISSING_IMAGE, gtk.ICON_SIZE_BUTTON).get_pixbuf()
 
-    if not main.window.double_page or current_image == len(image_files) - 1:
+    if not main.is_double():
         return raw_pixbufs[current_image]
 
     # =======================================================

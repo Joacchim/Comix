@@ -7,8 +7,6 @@ import filechooser
 
 def bogus(*args):
     print 'Weeee...'
-    #print dir(args[0])
-    #print args[0].get_active()
 
 class MainUI(gtk.UIManager):
 
@@ -363,7 +361,7 @@ class MainUI(gtk.UIManager):
         self.add_ui_from_string(ui_description)
         self.insert_action_group(actiongroup, 0)
         
-        # FIXME: Is there no builtin way to do this?
+        # FIXME: Is there no built-in way to do this?
         self.get_widget('/Tool/expander').set_expand(True)
         self.get_widget('/Tool/expander').set_sensitive(False)
 
