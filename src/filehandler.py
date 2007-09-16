@@ -10,6 +10,7 @@ import archive
 import preferences
 import main
 import encoding
+import thumbnail
 
 file_loaded = False
 archive_type = None
@@ -223,7 +224,7 @@ def open_file(path, start_image=0):
     global comment_files
     global current_comment
     global raw_pixbufs
-    
+
     # =======================================================
     # If the given path is invalid.
     # =======================================================

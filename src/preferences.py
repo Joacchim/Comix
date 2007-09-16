@@ -50,7 +50,7 @@ prefs = {
     'show thumbnails': True,
     'show toolbar': True,
     'slideshow delay': 6.0,
-    'smart space scroll': True,
+    'smart space scroll': False,
     'space scroll length': 85,
     'space scroll type': 'window', # window or image
     'stored hide all values': (True, True, True, True, True),
@@ -58,7 +58,7 @@ prefs = {
     'stretch': False,
     'thumbnail size': 80,
     'toolbar style': gtk.TOOLBAR_ICONS,
-    'use freedesktop thumbnails': True,
+    'create thumbnails': True,
     'window height': gtk.gdk.screen_get_default().get_height() * 3 / 4, 
     'window width': gtk.gdk.screen_get_default().get_width() / 2,
     'window x': 50,

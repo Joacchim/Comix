@@ -136,6 +136,7 @@ def key_press_event(widget, event, *args):
         
         if main.window.manga_mode:
             x_step *= -1
+        # FIXME: Smart space in DP mode is not implemented
         if preferences.prefs['smart space scroll']:
             if not main.is_double():
                 if not main.scroll(x_step, 0):
@@ -161,4 +162,27 @@ def key_press_event(widget, event, *args):
         return True
     else:
         return False
+
+def scroll_wheel_event(widget, event, *args):
+    
+    ''' Catches scroll wheel events and takes the appropriate
+    actions. The scroll wheel flips pages in fit-to-screen mode
+    and scrolls the scrollbars when not. With a preference set,
+    three successive scrolls at the top or bottom of the page will
+    flip pages when not in fit-to-screen mode as well. '''
+
+    if event.direction == gtk.gdk.SCROLL_UP:
+        if main.window.zoom_mode == 'fit':
+            main.previous_page()
+        else:
+            main.scroll(0, -50)
+    elif event.direction == gtk.gdk.SCROLL_DOWN:
+        if main.window.zoom_mode == 'fit':
+            main.next_page()
+        else:
+            main.scroll(0, 50)
+    elif event.direction == gtk.gdk.SCROLL_RIGHT:
+        main.next_page()
+    elif event.direction == gtk.gdk.SCROLL_LEFT:
+        main.previous_page()
 

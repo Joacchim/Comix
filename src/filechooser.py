@@ -5,6 +5,7 @@ import gtk
 import main
 import filehandler
 import preferences
+import thumbnail
 
 dialog = None
 
@@ -20,11 +21,16 @@ class ComicFileChooserDialog(gtk.FileChooserDialog):
         self.connect('delete_event', dialog_close)
         self.set_default_response(gtk.RESPONSE_OK)
         
-        #self.file_select_preview_box = gtk.VBox(False, 2)
-        #self.file_select_preview_box.set_size_request(130, 0)
-        #self.file_select_preview_box.show()
-        #self.file_select.set_preview_widget(self.file_select_preview_box)
-        #self.file_select.set_use_preview_label(False)
+        #preview_box = gtk.VBox(False, 2)
+        self.preview_image = gtk.Image()
+        self.preview_image.set_size_request(128, 128)
+        #preview_image.show()
+        #preview_box.add(preview_image)
+        #preview_box.set_size_request(100, 1)
+        #preview_box.show()
+        self.set_preview_widget(self.preview_image)
+        #self.set_use_preview_label(False)
+        self.connect('update-preview', self.update_preview)
 
         ffilter = gtk.FileFilter()
         ffilter.add_pattern('*')
@@ -73,6 +79,18 @@ class ComicFileChooserDialog(gtk.FileChooserDialog):
         ffilter.set_name(_('tar archives'))
         self.add_filter(ffilter)
 
+    def update_preview(self, *args):
+        path = self.get_preview_filename()
+        if path and os.path.isfile(path):
+            pixbuf = thumbnail.get_thumbnail(path,
+                preferences.prefs['create thumbnails'])
+            if pixbuf == None:
+                self.preview_image.clear()
+            else:
+                self.preview_image.set_from_pixbuf(pixbuf)
+        else:
+            self.preview_image.clear()
+
 def dialog_open(*args):
     global dialog
     dialog = ComicFileChooserDialog()
@@ -87,8 +105,6 @@ def dialog_close(*args):
         dialog = None
 
 def dialog_response(widget, response):
-    global dialog
-    
     if response == gtk.RESPONSE_OK:
         path = dialog.get_filename()
         dialog_close()

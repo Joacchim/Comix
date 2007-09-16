@@ -21,6 +21,7 @@ class Mainwindow(gtk.Window):
         gtk.Window.__init__(self, gtk.WINDOW_TOPLEVEL)
         self.connect('delete_event', terminate_program)
         self.connect('key_press_event', event.key_press_event)
+        self.connect('scroll_event', event.scroll_wheel_event)
         self.connect('configure_event', event.resize_event)
 
         self.set_title('Comix')
