@@ -1,3 +1,7 @@
+# ========================================================================
+# ui.py - UI definitions for Comix.
+# ========================================================================
+
 import gtk
 
 import main
@@ -116,9 +120,9 @@ class MainUI(gtk.UIManager):
                 None, bogus),
             ('rotate_270', 'comix-rotate-270', _('Rotat_e 90 degrees CCW'),
                 '<Shift>r', None, bogus),
-            ('flip_horiz', 'comix-flip-horiz', _('Fli_p horizontally'), None,
-                None, bogus),
-            ('flip_vert', 'comix-flip-vert', _('Flip _vertically'), None,
+            ('flip_horiz', 'comix-flip-horizontal', _('Fli_p horizontally'),
+                None, None, bogus),
+            ('flip_vert', 'comix-flip-vertical', _('Flip _vertically'), None,
                 None, bogus),
             ('expander', None, None, None, None, None)])
 
@@ -128,17 +132,17 @@ class MainUI(gtk.UIManager):
             ('double', 'comix-double-page', _('_Double page mode'), 'd',
                 None, main.change_double_page),
             ('toolbar', None, _('_Toolbar'), None,
-                None, bogus),
+                None, main.change_toolbar_visibility),
             ('menubar', None, _('_Menubar'), None,
-                None, bogus),
+                None, main.change_menubar_visibility),
             ('statusbar', None, _('St_atusbar'), None,
-                None, bogus),
-            ('scrollbars', None, _('S_crollbars'), None,
-                None, bogus),
+                None, main.change_statusbar_visibility),
+            ('scrollbar', None, _('S_crollbars'), None,
+                None, main.change_scrollbar_visibility),
             ('thumbnails', None, _('Th_umbnails'), 'F9',
-                None, bogus),
-            ('hide_all', None, _('H_ide all'), 'i',
-                None, bogus),
+                None, main.change_thumbnails_visibility),
+            ('hide all', None, _('H_ide all'), 'i',
+                None, main.change_hide_all),
             ('manga_mode', 'comix-manga', _('_Manga mode'), 'm',
                 None, main.change_manga_mode),
             ('keep_rotation', None, _('_Keep transformation'), 'k',
@@ -249,10 +253,10 @@ class MainUI(gtk.UIManager):
                         <menuitem action="menubar" />
                         <menuitem action="toolbar" />
                         <menuitem action="statusbar" />
-                        <menuitem action="scrollbars" />
+                        <menuitem action="scrollbar" />
                         <menuitem action="thumbnails" />
                         <separator />
-                        <menuitem action="hide_all" />
+                        <menuitem action="hide all" />
                     </menu>
                 </menu>
                 <menu action="menu_go">
@@ -305,10 +309,10 @@ class MainUI(gtk.UIManager):
                         <menuitem action="menubar" />
                         <menuitem action="toolbar" />
                         <menuitem action="statusbar" />
-                        <menuitem action="scrollbars" />
+                        <menuitem action="scrollbar" />
                         <menuitem action="thumbnails" />
                         <separator />
-                        <menuitem action="hide_all" />
+                        <menuitem action="hide all" />
                     </menu>
                 </menu>
                 <menu action="transform">

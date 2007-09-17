@@ -179,8 +179,12 @@ class Mainwindow(gtk.Window):
                 self.hscroll.hide_all()
         else:
             self.toolbar.hide_all()
+            self.menubar.hide_all()
             self.statusbar.hide_all()
             self.thumb_layout.hide_all()
+            self.thumb_scroll.hide_all()
+            self.vscroll.hide_all()
+            self.hscroll.hide_all()
 
     def get_layout_size(self):
         width, height = self.get_size()
@@ -324,6 +328,35 @@ def change_fullscreen(toggleaction):
         window.fullscreen()
     else:
         window.unfullscreen()
+
+def change_toolbar_visibility(*args):
+    preferences.prefs['show toolbar'] = \
+        not preferences.prefs['show toolbar']
+    window.draw_image()
+
+def change_menubar_visibility(*args):
+    preferences.prefs['show menubar'] = \
+        not preferences.prefs['show menubar']
+    window.draw_image()
+
+def change_statusbar_visibility(*args):
+    preferences.prefs['show statusbar'] = \
+        not preferences.prefs['show statusbar']
+    window.draw_image()
+
+def change_scrollbar_visibility(*args):
+    preferences.prefs['show scrollbar'] = \
+        not preferences.prefs['show scrollbar']
+    window.draw_image()
+
+def change_thumbnails_visibility(*args):
+    preferences.prefs['show thumbnails'] = \
+        not preferences.prefs['show thumbnails']
+    window.draw_image()
+
+def change_hide_all(*args):
+    preferences.prefs['hide all'] = not preferences.prefs['hide all']
+    window.draw_image()
 
 def manual_zoom_in(*args):
     new_zoom = window.manual_zoom * 1.15
@@ -469,5 +502,23 @@ def start():
         window.actiongroup.get_action('fit_width_mode').activate()
     else:
         window.actiongroup.get_action('fit_height_mode').activate()
+    if preferences.prefs['show toolbar']:
+        preferences.prefs['show toolbar'] = False
+        window.actiongroup.get_action('toolbar').activate()
+    if preferences.prefs['show menubar']:
+        preferences.prefs['show menubar'] = False
+        window.actiongroup.get_action('menubar').activate()
+    if preferences.prefs['show statusbar']:
+        preferences.prefs['show statusbar'] = False
+        window.actiongroup.get_action('statusbar').activate()
+    if preferences.prefs['show scrollbar']:
+        preferences.prefs['show scrollbar'] = False
+        window.actiongroup.get_action('scrollbar').activate()
+    if preferences.prefs['show thumbnails']:
+        preferences.prefs['show thumbnails'] = False
+        window.actiongroup.get_action('thumbnails').activate()
+    if preferences.prefs['hide all']:
+        preferences.prefs['hide all'] = False
+        window.actiongroup.get_action('hide all').activate()
     gtk.main()
 

@@ -1,3 +1,8 @@
+# ========================================================================
+# filehandler.py - File handler for Comix. Opens files and keeps track
+# of images, pages and caches.
+# ========================================================================
+
 import os
 import shutil
 import locale

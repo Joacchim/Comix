@@ -1,3 +1,7 @@
+# ========================================================================
+# scale.py - Image scaling module for Comix.
+# ========================================================================
+
 import gtk
 
 import preferences
@@ -91,4 +95,18 @@ def fit_2_in_rectangle(src1, src2, width, height, interp=None, scale_up=False):
 
     return (fit_in_rectangle(src1, src1s_part, height, interp, scale_up),
         fit_in_rectangle(src2, src2s_part, height, interp, scale_up))
+
+def add_border(pixbuf, thickness, colour=0x000000FF):
+
+    ''' Returns a pixbuf from <pixbuf> with a <thickness> px border 
+    of <colour> added.
+    '''
+
+    canvas = gtk.gdk.Pixbuf(gtk.gdk.COLORSPACE_RGB, True, 8,
+        pixbuf.get_width() + thickness * 2,
+        pixbuf.get_height() + thickness * 2)
+    canvas.fill(colour)
+    pixbuf.copy_area(0, 0, pixbuf.get_width(), pixbuf.get_height(),
+        canvas, thickness, thickness)
+    return canvas
 

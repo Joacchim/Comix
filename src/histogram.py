@@ -1,3 +1,7 @@
+# ========================================================================
+# histogram.py - Draws histograms from image data for Comix.
+# ========================================================================
+
 import gtk
 import Image
 import ImageDraw
