@@ -2,6 +2,8 @@
 # thumbbar.py - Thumbnail sidebar for Comix.
 # ========================================================================
 
+import time
+
 import gtk
 
 import main
@@ -14,8 +16,8 @@ class ThumbnailSidebar:
     
     def __init__(self):
 
-        self.visible = False
-        self.loaded = False
+        #self.visible = False
+        #self.loaded = False
         
         self.liststore = gtk.ListStore(gtk.gdk.Pixbuf)
         self.treeview = gtk.TreeView(self.liststore)
@@ -53,18 +55,21 @@ class ThumbnailSidebar:
     def show(self):
         self.layout.show_all()
         self.scroll.show()
-        if not self.loaded:
-            self.load_thumbnails()
-        self.visible = True
+        #self.visible = True
+        #if not self.loaded:
+        #    self.load_thumbnails()
+        #self.layout.set_size(0, self.treeview.get_visible_rect().height)
+        #self.update_select()
     
     def hide(self):
         self.layout.hide_all()
         self.scroll.hide()
-        self.visible = False
+        #self.visible = False
 
     def load_thumbnails(self):
-        if not self.visible:
-            return
+        print 'load'
+        #if not self.visible or self.loaded:
+        #    return
         for i, path in enumerate(filehandler.image_files):
             if filehandler.archive_type:
                 create = False
@@ -84,17 +89,17 @@ class ThumbnailSidebar:
                 gtk.main_iteration(False)
 
             self.layout.set_size(0, self.treeview.get_visible_rect().height)
-        self.loaded = True
+        #self.loaded = True
         self.update_select()
 
     def clear(self):
         self.liststore.clear()
         self.layout.set_size(0, 0)
-        self.loaded = False
+        #self.loaded = False
 
     def update_select(self):
-        if not self.visible:
-            return
+        #if not self.visible or not filehandler.file_loaded:
+        #    return
         self.selection.select_path(filehandler.current_image)
         rect = self.treeview.get_background_area(
             filehandler.current_image, self.column)

@@ -109,3 +109,12 @@ def archive_mime_type(path):
         print 'archive.py: Error while reading', path
     return None
 
+def get_name(archive_type):
+    names = {
+        'zip': _('Zip archive'),
+        'tar': _('Tar archive'),
+        'gzip': _('Gzip compressed tar archive'),
+        'bzip2': _('Bzip2 compressed tar archive'),
+        'rar': _('RAR archive')}
+    return names[archive_type]
+

@@ -155,7 +155,6 @@ def dialog_response(widget, response):
         while gtk.events_pending():
             gtk.main_iteration(False)
         filehandler.open_file(path)
-        main.window.draw_image()
         if preferences.prefs['open defaults to last browsed']:
             preferences.prefs['path of last browsed'] = os.path.dirname(path)
     elif response == gtk.RESPONSE_CANCEL:

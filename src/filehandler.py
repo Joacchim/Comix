@@ -9,6 +9,7 @@ import locale
 import tempfile
 import gtk
 import gc
+import shutil
 
 import archive
 #import cursor
@@ -126,7 +127,6 @@ def next_page():
     step = main.window.double_page and 2 or 1
     if current_image >= len(image_files) - step:
         if preferences.prefs['go to next archive']:
-            #old_image = -1
             #open_file(NEXT_ARCHIVE)
             print 'open next archive'
             return
@@ -151,7 +151,6 @@ def previous_page():
     step = main.window.double_page and 2 or 1
     if current_image <= step - 1:
         if preferences.prefs['go to next archive']:
-            #old_image = -1
             #open_file(PREVIOUS_ARCHIVE, -1)
             print 'open previous archive'
         else:
@@ -254,16 +253,7 @@ def open_file(path, start_image=0):
         return False
 
     #cursor.set_cursor('watch')
-    if os.path.exists(tmp_dir):
-        shutil.rmtree(tmp_dir)
-        os.makedirs(tmp_dir, 0700)
-    del raw_pixbufs
-    raw_pixbufs = {}
-    image_files = []
-    current_image = None
-    comment_files = []
-    current_comment = None
-    gc.collect() # Collect old pixbufs directly
+    close_file()
 
     # =======================================================
     # If <path> is an archive we extract it and walk down
@@ -321,11 +311,34 @@ def open_file(path, start_image=0):
 
     if not main.window.keep_rotation:
         main.window.rotation = 0
-    main.window.thumbnailsidebar.clear()
+    main.window.draw_image()
     main.window.thumbnailsidebar.load_thumbnails()
 
     comment_files.sort()
     #cursor.set_cursor(None)
+
+def close_file(*args):
+    global file_loaded
+    global archive_path
+    global tmp_dir
+    global image_files
+    global current_image
+    global comment_files
+    global current_comment
+    global raw_pixbufs
+
+    file_loaded = False
+    archive_path = None
+    shutil.rmtree(tmp_dir)
+    tmp_dir = tempfile.mkdtemp(prefix="comix.", suffix="/")
+    image_files = []
+    current_image = None
+    comment_files = []
+    current_comment = None
+    raw_pixbufs.clear()
+    main.window.thumbnailsidebar.clear()
+    main.window.draw_image()
+    gc.collect()
 
 def is_image_file(path):
     

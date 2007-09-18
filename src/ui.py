@@ -8,6 +8,7 @@ import main
 import about
 import properties
 import filechooser
+import filehandler
 
 def bogus(*args):
     print 'Weeee...'
@@ -77,7 +78,7 @@ class MainUI(gtk.UIManager):
             ('extract', gtk.STOCK_SAVE_AS, _('E_xtract image...'), '',
                 None, bogus),
             ('close', gtk.STOCK_CLOSE, _('_Close'), '<Control>w',
-                None, bogus),
+                None, filehandler.close_file),
             ('quit', gtk.STOCK_QUIT, _('_Quit'), '<Control>q',
                 None, main.terminate_program),
             ('colour_adjust', 'comix-colour-adjust', _('_Adjust colour...'),

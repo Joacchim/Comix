@@ -120,7 +120,8 @@ class Mainwindow(gtk.Window):
         self.connect('button_press_event', event.mouse_press_event)
 
     def display_active_widgets(self):
-        if not preferences.prefs['hide all']:
+        if not preferences.prefs['hide all'] and not (self.is_fullscreen and 
+          preferences.prefs['hide all in fullscreen']):
             if preferences.prefs['show toolbar']:
                 self.toolbar.show_all()
             else:
@@ -162,7 +163,8 @@ class Mainwindow(gtk.Window):
 
     def get_layout_size(self):
         width, height = self.get_size()
-        if not preferences.prefs['hide all']:
+        if not preferences.prefs['hide all']and not (self.is_fullscreen and 
+          preferences.prefs['hide all in fullscreen']):
             if preferences.prefs['show toolbar']:
                 height -= self.toolbar.size_request()[1]
             if preferences.prefs['show statusbar']:
@@ -186,6 +188,10 @@ class Mainwindow(gtk.Window):
     def draw_image(self, at_bottom=False):
         self.display_active_widgets()
         if not filehandler.file_loaded:
+            self.left_image.clear()
+            self.right_image.clear()
+            self.thumbnailsidebar.clear()
+            self.set_title('Comix')
             return
         print 'draw'
         width, height = self.get_layout_size()
