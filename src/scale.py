@@ -33,7 +33,7 @@ def fit_in_rectangle(src, width, height, interp=None, scale_up=False,
         height = 10000
     width = max(width, 1)
     height = max(height, 1)
-    print width, height
+    
     if rotation in [90, 270]:
         width, height = height, width
 
