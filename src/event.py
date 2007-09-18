@@ -190,37 +190,27 @@ def scroll_wheel_event(widget, event, *args):
     elif event.direction == gtk.gdk.SCROLL_LEFT:
         main.previous_page()
 
-def mouse_press_event(*args):
+def mouse_press_event(widget, event):
     
     ''' Handles mouse click events on the main window. '''
 
-    print args
-    
-    if self.exit:
-        return False
-    
-    self.scroll_events_down = 0
-    self.scroll_events_up = 0
-    self.set_cursor_type('normal')
-    if self.slideshow_started:
-        self.stop_slideshow()
-        self.slideshow_stopped_by_mouse = True
-        return
-    
-    if event.button == 3:
-        self.ui.get_widget('/Pop').popup(None, None, None, event.button,
-            event.time)
-    elif event.button == 1:
-        self.x_drag_position = event.x_root
-        self.y_drag_position = event.y_root
-        self.mouse_moved_while_drag = 0
-        self.old_vadjust_value = self.vadjust.value
-        self.old_hadjust_value = self.hadjust.value
+    if event.button == 1:
+        print 1
+        #self.x_drag_position = event.x_root
+        #self.y_drag_position = event.y_root
+        #self.mouse_moved_while_drag = 0
+        #self.old_vadjust_value = self.vadjust.value
+        #self.old_hadjust_value = self.hadjust.value
     elif event.button == 2:
-        if self.scroll_wheel_event_id != None:
-            self.layout.disconnect(self.scroll_wheel_event_id)
-            self.scroll_wheel_event_id = None
-        self.zooming_lens(event.x, event.y, event.time)
+        print 2
+        #if self.scroll_wheel_event_id != None:
+        #    self.layout.disconnect(self.scroll_wheel_event_id)
+        #    self.scroll_wheel_event_id = None
+        #self.zooming_lens(event.x, event.y, event.time)
+    elif event.button == 3:
+        main.window.ui_manager.get_widget('/Pop').popup(
+            None, None, None, event.button, event.time)
+
 
 def mouse_button_release_event(self, widget, event):
     

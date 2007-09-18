@@ -109,17 +109,15 @@ class MainUI(gtk.UIManager):
                 _('File o_perations')),
             ('menu_file', None, _('_File')),
             ('menu_view', None, _('_View')),
-            ('menu_view_popup', 'comix-view', _('_View')),
             ('menu_go', None, _('_Go')),
-            ('menu_go_popup', gtk.STOCK_GO_FORWARD, _('_Go')),
             ('menu_help', None, _('_Help')),
             ('transform', 'comix-transform', _('_Transform')),
             ('rotate_90', 'comix-rotate-90', _('_Rotate 90 degrees CW'), 'r',
-                None, bogus),
+                None, main.rotate90),
             ('rotate_180','comix-rotate-180', _('Rotate 180 de_grees'), None,
-                None, bogus),
+                None, main.rotate180),
             ('rotate_270', 'comix-rotate-270', _('Rotat_e 90 degrees CCW'),
-                '<Shift>r', None, bogus),
+                '<Shift>r', None, main.rotate270),
             ('flip_horiz', 'comix-flip-horizontal', _('Fli_p horizontally'),
                 None, None, bogus),
             ('flip_vert', 'comix-flip-vertical', _('Flip _vertically'), None,
@@ -146,7 +144,7 @@ class MainUI(gtk.UIManager):
             ('manga_mode', 'comix-manga', _('_Manga mode'), 'm',
                 None, main.change_manga_mode),
             ('keep_rotation', None, _('_Keep transformation'), 'k',
-                None, bogus),
+                None, main.change_keep_rotation),
             ('lens', 'comix-lens', _('Magnifying _lens'), 'z',
                 None, bogus)])
 
@@ -280,41 +278,18 @@ class MainUI(gtk.UIManager):
             </menubar>
 
             <popup name="Pop">
-                <menu action="menu_go_popup">
-                    <menuitem action="first" />
-                    <menuitem action="previous" />
-                    <menuitem action="next" />
-                    <menuitem action="last" />
-                    <separator />
-                    <menuitem action="go" />
-                </menu>
+                <menuitem action="next" />
+                <menuitem action="previous" />
                 <separator />
-                <menu action="menu_view_popup">
-                    <menuitem action="fullscreen" />
-                    <menuitem action="double" />
-                    <menuitem action="manga_mode" />
-                    <separator />
-                    <menuitem action="fit_screen_mode" />
-                    <menuitem action="fit_width_mode" />
-                    <menuitem action="fit_height_mode" />
-                    <menuitem action="fit_manual_mode" />
-                    <separator />
-                    <menuitem action="slideshow" />
-                    <separator />
-                    <menuitem action="colour_adjust" />
-                    <separator />
-                    <menuitem action="lens" />
-                    <separator />
-                    <menu action="menu_toolbars">
-                        <menuitem action="menubar" />
-                        <menuitem action="toolbar" />
-                        <menuitem action="statusbar" />
-                        <menuitem action="scrollbar" />
-                        <menuitem action="thumbnails" />
-                        <separator />
-                        <menuitem action="hide all" />
-                    </menu>
-                </menu>
+                <menuitem action="fullscreen" />
+                <menuitem action="double" />
+                <menuitem action="manga_mode" />
+                <separator />
+                <menuitem action="fit_screen_mode" />
+                <menuitem action="fit_width_mode" />
+                <menuitem action="fit_height_mode" />
+                <menuitem action="fit_manual_mode" />
+                <separator />
                 <menu action="transform">
                     <menuitem action="rotate_90" />
                     <menuitem action="rotate_270" />
@@ -324,40 +299,10 @@ class MainUI(gtk.UIManager):
                     <separator />
                     <menuitem action="keep_rotation" />
                 </menu>
-                <menu action="zoom">
-                    <menuitem action="zin" />
-                    <menuitem action="zout" />
-                    <menuitem action="zoriginal" />
-                    <menuitem action="zwidth" />
-                    <menuitem action="zheight" />
-                    <menuitem action="zfit" />
-                </menu>
                 <separator />
                 <menuitem action="properties" />
-                <menuitem action="comments" />
-                <menuitem action="preferences" />
-                <menuitem action="thumbnail_dialog" />
-                <separator />
-                <menuitem action="add_to_library" />
-                <menuitem action="convert" />
-                <menuitem action="extract" />
-                <menu action="menu_file_operations">
-                    <menuitem action="file_rot_90" />
-                    <menuitem action="file_rot_270" />
-                    <menuitem action="file_flip_horiz" />
-                    <menuitem action="file_flip_vert" />
-                    <menuitem action="file_desaturate" />
-                    <separator />
-                    <menuitem action="delete" />
-                </menu>
                 <separator />
                 <menuitem action="open" />
-                <menuitem action="library" />
-                <separator />
-                <menuitem action="about" />
-                <separator />
-                <menuitem action="close" />
-                <menuitem action="quit" />
             </popup>
         </ui>
         """

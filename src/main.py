@@ -11,6 +11,7 @@ import icons
 import ui
 import scale
 import event
+import pilpixbuf
 
 window = None
 
@@ -23,7 +24,7 @@ class Mainwindow(gtk.Window):
         self.connect('key_press_event', event.key_press_event)
         self.connect('scroll_event', event.scroll_wheel_event)
         self.connect('configure_event', event.resize_event)
-        self.connect('button_press_event'), event.mouse_press_event)
+        self.connect('button_press_event', event.mouse_press_event)
 
         self.set_title('Comix')
         
@@ -32,6 +33,8 @@ class Mainwindow(gtk.Window):
         self.manga_mode = False
         self.zoom_mode = 'fit'
         self.manual_zoom = 100
+        self.rotation = 0
+        self.keep_rotation = False
         self.width, self.height = self.get_size()
 
         # =======================================================
@@ -236,7 +239,7 @@ class Mainwindow(gtk.Window):
 
             left_pixbuf, right_pixbuf = scale.fit_2_in_rectangle(
                 left_pixbuf, right_pixbuf, scale_width, scale_height,
-                scale_up=scale_up)
+                scale_up=scale_up, rotation=self.rotation)
             self.left_image.set_from_pixbuf(left_pixbuf)
             self.right_image.set_from_pixbuf(right_pixbuf)
             x_padding = (width - left_pixbuf.get_width() -
@@ -254,7 +257,11 @@ class Mainwindow(gtk.Window):
                 scale_up = True
 
             pixbuf = scale.fit_in_rectangle(pixbuf, scale_width, scale_height,
-                scale_up=scale_up)
+                scale_up=scale_up, rotation=self.rotation)
+
+            #im = pilpixbuf.pixbuf_to_pil(pixbuf)
+            #pixbuf = pilpixbuf.pil_to_pixbuf(im)
+
             self.left_image.set_from_pixbuf(pixbuf)
             self.right_image.clear()
             self.right_image.hide()
@@ -287,19 +294,39 @@ class Mainwindow(gtk.Window):
 
 def next_page(*args):
     if filehandler.next_page():
+        if not window.keep_rotation:
+            window.rotation = 0
         window.draw_image()
 
 def previous_page(*args):
     if filehandler.previous_page():
+        if not window.keep_rotation:
+            window.rotation = 0
         window.draw_image(at_bottom=True)
 
 def first_page(*args):
     if filehandler.first_page():
+        if not window.keep_rotation:
+            window.rotation = 0
         window.draw_image()
 
 def last_page(*args):
     if filehandler.last_page():
+        if not window.keep_rotation:
+            window.rotation = 0
         window.draw_image()
+
+def rotate90(*args):
+    window.rotation = (window.rotation + 90) % 360
+    window.draw_image()
+
+def rotate180(*args):
+    window.rotation = (window.rotation + 180) % 360
+    window.draw_image()
+
+def rotate270(*args):
+    window.rotation = (window.rotation + 270) % 360
+    window.draw_image()
 
 def change_double_page(toggleaction):
     window.double_page = toggleaction.get_active()
@@ -358,6 +385,9 @@ def change_thumbnails_visibility(*args):
 def change_hide_all(*args):
     preferences.prefs['hide all'] = not preferences.prefs['hide all']
     window.draw_image()
+
+def change_keep_rotation(*args):
+    window.keep_rotation = not window.keep_rotation
 
 def manual_zoom_in(*args):
     new_zoom = window.manual_zoom * 1.15

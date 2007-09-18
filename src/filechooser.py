@@ -108,6 +108,8 @@ class ComicFileChooserDialog(gtk.Dialog):
                 preferences.prefs['create thumbnails'])
             if pixbuf == None:
                 self.preview_image.clear()
+                self.namelabel.set_text('')
+                self.sizelabel.set_text('')
             else:
                 pixbuf = scale.add_border(pixbuf, 1)
                 self.preview_image.set_from_pixbuf(pixbuf)
@@ -126,6 +128,8 @@ class ComicFileChooserDialog(gtk.Dialog):
                 self.sizelabel.set_attributes(attrlist)
         else:
             self.preview_image.clear()
+            self.namelabel.set_text('')
+            self.sizelabel.set_text('')
 
 def dialog_open(*args):
     global dialog

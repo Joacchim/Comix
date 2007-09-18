@@ -319,6 +319,9 @@ def open_file(path, start_image=0):
     else:
         file_loaded = True
 
+    if not main.window.keep_rotation:
+        main.window.rotation = 0
+
     comment_files.sort()
     #cursor.set_cursor(None)
 

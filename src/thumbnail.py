@@ -23,7 +23,7 @@ def create_thumbnail(path):
     try:
         pixbuf = gtk.gdk.pixbuf_new_from_file_at_size(path, 128, 128)
     except:
-        print 'thumbnail.py: Could not open', path
+        #print 'thumbnail.py: Could not open', path
         return None
     uri = 'file://' + pathname2url(path)
     thumbpath = _uri_to_thumbpath(uri)
