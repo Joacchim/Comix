@@ -19,12 +19,14 @@ def _uri_to_thumbpath(uri):
     thumbpath = os.path.join(thumbdir, md5hash + '.png')
     return thumbpath
 
-def create_thumbnail(path):
+def _get_pixbuf128(path):
     try:
-        pixbuf = gtk.gdk.pixbuf_new_from_file_at_size(path, 128, 128)
+        return gtk.gdk.pixbuf_new_from_file_at_size(path, 128, 128)
     except:
-        #print 'thumbnail.py: Could not open', path
         return None
+
+def create_thumbnail(path):
+    pixbuf = _get_pixbuf128(path)
     uri = 'file://' + pathname2url(path)
     thumbpath = _uri_to_thumbpath(uri)
     stat = os.stat(path)
@@ -60,13 +62,13 @@ def get_thumbnail(path, create=True):
     if not os.path.exists(thumbpath):
         if create:
             return create_thumbnail(path)
-        return None
+        return _get_pixbuf128(path)
     thumbnail = gtk.gdk.pixbuf_new_from_file(thumbpath)
     info = Image.open(thumbpath).info
     if (not info.has_key('Thumb::MTime') or 
       os.stat(path).st_mtime != int(info['Thumb::MTime'])):
         if create:
             return create_thumbnail(path)
-        return None
+        return _get_pixbuf128(path)
     return thumbnail
 

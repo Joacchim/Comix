@@ -33,7 +33,7 @@ def fit_in_rectangle(src, width, height, interp=None, scale_up=False,
         height = 10000
     width = max(width, 1)
     height = max(height, 1)
-
+    print width, height
     if rotation in [90, 270]:
         width, height = height, width
 
@@ -43,9 +43,9 @@ def fit_in_rectangle(src, width, height, interp=None, scale_up=False,
                 gtk.gdk.INTERP_TILES, 255, 8, 0x777777, 0x999999)
     else:
         if float(src.get_width()) / width > float(src.get_height()) / height:
-            height = src.get_height() * width / src.get_width()
+            height = max(src.get_height() * width / src.get_width(), 1)
         else:
-            width = src.get_width() * height / src.get_height()
+            width = max(src.get_width() * height / src.get_height(), 1)
 
         if interp == None:
             interp = preferences.prefs['interp mode']

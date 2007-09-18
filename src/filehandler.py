@@ -200,7 +200,7 @@ def set_page(page_num):
     global image_files
 
     old_image = current_image
-    if not 0 < page_num < len(image_files) - 1:
+    if not 0 <= page_num < len(image_files):
         return
     current_image = page_num
     return old_image != current_image
@@ -321,6 +321,8 @@ def open_file(path, start_image=0):
 
     if not main.window.keep_rotation:
         main.window.rotation = 0
+    main.window.thumbnailsidebar.clear()
+    main.window.thumbnailsidebar.load_thumbnails()
 
     comment_files.sort()
     #cursor.set_cursor(None)

@@ -148,6 +148,9 @@ def dialog_close(*args):
 def dialog_response(widget, response):
     if response == gtk.RESPONSE_OK:
         path = dialog.filechooser.get_filename()
+        if os.path.isdir(path):
+            dialog.filechooser.set_current_folder(path)
+            return
         dialog_close()
         while gtk.events_pending():
             gtk.main_iteration(False)

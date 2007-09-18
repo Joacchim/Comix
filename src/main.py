@@ -9,6 +9,7 @@ import filehandler
 import preferences
 import icons
 import ui
+import thumbbar
 import scale
 import event
 import pilpixbuf
@@ -20,12 +21,6 @@ class Mainwindow(gtk.Window):
     def __init__(self):
         
         gtk.Window.__init__(self, gtk.WINDOW_TOPLEVEL)
-        self.connect('delete_event', terminate_program)
-        self.connect('key_press_event', event.key_press_event)
-        self.connect('scroll_event', event.scroll_wheel_event)
-        self.connect('configure_event', event.resize_event)
-        self.connect('button_press_event', event.mouse_press_event)
-
         self.set_title('Comix')
         
         self.is_fullscreen = False
@@ -54,6 +49,7 @@ class Mainwindow(gtk.Window):
         self.comment_label = gtk.Label()
         self.statusbar = gtk.Statusbar()
         self.main_layout = gtk.Layout()
+        self.thumbnailsidebar = thumbbar.ThumbnailSidebar()
         self.ui_manager = ui.MainUI()
         self.add_accel_group(self.ui_manager.get_accel_group())
         self.actiongroup = self.ui_manager.get_action_groups()[0]
@@ -76,36 +72,7 @@ class Mainwindow(gtk.Window):
             gtk.gdk.colormap_get_system().alloc_color(gtk.gdk.Color(
             preferences.prefs['red bg'], preferences.prefs['green bg'],
             preferences.prefs['blue bg']), False, True))
-        
-        # =======================================================
-        # Create thumbnail sidebar widgets.
-        # =======================================================
-        self.thumb_liststore = gtk.ListStore(gtk.gdk.Pixbuf)
-        self.thumb_tree_view = gtk.TreeView(self.thumb_liststore)
-        self.thumb_column = gtk.TreeViewColumn(None)
-        self.thumb_cell = gtk.CellRendererPixbuf()
-        self.thumb_layout = gtk.Layout()
-        self.thumb_layout.put(self.thumb_tree_view, 0, 0)
-        self.thumb_tree_view.show()
-        self.thumb_column.set_sizing(gtk.TREE_VIEW_COLUMN_FIXED)
-        self.thumb_column.set_fixed_width(
-            preferences.prefs['thumbnail size'] + 7)
-        self.thumb_tree_view.append_column(self.thumb_column)
-        self.thumb_column.pack_start(self.thumb_cell, True)
-        self.thumb_column.set_attributes(self.thumb_cell, pixbuf=0)
-        self.thumb_layout.set_size_request(
-            preferences.prefs['thumbnail size'] + 7, 0)
-        self.thumb_tree_view.get_selection().set_mode(gtk.SELECTION_MULTIPLE)
-        self.thumb_tree_view.set_headers_visible(False)
-        self.thumb_vadjust = self.thumb_layout.get_vadjustment()
-        self.thumb_vadjust.step_increment = 15
-        self.thumb_vadjust.page_increment = 1
-        self.thumb_scroll = gtk.VScrollbar(None)
-        self.thumb_scroll.set_adjustment(self.thumb_vadjust)
-        #self.thumb_selection_handler = \
-        #    self.thumb_tree_view.get_selection().connect(
-        #    'changed', self.thumb_selection_event)
-        
+
         # =======================================================
         # Create scrollbar widgets.
         # =======================================================
@@ -124,27 +91,33 @@ class Mainwindow(gtk.Window):
         # Attach widgets to the main table.
         # =======================================================
         self.table = gtk.Table(2, 2, False)
-        self.table.attach(self.thumb_layout, 0, 1, 2, 5, gtk.FILL,
+        self.table.attach(self.thumbnailsidebar.layout, 0, 1, 2, 5, gtk.FILL,
             gtk.FILL|gtk.EXPAND, 0, 0)
-        self.table.attach(self.thumb_scroll, 1, 2, 2, 4, gtk.FILL|gtk.SHRINK,
-            gtk.FILL|gtk.SHRINK, 0, 0)
+        self.table.attach(self.thumbnailsidebar.scroll, 1, 2, 2, 4,
+            gtk.FILL|gtk.SHRINK, gtk.FILL|gtk.SHRINK, 0, 0)
         self.table.attach(self.main_layout, 2, 3, 2, 3, gtk.FILL|gtk.EXPAND,
             gtk.FILL|gtk.EXPAND, 0, 0)
         self.table.attach(self.vscroll, 3, 4, 2, 3, gtk.FILL|gtk.SHRINK,
             gtk.FILL|gtk.SHRINK, 0, 0)
         self.table.attach(self.hscroll, 2, 3, 4, 5, gtk.FILL|gtk.SHRINK,
-            gtk.FILL|gtk.SHRINK, 0, 0)
+            gtk.FILL, 0, 0)
         self.table.attach(self.toolbar, 0, 4, 1, 2, gtk.FILL|gtk.SHRINK,
-            gtk.FILL|gtk.SHRINK, 0, 0)
+            gtk.FILL, 0, 0)
         self.table.attach(self.statusbar, 0, 4, 5, 6, gtk.FILL|gtk.SHRINK,
-            gtk.FILL|gtk.SHRINK, 0, 0)
+            gtk.FILL, 0, 0)
         self.table.attach(self.menubar, 0, 4, 0, 1, gtk.FILL|gtk.SHRINK,
-            gtk.FILL|gtk.SHRINK, 0, 0)
+            gtk.FILL, 0, 0)
 
         self.add(self.table)
         self.table.show()
         self.main_layout.show()
         self.display_active_widgets()
+
+        self.connect('delete_event', terminate_program)
+        self.connect('key_press_event', event.key_press_event)
+        self.main_layout.connect('scroll_event', event.scroll_wheel_event)
+        self.connect('configure_event', event.resize_event)
+        self.connect('button_press_event', event.mouse_press_event)
 
     def display_active_widgets(self):
         if not preferences.prefs['hide all']:
@@ -157,11 +130,9 @@ class Mainwindow(gtk.Window):
             else:
                 self.statusbar.hide_all()
             if preferences.prefs['show thumbnails']:
-                self.thumb_layout.show_all()
-                self.thumb_scroll.show_all()
+                self.thumbnailsidebar.show()
             else:
-                self.thumb_layout.hide_all()
-                self.thumb_scroll.hide_all()
+                self.thumbnailsidebar.hide()
             if preferences.prefs['show menubar']:
                 self.menubar.show_all()
             else:
@@ -185,8 +156,7 @@ class Mainwindow(gtk.Window):
             self.toolbar.hide_all()
             self.menubar.hide_all()
             self.statusbar.hide_all()
-            self.thumb_layout.hide_all()
-            self.thumb_scroll.hide_all()
+            self.thumbnailsidebar.hide()
             self.vscroll.hide_all()
             self.hscroll.hide_all()
 
@@ -198,8 +168,7 @@ class Mainwindow(gtk.Window):
             if preferences.prefs['show statusbar']:
                 height -= self.statusbar.size_request()[1]
             if preferences.prefs['show thumbnails']:
-                width -= self.thumb_layout.size_request()[0]
-                width -= self.thumb_scroll.size_request()[0]
+                width -= self.thumbnailsidebar.get_width()
             if preferences.prefs['show menubar']:
                 height -= self.menubar.size_request()[1]
             if (preferences.prefs['show scrollbar'] and
@@ -296,24 +265,35 @@ def next_page(*args):
     if filehandler.next_page():
         if not window.keep_rotation:
             window.rotation = 0
+        window.thumbnailsidebar.update_select()
         window.draw_image()
 
 def previous_page(*args):
     if filehandler.previous_page():
         if not window.keep_rotation:
             window.rotation = 0
+        window.thumbnailsidebar.update_select()
         window.draw_image(at_bottom=True)
 
 def first_page(*args):
     if filehandler.first_page():
         if not window.keep_rotation:
             window.rotation = 0
+        window.thumbnailsidebar.update_select()
         window.draw_image()
 
 def last_page(*args):
     if filehandler.last_page():
         if not window.keep_rotation:
             window.rotation = 0
+        window.thumbnailsidebar.update_select()
+        window.draw_image()
+
+def set_page(num):
+    if filehandler.set_page(num):
+        if not window.keep_rotation:
+            window.rotation = 0
+        window.thumbnailsidebar.update_select()
         window.draw_image()
 
 def rotate90(*args):
