@@ -85,7 +85,12 @@ class ThumbnailSidebar:
         self.selection.select_path(filehandler.current_image)
         rect = self.treeview.get_background_area(
             filehandler.current_image, self.column)
-        self.vadjust.clamp_page(rect.y, rect.y + rect.height)
+        if (rect.y < self.vadjust.get_value() or rect.y + rect.height > 
+          self.vadjust.get_value() + self.vadjust.page_size):
+            value = rect.y + (rect.height // 2) - (self.vadjust.page_size // 2)
+            value = max(0, value)
+            value = min(self.vadjust.upper - self.vadjust.page_size, value)
+            self.vadjust.set_value(value)
 
     def scroll_event(self, widget, event):
         if event.direction == gtk.gdk.SCROLL_UP:
