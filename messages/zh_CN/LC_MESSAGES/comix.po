@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Comix 3.3\n"
 "POT-Creation-Date: 2007-07-20 16:52+CEST\n"
-"PO-Revision-Date: 2006-09-27 11:31+0800\n"
+"PO-Revision-Date: 2007-09-24 14:21+0800\n"
 "Last-Translator: Xie Yanbo <xieyanbo@gmail.com>\n"
 "Language-Team: Xie Yanbo <xieyanbo@gmail.com>\n"
 "MIME-Version: 1.0\n"
@@ -17,35 +17,44 @@ msgstr ""
 "X-Poedit-Language: Chinese\n"
 "X-Poedit-Basepath: /home/xyb/develop/comix/comix\n"
 
-#: comix:547 comix:11064
+#: comix:547
+#: comix:11064
 msgid "Fit-to-screen mode"
 msgstr "适应屏幕模式"
 
-#: comix:550 comix:11065
+#: comix:550
+#: comix:11065
 msgid "Fit width mode"
 msgstr "适应宽度模式"
 
-#: comix:553 comix:11066
+#: comix:553
+#: comix:11066
 msgid "Fit height mode"
 msgstr "适应高度模式"
 
-#: comix:556 comix:11008 comix:11067
+#: comix:556
+#: comix:11008
+#: comix:11067
 msgid "Manual zoom mode"
 msgstr "手动缩放模式"
 
-#: comix:559 comix:11068
+#: comix:559
+#: comix:11068
 msgid "Double page mode"
 msgstr "双页模式"
 
-#: comix:561 comix:11070
+#: comix:561
+#: comix:11070
 msgid "Manga mode"
 msgstr "Manga 漫画模式"
 
-#: comix:563 comix:11069
+#: comix:563
+#: comix:11069
 msgid "Magnifying lens"
 msgstr "放大镜"
 
-#: comix:664 comix:6637
+#: comix:664
+#: comix:6637
 msgid "Library"
 msgstr "收藏库"
 
@@ -61,7 +70,9 @@ msgstr "把文件加入到收藏库。"
 msgid "Remove selected archive from library."
 msgstr "从收藏库里删除选定的文件。"
 
-#: comix:709 comix:1611 comix:1654
+#: comix:709
+#: comix:1611
+#: comix:1654
 msgid "Clean up"
 msgstr "清理"
 
@@ -129,7 +140,12 @@ msgstr "XBM 图像"
 msgid "ZIP archive"
 msgstr "ZIP 图像"
 
-#: comix:857 comix:6719 comix:7071 comix:7122 comix:7470 comix:8743
+#: comix:857
+#: comix:6719
+#: comix:7071
+#: comix:7122
+#: comix:7470
+#: comix:8743
 msgid "RAR archive"
 msgstr "RAR 文件"
 
@@ -289,11 +305,13 @@ msgstr "工具栏按钮标签："
 msgid "Icons only"
 msgstr "只有图标"
 
-#: comix:1018 comix:4630
+#: comix:1018
+#: comix:4630
 msgid "Text only"
 msgstr "只有文字"
 
-#: comix:1019 comix:4632
+#: comix:1019
+#: comix:4632
 msgid "Icons and text"
 msgstr "图标和文字"
 
@@ -329,7 +347,12 @@ msgstr "注释"
 msgid "Space key scrolls"
 msgstr "空格键滚动"
 
-#: comix:1201 comix:3991 comix:9404 comix:9433 comix:9436 comix:9443
+#: comix:1201
+#: comix:3991
+#: comix:9404
+#: comix:9433
+#: comix:9436
+#: comix:9443
 #: comix:9445
 msgid "of"
 msgstr "of"
@@ -422,11 +445,14 @@ msgstr "编辑书签"
 msgid "Title"
 msgstr "标题"
 
-#: comix:1447 comix:5397 comix:5749
+#: comix:1447
+#: comix:5397
+#: comix:5749
 msgid "Page"
 msgstr "页面"
 
-#: comix:1477 comix:1529
+#: comix:1477
+#: comix:1529
 msgid "About"
 msgstr "关于"
 
@@ -496,23 +522,23 @@ msgstr "繁体中文译者"
 
 #: comix:1552
 msgid "Japanese translation"
-msgstr ""
+msgstr "日语译者"
 
 #: comix:1553
 msgid "Hungarian translation"
-msgstr ""
+msgstr "匈牙利语译者"
 
 #: comix:1554
 msgid "Russian translation"
-msgstr ""
+msgstr "俄语译者"
 
 #: comix:1555
 msgid "Croatian translation"
-msgstr ""
+msgstr "克罗埃西亚语译者"
 
 #: comix:1556
 msgid "Czech translation"
-msgstr ""
+msgstr "捷克语译者"
 
 #: comix:1564
 msgid "Credits"
@@ -522,11 +548,13 @@ msgstr "致谢"
 msgid "Manage thumbnails"
 msgstr "管理缩略图"
 
-#: comix:1606 comix:1649
+#: comix:1606
+#: comix:1649
 msgid "Remove all stored thumbnails:"
 msgstr "删除所有已经存储的缩略图："
 
-#: comix:1616 comix:1659
+#: comix:1616
+#: comix:1659
 msgid "Remove orphaned thumbnails:"
 msgstr "删除所有被遗弃的缩略图："
 
@@ -554,23 +582,47 @@ msgstr "文件类型"
 msgid "Extension"
 msgstr "扩展名"
 
-#: comix:1736 comix:4321 comix:4357 comix:6711 comix:7061 comix:7112
-#: comix:7468 comix:8714
+#: comix:1736
+#: comix:4321
+#: comix:4357
+#: comix:6711
+#: comix:7061
+#: comix:7112
+#: comix:7468
+#: comix:8714
 msgid "Zip archive"
 msgstr "Zip 文件"
 
-#: comix:1737 comix:4324 comix:4363 comix:6713 comix:7063 comix:7114
-#: comix:7472 comix:8730
+#: comix:1737
+#: comix:4324
+#: comix:4363
+#: comix:6713
+#: comix:7063
+#: comix:7114
+#: comix:7472
+#: comix:8730
 msgid "Tar archive"
 msgstr "Tar 文件"
 
-#: comix:1738 comix:4328 comix:4359 comix:6715 comix:7066 comix:7117
-#: comix:7473 comix:8726
+#: comix:1738
+#: comix:4328
+#: comix:4359
+#: comix:6715
+#: comix:7066
+#: comix:7117
+#: comix:7473
+#: comix:8726
 msgid "Gzip compressed tar archive"
 msgstr "Gzip 压缩过的 tar 文件"
 
-#: comix:1740 comix:4331 comix:4361 comix:6717 comix:7069 comix:7120
-#: comix:7474 comix:8728
+#: comix:1740
+#: comix:4331
+#: comix:4361
+#: comix:6717
+#: comix:7069
+#: comix:7120
+#: comix:7474
+#: comix:8728
 msgid "Bzip2 compressed tar archive"
 msgstr "Bzip2 压缩过的 tar 文件"
 
@@ -578,7 +630,9 @@ msgstr "Bzip2 压缩过的 tar 文件"
 msgid "Delete old archive/directory"
 msgstr "删除旧的文件或目录"
 
-#: comix:1777 comix:6112 comix:6117
+#: comix:1777
+#: comix:6112
+#: comix:6117
 msgid "Permission denied"
 msgstr "没有权限"
 
@@ -594,7 +648,8 @@ msgstr "要永久删除“%s”吗？"
 msgid "Perform lossless JPEG operation on %s?"
 msgstr "要对文件“%s”进行JPEG无损旋转吗？"
 
-#: comix:4098 comix:4103
+#: comix:4098
+#: comix:4103
 msgid "Some images might be trimmed a bit during the operation."
 msgstr "一些图像在转换过程中可能会被少许削减。"
 
@@ -602,29 +657,54 @@ msgstr "一些图像在转换过程中可能会被少许削减。"
 msgid "Permanently convert %s to greyscale?"
 msgstr "要把“%s”转换为灰度图像吗？"
 
-#: comix:4963 comix:4974
+#: comix:4963
+#: comix:4974
 msgid "Location:"
 msgstr "位置："
 
-#: comix:4964 comix:4975
+#: comix:4964
+#: comix:4975
 msgid "Quantity:"
 msgstr "数量："
 
-#: comix:4964 comix:4975
+#: comix:4964
+#: comix:4975
 msgid "Total size:"
 msgstr "总大小："
 
-#: comix:5010 comix:5021 comix:5025 comix:5036 comix:5055 comix:5060
-#: comix:5064 comix:5075 comix:5086 comix:5090 comix:5101 comix:5119
-#: comix:5124 comix:5128 comix:6431 comix:6459 comix:6465
+#: comix:5010
+#: comix:5021
+#: comix:5025
+#: comix:5036
+#: comix:5055
+#: comix:5060
+#: comix:5064
+#: comix:5075
+#: comix:5086
+#: comix:5090
+#: comix:5101
+#: comix:5119
+#: comix:5124
+#: comix:5128
+#: comix:6431
+#: comix:6459
+#: comix:6465
 msgid "Removed:"
 msgstr "已删除："
 
-#: comix:5026 comix:5065 comix:5091 comix:5129 comix:6379 comix:6466
+#: comix:5026
+#: comix:5065
+#: comix:5091
+#: comix:5129
+#: comix:6379
+#: comix:6466
 msgid "Done!"
 msgstr "完成！"
 
-#: comix:5230 comix:6704 comix:7059 comix:7110
+#: comix:5230
+#: comix:6704
+#: comix:7059
+#: comix:7110
 msgid "pages"
 msgstr "页"
 
@@ -636,7 +716,9 @@ msgstr "注释"
 msgid "comments"
 msgstr "注释"
 
-#: comix:5264 comix:5450 comix:5803
+#: comix:5264
+#: comix:5450
+#: comix:5803
 msgid "Location"
 msgstr "位置"
 
@@ -644,11 +726,13 @@ msgstr "位置"
 msgid "Yes"
 msgstr "是"
 
-#: comix:5277 comix:5280
+#: comix:5277
+#: comix:5280
 msgid "In library"
 msgstr "在收藏库"
 
-#: comix:5280 comix:5295
+#: comix:5280
+#: comix:5295
 msgid "No"
 msgstr "否"
 
@@ -656,23 +740,32 @@ msgstr "否"
 msgid "Yes, page"
 msgstr "是，页面"
 
-#: comix:5290 comix:5295
+#: comix:5290
+#: comix:5295
 msgid "Bookmarked"
 msgstr "已加书签"
 
-#: comix:5303 comix:5459 comix:5812
+#: comix:5303
+#: comix:5459
+#: comix:5812
 msgid "Accessed"
 msgstr "访问"
 
-#: comix:5313 comix:5470 comix:5823
+#: comix:5313
+#: comix:5470
+#: comix:5823
 msgid "Modified"
 msgstr "修改"
 
-#: comix:5323 comix:5481 comix:5834
+#: comix:5323
+#: comix:5481
+#: comix:5834
 msgid "Permissions"
 msgstr "权限"
 
-#: comix:5332 comix:5491 comix:5844
+#: comix:5332
+#: comix:5491
+#: comix:5844
 msgid "Owner"
 msgstr "属主"
 
@@ -680,31 +773,38 @@ msgstr "属主"
 msgid "Archive"
 msgstr "文件"
 
-#: comix:5508 comix:5861
+#: comix:5508
+#: comix:5861
 msgid "Mode"
 msgstr "模式"
 
-#: comix:5515 comix:5868
+#: comix:5515
+#: comix:5868
 msgid "Pixel count"
 msgstr "像素数"
 
-#: comix:5528 comix:5881
+#: comix:5528
+#: comix:5881
 msgid "Pixel sum"
 msgstr "像素和"
 
-#: comix:5559 comix:5912
+#: comix:5559
+#: comix:5912
 msgid "Extrema"
 msgstr "极值"
 
-#: comix:5598 comix:5951
+#: comix:5598
+#: comix:5951
 msgid "Mean"
 msgstr "平均值"
 
-#: comix:5626 comix:5979
+#: comix:5626
+#: comix:5979
 msgid "Median"
 msgstr "中间值"
 
-#: comix:5654 comix:6007
+#: comix:5654
+#: comix:6007
 msgid "Standard deviation"
 msgstr "标准差"
 
@@ -724,7 +824,8 @@ msgstr "图像 2"
 msgid "Could not delete"
 msgstr "不能删除"
 
-#: comix:6114 comix:6119
+#: comix:6114
+#: comix:6119
 msgid "Please check your permissions."
 msgstr "请检查您的权限。"
 
@@ -732,7 +833,10 @@ msgstr "请检查您的权限。"
 msgid "Could not create"
 msgstr "无法创建"
 
-#: comix:6230 comix:6240 comix:6374 comix:6378
+#: comix:6230
+#: comix:6240
+#: comix:6374
+#: comix:6378
 msgid "Added:"
 msgstr "加入："
 
@@ -753,9 +857,7 @@ msgid "page"
 msgstr "页面"
 
 #: comix:8741
-msgid ""
-"Could not find the unrar executable. Please install it if you wish to open "
-"RAR archives."
+msgid "Could not find the unrar executable. Please install it if you wish to open RAR archives."
 msgstr "找不到 unrar 可执行文件。如果您要打开 RAR 文件，请安装 unrar。"
 
 #: comix:8746
@@ -778,7 +880,8 @@ msgstr "文件类型"
 msgid "not recognized."
 msgstr "无法识别。"
 
-#: comix:8920 comix:11179
+#: comix:8920
+#: comix:11179
 msgid "No images in \"%s\""
 msgstr "“%s”中没有任何图像"
 
@@ -790,7 +893,10 @@ msgstr "注释文件"
 msgid "Could not read"
 msgstr "无法读取"
 
-#: comix:9432 comix:9435 comix:9442 comix:9444
+#: comix:9432
+#: comix:9435
+#: comix:9442
+#: comix:9444
 msgid "Comment"
 msgstr "注释"
 
@@ -942,7 +1048,8 @@ msgstr "垂直无损JPEG旋转..."
 msgid "Convert JPEG to greyscale..."
 msgstr "转换为灰度图像..."
 
-#: comix:10961 comix:10963
+#: comix:10961
+#: comix:10963
 msgid "_Bookmarks"
 msgstr "书签(_B)"
 
@@ -962,11 +1069,13 @@ msgstr "文件操作(O_)"
 msgid "_File"
 msgstr "文件(_F)"
 
-#: comix:10968 comix:10969
+#: comix:10968
+#: comix:10969
 msgid "_View"
 msgstr "查看(_V)"
 
-#: comix:10970 comix:10971
+#: comix:10970
+#: comix:10971
 msgid "_Go"
 msgstr "跳转(_G)"
 
@@ -1079,111 +1188,59 @@ msgid "Enter fit height mode automatically when Comix is started."
 msgstr "Comix 启动时自动进入适应高度模式。"
 
 #: comix:11031
-msgid ""
-"Also scale images to a size that is larger than their original size in fit-"
-"to-screen mode, fit width mode and fit height mode."
-msgstr ""
-"并且在适应屏幕模式、适应宽度模式和适应高度模式时，缩放图像到超过原始大小的尺"
-"寸。"
+msgid "Also scale images to a size that is larger than their original size in fit-to-screen mode, fit width mode and fit height mode."
+msgstr "并且在适应屏幕模式、适应宽度模式和适应高度模式时，缩放图像到超过原始大小的尺寸。"
 
 #: comix:11032
-msgid ""
-"Scale the images independently when in double page mode and fit-to-screen "
-"mode. The smaller of the two images will scale up to fill any extra space "
-"that is given."
-msgstr ""
-"在双页模式和适应屏幕模式时各自对图像进行独立缩放。两幅图像中较小的将会放大到"
-"填充满任何额外的给定的空间。"
+msgid "Scale the images independently when in double page mode and fit-to-screen mode. The smaller of the two images will scale up to fill any extra space that is given."
+msgstr "在双页模式和适应屏幕模式时各自对图像进行独立缩放。两幅图像中较小的将会放大到填充满任何额外的给定的空间。"
 
 #: comix:11033
 msgid "Automatically show any available comments when opening a new file."
 msgstr "打开新文件时自动显示任何可用的注释。"
 
 #: comix:11034
-msgid ""
-"Automatically hide scrollbars, menubar, toolbar, statusbar and thumbnails "
-"when in fullscreen mode."
+msgid "Automatically hide scrollbars, menubar, toolbar, statusbar and thumbnails when in fullscreen mode."
 msgstr "在全屏模式时自动隐藏滚动条、菜单栏、工具栏、状态栏和缩略图。"
 
 #: comix:11035
-msgid ""
-"Cache the next page in the archive/directory to increase the perceived "
-"speed. This is generally recommended unless you are running low on RAM."
-msgstr ""
-"缓存文件或目录中的下一个页面以便增加速度。除非您的内存很小，通常这是推荐使用"
-"的选项。"
+msgid "Cache the next page in the archive/directory to increase the perceived speed. This is generally recommended unless you are running low on RAM."
+msgstr "缓存文件或目录中的下一个页面以便增加速度。除非您的内存很小，通常这是推荐使用的选项。"
 
 #: comix:11036
-msgid ""
-"Move the horizontal scrollbar instead of the vertical when using the scroll "
-"wheel at the top or the bottom of the page. The direction will be determined "
-"by whether you use manga mode or not."
-msgstr ""
-"在页面顶部或底部滚轮滚动时，移动水平滚动条而不是垂直滚动条。方向是由是否使用 "
-"Manga 漫画模式（从右到左浏览）决定的。"
+msgid "Move the horizontal scrollbar instead of the vertical when using the scroll wheel at the top or the bottom of the page. The direction will be determined by whether you use manga mode or not."
+msgstr "在页面顶部或底部滚轮滚动时，移动水平滚动条而不是垂直滚动条。方向是由是否使用 Manga 漫画模式（从右到左浏览）决定的。"
 
 #: comix:11037
-msgid ""
-"Flip pages when scrolling \"off the page\" with the scroll wheel, as well as "
-"with the arrow keys, even when not in fit-to-screen mode. It takes three "
-"\"steps\" with the scroll wheel or arrow keys to trigger this behaviour."
-msgstr ""
+msgid "Flip pages when scrolling \"off the page\" with the scroll wheel, as well as with the arrow keys, even when not in fit-to-screen mode. It takes three \"steps\" with the scroll wheel or arrow keys to trigger this behaviour."
+msgstr "就算不是在适应屏幕模式，当用滚轮滚动“超出页面”时也像使用方向键时一样换页。要触发这个行为，滚轮或方向键要操作三“步”。"
 
 #: comix:11038
-msgid ""
-"Save the position and the size of the window for the next time you start "
-"Comix."
+msgid "Save the position and the size of the window for the next time you start Comix."
 msgstr "为下一次您启动 Comix 的时候保存窗口的位置和大小。"
 
 #: comix:11039
-msgid ""
-"Automatically open the next archive in the directory when scrolling past the "
-"last page of the current archive, and automatically open the previous "
-"archive in the directory when scrolling past the first page of the current "
-"archive."
-msgstr ""
-"当滚动超出当前文件的最后一页时，自动打开当前目录的下一个文件；当滚动超出当前"
-"文件的第一页时，自动打开当前目录的前一个文件。"
+msgid "Automatically open the next archive in the directory when scrolling past the last page of the current archive, and automatically open the previous archive in the directory when scrolling past the first page of the current archive."
+msgstr "当滚动超出当前文件的最后一页时，自动打开当前目录的下一个文件；当滚动超出当前文件的第一页时，自动打开当前目录的前一个文件。"
 
 #: comix:11040
 msgid "Hide the cursor when in fullscreen mode."
 msgstr "全屏模式时隐藏鼠标指针。"
 
-#: comix:11041 comix:11042 comix:11043 comix:11044
-msgid ""
-"Set the image scaling method. The best choice is often \"Tiles\", it is "
-"quite quick and produces almost as good results as \"Bilinear\" or \"Hyper\"."
-msgstr ""
-"设定图像缩放方法。最好的选择经常是“平铺”，它非常快，并且效果也和“双线性”或"
-"者“超级”差不多好。"
+#: comix:11041
+#: comix:11042
+#: comix:11043
+#: comix:11044
+msgid "Set the image scaling method. The best choice is often \"Tiles\", it is quite quick and produces almost as good results as \"Bilinear\" or \"Hyper\"."
+msgstr "设定图像缩放方法。最好的选择经常是“平铺”，它非常快，并且效果也和“双线性”或者“超级”差不多好。"
 
 #: comix:11045
-msgid ""
-"Treat files with the following extensions as comment files. Extensions "
-"should be separated by whitespaces. They are not case sensitive."
-msgstr ""
-"把以下扩展名的文件看成注释文件。扩展名以空白分隔。它们不是大小写敏感的。"
+msgid "Treat files with the following extensions as comment files. Extensions should be separated by whitespaces. They are not case sensitive."
+msgstr "把以下扩展名的文件看成注释文件。扩展名以空白分隔。它们不是大小写敏感的。"
 
 #: comix:11046
-msgid ""
-"Use smart scrolling with the space key. Pressing the space key normally "
-"scrolls straight down one window height unless at the bottom of the page "
-"where it flips pages instead. When this option is set Comix automatically "
-"tries to follow the reading flow of the comic book. When pressing the space "
-"key it will not only scroll down but will also scroll horizontally to the "
-"edge of the page (left or right depending on whether you use manga mode). In "
-"double page mode it will go to the edge of the first page if it is in view, "
-"otherwise it will go to the edge of the second page. Also, in double page "
-"mode with this option, Comix will not flip pages unless at the bottom of the "
-"second page. At the bottom of the first page it will instead go to the top "
-"of the second page."
-msgstr ""
-"使用空格键来进行智能滚动。按空格键通常往下滚动一个窗口高度，或者当在页面底部"
-"时就翻页。这个选项设了后，Comix 会自动试着跟随漫画书阅读的流程。当按下空格键"
-"时不仅会往下滚动也会水平滚动到页边去（往左还是往右就看您是不是在用 Manga 漫画"
-"模式）。在双页模式下如果正在看，会跳到第一页的页边，反之跳到第二页的页边。并"
-"且，如果双页模式下开启了这个选项，除非已经到了第二页的底部，Comix 不会翻页。"
-"在第一页的底部时，它会跳到第二页的顶部。"
+msgid "Use smart scrolling with the space key. Pressing the space key normally scrolls straight down one window height unless at the bottom of the page where it flips pages instead. When this option is set Comix automatically tries to follow the reading flow of the comic book. When pressing the space key it will not only scroll down but will also scroll horizontally to the edge of the page (left or right depending on whether you use manga mode). In double page mode it will go to the edge of the first page if it is in view, otherwise it will go to the edge of the second page. Also, in double page mode with this option, Comix will not flip pages unless at the bottom of the second page. At the bottom of the first page it will instead go to the top of the second page."
+msgstr "使用空格键来进行智能滚动。按空格键通常往下滚动一个窗口高度，或者当在页面底部时就翻页。这个选项设了后，Comix 会自动试着跟随漫画书阅读的流程。当按下空格键时不仅会往下滚动也会水平滚动到页边去（往左还是往右就看您是不是在用 Manga 漫画模式）。在双页模式下如果正在看，会跳到第一页的页边，反之跳到第二页的页边。并且，如果双页模式下开启了这个选项，除非已经到了第二页的底部，Comix 不会翻页。在第一页的底部时，它会跳到第二页的顶部。"
 
 #: comix:11047
 msgid "Always hide the thumbnail scrollbar."
@@ -1194,9 +1251,7 @@ msgid "Automatically open the last viewed page when Comix is started."
 msgstr "当 Comix 启动时自动打开上次查看的页面。"
 
 #: comix:11049
-msgid ""
-"Automatically go to the same directory as last time when opening the \"Open"
-"\" dialog."
+msgid "Automatically go to the same directory as last time when opening the \"Open\" dialog."
 msgstr "当打开“打开”对话框时自动跳到上一次使用的目录。"
 
 #: comix:11050
@@ -1212,79 +1267,36 @@ msgid "Show the page number in the upper left corner of each thumbnail."
 msgstr "在每个缩略力的左上角显示页码。"
 
 #: comix:11053
-msgid ""
-"Automatically adjust the contrast of the images so that the darkest pixel is "
-"completely black and the lightest pixel is completely white. This only works "
-"with images without an alpha channel."
-msgstr ""
-"自动调整图像的对比度，使得最暗的像素是全黑的，最亮的像素是全白的。仅当图像没"
-"有 alpha 通道时起作用。"
+msgid "Automatically adjust the contrast of the images so that the darkest pixel is completely black and the lightest pixel is completely white. This only works with images without an alpha channel."
+msgstr "自动调整图像的对比度，使得最暗的像素是全黑的，最亮的像素是全白的。仅当图像没有 alpha 通道时起作用。"
 
 #: comix:11054
-msgid ""
-"The space key uses smart scrolling as if in double page mode even when in "
-"single page mode. This can be useful for comics with two scanned pages in "
-"each image. The pages are assumed to be of equal size"
-msgstr ""
-"就算在单页面模式，也使用双页面模式的空格键智能滚动。当漫画有两个页面扫描在同"
-"一幅图像时这个选项会比较有用。假定页面都是大小相等的。"
+msgid "The space key uses smart scrolling as if in double page mode even when in single page mode. This can be useful for comics with two scanned pages in each image. The pages are assumed to be of equal size"
+msgstr "就算在单页面模式，也使用双页面模式的空格键智能滚动。当漫画有两个页面扫描在同一幅图像时这个选项会比较有用。假定页面都是大小相等的。"
 
 #: comix:11055
 msgid "Adjust the lens magnification factor."
 msgstr "调整放大镜的放大倍数。"
 
 #: comix:11056
-msgid ""
-"Set the lens width and height in pixels. A larger lens will use more CPU "
-"resources than a small one."
+msgid "Set the lens width and height in pixels. A larger lens will use more CPU resources than a small one."
 msgstr "以像素大小设置放大镜的宽和高。大的放大镜要比小的占用更多的 CPU 资源。"
 
 #: comix:11057
-msgid ""
-"Set the maximum update frequency for the magnification lens in milliseconds. "
-"Setting the value too low can cause the lens to lag behind when moving the "
-"mouse quickly. Setting the value too high can cause the lens to appear "
-"choppy."
-msgstr ""
-"为放大镜设定最大的更新频率，以毫秒计。值设得太低了会使得快速移动鼠标时放大镜"
-"落后于更新。值设得太高了会使放大镜跳跃突变。"
+msgid "Set the maximum update frequency for the magnification lens in milliseconds. Setting the value too low can cause the lens to lag behind when moving the mouse quickly. Setting the value too high can cause the lens to appear choppy."
+msgstr "为放大镜设定最大的更新频率，以毫秒计。值设得太低了会使得快速移动鼠标时放大镜落后于更新。值设得太高了会使放大镜跳跃突变。"
 
 #: comix:11058
-msgid ""
-"Read and write thumbnails in the ~/.thumbnails directory as proposed by the "
-"freedesktop.org standard. With this preference set, Comix will use the "
-"thumbnails already stored there to speed up thumbnail loading. If there are "
-"no thumbnails, Comix will create them and save them there. This is a "
-"standard that many applications conform to, thumbnails created by other "
-"applications can be used by Comix and vice versa. If this preference is not "
-"set, Comix will create thumbnails on the fly every time a directory is "
-"opened."
-msgstr ""
-"按照 freedesktop.org 建议的标准来从 ~/.thumbnails 存取缩略图。这个选项设定"
-"后，Comix 会使用已经存在那里的缩略图来加速缩略图的导入。如果还没有缩略图，"
-"Comix 会创建并把它们保存在那里。这是一个很多应用程序共同遵守的标准，其它程序"
-"创建的缩略图 Comix 能拿来用，反过来也一样。如果这个选项没有设定，Comix 会在每"
-"次打开一个目录时实时地创建缩略图。"
+msgid "Read and write thumbnails in the ~/.thumbnails directory as proposed by the freedesktop.org standard. With this preference set, Comix will use the thumbnails already stored there to speed up thumbnail loading. If there are no thumbnails, Comix will create them and save them there. This is a standard that many applications conform to, thumbnails created by other applications can be used by Comix and vice versa. If this preference is not set, Comix will create thumbnails on the fly every time a directory is opened."
+msgstr "按照 freedesktop.org 建议的标准来从 ~/.thumbnails 存取缩略图。这个选项设定后，Comix 会使用已经存在那里的缩略图来加速缩略图的导入。如果还没有缩略图，Comix 会创建并把它们保存在那里。这是一个很多应用程序共同遵守的标准，其它程序创建的缩略图 Comix 能拿来用，反过来也一样。如果这个选项没有设定，Comix 会在每次打开一个目录时实时地创建缩略图。"
 
 #: comix:11059
-msgid ""
-"Also use stored thumbnails for images in archives in a similiar way. Due to "
-"restrictions in the freedesktop.org standard, these thumbnails will be "
-"stored in ~/.comix and will only be used by Comix. If this preference is not "
-"set, Comix will create thumbnails on the fly every time an archive is opened."
-msgstr ""
-"用类似的方法为文件中的图像存储缩略图。因为 freedesktop.org 标准的限制，这些缩"
-"略图会被存在 ~/.comix，并且只有 Comix 能使用。如果这个选项没有设定，Comix 会"
-"在每次文件被打开时实时地创建缩略图。"
+msgid "Also use stored thumbnails for images in archives in a similiar way. Due to restrictions in the freedesktop.org standard, these thumbnails will be stored in ~/.comix and will only be used by Comix. If this preference is not set, Comix will create thumbnails on the fly every time an archive is opened."
+msgstr "用类似的方法为文件中的图像存储缩略图。因为 freedesktop.org 标准的限制，这些缩略图会被存在 ~/.comix，并且只有 Comix 能使用。如果这个选项没有设定，Comix 会在每次文件被打开时实时地创建缩略图。"
 
 #: comix:11060
-msgid ""
-"Only display a single image in double page mode if the image consists of two "
-"pages. An image is assumed to consist of two pages if its width is greater "
-"than its height."
-msgstr ""
-"如果图像是由两页组成的，在双页模式下也只显示一幅图像。图像的宽度如果比高度"
-"大，就被认为是由两页组成的。"
+msgid "Only display a single image in double page mode if the image consists of two pages. An image is assumed to consist of two pages if its width is greater than its height."
+msgstr "如果图像是由两页组成的，在双页模式下也只显示一幅图像。图像的宽度如果比高度大，就被认为是由两页组成的。"
 
 #: comix:11061
 msgid "Filter out archives with regular expressions."
@@ -1295,9 +1307,7 @@ msgid "Apply filters on full paths rather than filenames."
 msgstr "在完整路径而不是文件名上应用过滤器。"
 
 #: comix:11063
-msgid ""
-"Store a list of the 10 last opened files that can be accessed through the "
-"menus."
+msgid "Store a list of the 10 last opened files that can be accessed through the menus."
 msgstr "存储最后打开过的10个文件的列表，并且可以通过菜单访问。"
 
 #: comix:11071
@@ -1327,3 +1337,4 @@ msgstr "跳到页面..."
 #~ msgstr ""
 #~ "就算不是在适应屏幕模式，当用滚轮滚动“超出页面”时也换页。要触发这个行为，滚"
 #~ "轮要往滚三“步”。"
+
