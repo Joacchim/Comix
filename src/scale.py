@@ -82,15 +82,15 @@ def fit_2_in_rectangle(src1, src2, width, height, interp=None, scale_up=False,
     given rectangle.
     """
 
-    # "Unbounded" really means "bounded to 10000 px", for simplicity.
+    # "Unbounded" really means "bounded to 10000 px" - for simplicity.
     # Comix would choke on larger images anyway.
     if width < 0:
         width = 10000
     elif height < 0:
         height = 10000
     
-    width -= 2 # We got a 2 px gap between images
-    width = max(width, 2) # We just can't have 0 px images
+    width -= 2              # We got a 2 px gap between images
+    width = max(width, 2)   # We need at least 1 px per image
     height = max(height, 1)
 
     total_width = src1.get_width() + src2.get_width()

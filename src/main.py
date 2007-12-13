@@ -112,11 +112,18 @@ class MainWindow(gtk.Window):
         self.main_layout.show()
         self.display_active_widgets()
 
+        self.main_layout.set_events(gtk.gdk.BUTTON1_MOTION_MASK |
+                                    gtk.gdk.BUTTON2_MOTION_MASK | 
+                                    gtk.gdk.BUTTON_RELEASE_MASK |
+                                    gtk.gdk.POINTER_MOTION_MASK)
+
         self.connect('delete_event', terminate_program)
         self.connect('key_press_event', event.key_press_event)
         self.main_layout.connect('scroll_event', event.scroll_wheel_event)
         self.connect('configure_event', event.resize_event)
-        self.connect('button_press_event', event.mouse_press_event)
+        self.main_layout.connect('button_press_event', event.mouse_press_event)
+        self.connect('button_release_event', event.mouse_release_event)
+        self.main_layout.connect('motion_notify_event', event.mouse_move_event)
 
     def display_active_widgets(self):
         if not preferences.prefs['hide all'] and not (self.is_fullscreen and 
@@ -209,6 +216,8 @@ class MainWindow(gtk.Window):
                     left_pixbuf.get_width() + right_pixbuf.get_width()) // 100)
                 scale_height = int(self.manual_zoom * max(
                     left_pixbuf.get_height(), right_pixbuf.get_height()) // 100)
+                #if self.rotation in [90, 270]:
+                #    scale_width, scale_height = scale_height, scale_width
                 scale_up = True
 
             left_pixbuf, right_pixbuf = scale.fit_2_in_rectangle(
@@ -228,6 +237,8 @@ class MainWindow(gtk.Window):
                 scale_width = int(self.manual_zoom * pixbuf.get_width() // 100)
                 scale_height = int(self.manual_zoom * pixbuf.get_height()
                     // 100)
+                if self.rotation in [90, 270]:
+                    scale_width, scale_height = scale_height, scale_width
                 scale_up = True
 
             pixbuf = scale.fit_in_rectangle(pixbuf, scale_width, scale_height,

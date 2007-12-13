@@ -5,28 +5,27 @@
 import gtk
 
 import main
-import preferences
+import cursor
+from preferences import prefs
+
+last_pointer_pos_x = None
+last_pointer_pos_y = None
 
 def resize_event(widget, event):
         
     """ Handles events from resizing and moving the main window. """
     
-    #print dir(event)
-
-    #if not main.window.is_fullscreen:
-    #    preferences.prefs['window x'], preferences.prefs['window y'] = \
-    #        main.window.get_position()
+    if not main.window.is_fullscreen:
+        prefs['window x'], prefs['window y'] = main.window.get_position()
     if (event.width != main.window.width or
         event.height != main.window.height):
         print 'resize'
-        #if not main.window.is_fullscreen:
-        #    preferences.prefs['window width'] = event.width
-        #    preferences.prefs['window height'] = event.height
+        if not main.window.is_fullscreen:
+            prefs['window width'] = event.width
+            prefs['window height'] = event.height
         main.window.width = event.width
         main.window.height = event.height
-        #self.resize_event = 1
         main.window.draw_image()
-        #self.resize_event = 0
 
 def key_press_event(widget, event, *args):
     
@@ -121,12 +120,12 @@ def key_press_event(widget, event, *args):
     # If Shift is pressed we should backtrack instead.
     # --------------------------------------------------------------------
     elif event.keyval == gtk.keysyms.space:
-        if preferences.prefs['space scroll type'] == 'window':
+        if prefs['space scroll type'] == 'window':
             x_step, y_step = main.window.get_layout_size()
-        elif preferences.prefs['space scroll type'] == 'image':
+        elif prefs['space scroll type'] == 'image':
             x_step, y_step = main.window.main_layout.get_size()
-        x_step = x_step * preferences.prefs['space scroll length'] // 100
-        y_step = y_step * preferences.prefs['space scroll length'] // 100
+        x_step = x_step * prefs['space scroll length'] // 100
+        y_step = y_step * prefs['space scroll length'] // 100
         if 'GDK_SHIFT_MASK' in event.state.value_names:
             next_page_function = main.previous_page
             startfirst = 'endfirst'
@@ -139,7 +138,7 @@ def key_press_event(widget, event, *args):
         if main.window.manga_mode:
             x_step *= -1
         # FIXME: Smart space in DP mode is not implemented
-        if preferences.prefs['smart space scroll']:
+        if prefs['smart space scroll']:
             if not main.is_double():
                 if not main.scroll(x_step, 0):
                     if not main.scroll(0, y_step):
@@ -192,12 +191,10 @@ def mouse_press_event(widget, event):
     """ Handles mouse click events on the main window. """
 
     if event.button == 1:
-        print 1
-        #self.x_drag_position = event.x_root
-        #self.y_drag_position = event.y_root
-        #self.mouse_moved_while_drag = 0
-        #self.old_vadjust_value = self.vadjust.value
-        #self.old_hadjust_value = self.hadjust.value
+        global last_pointer_pos_x
+        global last_pointer_pos_y
+        last_pointer_pos_x = event.x_root
+        last_pointer_pos_y = event.y_root
     elif event.button == 2:
         print 2
         #if self.scroll_wheel_event_id != None:
@@ -208,24 +205,30 @@ def mouse_press_event(widget, event):
         main.window.ui_manager.get_widget('/Pop').popup(
             None, None, None, event.button, event.time)
 
-
-def mouse_button_release_event(self, widget, event): # XXX: Not used!
+def mouse_release_event(widget, event):
     
     """ Handles mouse button release events on the main window. """
+
+    cursor.set_cursor_type(cursor.NORMAL)
+
+    #if self.mouse_moved_while_drag == 0 and event.button == 1:
+    #    self.next_page(None)
+    #if event.button == 2 and self.z_pressed:
+    #    self.actiongroup.get_action('Lens').set_active(False)
+    #if self.scroll_wheel_event_id == None:
+    #    self.scroll_wheel_event_id = \
+    #        self.layout.connect('scroll_event', self.scroll_wheel_event)
+
+def mouse_move_event(widget, event):
     
-    if self.exit:
-        return False
-    if self.slideshow_stopped_by_mouse:
-        self.slideshow_stopped_by_mouse = False
-        self.set_cursor_type('normal')
-        return
+    """ Handles mouse pointer movement events. """
     
-    self.set_cursor_type('normal')
-    if self.mouse_moved_while_drag == 0 and event.button == 1:
-        self.next_page(None)
-    if event.button == 2 and self.z_pressed:
-        self.actiongroup.get_action('Lens').set_active(False)
-    if self.scroll_wheel_event_id == None:
-        self.scroll_wheel_event_id = \
-            self.layout.connect('scroll_event', self.scroll_wheel_event)
+    if 'GDK_BUTTON1_MASK' in event.state.value_names:
+        cursor.set_cursor_type(cursor.GRAB)
+        global last_pointer_pos_x
+        global last_pointer_pos_y
+        main.scroll(last_pointer_pos_x - event.x_root,
+                    last_pointer_pos_y - event.y_root)
+        last_pointer_pos_x = event.x_root
+        last_pointer_pos_y = event.y_root
 

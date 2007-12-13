@@ -12,7 +12,7 @@ import gc
 import shutil
 
 import archive
-#import cursor
+import cursor
 import preferences
 import main
 import encoding
@@ -255,8 +255,10 @@ def open_file(path, start_image=0):
         print 'Unknown filetype!'
         return False
 
-    #cursor.set_cursor('watch')
+    cursor.set_cursor_type(cursor.WAIT)
     close_file()
+    while gtk.events_pending():
+        gtk.main_iteration(False)
 
     # --------------------------------------------------------------------
     # If <path> is an archive we extract it and walk down the extracted
@@ -315,10 +317,9 @@ def open_file(path, start_image=0):
     if not main.window.keep_rotation:
         main.window.rotation = 0
     main.window.draw_image()
+    cursor.set_cursor_type(cursor.NORMAL)
     main.window.thumbnailsidebar.load_thumbnails()
-
     comment_files.sort()
-    #cursor.set_cursor(None)
 
 def close_file(*args):
     global file_loaded

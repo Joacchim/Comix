@@ -1,6 +1,8 @@
 # ============================================================================
 # thumbnail.py - Thumbnail module for Comix implementing the freedesktop.org
 # "standard" at http://jens.triq.net/thumbnail-spec/
+#
+# Only 128x128 px thumbnails are supported.
 # ============================================================================
 
 import os
@@ -11,6 +13,7 @@ import gtk
 import Image
 
 import constants
+import filehandler
 
 thumbdir = os.path.join(os.getenv('HOME'), '.thumbnails/normal')
 
@@ -26,6 +29,14 @@ def _get_pixbuf128(path):
         return None
 
 def create_thumbnail(path):
+    
+    """
+    Create a thumbnail from the file at <path> and store it in the standard
+    thumbnail directory.
+    """
+
+    if not filehandler.is_image_file(path):
+        return None
     pixbuf = _get_pixbuf128(path)
     uri = 'file://' + pathname2url(path)
     thumbpath = _uri_to_thumbpath(uri)
@@ -57,6 +68,14 @@ def create_thumbnail(path):
     return pixbuf
 
 def get_thumbnail(path, create=True):
+    
+    """
+    Get a thumbnail pixbuf for the file at <path> by looking in the
+    directory of stored thumbnails. If a thumbnail for the file doesn't
+    exist we create a thumbnail pixbuf from the original. If <create>
+    is True we also save this new thumbnail in the thumbnail directory.
+    """
+
     uri = 'file://' + pathname2url(path)
     thumbpath = _uri_to_thumbpath(uri)
     if not os.path.exists(thumbpath):
