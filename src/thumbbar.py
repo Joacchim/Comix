@@ -1,6 +1,6 @@
-# ========================================================================
+# ============================================================================
 # thumbbar.py - Thumbnail sidebar for Comix.
-# ========================================================================
+# ============================================================================
 
 import time
 
@@ -39,6 +39,7 @@ class ThumbnailSidebar:
         self.scroll = gtk.VScrollbar(None)
         self.scroll.set_adjustment(self.vadjust)
         self.selection = self.treeview.get_selection()
+
         self.selection.connect('changed', self.selection_event)
         self.layout.connect('scroll_event', self.scroll_event)
 

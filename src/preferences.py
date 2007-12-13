@@ -1,15 +1,15 @@
-# ========================================================================
+# ============================================================================
 # preferences.py - Preference handler for Comix.
-# ========================================================================
+# ============================================================================
 
 import os
 import cPickle
 
 import gtk
 
-# =======================================================
+# ------------------------------------------------------------------------
 # All the preferences are stored here.
-# =======================================================
+# ------------------------------------------------------------------------
 prefs = {
     'auto comments': False,
     'autocontrast': False,
@@ -71,9 +71,9 @@ prefs = {
 
 config_path = os.path.join(os.environ['HOME'], '.comix/preferences_data')
 
-# =======================================================
+# ------------------------------------------------------------------------
 # Parse preferences_data file.
-# =======================================================
+# ------------------------------------------------------------------------
 if os.path.isfile(config_path):
     try:
         config = open(config_path)
@@ -84,6 +84,7 @@ if os.path.isfile(config_path):
             print 'Removed outdated config data (version %s).' % version
         else:
             prefs.update(cPickle.load(config))
+            config.close()
     except:
-        print 'preferences.py: Error reading or writing', config_path
+        print '! preferences.py: Error reading or writing', config_path, '\n'
 

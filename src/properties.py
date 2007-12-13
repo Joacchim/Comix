@@ -1,6 +1,6 @@
-# ========================================================================
+# ============================================================================
 # properties.py - Properties dialog for Comix.
-# ========================================================================
+# ============================================================================
 
 import os
 import time
@@ -35,9 +35,9 @@ class Propertiesdialog(gtk.Dialog):
         self.vbox.pack_start(notebook, False, False, 0)
         
         if filehandler.archive_type:
-            # =====================================================
+            # ------------------------------------------------------------
             # Archive tab
-            # =====================================================
+            # ------------------------------------------------------------
             stats = os.stat(filehandler.archive_path)
             page = gtk.VBox(False, 12)
             page.set_border_width(12)
@@ -127,9 +127,9 @@ class Propertiesdialog(gtk.Dialog):
             page.pack_start(label, False, False)
             notebook.append_page(page, gtk.Label(_('Archive')))
         
-        # =====================================================
+        # ----------------------------------------------------------------
         # Image tab
-        # =====================================================
+        # ----------------------------------------------------------------
         stats = os.stat(filehandler.image_files[filehandler.current_image])
         iminfo = gtk.gdk.pixbuf_get_file_info(
             filehandler.image_files[filehandler.current_image])

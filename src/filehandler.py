@@ -1,7 +1,7 @@
-# ========================================================================
+# ============================================================================
 # filehandler.py - File handler for Comix. Opens files and keeps track
 # of images, pages and caches.
-# ========================================================================
+# ============================================================================
 
 import os
 import shutil
@@ -30,18 +30,19 @@ raw_pixbufs = {}
 
 def get_pixbufs():
 
-    ''' Returns the pixbuf for the current image from cache.
+    """
+    Returns the pixbuf for the current image from cache.
     Returns two pixbufs if needed in double_page mode.
     Pixbufs not found in cache are fetched from disk first. 
-    '''
+    """
 
     global current_image
     global image_files
     global raw_pixbufs
 
-    # =======================================================
+    # --------------------------------------------------------------------
     # Get first pixbuf from disk if not in cache.
-    # =======================================================
+    # --------------------------------------------------------------------
     if not raw_pixbufs.has_key(current_image):
         try:
             raw_pixbufs[current_image] = gtk.gdk.pixbuf_new_from_file(
@@ -53,9 +54,9 @@ def get_pixbufs():
     if not main.is_double():
         return raw_pixbufs[current_image]
 
-    # =======================================================
+    # --------------------------------------------------------------------
     # Get second pixbuf from disk if not in cache (double_page).
-    # =======================================================
+    # --------------------------------------------------------------------
     else:
         if not raw_pixbufs.has_key(current_image + 1):
             try:
@@ -68,11 +69,12 @@ def get_pixbufs():
 
 def do_cacheing():
 
-    ''' Makes sure that the correct pixbufs are stored in cache. These
+    """
+    Makes sure that the correct pixbufs are stored in cache. These
     are the current image(s) and if cacheing is enabled also the one or two
     pixbufs after them. All other pixbufs are deleted and garbage collected
     in order to save memory.
-    '''
+    """
 
     global current_image
     global image_files
@@ -84,19 +86,17 @@ def do_cacheing():
     wanted_pixbufs = range(current_image, 
         min(current_image + offset, len(image_files)))
     
-    # =======================================================
+    # --------------------------------------------------------------------
     # Remove old pixbufs.
-    # =======================================================
-    for not_wanted in xrange(0, len(image_files)):
-        if not_wanted in wanted_pixbufs:
-            continue
-        if raw_pixbufs.has_key(not_wanted):
-            del raw_pixbufs[not_wanted]
-    gc.collect()
+    # --------------------------------------------------------------------
+    for page in raw_pixbufs.keys()[:]:
+        if not page in wanted_pixbufs:
+            del raw_pixbufs[page]
+    gc.collect() # FIXME: Add generation for Python >= 2.5
     
-    # =======================================================
+    # --------------------------------------------------------------------
     # Cache new pixbufs if not already cached.
-    # =======================================================
+    # --------------------------------------------------------------------
     for wanted in wanted_pixbufs:
         if not raw_pixbufs.has_key(wanted):
             try:
@@ -109,14 +109,14 @@ def do_cacheing():
 def is_last_page():
     global image_files
     global current_image
-
     return current_image == len(image_files) - 1
 
 def next_page():
 
-    ''' Sets up filehandler to the next page. 
-    Returns True if this is not the same page, False otherwise.
-    '''
+    """
+    Sets up filehandler to the next page. Returns True if this is not
+    the same page, False otherwise.
+    """
 
     global image_files
     global current_image
@@ -129,18 +129,19 @@ def next_page():
         if preferences.prefs['go to next archive']:
             #open_file(NEXT_ARCHIVE)
             print 'open next archive'
-            return
+            return True
         else:
-            return
+            return False
     current_image += step
     current_image = min(len(image_files) - 1, current_image)
     return old_image != current_image
 
 def previous_page():
 
-    ''' Sets up filehandler to the previous page. 
-    Returns True if this is not the same page, False otherwise.
-    '''
+    """
+    Sets up filehandler to the previous page. Returns True if this is not
+    the same page, False otherwise.
+    """
 
     global image_files
     global current_image
@@ -151,19 +152,21 @@ def previous_page():
     step = main.window.double_page and 2 or 1
     if current_image <= step - 1:
         if preferences.prefs['go to next archive']:
-            #open_file(PREVIOUS_ARCHIVE, -1)
+            #open_file(PREVIOUS_ARCHIVE)
             print 'open previous archive'
+            return True
         else:
-            return
+            return False
     current_image -= step
     current_image = max(0, current_image)
     return old_image != current_image
 
 def first_page():
 
-    ''' Sets up filehandler to the first page.
-    Returns True if this is not the same page, False otherwise.
-    '''
+    """
+    Sets up filehandler to the first page. Returns True if this is not
+    the same page, False otherwise.
+    """
 
     global current_image
     
@@ -175,9 +178,10 @@ def first_page():
 
 def last_page():
 
-    ''' Sets up filehandler to the last page.
-    Returns True if this is not the same page, False otherwise.
-    '''
+    """ 
+    Sets up filehandler to the last page. Returns True if this is not
+    the same page, False otherwise.
+    """
 
     global current_image
     global image_files
@@ -191,9 +195,10 @@ def last_page():
 
 def set_page(page_num):
 
-    ''' Sets up filehandler to the page <page_num>.
-    Returns True if this is not the same page, False otherwise.
-    '''
+    """ 
+    Sets up filehandler to the page <page_num>. Returns True if this is
+    not the same page, False otherwise.
+    """
 
     global current_image
     global image_files
@@ -206,8 +211,7 @@ def set_page(page_num):
 
 def open_file(path, start_image=0):
 
-    ''' Analyses <path>. 
-
+    """
     If <path> is an image we add all images in its directory to the
     image_files and all comments to the comment_files. We set current_image
     to point to <path>.
@@ -217,7 +221,7 @@ def open_file(path, start_image=0):
     comment_files. If <start_image> is not set we set current_image to 0
     (first image), if it is set we set it to the value of <start_image>.
     If <start_image> is negative it means the last image.
-    '''
+    """
     
     global file_loaded
     global archive_type
@@ -229,36 +233,35 @@ def open_file(path, start_image=0):
     global current_comment
     global raw_pixbufs
 
-    # =======================================================
+    # --------------------------------------------------------------------
     # If the given path is invalid.
-    # =======================================================
+    # --------------------------------------------------------------------
     if not os.path.isfile(path):
         if os.path.isdir(path):
-            main.window.statusbar.push(0, '"' + encoding.to_unicode(
-            os.path.basename(path)) + '" ' + _('is not a file.'))
+            main.window.statusbar.push(0, _('"%s" is not a file.') % 
+                encoding.to_unicode(os.path.basename(path)))
             print 'not a file'
         else:
-            main.window.statusbar.push(0, '"' + encoding.to_unicode(
-            os.path.basename(path)) + '" ' + _('does not exist.'))
+            main.window.statusbar.push(0, _('"%s" does not exist.') % 
+                encoding.to_unicode(os.path.basename(path)))
             print 'does not exist'
         return False
 
     archive_type = archive.archive_mime_type(path)
         
     if not archive_type and not is_image_file(path):
-        main.window.statusbar.push(0, _('Filetype of') + ' "' +
-            encoding.to_unicode(os.path.basename(path)) + '" ' +
-            _('not recognized.'))
+        main.window.statusbar.push(0, _('Filetype of "%s" not recognized.') %
+            encoding.to_unicode(os.path.basename(path)))
         print 'Unknown filetype!'
         return False
 
     #cursor.set_cursor('watch')
     close_file()
 
-    # =======================================================
-    # If <path> is an archive we extract it and walk down
-    # the extracted tree to find images and comments.
-    # =======================================================
+    # --------------------------------------------------------------------
+    # If <path> is an archive we extract it and walk down the extracted
+    # tree to find images and comments.
+    # --------------------------------------------------------------------
     if archive_type:
         archive_path = path
         archive.extract_archive(path, tmp_dir)
@@ -280,10 +283,10 @@ def open_file(path, start_image=0):
             current_image = start_image
         current_image = max(0, current_image)
 
-    # =======================================================
-    # If <path> is an image we scan it's directory for more
-    # images and comments.
-    # =======================================================
+    # --------------------------------------------------------------------
+    # If <path> is an image we scan it's directory for more images and
+    # comments.
+    # --------------------------------------------------------------------
     else:
         archive_path = os.path.dirname(path)
         for f in os.listdir(os.path.dirname(path)):
@@ -298,9 +301,9 @@ def open_file(path, start_image=0):
         image_files.sort(locale.strcoll)
         current_image = image_files.index(path)
 
-    # =======================================================
+    # --------------------------------------------------------------------
     # If there are no viewable image files found.
-    # =======================================================
+    # --------------------------------------------------------------------
     if not image_files:
         main.window.statusbar.push(0, _('No images in "%s"') % 
             encoding.to_unicode(os.path.basename(path)))

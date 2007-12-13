@@ -1,6 +1,6 @@
-# ========================================================================
+# ============================================================================
 # scale.py - Image scaling module for Comix.
-# ========================================================================
+# ============================================================================
 
 import gtk
 
@@ -9,9 +9,10 @@ import preferences
 def fit_in_rectangle(src, width, height, interp=None, scale_up=False,
   rotation=0):
     
-    ''' Returns a pixbuf scaled from <src> to fit into a rectangle with
+    """
+    Returns a pixbuf from <src> scaled to fit into a rectangle with
     dimensions <width> x <height>. A negative <width> or <height> means an
-    unbounded dimension, both can not be negative.
+    unbounded dimension, both cannot be negative.
 
     If rotation is 90, 180 or 270 we rotate <src> so that the rotated
     pixbuf is fitted in the rectangle.
@@ -23,9 +24,9 @@ def fit_in_rectangle(src, width, height, interp=None, scale_up=False,
     given rectangle.
 
     If <src> has an alpha channel it gets a checkboard background.
-    '''
+    """
     
-    # "Unbounded" really means "bounded to 10000 px", for simplicity.
+    # "Unbounded" really means "bounded to 10000 px" - for simplicity.
     # Comix would choke on larger images anyway.
     if width < 0:
         width = 10000
@@ -66,10 +67,11 @@ def fit_in_rectangle(src, width, height, interp=None, scale_up=False,
 def fit_2_in_rectangle(src1, src2, width, height, interp=None, scale_up=False,
   rotation=0):
     
-    ''' Returns a 2-tuple with two pixbufs scaled from <src1> and <src2>
+    """
+    Returns a 2-tuple with two pixbufs scaled from <src1> and <src2>
     to fit together (side-by-side) into a rectangle with dimensions
     <width> x <height>. A negative <width> or <height> means an
-    unbounded dimension, both can not be negative.
+    unbounded dimension, both cannot be negative.
 
     If rotation is 90, 180 or 270 we rotate the pixbufs.
     
@@ -78,7 +80,7 @@ def fit_2_in_rectangle(src1, src2, width, height, interp=None, scale_up=False,
     
     Unless <scale_up> is True we don't stretch images smaller than the
     given rectangle.
-    '''
+    """
 
     # "Unbounded" really means "bounded to 10000 px", for simplicity.
     # Comix would choke on larger images anyway.
@@ -114,9 +116,10 @@ def fit_2_in_rectangle(src1, src2, width, height, interp=None, scale_up=False,
 
 def add_border(pixbuf, thickness, colour=0x000000FF):
 
-    ''' Returns a pixbuf from <pixbuf> with a <thickness> px border 
-    of <colour> added.
-    '''
+    """
+    Returns a pixbuf from <pixbuf> with a <thickness> px border of 
+    <colour> added.
+    """
 
     canvas = gtk.gdk.Pixbuf(gtk.gdk.COLORSPACE_RGB, True, 8,
         pixbuf.get_width() + thickness * 2,

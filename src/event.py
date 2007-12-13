@@ -1,6 +1,6 @@
-# ========================================================================
+# ============================================================================
 # event.py - Event handling (keyboard, mouse, etc.) for Comix.
-# ========================================================================
+# ============================================================================
 
 import gtk
 
@@ -9,7 +9,7 @@ import preferences
 
 def resize_event(widget, event):
         
-    ''' Handles events from resizing and moving the main window. '''
+    """ Handles events from resizing and moving the main window. """
     
     #print dir(event)
 
@@ -30,23 +30,22 @@ def resize_event(widget, event):
 
 def key_press_event(widget, event, *args):
     
-    ''' Catches key press events and takes the appropriate
-    actions. '''
+    """ Catches key press events and takes the appropriate actions. """
     
     #if self.slideshow_started:
     #    self.stop_slideshow()
     #    self.window.emit_stop_by_name("key_press_event")
     #    return True
     
-    # =======================================================
+    # --------------------------------------------------------------------
     # Delete key deletes an image (duh...)
-    # =======================================================
+    # --------------------------------------------------------------------
     #if event.keyval == gtk.keysyms.Delete:
     #    self.delete_file()
     
-    # =======================================================
+    # --------------------------------------------------------------------
     # Numpad aligns the image depending on the key. 
-    # =======================================================
+    # --------------------------------------------------------------------
     if event.keyval == gtk.keysyms.KP_1:
         main.scroll_to_fixed(horiz='left', vert='bottom')
     elif event.keyval == gtk.keysyms.KP_2:
@@ -66,20 +65,19 @@ def key_press_event(widget, event, *args):
     elif event.keyval == gtk.keysyms.KP_9:
         main.scroll_to_fixed(horiz='right', vert='top')
     
-    # =======================================================
-    # Enter/exit fullscreen. 'f' is also a valid key,
-    # defined as an accelerator elsewhere.
-    # =======================================================
+    # --------------------------------------------------------------------
+    # Enter/exit fullscreen. 'f' is also a valid key, defined as an
+    # accelerator elsewhere.
+    # --------------------------------------------------------------------
     elif event.keyval == gtk.keysyms.Escape:
         main.window.actiongroup.get_action('fullscreen').set_active(False)
     elif event.keyval == gtk.keysyms.F11:
         main.window.actiongroup.get_action('fullscreen').activate()
 
-    # =======================================================
-    # Zooming commands for manual zoom mode. These keys 
-    # complement others (with the same action) defined as 
-    # accelerators.
-    # =======================================================
+    # --------------------------------------------------------------------
+    # Zooming commands for manual zoom mode. These keys complement others
+    # (with the same action) defined as accelerators.
+    # --------------------------------------------------------------------
     elif event.keyval in [gtk.keysyms.plus, gtk.keysyms.equal]:
         main.window.actiongroup.get_action('zin').activate()
     elif event.keyval == gtk.keysyms.minus:
@@ -88,10 +86,10 @@ def key_press_event(widget, event, *args):
       'GDK_CONTROL_MASK' in event.state.value_names):
         main.window.actiongroup.get_action('zoriginal').activate()
     
-    # =======================================================
-    # Arrow keys scroll the image, except in
-    # fit-to-screen mode where they flip pages.
-    # =======================================================
+    # --------------------------------------------------------------------
+    # Arrow keys scroll the image, except in fit-to-screen mode where they
+    # flip pages instead.
+    # --------------------------------------------------------------------
     elif event.keyval == gtk.keysyms.Down:
         if not main.window.zoom_mode == 'fit':
             main.scroll(0, 30)
@@ -113,14 +111,15 @@ def key_press_event(widget, event, *args):
         else:
             main.previous_page()
 
-    # =======================================================
-    # Space key scrolls down a percentage of the window height
-    # or the image height at a time.
-    # When at the bottom it flips to the next page. 
+    # --------------------------------------------------------------------
+    # Space key scrolls down a percentage of the window height or the image
+    # height at a time. When at the bottom it flips to the next page. 
     # 
-    # It also has a "smart scrolling mode" in which we try
-    # to follow the flow of the comic.
-    # =======================================================
+    # It also has a "smart scrolling mode" in which we try to follow the
+    # flow of the comic.
+    #
+    # If Shift is pressed we should backtrack instead.
+    # --------------------------------------------------------------------
     elif event.keyval == gtk.keysyms.space:
         if preferences.prefs['space scroll type'] == 'window':
             x_step, y_step = main.window.get_layout_size()
@@ -137,7 +136,6 @@ def key_press_event(widget, event, *args):
             next_page_function = main.next_page
             startfirst = 'startfirst'
             
-        
         if main.window.manga_mode:
             x_step *= -1
         # FIXME: Smart space in DP mode is not implemented
@@ -153,11 +151,10 @@ def key_press_event(widget, event, *args):
             if main.window.zoom_mode == 'fit' or not main.scroll(0, y_step):
                 next_page_function()
 
-    # =======================================================
-    # We kill the signals here for the Up, Down, Space and 
-    # Enter keys. Otherwise they will start fiddling with
-    # the thumbnail selector - we don't want that.
-    # =======================================================
+    # --------------------------------------------------------------------
+    # We kill the signals here for the Up, Down, Space and Enter keys.
+    # Otherwise they will start fiddling with the thumbnail selector.
+    # --------------------------------------------------------------------
     if (event.keyval in [gtk.keysyms.Up, gtk.keysyms.Down,
       gtk.keysyms.space, gtk.keysyms.KP_Enter] or 
       (event.keyval == gtk.keysyms.Return and not
@@ -169,11 +166,11 @@ def key_press_event(widget, event, *args):
 
 def scroll_wheel_event(widget, event, *args):
     
-    ''' Catches scroll wheel events and takes the appropriate
+    """
+    Catches scroll wheel events and takes the appropriate
     actions. The scroll wheel flips pages in fit-to-screen mode
-    and scrolls the scrollbars when not. With a preference set,
-    three successive scrolls at the top or bottom of the page will
-    flip pages when not in fit-to-screen mode as well. '''
+    and scrolls the scrollbars when not.
+    """
 
     if event.direction == gtk.gdk.SCROLL_UP:
         if main.window.zoom_mode == 'fit':
@@ -192,7 +189,7 @@ def scroll_wheel_event(widget, event, *args):
 
 def mouse_press_event(widget, event):
     
-    ''' Handles mouse click events on the main window. '''
+    """ Handles mouse click events on the main window. """
 
     if event.button == 1:
         print 1
@@ -212,9 +209,9 @@ def mouse_press_event(widget, event):
             None, None, None, event.button, event.time)
 
 
-def mouse_button_release_event(self, widget, event):
+def mouse_button_release_event(self, widget, event): # XXX: Not used!
     
-    ''' Handles mouse button release events on the main window. '''
+    """ Handles mouse button release events on the main window. """
     
     if self.exit:
         return False

@@ -1,7 +1,7 @@
-# ========================================================================
-# thumbnail.py - Thumbnail module for Comix implementing the 
-# freedesktop.org "standard" at http://jens.triq.net/thumbnail-spec/
-# ========================================================================
+# ============================================================================
+# thumbnail.py - Thumbnail module for Comix implementing the freedesktop.org
+# "standard" at http://jens.triq.net/thumbnail-spec/
+# ============================================================================
 
 import os
 from urllib import pathname2url, url2pathname
@@ -52,7 +52,7 @@ def create_thumbnail(path):
         os.rename(thumbpath + 'comixtemp', thumbpath)
         os.chmod(thumbpath, 0600)
     except:
-        print 'thumbnail.py: Could not write', thumbpath
+        print '! thumbnail.py: Could not write', thumbpath, '\n'
         return None
     return pixbuf
 

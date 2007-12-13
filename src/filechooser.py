@@ -1,6 +1,6 @@
-# ========================================================================
+# ============================================================================
 # filechooser.py - FileChooserDialog implementation for Comix.
-# ========================================================================
+# ============================================================================
 
 import os
 
@@ -15,7 +15,7 @@ import scale
 
 dialog = None
 
-# We roll our own FileChooserDialog because the one in gtk is buggy
+# We roll our own FileChooserDialog because the one in GTK is buggy
 # with the preview widget.
 class ComicFileChooserDialog(gtk.Dialog):
     

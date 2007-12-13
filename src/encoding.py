@@ -1,14 +1,16 @@
-# ========================================================================
-# encoding.py - Encoding handling for Comix.
-# ========================================================================
+# ============================================================================
+# encoding.py - Encoding handler for Comix.
+# ============================================================================
 
 import sys
 
 def to_unicode(string):
     
-    ''' Converts <string> to unicode. First tries the default filesystem
+    """ 
+    Converts <string> to unicode. First tries the default filesystem
     encoding, and then falls back on some common encodings. If none
-    of the convertions are successful it returns "???". '''
+    of the convertions are successful it returns "???". 
+    """
 
     if type(string) == unicode:
         return string

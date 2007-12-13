@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
-# ========================================================================
+# ============================================================================
 # about.py - About dialog for Comix.
-# ========================================================================
+# ============================================================================
 
 import gtk
 import os
@@ -11,7 +11,7 @@ import constants
 
 dialog = None
 
-class Aboutdialog(gtk.Dialog):
+class AboutDialog(gtk.Dialog):
 
     def __init__(self, window):
 
@@ -19,20 +19,20 @@ class Aboutdialog(gtk.Dialog):
         
         gtk.Dialog.__init__(self, _("About"), window, 0, (gtk.STOCK_CLOSE,
             gtk.RESPONSE_CLOSE))
+        self.set_has_separator(False)
+        self.set_resizable(False)
+        notebook = gtk.Notebook()
+        self.vbox.pack_start(notebook, False, False, 0)
 
         self.connect('response', dialog_close)
         self.connect('delete_event', dialog_close)
         
-        # =======================================================
+        # ----------------------------------------------------------------
         # About tab.
-        # =======================================================
-        self.set_has_separator(False)
-        self.set_resizable(False)
+        # ----------------------------------------------------------------
         box = gtk.VBox(False, 0)
         box.set_border_width(5)
-        notebook = gtk.Notebook()
-        self.vbox.pack_start(notebook, False, False, 0)
-        
+                
         if os.path.isfile(os.path.join(os.path.dirname(os.path.dirname(
             sys.argv[0])), 'images/logo/comix.svg')):
             icon_path = \
@@ -53,7 +53,7 @@ class Aboutdialog(gtk.Dialog):
             icon_image.set_from_pixbuf(icon_pixbuf)
             box.pack_start(icon_image, False, False, 10)
         except:
-            pass
+            print '! Could not find the file "comix.svg"\n'
         
         label = gtk.Label()
         label.set_markup(
@@ -78,9 +78,9 @@ class Aboutdialog(gtk.Dialog):
         
         notebook.insert_page(box, gtk.Label(_("About")))
         
-        # =======================================================
+        # ----------------------------------------------------------------
         # Credits tab.
-        # =======================================================
+        # ----------------------------------------------------------------
         box = gtk.VBox(False, 5)
         box.set_border_width(5)
 
@@ -119,7 +119,7 @@ class Aboutdialog(gtk.Dialog):
 def dialog_open(*args):
     global dialog
     if dialog == None:
-        dialog = Aboutdialog(None)
+        dialog = AboutDialog(None)
         dialog.show()
 
 def dialog_close(*args):

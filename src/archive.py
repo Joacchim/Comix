@@ -1,15 +1,15 @@
-# ========================================================================
+# ============================================================================
 # archive.py - Archive handling for Comix.
-# ========================================================================
+# ============================================================================
 
 import sys
 import os
 import zipfile
 import tarfile
 
-# =======================================================
+# ------------------------------------------------------------------------
 # Determine if rar/unrar exists.
-# =======================================================
+# ------------------------------------------------------------------------
 rar_exec = None
 for path in os.getenv('PATH').split(':') + [os.path.curdir]:
     if os.path.isfile(os.path.join(path, 'unrar')):
@@ -19,9 +19,8 @@ for path in os.getenv('PATH').split(':') + [os.path.curdir]:
         self.rar = os.path.join(path, 'rar')
         break
 if not rar_exec:
-    print 'Could not find the `rar` or `unrar` executables.'
-    print 'RAR (.cbr) files will not be readable.'
-    print
+    print '! Could not find the `rar` or `unrar` executables.'
+    print '! RAR files (.cbr) will not be readable.\n'
 
 def extract_archive(src_path, dst_path):
     
@@ -29,9 +28,9 @@ def extract_archive(src_path, dst_path):
     
     archive_type = archive_mime_type(src_path)
     try:    
-        # =======================================================
+        # ----------------------------------------------------------------
         # Zip archive.
-        # =======================================================
+        # ----------------------------------------------------------------
         if archive_type == 'zip':
             zipf = zipfile.ZipFile(src_path)
             zipfiles = zipf.namelist()
@@ -39,11 +38,10 @@ def extract_archive(src_path, dst_path):
                 # Caught the directory descriptor. Skip it.
                 if x.endswith('/'):
                     continue
-                # FIXME: Other possible encodings?
+                # Other possible encodings? This is the standard I think.
                 dst = unicode(x, 'cp437')
                 found_encoding = False
-                for enc in (sys.getfilesystemencoding(),
-                    sys.getdefaultencoding(), 'utf8', 'latin-1'):
+                for enc in (sys.getfilesystemencoding(), 'utf8', 'latin-1'):
                     try:
                         dst = dst.encode(enc)
                     except:
@@ -62,9 +60,9 @@ def extract_archive(src_path, dst_path):
                     new.close()
             zipf.close()
         
-        # =======================================================
+        # ----------------------------------------------------------------
         # Tar archive.
-        # =======================================================
+        # ----------------------------------------------------------------
         elif archive_type in ['tar', 'gzip', 'bzip2']:
             tar = tarfile.open(src_path, 'r')
             tarfiles = tar.getmembers()
@@ -72,18 +70,18 @@ def extract_archive(src_path, dst_path):
                 tar.extract(x, dst_path)
             tar.close()
         
-        # =======================================================
+        # ----------------------------------------------------------------
         # RAR archive.
-        # =======================================================
+        # ----------------------------------------------------------------
         elif archive_type == 'rar':
             global rar_exec
             if rar_exec:
                 os.popen(rar_exec + ' x "' + src_path + '" "' + dst_path + '"')
             else:
-                print 'archive.py: Could not find RAR file extractor'
+                print '! archive.py: Could not find RAR file extractor.\n'
                 return None
     except:
-        print 'archive.py: Error extracting', src_path, 'to', dst_path
+        print '! archive.py: Error extracting', src_path, 'to', dst_path, '\n'
     return archive_type
 
 def archive_mime_type(path):
@@ -106,15 +104,13 @@ def archive_mime_type(path):
             if magic == 'Rar!':
                 return 'rar'
     except:
-        print 'archive.py: Error while reading', path
+        print '! archive.py: Error while reading', path, '\n'
     return None
 
 def get_name(archive_type):
-    names = {
-        'zip': _('Zip archive'),
-        'tar': _('Tar archive'),
-        'gzip': _('Gzip compressed tar archive'),
-        'bzip2': _('Bzip2 compressed tar archive'),
-        'rar': _('RAR archive')}
-    return names[archive_type]
+    return {'zip': _('Zip archive'),
+            'tar': _('Tar archive'),
+            'gzip': _('Gzip compressed tar archive'),
+            'bzip2': _('Bzip2 compressed tar archive'),
+            'rar': _('RAR archive')}[archive_type]
 

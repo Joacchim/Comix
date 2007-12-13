@@ -1,3 +1,7 @@
+# ============================================================================
+# main.py - Main window and logic for Comix.
+# ============================================================================
+
 import sys
 import os
 import shutil
@@ -16,10 +20,9 @@ import pilpixbuf
 
 window = None
 
-class Mainwindow(gtk.Window):
+class MainWindow(gtk.Window):
     
-    def __init__(self):
-        
+    def __init__(self): 
         gtk.Window.__init__(self, gtk.WINDOW_TOPLEVEL)
         self.set_title('Comix')
         
@@ -30,20 +33,19 @@ class Mainwindow(gtk.Window):
         self.manual_zoom = 100
         self.rotation = 0
         self.keep_rotation = False
-        self.width, self.height = self.get_size()
 
-        # =======================================================
-        # Create main display area widgets.
-        # =======================================================
         self.realize()
         if preferences.prefs['save window pos']:
             self.move(preferences.prefs['window x'],
-                preferences.prefs['window y'])
-        self.set_size_request(300, 300)
+                      preferences.prefs['window y'])
+        self.set_size_request(300, 300) # Avoid making the window *too* small
         self.resize(preferences.prefs['window width'],
-            preferences.prefs['window height'])
-        #self.tooltips = gtk.Tooltips()
-
+                    preferences.prefs['window height'])
+        self.width, self.height = self.get_size()
+        
+        # ----------------------------------------------------------------
+        # Create and initialize widgets for the main window.
+        # ----------------------------------------------------------------
         self.left_image = gtk.Image()
         self.right_image = gtk.Image()
         self.comment_label = gtk.Label()
@@ -61,7 +63,6 @@ class Mainwindow(gtk.Window):
             self.ui_manager.get_widget('/Tool/expander'))
 
         self.image_box = gtk.HBox(False, 2)
-        self.image_box.show()
         self.image_box.add(self.left_image)
         self.image_box.add(self.right_image)
         self.image_box.show_all()
@@ -73,40 +74,38 @@ class Mainwindow(gtk.Window):
             preferences.prefs['red bg'], preferences.prefs['green bg'],
             preferences.prefs['blue bg']), False, True))
 
-        # =======================================================
+        # ----------------------------------------------------------------
         # Create scrollbar widgets.
-        # =======================================================
+        # ----------------------------------------------------------------
         self.vadjust = self.main_layout.get_vadjustment()
         self.hadjust = self.main_layout.get_hadjustment()
         self.vadjust.step_increment = 15
         self.vadjust.page_increment = 1
         self.hadjust.step_increment = 15
         self.hadjust.page_increment = 1
-        self.hscroll = gtk.HScrollbar(None)
-        self.hscroll.set_adjustment(self.hadjust)
-        self.vscroll = gtk.VScrollbar(None)
-        self.vscroll.set_adjustment(self.vadjust)
+        self.hscroll = gtk.HScrollbar(self.hadjust)
+        self.vscroll = gtk.VScrollbar(self.vadjust)
         
-        # =======================================================
+        # ----------------------------------------------------------------
         # Attach widgets to the main table.
-        # =======================================================
+        # ----------------------------------------------------------------
         self.table = gtk.Table(2, 2, False)
         self.table.attach(self.thumbnailsidebar.layout, 0, 1, 2, 5, gtk.FILL,
-            gtk.FILL|gtk.EXPAND, 0, 0)
+                          gtk.FILL|gtk.EXPAND, 0, 0)
         self.table.attach(self.thumbnailsidebar.scroll, 1, 2, 2, 4,
-            gtk.FILL|gtk.SHRINK, gtk.FILL|gtk.SHRINK, 0, 0)
+                          gtk.FILL|gtk.SHRINK, gtk.FILL|gtk.SHRINK, 0, 0)
         self.table.attach(self.main_layout, 2, 3, 2, 3, gtk.FILL|gtk.EXPAND,
-            gtk.FILL|gtk.EXPAND, 0, 0)
+                          gtk.FILL|gtk.EXPAND, 0, 0)
         self.table.attach(self.vscroll, 3, 4, 2, 3, gtk.FILL|gtk.SHRINK,
-            gtk.FILL|gtk.SHRINK, 0, 0)
+                          gtk.FILL|gtk.SHRINK, 0, 0)
         self.table.attach(self.hscroll, 2, 3, 4, 5, gtk.FILL|gtk.SHRINK,
-            gtk.FILL, 0, 0)
+                          gtk.FILL, 0, 0)
         self.table.attach(self.toolbar, 0, 4, 1, 2, gtk.FILL|gtk.SHRINK,
-            gtk.FILL, 0, 0)
+                          gtk.FILL, 0, 0)
         self.table.attach(self.statusbar, 0, 4, 5, 6, gtk.FILL|gtk.SHRINK,
-            gtk.FILL, 0, 0)
+                          gtk.FILL, 0, 0)
         self.table.attach(self.menubar, 0, 4, 0, 1, gtk.FILL|gtk.SHRINK,
-            gtk.FILL, 0, 0)
+                          gtk.FILL, 0, 0)
 
         self.add(self.table)
         self.table.show()
@@ -163,7 +162,7 @@ class Mainwindow(gtk.Window):
 
     def get_layout_size(self):
         width, height = self.get_size()
-        if not preferences.prefs['hide all']and not (self.is_fullscreen and 
+        if not preferences.prefs['hide all'] and not (self.is_fullscreen and 
           preferences.prefs['hide all in fullscreen']):
             if preferences.prefs['show toolbar']:
                 height -= self.toolbar.size_request()[1]
@@ -399,9 +398,10 @@ def manual_zoom_original(*args):
 
 def scroll(x, y):
 
-    ''' Scrolls <x> px horizontally and <y> px vertically.
+    """
+    Scrolls <x> px horizontally and <y> px vertically.
     Returns True if call resulted in new adjustment values, False otherwise.
-    '''
+    """
 
     old_hadjust = window.hadjust.get_value()
     old_vadjust = window.vadjust.get_value()
@@ -420,7 +420,8 @@ def scroll(x, y):
 
 def scroll_to_fixed(horiz=None, vert=None):
     
-    ''' If either <horiz> or <vert> is not None, the display is scrolled as
+    """
+    If either <horiz> or <vert> is not None, the display is scrolled as
     follows:
 
     horiz: 'left'        = left end of display
@@ -438,7 +439,7 @@ def scroll_to_fixed(horiz=None, vert=None):
     Scrolling to the second page is, of course, only applicable in double
     page mode. What is considered "start" and "end" depends on whether we
     are using manga mode or not.
-    '''
+    """
 
     layout_width, layout_height = window.get_layout_size()
     vadjust_upper = window.vadjust.upper - layout_height
@@ -491,7 +492,7 @@ def is_double():
 
 def terminate_program(*args):
     
-    ''' Runs clean-up tasks and exits the program. '''
+    """ Runs clean-up tasks and exits the program. """
 
     print 'Bye!'
     gtk.main_quit()
@@ -500,10 +501,10 @@ def terminate_program(*args):
 
 def start():
 
-    ''' Runs setup tasks and starts the main loop. '''
+    """ Runs setup tasks and starts the main loop. """
 
     global window
-    window = Mainwindow()
+    window = MainWindow()
     window.show()
     if preferences.prefs['default double page']:
         window.actiongroup.get_action('double').activate()
