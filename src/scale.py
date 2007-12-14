@@ -71,7 +71,8 @@ def fit_2_in_rectangle(src1, src2, width, height, interp=None, scale_up=False,
     Returns a 2-tuple with two pixbufs scaled from <src1> and <src2>
     to fit together (side-by-side) into a rectangle with dimensions
     <width> x <height>. A negative <width> or <height> means an
-    unbounded dimension, both cannot be negative.
+    unbounded dimension, both cannot be negative. The images are scaled
+    so that a gap of 2 px will fit between them in the rectangle.
 
     If rotation is 90, 180 or 270 we rotate the pixbufs.
     
@@ -94,26 +95,26 @@ def fit_2_in_rectangle(src1, src2, width, height, interp=None, scale_up=False,
     height = max(height, 1)
 
     total_width = src1.get_width() + src2.get_width()
-    src1s_part = max(src1.get_width() * width / total_width, 1)
+    alloc_width_src1 = max(src1.get_width() * width / total_width, 1)
+    alloc_width_src2 = max(src2.get_width() * width / total_width, 1)
+    needed_width_src1 = round(src1.get_width() * 
+                              min(height / float(src1.get_height()),
+                                  alloc_width_src1 / float(src1.get_width())))
+    needed_width_src2 = round(src2.get_width() * 
+                              min(height / float(src2.get_height()),
+                                  alloc_width_src2 / float(src2.get_width())))
+    if (needed_width_src1 < alloc_width_src1 and 
+       needed_width_src2 >= alloc_width_src2):
+       alloc_width_src2 += alloc_width_src1 - needed_width_src1
+    elif (needed_width_src1 >= alloc_width_src1 and 
+       needed_width_src2 < alloc_width_src2):
+       alloc_width_src1 += alloc_width_src2 - needed_width_src2
+
+    return (fit_in_rectangle(src1, alloc_width_src1, height,
+                             interp, scale_up, rotation),
+            fit_in_rectangle(src2, alloc_width_src2, height,
+                             interp, scale_up, rotation))
     
-    src1s_max_scale = min(height / float(src1.get_height()), 
-        src1s_part / float(src1.get_width()))
-    src1s_part = round(src1.get_width() * src1s_max_scale)
-    src1s_part = max(src1s_part, 1)
-
-    src2s_part = max(width - src1s_part, 1)
-
-    src2s_max_scale = min(height / float(src2.get_height()), 
-        src2s_part / float(src2.get_width()))
-    src2s_part = int(round(src2.get_width() * src2s_max_scale))
-
-    src1s_part = int(max(width - src2s_part, 1))
-    
-    # FIXME: "Smart" scaling doesn't work properly when rotated
-    return (
-        fit_in_rectangle(src1, src1s_part, height, interp, scale_up, rotation),
-        fit_in_rectangle(src2, src2s_part, height, interp, scale_up, rotation))
-
 def add_border(pixbuf, thickness, colour=0x000000FF):
 
     """

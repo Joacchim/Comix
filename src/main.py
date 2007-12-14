@@ -212,12 +212,21 @@ class MainWindow(gtk.Window):
                 left_pixbuf, right_pixbuf = filehandler.get_pixbufs()
 
             if self.zoom_mode == 'manual':
-                scale_width = int(self.manual_zoom * (
-                    left_pixbuf.get_width() + right_pixbuf.get_width()) // 100)
-                scale_height = int(self.manual_zoom * max(
-                    left_pixbuf.get_height(), right_pixbuf.get_height()) // 100)
-                #if self.rotation in [90, 270]:
-                #    scale_width, scale_height = scale_height, scale_width
+                if self.rotation in [90, 270]:
+                    scale_width = int(self.manual_zoom *
+                        (left_pixbuf.get_height() +
+                        right_pixbuf.get_height()) // 100)
+                    scale_height = int(self.manual_zoom * max(
+                        left_pixbuf.get_width(),
+                        right_pixbuf.get_width()) // 100)
+                else:
+                    scale_width = int(self.manual_zoom * 
+                        (left_pixbuf.get_width() +
+                        right_pixbuf.get_width()) // 100)
+                    scale_height = int(self.manual_zoom * max(
+                        left_pixbuf.get_height(),
+                        right_pixbuf.get_height()) // 100)
+                
                 scale_up = True
 
             left_pixbuf, right_pixbuf = scale.fit_2_in_rectangle(

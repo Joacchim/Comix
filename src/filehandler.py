@@ -316,8 +316,12 @@ def open_file(path, start_image=0):
 
     if not main.window.keep_rotation:
         main.window.rotation = 0
+    main.window.thumbnailsidebar.block = True
     main.window.draw_image()
     cursor.set_cursor_type(cursor.NORMAL)
+    while gtk.events_pending():
+        gtk.main_iteration(False)
+    main.window.thumbnailsidebar.block = False
     main.window.thumbnailsidebar.load_thumbnails()
     comment_files.sort()
 
