@@ -38,7 +38,7 @@ def extract_archive(src_path, dst_path):
                 # Caught the directory descriptor. Skip it.
                 if x.endswith('/'):
                     continue
-                # Other possible encodings? This is the standard I think.
+                # Other possible encodings? I *believe* this is the standard.
                 dst = unicode(x, 'cp437')
                 found_encoding = False
                 for enc in (sys.getfilesystemencoding(), 'utf8', 'latin-1'):
@@ -108,6 +108,9 @@ def archive_mime_type(path):
     return None
 
 def get_name(archive_type):
+    
+    """ Returns a text representation of an archive type. """
+
     return {'zip': _('Zip archive'),
             'tar': _('Tar archive'),
             'gzip': _('Gzip compressed tar archive'),

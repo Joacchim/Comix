@@ -1,6 +1,6 @@
 # ============================================================================
-# thumbnail.py - Thumbnail module for Comix implementing the freedesktop.org
-# "standard" at http://jens.triq.net/thumbnail-spec/
+# thumbnail.py - Thumbnail module for Comix implementing (most of) the
+# freedesktop.org "standard" at http://jens.triq.net/thumbnail-spec/
 #
 # Only 128x128 px thumbnails are supported.
 # ============================================================================

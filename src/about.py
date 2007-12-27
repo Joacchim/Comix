@@ -3,9 +3,10 @@
 # about.py - About dialog for Comix.
 # ============================================================================
 
-import gtk
 import os
 import sys
+
+import gtk
 
 import constants
 
@@ -14,11 +15,8 @@ dialog = None
 class AboutDialog(gtk.Dialog):
 
     def __init__(self, window):
-
-        ''' Creates the about dialog and all its widgets. '''
-        
-        gtk.Dialog.__init__(self, _("About"), window, 0, (gtk.STOCK_CLOSE,
-            gtk.RESPONSE_CLOSE))
+        gtk.Dialog.__init__(self, _('About'), window, 0,
+            (gtk.STOCK_CLOSE, gtk.RESPONSE_CLOSE))
         self.set_has_separator(False)
         self.set_resizable(False)
         notebook = gtk.Notebook()

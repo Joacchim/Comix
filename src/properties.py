@@ -10,22 +10,21 @@ import pwd
 import gtk
 import pango
 
-import main
-import filehandler
-import scale
-import histogram
 import archive
 import encoding
+import histogram
+import scale
 
 dialog = None
 
-class Propertiesdialog(gtk.Dialog):
+class PropertiesDialog(gtk.Dialog):
 
     def __init__(self, window):
         
         gtk.Dialog.__init__(self, _('Properties'), window, 0,
             (gtk.STOCK_CLOSE, gtk.RESPONSE_CLOSE))
         
+        self.mainwindow = window
         self.set_resizable(False)
         self.set_has_separator(False)
         self.connect('response', dialog_close)
@@ -34,17 +33,17 @@ class Propertiesdialog(gtk.Dialog):
         notebook = gtk.Notebook()
         self.vbox.pack_start(notebook, False, False, 0)
         
-        if filehandler.archive_type:
+        if self.mainwindow.file_handler.archive_type:
             # ------------------------------------------------------------
             # Archive tab
             # ------------------------------------------------------------
-            stats = os.stat(filehandler.archive_path)
+            stats = os.stat(self.mainwindow.file_handler.archive_path)
             page = gtk.VBox(False, 12)
             page.set_border_width(12)
             topbox = gtk.HBox(False, 12)
             page.pack_start(topbox)
             pixbuf = gtk.gdk.pixbuf_new_from_file_at_size(
-                filehandler.image_files[0], 200, 128)
+                self.mainwindow.file_handler.image_files[0], 200, 128)
             pixbuf = scale.add_border(pixbuf, 1)
             thumb = gtk.Image()
             thumb.set_from_pixbuf(pixbuf)
@@ -62,7 +61,7 @@ class Propertiesdialog(gtk.Dialog):
             infobox.set_border_width(10)
             insidebox.add(infobox)
             label = gtk.Label(encoding.to_unicode(os.path.basename(
-                filehandler.archive_path)))
+                self.mainwindow.file_handler.archive_path)))
             label.set_alignment(0, 0.5)
             attrlist = pango.AttrList()
             attrlist.insert(pango.AttrWeight(pango.WEIGHT_BOLD, 0,
@@ -70,13 +69,16 @@ class Propertiesdialog(gtk.Dialog):
             label.set_attributes(attrlist)
             infobox.pack_start(label, False, False)
             infobox.pack_start(gtk.VBox()) # Just to add space (any better way?)
-            label = gtk.Label(_('%d pages') % len(filehandler.image_files))
+            label = gtk.Label(_('%d pages') %
+                len(self.mainwindow.file_handler.image_files))
             label.set_alignment(0, 0.5)
             infobox.pack_start(label, False, False)
-            label = gtk.Label(_('%d comments') % len(filehandler.comment_files))
+            label = gtk.Label(_('%d comments') %
+                len(self.mainwindow.file_handler.comment_files))
             label.set_alignment(0, 0.5)
             infobox.pack_start(label, False, False)
-            label = gtk.Label(archive.get_name(filehandler.archive_type))
+            label = gtk.Label(archive.get_name(
+                self.mainwindow.file_handler.archive_type))
             label.set_alignment(0, 0.5)
             infobox.pack_start(label, False, False)
             label = gtk.Label('%.1f MiB' % (stats.st_size / 1048576.0))
@@ -84,7 +86,8 @@ class Propertiesdialog(gtk.Dialog):
             infobox.pack_start(label, False, False)
 
             label = gtk.Label(_('Location') + ':   ' +
-                encoding.to_unicode(os.path.dirname(filehandler.archive_path)))
+                encoding.to_unicode(os.path.dirname(
+                self.mainwindow.file_handler.archive_path)))
             attrlist = pango.AttrList()
             attrlist.insert(pango.AttrWeight(pango.WEIGHT_BOLD, 0,
                 len(_('Location')) + 1))
@@ -130,9 +133,11 @@ class Propertiesdialog(gtk.Dialog):
         # ----------------------------------------------------------------
         # Image tab
         # ----------------------------------------------------------------
-        stats = os.stat(filehandler.image_files[filehandler.current_image])
+        stats = os.stat(self.mainwindow.file_handler.image_files[
+            self.mainwindow.file_handler.current_image])
         iminfo = gtk.gdk.pixbuf_get_file_info(
-            filehandler.image_files[filehandler.current_image])
+            self.mainwindow.file_handler.image_files[
+            self.mainwindow.file_handler.current_image])
         page = gtk.HBox(False, 12)
         page.set_border_width(12)
         leftpane = gtk.VBox(False, 12)
@@ -140,7 +145,8 @@ class Propertiesdialog(gtk.Dialog):
         topbox = gtk.HBox(False, 12)
         leftpane.pack_start(topbox)
         pixbuf = gtk.gdk.pixbuf_new_from_file_at_size(
-            filehandler.image_files[filehandler.current_image], 200, 128)
+            self.mainwindow.file_handler.image_files[
+            self.mainwindow.file_handler.current_image], 200, 128)
         pixbuf = scale.add_border(pixbuf, 1)
         thumb = gtk.Image()
         thumb.set_from_pixbuf(pixbuf)
@@ -158,7 +164,8 @@ class Propertiesdialog(gtk.Dialog):
         infobox.set_border_width(10)
         insidebox.add(infobox)
         label = gtk.Label(os.path.basename(encoding.to_unicode(
-            filehandler.image_files[filehandler.current_image])))
+            self.mainwindow.file_handler.image_files[
+            self.mainwindow.file_handler.current_image])))
         label.set_alignment(0, 0.5)
         attrlist = pango.AttrList()
         attrlist.insert(pango.AttrWeight(pango.WEIGHT_BOLD, 0,
@@ -178,7 +185,8 @@ class Propertiesdialog(gtk.Dialog):
 
         label = gtk.Label(_('Location') + ':   ' +
             encoding.to_unicode(os.path.dirname(
-            filehandler.image_files[filehandler.current_image])))
+            self.mainwindow.file_handler.image_files[
+            self.mainwindow.file_handler.current_image])))
         attrlist = pango.AttrList()
         attrlist.insert(pango.AttrWeight(pango.WEIGHT_BOLD, 0,
             len(_('Location')) + 1))
@@ -230,10 +238,10 @@ class Propertiesdialog(gtk.Dialog):
   
         self.vbox.show_all()
 
-def dialog_open(*args):
+def dialog_open(action, window):
     global dialog
     if dialog == None:
-        dialog = Propertiesdialog(None)
+        dialog = PropertiesDialog(window)
         dialog.show()
 
 def dialog_close(*args):

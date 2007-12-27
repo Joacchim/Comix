@@ -6,16 +6,14 @@ import time
 
 import gtk
 
-import main
 from preferences import prefs
-import filehandler
 import thumbnail
 import scale
 
 class ThumbnailSidebar:
     
-    def __init__(self):
-
+    def __init__(self, window):
+        self.window = window
         self.visible = False
         self.loaded = False
         # Set and unset by filehandler to make sure that the main image is
@@ -50,9 +48,9 @@ class ThumbnailSidebar:
     def selection_event(self, widget):
         try:
             selected = widget.get_selected_rows()[1][0][0]
-            main.set_page(selected)
+            self.window.set_page(selected)
         except:
-            pass
+            print '! Error selecting thumbnail'
 
     def get_width(self):
         return self.layout.size_request()[0] + self.scroll.size_request()[0]
@@ -73,10 +71,12 @@ class ThumbnailSidebar:
 
     def load_thumbnails(self):
         if (not prefs['show thumbnails'] or prefs['hide all'] or
-            not filehandler.file_loaded or self.loaded or self.block):
+          not self.window.file_handler.file_loaded or
+          self.loaded or self.block):
             return
-        for i, path in enumerate(filehandler.image_files):
-            if filehandler.archive_type:
+        self.loaded = True
+        for i, path in enumerate(self.window.file_handler.image_files):
+            if self.window.file_handler.archive_type:
                 create = False
             else:
                 create = prefs['create thumbnails']
@@ -94,7 +94,6 @@ class ThumbnailSidebar:
                 gtk.main_iteration(False)
 
             self.layout.set_size(0, self.height)
-        self.loaded = True
         self.update_select()
 
     def clear(self):
@@ -106,9 +105,9 @@ class ThumbnailSidebar:
     def update_select(self):
         if not self.loaded:
             return
-        self.selection.select_path(filehandler.current_image)
+        self.selection.select_path(self.window.file_handler.current_image)
         rect = self.treeview.get_background_area(
-            filehandler.current_image, self.column)
+            self.window.file_handler.current_image, self.column)
         if (rect.y < self.vadjust.get_value() or rect.y + rect.height > 
           self.vadjust.get_value() + self.vadjust.page_size):
             value = rect.y + (rect.height // 2) - (self.vadjust.page_size // 2)

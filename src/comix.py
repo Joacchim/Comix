@@ -75,9 +75,10 @@ except:
 
 
 if __name__ == '__main__':
+    
     # --------------------------------------------------------------------
-    # Use gettext translations as found in the source dir,
-    # otherwise based on the install path.
+    # Use gettext translations as found in the source dir, otherwise
+    # based on the install path.
     # --------------------------------------------------------------------
     exec_path = os.path.realpath(sys.argv[0])
     base_dir = os.path.dirname(os.path.dirname(exec_path))
@@ -87,6 +88,7 @@ if __name__ == '__main__':
     else:
         gettext.install('comix', os.path.join(base_dir, '/share/locale'),
             unicode=True)
-
-    main.start()
+    
+    main.MainWindow()
+    gtk.main()
 

@@ -9,7 +9,7 @@ def to_unicode(string):
     """ 
     Converts <string> to unicode. First tries the default filesystem
     encoding, and then falls back on some common encodings. If none
-    of the convertions are successful it returns "???". 
+    of the convertions are successful "???" is returned. 
     """
 
     if type(string) == unicode:

@@ -1,68 +1,67 @@
 # ============================================================================
-# main.py - Main window and logic for Comix.
+# main.py - Main window for Comix.
 # ============================================================================
 
 import sys
 import os
 import shutil
-import time
 
 import gtk
 
-import filehandler
-import preferences
-import icons
-import ui
-import thumbbar
-import scale
 import event
+import filehandler
+import icons
 import pilpixbuf
-
-window = None
+from preferences import prefs
+import ui
+import scale
+import thumbbar
 
 class MainWindow(gtk.Window):
-    
+
     def __init__(self): 
         gtk.Window.__init__(self, gtk.WINDOW_TOPLEVEL)
         self.set_title('Comix')
-        
-        self.is_fullscreen = False
-        self.double_page = False 
-        self.manga_mode = False
-        self.zoom_mode = 'fit'
-        self.manual_zoom = 100
-        self.rotation = 0
-        self.keep_rotation = False
+        self.realize() # XXX
 
-        self.realize()
-        if preferences.prefs['save window pos']:
-            self.move(preferences.prefs['window x'],
-                      preferences.prefs['window y'])
-        self.set_size_request(300, 300) # Avoid making the window *too* small
-        self.resize(preferences.prefs['window width'],
-                    preferences.prefs['window height'])
-        self.width, self.height = self.get_size()
-        
-        # ----------------------------------------------------------------
-        # Create and initialize widgets for the main window.
-        # ----------------------------------------------------------------
+        self.is_fullscreen = False
+        self.is_double_page = False 
+        self.is_manga_mode = False
+        self.keep_rotation = False
+        self.zoom_mode = 'fit'          # 'fit', 'width', 'height' or 'manual'
+        self.manual_zoom = 100          # In percent of original image size
+        self.rotation = 0               # In degrees, clockwise
         self.left_image = gtk.Image()
         self.right_image = gtk.Image()
+        self.image_box = gtk.HBox(False, 2)
+        self.table = gtk.Table(2, 2, False)
         self.comment_label = gtk.Label()
         self.statusbar = gtk.Statusbar()
         self.main_layout = gtk.Layout()
-        self.thumbnailsidebar = thumbbar.ThumbnailSidebar()
-        self.ui_manager = ui.MainUI()
-        self.add_accel_group(self.ui_manager.get_accel_group())
-        self.actiongroup = self.ui_manager.get_action_groups()[0]
+        self.thumbnailsidebar = thumbbar.ThumbnailSidebar(self)
+        self.file_handler = filehandler.FileHandler(self)
+        self.event_handler = event.EventHandler(self)
+        self.ui_manager = ui.MainUI(self)
         self.menubar = self.ui_manager.get_widget('/Menu')
         self.toolbar = self.ui_manager.get_widget('/Tool')
+        self.actiongroup = self.ui_manager.get_action_groups()[0]
+        self.vadjust = self.main_layout.get_vadjustment()
+        self.hadjust = self.main_layout.get_hadjustment()
+        self.vscroll = gtk.VScrollbar(self.vadjust)
+        self.hscroll = gtk.HScrollbar(self.hadjust)
+
+        if prefs['save window pos']:
+            self.move(prefs['window x'], prefs['window y'])
+        self.set_size_request(300, 300) # Avoid making the window *too* small
+        self.resize(prefs['window width'], prefs['window height'])
+        self.width, self.height = self.get_size()
+
         # This is a hack to get the focus away from the toolbar so that
         # we don't activate it with space or some other key.
         self.toolbar.set_focus_child(
             self.ui_manager.get_widget('/Tool/expander'))
-
-        self.image_box = gtk.HBox(False, 2)
+        
+        self.add_accel_group(self.ui_manager.get_accel_group())
         self.image_box.add(self.left_image)
         self.image_box.add(self.right_image)
         self.image_box.show_all()
@@ -71,25 +70,13 @@ class MainWindow(gtk.Window):
         self.main_layout.put(self.comment_label, 0, 0)
         self.main_layout.modify_bg(gtk.STATE_NORMAL,
             gtk.gdk.colormap_get_system().alloc_color(gtk.gdk.Color(
-            preferences.prefs['red bg'], preferences.prefs['green bg'],
-            preferences.prefs['blue bg']), False, True))
+            prefs['red bg'], prefs['green bg'], prefs['blue bg']), False, True))
 
-        # ----------------------------------------------------------------
-        # Create scrollbar widgets.
-        # ----------------------------------------------------------------
-        self.vadjust = self.main_layout.get_vadjustment()
-        self.hadjust = self.main_layout.get_hadjustment()
         self.vadjust.step_increment = 15
         self.vadjust.page_increment = 1
         self.hadjust.step_increment = 15
         self.hadjust.page_increment = 1
-        self.hscroll = gtk.HScrollbar(self.hadjust)
-        self.vscroll = gtk.VScrollbar(self.vadjust)
         
-        # ----------------------------------------------------------------
-        # Attach widgets to the main table.
-        # ----------------------------------------------------------------
-        self.table = gtk.Table(2, 2, False)
         self.table.attach(self.thumbnailsidebar.layout, 0, 1, 2, 5, gtk.FILL,
                           gtk.FILL|gtk.EXPAND, 0, 0)
         self.table.attach(self.thumbnailsidebar.scroll, 1, 2, 2, 4,
@@ -107,6 +94,39 @@ class MainWindow(gtk.Window):
         self.table.attach(self.menubar, 0, 4, 0, 1, gtk.FILL|gtk.SHRINK,
                           gtk.FILL, 0, 0)
 
+        if prefs['default double page']:
+            self.actiongroup.get_action('double').activate()
+        if prefs['default fullscreen']:
+            self.actiongroup.get_action('fullscreen').activate()
+        if prefs['default manga mode']:
+            self.actiongroup.get_action('manga_mode').activate()
+        if prefs['default zoom mode'] == 'manual':
+            self.actiongroup.get_action('fit_manual_mode').activate()
+        elif prefs['default zoom mode'] == 'fit':
+            self.actiongroup.get_action('fit_screen_mode').activate()
+        elif prefs['default zoom mode'] == 'width':
+            self.actiongroup.get_action('fit_width_mode').activate()
+        else:
+            self.actiongroup.get_action('fit_height_mode').activate()
+        if prefs['show toolbar']:
+            prefs['show toolbar'] = False
+            self.actiongroup.get_action('toolbar').activate()
+        if prefs['show menubar']:
+            prefs['show menubar'] = False
+            self.actiongroup.get_action('menubar').activate()
+        if prefs['show statusbar']:
+            prefs['show statusbar'] = False
+            self.actiongroup.get_action('statusbar').activate()
+        if prefs['show scrollbar']:
+            prefs['show scrollbar'] = False
+            self.actiongroup.get_action('scrollbar').activate()
+        if prefs['show thumbnails']:
+            prefs['show thumbnails'] = False
+            self.actiongroup.get_action('thumbnails').activate()
+        if prefs['hide all']:
+            prefs['hide all'] = False
+            self.actiongroup.get_action('hide all').activate()
+
         self.add(self.table)
         self.table.show()
         self.main_layout.show()
@@ -117,42 +137,51 @@ class MainWindow(gtk.Window):
                                     gtk.gdk.BUTTON_RELEASE_MASK |
                                     gtk.gdk.POINTER_MOTION_MASK)
 
-        self.connect('delete_event', terminate_program)
-        self.connect('key_press_event', event.key_press_event)
-        self.main_layout.connect('scroll_event', event.scroll_wheel_event)
-        self.connect('configure_event', event.resize_event)
-        self.main_layout.connect('button_press_event', event.mouse_press_event)
-        self.connect('button_release_event', event.mouse_release_event)
-        self.main_layout.connect('motion_notify_event', event.mouse_move_event)
+        self.connect('delete_event',
+            self.terminate_program)
+        self.connect('key_press_event',
+            self.event_handler.key_press_event)
+        self.main_layout.connect('scroll_event',
+            self.event_handler.scroll_wheel_event)
+        self.connect('configure_event',
+            self.event_handler.resize_event)
+        self.main_layout.connect('button_press_event',
+            self.event_handler.mouse_press_event)
+        self.connect('button_release_event',
+            self.event_handler.mouse_release_event)
+        self.main_layout.connect('motion_notify_event',
+            self.event_handler.mouse_move_event)
+        
+        self.show()
 
     def display_active_widgets(self):
-        if not preferences.prefs['hide all'] and not (self.is_fullscreen and 
-          preferences.prefs['hide all in fullscreen']):
-            if preferences.prefs['show toolbar']:
+        if not prefs['hide all'] and not (self.is_fullscreen and 
+          prefs['hide all in fullscreen']):
+            if prefs['show toolbar']:
                 self.toolbar.show_all()
             else:
                 self.toolbar.hide_all()
-            if preferences.prefs['show statusbar']:
+            if prefs['show statusbar']:
                 self.statusbar.show_all()
             else:
                 self.statusbar.hide_all()
-            if preferences.prefs['show thumbnails']:
+            if prefs['show thumbnails']:
                 self.thumbnailsidebar.show()
             else:
                 self.thumbnailsidebar.hide()
-            if preferences.prefs['show menubar']:
+            if prefs['show menubar']:
                 self.menubar.show_all()
             else:
                 self.menubar.hide_all()
-            if (preferences.prefs['show scrollbar'] and
+            if (prefs['show scrollbar'] and
               self.zoom_mode == 'width'):
                 self.vscroll.show_all()
                 self.hscroll.hide_all()
-            elif (preferences.prefs['show scrollbar'] and
+            elif (prefs['show scrollbar'] and
               self.zoom_mode == 'height'):
                 self.vscroll.hide_all()
                 self.hscroll.show_all()
-            elif (preferences.prefs['show scrollbar'] and
+            elif (prefs['show scrollbar'] and
               self.zoom_mode == 'manual'):
                 self.vscroll.show_all()
                 self.hscroll.show_all()
@@ -169,23 +198,23 @@ class MainWindow(gtk.Window):
 
     def get_layout_size(self):
         width, height = self.get_size()
-        if not preferences.prefs['hide all'] and not (self.is_fullscreen and 
-          preferences.prefs['hide all in fullscreen']):
-            if preferences.prefs['show toolbar']:
+        if not prefs['hide all'] and not (self.is_fullscreen and 
+          prefs['hide all in fullscreen']):
+            if prefs['show toolbar']:
                 height -= self.toolbar.size_request()[1]
-            if preferences.prefs['show statusbar']:
+            if prefs['show statusbar']:
                 height -= self.statusbar.size_request()[1]
-            if preferences.prefs['show thumbnails']:
+            if prefs['show thumbnails']:
                 width -= self.thumbnailsidebar.get_width()
-            if preferences.prefs['show menubar']:
+            if prefs['show menubar']:
                 height -= self.menubar.size_request()[1]
-            if (preferences.prefs['show scrollbar'] and
+            if (prefs['show scrollbar'] and
               self.zoom_mode == 'width'):
                 width -= self.vscroll.size_request()[0]
-            elif (preferences.prefs['show scrollbar'] and
+            elif (prefs['show scrollbar'] and
               self.zoom_mode == 'height'):
                 height -= self.hscroll.size_request()[1]
-            elif (preferences.prefs['show scrollbar'] and
+            elif (prefs['show scrollbar'] and
               self.zoom_mode == 'manual'):
                 width -= self.vscroll.size_request()[0]
                 height -= self.hscroll.size_request()[1]
@@ -193,7 +222,7 @@ class MainWindow(gtk.Window):
 
     def draw_image(self, at_bottom=False):
         self.display_active_widgets()
-        if not filehandler.file_loaded:
+        if not self.file_handler.file_loaded:
             self.left_image.clear()
             self.right_image.clear()
             self.thumbnailsidebar.clear()
@@ -203,13 +232,13 @@ class MainWindow(gtk.Window):
         width, height = self.get_layout_size()
         scale_width = self.zoom_mode == 'height' and -1 or width
         scale_height = self.zoom_mode == 'width' and -1 or height
-        scale_up = preferences.prefs['stretch']
+        scale_up = prefs['stretch']
         
-        if is_double():
-            if self.manga_mode:
-                right_pixbuf, left_pixbuf = filehandler.get_pixbufs()
+        if self.displayed_double():
+            if self.is_manga_mode:
+                right_pixbuf, left_pixbuf = self.file_handler.get_pixbufs()
             else:
-                left_pixbuf, right_pixbuf = filehandler.get_pixbufs()
+                left_pixbuf, right_pixbuf = self.file_handler.get_pixbufs()
 
             if self.zoom_mode == 'manual':
                 if self.rotation in [90, 270]:
@@ -240,7 +269,7 @@ class MainWindow(gtk.Window):
                 right_pixbuf.get_height())) / 2
             self.right_image.show()
         else:
-            pixbuf = filehandler.get_pixbufs()
+            pixbuf = self.file_handler.get_pixbufs()
 
             if self.zoom_mode == 'manual':
                 scale_width = int(self.manual_zoom * pixbuf.get_width() // 100)
@@ -267,296 +296,244 @@ class MainWindow(gtk.Window):
         self.main_layout.set_size(*self.image_box.size_request())
         if at_bottom:
             self.vadjust.set_value(self.vadjust.upper - height)
-            if self.manga_mode:
+            if self.is_manga_mode:
                 self.hadjust.set_value(0)
             else:
                 self.hadjust.set_value(self.hadjust.upper - width)
         else:
             self.vadjust.set_value(0)
-            if self.manga_mode:
+            if self.is_manga_mode:
                 self.hadjust.set_value(self.hadjust.upper - width)
             else:
                 self.hadjust.set_value(0)
         
-        self.set_title(os.path.basename(filehandler.archive_path) + 
-            '  [%d / %d]  -  Comix' % (filehandler.current_image + 1,
-            len(filehandler.image_files)))
+        self.set_title(os.path.basename(self.file_handler.archive_path) + 
+            '  [%d / %d]  -  Comix' % (self.file_handler.current_image + 1,
+            len(self.file_handler.image_files)))
 
         while gtk.events_pending():
             gtk.main_iteration(False)
-        filehandler.do_cacheing()
+        self.file_handler.do_cacheing()
 
-def next_page(*args):
-    if filehandler.next_page():
-        if not window.keep_rotation:
-            window.rotation = 0
-        window.thumbnailsidebar.update_select()
-        window.draw_image()
+    def _new_page(self, at_bottom=False):
+        if not self.keep_rotation:
+                self.rotation = 0
+        self.thumbnailsidebar.update_select()
+        self.draw_image(at_bottom)
 
-def previous_page(*args):
-    if filehandler.previous_page():
-        if not window.keep_rotation:
-            window.rotation = 0
-        window.thumbnailsidebar.update_select()
-        window.draw_image(at_bottom=True)
+    def next_page(self, *args):
+        if self.file_handler.next_page():
+            self._new_page()
 
-def first_page(*args):
-    if filehandler.first_page():
-        if not window.keep_rotation:
-            window.rotation = 0
-        window.thumbnailsidebar.update_select()
-        window.draw_image()
+    def previous_page(self, *args):
+        if self.file_handler.previous_page():
+            self._new_page(at_bottom=True)
 
-def last_page(*args):
-    if filehandler.last_page():
-        if not window.keep_rotation:
-            window.rotation = 0
-        window.thumbnailsidebar.update_select()
-        window.draw_image()
+    def first_page(self, *args):
+        if self.file_handler.first_page():
+            self._new_page()
 
-def set_page(num):
-    if filehandler.set_page(num):
-        if not window.keep_rotation:
-            window.rotation = 0
-        window.thumbnailsidebar.update_select()
-        window.draw_image()
+    def last_page(self, *args):
+        if self.file_handler.last_page():
+            self._new_page()
 
-def rotate90(*args):
-    window.rotation = (window.rotation + 90) % 360
-    window.draw_image()
+    def set_page(self, num):
+        if self.file_handler.set_page(num):
+            self._new_page()
 
-def rotate180(*args):
-    window.rotation = (window.rotation + 180) % 360
-    window.draw_image()
+    def rotate90(self, *args):
+        self.rotation = (self.rotation + 90) % 360
+        self.draw_image()
 
-def rotate270(*args):
-    window.rotation = (window.rotation + 270) % 360
-    window.draw_image()
+    def rotate180(self, *args):
+        self.rotation = (self.rotation + 180) % 360
+        self.draw_image()
 
-def change_double_page(toggleaction):
-    window.double_page = toggleaction.get_active()
-    window.draw_image()
+    def rotate270(self, *args):
+        self.rotation = (self.rotation + 270) % 360
+        self.draw_image()
 
-def change_manga_mode(toggleaction):
-    window.manga_mode = toggleaction.get_active()
-    window.draw_image()
+    def change_double_page(self, toggleaction):
+        self.is_double_page = toggleaction.get_active()
+        self.draw_image()
 
-def change_zoom_mode(radioaction, *args):
-    mode = radioaction.get_current_value()
-    old_mode = window.zoom_mode
-    if mode == 0:
-        window.zoom_mode = 'manual'
-    elif mode == 1:
-        window.zoom_mode = 'fit'
-    elif mode == 2:
-        window.zoom_mode = 'width'
-    else:
-        window.zoom_mode = 'height'
-    if old_mode != window.zoom_mode:
-        window.draw_image()
+    def change_manga_mode(self, toggleaction):
+        self.is_manga_mode = toggleaction.get_active()
+        self.draw_image()
 
-def change_fullscreen(toggleaction):
-    window.is_fullscreen = toggleaction.get_active()
-    if window.is_fullscreen:
-        window.fullscreen()
-    else:
-        window.unfullscreen()
-
-def change_toolbar_visibility(*args):
-    preferences.prefs['show toolbar'] = \
-        not preferences.prefs['show toolbar']
-    window.draw_image()
-
-def change_menubar_visibility(*args):
-    preferences.prefs['show menubar'] = \
-        not preferences.prefs['show menubar']
-    window.draw_image()
-
-def change_statusbar_visibility(*args):
-    preferences.prefs['show statusbar'] = \
-        not preferences.prefs['show statusbar']
-    window.draw_image()
-
-def change_scrollbar_visibility(*args):
-    preferences.prefs['show scrollbar'] = \
-        not preferences.prefs['show scrollbar']
-    window.draw_image()
-
-def change_thumbnails_visibility(*args):
-    preferences.prefs['show thumbnails'] = \
-        not preferences.prefs['show thumbnails']
-    window.draw_image()
-
-def change_hide_all(*args):
-    preferences.prefs['hide all'] = not preferences.prefs['hide all']
-    window.draw_image()
-
-def change_keep_rotation(*args):
-    window.keep_rotation = not window.keep_rotation
-
-def manual_zoom_in(*args):
-    new_zoom = window.manual_zoom * 1.15
-    if 95 < new_zoom < 105: # To compensate for rounding errors
-        new_zoom = 100
-    if new_zoom > 1000:
-        return
-    window.manual_zoom = new_zoom
-    window.draw_image()
-
-def manual_zoom_out(*args):
-    new_zoom = window.manual_zoom / 1.15
-    if 95 < new_zoom < 105: # To compensate for rounding errors
-        new_zoom = 100
-    if new_zoom < 10:
-        return
-    window.manual_zoom = new_zoom
-    window.draw_image()
-
-def manual_zoom_original(*args):
-    window.manual_zoom = 100
-    window.draw_image()
-
-def scroll(x, y):
-
-    """
-    Scrolls <x> px horizontally and <y> px vertically.
-    Returns True if call resulted in new adjustment values, False otherwise.
-    """
-
-    old_hadjust = window.hadjust.get_value()
-    old_vadjust = window.vadjust.get_value()
-    layout_width, layout_height = window.get_layout_size()
-    hadjust_upper = window.hadjust.upper - layout_width
-    vadjust_upper = window.vadjust.upper - layout_height
-    new_hadjust = old_hadjust + x
-    new_vadjust = old_vadjust + y
-    new_hadjust = max(0, new_hadjust)
-    new_vadjust = max(0, new_vadjust)
-    new_hadjust = min(hadjust_upper, new_hadjust)
-    new_vadjust = min(vadjust_upper, new_vadjust)
-    window.vadjust.set_value(new_vadjust)
-    window.hadjust.set_value(new_hadjust)
-    return old_vadjust != new_vadjust or old_hadjust != new_hadjust
-
-def scroll_to_fixed(horiz=None, vert=None):
-    
-    """
-    If either <horiz> or <vert> is not None, the display is scrolled as
-    follows:
-
-    horiz: 'left'        = left end of display
-           'middle'      = middle of the display
-           'right'       = rigth end of display
-           'startfirst'  = start of first page
-           'endfirst'    = end of first page
-           'startsecond' = start of second page
-           'endsecond'   = end of second page
-    
-    vert:  'top'         = top of display
-           'middle'      = middle of display
-           'bottom'      = bottom of display
-
-    Scrolling to the second page is, of course, only applicable in double
-    page mode. What is considered "start" and "end" depends on whether we
-    are using manga mode or not.
-    """
-
-    layout_width, layout_height = window.get_layout_size()
-    vadjust_upper = window.vadjust.upper - layout_height
-    hadjust_upper = window.hadjust.upper - layout_width
-
-    if vert == 'top':
-        window.vadjust.set_value(0)
-    elif vert == 'middle':
-        window.vadjust.set_value(vadjust_upper / 2)
-    elif vert == 'bottom':
-        window.vadjust.set_value(vadjust_upper)
-    
-    # Manga transformations.
-    if window.manga_mode and is_double():
-        horiz = {'left':        'left',
-                 'middle':      'middle',
-                 'right':       'right',
-                 'startfirst':  'endsecond',
-                 'endfirst':    'startsecond',
-                 'startsecond': 'endfirst',
-                 'endsecond':   'startfirst'}[horiz]
-    elif window.manga_mode:
-        horiz = {'left':        'left',
-                 'middle':      'middle',
-                 'right':       'right',
-                 'startfirst':  'endfirst',
-                 'endfirst':    'startfirst'}[horiz]
-    
-    if horiz == 'left':
-        window.hadjust.set_value(0)
-    elif horiz == 'middle':
-        window.hadjust.set_value(hadjust_upper / 2)
-    elif horiz == 'right':
-        window.hadjust.set_value(hadjust_upper)
-    elif horiz == 'startfirst':
-        window.hadjust.set_value(0)
-    elif horiz == 'endfirst':
-        if is_double():
-            window.hadjust.set_value(
-                window.left_image.size_request()[0] - layout_width)
+    def change_fullscreen(self, toggleaction):
+        self.is_fullscreen = toggleaction.get_active()
+        if self.is_fullscreen:
+            self.fullscreen()
         else:
-            window.hadjust.set_value(hadjust_upper)
-    elif horiz == 'startsecond':
-        window.hadjust.set_value(window.left_image.size_request()[0] + 2)
-    elif horiz == 'endsecond':
-        window.hadjust.set_value(vadjust_upper)
+            self.unfullscreen()
 
-def is_double():
-    return window.double_page and not filehandler.is_last_page()
-
-def terminate_program(*args):
+    def change_zoom_mode(self, radioaction, *args):
+        mode = radioaction.get_current_value()
+        old_mode = self.zoom_mode
+        if mode == 0:
+            self.zoom_mode = 'manual'
+        elif mode == 1:
+            self.zoom_mode = 'fit'
+        elif mode == 2:
+            self.zoom_mode = 'width'
+        else:
+            self.zoom_mode = 'height'
+        if old_mode != self.zoom_mode:
+            self.draw_image()
     
-    """ Runs clean-up tasks and exits the program. """
+    def change_toolbar_visibility(self, *args):
+        prefs['show toolbar'] = not prefs['show toolbar']
+        self.draw_image()
 
-    print 'Bye!'
-    gtk.main_quit()
-    shutil.rmtree(filehandler.tmp_dir)
-    sys.exit(0)
+    def change_menubar_visibility(self, *args):
+        prefs['show menubar'] = not prefs['show menubar']
+        self.draw_image()
 
-def start():
+    def change_statusbar_visibility(self, *args):
+        prefs['show statusbar'] = not prefs['show statusbar']
+        self.draw_image()
 
-    """ Runs setup tasks and starts the main loop. """
+    def change_scrollbar_visibility(self, *args):
+        prefs['show scrollbar'] = not prefs['show scrollbar']
+        self.draw_image()
 
-    global window
-    window = MainWindow()
-    window.show()
-    if preferences.prefs['default double page']:
-        window.actiongroup.get_action('double').activate()
-    if preferences.prefs['default fullscreen']:
-        window.actiongroup.get_action('fullscreen').activate()
-    if preferences.prefs['default manga mode']:
-        window.actiongroup.get_action('manga_mode').activate()
-    if preferences.prefs['default zoom mode'] == 'manual':
-        window.actiongroup.get_action('fit_manual_mode').activate()
-    elif preferences.prefs['default zoom mode'] == 'fit':
-        window.actiongroup.get_action('fit_screen_mode').activate()
-    elif preferences.prefs['default zoom mode'] == 'width':
-        window.actiongroup.get_action('fit_width_mode').activate()
-    else:
-        window.actiongroup.get_action('fit_height_mode').activate()
-    if preferences.prefs['show toolbar']:
-        preferences.prefs['show toolbar'] = False
-        window.actiongroup.get_action('toolbar').activate()
-    if preferences.prefs['show menubar']:
-        preferences.prefs['show menubar'] = False
-        window.actiongroup.get_action('menubar').activate()
-    if preferences.prefs['show statusbar']:
-        preferences.prefs['show statusbar'] = False
-        window.actiongroup.get_action('statusbar').activate()
-    if preferences.prefs['show scrollbar']:
-        preferences.prefs['show scrollbar'] = False
-        window.actiongroup.get_action('scrollbar').activate()
-    if preferences.prefs['show thumbnails']:
-        preferences.prefs['show thumbnails'] = False
-        window.actiongroup.get_action('thumbnails').activate()
-    if preferences.prefs['hide all']:
-        preferences.prefs['hide all'] = False
-        window.actiongroup.get_action('hide all').activate()
-    gtk.main()
+    def change_thumbnails_visibility(self, *args):
+        prefs['show thumbnails'] = not prefs['show thumbnails']
+        self.draw_image()
+
+    def change_hide_all(self, *args):
+        prefs['hide all'] = not prefs['hide all']
+        self.draw_image()
+
+    def change_keep_rotation(self, *args):
+        self.keep_rotation = not self.keep_rotation
+
+    def manual_zoom_in(self, *args):
+        new_zoom = self.manual_zoom * 1.15
+        if 95 < new_zoom < 105: # To compensate for rounding errors
+            new_zoom = 100
+        if new_zoom > 1000:
+            return
+        self.manual_zoom = new_zoom
+        self.draw_image()
+
+    def manual_zoom_out(self, *args):
+        new_zoom = self.manual_zoom / 1.15
+        if 95 < new_zoom < 105: # To compensate for rounding errors
+            new_zoom = 100
+        if new_zoom < 10:
+            return
+        self.manual_zoom = new_zoom
+        self.draw_image()
+
+    def manual_zoom_original(self, *args):
+        self.manual_zoom = 100
+        self.draw_image()
+
+    def scroll(self, x, y):
+
+        """
+        Scrolls <x> px horizontally and <y> px vertically.
+        Returns True if call resulted in new adjustment values, False otherwise.
+        """
+
+        old_hadjust = self.hadjust.get_value()
+        old_vadjust = self.vadjust.get_value()
+        layout_width, layout_height = self.get_layout_size()
+        hadjust_upper = self.hadjust.upper - layout_width
+        vadjust_upper = self.vadjust.upper - layout_height
+        new_hadjust = old_hadjust + x
+        new_vadjust = old_vadjust + y
+        new_hadjust = max(0, new_hadjust)
+        new_vadjust = max(0, new_vadjust)
+        new_hadjust = min(hadjust_upper, new_hadjust)
+        new_vadjust = min(vadjust_upper, new_vadjust)
+        self.vadjust.set_value(new_vadjust)
+        self.hadjust.set_value(new_hadjust)
+        return old_vadjust != new_vadjust or old_hadjust != new_hadjust
+
+    def scroll_to_fixed(self, horiz=None, vert=None):
+        
+        """
+        If either <horiz> or <vert> is as below, the display is scrolled as
+        follows:
+
+        horiz: 'left'        = left end of display
+               'middle'      = middle of the display
+               'right'       = rigth end of display
+               'startfirst'  = start of first page
+               'endfirst'    = end of first page
+               'startsecond' = start of second page
+               'endsecond'   = end of second page
+        
+        vert:  'top'         = top of display
+               'middle'      = middle of display
+               'bottom'      = bottom of display
+
+        Scrolling to the second page is, of course, only applicable in double
+        page mode. What is considered "start" and "end" depends on whether we
+        are using manga mode or not.
+        """
+
+        layout_width, layout_height = self.get_layout_size()
+        vadjust_upper = self.vadjust.upper - layout_height
+        hadjust_upper = self.hadjust.upper - layout_width
+
+        if vert == 'top':
+            self.vadjust.set_value(0)
+        elif vert == 'middle':
+            self.vadjust.set_value(vadjust_upper / 2)
+        elif vert == 'bottom':
+            self.vadjust.set_value(vadjust_upper)
+        
+        # Manga transformations.
+        if self.is_manga_mode and self.displayed_double():
+            horiz = {'left':        'left',
+                     'middle':      'middle',
+                     'right':       'right',
+                     'startfirst':  'endsecond',
+                     'endfirst':    'startsecond',
+                     'startsecond': 'endfirst',
+                     'endsecond':   'startfirst'}[horiz]
+        elif self.is_manga_mode:
+            horiz = {'left':        'left',
+                     'middle':      'middle',
+                     'right':       'right',
+                     'startfirst':  'endfirst',
+                     'endfirst':    'startfirst'}[horiz]
+        
+        if horiz == 'left':
+            self.hadjust.set_value(0)
+        elif horiz == 'middle':
+            self.hadjust.set_value(hadjust_upper / 2)
+        elif horiz == 'right':
+            self.hadjust.set_value(hadjust_upper)
+        elif horiz == 'startfirst':
+            self.hadjust.set_value(0)
+        elif horiz == 'endfirst':
+            if self.displayed_double():
+                self.hadjust.set_value(
+                    self.left_image.size_request()[0] - layout_width)
+            else:
+                self.hadjust.set_value(hadjust_upper)
+        elif horiz == 'startsecond':
+            self.hadjust.set_value(self.left_image.size_request()[0] + 2)
+        elif horiz == 'endsecond':
+            self.hadjust.set_value(vadjust_upper)
+
+    def displayed_double(self):
+        
+        """ Returns True if two pages are currently displayed. """
+
+        return self.is_double_page and not self.file_handler.is_last_page()
+
+    def terminate_program(self, *args):
+        
+        """ Runs clean-up tasks and exits the program. """
+
+        print 'Bye!'
+        gtk.main_quit()
+        shutil.rmtree(self.file_handler.tmp_dir)
+        sys.exit(0)
 

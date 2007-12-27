@@ -4,19 +4,19 @@
 
 import gtk
 
-import main
 import about
-import properties
 import filechooser
 import filehandler
+import properties
 
 def bogus(*args):
     print 'Weeee...'
 
 class MainUI(gtk.UIManager):
 
-    def __init__(self):
+    def __init__(self, window):
         gtk.UIManager.__init__(self)
+        self.window = window
 
         # ----------------------------------------------------------------
         # Create actions for the menus.
@@ -24,22 +24,22 @@ class MainUI(gtk.UIManager):
         actiongroup = gtk.ActionGroup('')
         actiongroup.add_actions([
             ('next', gtk.STOCK_GO_FORWARD, _('_Next page'), 'Page_Down',
-                None, main.next_page),
+                None, window.next_page),
             ('previous', gtk.STOCK_GO_BACK, _('_Previous page'), 'Page_Up',
-                None, main.previous_page),
+                None, window.previous_page),
             ('first', gtk.STOCK_GOTO_FIRST, _('_First page'), 'Home',
-                None, main.first_page),
+                None, window.first_page),
             ('last',gtk.STOCK_GOTO_LAST, _('_Last page'), 'End',
-                None, main.last_page),
+                None, window.last_page),
             ('go', gtk.STOCK_JUMP_TO, _('_Go to page...'), 'g',
                 None, bogus),
             ('zoom', 'comix-zoom', _('Manual _Zoom')),
             ('zin', gtk.STOCK_ZOOM_IN, _('_Zoom in'), 'KP_Add',
-                None, main.manual_zoom_in),
+                None, window.manual_zoom_in),
             ('zout', gtk.STOCK_ZOOM_OUT, _('Zoom _out'), 'KP_Subtract',
-                None, main.manual_zoom_out),
+                None, window.manual_zoom_out),
             ('zoriginal', gtk.STOCK_ZOOM_100, _('_Normal size'), 'n',
-                None, main.manual_zoom_original),
+                None, window.manual_zoom_original),
             ('zwidth', gtk.STOCK_ZOOM_FIT, _('Fit _width'), '<Control>w',
                 None, bogus),
             ('zheight', gtk.STOCK_ZOOM_FIT, _('Fit _height'), '<Control>h',
@@ -58,14 +58,9 @@ class MainUI(gtk.UIManager):
             ('about', gtk.STOCK_ABOUT, _('_About'), '',
                 None, about.dialog_open),
             ('thumbnail_dialog', 'comix-thumbnails',
-                _('_Manage thumbnails...'),
-                '', None, bogus),
-            ('properties', gtk.STOCK_PROPERTIES, _('Proper_ties'), '<Alt>Return',
-                None, properties.dialog_open),
+                _('_Manage thumbnails...'), '', None, bogus),
             ('comments', gtk.STOCK_INFO, _('View _comments'), 'c',
                 None, bogus),
-            ('open', gtk.STOCK_OPEN, _('_Open...'), '<Control>o',
-                None, filechooser.dialog_open),
             ('recent', 'comix-recent-files', _('_Recent files')),
             ('clear_recent', gtk.STOCK_CLEAR, _('Clear recent files'), '',
                 None, bogus),
@@ -78,9 +73,9 @@ class MainUI(gtk.UIManager):
             ('extract', gtk.STOCK_SAVE_AS, _('E_xtract image...'), '',
                 None, bogus),
             ('close', gtk.STOCK_CLOSE, _('_Close'), '<Control>w',
-                None, filehandler.close_file),
+                None, window.file_handler.close_file),
             ('quit', gtk.STOCK_QUIT, _('_Quit'), '<Control>q',
-                None, main.terminate_program),
+                None, window.terminate_program),
             ('colour_adjust', 'comix-colour-adjust', _('_Adjust colour...'),
                 'j', None, bogus),
             ('slideshow', 'comix-slideshow', _('Slideshow'), '<Control>S', 
@@ -114,11 +109,11 @@ class MainUI(gtk.UIManager):
             ('menu_help', None, _('_Help')),
             ('transform', 'comix-transform', _('_Transform')),
             ('rotate_90', 'comix-rotate-90', _('_Rotate 90 degrees CW'), 'r',
-                None, main.rotate90),
+                None, window.rotate90),
             ('rotate_180','comix-rotate-180', _('Rotate 180 de_grees'), None,
-                None, main.rotate180),
+                None, window.rotate180),
             ('rotate_270', 'comix-rotate-270', _('Rotat_e 90 degrees CCW'),
-                '<Shift>r', None, main.rotate270),
+                '<Shift>r', None, window.rotate270),
             ('flip_horiz', 'comix-flip-horizontal', _('Fli_p horizontally'),
                 None, None, bogus),
             ('flip_vert', 'comix-flip-vertical', _('Flip _vertically'), None,
@@ -127,25 +122,25 @@ class MainUI(gtk.UIManager):
 
         actiongroup.add_toggle_actions([
             ('fullscreen', None, _('_Fullscreen'), 'f',
-                None, main.change_fullscreen),
+                None, window.change_fullscreen),
             ('double', 'comix-double-page', _('_Double page mode'), 'd',
-                None, main.change_double_page),
+                None, window.change_double_page),
             ('toolbar', None, _('_Toolbar'), None,
-                None, main.change_toolbar_visibility),
+                None, window.change_toolbar_visibility),
             ('menubar', None, _('_Menubar'), None,
-                None, main.change_menubar_visibility),
+                None, window.change_menubar_visibility),
             ('statusbar', None, _('St_atusbar'), None,
-                None, main.change_statusbar_visibility),
+                None, window.change_statusbar_visibility),
             ('scrollbar', None, _('S_crollbars'), None,
-                None, main.change_scrollbar_visibility),
+                None, window.change_scrollbar_visibility),
             ('thumbnails', None, _('Th_umbnails'), 'F9',
-                None, main.change_thumbnails_visibility),
+                None, window.change_thumbnails_visibility),
             ('hide all', None, _('H_ide all'), 'i',
-                None, main.change_hide_all),
+                None, window.change_hide_all),
             ('manga_mode', 'comix-manga', _('_Manga mode'), 'm',
-                None, main.change_manga_mode),
+                None, window.change_manga_mode),
             ('keep_rotation', None, _('_Keep transformation'), 'k',
-                None, main.change_keep_rotation),
+                None, window.change_keep_rotation),
             ('lens', 'comix-lens', _('Magnifying _lens'), 'z',
                 None, bogus)])
 
@@ -158,7 +153,15 @@ class MainUI(gtk.UIManager):
                 _('Fit _width mode'), 'w', None, 2),
             ('fit_height_mode', 'comix-fitheight',
                 _('Fit _height mode'), 'h', None, 3)],
-            0, main.change_zoom_mode)
+            0, window.change_zoom_mode)
+        
+        # Some actions added separately since they need the main window as
+        # a parameter.
+        actiongroup.add_actions([
+            ('open', gtk.STOCK_OPEN, _('_Open...'),
+                '<Control>o', None, filechooser.dialog_open),
+            ('properties', gtk.STOCK_PROPERTIES, _('Proper_ties'),
+                '<Alt>Return', None, properties.dialog_open)], window)
 
         ui_description = """
         <ui>

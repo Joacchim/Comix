@@ -7,9 +7,7 @@ import os
 import gtk
 import pango
 
-import main
-import filehandler
-import preferences
+from preferences import prefs
 import thumbnail
 import scale
 
@@ -19,18 +17,19 @@ dialog = None
 # with the preview widget.
 class ComicFileChooserDialog(gtk.Dialog):
     
-    def __init__(self):
+    def __init__(self, window):
         gtk.Dialog.__init__(self, title=_('Open'),
-            parent=main.window, buttons=(gtk.STOCK_CANCEL,
-            gtk.RESPONSE_CANCEL, gtk.STOCK_OPEN, gtk.RESPONSE_OK))
-
-        self.connect('response', dialog_response)
+            buttons=(gtk.STOCK_CANCEL, gtk.RESPONSE_CANCEL,
+            gtk.STOCK_OPEN, gtk.RESPONSE_OK))
+        
+        self.mainwindow = window
+        self.connect('response', self.dialog_response)
         self.connect('delete_event', dialog_close)
         self.set_default_response(gtk.RESPONSE_OK)
         self.set_has_separator(False)
 
         self.filechooser = gtk.FileChooserWidget()
-        self.filechooser.connect('file-activated', dialog_response, 
+        self.filechooser.connect('file-activated', self.dialog_response, 
             gtk.RESPONSE_OK)
         self.vbox.pack_start(self.filechooser)
         self.filechooser.set_border_width(10)
@@ -104,8 +103,7 @@ class ComicFileChooserDialog(gtk.Dialog):
     def update_preview(self, *args):
         path = self.filechooser.get_preview_filename()
         if path and os.path.isfile(path):
-            pixbuf = thumbnail.get_thumbnail(path,
-                preferences.prefs['create thumbnails'])
+            pixbuf = thumbnail.get_thumbnail(path, prefs['create thumbnails'])
             if pixbuf == None:
                 self.preview_image.clear()
                 self.namelabel.set_text('')
@@ -131,13 +129,29 @@ class ComicFileChooserDialog(gtk.Dialog):
             self.namelabel.set_text('')
             self.sizelabel.set_text('')
 
-def dialog_open(*args):
+    def dialog_response(self, widget, response):
+        if response == gtk.RESPONSE_OK:
+            path = self.filechooser.get_filename()
+            if os.path.isdir(path):
+                self.filechooser.set_current_folder(path)
+                return
+            dialog_close()
+            while gtk.events_pending():
+                gtk.main_iteration(False)
+            self.mainwindow.file_handler.open_file(path)
+            if prefs['open defaults to last browsed']:
+                prefs['path of last browsed'] = os.path.dirname(path)
+        elif response == gtk.RESPONSE_CANCEL:
+            dialog_close()
+
+
+def dialog_open(action, window):
     global dialog
-    dialog = ComicFileChooserDialog()
-    if preferences.prefs['open defaults to last browsed']:
-        dialog.filechooser.set_current_folder(
-            preferences.prefs['path of last browsed'])
-    dialog.run()
+    if dialog == None:
+        dialog = ComicFileChooserDialog(window)
+        if prefs['open defaults to last browsed']:
+            dialog.filechooser.set_current_folder(prefs['path of last browsed'])
+        dialog.run()
 
 def dialog_close(*args):
     global dialog
@@ -145,18 +159,4 @@ def dialog_close(*args):
         dialog.destroy()
         dialog = None
 
-def dialog_response(widget, response):
-    if response == gtk.RESPONSE_OK:
-        path = dialog.filechooser.get_filename()
-        if os.path.isdir(path):
-            dialog.filechooser.set_current_folder(path)
-            return
-        dialog_close()
-        while gtk.events_pending():
-            gtk.main_iteration(False)
-        filehandler.open_file(path)
-        if preferences.prefs['open defaults to last browsed']:
-            preferences.prefs['path of last browsed'] = os.path.dirname(path)
-    elif response == gtk.RESPONSE_CANCEL:
-        dialog_close()
 
