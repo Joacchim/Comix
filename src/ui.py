@@ -21,85 +21,83 @@ class MainUI(gtk.UIManager):
         # ----------------------------------------------------------------
         # Create actions for the menus.
         # ----------------------------------------------------------------
-        actiongroup = gtk.ActionGroup('')
+        actiongroup = gtk.ActionGroup('comix-main')
         actiongroup.add_actions([
-            ('next', gtk.STOCK_GO_FORWARD, _('_Next page'), 'Page_Down',
-                None, window.next_page),
-            ('previous', gtk.STOCK_GO_BACK, _('_Previous page'), 'Page_Up',
-                None, window.previous_page),
-            ('first', gtk.STOCK_GOTO_FIRST, _('_First page'), 'Home',
-                None, window.first_page),
-            ('last',gtk.STOCK_GOTO_LAST, _('_Last page'), 'End',
-                None, window.last_page),
-            ('go', gtk.STOCK_JUMP_TO, _('_Go to page...'), 'g',
-                None, bogus),
-            ('zoom', 'comix-zoom', _('Manual _Zoom')),
-            ('zin', gtk.STOCK_ZOOM_IN, _('_Zoom in'), 'KP_Add',
-                None, window.manual_zoom_in),
-            ('zout', gtk.STOCK_ZOOM_OUT, _('Zoom _out'), 'KP_Subtract',
-                None, window.manual_zoom_out),
-            ('zoriginal', gtk.STOCK_ZOOM_100, _('_Normal size'), 'n',
-                None, window.manual_zoom_original),
-            ('zwidth', gtk.STOCK_ZOOM_FIT, _('Fit _width'), '<Control>w',
-                None, bogus),
-            ('zheight', gtk.STOCK_ZOOM_FIT, _('Fit _height'), '<Control>h',
-                None, bogus),
-            ('zfit', gtk.STOCK_ZOOM_FIT, _('_Best fit'), 'b',
-                None, bogus),
-            ('add_bookmark', gtk.STOCK_ADD, _('_Add bookmark'), '<Control>d',
-                None, bogus),
-            ('clear_bookmarks', gtk.STOCK_CLEAR, _('Clear bookmarks'), '',
-                None, bogus),
-            ('bookmark_manager', 'comix-edit-bookmarks',
-                _('_Edit bookmarks...'), '<Control>b', None,
-                bogus),
-            ('preferences', gtk.STOCK_PREFERENCES, _('Pr_eferences'), '',
-                None, bogus),
-            ('about', gtk.STOCK_ABOUT, _('_About'), '',
-                None, about.dialog_open),
-            ('thumbnail_dialog', 'comix-thumbnails',
-                _('_Manage thumbnails...'), '', None, bogus),
-            ('comments', gtk.STOCK_INFO, _('View _comments'), 'c',
-                None, bogus),
-            ('recent', 'comix-recent-files', _('_Recent files')),
-            ('clear_recent', gtk.STOCK_CLEAR, _('Clear recent files'), '',
-                None, bogus),
-            ('library', 'comix-library', _('Open _library...'), '<Control>l',
-                None, bogus),
-            ('add_to_library', 'comix-library-add', _('_Add to library'), '',
-                None, bogus),
-            ('convert', gtk.STOCK_CONVERT, _('Con_vert...'), '',
-                None, bogus),
-            ('extract', gtk.STOCK_SAVE_AS, _('E_xtract image...'), '',
-                None, bogus),
-            ('close', gtk.STOCK_CLOSE, _('_Close'), '<Control>w',
-                None, window.file_handler.close_file),
-            ('quit', gtk.STOCK_QUIT, _('_Quit'), '<Control>q',
-                None, window.terminate_program),
+            ('next_page', gtk.STOCK_GO_FORWARD, _('_Next page'),
+                'Page_Down', None, window.next_page),
+            ('previous_page', gtk.STOCK_GO_BACK, _('_Previous page'),
+                'Page_Up', None, window.previous_page),
+            ('first_page', gtk.STOCK_GOTO_FIRST, _('_First page'),
+                'Home', None, window.first_page),
+            ('last_page',gtk.STOCK_GOTO_LAST, _('_Last page'),
+                'End', None, window.last_page),
+            ('go_to_page', gtk.STOCK_JUMP_TO, _('_Go to page...'),
+                'g', None, bogus),
+            ('zoom_in', gtk.STOCK_ZOOM_IN, _('_Zoom in'),
+                'KP_Add', None, window.manual_zoom_in),
+            ('zoom_out', gtk.STOCK_ZOOM_OUT, _('Zoom _out'),
+                'KP_Subtract', None, window.manual_zoom_out),
+            ('zoom_original', gtk.STOCK_ZOOM_100, _('_Normal size'),
+                'n', None, window.manual_zoom_original),
+            ('add_bookmark', gtk.STOCK_ADD, _('_Add bookmark'),
+                '<Control>d', None, bogus),
+            ('clear_bookmarks', gtk.STOCK_CLEAR, _('Clear bookmarks'),
+                None, None, bogus),
+            ('edit_bookmarks', 'comix-edit-bookmarks', _('_Edit bookmarks...'),
+                '<Control>b', None, bogus),
+            ('preferences', gtk.STOCK_PREFERENCES, _('Pr_eferences'),
+                None, None, bogus),
+            ('about', gtk.STOCK_ABOUT, _('_About'),
+                None, None, about.dialog_open),
+            ('edit_thumbnails', 'comix-thumbnails', _('_Manage thumbnails...'),
+                None, None, bogus),
+            ('comments', gtk.STOCK_INFO, _('View _comments'),
+                'c', None, bogus),
+            ('clear_recent', gtk.STOCK_CLEAR, _('Clear recent files'),
+                None, None, bogus),
+            ('library', 'comix-library', _('Open _library...'),
+                '<Control>l', None, bogus),
+            ('add_to_library', 'comix-library-add', _('_Add to library'),
+                None, None, bogus),
+            ('convert', gtk.STOCK_CONVERT, _('Con_vert...'),
+                None, None, bogus),
+            ('extract', gtk.STOCK_SAVE_AS, _('E_xtract image...'),
+                None, None, bogus),
+            ('close', gtk.STOCK_CLOSE, _('_Close'),
+                '<Control>w', None, window.file_handler.close_file),
+            ('quit', gtk.STOCK_QUIT, _('_Quit'),
+                '<Control>q', None, window.terminate_program),
             ('colour_adjust', 'comix-colour-adjust', _('_Adjust colour...'),
                 'j', None, bogus),
-            ('slideshow', 'comix-slideshow', _('Slideshow'), '<Control>S', 
-                None, bogus),
-            ('delete', gtk.STOCK_DELETE, _('Delete image...'), None,
-                None, bogus),
-            ('file_rot_90', 'comix-rotate-90-jpeg',
-                _('CW lossless JPEG rotation...'), '<Alt>r',
-                None, bogus),
-            ('file_rot_270', 'comix-rotate-270-jpeg',
-                _('CCW lossless JPEG rotation...'),
-                '<Alt><Shift>r', None, bogus),
-            ('file_flip_horiz', 'comix-flip-horizontal-jpeg',
-                _('Horizontal lossless JPEG flip...'),
+            ('slideshow', 'comix-slideshow', _('Slideshow'),
+                '<Control>S', None, bogus),
+            ('delete', gtk.STOCK_DELETE, _('Delete image...'),
                 None, None, bogus),
-            ('file_flip_vert', 'comix-flip-vertical-jpeg',
-                _('Vertical lossless JPEG flip...'),
-                None, None, bogus),
-            ('file_desaturate', 'comix-desaturate',
-                _('Convert JPEG to greyscale...'),
-                None, None, bogus),
+            ('rotate_90_jpeg', 'comix-rotate-90-jpeg',
+                _('CW lossless JPEG rotation...'), '<Alt>r', None, bogus),
+            ('rotate_270_jpeg', 'comix-rotate-270-jpeg',
+                _('CCW lossless JPEG rotation...'), '<Alt><Shift>r', None,
+                bogus),
+            ('flip_horiz_jpeg', 'comix-flip-horizontal-jpeg',
+                _('Horizontal lossless JPEG flip...'), None, None, bogus),
+            ('flip_vert_jpeg', 'comix-flip-vertical-jpeg',
+                _('Vertical lossless JPEG flip...'), None, None, bogus),
+            ('desaturate_jpeg', 'comix-desaturate',
+                _('Convert JPEG to greyscale...'), None, None, bogus),
+            ('rotate_90', 'comix-rotate-90', _('_Rotate 90 degrees CW'),
+                'r', None, window.rotate_90),
+            ('rotate_180','comix-rotate-180', _('Rotate 180 de_grees'),
+                None, None, window.rotate_180),
+            ('rotate_270', 'comix-rotate-270', _('Rotat_e 90 degrees CCW'),
+                '<Shift>r', None, window.rotate_270),
+            ('flip_horiz', 'comix-flip-horizontal', _('Fli_p horizontally'),
+                None, None, window.flip_horizontally),
+            ('flip_vert', 'comix-flip-vertical', _('Flip _vertically'),
+                None, None, window.flip_vertically),
+            ('menu_zoom', 'comix-zoom', _('Manual _Zoom')),
+            ('menu_recent', 'comix-recent-files', _('_Recent files')),
             ('menu_bookmarks', None, _('_Bookmarks')),
             ('menu_toolbars', 'comix-toolbars', _('_Toolbars')),
-            ('menu_bookmarks_popup', 'comix-bookmarks', _('_Bookmarks')),
             ('menu_edit', None, _('_Edit')),
             ('menu_file_operations', 'comix-file-operations',
                 _('File o_perations')),
@@ -107,52 +105,42 @@ class MainUI(gtk.UIManager):
             ('menu_view', None, _('_View')),
             ('menu_go', None, _('_Go')),
             ('menu_help', None, _('_Help')),
-            ('transform', 'comix-transform', _('_Transform')),
-            ('rotate_90', 'comix-rotate-90', _('_Rotate 90 degrees CW'), 'r',
-                None, window.rotate_90),
-            ('rotate_180','comix-rotate-180', _('Rotate 180 de_grees'), None,
-                None, window.rotate_180),
-            ('rotate_270', 'comix-rotate-270', _('Rotat_e 90 degrees CCW'),
-                '<Shift>r', None, window.rotate_270),
-            ('flip_horiz', 'comix-flip-horizontal', _('Fli_p horizontally'),
-                None, None, window.flip_horizontally),
-            ('flip_vert', 'comix-flip-vertical', _('Flip _vertically'), None,
-                None, window.flip_vertically),
+            ('menu_transform', 'comix-transform', _('_Transform')),
             ('expander', None, None, None, None, None)])
 
         actiongroup.add_toggle_actions([
-            ('fullscreen', None, _('_Fullscreen'), 'f',
-                None, window.change_fullscreen),
-            ('double', 'comix-double-page', _('_Double page mode'), 'd',
-                None, window.change_double_page),
-            ('toolbar', None, _('_Toolbar'), None,
-                None, window.change_toolbar_visibility),
-            ('menubar', None, _('_Menubar'), None,
-                None, window.change_menubar_visibility),
-            ('statusbar', None, _('St_atusbar'), None,
-                None, window.change_statusbar_visibility),
-            ('scrollbar', None, _('S_crollbars'), None,
-                None, window.change_scrollbar_visibility),
-            ('thumbnails', None, _('Th_umbnails'), 'F9',
-                None, window.change_thumbnails_visibility),
-            ('hide all', None, _('H_ide all'), 'i',
-                None, window.change_hide_all),
-            ('manga_mode', 'comix-manga', _('_Manga mode'), 'm',
-                None, window.change_manga_mode),
-            ('keep_rotation', None, _('_Keep transformation'), 'k',
-                None, window.change_keep_rotation),
-            ('lens', 'comix-lens', _('Magnifying _lens'), 'z',
-                None, bogus)])
+            ('fullscreen', None, _('_Fullscreen'),
+                'f', None, window.change_fullscreen),
+            ('double_page', 'comix-double-page', _('_Double page mode'),
+                'd', None, window.change_double_page),
+            ('toolbar', None, _('_Toolbar'),
+                None, None, window.change_toolbar_visibility),
+            ('menubar', None, _('_Menubar'),
+                None, None, window.change_menubar_visibility),
+            ('statusbar', None, _('St_atusbar'),
+                None, None, window.change_statusbar_visibility),
+            ('scrollbar', None, _('S_crollbars'),
+                None, None, window.change_scrollbar_visibility),
+            ('thumbnails', None, _('Th_umbnails'),
+                'F9', None, window.change_thumbnails_visibility),
+            ('hide all', None, _('H_ide all'),
+                'i', None, window.change_hide_all),
+            ('manga_mode', 'comix-manga', _('_Manga mode'),
+                'm', None, window.change_manga_mode),
+            ('keep_rotation', None, _('_Keep transformation'),
+                'k', None, window.change_keep_rotation),
+            ('lens', 'comix-lens', _('Magnifying _lens'),
+                'z', None, bogus)])
 
         actiongroup.add_radio_actions([
-            ('fit_manual_mode', 'comix-fitnone',
-                _('Manual zoom mode'), 'a', None, 0),
-            ('fit_screen_mode', 'comix-fitscreen',
-                _('Fit-to-_screen mode'), 's', None, 1),
-            ('fit_width_mode', 'comix-fitwidth',
-                _('Fit _width mode'), 'w', None, 2),
-            ('fit_height_mode', 'comix-fitheight',
-                _('Fit _height mode'), 'h', None, 3)],
+            ('fit_manual_mode', 'comix-fitnone', _('Manual zoom mode'),
+                'a', None, 0),
+            ('fit_screen_mode', 'comix-fitscreen', _('Fit-to-_screen mode'),
+                's', None, 1),
+            ('fit_width_mode', 'comix-fitwidth', _('Fit _width mode'),
+                'w', None, 2),
+            ('fit_height_mode', 'comix-fitheight', _('Fit _height mode'),
+                'h', None, 3)],
             0, window.change_zoom_mode)
         
         # Some actions added separately since they need the main window as
@@ -166,19 +154,19 @@ class MainUI(gtk.UIManager):
         ui_description = """
         <ui>
             <toolbar name="Tool">
-                <toolitem action="first" />
-                <toolitem action="previous" />
-                <toolitem action="next" />
-                <toolitem action="last" />
+                <toolitem action="first_page" />
+                <toolitem action="previous_page" />
+                <toolitem action="next_page" />
+                <toolitem action="last_page" />
                 <separator />
-                <toolitem action="go" />
+                <toolitem action="go_to_page" />
                 <toolitem action="expander" />
                 <toolitem action="fit_screen_mode" />
                 <toolitem action="fit_width_mode" />
                 <toolitem action="fit_height_mode" />
                 <toolitem action="fit_manual_mode" />
                 <separator />
-                <toolitem action="double" />
+                <toolitem action="double_page" />
                 <toolitem action="manga_mode" />
                 <separator />
                 <toolitem action="lens" />
@@ -193,16 +181,16 @@ class MainUI(gtk.UIManager):
                     <menuitem action="convert" />
                     <menuitem action="extract" />
                     <menu action="menu_file_operations">
-                        <menuitem action="file_rot_90" />
-                        <menuitem action="file_rot_270" />
-                        <menuitem action="file_flip_horiz" />
-                        <menuitem action="file_flip_vert" />
-                        <menuitem action="file_desaturate" />
+                        <menuitem action="rotate_90_jpeg" />
+                        <menuitem action="rotate_270_jpeg" />
+                        <menuitem action="flip_horiz_jpeg" />
+                        <menuitem action="flip_vert_jpeg" />
+                        <menuitem action="desaturate_jpeg" />
                         <separator />
                         <menuitem action="delete" />
                     </menu>
                     <separator />
-                    <menu action="recent">
+                    <menu action="menu_recent">
                         <separator />
                         <menuitem action="clear_recent" />
                     </menu>
@@ -214,12 +202,12 @@ class MainUI(gtk.UIManager):
                     <menuitem action="quit" />
                 </menu>
                 <menu action="menu_edit">
-                    <menuitem action="thumbnail_dialog" />
+                    <menuitem action="edit_thumbnails" />
                     <menuitem action="preferences" />
                 </menu>
                 <menu action="menu_view">
                     <menuitem action="fullscreen" />
-                    <menuitem action="double" />
+                    <menuitem action="double_page" />
                     <menuitem action="manga_mode" />
                     <separator />
                     <menuitem action="fit_screen_mode" />
@@ -233,7 +221,7 @@ class MainUI(gtk.UIManager):
                     <separator />
                     <menuitem action="lens" />
                     <separator />
-                    <menu action="transform">
+                    <menu action="menu_transform">
                         <menuitem action="rotate_90" />
                         <menuitem action="rotate_270" />
                         <menuitem action="rotate_180" />
@@ -242,13 +230,10 @@ class MainUI(gtk.UIManager):
                         <separator />
                         <menuitem action="keep_rotation" />
                     </menu>
-                    <menu action="zoom">
-                        <menuitem action="zin" />
-                        <menuitem action="zout" />
-                        <menuitem action="zoriginal" />
-                        <menuitem action="zwidth" />
-                        <menuitem action="zheight" />
-                        <menuitem action="zfit" />
+                    <menu action="menu_zoom">
+                        <menuitem action="zoom_in" />
+                        <menuitem action="zoom_out" />
+                        <menuitem action="zoom_original" />
                     </menu>
                     <separator />
                     <menu action="menu_toolbars">
@@ -262,16 +247,16 @@ class MainUI(gtk.UIManager):
                     </menu>
                 </menu>
                 <menu action="menu_go">
-                    <menuitem action="first" />
-                    <menuitem action="previous" />
-                    <menuitem action="next" />
-                    <menuitem action="last" />
+                    <menuitem action="first_page" />
+                    <menuitem action="previous_page" />
+                    <menuitem action="next_page" />
+                    <menuitem action="last_page" />
                     <separator />
-                    <menuitem action="go" />
+                    <menuitem action="go_to_page" />
                 </menu>
                 <menu action="menu_bookmarks">
                     <menuitem action="add_bookmark" />
-                    <menuitem action="bookmark_manager" />
+                    <menuitem action="edit_bookmarks" />
                     <separator />
                     <separator />
                     <menuitem action="clear_bookmarks" />
@@ -282,11 +267,11 @@ class MainUI(gtk.UIManager):
             </menubar>
 
             <popup name="Pop">
-                <menuitem action="next" />
-                <menuitem action="previous" />
+                <menuitem action="next_page" />
+                <menuitem action="previous_page" />
                 <separator />
                 <menuitem action="fullscreen" />
-                <menuitem action="double" />
+                <menuitem action="double_page" />
                 <menuitem action="manga_mode" />
                 <separator />
                 <menuitem action="fit_screen_mode" />
@@ -294,7 +279,7 @@ class MainUI(gtk.UIManager):
                 <menuitem action="fit_height_mode" />
                 <menuitem action="fit_manual_mode" />
                 <separator />
-                <menu action="transform">
+                <menu action="menu_transform">
                     <menuitem action="rotate_90" />
                     <menuitem action="rotate_270" />
                     <menuitem action="rotate_180" />

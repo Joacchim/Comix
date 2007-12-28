@@ -7,7 +7,7 @@ import Image
 
 def pil_to_pixbuf(image):
     imagestr = image.tostring()
-    IS_RGBA =image.mode == 'RGBA'
+    IS_RGBA = image.mode == 'RGBA'
     return gtk.gdk.pixbuf_new_from_data(imagestr, gtk.gdk.COLORSPACE_RGB,
         IS_RGBA, 8, image.size[0], image.size[1],
         (IS_RGBA and 4 or 3) * image.size[0])

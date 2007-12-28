@@ -15,16 +15,17 @@ import icons
 import pilpixbuf
 from preferences import prefs
 import ui
-import scale
+import image
 import status
 import thumbbar
 
+icons.load()
+
 class MainWindow(gtk.Window):
 
-    def __init__(self): 
+    def __init__(self):
         gtk.Window.__init__(self, gtk.WINDOW_TOPLEVEL)
         self.set_title('Comix')
-        #self.realize() # XXX
 
         self.is_fullscreen = False
         self.is_double_page = False 
@@ -283,7 +284,7 @@ class MainWindow(gtk.Window):
                         right_pixbuf.get_height()) // 100)
                 scale_up = True
 
-            left_pixbuf, right_pixbuf = scale.fit_2_in_rectangle(
+            left_pixbuf, right_pixbuf = image.fit_2_in_rectangle(
                 left_pixbuf, right_pixbuf, scale_width, scale_height,
                 scale_up=scale_up, rotation=self.rotation)
             if self.horizontal_flip:
@@ -301,8 +302,7 @@ class MainWindow(gtk.Window):
             self.right_image.show()
 
             self.statusbar.set_page_number(self.file_handler.current_image + 1,
-                                           self.file_handler.number_of_pages,
-                                           double_page=True)
+                self.file_handler.number_of_pages, double_page=True)
             self.statusbar.set_resolution((left_unscaled_x, left_unscaled_y,
                 100.0 * left_pixbuf.get_width() / left_unscaled_x), 
                 (right_unscaled_x, right_unscaled_y,
@@ -321,7 +321,7 @@ class MainWindow(gtk.Window):
                     scale_width, scale_height = scale_height, scale_width
                 scale_up = True
 
-            pixbuf = scale.fit_in_rectangle(pixbuf, scale_width, scale_height,
+            pixbuf = image.fit_in_rectangle(pixbuf, scale_width, scale_height,
                 scale_up=scale_up, rotation=self.rotation)
             if self.horizontal_flip:
                 pixbuf = pixbuf.flip(horizontal=True)
@@ -338,7 +338,7 @@ class MainWindow(gtk.Window):
             y_padding = (height - pixbuf.get_height()) / 2
 
             self.statusbar.set_page_number(self.file_handler.current_image + 1,
-                                           self.file_handler.number_of_pages)
+                self.file_handler.number_of_pages)
             self.statusbar.set_resolution((unscaled_x, unscaled_y,
                 100.0 * pixbuf.get_width() / unscaled_x))
         

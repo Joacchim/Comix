@@ -32,7 +32,7 @@ def create_thumbnail(path):
     
     """
     Create a thumbnail from the file at <path> and store it in the standard
-    thumbnail directory.
+    thumbnail directory. A pixbuf for the thumbnail is returned.
     """
 
     if not filehandler.is_image_file(path):
@@ -82,12 +82,11 @@ def get_thumbnail(path, create=True):
         if create:
             return create_thumbnail(path)
         return _get_pixbuf128(path)
-    thumbnail = gtk.gdk.pixbuf_new_from_file(thumbpath)
     info = Image.open(thumbpath).info
     if (not info.has_key('Thumb::MTime') or 
       os.stat(path).st_mtime != int(info['Thumb::MTime'])):
         if create:
             return create_thumbnail(path)
         return _get_pixbuf128(path)
-    return thumbnail
+    return gtk.gdk.pixbuf_new_from_file(thumbpath)
 

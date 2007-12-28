@@ -1,5 +1,5 @@
 # ============================================================================
-# scale.py - Image scaling module for Comix.
+# image.py - Image modification module for Comix.
 # ============================================================================
 
 import gtk

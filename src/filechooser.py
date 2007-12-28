@@ -7,9 +7,9 @@ import os
 import gtk
 import pango
 
+import image
 from preferences import prefs
 import thumbnail
-import scale
 
 dialog = None
 
@@ -109,7 +109,7 @@ class ComicFileChooserDialog(gtk.Dialog):
                 self.namelabel.set_text('')
                 self.sizelabel.set_text('')
             else:
-                pixbuf = scale.add_border(pixbuf, 1)
+                pixbuf = image.add_border(pixbuf, 1)
                 self.preview_image.set_from_pixbuf(pixbuf)
                 self.namelabel.set_text(os.path.basename(path))
                 self.sizelabel.set_text(

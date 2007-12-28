@@ -49,15 +49,15 @@ class FileHandler:
                     gtk.STOCK_MISSING_IMAGE, gtk.ICON_SIZE_BUTTON).get_pixbuf()
         return self.raw_pixbufs[page]
 
-    def get_pixbufs(self):
+    def get_pixbufs(self, single=False):
 
         """
         Returns the pixbuf for the current image from cache.
-        Returns two pixbufs if needed in double_page mode.
+        Returns two pixbufs in double-page mode unless <single> is True.
         Pixbufs not found in cache are fetched from disk first. 
         """
 
-        if not self.window.displayed_double():
+        if not self.window.displayed_double() or single:
             return self._get_pixbuf(self.current_image)
         return (self._get_pixbuf(self.current_image),
                 self._get_pixbuf(self.current_image + 1))
@@ -89,14 +89,7 @@ class FileHandler:
         # Cache new pixbufs if not already cached.
         # --------------------------------------------------------------------
         for wanted in wanted_pixbufs:
-            if not self.raw_pixbufs.has_key(wanted):
-                try:
-                    self.raw_pixbufs[wanted] = gtk.gdk.pixbuf_new_from_file(
-                        self.image_files[wanted])
-                except:
-                    self.raw_pixbufs[wanted] = gtk.image_new_from_stock(
-                        gtk.STOCK_MISSING_IMAGE,
-                        gtk.ICON_SIZE_BUTTON).get_pixbuf()
+            self._get_pixbuf(wanted)
 
     def is_last_page(self):
         
@@ -184,7 +177,7 @@ class FileHandler:
 
         old_image = self.current_image
         if not 0 <= page_num < self.number_of_pages:
-            return
+            return False
         self.current_image = page_num
         return old_image != self.current_image
 

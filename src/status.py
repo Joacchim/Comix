@@ -29,9 +29,9 @@ class Statusbar(gtk.Statusbar):
         """ Updates the page number and (re)displays the reading info. """
 
         if double_page:
-            self.page_info = '[%d,%d / %d]' % (page, page + 1, total)
+            self.page_info = '%d,%d / %d' % (page, page + 1, total)
         else:
-            self.page_info = '[%d / %d]' % (page, total)
+            self.page_info = '%d / %d' % (page, total)
         self._push_reading_info()
 
     def set_resolution(self, left_dimensions, right_dimensions=None):

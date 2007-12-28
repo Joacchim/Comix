@@ -11,8 +11,10 @@ class EventHandler:
     
     def __init__(self, window):
         self.window = window
-        self.last_pointer_pos_x = 0
-        self.last_pointer_pos_y = 0
+        self.last_pointer_pos_x = None
+        self.last_pointer_pos_y = None
+        self.pressed_pointer_pos_x = None
+        self.pressed_pointer_pos_y = None
 
     def resize_event(self, widget, event):
             
@@ -185,6 +187,8 @@ class EventHandler:
         """ Handles mouse click events on the main window. """
 
         if event.button == 1:
+            self.pressed_pointer_pos_x = event.x_root
+            self.pressed_pointer_pos_y = event.y_root
             self.last_pointer_pos_x = event.x_root
             self.last_pointer_pos_y = event.y_root
         elif event.button == 2:
@@ -202,9 +206,12 @@ class EventHandler:
         """ Handles mouse button release events on the main window. """
 
         cursor.set_cursor_type(cursor.NORMAL)
+        
+        if (event.button == 1 and
+          event.x_root == self.pressed_pointer_pos_x and
+          event.y_root == self.pressed_pointer_pos_y):
+            self.window.next_page()
 
-        #if self.mouse_moved_while_drag == 0 and event.button == 1:
-        #    self.next_page(None)
         #if event.button == 2 and self.z_pressed:
         #    self.actiongroup.get_action('Lens').set_active(False)
         #if self.scroll_wheel_event_id == None:
