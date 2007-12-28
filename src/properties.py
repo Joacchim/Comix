@@ -70,7 +70,7 @@ class PropertiesDialog(gtk.Dialog):
             infobox.pack_start(label, False, False)
             infobox.pack_start(gtk.VBox()) # Just to add space (any better way?)
             label = gtk.Label(_('%d pages') %
-                len(self.mainwindow.file_handler.image_files))
+                self.mainwindow.file_handler.number_of_pages)
             label.set_alignment(0, 0.5)
             infobox.pack_start(label, False, False)
             label = gtk.Label(_('%d comments') %
@@ -232,8 +232,6 @@ class PropertiesDialog(gtk.Dialog):
         expander = gtk.Expander()
         page.pack_start(expander, False, False)
         
-        
-
         notebook.append_page(page, gtk.Label(_('Image')))
   
         self.vbox.show_all()

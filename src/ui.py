@@ -109,15 +109,15 @@ class MainUI(gtk.UIManager):
             ('menu_help', None, _('_Help')),
             ('transform', 'comix-transform', _('_Transform')),
             ('rotate_90', 'comix-rotate-90', _('_Rotate 90 degrees CW'), 'r',
-                None, window.rotate90),
+                None, window.rotate_90),
             ('rotate_180','comix-rotate-180', _('Rotate 180 de_grees'), None,
-                None, window.rotate180),
+                None, window.rotate_180),
             ('rotate_270', 'comix-rotate-270', _('Rotat_e 90 degrees CCW'),
-                '<Shift>r', None, window.rotate270),
+                '<Shift>r', None, window.rotate_270),
             ('flip_horiz', 'comix-flip-horizontal', _('Fli_p horizontally'),
-                None, None, bogus),
+                None, None, window.flip_horizontally),
             ('flip_vert', 'comix-flip-vertical', _('Flip _vertically'), None,
-                None, bogus),
+                None, window.flip_vertically),
             ('expander', None, None, None, None, None)])
 
         actiongroup.add_toggle_actions([

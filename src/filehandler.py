@@ -27,6 +27,7 @@ class FileHandler:
         self.tmp_dir = tempfile.mkdtemp(prefix="comix.", suffix="/")
         self.image_files = []
         self.current_image = None
+        self.number_of_pages = 0
         self.comment_files = []
         self.current_comment = None
         self.raw_pixbufs = {}
@@ -74,7 +75,7 @@ class FileHandler:
         if prefs['cache']:
             offset *= 2
         wanted_pixbufs = range(self.current_image, 
-            min(self.current_image + offset, len(self.image_files)))
+            min(self.current_image + offset, self.number_of_pages))
         
         # --------------------------------------------------------------------
         # Remove old pixbufs.
@@ -101,7 +102,7 @@ class FileHandler:
         
         """ Returns True if at the last page. """
 
-        return self.current_image == len(self.image_files) - 1
+        return self.current_image == self.number_of_pages - 1
 
     def next_page(self):
 
@@ -114,7 +115,7 @@ class FileHandler:
             return False
         old_image = self.current_image
         step = self.window.is_double_page and 2 or 1
-        if self.current_image >= len(self.image_files) - step:
+        if self.current_image >= self.number_of_pages - step:
             if prefs['go to next archive']:
                 #open_file(NEXT_ARCHIVE)
                 print 'open next archive'
@@ -122,7 +123,7 @@ class FileHandler:
             else:
                 return False
         self.current_image += step
-        self.current_image = min(len(self.image_files) - 1, self.current_image)
+        self.current_image = min(self.number_of_pages - 1, self.current_image)
         return old_image != self.current_image
 
     def previous_page(self):
@@ -171,7 +172,7 @@ class FileHandler:
             return False
         old_image = self.current_image
         offset = self.window.is_double_page and 2 or 1
-        self.current_image = max(0, len(self.image_files) - offset)
+        self.current_image = max(0, self.number_of_pages - offset)
         return old_image != self.current_image
 
     def set_page(self, page_num):
@@ -182,7 +183,7 @@ class FileHandler:
         """
 
         old_image = self.current_image
-        if not 0 <= page_num < len(self.image_files):
+        if not 0 <= page_num < self.number_of_pages:
             return
         self.current_image = page_num
         return old_image != self.current_image
@@ -206,17 +207,17 @@ class FileHandler:
         # --------------------------------------------------------------------
         if not os.path.isfile(path):
             if os.path.isdir(path):
-                self.window.statusbar.push(0, _('"%s" is not a file.') % 
+                self.window.statusbar.set_message(_('"%s" is not a file.') % 
                     encoding.to_unicode(os.path.basename(path)))
             else:
-                self.window.statusbar.push(0, _('"%s" does not exist.') % 
+                self.window.statusbar.set_message(_('"%s" does not exist.') % 
                     encoding.to_unicode(os.path.basename(path)))
             return False
 
         self.archive_type = archive.archive_mime_type(path)
             
         if not self.archive_type and not is_image_file(path):
-            self.window.statusbar.push(0,
+            self.window.statusbar.set_message(
                 _('Filetype of "%s" not recognized.') %
                 encoding.to_unicode(os.path.basename(path)))
             return False
@@ -242,11 +243,12 @@ class FileHandler:
                       prefs['comment extensions']):
                         self.comment_files.append(os.path.join(dirname, f))
             self.image_files.sort() # We don't sort archives after locale
+            self.number_of_pages = len(self.image_files)
             if start_image < 0:
                 if self.window.is_double_page:
-                    self.current_image = len(self.image_files) - 2
+                    self.current_image = self.number_of_pages - 2
                 else:
-                    self.current_image = len(self.image_files) - 1
+                    self.current_image = self.number_of_pages - 1
             else:
                 self.current_image = start_image
             self.current_image = max(0, self.current_image)
@@ -267,22 +269,23 @@ class FileHandler:
                   prefs['comment extensions']):
                     self.comment_files.append(fpath)
             self.image_files.sort(locale.strcoll)
+            self.number_of_pages = len(self.image_files)
             self.current_image = self.image_files.index(path)
 
         # --------------------------------------------------------------------
         # If there are no viewable image files found.
         # --------------------------------------------------------------------
         if not self.image_files:
-            self.window.statusbar.push(0, _('No images in "%s"') % 
+            self.window.statusbar.set_message(_('No images in "%s"') % 
                 encoding.to_unicode(os.path.basename(path)))
             self.file_loaded = False
         else:
             self.file_loaded = True
+            self.window.statusbar.set_filename(encoding.to_unicode(
+                os.path.basename(self.archive_path)))
 
-        if not self.window.keep_rotation:
-            self.window.rotation = 0
         self.window.thumbnailsidebar.block = True
-        self.window.draw_image()
+        self.window.new_page()
         cursor.set_cursor_type(cursor.NORMAL)
         while gtk.events_pending():
             gtk.main_iteration(False)

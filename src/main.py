@@ -8,6 +8,7 @@ import shutil
 
 import gtk
 
+import encoding
 import event
 import filehandler
 import icons
@@ -15,6 +16,7 @@ import pilpixbuf
 from preferences import prefs
 import ui
 import scale
+import status
 import thumbbar
 
 class MainWindow(gtk.Window):
@@ -22,7 +24,7 @@ class MainWindow(gtk.Window):
     def __init__(self): 
         gtk.Window.__init__(self, gtk.WINDOW_TOPLEVEL)
         self.set_title('Comix')
-        self.realize() # XXX
+        #self.realize() # XXX
 
         self.is_fullscreen = False
         self.is_double_page = False 
@@ -31,12 +33,14 @@ class MainWindow(gtk.Window):
         self.zoom_mode = 'fit'          # 'fit', 'width', 'height' or 'manual'
         self.manual_zoom = 100          # In percent of original image size
         self.rotation = 0               # In degrees, clockwise
+        self.horizontal_flip = False
+        self.vertical_flip = False
         self.left_image = gtk.Image()
         self.right_image = gtk.Image()
         self.image_box = gtk.HBox(False, 2)
         self.table = gtk.Table(2, 2, False)
         self.comment_label = gtk.Label()
-        self.statusbar = gtk.Statusbar()
+        self.statusbar = status.Statusbar()
         self.main_layout = gtk.Layout()
         self.thumbnailsidebar = thumbbar.ThumbnailSidebar(self)
         self.file_handler = filehandler.FileHandler(self)
@@ -155,6 +159,12 @@ class MainWindow(gtk.Window):
         self.show()
 
     def display_active_widgets(self):
+        
+        """ 
+        Hides and/or shows main window widgets depending on the current
+        state.
+        """
+
         if not prefs['hide all'] and not (self.is_fullscreen and 
           prefs['hide all in fullscreen']):
             if prefs['show toolbar']:
@@ -197,6 +207,12 @@ class MainWindow(gtk.Window):
             self.hscroll.hide_all()
 
     def get_layout_size(self):
+        
+        """
+        Returns a 2-tuple with the width and height of the visible part
+        of the main layout area.
+        """
+
         width, height = self.get_size()
         if not prefs['hide all'] and not (self.is_fullscreen and 
           prefs['hide all in fullscreen']):
@@ -221,14 +237,20 @@ class MainWindow(gtk.Window):
         return width, height
 
     def draw_image(self, at_bottom=False):
+        
+        """ Draws the current page(s) and updates titlebar and statusbar. """
+
         self.display_active_widgets()
+
         if not self.file_handler.file_loaded:
             self.left_image.clear()
             self.right_image.clear()
             self.thumbnailsidebar.clear()
             self.set_title('Comix')
             return
+
         print 'draw'
+
         width, height = self.get_layout_size()
         scale_width = self.zoom_mode == 'height' and -1 or width
         scale_height = self.zoom_mode == 'width' and -1 or height
@@ -239,6 +261,10 @@ class MainWindow(gtk.Window):
                 right_pixbuf, left_pixbuf = self.file_handler.get_pixbufs()
             else:
                 left_pixbuf, right_pixbuf = self.file_handler.get_pixbufs()
+            left_unscaled_x = left_pixbuf.get_width()
+            left_unscaled_y = left_pixbuf.get_height()
+            right_unscaled_x = right_pixbuf.get_width()
+            right_unscaled_y = right_pixbuf.get_height()
 
             if self.zoom_mode == 'manual':
                 if self.rotation in [90, 270]:
@@ -255,12 +281,17 @@ class MainWindow(gtk.Window):
                     scale_height = int(self.manual_zoom * max(
                         left_pixbuf.get_height(),
                         right_pixbuf.get_height()) // 100)
-                
                 scale_up = True
 
             left_pixbuf, right_pixbuf = scale.fit_2_in_rectangle(
                 left_pixbuf, right_pixbuf, scale_width, scale_height,
                 scale_up=scale_up, rotation=self.rotation)
+            if self.horizontal_flip:
+                left_pixbuf = left_pixbuf.flip(horizontal=True)
+                right_pixbuf = right_pixbuf.flip(horizontal=True)
+            if self.vertical_flip:
+                left_pixbuf = left_pixbuf.flip(horizontal=False)
+                right_pixbuf = right_pixbuf.flip(horizontal=False)
             self.left_image.set_from_pixbuf(left_pixbuf)
             self.right_image.set_from_pixbuf(right_pixbuf)
             x_padding = (width - left_pixbuf.get_width() -
@@ -268,11 +299,22 @@ class MainWindow(gtk.Window):
             y_padding = (height - max(left_pixbuf.get_height(),
                 right_pixbuf.get_height())) / 2
             self.right_image.show()
+
+            self.statusbar.set_page_number(self.file_handler.current_image + 1,
+                                           self.file_handler.number_of_pages,
+                                           double_page=True)
+            self.statusbar.set_resolution((left_unscaled_x, left_unscaled_y,
+                100.0 * left_pixbuf.get_width() / left_unscaled_x), 
+                (right_unscaled_x, right_unscaled_y,
+                100.0 * right_pixbuf.get_width() / right_unscaled_x))
         else:
             pixbuf = self.file_handler.get_pixbufs()
+            unscaled_x = pixbuf.get_width()
+            unscaled_y = pixbuf.get_height()
 
             if self.zoom_mode == 'manual':
-                scale_width = int(self.manual_zoom * pixbuf.get_width() // 100)
+                scale_width = int(self.manual_zoom * pixbuf.get_width()
+                    // 100)
                 scale_height = int(self.manual_zoom * pixbuf.get_height()
                     // 100)
                 if self.rotation in [90, 270]:
@@ -281,6 +323,10 @@ class MainWindow(gtk.Window):
 
             pixbuf = scale.fit_in_rectangle(pixbuf, scale_width, scale_height,
                 scale_up=scale_up, rotation=self.rotation)
+            if self.horizontal_flip:
+                pixbuf = pixbuf.flip(horizontal=True)
+            if self.vertical_flip:
+                pixbuf = pixbuf.flip(horizontal=False)
 
             #im = pilpixbuf.pixbuf_to_pil(pixbuf)
             #pixbuf = pilpixbuf.pil_to_pixbuf(im)
@@ -290,67 +336,71 @@ class MainWindow(gtk.Window):
             self.right_image.hide()
             x_padding = (width - pixbuf.get_width()) / 2
             y_padding = (height - pixbuf.get_height()) / 2
+
+            self.statusbar.set_page_number(self.file_handler.current_image + 1,
+                                           self.file_handler.number_of_pages)
+            self.statusbar.set_resolution((unscaled_x, unscaled_y,
+                100.0 * pixbuf.get_width() / unscaled_x))
         
         self.main_layout.move(self.image_box, max(0, x_padding),
             max(0, y_padding))
         self.main_layout.set_size(*self.image_box.size_request())
         if at_bottom:
-            self.vadjust.set_value(self.vadjust.upper - height)
-            if self.is_manga_mode:
-                self.hadjust.set_value(0)
-            else:
-                self.hadjust.set_value(self.hadjust.upper - width)
+            self.scroll_to_fixed(horiz='endsecond', vert='bottom')
         else:
-            self.vadjust.set_value(0)
-            if self.is_manga_mode:
-                self.hadjust.set_value(self.hadjust.upper - width)
-            else:
-                self.hadjust.set_value(0)
+            self.scroll_to_fixed(horiz='startfirst', vert='top')
         
-        self.set_title(os.path.basename(self.file_handler.archive_path) + 
-            '  [%d / %d]  -  Comix' % (self.file_handler.current_image + 1,
-            len(self.file_handler.image_files)))
-
+        self._set_title()
         while gtk.events_pending():
             gtk.main_iteration(False)
         self.file_handler.do_cacheing()
 
-    def _new_page(self, at_bottom=False):
+    def new_page(self, at_bottom=False):
         if not self.keep_rotation:
-                self.rotation = 0
+            self.rotation = 0
+            self.horizontal_flip = False
+            self.vertical_flip = False
         self.thumbnailsidebar.update_select()
         self.draw_image(at_bottom)
 
     def next_page(self, *args):
         if self.file_handler.next_page():
-            self._new_page()
+            self.new_page()
 
     def previous_page(self, *args):
         if self.file_handler.previous_page():
-            self._new_page(at_bottom=True)
+            self.new_page(at_bottom=True)
 
     def first_page(self, *args):
         if self.file_handler.first_page():
-            self._new_page()
+            self.new_page()
 
     def last_page(self, *args):
         if self.file_handler.last_page():
-            self._new_page()
+            self.new_page()
 
     def set_page(self, num):
         if self.file_handler.set_page(num):
-            self._new_page()
+            self.new_page()
 
-    def rotate90(self, *args):
+    def rotate_90(self, *args):
         self.rotation = (self.rotation + 90) % 360
         self.draw_image()
 
-    def rotate180(self, *args):
+    def rotate_180(self, *args):
         self.rotation = (self.rotation + 180) % 360
         self.draw_image()
 
-    def rotate270(self, *args):
+    def rotate_270(self, *args):
         self.rotation = (self.rotation + 270) % 360
+        self.draw_image()
+
+    def flip_horizontally(self, *args):
+        self.horizontal_flip = not self.horizontal_flip
+        self.draw_image()
+
+    def flip_vertically(self, *args):
+        self.vertical_flip = not self.vertical_flip
         self.draw_image()
 
     def change_double_page(self, toggleaction):
@@ -461,7 +511,7 @@ class MainWindow(gtk.Window):
 
         horiz: 'left'        = left end of display
                'middle'      = middle of the display
-               'right'       = rigth end of display
+               'right'       = right end of display
                'startfirst'  = start of first page
                'endfirst'    = end of first page
                'startsecond' = start of second page
@@ -471,9 +521,8 @@ class MainWindow(gtk.Window):
                'middle'      = middle of display
                'bottom'      = bottom of display
 
-        Scrolling to the second page is, of course, only applicable in double
-        page mode. What is considered "start" and "end" depends on whether we
-        are using manga mode or not.
+        What is considered "start" and "end" depends on whether we are
+        using manga mode or not.
         """
 
         layout_width, layout_height = self.get_layout_size()
@@ -486,6 +535,10 @@ class MainWindow(gtk.Window):
             self.vadjust.set_value(vadjust_upper / 2)
         elif vert == 'bottom':
             self.vadjust.set_value(vadjust_upper)
+
+        if not self.displayed_double():
+            horiz = {'startsecond': 'endfirst',
+                     'endsecond':   'endfirst'}.get(horiz, horiz)
         
         # Manga transformations.
         if self.is_manga_mode and self.displayed_double():
@@ -520,13 +573,30 @@ class MainWindow(gtk.Window):
         elif horiz == 'startsecond':
             self.hadjust.set_value(self.left_image.size_request()[0] + 2)
         elif horiz == 'endsecond':
-            self.hadjust.set_value(vadjust_upper)
+            self.hadjust.set_value(hadjust_upper)
 
     def displayed_double(self):
         
         """ Returns True if two pages are currently displayed. """
 
         return self.is_double_page and not self.file_handler.is_last_page()
+
+    def _set_title(self):
+        
+        """ Sets the title acording to current state. """
+
+        if self.displayed_double():
+            self.set_title(encoding.to_unicode(os.path.basename(
+                self.file_handler.archive_path)) + 
+                '  [%d,%d / %d]  -  Comix' %
+                (self.file_handler.current_image + 1,
+                self.file_handler.current_image + 2,
+                self.file_handler.number_of_pages))
+        else:
+            self.set_title(encoding.to_unicode(os.path.basename(
+                self.file_handler.archive_path)) + 
+                '  [%d / %d]  -  Comix' % (self.file_handler.current_image + 1,
+                self.file_handler.number_of_pages))
 
     def terminate_program(self, *args):
         
