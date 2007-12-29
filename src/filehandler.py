@@ -4,6 +4,7 @@
 # ============================================================================
 
 import os
+import sys
 import shutil
 import locale
 import tempfile
@@ -66,27 +67,30 @@ class FileHandler:
         """
         Makes sure that the correct pixbufs are stored in cache. These
         are the current image(s) and if cacheing is enabled also the one or two
-        pixbufs after them. All other pixbufs are deleted and garbage collected
-        in order to save memory.
+        pixbufs before and after them. All other pixbufs are deleted and
+        garbage collected in order to save memory.
         """
-
-        offset = self._window.is_double_page and 2 or 1
-        if prefs['cache']:
-            offset *= 2
-        wanted_pixbufs = range(self._current_image_index, 
-            min(self._current_image_index + offset, self.number_of_pages()))
         
-        # --------------------------------------------------------------------
+        # Get list of wanted pixbufs.
+        viewed = self._window.is_double_page and 2 or 1
+        if prefs['cache']:
+            wanted_pixbufs = range(max(0, self._current_image_index - viewed), 
+                min(self._current_image_index + viewed * 2,
+                    self.number_of_pages()))
+        else:
+            wanted_pixbufs = range(self._current_image_index, 
+                min(self._current_image_index + viewed, self.number_of_pages()))
+        
         # Remove old pixbufs.
-        # --------------------------------------------------------------------
         for page in self._raw_pixbufs.keys()[:]:
             if not page in wanted_pixbufs:
                 del self._raw_pixbufs[page]
-        gc.collect() # FIXME: Add generation for Python >= 2.5
-        
-        # --------------------------------------------------------------------
+        if sys.version_info[:3] >= (2, 5, 0):
+            gc.collect(0)  # FIXME: Try this!
+        else:
+            gc.collect()
+
         # Cache new pixbufs if not already cached.
-        # --------------------------------------------------------------------
         for wanted in wanted_pixbufs:
             self._get_pixbuf(wanted)
 
@@ -152,13 +156,13 @@ class FileHandler:
 
         if not self.file_loaded:
             return False
-        old_image = self.current_page()
-        step = self._window.is_double_page and 2 or 1
-        if self.current_page() - step <= 0:
+        if self.current_page() == 1:
             if prefs['go to next archive']:
                 #open_file(PREVIOUS_ARCHIVE)
                 print 'open previous archive'
             return False
+        old_image = self.current_page()
+        step = self._window.is_double_page and 2 or 1
         self._current_image_index -= step
         self._current_image_index = max(0, self._current_image_index)
         return old_image != self.current_page()

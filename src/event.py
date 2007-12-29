@@ -197,8 +197,8 @@ class EventHandler:
             #    self.scroll_wheel_event_id = None
             #self.zooming_lens(event.x, event.y, event.time)
         elif event.button == 3:
-            self._window.ui_manager.get_widget('/Pop').popup(
-                None, None, None, event.button, event.time)
+            self._window.popup.popup(None, None, None, event.button,
+                event.time)
 
     def mouse_release_event(self, widget, event):
         

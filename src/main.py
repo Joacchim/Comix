@@ -59,6 +59,7 @@ class MainWindow(gtk.Window):
         
         self.menubar = self._ui_manager.get_widget('/Menu')
         self.toolbar = self._ui_manager.get_widget('/Tool')
+        self.popup = self._ui_manager.get_widget('/Popup')
         self.actiongroup = self._ui_manager.get_action_groups()[0]
         
         # ----------------------------------------------------------------

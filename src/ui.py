@@ -265,7 +265,7 @@ class MainUI(gtk.UIManager):
                 </menu>
             </menubar>
 
-            <popup name="Pop">
+            <popup name="Popup">
                 <menuitem action="next_page" />
                 <menuitem action="previous_page" />
                 <separator />
