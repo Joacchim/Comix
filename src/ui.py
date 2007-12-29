@@ -16,7 +16,6 @@ class MainUI(gtk.UIManager):
 
     def __init__(self, window):
         gtk.UIManager.__init__(self)
-        self.window = window
 
         # ----------------------------------------------------------------
         # Create actions for the menus.

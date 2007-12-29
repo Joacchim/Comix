@@ -24,7 +24,6 @@ class EventHandler:
             prefs['window x'], prefs['window y'] = self._window.get_position()
         if (event.width != self._window.width or
             event.height != self._window.height):
-            print 'resize'
             if not self._window.is_fullscreen:
                 prefs['window width'] = event.width
                 prefs['window height'] = event.height

@@ -18,8 +18,8 @@ class Statusbar(gtk.Statusbar):
     def set_message(self, message):
         
         """ 
-        Sets a message (such as an error message) on the statusbar, replacing
-        what was there earlier.
+        Sets a specific message (such as an error message) on the statusbar,
+        replacing whatever was there earlier.
         """
 
         self.pop(0)

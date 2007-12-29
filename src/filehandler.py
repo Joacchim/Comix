@@ -137,9 +137,7 @@ class FileHandler:
             if prefs['go to next archive']:
                 #open_file(NEXT_ARCHIVE)
                 print 'open next archive'
-                return True
-            else:
-                return False
+            return False
         self._current_image_index += step
         self._current_image_index = min(self.number_of_pages() - 1,
             self._current_image_index)
@@ -160,9 +158,7 @@ class FileHandler:
             if prefs['go to next archive']:
                 #open_file(PREVIOUS_ARCHIVE)
                 print 'open previous archive'
-                return True
-            else:
-                return False
+            return False
         self._current_image_index -= step
         self._current_image_index = max(0, self._current_image_index)
         return old_image != self.current_page()
@@ -298,12 +294,12 @@ class FileHandler:
         else:
             self.file_loaded = True
 
-        self._window.thumbnailsidebar.block = True
+        self._window.thumbnailsidebar.block()
         self._window.new_page()
         cursor.set_cursor_type(cursor.NORMAL)
         while gtk.events_pending():
             gtk.main_iteration(False)
-        self._window.thumbnailsidebar.block = False
+        self._window.thumbnailsidebar.unblock()
         self._window.thumbnailsidebar.load_thumbnails()
         self._comment_files.sort()
 

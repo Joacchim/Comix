@@ -14,9 +14,9 @@ import archive
 import encoding
 import image
 
-dialog = None
+_dialog = None
 
-class PropertiesDialog(gtk.Dialog):
+class _PropertiesDialog(gtk.Dialog):
 
     def __init__(self, window):
         
@@ -229,14 +229,14 @@ class PropertiesDialog(gtk.Dialog):
         self.vbox.show_all()
 
 def dialog_open(action, window):
-    global dialog
-    if dialog == None:
-        dialog = PropertiesDialog(window)
-        dialog.show()
+    global _dialog
+    if _dialog == None:
+        _dialog = _PropertiesDialog(window)
+        _dialog.show()
 
 def dialog_close(*args):
-    global dialog
-    if dialog != None:
-        dialog.destroy()
-        dialog = None 
+    global _dialog
+    if _dialog != None:
+        _dialog.destroy()
+        _dialog = None 
 

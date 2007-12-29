@@ -15,11 +15,11 @@ import Image
 import constants
 import filehandler
 
-thumbdir = os.path.join(os.getenv('HOME'), '.thumbnails/normal')
+_thumbdir = os.path.join(os.getenv('HOME'), '.thumbnails/normal')
 
 def _uri_to_thumbpath(uri):
     md5hash = md5.new(uri).hexdigest()
-    thumbpath = os.path.join(thumbdir, md5hash + '.png')
+    thumbpath = os.path.join(_thumbdir, md5hash + '.png')
     return thumbpath
 
 def _get_pixbuf128(path):
@@ -57,8 +57,8 @@ def create_thumbnail(path):
         'tEXt::Software':             'Comix ' + str(constants.version)
     }
     try:
-        if not os.path.isdir(thumbdir):
-            os.makedirs(thumbdir, 0700)
+        if not os.path.isdir(_thumbdir):
+            os.makedirs(_thumbdir, 0700)
         pixbuf.save(thumbpath + 'comixtemp', 'png', tEXt_data)
         os.rename(thumbpath + 'comixtemp', thumbpath)
         os.chmod(thumbpath, 0600)
