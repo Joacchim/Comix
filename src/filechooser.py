@@ -11,18 +11,18 @@ import image
 from preferences import prefs
 import thumbnail
 
-dialog = None
+_dialog = None
 
 # We roll our own FileChooserDialog because the one in GTK is buggy
 # with the preview widget.
-class ComicFileChooserDialog(gtk.Dialog):
+class _ComicFileChooserDialog(gtk.Dialog):
     
     def __init__(self, window):
         gtk.Dialog.__init__(self, title=_('Open'),
             buttons=(gtk.STOCK_CANCEL, gtk.RESPONSE_CANCEL,
             gtk.STOCK_OPEN, gtk.RESPONSE_OK))
         
-        self.mainwindow = window
+        self.window_ = window
         self.connect('response', self.dialog_response)
         self.connect('delete_event', dialog_close)
         self.set_default_response(gtk.RESPONSE_OK)
@@ -83,7 +83,7 @@ class ComicFileChooserDialog(gtk.Dialog):
         ffilter.add_mime_type('application/x-zip')
         ffilter.add_mime_type('application/zip')
         ffilter.add_mime_type('application/x-cbz')
-        ffilter.set_name(_('ZIP archives'))
+        ffilter.set_name(_('Zip archives'))
         self.filechooser.add_filter(ffilter)
         ffilter = gtk.FileFilter()
         ffilter.add_mime_type('application/x-rar')
@@ -138,7 +138,7 @@ class ComicFileChooserDialog(gtk.Dialog):
             dialog_close()
             while gtk.events_pending():
                 gtk.main_iteration(False)
-            self.mainwindow.file_handler.open_file(path)
+            self.window_.file_handler.open_file(path)
             if prefs['open defaults to last browsed']:
                 prefs['path of last browsed'] = os.path.dirname(path)
         elif response == gtk.RESPONSE_CANCEL:
@@ -146,17 +146,18 @@ class ComicFileChooserDialog(gtk.Dialog):
 
 
 def dialog_open(action, window):
-    global dialog
-    if dialog == None:
-        dialog = ComicFileChooserDialog(window)
+    global _dialog
+    if _dialog == None:
+        _dialog = _ComicFileChooserDialog(window)
         if prefs['open defaults to last browsed']:
-            dialog.filechooser.set_current_folder(prefs['path of last browsed'])
-        dialog.run()
+            _dialog.filechooser.set_current_folder(
+                prefs['path of last browsed'])
+        _dialog.run()
 
 def dialog_close(*args):
-    global dialog
-    if dialog != None:
-        dialog.destroy()
-        dialog = None
+    global _dialog
+    if _dialog != None:
+        _dialog.destroy()
+        _dialog = None
 
 

@@ -2,5 +2,5 @@
 # constants.py - Miscellaneous constants for Comix.
 # ============================================================================
 
-version = '4.0dev'
+VERSION = '4.0dev'
 

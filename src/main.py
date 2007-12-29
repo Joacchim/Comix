@@ -301,8 +301,8 @@ class MainWindow(gtk.Window):
                 right_pixbuf.get_height())) / 2
             self.right_image.show()
 
-            self.statusbar.set_page_number(self.file_handler.current_image + 1,
-                self.file_handler.number_of_pages, double_page=True)
+            self.statusbar.set_page_number(self.file_handler.current_page(),
+                self.file_handler.number_of_pages(), double_page=True)
             self.statusbar.set_resolution((left_unscaled_x, left_unscaled_y,
                 100.0 * left_pixbuf.get_width() / left_unscaled_x), 
                 (right_unscaled_x, right_unscaled_y,
@@ -337,8 +337,8 @@ class MainWindow(gtk.Window):
             x_padding = (width - pixbuf.get_width()) / 2
             y_padding = (height - pixbuf.get_height()) / 2
 
-            self.statusbar.set_page_number(self.file_handler.current_image + 1,
-                self.file_handler.number_of_pages)
+            self.statusbar.set_page_number(self.file_handler.current_page(),
+                self.file_handler.number_of_pages())
             self.statusbar.set_resolution((unscaled_x, unscaled_y,
                 100.0 * pixbuf.get_width() / unscaled_x))
         
@@ -350,6 +350,9 @@ class MainWindow(gtk.Window):
         else:
             self.scroll_to_fixed(horiz='startfirst', vert='top')
         
+        self.statusbar.set_filename(
+            self.file_handler.get_pretty_current_filename())
+        self.statusbar.update()
         self._set_title()
         while gtk.events_pending():
             gtk.main_iteration(False)
@@ -586,17 +589,18 @@ class MainWindow(gtk.Window):
         """ Sets the title acording to current state. """
 
         if self.displayed_double():
-            self.set_title(encoding.to_unicode(os.path.basename(
-                self.file_handler.archive_path)) + 
-                '  [%d,%d / %d]  -  Comix' %
-                (self.file_handler.current_image + 1,
-                self.file_handler.current_image + 2,
-                self.file_handler.number_of_pages))
+            self.set_title(encoding.to_unicode( 
+                '[%d,%d / %d]  %s  -  Comix' %
+                (self.file_handler.current_page(),
+                self.file_handler.current_page() + 1,
+                self.file_handler.number_of_pages(),
+                self.file_handler.get_pretty_current_filename())))
         else:
-            self.set_title(encoding.to_unicode(os.path.basename(
-                self.file_handler.archive_path)) + 
-                '  [%d / %d]  -  Comix' % (self.file_handler.current_image + 1,
-                self.file_handler.number_of_pages))
+            self.set_title(encoding.to_unicode( 
+                '[%d / %d]  %s  -  Comix' %
+                (self.file_handler.current_page(),
+                self.file_handler.number_of_pages(),
+                self.file_handler.get_pretty_current_filename())))
 
     def terminate_program(self, *args):
         
@@ -604,6 +608,6 @@ class MainWindow(gtk.Window):
 
         print 'Bye!'
         gtk.main_quit()
-        shutil.rmtree(self.file_handler.tmp_dir)
+        self.file_handler.cleanup()
         sys.exit(0)
 

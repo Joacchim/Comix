@@ -35,14 +35,14 @@ class PropertiesDialog(gtk.Dialog):
             # ------------------------------------------------------------
             # Archive tab
             # ------------------------------------------------------------
-            stats = os.stat(window.file_handler.archive_path)
+            stats = os.stat(window.file_handler.get_path_to_base())
             page = gtk.VBox(False, 12)
             page.set_border_width(12)
             topbox = gtk.HBox(False, 12)
             page.pack_start(topbox, False)
             # Add thumbnail
             pixbuf = gtk.gdk.pixbuf_new_from_file_at_size(
-                window.file_handler.image_files[0], 200, 128)
+                window.file_handler.get_path_to_page(1), 200, 128)
             pixbuf = image.add_border(pixbuf, 1)
             thumb = gtk.Image()
             thumb.set_from_pixbuf(pixbuf)
@@ -60,8 +60,8 @@ class PropertiesDialog(gtk.Dialog):
             infobox.set_border_width(10)
             insidebox.add(infobox)
             # Add bold archive name
-            label = gtk.Label(encoding.to_unicode(os.path.basename(
-                window.file_handler.archive_path)))
+            label = gtk.Label(encoding.to_unicode(
+                window.file_handler.get_pretty_current_filename()))
             label.set_alignment(0, 0.5)
             attrlist = pango.AttrList()
             attrlist.insert(pango.AttrWeight(pango.WEIGHT_BOLD, 0,
@@ -71,11 +71,11 @@ class PropertiesDialog(gtk.Dialog):
             infobox.pack_start(gtk.VBox()) # Just to add space (any better way?)
             # Add the rest of the main info to the coloured box
             label = gtk.Label(_('%d pages') %
-                window.file_handler.number_of_pages)
+                window.file_handler.number_of_pages())
             label.set_alignment(0, 0.5)
             infobox.pack_start(label, False, False)
             label = gtk.Label(_('%d comments') %
-                len(window.file_handler.comment_files))
+                window.file_handler.number_of_comments())
             label.set_alignment(0, 0.5)
             infobox.pack_start(label, False, False)
             label = gtk.Label(archive.get_name(
@@ -88,7 +88,7 @@ class PropertiesDialog(gtk.Dialog):
             # Other info below
             label = gtk.Label(_('Location') + ':   ' +
                 encoding.to_unicode(os.path.dirname(
-                window.file_handler.archive_path)))
+                window.file_handler.get_path_to_base())))
             attrlist = pango.AttrList()
             attrlist.insert(pango.AttrWeight(pango.WEIGHT_BOLD, 0,
                 len(_('Location')) + 1))
@@ -134,18 +134,16 @@ class PropertiesDialog(gtk.Dialog):
         # ----------------------------------------------------------------
         # Image tab
         # ----------------------------------------------------------------
-        stats = os.stat(window.file_handler.image_files[
-            window.file_handler.current_image])
+        stats = os.stat(window.file_handler.get_path_to_page())
         iminfo = gtk.gdk.pixbuf_get_file_info(
-            window.file_handler.image_files[window.file_handler.current_image])
+            window.file_handler.get_path_to_page())
         page = gtk.VBox(False, 12)
         page.set_border_width(12)
         topbox = gtk.HBox(False, 12)
         page.pack_start(topbox)
         # Add thumbnail
         pixbuf = gtk.gdk.pixbuf_new_from_file_at_size(
-            window.file_handler.image_files[
-            window.file_handler.current_image], 200, 128)
+            window.file_handler.get_path_to_page(), 200, 128)
         pixbuf = image.add_border(pixbuf, 1)
         thumb = gtk.Image()
         thumb.set_from_pixbuf(pixbuf)
@@ -163,9 +161,8 @@ class PropertiesDialog(gtk.Dialog):
         infobox.set_border_width(10)
         insidebox.add(infobox)
         # Add bold filename
-        label = gtk.Label(os.path.basename(encoding.to_unicode(
-            window.file_handler.image_files[
-            window.file_handler.current_image])))
+        label = gtk.Label(encoding.to_unicode(os.path.basename(
+            window.file_handler.get_path_to_page())))
         label.set_alignment(0, 0.5)
         attrlist = pango.AttrList()
         attrlist.insert(pango.AttrWeight(pango.WEIGHT_BOLD, 0,
@@ -186,8 +183,7 @@ class PropertiesDialog(gtk.Dialog):
         # Other info below the thumb + main info box
         label = gtk.Label(_('Location') + ':   ' +
             encoding.to_unicode(os.path.dirname(
-            window.file_handler.image_files[
-            window.file_handler.current_image])))
+            window.file_handler.get_path_to_page())))
         attrlist = pango.AttrList()
         attrlist.insert(pango.AttrWeight(pango.WEIGHT_BOLD, 0,
             len(_('Location')) + 1))

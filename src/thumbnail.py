@@ -38,7 +38,7 @@ def create_thumbnail(path):
     if not filehandler.is_image_file(path):
         return None
     pixbuf = _get_pixbuf128(path)
-    uri = 'file://' + pathname2url(path)
+    uri = 'file://' + pathname2url(os.path.normpath(path))
     thumbpath = _uri_to_thumbpath(uri)
     stat = os.stat(path)
     mtime = str(stat.st_mtime)
@@ -76,7 +76,7 @@ def get_thumbnail(path, create=True):
     is True we also save this new thumbnail in the thumbnail directory.
     """
 
-    uri = 'file://' + pathname2url(path)
+    uri = 'file://' + pathname2url(os.path.normpath(path))
     thumbpath = _uri_to_thumbpath(uri)
     if not os.path.exists(thumbpath):
         if create:

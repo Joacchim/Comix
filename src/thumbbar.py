@@ -79,7 +79,8 @@ class ThumbnailSidebar:
         t = time.time()
 
         self.loaded = True
-        for i, path in enumerate(self.window.file_handler.image_files):
+        for i in xrange(self.window.file_handler.number_of_pages()):
+            path = self.window.file_handler.get_path_to_page(i + 1)
             if self.window.file_handler.archive_type:
                 create = False
             else:
@@ -101,15 +102,15 @@ class ThumbnailSidebar:
 
             self.layout.set_size(0, self.height)
         self.update_select()
-
+        
         print time.time() - t
 
     def update_select(self):
         if not self.loaded:
             return
-        self.selection.select_path(self.window.file_handler.current_image)
+        self.selection.select_path(self.window.file_handler.current_page() - 1)
         rect = self.treeview.get_background_area(
-            self.window.file_handler.current_image, self.column)
+            self.window.file_handler.current_page() - 1, self.column)
         if (rect.y < self.vadjust.get_value() or rect.y + rect.height > 
           self.vadjust.get_value() + self.vadjust.page_size):
             value = rect.y + (rect.height // 2) - (self.vadjust.page_size // 2)
@@ -121,7 +122,7 @@ class ThumbnailSidebar:
         print 'select'
         try:
             selected = widget.get_selected_rows()[1][0][0]
-            self.window.set_page(selected)
+            self.window.set_page(selected + 1)
         except:
             pass
 

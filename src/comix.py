@@ -44,14 +44,13 @@ try:
     assert gtk.gtk_version >= (2, 8, 0)
     assert gtk.pygtk_version >= (2, 8, 0)
 except AssertionError:
-    print (
-    'You do not have the required versions of GTK+ and/or PyGTK installed.\n\n'
-    'Installed GTK+ version is ' + 
-    '.'.join([str(n) for n in gtk.gtk_version]) + '\n' +
-    'Required GTK+ version is 2.8.0 or higher\n\n'
-    'Installed PyGTK version is ' + 
-    '.'.join([str(n) for n in gtk.pygtk_version]) + '\n' +
-    'Required PyGTK version is 2.8.0 or higher')
+    print "You don't have the required versions of GTK+ and/or PyGTK installed."
+    print 'Installed GTK+ version is: %s' % (
+        '.'.join([str(n) for n in gtk.gtk_version]))
+    print 'Required GTK+ version is: 2.8.0 or higher\n'
+    print 'Installed PyGTK version is: %s' % ( 
+        '.'.join([str(n) for n in gtk.pygtk_version]))
+    print 'Required PyGTK version is: 2.8.0 or higher'
     sys.exit(1)
 except:
     print 'PyGTK version 2.8.0 or higher is required to run Comix.'
@@ -62,20 +61,18 @@ try:
     import Image
     assert Image.VERSION >= '1.1.4'
 except AssertionError:
-    print (
-    'You do not have the required version of the Python Imaging Library (PIL) '
-    'installed.\n\n' + 
-    'Installed Python Imaging Library version is ' + Image.VERSION + '\n' +
-    'Required Python Imaging Library version is 1.1.4 or higher')
+    print "You don't have the required version of the Python Imaging Library"
+    print '(PIL) installed.' 
+    print 'Installed PIL version is: %s' % Image.VERSION
+    print 'Required PIL version is: 1.1.4 or higher'
     sys.exit(1)
 except:
-    print 'Python Imaging Library 1.1.4 or higher is required to run Comix.'
+    print 'Python Imaging Library (PIL) 1.1.4 or higher is required to run.'
     print 'No version of the Python Imaging Library was found on your system.'
     sys.exit(1)
 
 
 if __name__ == '__main__':
-    
     # --------------------------------------------------------------------
     # Use gettext translations as found in the source dir, otherwise
     # based on the install path.
@@ -89,6 +86,8 @@ if __name__ == '__main__':
         gettext.install('comix', os.path.join(base_dir, '/share/locale'),
             unicode=True)
     
-    main.MainWindow()
+    window = main.MainWindow()
+    if len(sys.argv) >= 2:
+        window.file_handler.open_file(os.path.normpath(sys.argv[1]))
     gtk.main()
 

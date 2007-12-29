@@ -12,7 +12,7 @@ def to_unicode(string):
     of the convertions are successful "???" is returned. 
     """
 
-    if type(string) == unicode:
+    if isinstance(string, unicode):
         return string
     for encoding in (sys.getfilesystemencoding(), 'utf-8', 'latin-1'):
         try:

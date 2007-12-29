@@ -20,17 +20,17 @@ from preferences import prefs
 class FileHandler:
 
     def __init__(self, window):
-        self.window = window
         self.file_loaded = False
         self.archive_type = None
-        self.archive_path = None
-        self.tmp_dir = tempfile.mkdtemp(prefix="comix.", suffix="/")
-        self.image_files = []
-        self.current_image = None
-        self.number_of_pages = 0
-        self.comment_files = []
-        self.current_comment = None
-        self.raw_pixbufs = {}
+        
+        self._base_path = None
+        self._window = window
+        self._tmp_dir = tempfile.mkdtemp(prefix="comix.", suffix="/")
+        self._image_files = []
+        self._current_image_index = None
+        self._comment_files = []
+        self._current_comment_index = None
+        self._raw_pixbufs = {}
 
     def _get_pixbuf(self, page):
         
@@ -39,28 +39,27 @@ class FileHandler:
         Pixbufs not found in cache are fetched from disk first. 
         """
 
-        if not self.raw_pixbufs.has_key(page):
+        if not self._raw_pixbufs.has_key(page):
             try:
-                self.raw_pixbufs[page] = gtk.gdk.pixbuf_new_from_file(
-                    self.image_files[page])
+                self._raw_pixbufs[page] = gtk.gdk.pixbuf_new_from_file(
+                    self._image_files[page])
             except:
-                self.raw_pixbufs[page] = \
-                    gtk.image_new_from_stock(
+                self._raw_pixbufs[page] = gtk.image_new_from_stock(
                     gtk.STOCK_MISSING_IMAGE, gtk.ICON_SIZE_BUTTON).get_pixbuf()
-        return self.raw_pixbufs[page]
+        return self._raw_pixbufs[page]
 
     def get_pixbufs(self, single=False):
 
         """
-        Returns the pixbuf for the current image from cache.
+        Returns the pixbuf(s) for the current image(s) from cache.
         Returns two pixbufs in double-page mode unless <single> is True.
         Pixbufs not found in cache are fetched from disk first. 
         """
 
-        if not self.window.displayed_double() or single:
-            return self._get_pixbuf(self.current_image)
-        return (self._get_pixbuf(self.current_image),
-                self._get_pixbuf(self.current_image + 1))
+        if not self._window.displayed_double() or single:
+            return self._get_pixbuf(self._current_image_index)
+        return (self._get_pixbuf(self._current_image_index),
+                self._get_pixbuf(self._current_image_index + 1))
 
     def do_cacheing(self):
 
@@ -71,18 +70,18 @@ class FileHandler:
         in order to save memory.
         """
 
-        offset = self.window.is_double_page and 2 or 1
+        offset = self._window.is_double_page and 2 or 1
         if prefs['cache']:
             offset *= 2
-        wanted_pixbufs = range(self.current_image, 
-            min(self.current_image + offset, self.number_of_pages))
+        wanted_pixbufs = range(self._current_image_index, 
+            min(self._current_image_index + offset, self.number_of_pages()))
         
         # --------------------------------------------------------------------
         # Remove old pixbufs.
         # --------------------------------------------------------------------
-        for page in self.raw_pixbufs.keys()[:]:
+        for page in self._raw_pixbufs.keys()[:]:
             if not page in wanted_pixbufs:
-                del self.raw_pixbufs[page]
+                del self._raw_pixbufs[page]
         gc.collect() # FIXME: Add generation for Python >= 2.5
         
         # --------------------------------------------------------------------
@@ -91,11 +90,37 @@ class FileHandler:
         for wanted in wanted_pixbufs:
             self._get_pixbuf(wanted)
 
+    def number_of_pages(self):
+        
+        """ Returns the number of pages in the current archive/directory. """
+
+        return len(self._image_files)
+
+    def current_page(self):
+        
+        """ Returns the current page number. """
+
+        return self._current_image_index + 1
+
     def is_last_page(self):
         
         """ Returns True if at the last page. """
 
-        return self.current_image == self.number_of_pages - 1
+        return self.current_page() == self.number_of_pages()
+
+    def number_of_comments(self):
+        
+        """
+        Returns the number of comments in the current archive/directory.
+        """
+
+        return len(self._comment_files)
+
+    def current_comment(self):
+        
+        """ Returns the current comment number. """
+
+        return self._current_comment_index + 1
 
     def next_page(self):
 
@@ -106,18 +131,19 @@ class FileHandler:
 
         if not self.file_loaded:
             return False
-        old_image = self.current_image
-        step = self.window.is_double_page and 2 or 1
-        if self.current_image >= self.number_of_pages - step:
+        old_image = self.current_page()
+        step = self._window.is_double_page and 2 or 1
+        if self.current_page() + step > self.number_of_pages():
             if prefs['go to next archive']:
                 #open_file(NEXT_ARCHIVE)
                 print 'open next archive'
                 return True
             else:
                 return False
-        self.current_image += step
-        self.current_image = min(self.number_of_pages - 1, self.current_image)
-        return old_image != self.current_image
+        self._current_image_index += step
+        self._current_image_index = min(self.number_of_pages() - 1,
+            self._current_image_index)
+        return old_image != self.current_page()
 
     def previous_page(self):
 
@@ -128,18 +154,18 @@ class FileHandler:
 
         if not self.file_loaded:
             return False
-        old_image = self.current_image
-        step = self.window.is_double_page and 2 or 1
-        if self.current_image <= step - 1:
+        old_image = self.current_page()
+        step = self._window.is_double_page and 2 or 1
+        if self.current_page() - step <= 0:
             if prefs['go to next archive']:
                 #open_file(PREVIOUS_ARCHIVE)
                 print 'open previous archive'
                 return True
             else:
                 return False
-        self.current_image -= step
-        self.current_image = max(0, self.current_image)
-        return old_image != self.current_image
+        self._current_image_index -= step
+        self._current_image_index = max(0, self._current_image_index)
+        return old_image != self.current_page()
 
     def first_page(self):
 
@@ -150,9 +176,9 @@ class FileHandler:
 
         if not self.file_loaded:
             return False
-        old_image = self.current_image
-        self.current_image = 0
-        return old_image != self.current_image
+        old_image = self.current_page()
+        self._current_image_index = 0
+        return old_image != self.current_page()
 
     def last_page(self):
 
@@ -163,10 +189,10 @@ class FileHandler:
         
         if not self.file_loaded:
             return False
-        old_image = self.current_image
-        offset = self.window.is_double_page and 2 or 1
-        self.current_image = max(0, self.number_of_pages - offset)
-        return old_image != self.current_image
+        old_image = self.current_page()
+        offset = self._window.is_double_page and 2 or 1
+        self._current_image_index = max(0, self.number_of_pages() - offset)
+        return old_image != self.current_page()
 
     def set_page(self, page_num):
 
@@ -175,13 +201,13 @@ class FileHandler:
         not the same page, False otherwise.
         """
 
-        old_image = self.current_image
-        if not 0 <= page_num < self.number_of_pages:
+        old_image = self.current_page()
+        if not 0 < page_num <= self.number_of_pages():
             return False
-        self.current_image = page_num
-        return old_image != self.current_image
+        self._current_image_index = page_num - 1
+        return old_image != self.current_page()
 
-    def open_file(self, path, start_image=0):
+    def open_file(self, path, start_page=1):
 
         """
         If <path> is an image we add all images in its directory to the
@@ -190,29 +216,28 @@ class FileHandler:
 
         If <path> is an archive we decompresses it to the tmp_dir and adds all
         images in the decompressed tree to image_files and all comments to
-        comment_files. If <start_image> is not set we set current_image to 0
-        (first image), if it is set we set it to the value of <start_image>.
-        If <start_image> is negative it means the last image.
+        comment_files. If <start_image> is not set we set current page to 1
+        (first page), if it is set we set it to the value of <start_page>.
+        If <start_page> is non-positive it means the last image.
         """
         
         # --------------------------------------------------------------------
-        # If the given path is invalid.
+        # If the given <path> is invalid we update the statusbar.
         # --------------------------------------------------------------------
         if not os.path.isfile(path):
             if os.path.isdir(path):
-                self.window.statusbar.set_message(_('"%s" is not a file.') % 
-                    encoding.to_unicode(os.path.basename(path)))
+                self._window.statusbar.set_message(_('"%s" is not a file.') % 
+                    os.path.basename(path))
             else:
-                self.window.statusbar.set_message(_('"%s" does not exist.') % 
-                    encoding.to_unicode(os.path.basename(path)))
+                self._window.statusbar.set_message(_('"%s" does not exist.') % 
+                    os.path.basename(path))
             return False
 
         self.archive_type = archive.archive_mime_type(path)
             
         if not self.archive_type and not is_image_file(path):
-            self.window.statusbar.set_message(
-                _('Filetype of "%s" not recognized.') %
-                encoding.to_unicode(os.path.basename(path)))
+            self._window.statusbar.set_message(
+                _('Filetype of "%s" not recognized.') % os.path.basename(path))
             return False
 
         cursor.set_cursor_type(cursor.WAIT)
@@ -225,80 +250,111 @@ class FileHandler:
         # tree to find images and comments.
         # --------------------------------------------------------------------
         if self.archive_type:
-            self.archive_path = path
-            archive.extract_archive(path, self.tmp_dir)
+            self._base_path = path
+            archive.extract_archive(path, self._tmp_dir)
             # FIXME: Nested archives
-            for dirname, dirs, files in os.walk(self.tmp_dir):
+            for dirname, dirs, files in os.walk(self._tmp_dir):
                 for f in files:
                     if is_image_file(os.path.join(dirname, f)):
-                        self.image_files.append(os.path.join(dirname, f))
+                        self._image_files.append(os.path.join(dirname, f))
                     elif (os.path.splitext(f)[1].lower() in
                       prefs['comment extensions']):
-                        self.comment_files.append(os.path.join(dirname, f))
-            self.image_files.sort() # We don't sort archives after locale
-            self.number_of_pages = len(self.image_files)
-            if start_image < 0:
-                if self.window.is_double_page:
-                    self.current_image = self.number_of_pages - 2
+                        self._comment_files.append(os.path.join(dirname, f))
+            self._image_files.sort()  # We don't sort archives after locale
+            if start_page <= 0:
+                if self._window.is_double_page:
+                    self._current_image_index = self.number_of_pages() - 2
                 else:
-                    self.current_image = self.number_of_pages - 1
+                    self._current_image_index = self.number_of_pages() - 1
             else:
-                self.current_image = start_image
-            self.current_image = max(0, self.current_image)
+                self._current_image_index = start_page - 1
+            self._current_image_index = max(0, self._current_image_index)
 
         # --------------------------------------------------------------------
         # If <path> is an image we scan it's directory for more images and
         # comments.
         # --------------------------------------------------------------------
         else:
-            self.archive_path = os.path.dirname(path)
+            self._base_path = os.path.dirname(path)
             for f in os.listdir(os.path.dirname(path)):
                 fpath = os.path.join(os.path.dirname(path), f)
                 if os.path.isdir(fpath):
                     continue
                 if is_image_file(fpath):
-                    self.image_files.append(fpath)
+                    self._image_files.append(fpath)
                 elif (os.path.splitext(f)[1].lower() in 
                   prefs['comment extensions']):
-                    self.comment_files.append(fpath)
-            self.image_files.sort(locale.strcoll)
-            self.number_of_pages = len(self.image_files)
-            self.current_image = self.image_files.index(path)
+                    self._comment_files.append(fpath)
+            self._image_files.sort(locale.strcoll)
+            self._current_image_index = self._image_files.index(path)
 
         # --------------------------------------------------------------------
         # If there are no viewable image files found.
         # --------------------------------------------------------------------
-        if not self.image_files:
-            self.window.statusbar.set_message(_('No images in "%s"') % 
-                encoding.to_unicode(os.path.basename(path)))
+        if not self._image_files:
+            self._window.statusbar.set_message(_('No images in "%s"') % 
+                os.path.basename(path))
             self.file_loaded = False
         else:
             self.file_loaded = True
-            self.window.statusbar.set_filename(encoding.to_unicode(
-                os.path.basename(self.archive_path)))
 
-        self.window.thumbnailsidebar.block = True
-        self.window.new_page()
+        self._window.thumbnailsidebar.block = True
+        self._window.new_page()
         cursor.set_cursor_type(cursor.NORMAL)
         while gtk.events_pending():
             gtk.main_iteration(False)
-        self.window.thumbnailsidebar.block = False
-        self.window.thumbnailsidebar.load_thumbnails()
-        self.comment_files.sort()
+        self._window.thumbnailsidebar.block = False
+        self._window.thumbnailsidebar.load_thumbnails()
+        self._comment_files.sort()
 
     def close_file(self, *args):
         self.file_loaded = False
-        self.archive_path = None
-        shutil.rmtree(self.tmp_dir)
-        self.tmp_dir = tempfile.mkdtemp(prefix="comix.", suffix="/")
-        self.image_files = []
-        self.current_image = None
-        self.comment_files = []
-        self.current_comment = None
-        self.raw_pixbufs.clear()
-        self.window.thumbnailsidebar.clear()
-        self.window.draw_image()
+        self._base_path = None
+        shutil.rmtree(self._tmp_dir)
+        self._tmp_dir = tempfile.mkdtemp(prefix="comix.", suffix="/")
+        self._image_files = []
+        self._current_image_index = None
+        self._comment_files = []
+        self._current_comment_index = None
+        self._raw_pixbufs.clear()
+        self._window.thumbnailsidebar.clear()
+        self._window.draw_image()
         gc.collect()
+
+    def cleanup(self):
+        shutil.rmtree(self._tmp_dir)
+
+    def get_pretty_current_filename(self):
+        
+        """
+        Returns a string with the name of the currently viewed file that is
+        suitable for printing.
+        """
+
+        if self.archive_type:
+            return os.path.basename(self._base_path)
+        return os.path.join(os.path.basename(self._base_path),
+            os.path.basename(self._image_files[self._current_image_index]))
+
+    def get_path_to_page(self, page=None):
+        
+        """
+        Returns the full path to the image file for <page>, or the current
+        page if <page> is None.
+        """
+
+        if page == None:
+            return self._image_files[self._current_image_index]
+        return self._image_files[page - 1]
+
+    def get_path_to_base(self):
+        
+        """
+        Returns the full path to the current base (path to archive or
+        image directory.
+        """
+
+        return self._base_path
 
 def is_image_file(path):
     

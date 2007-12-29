@@ -1,12 +1,11 @@
 # ============================================================================
-# histogram.py - Draws histograms from image data for Comix.
+# histogram.py - Draws histograms from pixbufs for Comix.
 # ============================================================================
 
 import gtk
 import Image
 import ImageDraw
 import ImageOps
-import ImageStat
 
 import pilpixbuf
 

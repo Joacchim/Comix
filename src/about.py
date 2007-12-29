@@ -3,78 +3,67 @@
 # about.py - About dialog for Comix.
 # ============================================================================
 
-import os
+from os.path import join, dirname, isfile
 import sys
 
 import gtk
 
 import constants
 
-dialog = None
+_dialog = None
 
-class AboutDialog(gtk.Dialog):
+class _AboutDialog(gtk.Dialog):
 
     def __init__(self, window):
         gtk.Dialog.__init__(self, _('About'), window, 0,
             (gtk.STOCK_CLOSE, gtk.RESPONSE_CLOSE))
         self.set_has_separator(False)
         self.set_resizable(False)
-        notebook = gtk.Notebook()
-        self.vbox.pack_start(notebook, False, False, 0)
-
         self.connect('response', dialog_close)
         self.connect('delete_event', dialog_close)
         
+        notebook = gtk.Notebook()
+        self.vbox.pack_start(notebook, False, False, 0)
         # ----------------------------------------------------------------
         # About tab.
         # ----------------------------------------------------------------
         box = gtk.VBox(False, 0)
         box.set_border_width(5)
-                
-        if os.path.isfile(os.path.join(os.path.dirname(os.path.dirname(
-            sys.argv[0])), 'images/logo/comix.svg')):
-            icon_path = \
-                os.path.join(os.path.dirname(os.path.dirname(sys.argv[0])),
-                'images/logo/comix.svg')
-        else:
-            for prefix in [os.path.dirname(os.path.dirname(sys.argv[0])),
-                '/usr', '/usr/local', '/usr/X11R6']:
-                icon_path = \
-                    os.path.join(prefix,
+        
+        icon_path = join(dirname(dirname(sys.argv[0])), 'images/logo/comix.svg')
+        if not isfile(icon_path):
+            for prefix in [dirname(dirname(sys.argv[0])), '/usr', '/usr/local',
+              '/usr/X11R6']:
+                icon_path = join(prefix, 
                     'share/icons/hicolor/scalable/apps/comix.svg')
-                if os.path.isfile(icon_path):
+                if isfile(icon_path):
                     break
         try:
-            icon_pixbuf = \
-                gtk.gdk.pixbuf_new_from_file_at_size(icon_path, 150, 150)
-            icon_image = gtk.Image()
-            icon_image.set_from_pixbuf(icon_pixbuf)
-            box.pack_start(icon_image, False, False, 10)
+            pixbuf = gtk.gdk.pixbuf_new_from_file_at_size(icon_path, 150, 150)
+            icon = gtk.Image()
+            icon.set_from_pixbuf(pixbuf)
+            box.pack_start(icon, False, False, 10)
         except:
-            print '! Could not find the file "comix.svg"\n'
+            print '! Could not find the icon file "comix.svg"\n'
         
         label = gtk.Label()
         label.set_markup(
         '<big><big><big><big><b><span foreground="#333333">Com</span>' +
         '<span foreground="#79941b">ix</span> <span foreground="#333333">' +
-        constants.version +
-        '</span></b></big></big></big></big>\n' +
-        "\n" +
-        _("Comix is an image viewer specifically designed to handle comic books.") +
-        "\n" +
-        _("It reads ZIP, RAR and tar archives (also gzip or bzip2 compressed)") +
-        "\n" +
-        _("as well as plain image files.") + "\n" +
-        "\n" +
-        _("Comix is licensed under the GNU General Public License.") + "\n" +
-        "\n" +
-        "<small>Copyright © 2005-2007 Pontus Ekberg\n\n" +
-        "herrekberg@users.sourceforge.net</small>\n" +
-        "<small>http://comix.sourceforge.net</small>\n")
+        constants.VERSION +
+        '</span></b></big></big></big></big>\n\n' +
+        _('Comix is an image viewer specifically designed to handle comics.') +
+        '\n' +
+        _('It reads Zip, RAR and tar archives, as well as plain image files.') +
+        '\n\n' +
+        _('Comix is licensed under the GNU General Public License.') +
+        '\n\n' +
+        '<small>Copyright © 2005-2007 Pontus Ekberg\n\n' +
+        'herrekberg@users.sourceforge.net\n' +
+        'http://comix.sourceforge.net</small>\n')
         box.pack_start(label, True, True, 0)
         label.set_justify(gtk.JUSTIFY_CENTER)
-        
-        notebook.insert_page(box, gtk.Label(_("About")))
+        notebook.insert_page(box, gtk.Label(_('About')))
         
         # ----------------------------------------------------------------
         # Credits tab.
@@ -83,7 +72,7 @@ class AboutDialog(gtk.Dialog):
         box.set_border_width(5)
 
         for nice_person, description in (
-            ('Pontus Ekberg', _('Developer and Swedish translation')),
+            ('Pontus Ekberg', _('Developer')),
             ('Emfox Zhou &amp; Xie Yanbo',
             _('Simplified Chinese translation')),
             ('Manuel Quiñones', _('Spanish translation')),
@@ -104,25 +93,24 @@ class AboutDialog(gtk.Dialog):
             ('Jan Nekvasil', _('Czech translation'))
             ):
             label = gtk.Label()
-            label.set_markup('<b>' + nice_person + ':</b>   ' +
-                description)
+            label.set_markup('<b>%s:</b>   %s' % (nice_person, description))
             box.pack_start(label, False, False, 0)
-            label.set_alignment(0, 0)
+            label.set_alignment(0, 0.5)
 
-        notebook.insert_page(box, gtk.Label(_("Credits")))
+        notebook.insert_page(box, gtk.Label(_('Credits')))
         self.action_area.get_children()[0].grab_focus()
         self.vbox.show_all()
         
 
 def dialog_open(*args):
-    global dialog
-    if dialog == None:
-        dialog = AboutDialog(None)
-        dialog.show()
+    global _dialog
+    if _dialog == None:
+        _dialog = _AboutDialog(None)
+        _dialog.show()
 
 def dialog_close(*args):
-    global dialog
-    if dialog != None:
-        dialog.destroy()
-        dialog = None
+    global _dialog
+    if _dialog != None:
+        _dialog.destroy()
+        _dialog = None
 
