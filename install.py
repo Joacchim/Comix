@@ -126,7 +126,11 @@ def check_dependencies():
     print
 
 
-
+###############################################################################
+print 'Install script not yet adopted to 4.X file organization.'
+print 'Quitting...'
+sys.exit(1)
+###############################################################################
 
 install_dir = "/usr/local/"
 no_mime = False
