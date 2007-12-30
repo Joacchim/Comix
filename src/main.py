@@ -11,15 +11,13 @@ import gtk
 import encoding
 import event
 import filehandler
-import icons
 import image
 import pilpixbuf
+import preferences
 from preferences import prefs
 import ui
 import status
 import thumbbar
-
-icons.load()
 
 class MainWindow(gtk.Window):
 
@@ -66,8 +64,6 @@ class MainWindow(gtk.Window):
         # Setup
         # ----------------------------------------------------------------
         self.set_title('Comix')
-        if prefs['save window pos']:
-            self.move(prefs['window x'], prefs['window y'])
         self.set_size_request(300, 300)  # Avoid making the window *too* small
         self.resize(prefs['window width'], prefs['window height'])
 
@@ -84,7 +80,7 @@ class MainWindow(gtk.Window):
         self._main_layout.put(self._image_box, 0, 0)
         self._main_layout.modify_bg(gtk.STATE_NORMAL,
             gtk.gdk.colormap_get_system().alloc_color(gtk.gdk.Color(
-            prefs['red bg'], prefs['green bg'], prefs['blue bg']), False, True))
+            *prefs['bg colour']), False, True))
 
         self._vadjust.step_increment = 15
         self._vadjust.page_increment = 1
@@ -180,7 +176,7 @@ class MainWindow(gtk.Window):
             self.set_title('Comix')
             return
 
-        width, height = self._get_layout_size()
+        width, height = self.get_visible_area_size()
         scale_width = self.zoom_mode == 'height' and -1 or width
         scale_height = self.zoom_mode == 'width' and -1 or height
         scale_up = prefs['stretch']
@@ -422,14 +418,15 @@ class MainWindow(gtk.Window):
 
         """
         Scrolls <x> px horizontally and <y> px vertically.
-        Returns True if call resulted in new adjustment values, False otherwise.
+        Returns True if call resulted in new adjustment values, False
+        otherwise.
         """
 
         old_hadjust = self._hadjust.get_value()
         old_vadjust = self._vadjust.get_value()
-        layout_width, layout_height = self._get_layout_size()
-        hadjust_upper = self._hadjust.upper - layout_width
-        vadjust_upper = self._vadjust.upper - layout_height
+        visible_width, visible_height = self.get_visible_area_size()
+        hadjust_upper = self._hadjust.upper - visible_width
+        vadjust_upper = self._vadjust.upper - visible_height
         new_hadjust = old_hadjust + x
         new_vadjust = old_vadjust + y
         new_hadjust = max(0, new_hadjust)
@@ -462,9 +459,9 @@ class MainWindow(gtk.Window):
         using manga mode or not.
         """
 
-        layout_width, layout_height = self._get_layout_size()
-        vadjust_upper = self._vadjust.upper - layout_height
-        hadjust_upper = self._hadjust.upper - layout_width
+        visible_width, visible_height = self.get_visible_area_size()
+        vadjust_upper = self._vadjust.upper - visible_height
+        hadjust_upper = self._hadjust.upper - visible_width
 
         if vert == 'top':
             self._vadjust.set_value(0)
@@ -504,7 +501,7 @@ class MainWindow(gtk.Window):
         elif horiz == 'endfirst':
             if self.displayed_double():
                 self._hadjust.set_value(
-                    self._left_image.size_request()[0] - layout_width)
+                    self._left_image.size_request()[0] - visible_width)
             else:
                 self._hadjust.set_value(hadjust_upper)
         elif horiz == 'startsecond':
@@ -517,6 +514,33 @@ class MainWindow(gtk.Window):
         """ Returns True if two pages are currently displayed. """
 
         return self.is_double_page and not self.file_handler.is_last_page()
+
+    def get_visible_area_size(self):
+        
+        """
+        Returns a 2-tuple with the width and height of the visible part
+        of the main layout area.
+        """
+
+        width, height = self.get_size()
+        if not prefs['hide all'] and not (self.is_fullscreen and 
+          prefs['hide all in fullscreen']):
+            if prefs['show toolbar']:
+                height -= self.toolbar.size_request()[1]
+            if prefs['show statusbar']:
+                height -= self.statusbar.size_request()[1]
+            if prefs['show thumbnails']:
+                width -= self.thumbnailsidebar.get_width()
+            if prefs['show menubar']:
+                height -= self.menubar.size_request()[1]
+            if prefs['show scrollbar'] and self.zoom_mode == 'width':
+                width -= self._vscroll.size_request()[0]
+            elif prefs['show scrollbar'] and self.zoom_mode == 'height':
+                height -= self._hscroll.size_request()[1]
+            elif prefs['show scrollbar'] and self.zoom_mode == 'manual':
+                width -= self._vscroll.size_request()[0]
+                height -= self._hscroll.size_request()[1]
+        return width, height
 
     def _display_active_widgets(self):
         
@@ -566,33 +590,6 @@ class MainWindow(gtk.Window):
             self._vscroll.hide_all()
             self._hscroll.hide_all()
 
-    def _get_layout_size(self):
-        
-        """
-        Returns a 2-tuple with the width and height of the visible part
-        of the main layout area.
-        """
-
-        width, height = self.get_size()
-        if not prefs['hide all'] and not (self.is_fullscreen and 
-          prefs['hide all in fullscreen']):
-            if prefs['show toolbar']:
-                height -= self.toolbar.size_request()[1]
-            if prefs['show statusbar']:
-                height -= self.statusbar.size_request()[1]
-            if prefs['show thumbnails']:
-                width -= self.thumbnailsidebar.get_width()
-            if prefs['show menubar']:
-                height -= self.menubar.size_request()[1]
-            if prefs['show scrollbar'] and self.zoom_mode == 'width':
-                width -= self._vscroll.size_request()[0]
-            elif prefs['show scrollbar'] and self.zoom_mode == 'height':
-                height -= self._hscroll.size_request()[1]
-            elif prefs['show scrollbar'] and self.zoom_mode == 'manual':
-                width -= self._vscroll.size_request()[0]
-                height -= self._hscroll.size_request()[1]
-        return width, height
-
     def _set_title(self):
         
         """ Sets the title acording to current state. """
@@ -618,5 +615,6 @@ class MainWindow(gtk.Window):
         print 'Bye!'
         gtk.main_quit()
         self.file_handler.cleanup()
+        preferences.write_config_file()
         sys.exit(0)
 

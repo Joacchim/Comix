@@ -114,12 +114,9 @@ class EventHandler:
         # If Shift is pressed we should backtrack instead.
         # ----------------------------------------------------------------
         elif event.keyval == gtk.keysyms.space:
-            if prefs['space scroll type'] == 'window':
-                x_step, y_step = self._window.get_layout_size()
-            elif prefs['space scroll type'] == 'image':
-                x_step, y_step = self._window.main_layout.get_size()
-            x_step = x_step * prefs['space scroll length'] // 100
-            y_step = y_step * prefs['space scroll length'] // 100
+            x_step, y_step = self._window.get_visible_area_size()
+            x_step = x_step * prefs['space scroll percent'] // 100
+            y_step = y_step * prefs['space scroll percent'] // 100
             if 'GDK_SHIFT_MASK' in event.state.value_names:
                 next_page_function = self._window.previous_page
                 startfirst = 'endfirst'
@@ -133,7 +130,9 @@ class EventHandler:
                 x_step *= -1
             # FIXME: Smart space in DP mode is not implemented
             if prefs['smart space scroll']:
-                if not self._window.is_double():
+                if self._window.displayed_double():
+                    pass
+                else:
                     if not self._window.scroll(x_step, 0):
                         if not self._window.scroll(0, y_step):
                             next_page_function()
@@ -146,8 +145,8 @@ class EventHandler:
                     next_page_function()
 
         # ----------------------------------------------------------------
-        # We kill the signals here for the Up, Down, Space and Enter keys.
-        # Otherwise they will start fiddling with the thumbnail selector.
+        # We kill the signals here for the Up, Down, Space and Enter keys,
+        # or they will start fiddling with the thumbnail selector (bad).
         # ----------------------------------------------------------------
         if (event.keyval in [gtk.keysyms.Up, gtk.keysyms.Down,
           gtk.keysyms.space, gtk.keysyms.KP_Enter] or 

@@ -138,7 +138,7 @@ class FileHandler:
         old_image = self.current_page()
         step = self._window.is_double_page and 2 or 1
         if self.current_page() + step > self.number_of_pages():
-            if prefs['go to next archive']:
+            if prefs['auto open next archive']:
                 #open_file(NEXT_ARCHIVE)
                 print 'open next archive'
             return False
@@ -157,7 +157,7 @@ class FileHandler:
         if not self.file_loaded:
             return False
         if self.current_page() == 1:
-            if prefs['go to next archive']:
+            if prefs['auto open next archive']:
                 #open_file(PREVIOUS_ARCHIVE)
                 print 'open previous archive'
             return False
