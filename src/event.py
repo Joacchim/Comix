@@ -1,6 +1,8 @@
 # ============================================================================
-# event.py - Event handling (keyboard, mouse, etc.) for Comix.
+# event.py - Event handling (keyboard, mouse, etc.) for Comix main window.
 # ============================================================================
+
+import urllib
 
 import gtk
 
@@ -226,4 +228,16 @@ class EventHandler:
                                 self._last_pointer_pos_y - event.y_root)
             self._last_pointer_pos_x = event.x_root
             self._last_pointer_pos_y = event.y_root
+    
+    def drag_n_drop_event(self, widget, context, x, y, data, *args):
+        uris = data.get_uris()
+        if not uris:
+            return
+        uri = uris[0]
+        if uri.startswith('file://'):  # Nautilus etc.
+            uri = uri[7:]
+        elif uri.startswith('file:'):  # Xffm etc.
+            uri = uri[5:]
+        path = urllib.url2pathname(uri)
+        self._window.file_handler.open_file(path)
 

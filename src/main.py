@@ -59,7 +59,7 @@ class MainWindow(gtk.Window):
         self.toolbar = self._ui_manager.get_widget('/Tool')
         self.popup = self._ui_manager.get_widget('/Popup')
         self.actiongroup = self._ui_manager.get_action_groups()[0]
-        
+
         # ----------------------------------------------------------------
         # Setup
         # ----------------------------------------------------------------
@@ -145,6 +145,9 @@ class MainWindow(gtk.Window):
                                      gtk.gdk.BUTTON2_MOTION_MASK | 
                                      gtk.gdk.BUTTON_RELEASE_MASK |
                                      gtk.gdk.POINTER_MOTION_MASK)
+        self._main_layout.drag_dest_set(gtk.DEST_DEFAULT_ALL,
+                                        [('text/uri-list', 0, 0)],
+                                        gtk.gdk.ACTION_COPY)
 
         self.connect('delete_event',
             self.terminate_program)
@@ -160,7 +163,9 @@ class MainWindow(gtk.Window):
             self._event_handler.mouse_press_event)
         self._main_layout.connect('motion_notify_event',
             self._event_handler.mouse_move_event)
-        
+        self._main_layout.connect('drag_data_received',
+            self._event_handler.drag_n_drop_event)
+
         self.show()
 
     def draw_image(self, at_bottom=False):

@@ -38,13 +38,15 @@ def create_thumbnail(path):
     if not filehandler.is_image_file(path):
         return None
     pixbuf = _get_pixbuf128(path)
+    mime, width, height = gtk.gdk.pixbuf_get_file_info(path)
+    if width <= 128 and height <= 128:
+        return pixbuf
+    mime = mime['mime_types'][0]
     uri = 'file://' + pathname2url(os.path.normpath(path))
     thumbpath = _uri_to_thumbpath(uri)
     stat = os.stat(path)
     mtime = str(stat.st_mtime)
     size = str(stat.st_size)
-    mime, width, height = gtk.gdk.pixbuf_get_file_info(path)
-    mime = mime['mime_types'][0]
     width = str(width)
     height = str(height)
     tEXt_data = {
@@ -54,7 +56,7 @@ def create_thumbnail(path):
         'tEXt::Thumb::Mimetype':      mime,
         'tEXt::Thumb::Image::Width':  width,
         'tEXt::Thumb::Image::Height': height,
-        'tEXt::Software':             'Comix ' + str(constants.version)
+        'tEXt::Software':             'Comix ' + str(constants.VERSION)
     }
     try:
         if not os.path.isdir(_thumbdir):

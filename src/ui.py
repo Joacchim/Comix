@@ -30,8 +30,6 @@ class MainUI(gtk.UIManager):
                 'Home', None, window.first_page),
             ('last_page',gtk.STOCK_GOTO_LAST, _('_Last page'),
                 'End', None, window.last_page),
-            ('go_to_page', gtk.STOCK_JUMP_TO, _('_Go to page...'),
-                'g', None, bogus),
             ('zoom_in', gtk.STOCK_ZOOM_IN, _('_Zoom in'),
                 'KP_Add', None, window.manual_zoom_in),
             ('zoom_out', gtk.STOCK_ZOOM_OUT, _('Zoom _out'),
@@ -157,8 +155,6 @@ class MainUI(gtk.UIManager):
                 <toolitem action="previous_page" />
                 <toolitem action="next_page" />
                 <toolitem action="last_page" />
-                <separator />
-                <toolitem action="go_to_page" />
                 <toolitem action="expander" />
                 <toolitem action="fit_screen_mode" />
                 <toolitem action="fit_width_mode" />
@@ -250,8 +246,6 @@ class MainUI(gtk.UIManager):
                     <menuitem action="previous_page" />
                     <menuitem action="next_page" />
                     <menuitem action="last_page" />
-                    <separator />
-                    <menuitem action="go_to_page" />
                 </menu>
                 <menu action="menu_bookmarks">
                     <menuitem action="add_bookmark" />
@@ -297,7 +291,7 @@ class MainUI(gtk.UIManager):
 
         self.add_ui_from_string(ui_description)
         self.insert_action_group(actiongroup, 0)
-        
+
         # FIXME: Is there no built-in way to do this?
         self.get_widget('/Tool/expander').set_expand(True)
         self.get_widget('/Tool/expander').set_sensitive(False)
