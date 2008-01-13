@@ -251,9 +251,6 @@ class FileHandler:
                     continue
                 if is_image_file(fpath):
                     self._image_files.append(fpath)
-                elif (os.path.splitext(f)[1].lower() in 
-                  prefs['comment extensions']):
-                    self._comment_files.append(fpath)
             self._image_files.sort(locale.strcoll)
             self._current_image_index = self._image_files.index(path)
 
@@ -272,6 +269,7 @@ class FileHandler:
         cursor.set_cursor_type(cursor.NORMAL)
         while gtk.events_pending():
             gtk.main_iteration(False)
+        self._window.ui_manager.set_sensitivities()
         self._window.thumbnailsidebar.unblock()
         self._window.thumbnailsidebar.load_thumbnails()
         self._comment_files.sort()
@@ -288,6 +286,7 @@ class FileHandler:
         self._raw_pixbufs.clear()
         self._window.thumbnailsidebar.clear()
         self._window.draw_image()
+        self._window.ui_manager.set_sensitivities()
         gc.collect()
 
     def cleanup(self):

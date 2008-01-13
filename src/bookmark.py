@@ -8,6 +8,8 @@ import cPickle
 import gtk
 
 import constants
+import image
+import thumbnail
 
 _pickle_path = os.path.join(constants.COMIX_DIR, 'bookmarks_pickle')
 
@@ -127,4 +129,7 @@ class BookmarksMenu(gtk.Menu):
         packs = [bookmark.pack() for bookmark in self._bookmarks]
         cPickle.dump(packs, fd, cPickle.HIGHEST_PROTOCOL)
         fd.close()
+
+    def set_sensitive(self, sensitive):
+        self._actiongroup.get_action('add_bookmark').set_sensitive(sensitive)
 

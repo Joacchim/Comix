@@ -14,7 +14,7 @@ import constants
 # ------------------------------------------------------------------------
 prefs = {
     #'auto comments': False,
-    'comment extensions': 'txt nfo',
+    'comment extensions': ['.txt',  '.nfo'],
     #'auto load last file': False,
     #'page of last file': 0,
     #'path to last file': '',

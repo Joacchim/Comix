@@ -294,6 +294,9 @@ class MainUI(gtk.UIManager):
         self.get_widget('/Tool/expander').set_sensitive(False)
 
     def set_sensitivities(self):
+
+        """ Sets the main UI's widget's sensitivities appropriately. """
+
         general = ('/Menu/menu_file/properties',
                    '/Menu/menu_file/close',
                    '/Menu/menu_file/menu_file_operations/rotate_90_jpeg',
@@ -321,16 +324,23 @@ class MainUI(gtk.UIManager):
                    '/Popup/properties')
         archive = ('/Menu/menu_file/add_to_library',
                    '/Menu/menu_file/convert',
-                   '/Menu/menu_file/extract',
-                   '/Menu/menu_file/comments')
+                   '/Menu/menu_file/extract')
+        comment = ('/Menu/menu_file/comments',)
+        general_sensitive = False
+        archive_sensitive = False
+        comment_sensitive = False
 
         if self._window.file_handler.file_loaded:
-            for path in general:
-                self.get_widget(path).set_sensitive(True)
+            general_sensitive = True
             if self._window.file_handler.archive_type:
-                for path in archive:
-                    self.get_widget(path).set_sensitive(True)
-        else:
-            for path in general + archive:
-                self.get_widget(path).set_sensitive(False)
+                archive_sensitive = True
+                if self._window.file_handler.get_number_of_comments():
+                    comment_sensitive = True 
+        for path in general:
+            self.get_widget(path).set_sensitive(general_sensitive)
+        for path in archive:
+            self.get_widget(path).set_sensitive(archive_sensitive)
+        for path in comment:
+            self.get_widget(path).set_sensitive(comment_sensitive)
+        self.bookmarks.set_sensitive(general_sensitive)
 

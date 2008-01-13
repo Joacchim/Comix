@@ -45,23 +45,22 @@ class MainWindow(gtk.Window):
         self.file_handler = filehandler.FileHandler(self)
         self.thumbnailsidebar = thumbbar.ThumbnailSidebar(self)
         self.statusbar = status.Statusbar()
+        self.ui_manager = ui.MainUI(self)
+        self.menubar = self.ui_manager.get_widget('/Menu')
+        self.toolbar = self.ui_manager.get_widget('/Tool')
+        self.popup = self.ui_manager.get_widget('/Popup')
+        self.actiongroup = self.ui_manager.get_action_groups()[0]
 
         self._left_image = gtk.Image()
         self._right_image = gtk.Image()
         self._image_box = gtk.HBox(False, 2)
         self._main_layout = gtk.Layout()
         self._event_handler = event.EventHandler(self)
-        self._ui_manager = ui.MainUI(self)
         self._vadjust = self._main_layout.get_vadjustment()
         self._hadjust = self._main_layout.get_hadjustment()
         self._vscroll = gtk.VScrollbar(self._vadjust)
         self._hscroll = gtk.HScrollbar(self._hadjust)
         
-        self.menubar = self._ui_manager.get_widget('/Menu')
-        self.toolbar = self._ui_manager.get_widget('/Tool')
-        self.popup = self._ui_manager.get_widget('/Popup')
-        self.actiongroup = self._ui_manager.get_action_groups()[0]
-
         # ----------------------------------------------------------------
         # Setup
         # ----------------------------------------------------------------
@@ -72,7 +71,7 @@ class MainWindow(gtk.Window):
         # This is a hack to get the focus away from the toolbar so that
         # we don't activate it with space or some other key. (alternative?)
         self.toolbar.set_focus_child(
-            self._ui_manager.get_widget('/Tool/expander'))
+            self.ui_manager.get_widget('/Tool/expander'))
         
         self._image_box.add(self._left_image)
         self._image_box.add(self._right_image)
@@ -166,7 +165,8 @@ class MainWindow(gtk.Window):
             self._event_handler.mouse_move_event)
         self._main_layout.connect('drag_data_received',
             self._event_handler.drag_n_drop_event)
-
+        
+        self.ui_manager.set_sensitivities()
         self.show()
 
     def draw_image(self, at_bottom=False):
@@ -180,6 +180,7 @@ class MainWindow(gtk.Window):
             self._right_image.clear()
             self.thumbnailsidebar.clear()
             self.set_title('Comix')
+            self.statusbar.set_message('')
             return
 
         width, height = self.get_visible_area_size()
@@ -596,8 +597,6 @@ class MainWindow(gtk.Window):
             self._vscroll.hide_all()
             self._hscroll.hide_all()
         
-        self._ui_manager.set_sensitivities()
-
     def _set_title(self):
         
         """ Sets the title acording to current state. """
@@ -626,6 +625,6 @@ class MainWindow(gtk.Window):
         if not os.path.exists(constants.COMIX_DIR):
             os.mkdir(constants.COMIX_DIR)
         preferences.write_config_file()
-        self._ui_manager.bookmarks.store_bookmarks()
+        self.ui_manager.bookmarks.store_bookmarks()
         sys.exit(0)
 
