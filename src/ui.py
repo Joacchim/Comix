@@ -22,8 +22,8 @@ class MainUI(gtk.UIManager):
         # ----------------------------------------------------------------
         # Create actions for the menus.
         # ----------------------------------------------------------------
-        actiongroup = gtk.ActionGroup('comix-main')
-        actiongroup.add_actions([
+        self._actiongroup = gtk.ActionGroup('comix-main')
+        self._actiongroup.add_actions([
             ('next_page', gtk.STOCK_GO_FORWARD, _('_Next page'),
                 'Page_Down', None, window.next_page),
             ('previous_page', gtk.STOCK_GO_BACK, _('_Previous page'),
@@ -101,7 +101,7 @@ class MainUI(gtk.UIManager):
             ('menu_transform', 'comix-transform', _('_Transform')),
             ('expander', None, None, None, None, None)])
 
-        actiongroup.add_toggle_actions([
+        self._actiongroup.add_toggle_actions([
             ('fullscreen', None, _('_Fullscreen'),
                 'f', None, window.change_fullscreen),
             ('double_page', 'comix-double-page', _('_Double page mode'),
@@ -125,7 +125,7 @@ class MainUI(gtk.UIManager):
             ('lens', 'comix-lens', _('Magnifying _lens'),
                 'z', None, bogus)])
 
-        actiongroup.add_radio_actions([
+        self._actiongroup.add_radio_actions([
             ('fit_manual_mode', 'comix-fitnone', _('Manual zoom mode'),
                 'a', None, 0),
             ('fit_screen_mode', 'comix-fitscreen', _('Fit-to-_screen mode'),
@@ -138,7 +138,7 @@ class MainUI(gtk.UIManager):
         
         # Some actions added separately since they need the main window as
         # a parameter.
-        actiongroup.add_actions([
+        self._actiongroup.add_actions([
             ('open', gtk.STOCK_OPEN, _('_Open...'),
                 '<Control>o', None, filechooser.dialog_open),
             ('properties', gtk.STOCK_PROPERTIES, _('Proper_ties'),
@@ -281,7 +281,7 @@ class MainUI(gtk.UIManager):
         """
 
         self.add_ui_from_string(ui_description)
-        self.insert_action_group(actiongroup, 0)
+        self.insert_action_group(self._actiongroup, 0)
         
         self.bookmarks = bookmark.BookmarksMenu(self, window)
         self.get_widget('/Menu/menu_bookmarks').set_submenu(self.bookmarks)
@@ -297,35 +297,28 @@ class MainUI(gtk.UIManager):
 
         """ Sets the main UI's widget's sensitivities appropriately. """
 
-        general = ('/Menu/menu_file/properties',
-                   '/Menu/menu_file/close',
-                   '/Menu/menu_file/menu_file_operations/rotate_90_jpeg',
-                   '/Menu/menu_file/menu_file_operations/rotate_270_jpeg',
-                   '/Menu/menu_file/menu_file_operations/flip_horiz_jpeg',
-                   '/Menu/menu_file/menu_file_operations/flip_vert_jpeg',
-                   '/Menu/menu_file/menu_file_operations/desaturate_jpeg',
-                   '/Menu/menu_file/menu_file_operations/delete',
-                   '/Menu/menu_view/slideshow',
-                   '/Menu/menu_view/menu_transform/rotate_90',
-                   '/Menu/menu_view/menu_transform/rotate_180',
-                   '/Menu/menu_view/menu_transform/rotate_270',
-                   '/Menu/menu_view/menu_transform/flip_horiz',
-                   '/Menu/menu_view/menu_transform/flip_vert',
-                   '/Menu/menu_go/next_page',
-                   '/Menu/menu_go/previous_page',
-                   '/Menu/menu_go/first_page',
-                   '/Menu/menu_go/last_page',
-                   '/Tool/next_page',
-                   '/Tool/previous_page',
-                   '/Tool/first_page',
-                   '/Tool/last_page',
-                   '/Popup/next_page',
-                   '/Popup/previous_page',
-                   '/Popup/properties')
-        archive = ('/Menu/menu_file/add_to_library',
-                   '/Menu/menu_file/convert',
-                   '/Menu/menu_file/extract')
-        comment = ('/Menu/menu_file/comments',)
+        general = ('properties',
+                   'close',
+                   'rotate_90_jpeg',
+                   'rotate_270_jpeg',
+                   'flip_horiz_jpeg',
+                   'flip_vert_jpeg',
+                   'desaturate_jpeg',
+                   'delete',
+                   'slideshow',
+                   'rotate_90',
+                   'rotate_180',
+                   'rotate_270',
+                   'flip_horiz',
+                   'flip_vert',
+                   'next_page',
+                   'previous_page',
+                   'first_page',
+                   'last_page')
+        archive = ('add_to_library',
+                   'convert',
+                   'extract')
+        comment = ('comments',)
         general_sensitive = False
         archive_sensitive = False
         comment_sensitive = False
@@ -337,10 +330,10 @@ class MainUI(gtk.UIManager):
                 if self._window.file_handler.get_number_of_comments():
                     comment_sensitive = True 
         for path in general:
-            self.get_widget(path).set_sensitive(general_sensitive)
+            self._actiongroup.get_action(path).set_sensitive(general_sensitive)
         for path in archive:
-            self.get_widget(path).set_sensitive(archive_sensitive)
+            self._actiongroup.get_action(path).set_sensitive(archive_sensitive)
         for path in comment:
-            self.get_widget(path).set_sensitive(comment_sensitive)
+            self._actiongroup.get_action(path).set_sensitive(comment_sensitive)
         self.bookmarks.set_sensitive(general_sensitive)
 
