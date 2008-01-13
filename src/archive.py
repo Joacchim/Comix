@@ -75,7 +75,7 @@ def extract_archive(src_path, dst_path):
         # ----------------------------------------------------------------
         elif archive_type == 'rar':
             if _rar_exec != None:
-                os.popen('%s x "%s" "%s"' % (_rar_exec, src_path, dst_path))
+                os.popen('%s x -p- "%s" "%s"' % (_rar_exec, src_path, dst_path))
             else:
                 print '! archive.py: Could not find RAR file extractor.\n'
                 # FIXME: Pop-up or statusbar should be better for user

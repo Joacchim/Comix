@@ -176,11 +176,6 @@ class MainWindow(gtk.Window):
         self._display_active_widgets()
 
         if not self.file_handler.file_loaded:
-            self._left_image.clear()
-            self._right_image.clear()
-            self.thumbnailsidebar.clear()
-            self.set_title('Comix')
-            self.statusbar.set_message('')
             return
 
         width, height = self.get_visible_area_size()
@@ -515,6 +510,13 @@ class MainWindow(gtk.Window):
             self._hadjust.set_value(self._left_image.size_request()[0] + 2)
         elif horiz == 'endsecond':
             self._hadjust.set_value(hadjust_upper)
+
+    def clear(self):
+        self._left_image.clear()
+        self._right_image.clear()
+        self.thumbnailsidebar.clear()
+        self.set_title('Comix')
+        self.statusbar.set_message('')
 
     def displayed_double(self):
         

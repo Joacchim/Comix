@@ -284,8 +284,7 @@ class FileHandler:
         self._comment_files = []
         self._current_comment_index = None
         self._raw_pixbufs.clear()
-        self._window.thumbnailsidebar.clear()
-        self._window.draw_image()
+        self._window.clear()
         self._window.ui_manager.set_sensitivities()
         gc.collect()
 
