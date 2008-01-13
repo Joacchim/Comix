@@ -266,7 +266,7 @@ class FileHandler:
             self.file_loaded = False
         else:
             self.file_loaded = True
-
+        
         self._window.thumbnailsidebar.block()
         self._window.new_page()
         cursor.set_cursor_type(cursor.NORMAL)

@@ -9,7 +9,7 @@ import ImageOps
 
 import pilpixbuf
 
-def get_histogram(pixbuf, height=150, fill=170, text=True):
+def draw_histogram(pixbuf, height=150, fill=170, text=True):
     
     """
     Draws a histogram from <pixbuf> and returns it as another pixbuf.
@@ -63,7 +63,7 @@ def get_histogram(pixbuf, height=150, fill=170, text=True):
     if text:
         maxstr = 'max: ' + str(maximum)
         draw = ImageDraw.Draw(im)
-        draw.rectangle((0, 0, len(maxstr) * 6 + 2, 10), fill=(0, 0, 0))
+        draw.rectangle((0, 0, len(maxstr) * 6 + 2, 10), fill=(30, 30, 30))
         draw.text((2, 0), maxstr, fill=(255, 255, 255))
     im = ImageOps.expand(im, 1, (0, 0, 0))
     return pilpixbuf.pil_to_pixbuf(im)

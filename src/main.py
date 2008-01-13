@@ -9,6 +9,7 @@ import time #XXX
 
 import gtk
 
+import constants
 import encoding
 import event
 import filehandler
@@ -622,6 +623,8 @@ class MainWindow(gtk.Window):
         print 'Bye!'
         gtk.main_quit()
         self.file_handler.cleanup()
+        if not os.path.exists(constants.COMIX_DIR):
+            os.mkdir(constants.COMIX_DIR)
         preferences.write_config_file()
         self._ui_manager.bookmarks.store_bookmarks()
         sys.exit(0)

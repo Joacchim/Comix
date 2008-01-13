@@ -44,9 +44,9 @@ def fit_in_rectangle(src, width, height, interp=None, scale_up=False,
                 gtk.gdk.INTERP_TILES, 255, 8, 0x777777, 0x999999)
     else:
         if float(src.get_width()) / width > float(src.get_height()) / height:
-            height = max(src.get_height() * width / src.get_width(), 1)
+            height = int(max(src.get_height() * width / src.get_width(), 1))
         else:
-            width = max(src.get_width() * height / src.get_height(), 1)
+            width = int(max(src.get_width() * height / src.get_height(), 1))
 
         if interp == None:
             interp = preferences.prefs['interp mode']

@@ -22,6 +22,7 @@ class ThumbnailSidebar(gtk.HBox):
         self._visible = False
         self._loaded = False
         self._height = 0
+        self._counter = None
         
         self._liststore = gtk.ListStore(gtk.gdk.Pixbuf)
         self._treeview = gtk.TreeView(self._liststore)
@@ -78,8 +79,11 @@ class ThumbnailSidebar(gtk.HBox):
             return
         
         self._loaded = True
-        for i in xrange(self._window.file_handler.get_number_of_pages()):
-            path = self._window.file_handler.get_path_to_page(i + 1)
+        self._counter = _Counter(
+            self._window.file_handler.get_number_of_pages())
+        while self._counter.incr():
+            i = self._counter.get()
+            path = self._window.file_handler.get_path_to_page(i)
             if self._window.file_handler.archive_type:
                 create = False
             else:
@@ -91,15 +95,15 @@ class ThumbnailSidebar(gtk.HBox):
             pixbuf = image.fit_in_rectangle(pixbuf, prefs['thumbnail size'],
                                             prefs['thumbnail size'])
             if prefs['show page numbers on thumbnails']:
-                _add_page_number(pixbuf, i + 1)
+                _add_page_number(pixbuf, i)
             pixbuf = image.add_border(pixbuf, 1)
             self._liststore.append([pixbuf])
             self._height += pixbuf.get_height() + 4
+            self._layout.set_size(0, self._height)
 
             while gtk.events_pending():
                 gtk.main_iteration(False)
 
-            self._layout.set_size(0, self._height)
         self.update_select()
 
     def update_select(self):
@@ -135,6 +139,20 @@ class ThumbnailSidebar(gtk.HBox):
         elif event.direction == gtk.gdk.SCROLL_DOWN:
             upper = self._vadjust.upper - self._vadjust.page_size
             self._vadjust.set_value(min(self._vadjust.get_value() + 60, upper))
+
+
+class _Counter:
+
+    def __init__(self, roof):
+        self._roof = roof
+        self._num = 0
+    
+    def get(self):
+        return self._num
+
+    def incr(self):
+        self._num += 1
+        return self._num <= self._roof
 
 
 def _add_page_number(pixbuf, page):
