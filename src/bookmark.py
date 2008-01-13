@@ -31,6 +31,9 @@ class _Bookmark(gtk.ImageMenuItem):
     def _load(self, *args):
         self._file_handler.open_file(self._path, self._page)
 
+    def same(self, path):
+        return path == self._path
+
     def pack(self):
         return (self._name, self._path, self._page, self._numpages)
 
@@ -99,6 +102,10 @@ class BookmarksMenu(gtk.Menu):
         path = self._window.file_handler.get_real_path()
         page = self._window.file_handler.get_current_page()
         numpages = self._window.file_handler.get_number_of_pages()
+        for bookmark in self._bookmarks:
+            if bookmark.same(path):
+                self._remove_bookmark(bookmark)
+                break
         self._add_bookmark(name, path, page, numpages)
 
     def _edit_bookmarks(self, *args):
