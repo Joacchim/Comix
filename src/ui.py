@@ -9,6 +9,7 @@ import bookmark
 import filechooser
 import filehandler
 import properties
+import recent
 
 def bogus(*args):
     print 'Weeee...'
@@ -182,8 +183,6 @@ class MainUI(gtk.UIManager):
                     </menu>
                     <separator />
                     <menu action="menu_recent">
-                        <separator />
-                        <menuitem action="clear_recent" />
                     </menu>
                     <separator />
                     <menuitem action="properties" />
@@ -286,6 +285,10 @@ class MainUI(gtk.UIManager):
         self.bookmarks = bookmark.BookmarksMenu(self, window)
         self.get_widget('/Menu/menu_bookmarks').set_submenu(self.bookmarks)
         self.get_widget('/Menu/menu_bookmarks').show()
+        
+        self.recent = recent.RecentFilesMenu(self, window)
+        self.get_widget('/Menu/menu_file/menu_recent').set_submenu(self.recent)
+        self.get_widget('/Menu/menu_file/menu_recent').show()
         
         window.add_accel_group(self.get_accel_group())
 

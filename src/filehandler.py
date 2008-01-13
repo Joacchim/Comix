@@ -264,6 +264,7 @@ class FileHandler:
         else:
             self.file_loaded = True
         
+        self._comment_files.sort()
         self._window.thumbnailsidebar.block()
         self._window.new_page()
         cursor.set_cursor_type(cursor.NORMAL)
@@ -272,7 +273,7 @@ class FileHandler:
         self._window.ui_manager.set_sensitivities()
         self._window.thumbnailsidebar.unblock()
         self._window.thumbnailsidebar.load_thumbnails()
-        self._comment_files.sort()
+        self._window.ui_manager.recent.add(path)
 
     def close_file(self, *args):
         self.file_loaded = False

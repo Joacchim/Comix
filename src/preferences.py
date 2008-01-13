@@ -53,7 +53,7 @@ prefs = {
     #'slideshow delay': 6.0,
     'smart space scroll': True,
     'space scroll percent': 85,
-    #'store recent file info': True,
+    'store recent file info': True,
     'window height': gtk.gdk.screen_get_default().get_height() * 3 / 4, 
     'window width': gtk.gdk.screen_get_default().get_width() / 2
 }
