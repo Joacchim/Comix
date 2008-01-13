@@ -11,7 +11,7 @@ import constants
 
 _pickle_path = os.path.join(constants.COMIX_DIR, 'bookmarks_pickle')
 
-class _Bookmark(gtk.MenuItem):
+class _Bookmark(gtk.ImageMenuItem):
     
     def __init__(self, file_handler, name, path, page, numpages):
         self._name = name
