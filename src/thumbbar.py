@@ -78,7 +78,7 @@ class ThumbnailSidebar(gtk.HBox):
             return
         
         self._loaded = True
-        for i in xrange(self._window.file_handler.number_of_pages()):
+        for i in xrange(self._window.file_handler.get_number_of_pages()):
             path = self._window.file_handler.get_path_to_page(i + 1)
             if self._window.file_handler.archive_type:
                 create = False
@@ -106,9 +106,9 @@ class ThumbnailSidebar(gtk.HBox):
         if not self._loaded:
             return
         self._selection.select_path(
-            self._window.file_handler.current_page() - 1)
+            self._window.file_handler.get_current_page() - 1)
         rect = self._treeview.get_background_area(
-            self._window.file_handler.current_page() - 1, self._column)
+            self._window.file_handler.get_current_page() - 1, self._column)
         if (rect.y < self._vadjust.get_value() or rect.y + rect.height > 
           self._vadjust.get_value() + self._vadjust.page_size):
             value = rect.y + (rect.height // 2) - (self._vadjust.page_size // 2)

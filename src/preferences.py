@@ -58,23 +58,18 @@ prefs = {
     'window width': gtk.gdk.screen_get_default().get_width() / 2
 }
 
-_config_path = os.path.join(constants.COMIX_DIR, 'preferences_data')
+_config_path = os.path.join(constants.COMIX_DIR, 'preferences_pickle')
 
 def read_config_file():
     if os.path.isfile(_config_path):
         try:
             config = open(_config_path)
             version = cPickle.load(config)
-            if version < '4.0':
-                config.close()
-                os.remove(_config_path)
-                print 'Removed old incompatible config (version %s).' % version
-            else:
-                old_prefs = cPickle.load(config)
-                config.close()
-                for key in old_prefs.iterkeys():
-                    if prefs.has_key(key):
-                        prefs[key] = old_prefs[key]
+            old_prefs = cPickle.load(config)
+            config.close()
+            for key in old_prefs.iterkeys():
+                if prefs.has_key(key):
+                    prefs[key] = old_prefs[key]
         except:
             print '! preferences.py: Error reading or writing', _config_path
             os.remove(_config_path)

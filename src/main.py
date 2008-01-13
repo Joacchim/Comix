@@ -5,6 +5,7 @@
 import sys
 import os
 import shutil
+import time #XXX
 
 import gtk
 
@@ -72,7 +73,6 @@ class MainWindow(gtk.Window):
         self.toolbar.set_focus_child(
             self._ui_manager.get_widget('/Tool/expander'))
         
-        self.add_accel_group(self._ui_manager.get_accel_group())
         self._image_box.add(self._left_image)
         self._image_box.add(self._right_image)
         self._image_box.show_all()
@@ -231,8 +231,8 @@ class MainWindow(gtk.Window):
                 right_pixbuf.get_height())) / 2
             #self.right_image.show()
 
-            self.statusbar.set_page_number(self.file_handler.current_page(),
-                self.file_handler.number_of_pages(), double_page=True)
+            self.statusbar.set_page_number(self.file_handler.get_current_page(),
+                self.file_handler.get_number_of_pages(), double_page=True)
             self.statusbar.set_resolution((left_unscaled_x, left_unscaled_y,
                 100.0 * left_pixbuf.get_width() / left_unscaled_x), 
                 (right_unscaled_x, right_unscaled_y,
@@ -264,8 +264,8 @@ class MainWindow(gtk.Window):
             x_padding = (width - pixbuf.get_width()) / 2
             y_padding = (height - pixbuf.get_height()) / 2
 
-            self.statusbar.set_page_number(self.file_handler.current_page(),
-                self.file_handler.number_of_pages())
+            self.statusbar.set_page_number(self.file_handler.get_current_page(),
+                self.file_handler.get_number_of_pages())
             self.statusbar.set_resolution((unscaled_x, unscaled_y,
                 100.0 * pixbuf.get_width() / unscaled_x))
         
@@ -293,7 +293,7 @@ class MainWindow(gtk.Window):
     def new_page(self, at_bottom=False):
         
         """ Draws a *new* page correctly. """
-
+        
         if not self._keep_rotation:
             self._rotation = 0
             self._horizontal_flip = False
@@ -594,6 +594,8 @@ class MainWindow(gtk.Window):
             self.thumbnailsidebar.hide()
             self._vscroll.hide_all()
             self._hscroll.hide_all()
+        
+        self._ui_manager.set_sensitivities()
 
     def _set_title(self):
         
@@ -602,15 +604,15 @@ class MainWindow(gtk.Window):
         if self.displayed_double():
             self.set_title(encoding.to_unicode( 
                 '[%d,%d / %d]  %s  -  Comix' %
-                (self.file_handler.current_page(),
-                self.file_handler.current_page() + 1,
-                self.file_handler.number_of_pages(),
+                (self.file_handler.get_current_page(),
+                self.file_handler.get_current_page() + 1,
+                self.file_handler.get_number_of_pages(),
                 self.file_handler.get_pretty_current_filename())))
         else:
             self.set_title(encoding.to_unicode( 
                 '[%d / %d]  %s  -  Comix' %
-                (self.file_handler.current_page(),
-                self.file_handler.number_of_pages(),
+                (self.file_handler.get_current_page(),
+                self.file_handler.get_number_of_pages(),
                 self.file_handler.get_pretty_current_filename())))
 
     def terminate_program(self, *args):
@@ -621,5 +623,6 @@ class MainWindow(gtk.Window):
         gtk.main_quit()
         self.file_handler.cleanup()
         preferences.write_config_file()
+        self._ui_manager.bookmarks.store_bookmarks()
         sys.exit(0)
 

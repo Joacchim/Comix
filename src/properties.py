@@ -71,11 +71,11 @@ class _PropertiesDialog(gtk.Dialog):
             infobox.pack_start(gtk.VBox()) # Just to add space (any better way?)
             # Add the rest of the main info to the coloured box
             label = gtk.Label(_('%d pages') %
-                window.file_handler.number_of_pages())
+                window.file_handler.get_number_of_pages())
             label.set_alignment(0, 0.5)
             infobox.pack_start(label, False, False)
             label = gtk.Label(_('%d comments') %
-                window.file_handler.number_of_comments())
+                window.file_handler.get_number_of_comments())
             label.set_alignment(0, 0.5)
             infobox.pack_start(label, False, False)
             label = gtk.Label(archive.get_name(

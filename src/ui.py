@@ -5,6 +5,7 @@
 import gtk
 
 import about
+import bookmark
 import filechooser
 import filehandler
 import properties
@@ -16,6 +17,7 @@ class MainUI(gtk.UIManager):
 
     def __init__(self, window):
         gtk.UIManager.__init__(self)
+        self._window = window
 
         # ----------------------------------------------------------------
         # Create actions for the menus.
@@ -36,12 +38,6 @@ class MainUI(gtk.UIManager):
                 'KP_Subtract', None, window.manual_zoom_out),
             ('zoom_original', gtk.STOCK_ZOOM_100, _('_Normal size'),
                 'n', None, window.manual_zoom_original),
-            ('add_bookmark', gtk.STOCK_ADD, _('_Add bookmark'),
-                '<Control>d', None, bogus),
-            ('clear_bookmarks', gtk.STOCK_CLEAR, _('Clear bookmarks'),
-                None, None, bogus),
-            ('edit_bookmarks', 'comix-edit-bookmarks', _('_Edit bookmarks...'),
-                '<Control>b', None, bogus),
             ('preferences', gtk.STOCK_PREFERENCES, _('Pr_eferences'),
                 None, None, bogus),
             ('about', gtk.STOCK_ABOUT, _('_About'),
@@ -248,11 +244,6 @@ class MainUI(gtk.UIManager):
                     <menuitem action="last_page" />
                 </menu>
                 <menu action="menu_bookmarks">
-                    <menuitem action="add_bookmark" />
-                    <menuitem action="edit_bookmarks" />
-                    <separator />
-                    <separator />
-                    <menuitem action="clear_bookmarks" />
                 </menu>
                 <menu action="menu_help">
                     <menuitem action="about" />
@@ -291,8 +282,55 @@ class MainUI(gtk.UIManager):
 
         self.add_ui_from_string(ui_description)
         self.insert_action_group(actiongroup, 0)
+        
+        self.bookmarks = bookmark.BookmarksMenu(self, window)
+        self.get_widget('/Menu/menu_bookmarks').set_submenu(self.bookmarks)
+        self.get_widget('/Menu/menu_bookmarks').show()
+        
+        window.add_accel_group(self.get_accel_group())
 
         # FIXME: Is there no built-in way to do this?
         self.get_widget('/Tool/expander').set_expand(True)
         self.get_widget('/Tool/expander').set_sensitive(False)
+
+    def set_sensitivities(self):
+        general = ('/Menu/menu_file/properties',
+                   '/Menu/menu_file/close',
+                   '/Menu/menu_file/menu_file_operations/rotate_90_jpeg',
+                   '/Menu/menu_file/menu_file_operations/rotate_270_jpeg',
+                   '/Menu/menu_file/menu_file_operations/flip_horiz_jpeg',
+                   '/Menu/menu_file/menu_file_operations/flip_vert_jpeg',
+                   '/Menu/menu_file/menu_file_operations/desaturate_jpeg',
+                   '/Menu/menu_file/menu_file_operations/delete',
+                   '/Menu/menu_view/slideshow',
+                   '/Menu/menu_view/menu_transform/rotate_90',
+                   '/Menu/menu_view/menu_transform/rotate_180',
+                   '/Menu/menu_view/menu_transform/rotate_270',
+                   '/Menu/menu_view/menu_transform/flip_horiz',
+                   '/Menu/menu_view/menu_transform/flip_vert',
+                   '/Menu/menu_go/next_page',
+                   '/Menu/menu_go/previous_page',
+                   '/Menu/menu_go/first_page',
+                   '/Menu/menu_go/last_page',
+                   '/Tool/next_page',
+                   '/Tool/previous_page',
+                   '/Tool/first_page',
+                   '/Tool/last_page',
+                   '/Popup/next_page',
+                   '/Popup/previous_page',
+                   '/Popup/properties')
+        archive = ('/Menu/menu_file/add_to_library',
+                   '/Menu/menu_file/convert',
+                   '/Menu/menu_file/extract',
+                   '/Menu/menu_file/comments')
+
+        if self._window.file_handler.file_loaded:
+            for path in general:
+                self.get_widget(path).set_sensitive(True)
+            if self._window.file_handler.archive_type:
+                for path in archive:
+                    self.get_widget(path).set_sensitive(True)
+        else:
+            for path in general + archive:
+                self.get_widget(path).set_sensitive(False)
 

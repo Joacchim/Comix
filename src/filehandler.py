@@ -76,55 +76,24 @@ class FileHandler:
         if prefs['cache']:
             wanted_pixbufs = range(max(0, self._current_image_index - viewed), 
                 min(self._current_image_index + viewed * 2,
-                    self.number_of_pages()))
+                    self.get_number_of_pages()))
         else:
             wanted_pixbufs = range(self._current_image_index, 
-                min(self._current_image_index + viewed, self.number_of_pages()))
+                min(self._current_image_index + viewed,
+                    self.get_number_of_pages()))
         
         # Remove old pixbufs.
         for page in self._raw_pixbufs.keys()[:]:
             if not page in wanted_pixbufs:
                 del self._raw_pixbufs[page]
         if sys.version_info[:3] >= (2, 5, 0):
-            gc.collect(0)  # FIXME: Try this!
+            gc.collect(0)  # FIXME: Try this (i.e. get Python 2.5)!
         else:
             gc.collect()
 
         # Cache new pixbufs if not already cached.
         for wanted in wanted_pixbufs:
             self._get_pixbuf(wanted)
-
-    def number_of_pages(self):
-        
-        """ Returns the number of pages in the current archive/directory. """
-
-        return len(self._image_files)
-
-    def current_page(self):
-        
-        """ Returns the current page number. """
-
-        return self._current_image_index + 1
-
-    def is_last_page(self):
-        
-        """ Returns True if at the last page. """
-
-        return self.current_page() == self.number_of_pages()
-
-    def number_of_comments(self):
-        
-        """
-        Returns the number of comments in the current archive/directory.
-        """
-
-        return len(self._comment_files)
-
-    def current_comment(self):
-        
-        """ Returns the current comment number. """
-
-        return self._current_comment_index + 1
 
     def next_page(self):
 
@@ -135,17 +104,17 @@ class FileHandler:
 
         if not self.file_loaded:
             return False
-        old_image = self.current_page()
+        old_image = self.get_current_page()
         step = self._window.is_double_page and 2 or 1
-        if self.current_page() + step > self.number_of_pages():
+        if self.get_current_page() + step > self.get_number_of_pages():
             if prefs['auto open next archive']:
                 #open_file(NEXT_ARCHIVE)
                 print 'open next archive'
             return False
         self._current_image_index += step
-        self._current_image_index = min(self.number_of_pages() - 1,
+        self._current_image_index = min(self.get_number_of_pages() - 1,
             self._current_image_index)
-        return old_image != self.current_page()
+        return old_image != self.get_current_page()
 
     def previous_page(self):
 
@@ -156,16 +125,16 @@ class FileHandler:
 
         if not self.file_loaded:
             return False
-        if self.current_page() == 1:
+        if self.get_current_page() == 1:
             if prefs['auto open next archive']:
                 #open_file(PREVIOUS_ARCHIVE)
                 print 'open previous archive'
             return False
-        old_image = self.current_page()
+        old_image = self.get_current_page()
         step = self._window.is_double_page and 2 or 1
         self._current_image_index -= step
         self._current_image_index = max(0, self._current_image_index)
-        return old_image != self.current_page()
+        return old_image != self.get_current_page()
 
     def first_page(self):
 
@@ -176,9 +145,9 @@ class FileHandler:
 
         if not self.file_loaded:
             return False
-        old_image = self.current_page()
+        old_image = self.get_current_page()
         self._current_image_index = 0
-        return old_image != self.current_page()
+        return old_image != self.get_current_page()
 
     def last_page(self):
 
@@ -189,10 +158,10 @@ class FileHandler:
         
         if not self.file_loaded:
             return False
-        old_image = self.current_page()
+        old_image = self.get_current_page()
         offset = self._window.is_double_page and 2 or 1
-        self._current_image_index = max(0, self.number_of_pages() - offset)
-        return old_image != self.current_page()
+        self._current_image_index = max(0, self.get_number_of_pages() - offset)
+        return old_image != self.get_current_page()
 
     def set_page(self, page_num):
 
@@ -201,11 +170,11 @@ class FileHandler:
         not the same page, False otherwise.
         """
 
-        old_image = self.current_page()
-        if not 0 < page_num <= self.number_of_pages():
+        old_image = self.get_current_page()
+        if not 0 < page_num <= self.get_number_of_pages():
             return False
         self._current_image_index = page_num - 1
-        return old_image != self.current_page()
+        return old_image != self.get_current_page()
 
     def open_file(self, path, start_page=1):
 
@@ -324,6 +293,38 @@ class FileHandler:
     def cleanup(self):
         shutil.rmtree(self._tmp_dir)
 
+    def is_last_page(self):
+        
+        """ Returns True if at the last page. """
+
+        return self.get_current_page() == self.get_number_of_pages()
+
+    def get_number_of_pages(self):
+        
+        """ Returns the number of pages in the current archive/directory. """
+
+        return len(self._image_files)
+
+    def get_current_page(self):
+        
+        """ Returns the current page number. """
+
+        return self._current_image_index + 1
+
+    def get_number_of_comments(self):
+        
+        """
+        Returns the number of comments in the current archive/directory.
+        """
+
+        return len(self._comment_files)
+
+    def get_current_comment(self):
+        
+        """ Returns the current comment number. """
+
+        return self._current_comment_index + 1
+
     def get_pretty_current_filename(self):
         
         """
@@ -351,10 +352,22 @@ class FileHandler:
         
         """
         Returns the full path to the current base (path to archive or
-        image directory.
+        image directory.)
         """
 
         return self._base_path
+
+    def get_real_path(self):
+        
+        """
+        Returns the "real" path to the currenlty viewed file, i.e. the
+        full path to the archive or the full path to the currently
+        viewed image.
+        """
+
+        if self.archive_type:
+            return self.get_path_to_base()
+        return self._image_files[self._current_image_index]
 
 def is_image_file(path):
     
