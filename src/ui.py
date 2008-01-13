@@ -38,18 +38,16 @@ class MainUI(gtk.UIManager):
             ('zoom_out', gtk.STOCK_ZOOM_OUT, _('Zoom _out'),
                 'KP_Subtract', None, window.manual_zoom_out),
             ('zoom_original', gtk.STOCK_ZOOM_100, _('_Normal size'),
-                'n', None, window.manual_zoom_original),
+                '<Control>0', None, window.manual_zoom_original),
             ('preferences', gtk.STOCK_PREFERENCES, _('Pr_eferences'),
                 None, None, bogus),
             ('about', gtk.STOCK_ABOUT, _('_About'),
                 None, None, about.dialog_open),
             ('edit_thumbnails', 'comix-thumbnails', _('_Manage thumbnails...'),
                 None, None, bogus),
-            ('comments', gtk.STOCK_INFO, _('View _comments'),
+            ('comments', 'comix-comments', _('View _comments'),
                 'c', None, bogus),
-            ('clear_recent', gtk.STOCK_CLEAR, _('Clear recent files'),
-                None, None, bogus),
-            ('library', 'comix-library', _('Open _library...'),
+            ('library', 'comix-library', _('_Library...'),
                 '<Control>l', None, bogus),
             ('add_to_library', 'comix-library-add', _('_Add to library'),
                 None, None, bogus),
@@ -63,21 +61,10 @@ class MainUI(gtk.UIManager):
                 '<Control>q', None, window.terminate_program),
             ('colour_adjust', 'comix-colour-adjust', _('_Adjust colour...'),
                 'j', None, bogus),
-            ('slideshow', 'comix-slideshow', _('Slideshow'),
+            ('slideshow', gtk.STOCK_MEDIA_PLAY, _('Slideshow'),
                 '<Control>S', None, bogus),
             ('delete', gtk.STOCK_DELETE, _('Delete image...'),
                 None, None, bogus),
-            ('rotate_90_jpeg', 'comix-rotate-90-jpeg',
-                _('CW lossless JPEG rotation...'), '<Alt>r', None, bogus),
-            ('rotate_270_jpeg', 'comix-rotate-270-jpeg',
-                _('CCW lossless JPEG rotation...'), '<Alt><Shift>r', None,
-                bogus),
-            ('flip_horiz_jpeg', 'comix-flip-horizontal-jpeg',
-                _('Horizontal lossless JPEG flip...'), None, None, bogus),
-            ('flip_vert_jpeg', 'comix-flip-vertical-jpeg',
-                _('Vertical lossless JPEG flip...'), None, None, bogus),
-            ('desaturate_jpeg', 'comix-desaturate',
-                _('Convert JPEG to greyscale...'), None, None, bogus),
             ('rotate_90', 'comix-rotate-90', _('_Rotate 90 degrees CW'),
                 'r', None, window.rotate_90),
             ('rotate_180','comix-rotate-180', _('Rotate 180 de_grees'),
@@ -89,12 +76,10 @@ class MainUI(gtk.UIManager):
             ('flip_vert', 'comix-flip-vertical', _('Flip _vertically'),
                 None, None, window.flip_vertically),
             ('menu_zoom', 'comix-zoom', _('Manual _Zoom')),
-            ('menu_recent', 'comix-recent-files', _('_Recent files')),
+            ('menu_recent', None, _('_Recent files')),
             ('menu_bookmarks', None, _('_Bookmarks')),
-            ('menu_toolbars', 'comix-toolbars', _('_Toolbars')),
+            ('menu_toolbars', None, _('_Toolbars')),
             ('menu_edit', None, _('_Edit')),
-            ('menu_file_operations', 'comix-file-operations',
-                _('File o_perations')),
             ('menu_file', None, _('_File')),
             ('menu_view', None, _('_View')),
             ('menu_go', None, _('_Go')),
@@ -127,7 +112,7 @@ class MainUI(gtk.UIManager):
                 'z', None, bogus)])
 
         self._actiongroup.add_radio_actions([
-            ('fit_manual_mode', 'comix-fitnone', _('Manual zoom mode'),
+            ('fit_manual_mode', 'comix-fitmanual', _('Manual zoom mode'),
                 'a', None, 0),
             ('fit_screen_mode', 'comix-fitscreen', _('Fit-to-_screen mode'),
                 's', None, 1),
@@ -172,15 +157,7 @@ class MainUI(gtk.UIManager):
                     <menuitem action="add_to_library" />
                     <menuitem action="convert" />
                     <menuitem action="extract" />
-                    <menu action="menu_file_operations">
-                        <menuitem action="rotate_90_jpeg" />
-                        <menuitem action="rotate_270_jpeg" />
-                        <menuitem action="flip_horiz_jpeg" />
-                        <menuitem action="flip_vert_jpeg" />
-                        <menuitem action="desaturate_jpeg" />
-                        <separator />
-                        <menuitem action="delete" />
-                    </menu>
+                    <menuitem action="delete" />
                     <separator />
                     <menu action="menu_recent">
                     </menu>
@@ -192,8 +169,8 @@ class MainUI(gtk.UIManager):
                     <menuitem action="quit" />
                 </menu>
                 <menu action="menu_edit">
-                    <menuitem action="edit_thumbnails" />
                     <menuitem action="preferences" />
+                    <menuitem action="edit_thumbnails" />
                 </menu>
                 <menu action="menu_view">
                     <menuitem action="fullscreen" />
@@ -205,8 +182,6 @@ class MainUI(gtk.UIManager):
                     <menuitem action="fit_height_mode" />
                     <menuitem action="fit_manual_mode" />
                     <separator />
-                    <menuitem action="slideshow" />
-                    <separator />
                     <menuitem action="colour_adjust" />
                     <separator />
                     <menuitem action="lens" />
@@ -215,6 +190,7 @@ class MainUI(gtk.UIManager):
                         <menuitem action="rotate_90" />
                         <menuitem action="rotate_270" />
                         <menuitem action="rotate_180" />
+                        <separator />
                         <menuitem action="flip_horiz" />
                         <menuitem action="flip_vert" />
                         <separator />
@@ -241,6 +217,8 @@ class MainUI(gtk.UIManager):
                     <menuitem action="previous_page" />
                     <menuitem action="next_page" />
                     <menuitem action="last_page" />
+                    <separator />
+                    <menuitem action="slideshow" />
                 </menu>
                 <menu action="menu_bookmarks">
                 </menu>
@@ -266,6 +244,7 @@ class MainUI(gtk.UIManager):
                     <menuitem action="rotate_90" />
                     <menuitem action="rotate_270" />
                     <menuitem action="rotate_180" />
+                    <separator />
                     <menuitem action="flip_horiz" />
                     <menuitem action="flip_vert" />
                     <separator />
@@ -302,11 +281,6 @@ class MainUI(gtk.UIManager):
 
         general = ('properties',
                    'close',
-                   'rotate_90_jpeg',
-                   'rotate_270_jpeg',
-                   'flip_horiz_jpeg',
-                   'flip_vert_jpeg',
-                   'desaturate_jpeg',
                    'delete',
                    'slideshow',
                    'rotate_90',

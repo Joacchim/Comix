@@ -44,11 +44,11 @@ class BookmarksMenu(gtk.Menu):
         self._bookmarks = []
         self._actiongroup = gtk.ActionGroup('comix-bookmarks')
         self._actiongroup.add_actions([
-            ('add_bookmark', gtk.STOCK_ADD, _('_Add bookmark'),
+            ('add_bookmark', 'comix-add-bookmark', _('_Add bookmark'),
                 '<Control>d', None, self._add_current_to_bookmarks),
             ('clear_bookmarks', gtk.STOCK_CLEAR, _('Clear bookmarks'),
                 None, None, self._clear_bookmarks),
-            ('edit_bookmarks', 'comix-edit-bookmarks', _('_Edit bookmarks...'),
+            ('edit_bookmarks', None, _('_Edit bookmarks...'),
                 '<Control>b', None, self._edit_bookmarks)])
         self._separator = gtk.SeparatorMenuItem()
 
