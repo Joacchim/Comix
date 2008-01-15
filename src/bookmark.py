@@ -15,14 +15,21 @@ _pickle_path = os.path.join(constants.COMIX_DIR, 'bookmarks_pickle')
 
 class _Bookmark(gtk.ImageMenuItem):
     
-    def __init__(self, file_handler, name, path, page, numpages):
+    def __init__(self, file_handler, name, path, page, numpages, archive_type):
         self._name = name
         self._path = path
         self._page = page
         self._numpages = numpages
+        self._archive_type = archive_type
         self._file_handler = file_handler
         
         gtk.MenuItem.__init__(self, str(self), False)
+        if archive_type:
+            im = gtk.image_new_from_stock('comix-archive', gtk.ICON_SIZE_MENU)
+        else:
+            im = gtk.image_new_from_stock('comix-image', gtk.ICON_SIZE_MENU)
+        self.set_image(im)
+
         self.connect('activate', self._load)
     
     def __str__(self):
@@ -35,7 +42,8 @@ class _Bookmark(gtk.ImageMenuItem):
         return path == self._path
 
     def pack(self):
-        return (self._name, self._path, self._page, self._numpages)
+        return (self._name, self._path, self._page, self._numpages,
+            self._archive_type)
 
 
 class BookmarksMenu(gtk.Menu):
@@ -83,12 +91,12 @@ class BookmarksMenu(gtk.Menu):
                 os.remove(_pickle_path)
                 self._bookmarks = []
     
-    def _add_bookmark(self, name, path, page, numpages):
+    def _add_bookmark(self, name, path, page, numpages, archive_type):
         
         """ Adds a bookmark. """
         
         bookmark = _Bookmark(self._window.file_handler, name, path, page,
-            numpages)
+            numpages, archive_type)
         self._bookmarks.append(bookmark)
         self.insert(bookmark, 3)
         bookmark.show()
@@ -102,11 +110,12 @@ class BookmarksMenu(gtk.Menu):
         path = self._window.file_handler.get_real_path()
         page = self._window.file_handler.get_current_page()
         numpages = self._window.file_handler.get_number_of_pages()
+        archive_type = self._window.file_handler.archive_type
         for bookmark in self._bookmarks:
             if bookmark.same(path):
                 self._remove_bookmark(bookmark)
                 break
-        self._add_bookmark(name, path, page, numpages)
+        self._add_bookmark(name, path, page, numpages, archive_type)
 
     def _edit_bookmarks(self, *args):
         print 'edit bookmarks'

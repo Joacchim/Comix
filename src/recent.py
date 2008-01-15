@@ -15,7 +15,6 @@ class RecentFilesMenu(gtk.RecentChooserMenu):
         self._manager = gtk.recent_manager_get_default()
         gtk.RecentChooserMenu.__init__(self, self._manager)
 
-        self.set_show_numbers(True)
         self.set_sort_type(gtk.RECENT_SORT_MRU)
         self.set_show_tips(True)
 

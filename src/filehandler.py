@@ -295,8 +295,11 @@ class FileHandler:
     def is_last_page(self):
         
         """ Returns True if at the last page. """
-
-        return self.get_current_page() == self.get_number_of_pages()
+        
+        if self._window.displayed_double():
+            return self.get_current_page() + 1 >= self.get_number_of_pages()
+        else:
+            return self.get_current_page() == self.get_number_of_pages()
 
     def get_number_of_pages(self):
         

@@ -51,7 +51,7 @@ class MainUI(gtk.UIManager):
                 '<Control>l', None, bogus),
             ('add_to_library', 'comix-library-add', _('_Add to library'),
                 None, None, bogus),
-            ('convert', gtk.STOCK_CONVERT, _('Con_vert...'),
+            ('convert', gtk.STOCK_CONVERT, _('Con_vert archive...'),
                 None, None, bogus),
             ('extract', gtk.STOCK_SAVE_AS, _('E_xtract image...'),
                 None, None, bogus),
@@ -61,10 +61,8 @@ class MainUI(gtk.UIManager):
                 '<Control>q', None, window.terminate_program),
             ('colour_adjust', 'comix-colour-adjust', _('_Adjust colour...'),
                 'j', None, bogus),
-            ('slideshow', gtk.STOCK_MEDIA_PLAY, _('Slideshow'),
-                '<Control>S', None, bogus),
-            ('delete', gtk.STOCK_DELETE, _('Delete image...'),
-                None, None, bogus),
+            ('delete', gtk.STOCK_DELETE, _('Delete image'),
+                'Delete', None, bogus),
             ('rotate_90', 'comix-rotate-90', _('_Rotate 90 degrees CW'),
                 'r', None, window.rotate_90),
             ('rotate_180','comix-rotate-180', _('Rotate 180 de_grees'),
@@ -76,7 +74,7 @@ class MainUI(gtk.UIManager):
             ('flip_vert', 'comix-flip-vertical', _('Flip _vertically'),
                 None, None, window.flip_vertically),
             ('menu_zoom', 'comix-zoom', _('Manual _Zoom')),
-            ('menu_recent', None, _('_Recent files')),
+            ('menu_recent', None, _('Open _recent')),
             ('menu_bookmarks', None, _('_Bookmarks')),
             ('menu_toolbars', None, _('_Toolbars')),
             ('menu_edit', None, _('_Edit')),
@@ -108,6 +106,8 @@ class MainUI(gtk.UIManager):
                 'm', None, window.change_manga_mode),
             ('keep_rotation', None, _('_Keep transformation'),
                 'k', None, window.change_keep_rotation),
+            ('slideshow', gtk.STOCK_MEDIA_PLAY, _('Run _slideshow'),
+                '<Control>S', None, window.slideshow.toggle),
             ('lens', 'comix-lens', _('Magnifying _lens'),
                 'z', None, bogus)])
 
@@ -156,21 +156,22 @@ class MainUI(gtk.UIManager):
                     <separator />
                     <menuitem action="add_to_library" />
                     <menuitem action="convert" />
-                    <menuitem action="extract" />
-                    <menuitem action="delete" />
-                    <separator />
-                    <menu action="menu_recent">
-                    </menu>
+                    <menuitem action="extract" /> 
                     <separator />
                     <menuitem action="properties" />
                     <menuitem action="comments" />
+                    <separator />
+                    <menu action="menu_recent">
+                    </menu>
                     <separator />
                     <menuitem action="close" />
                     <menuitem action="quit" />
                 </menu>
                 <menu action="menu_edit">
-                    <menuitem action="preferences" />
+                    <menuitem action="delete" />
                     <menuitem action="edit_thumbnails" />
+                    <separator />
+                    <menuitem action="preferences" />
                 </menu>
                 <menu action="menu_view">
                     <menuitem action="fullscreen" />
@@ -213,9 +214,9 @@ class MainUI(gtk.UIManager):
                     </menu>
                 </menu>
                 <menu action="menu_go">
-                    <menuitem action="first_page" />
-                    <menuitem action="previous_page" />
                     <menuitem action="next_page" />
+                    <menuitem action="previous_page" />
+                    <menuitem action="first_page" />
                     <menuitem action="last_page" />
                     <separator />
                     <menuitem action="slideshow" />
@@ -280,6 +281,7 @@ class MainUI(gtk.UIManager):
         """ Sets the main UI's widget's sensitivities appropriately. """
 
         general = ('properties',
+                   'convert',
                    'close',
                    'delete',
                    'slideshow',
@@ -293,7 +295,6 @@ class MainUI(gtk.UIManager):
                    'first_page',
                    'last_page')
         archive = ('add_to_library',
-                   'convert',
                    'extract')
         comment = ('comments',)
         general_sensitive = False

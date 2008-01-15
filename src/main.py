@@ -18,6 +18,7 @@ import pilpixbuf
 import preferences
 from preferences import prefs
 import ui
+import slideshow
 import status
 import thumbbar
 
@@ -45,6 +46,7 @@ class MainWindow(gtk.Window):
         self.file_handler = filehandler.FileHandler(self)
         self.thumbnailsidebar = thumbbar.ThumbnailSidebar(self)
         self.statusbar = status.Statusbar()
+        self.slideshow = slideshow.Slideshow(self)
         self.ui_manager = ui.MainUI(self)
         self.menubar = self.ui_manager.get_widget('/Menu')
         self.toolbar = self.ui_manager.get_widget('/Tool')
@@ -522,7 +524,8 @@ class MainWindow(gtk.Window):
         
         """ Returns True if two pages are currently displayed. """
 
-        return self.is_double_page and not self.file_handler.is_last_page()
+        return (self.is_double_page and self.file_handler.get_current_page() !=
+            self.file_handler.get_number_of_pages())
 
     def get_visible_area_size(self):
         
@@ -605,14 +608,14 @@ class MainWindow(gtk.Window):
 
         if self.displayed_double():
             self.set_title(encoding.to_unicode( 
-                '[%d,%d / %d]  %s  -  Comix' %
+                '[%d,%d / %d]  %s - Comix' %
                 (self.file_handler.get_current_page(),
                 self.file_handler.get_current_page() + 1,
                 self.file_handler.get_number_of_pages(),
                 self.file_handler.get_pretty_current_filename())))
         else:
             self.set_title(encoding.to_unicode( 
-                '[%d / %d]  %s  -  Comix' %
+                '[%d / %d]  %s - Comix' %
                 (self.file_handler.get_current_page(),
                 self.file_handler.get_number_of_pages(),
                 self.file_handler.get_pretty_current_filename())))

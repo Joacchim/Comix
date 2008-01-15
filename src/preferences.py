@@ -50,7 +50,7 @@ prefs = {
     'show page numbers on thumbnails': True,
     'thumbnail size': 80,
     'create thumbnails': True,
-    #'slideshow delay': 6.0,
+    'slideshow delay': 3000,
     'smart space scroll': True,
     'space scroll percent': 85,
     'store recent file info': True,
