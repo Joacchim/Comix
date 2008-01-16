@@ -30,7 +30,6 @@ class FileHandler:
         self._image_files = []
         self._current_image_index = None
         self._comment_files = []
-        self._current_comment_index = None
         self._raw_pixbufs = {}
 
     def _get_pixbuf(self, page):
@@ -283,7 +282,6 @@ class FileHandler:
         self._image_files = []
         self._current_image_index = None
         self._comment_files = []
-        self._current_comment_index = None
         self._raw_pixbufs.clear()
         self._window.clear()
         self._window.ui_manager.set_sensitivities()
@@ -321,11 +319,16 @@ class FileHandler:
 
         return len(self._comment_files)
 
-    def get_current_comment(self):
+    def get_comment(self, num):
         
-        """ Returns the current comment number. """
-
-        return self._current_comment_index + 1
+        """ 
+        Returns the path to comment <num> or None if comment <num> does 
+        not exist.
+        """
+        
+        if num > self.get_number_of_comments():
+            return None
+        return self._comment_files[num - 1]
 
     def get_pretty_current_filename(self):
         

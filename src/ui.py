@@ -6,6 +6,7 @@ import gtk
 
 import about
 import bookmark
+import comment
 import filechooser
 import filehandler
 import properties
@@ -45,8 +46,6 @@ class MainUI(gtk.UIManager):
                 None, None, about.dialog_open),
             ('edit_thumbnails', 'comix-thumbnails', _('_Manage thumbnails...'),
                 None, None, bogus),
-            ('comments', 'comix-comments', _('View _comments'),
-                'c', None, bogus),
             ('library', 'comix-library', _('_Library...'),
                 '<Control>l', None, bogus),
             ('add_to_library', 'comix-library-add', _('_Add to library'),
@@ -125,10 +124,14 @@ class MainUI(gtk.UIManager):
         # Some actions added separately since they need the main window as
         # a parameter.
         self._actiongroup.add_actions([
-            ('open', gtk.STOCK_OPEN, _('_Open...'),
-                '<Control>o', None, filechooser.dialog_open),
             ('properties', gtk.STOCK_PROPERTIES, _('Proper_ties'),
                 '<Alt>Return', None, properties.dialog_open)], window)
+
+        self._actiongroup.add_actions([
+            ('open', gtk.STOCK_OPEN, _('_Open...'),
+                '<Control>o', None, filechooser.dialog_open),
+            ('comments', 'comix-comments', _('View _comments'),
+                'c', None, comment.dialog_open)], window.file_handler)
 
         ui_description = """
         <ui>
