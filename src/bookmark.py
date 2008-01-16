@@ -225,9 +225,11 @@ class _BookmarksDialog(gtk.Dialog):
         self.set_resizable(True)
         self.set_default_response(gtk.RESPONSE_CLOSE)
 
-        listbox = gtk.VBox()
-        listbox.set_border_width(8)
-        self.vbox.pack_start(listbox)
+        scrolled = gtk.ScrolledWindow()
+        scrolled.set_border_width(8)
+        scrolled.set_shadow_type(gtk.SHADOW_IN)
+        scrolled.set_policy(gtk.POLICY_AUTOMATIC, gtk.POLICY_AUTOMATIC)
+        self.vbox.pack_start(scrolled)
 
         self._liststore = gtk.ListStore(gtk.gdk.Pixbuf, gobject.TYPE_STRING,
             gobject.TYPE_STRING, _Bookmark)
@@ -235,7 +237,7 @@ class _BookmarksDialog(gtk.Dialog):
         self._treeview.set_rules_hint(True)
         self._treeview.set_reorderable(True)
         self._selection = self._treeview.get_selection()
-        listbox.pack_start(self._treeview, True, True)
+        scrolled.add(self._treeview)
         cellrenderer_text = gtk.CellRendererText()
         cellrenderer_pbuf = gtk.CellRendererPixbuf()
         self._icon_col = gtk.TreeViewColumn(None, cellrenderer_pbuf)
@@ -251,7 +253,7 @@ class _BookmarksDialog(gtk.Dialog):
         self._icon_col.set_sizing(gtk.TREE_VIEW_COLUMN_AUTOSIZE)
         self._name_col.set_sizing(gtk.TREE_VIEW_COLUMN_AUTOSIZE)
         self._page_col.set_sizing(gtk.TREE_VIEW_COLUMN_AUTOSIZE)
-        self.resize(300, 300)
+        self.resize(400, 400)
         
         self.connect('response', self._response)
         self.connect('delete_event', self._close)

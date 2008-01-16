@@ -26,7 +26,7 @@ class FileHandler:
         
         self._base_path = None
         self._window = window
-        self._tmp_dir = tempfile.mkdtemp(prefix="comix.", suffix="/")
+        self._tmp_dir = tempfile.mkdtemp(prefix='comix.')
         self._image_files = []
         self._current_image_index = None
         self._comment_files = []
@@ -106,9 +106,8 @@ class FileHandler:
         old_image = self.get_current_page()
         step = self._window.is_double_page and 2 or 1
         if self.get_current_page() + step > self.get_number_of_pages():
-            if prefs['auto open next archive']:
-                #open_file(NEXT_ARCHIVE)
-                print 'open next archive'
+            if prefs['auto open next archive'] and self.archive_type:
+                self._open_next_archive()
             return False
         self._current_image_index += step
         self._current_image_index = min(self.get_number_of_pages() - 1,
@@ -125,9 +124,8 @@ class FileHandler:
         if not self.file_loaded:
             return False
         if self.get_current_page() == 1:
-            if prefs['auto open next archive']:
-                #open_file(PREVIOUS_ARCHIVE)
-                print 'open previous archive'
+            if prefs['auto open next archive'] and self.archive_type:
+                self._open_previous_archive()
             return False
         old_image = self.get_current_page()
         step = self._window.is_double_page and 2 or 1
@@ -179,14 +177,13 @@ class FileHandler:
 
         """
         If <path> is an image we add all images in its directory to the
-        image_files and all comments to the comment_files. We set current_image
-        to point to <path>.
+        _image_files.
 
-        If <path> is an archive we decompresses it to the tmp_dir and adds all
-        images in the decompressed tree to image_files and all comments to
-        comment_files. If <start_image> is not set we set current page to 1
-        (first page), if it is set we set it to the value of <start_page>.
-        If <start_page> is non-positive it means the last image.
+        If <path> is an archive we decompresses it to the _tmp_dir and adds
+        all images in the decompressed tree to _image_files and all comments
+        to _comment_files. If <start_image> is not set we set current page
+        to 1 (first page), if it is set we set it to the value of
+        <start_page>. If <start_page> is non-positive it means the last image.
         """
         
         # --------------------------------------------------------------------
@@ -220,20 +217,24 @@ class FileHandler:
         if self.archive_type:
             self._base_path = path
             archive.extract_archive(path, self._tmp_dir)
-            # FIXME: Nested archives
             for dirname, dirs, files in os.walk(self._tmp_dir):
                 for f in files:
-                    if is_image_file(os.path.join(dirname, f)):
-                        self._image_files.append(os.path.join(dirname, f))
+                    fpath = os.path.join(dirname, f)
+                    if is_image_file(fpath):
+                        self._image_files.append(fpath)
                     elif (os.path.splitext(f)[1].lower() in
                       prefs['comment extensions']):
-                        self._comment_files.append(os.path.join(dirname, f))
+                        self._comment_files.append(fpath)
+                    elif archive.archive_mime_type(fpath):
+                        subdir = tempfile.mkdtemp(dir=dirname, prefix=f)
+                        archive.extract_archive(fpath, subdir)
+                        dirs.append(subdir)
             self._image_files.sort()  # We don't sort archives after locale
             if start_page <= 0:
                 if self._window.is_double_page:
-                    self._current_image_index = self.number_of_pages() - 2
+                    self._current_image_index = self.get_number_of_pages() - 2
                 else:
-                    self._current_image_index = self.number_of_pages() - 1
+                    self._current_image_index = self.get_number_of_pages() - 1
             else:
                 self._current_image_index = start_page - 1
             self._current_image_index = max(0, self._current_image_index)
@@ -246,8 +247,6 @@ class FileHandler:
             self._base_path = os.path.dirname(path)
             for f in os.listdir(os.path.dirname(path)):
                 fpath = os.path.join(os.path.dirname(path), f)
-                if os.path.isdir(fpath):
-                    continue
                 if is_image_file(fpath):
                     self._image_files.append(fpath)
             self._image_files.sort(locale.strcoll)
@@ -278,7 +277,7 @@ class FileHandler:
         self.file_loaded = False
         self._base_path = None
         shutil.rmtree(self._tmp_dir)
-        self._tmp_dir = tempfile.mkdtemp(prefix="comix.", suffix="/")
+        self._tmp_dir = tempfile.mkdtemp(prefix='comix.')
         self._image_files = []
         self._current_image_index = None
         self._comment_files = []
@@ -289,6 +288,28 @@ class FileHandler:
 
     def cleanup(self):
         shutil.rmtree(self._tmp_dir)
+
+    def _open_next_archive(self):
+        arch_dir = os.path.dirname(self._base_path)
+        files = os.listdir(arch_dir)
+        files.sort(locale.strcoll)
+        current_index = files.index(os.path.basename(self._base_path))
+        for f in files[current_index + 1:]:
+            path = os.path.join(arch_dir, f)
+            if archive.archive_mime_type(path):
+                self.open_file(path)
+                return
+
+    def _open_previous_archive(self):
+        arch_dir = os.path.dirname(self._base_path)
+        files = os.listdir(arch_dir)
+        files.sort(locale.strcoll)
+        current_index = files.index(os.path.basename(self._base_path))
+        for f in reversed(files[:current_index]):
+            path = os.path.join(arch_dir, f)
+            if archive.archive_mime_type(path):
+                self.open_file(path, 0)
+                return
 
     def is_last_page(self):
         
