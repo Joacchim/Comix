@@ -74,7 +74,7 @@ def read_config_file():
             print '! preferences.py: Error reading or writing', _config_path
             os.remove(_config_path)
 
-def write_config_file():
+def write_config_to_file():
     config = open(_config_path, 'w')
     cPickle.dump(constants.VERSION, config, cPickle.HIGHEST_PROTOCOL)
     cPickle.dump(prefs, config, cPickle.HIGHEST_PROTOCOL)

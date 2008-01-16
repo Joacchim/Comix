@@ -14,8 +14,8 @@ _dialog = None
 
 class _AboutDialog(gtk.Dialog):
 
-    def __init__(self, window):
-        gtk.Dialog.__init__(self, _('About'), window, 0,
+    def __init__(self):
+        gtk.Dialog.__init__(self, _('About'), None, 0,
             (gtk.STOCK_CLOSE, gtk.RESPONSE_CLOSE))
         self.set_has_separator(False)
         self.set_resizable(False)
@@ -105,7 +105,7 @@ class _AboutDialog(gtk.Dialog):
 def dialog_open(*args):
     global _dialog
     if _dialog == None:
-        _dialog = _AboutDialog(None)
+        _dialog = _AboutDialog()
         _dialog.show()
 
 def dialog_close(*args):
