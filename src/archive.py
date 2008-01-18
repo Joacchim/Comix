@@ -88,9 +88,16 @@ class Extractor:
         the order of extraction. Normally one would get the list of all files
         in the archive using get_files(), then filter and/or permute this
         list before sending it back using set_files().
+        
+        Note: Random access on gzip or bzip2 compressed tar archives is
+        no good idea. These formats are supported *only* for backwards
+        compability. They should not be used for comic book purposes.
+        So, we cheat and ignore the ordering applied with this method on
+        such archives.
         """
 
-        self._files = files
+        if self._type != 'gzip' and self._type != 'bzip2':
+            self._files = files
 
     def is_ready(self, name):
 
@@ -134,6 +141,7 @@ class Extractor:
     def _thread_extract(self):
         
         """ Extract the files in the file list one by one. """
+        
 
         for name in self._files:
             self._extract_file(name, self._dst)

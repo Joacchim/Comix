@@ -240,10 +240,8 @@ class FileHandler:
         # tree to find images and comments.
         # --------------------------------------------------------------------
         if self.archive_type:
-            t = time.time()
             self._base_path = path
             self._condition = self._extractor.setup(path, self._tmp_dir)
-            print time.time() - t
             files = self._extractor.get_files()
             image_files = filter(self._image_re.search, files)
             image_files.sort()
@@ -256,7 +254,6 @@ class FileHandler:
                 self._name_table[path] = name
             for name, path in zip(comment_files, self._comment_files):
                 self._name_table[path] = name
-            print time.time() - t
 
             if start_page <= 0:
                 if self._window.is_double_page:
@@ -275,17 +272,13 @@ class FileHandler:
                     self._current_image_index)[::-1])
             priority_ordering = [image_files[p] for p in priority_ordering
                 if 0 <= p <= self.get_number_of_pages() - 1]
-            print time.time() - t
             
             for i, name in enumerate(priority_ordering):
                 image_files.remove(name)
                 image_files.insert(i, name)
             
             self._extractor.set_files(image_files + comment_files)
-            print time.time() - t
             self._extractor.extract()
-            print time.time() - t
-            print '------------'
 
         # --------------------------------------------------------------------
         # If <path> is an image we scan it's directory for more images and
