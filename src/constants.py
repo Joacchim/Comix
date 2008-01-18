@@ -1,9 +1,9 @@
 # ============================================================================
-# constants.py - Miscellaneous constants for Comix.
+# constants.py - Miscellaneous constants.
 # ============================================================================
 
 import os
 
 VERSION = '4.0dev'
-COMIX_DIR = os.path.join(os.environ['HOME'], '.comix')
+COMIX_DIR = os.path.join(os.getenv('HOME', ''), '.comix')
 

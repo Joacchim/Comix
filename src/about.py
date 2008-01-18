@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 # ============================================================================
-# about.py - About dialog for Comix.
+# about.py - About dialog.
 # ============================================================================
 
 from os.path import join, dirname, isfile
@@ -103,12 +103,18 @@ class _AboutDialog(gtk.Dialog):
         
 
 def dialog_open(*args):
+
+    """ Create and display the (singleton) about dialog. """
+
     global _dialog
     if _dialog == None:
         _dialog = _AboutDialog()
         _dialog.show()
 
 def dialog_close(*args):
+    
+    """ Destroy the about dialog. """
+
     global _dialog
     if _dialog != None:
         _dialog.destroy()

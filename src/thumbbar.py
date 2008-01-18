@@ -71,6 +71,7 @@ class ThumbnailSidebar(gtk.HBox):
         self._layout.set_size(0, 0)
         self._height = 0
         self._loaded = False
+        self._counter = _Counter(0)
 
     def load_thumbnails(self):
         if (not prefs['show thumbnails'] or prefs['hide all'] or

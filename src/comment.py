@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 # ============================================================================
-# comment.py - Comments dialog for Comix.
+# comment.py - Comments dialog.
 # ============================================================================
 
 import os
@@ -68,12 +68,18 @@ class _CommentsDialog(gtk.Dialog):
         
 
 def dialog_open(action, file_handler):
+    
+    """ Create and display the (singleton) comments dialog. """
+
     global _dialog
     if _dialog == None:
         _dialog = _CommentsDialog(file_handler)
         _dialog.show()
 
 def dialog_close(*args):
+    
+    """ Destroy the comments dialog. """
+
     global _dialog
     if _dialog != None:
         _dialog.destroy()

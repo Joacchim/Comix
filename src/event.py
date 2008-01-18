@@ -1,5 +1,5 @@
 # ============================================================================
-# event.py - Event handling (keyboard, mouse, etc.) for Comix main window.
+# event.py - Event handling (keyboard, mouse, etc.) for the main window.
 # ============================================================================
 
 import urllib
@@ -20,7 +20,7 @@ class EventHandler:
 
     def resize_event(self, widget, event):
             
-        """ Handles events from resizing and moving the main window. """
+        """ Handle events from resizing and moving the main window. """
         
         if not self._window.is_fullscreen:
             prefs['window x'], prefs['window y'] = self._window.get_position()
@@ -35,7 +35,7 @@ class EventHandler:
 
     def key_press_event(self, widget, event, *args):
         
-        """ Catches key press events and takes the appropriate actions. """
+        """ Handle key press events on the main window. """
         
         # ----------------------------------------------------------------
         # Numpad aligns the image depending on the key. 
@@ -162,9 +162,9 @@ class EventHandler:
     def scroll_wheel_event(self, widget, event, *args):
         
         """
-        Catches scroll wheel events and takes the appropriate
-        actions. The scroll wheel flips pages in fit-to-screen mode
-        and scrolls the scrollbars when not.
+        Handle scroll wheel events on the maon layout area. The scroll
+        wheel flips pages in fit-to-screen mode and scrolls the
+        scrollbars otherwise.
         """
 
         if event.direction == gtk.gdk.SCROLL_UP:
@@ -184,7 +184,7 @@ class EventHandler:
 
     def mouse_press_event(self, widget, event):
         
-        """ Handles mouse click events on the main window. """
+        """ Handle mouse click events on the main layout area. """
 
         if event.button == 1:
             self._pressed_pointer_pos_x = event.x_root
@@ -203,7 +203,7 @@ class EventHandler:
 
     def mouse_release_event(self, widget, event):
         
-        """ Handles mouse button release events on the main window. """
+        """ Handle mouse button release events on the main layout area. """
 
         cursor.set_cursor_type(cursor.NORMAL)
         
@@ -220,7 +220,7 @@ class EventHandler:
 
     def mouse_move_event(self, widget, event):
         
-        """ Handles mouse pointer movement events. """
+        """ Handle mouse pointer movement events. """
         
         if 'GDK_BUTTON1_MASK' in event.state.value_names:
             cursor.set_cursor_type(cursor.GRAB)
@@ -230,6 +230,9 @@ class EventHandler:
             self._last_pointer_pos_y = event.y_root
     
     def drag_n_drop_event(self, widget, context, x, y, data, *args):
+        
+        """ Handle drag-n-drop events on the main layout area. """
+
         uris = data.get_uris()
         if not uris:
             return

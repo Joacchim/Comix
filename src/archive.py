@@ -7,10 +7,9 @@ import os
 import zipfile
 import tarfile
 import threading
-import time
 
 # ------------------------------------------------------------------------
-# Determine if rar/unrar exists.
+# Determine if rar/unrar exists, and bind the executable path to _rar_exec
 # ------------------------------------------------------------------------
 _rar_exec = None
 for path in os.getenv('PATH', '').split(':') + [os.path.curdir]:
@@ -27,6 +26,18 @@ if _rar_exec == None:
 
 class Extractor:
     
+    """
+    Extractor is a threaded class for extracting different archive formats.
+
+    The Extractor can be loaded with paths to archives (currently ZIP, tar,
+    or RAR archives) and a path to a destination directory. Once an archive
+    has been set it is possible to filter out the files to be extracted and
+    set the order in which they should be extracted. The extraction can
+    then be started in a new thread in which files are extracted one by one,
+    and a signal is sent on a condition after each extraction, so that it is
+    possible for other threads to wait on specific files to be ready.
+    """
+    
     def __init__(self):
         self._setupped = False
     
@@ -34,7 +45,7 @@ class Extractor:
         
         """
         Setup the extractor with archive <src> and destination dir <dst>.
-        A threading condition related to the is_ready() method is returned.
+        Return a threading Condition related to the is_ready() method.
         """
 
         self._src = src
@@ -62,8 +73,8 @@ class Extractor:
     def get_files(self):
         
         """
-        Get a list of names of all the files the extractor is currently
-        set for extracting. After a call to setup() this is always all
+        Return a list of names of all the files the extractor is currently
+        set for extracting. After a call to setup() this is by default all
         files found in the archive. The paths in the list are relative to
         the archive root and are not absolute for the files once extracted.
         """
@@ -81,26 +92,26 @@ class Extractor:
 
         self._files = files
 
-    def is_ready(self, num):
+    def is_ready(self, name):
 
         """
-        Returns True if the file indexed by <num> in the extractors file
-        list (as set by set_files()) is fully extracted.
+        Return True if the file <name> in the extractors file list
+        (as set by set_files()) is fully extracted.
         """
-
-        return self._extracted.get(num, False)
+        
+        return self._extracted.get(name, False)
 
     def get_mime_type(self):
         
-        """ Returns the mime type name of the extractors archive. """
+        """ Return the mime type name of the extractor's current archive. """
 
         return self._type
 
     def stop(self):
         
         """
-        Tells the extractor to stop extracting and kill the extracting
-        thread. Blocks until the extracting thread has exited.
+        Signal the extractor to stop extracting and kill the extracting
+        thread. Blocks until the extracting thread has terminated.
         """
 
         self._stop = True
@@ -111,9 +122,9 @@ class Extractor:
     def extract(self):
         
         """
-        Starts extracting the files in the file list one by one using a
+        Start extracting the files in the file list one by one using a
         new thread. Every time a new file is extracted a notify() will be
-        signalled the condition returned by setup().
+        signalled the Condition that was returned by setup().
         """
 
         self._extract_thread = threading.Thread(target=self._thread_extract)
@@ -121,10 +132,19 @@ class Extractor:
         self._extract_thread.start()
 
     def _thread_extract(self):
+        
+        """ Extract the files in the file list one by one. """
+
         for name in self._files:
             self._extract_file(name, self._dst)
 
     def _extract_file(self, name, dst):
+        
+        """
+        Extract the file named <name> to <dst>, mark the file as "ready",
+        then signal a notify() on the Condition returned by setup().
+        """
+        
         if self._stop:
             sys.exit(0)
         try:
@@ -161,14 +181,14 @@ class Extractor:
             pass
         
         self._condition.acquire()
-        self._extracted[self._files.index(name)] = True
+        self._extracted[name] = True
         self._condition.notify()
         self._condition.release()
 
 
 def archive_mime_type(path):
     
-    """ Returns the archive type of <path> or None for non-archives. """
+    """ Return the archive type of <path> or None for non-archives. """
     
     try:
         if os.path.isfile(path):
@@ -191,7 +211,7 @@ def archive_mime_type(path):
 
 def get_name(archive_type):
     
-    """ Returns a text representation of an archive type. """
+    """ Return a text representation of an archive type. """
 
     return {'zip':   _('ZIP archive'),
             'tar':   _('Tar archive'),

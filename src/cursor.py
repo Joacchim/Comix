@@ -1,5 +1,5 @@
 # ============================================================================
-# cursor.py - Cursor handler for Comix.
+# cursor.py - Cursor handler.
 # ============================================================================
 
 import gtk
@@ -11,7 +11,7 @@ WAIT = gtk.gdk.Cursor(gtk.gdk.WATCH)
 def set_cursor_type(mode):
     
     """ 
-    Sets the cursor to type <MODE>. Abbreviations of common cursor types
+    Set the cursor to type <MODE>. Abbreviations of common cursor types
     are available in this module.
     """
     

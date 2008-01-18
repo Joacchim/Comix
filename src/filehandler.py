@@ -1,10 +1,5 @@
 # ============================================================================
-# filehandler.py - File handler for Comix. Opens files and keeps track
-# of images, pages and caches.
-#
-# Other modules should *never* read directly from the files pointed to by
-# paths given by the FileHandler's methods. The files are not even
-# guaranteed to exist at all times.
+# filehandler.py - File handler. 
 # ============================================================================
 
 import os
@@ -15,8 +10,8 @@ import tempfile
 import gc
 import shutil
 import threading
-import time
 import re
+import time
 
 import gtk
 
@@ -28,6 +23,18 @@ from preferences import prefs
 import thumbnail
 
 class FileHandler:
+    
+    """
+    The FileHandler keeps track of images, pages, caches and opens files.
+
+    When the Filehandler's methods refer to pages, they are indexed from 1,
+    i.e. the first page is page 1 etc.
+    
+    Other modules should *never* read directly from the files pointed to by
+    paths given by the FileHandler's methods. The files are not even
+    guaranteed to exist at all times since the extraction of archives is
+    threaded.
+    """
 
     def __init__(self, window):
         self.file_loaded = False
@@ -39,6 +46,7 @@ class FileHandler:
         self._image_files = []
         self._current_image_index = None
         self._comment_files = []
+        self._name_table = {}
         self._raw_pixbufs = {}
         self._extractor = archive.Extractor()
         self._condition = None
@@ -48,7 +56,7 @@ class FileHandler:
     def _get_pixbuf(self, index):
         
         """
-        Returns the pixbuf for <page> from cache.
+        Return the pixbuf indexed by <index> from cache.
         Pixbufs not found in cache are fetched from disk first. 
         """
 
@@ -64,8 +72,8 @@ class FileHandler:
     def get_pixbufs(self, single=False):
 
         """
-        Returns the pixbuf(s) for the current image(s) from cache.
-        Returns two pixbufs in double-page mode unless <single> is True.
+        Return the pixbuf(s) for the current image(s) from cache.
+        Return two pixbufs in double-page mode unless <single> is True.
         Pixbufs not found in cache are fetched from disk first. 
         """
 
@@ -77,10 +85,11 @@ class FileHandler:
     def do_cacheing(self):
 
         """
-        Makes sure that the correct pixbufs are stored in cache. These
-        are the current image(s) and if cacheing is enabled also the one or two
-        pixbufs before and after them. All other pixbufs are deleted and
-        garbage collected in order to save memory.
+        Make sure that the correct pixbufs are stored in cache. These
+        are (in the current implementation) the current image(s), and
+        if cacheing is enabled, also the one or two pixbufs before and
+        after them. All other pixbufs are deleted and garbage collected
+        in order to save memory.
         """
         
         # Get list of wanted pixbufs.
@@ -110,8 +119,8 @@ class FileHandler:
     def next_page(self):
 
         """
-        Sets up filehandler to the next page. Returns True if this is not
-        the same page, False otherwise.
+        Set up filehandler to the next page. Return True if this is not
+        the same page.
         """
 
         if not self.file_loaded:
@@ -130,8 +139,8 @@ class FileHandler:
     def previous_page(self):
 
         """
-        Sets up filehandler to the previous page. Returns True if this is not
-        the same page, False otherwise.
+        Set up filehandler to the previous page. Return True if this is not
+        the same page.
         """
 
         if not self.file_loaded:
@@ -149,8 +158,8 @@ class FileHandler:
     def first_page(self):
 
         """
-        Sets up filehandler to the first page. Returns True if this is not
-        the same page, False otherwise.
+        Set up filehandler to the first page. Return True if this is not
+        the same page.
         """
 
         if not self.file_loaded:
@@ -162,8 +171,8 @@ class FileHandler:
     def last_page(self):
 
         """ 
-        Sets up filehandler to the last page. Returns True if this is not
-        the same page, False otherwise.
+        Set up filehandler to the last page. Return True if this is not
+        the same page.
         """
         
         if not self.file_loaded:
@@ -176,8 +185,8 @@ class FileHandler:
     def set_page(self, page_num):
 
         """ 
-        Sets up filehandler to the page <page_num>. Returns True if this is
-        not the same page, False otherwise.
+        Set up filehandler to the page <page_num>. Return True if this is
+        not the same page.
         """
 
         old_image = self.get_current_page()
@@ -189,13 +198,15 @@ class FileHandler:
     def open_file(self, path, start_page=1):
 
         """
+        Open the file pointed to by <path>.
+
         If <path> is an image we add all images in its directory to the
         _image_files.
 
         If <path> is an archive we decompresses it to the _tmp_dir and adds
         all images in the decompressed tree to _image_files and all comments
-        to _comment_files. If <start_image> is not set we set current page
-        to 1 (first page), if it is set we set it to the value of
+        to _comment_files. If <start_image> is not set we set the current
+        page to 1 (first page), if it is set we set it to the value of
         <start_page>. If <start_page> is non-positive it means the last image.
         """
         
@@ -230,37 +241,15 @@ class FileHandler:
         # --------------------------------------------------------------------
         if self.archive_type:
             self._base_path = path
-            #t = time.time()
             self._condition = self._extractor.setup(path, self._tmp_dir)
-            #print 'create extractor:', time.time() - t
-            #t = time.time()
             files = self._extractor.get_files()
-            #print files
             image_files = filter(self._image_re.search, files)
             image_files.sort()
             self._image_files = \
                 [os.path.join(self._tmp_dir, f) for f in image_files]
-            self._extractor.set_files(image_files)
-            #print 'sort:', time.time() - t
-            #t = time.time()
-            self._extractor.extract()
-            #print 'extract:', time.time() - t
-            #t = time.time()
-
-            #archive.extract_archive(path, self._tmp_dir)
-            #for dirname, dirs, files in os.walk(self._tmp_dir):
-            #    for f in files:
-            #        fpath = os.path.join(dirname, f)
-            #        if is_image_file(fpath):
-            #            self._image_files.append(fpath)
-            #        elif (os.path.splitext(f)[1].lower() in
-            #          prefs['comment extensions']):
-            #            self._comment_files.append(fpath)
-                    #elif archive.archive_mime_type(fpath):
-                    #    subdir = tempfile.mkdtemp(dir=dirname, prefix=f)
-                    #    archive.extract_archive(fpath, subdir)
-                    #    dirs.append(subdir)
-            #self._image_files.sort()  # We don't sort archives after locale
+            for i, name in enumerate(image_files):
+                self._name_table[self._image_files[i]] = name
+            
             if start_page <= 0:
                 if self._window.is_double_page:
                     self._current_image_index = self.get_number_of_pages() - 2
@@ -269,7 +258,22 @@ class FileHandler:
             else:
                 self._current_image_index = start_page - 1
             self._current_image_index = max(0, self._current_image_index)
-            #print 'other:', time.time() - t
+            
+            depth = self._window.is_double_page and 2 or 1
+            priority_ordering = (
+                range(self._current_image_index,
+                    self._current_image_index + depth * 2) + 
+                range(self._current_image_index - depth,
+                    self._current_image_index)[::-1])
+            priority_ordering = [image_files[p] for p in priority_ordering
+                if 0 <= p <= self.get_number_of_pages() - 1]
+            
+            for i, name in enumerate(priority_ordering):
+                image_files.remove(name)
+                image_files.insert(i, name)
+            
+            self._extractor.set_files(image_files)
+            self._extractor.extract()
 
         # --------------------------------------------------------------------
         # If <path> is an image we scan it's directory for more images and
@@ -307,13 +311,14 @@ class FileHandler:
 
     def close_file(self, *args):
         
-        """ Runs tasks for "closing" the currently opened file(s) """
+        """ Run tasks for "closing" the currently opened file(s) """
 
         self.file_loaded = False
         self._base_path = None
         self._image_files = []
         self._current_image_index = None
         self._comment_files = []
+        self._name_table.clear()
         self._raw_pixbufs.clear()
         self._window.clear()
         self._window.ui_manager.set_sensitivities()
@@ -324,7 +329,7 @@ class FileHandler:
 
     def cleanup(self):
         
-        """ Runs clean-up tasks. Should be called prior to exit """
+        """ Run clean-up tasks. Should be called prior to exit """
 
         self._extractor.stop()
         thread_delete(self._tmp_dir)
@@ -332,7 +337,7 @@ class FileHandler:
     def _open_next_archive(self):
 
         """
-        Opens the archive that comes directly after the currently loaded
+        Open the archive that comes directly after the currently loaded
         archive in that archive's directory listing, sorted alphabetically.
         """
 
@@ -349,7 +354,7 @@ class FileHandler:
     def _open_previous_archive(self):
         
         """
-        Opens the archive that comes directly before the currently loaded
+        Open the archive that comes directly before the currently loaded
         archive in that archive's directory listing, sorted alphabetically.
         """
 
@@ -365,14 +370,14 @@ class FileHandler:
 
     def _get_missing_image(self):
         
-        """ Returns a pixbuf depicting a missing/broken image. """
+        """ Return a pixbuf depicting a missing/broken image. """
 
         return self._window.render_icon(gtk.STOCK_MISSING_IMAGE,
             gtk.ICON_SIZE_DIALOG)
 
     def is_last_page(self):
         
-        """ Returns True if at the last page. """
+        """ Return True if at the last page. """
         
         if self._window.displayed_double():
             return self.get_current_page() + 1 >= self.get_number_of_pages()
@@ -381,20 +386,20 @@ class FileHandler:
 
     def get_number_of_pages(self):
         
-        """ Returns the number of pages in the current archive/directory. """
+        """ Return the number of pages in the current archive/directory. """
 
         return len(self._image_files)
 
     def get_current_page(self):
         
-        """ Returns the current page number. """
+        """ Return the current page number. """
 
         return self._current_image_index + 1
 
     def get_number_of_comments(self):
         
         """
-        Returns the number of comments in the current archive/directory.
+        Return the number of comments in the current archive.
         """
 
         return len(self._comment_files)
@@ -402,7 +407,7 @@ class FileHandler:
     def get_comment_text(self, num):
         
         """ 
-        Returns the text in comment <num> or None if comment <num> is not
+        Return the text in comment <num> or None if comment <num> is not
         readable.
         """
         
@@ -417,14 +422,14 @@ class FileHandler:
 
     def get_comment_name(self, num):
         
-        """ Returns the filename of comment <num>. """
+        """ Return the filename of comment <num>. """
 
         return self._comment_files[num]
 
     def get_pretty_current_filename(self):
         
         """
-        Returns a string with the name of the currently viewed file that is
+        Return a string with the name of the currently viewed file that is
         suitable for printing.
         """
 
@@ -436,7 +441,7 @@ class FileHandler:
     def get_path_to_page(self, page=None):
         
         """
-        Returns the full path to the image file for <page>, or the current
+        Return the full path to the image file for <page>, or the current
         page if <page> is None.
         """
 
@@ -447,7 +452,7 @@ class FileHandler:
     def get_path_to_base(self):
         
         """
-        Returns the full path to the current base (path to archive or
+        Return the full path to the current base (path to archive or
         image directory.)
         """
 
@@ -456,7 +461,7 @@ class FileHandler:
     def get_real_path(self):
         
         """
-        Returns the "real" path to the currenlty viewed file, i.e. the
+        Return the "real" path to the currently viewed file, i.e. the
         full path to the archive or the full path to the currently
         viewed image.
         """
@@ -468,8 +473,8 @@ class FileHandler:
     def get_size(self, page=None):
         
         """
-        Returns a tuple (width, height) with the size of <page>. If <page>
-        is None, returns the size of the current page.
+        Return a tuple (width, height) with the size of <page>. If <page>
+        is None, return the size of the current page.
         """
 
         self._wait_on_page(page)
@@ -481,8 +486,8 @@ class FileHandler:
     def get_mime_name(self, page=None):
 
         """
-        Returns a string with the name of the mime type of <page>. If
-        <page> is None, returns the mime type name of the current page.
+        Return a string with the name of the mime type of <page>. If
+        <page> is None, return the mime type name of the current page.
         """
 
         self._wait_on_page(page)
@@ -494,10 +499,12 @@ class FileHandler:
     def get_thumbnail(self, page=None, width=128, height=128, create=False):
         
         """
-        Returns a thumbnail pixbuf of <page> with dimensions <width>x<height>.
-        Returns a thumbnail for the current page if <page> is None.
-        If <create> is True, and the <width>x<height> <= 128x128, the 
-        thumbnail is stored on disk.        
+        Return a thumbnail pixbuf of <page> that fit in a box with
+        dimensions <width>x<height>. Return a thumbnail for the current
+        page if <page> is None.
+
+        If <create> is True, and <width>x<height> <= 128x128, the 
+        thumbnail is also stored on disk.        
         """
         
         self._wait_on_page(page)
@@ -518,9 +525,9 @@ class FileHandler:
     def get_stats(self, page=None):
         
         """
-        Returns a stat object as used by the Python stat module for <page>.
-        If <page> is None return a stat object for the current page.
-        Returns None if the stat object can not be produced (e.g. broken file).
+        Return a stat object as used by the Python stat module for <page>.
+        If <page> is None, return a stat object for the current page.
+        Return None if the stat object can not be produced (e.g. broken file).
         """
         
         self._wait_on_page(page)
@@ -533,28 +540,31 @@ class FileHandler:
     def _wait_on_page(self, page):
         
         """
-        Blocks the running (main) thread until the file corresponding to 
+        Block the running (main) thread until the file corresponding to 
         <page> has been fully extracted.
         """
         
         # We don't have to wait for files not in an archive
         if not self.archive_type:
             return
-        if page == None:
-            page = self.get_current_page()
-        self._condition.acquire()
-        while not self._extractor.is_ready(page - 1):
-            self._condition.wait()
-        self._condition.release()
+        path = self.get_path_to_page(page)
+        self._wait_on_file(path)
 
     def _wait_on_comment(self, num):
         pass
+
+    def _wait_on_file(self, path):
+        name = self._name_table[path]
+        self._condition.acquire()
+        while not self._extractor.is_ready(name):
+            self._condition.wait()
+        self._condition.release()
 
 
 def thread_delete(path):
     
     """
-    Starts a threaded removal of the directory tree rooted at <path>.
+    Start a threaded removal of the directory tree rooted at <path>.
     This is to avoid long blockings when removing large temporary dirs.
     """
     
@@ -564,8 +574,9 @@ def thread_delete(path):
 
 def is_image_file(path):
     
-    ''' Returns the mime type if <path> is an image file in a
-    supported format, else False.
+    ''' 
+    Return the mime type of the file at <path> if it is an image file
+    in a supported format, else False.
     '''
     
     if os.path.isfile(path): 

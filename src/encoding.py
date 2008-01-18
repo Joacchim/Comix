@@ -1,5 +1,5 @@
 # ============================================================================
-# encoding.py - Encoding handler for Comix.
+# encoding.py - Encoding handler.
 # ============================================================================
 
 import sys
@@ -7,9 +7,9 @@ import sys
 def to_unicode(string):
     
     """ 
-    Converts <string> to unicode. First tries the default filesystem
-    encoding, and then falls back on some common encodings. If none
-    of the convertions are successful "???" is returned. 
+    Convert <string> to unicode. First trie the default filesystem
+    encoding, and then fall back on some common encodings. If none
+    of the convertions are successful, "???" is returned. 
     """
 
     if isinstance(string, unicode):

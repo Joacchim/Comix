@@ -227,7 +227,6 @@ class MainWindow(gtk.Window):
                 right_pixbuf.get_width()) / 2
             y_padding = (height - max(left_pixbuf.get_height(),
                 right_pixbuf.get_height())) / 2
-            #self.right_image.show()
 
             self.statusbar.set_page_number(self.file_handler.get_current_page(),
                 self.file_handler.get_number_of_pages(), double_page=True)
@@ -258,7 +257,6 @@ class MainWindow(gtk.Window):
 
             self._left_image.set_from_pixbuf(pixbuf)
             self._right_image.clear()
-            #self.right_image.hide()
             x_padding = (width - pixbuf.get_width()) / 2
             y_padding = (height - pixbuf.get_height()) / 2
 
