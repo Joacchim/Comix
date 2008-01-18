@@ -250,10 +250,10 @@ class FileHandler:
             comment_files = filter(self._comment_re.search, files)
             self._comment_files = \
                 [os.path.join(self._tmp_dir, f) for f in comment_files]
-            for name, path in zip(image_files, self._image_files):
-                self._name_table[path] = name
-            for name, path in zip(comment_files, self._comment_files):
-                self._name_table[path] = name
+            for name, full_path in zip(image_files, self._image_files):
+                self._name_table[full_path] = name
+            for name, full_path in zip(comment_files, self._comment_files):
+                self._name_table[full_path] = name
 
             if start_page <= 0:
                 if self._window.is_double_page:

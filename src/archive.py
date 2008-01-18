@@ -36,6 +36,9 @@ class Extractor:
     then be started in a new thread in which files are extracted one by one,
     and a signal is sent on a condition after each extraction, so that it is
     possible for other threads to wait on specific files to be ready.
+
+    Note: Support for gzip/bzip2 compressed tar archives is limited, see
+    set_files() for more info.
     """
     
     def __init__(self):
