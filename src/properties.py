@@ -41,11 +41,11 @@ class _PropertiesDialog(gtk.Dialog):
             topbox = gtk.HBox(False, 12)
             page.pack_start(topbox, False)
             # Add thumbnail
-            pixbuf = gtk.gdk.pixbuf_new_from_file_at_size(
-                window.file_handler.get_path_to_page(1), 200, 128)
-            pixbuf = image.add_border(pixbuf, 1)
+            thumb_pb = window.file_handler.get_thumbnail(1, width=200,
+                height=128)
+            thumb_pb = image.add_border(thumb_pb, 1)
             thumb = gtk.Image()
-            thumb.set_from_pixbuf(pixbuf)
+            thumb.set_from_pixbuf(thumb_pb)
             topbox.pack_start(thumb, False, False)
             # Add coloured box for main info
             borderbox = gtk.EventBox()
@@ -68,7 +68,7 @@ class _PropertiesDialog(gtk.Dialog):
                 len(label.get_text())))
             label.set_attributes(attrlist)
             infobox.pack_start(label, False, False)
-            infobox.pack_start(gtk.VBox()) # Just to add space (any better way?)
+            infobox.pack_start(gtk.VBox()) # Just to add space (better way?)
             # Add the rest of the main info to the coloured box
             label = gtk.Label(_('%d pages') %
                 window.file_handler.get_number_of_pages())
@@ -121,8 +121,11 @@ class _PropertiesDialog(gtk.Dialog):
             label.set_attributes(attrlist)
             label.set_alignment(0, 0.5)
             page.pack_start(label, False, False)
-            label = gtk.Label(_('Owner') + ':   ' +
-                pwd.getpwuid(stats.st_uid)[0])
+            try:
+                uid = pwd.getpwuid(stats.st_uid)[0]
+            except:
+                uid = str(stats.st_uid)
+            label = gtk.Label(_('Owner') + ':   ' + uid)
             attrlist = pango.AttrList()
             attrlist.insert(pango.AttrWeight(pango.WEIGHT_BOLD, 0,
                 len(_('Owner')) + 1))
@@ -134,19 +137,16 @@ class _PropertiesDialog(gtk.Dialog):
         # ----------------------------------------------------------------
         # Image tab
         # ----------------------------------------------------------------
-        stats = os.stat(window.file_handler.get_path_to_page())
-        iminfo = gtk.gdk.pixbuf_get_file_info(
-            window.file_handler.get_path_to_page())
+        stats = window.file_handler.get_stats()
         page = gtk.VBox(False, 12)
         page.set_border_width(12)
         topbox = gtk.HBox(False, 12)
         page.pack_start(topbox)
         # Add thumbnail
-        pixbuf = gtk.gdk.pixbuf_new_from_file_at_size(
-            window.file_handler.get_path_to_page(), 200, 128)
-        pixbuf = image.add_border(pixbuf, 1)
+        thumb_pb = window.file_handler.get_thumbnail(width=200, height=128)
+        thumb_pb = image.add_border(thumb_pb, 1)
         thumb = gtk.Image()
-        thumb.set_from_pixbuf(pixbuf)
+        thumb.set_from_pixbuf(thumb_pb)
         topbox.pack_start(thumb, False, False)
         # Add coloured main info box
         borderbox = gtk.EventBox()
@@ -161,8 +161,9 @@ class _PropertiesDialog(gtk.Dialog):
         infobox.set_border_width(10)
         insidebox.add(infobox)
         # Add bold filename
-        label = gtk.Label(encoding.to_unicode(os.path.basename(
-            window.file_handler.get_path_to_page())))
+        path = window.file_handler.get_path_to_page()
+        filename = encoding.to_unicode(os.path.basename(path))
+        label = gtk.Label(filename)
         label.set_alignment(0, 0.5)
         attrlist = pango.AttrList()
         attrlist.insert(pango.AttrWeight(pango.WEIGHT_BOLD, 0,
@@ -171,59 +172,65 @@ class _PropertiesDialog(gtk.Dialog):
         infobox.pack_start(label, False, False)
         infobox.pack_start(gtk.VBox()) # Just to add space (any better way?)
         # Add the rest of the main info
-        label = gtk.Label('%dx%d px' % (iminfo[1], iminfo[2]))
+        width, height = window.file_handler.get_size()
+        mime_name = window.file_handler.get_mime_name()
+        label = gtk.Label('%dx%d px' % (width, height))
         label.set_alignment(0, 0.5)
         infobox.pack_start(label, False, False)
-        label = gtk.Label(iminfo[0]['name'].upper())
+        label = gtk.Label(mime_name)
         label.set_alignment(0, 0.5)
         infobox.pack_start(label, False, False)
-        label = gtk.Label('%.1f kiB' % (stats.st_size / 1024.0))
-        label.set_alignment(0, 0.5)
-        infobox.pack_start(label, False, False)
-        # Other info below the thumb + main info box
-        label = gtk.Label(_('Location') + ':   ' +
-            encoding.to_unicode(os.path.dirname(
-            window.file_handler.get_path_to_page())))
-        attrlist = pango.AttrList()
-        attrlist.insert(pango.AttrWeight(pango.WEIGHT_BOLD, 0,
-            len(_('Location')) + 1))
-        label.set_attributes(attrlist)
-        label.set_alignment(0, 0.5)
-        page.pack_start(label, False, False)
-        label = gtk.Label(_('Accessed') + ':   ' +
-            time.strftime('%Y-%m-%d [%H:%M:%S]',
-            time.localtime(stats.st_atime)))
-        attrlist = pango.AttrList()
-        attrlist.insert(pango.AttrWeight(pango.WEIGHT_BOLD, 0,
-            len(_('Accessed')) + 1))
-        label.set_attributes(attrlist)
-        label.set_alignment(0, 0.5)
-        page.pack_start(label, False, False)
-        label = gtk.Label(_('Modified') + ':   ' +
-            time.strftime('%Y-%m-%d [%H:%M:%S]',
-            time.localtime(stats.st_mtime)))
-        attrlist = pango.AttrList()
-        attrlist.insert(pango.AttrWeight(pango.WEIGHT_BOLD, 0,
-            len(_('Modified')) + 1))
-        label.set_attributes(attrlist)
-        label.set_alignment(0, 0.5)
-        page.pack_start(label, False, False)
-        label = gtk.Label(_('Permissions') + ':   ' +
-            oct(stat.S_IMODE(stats.st_mode)))
-        attrlist = pango.AttrList()
-        attrlist.insert(pango.AttrWeight(pango.WEIGHT_BOLD, 0,
-            len(_('Permissions')) + 1))
-        label.set_attributes(attrlist)
-        label.set_alignment(0, 0.5)
-        page.pack_start(label, False, False)
-        label = gtk.Label(_('Owner') + ':   ' +
-            pwd.getpwuid(stats.st_uid)[0])
-        attrlist = pango.AttrList()
-        attrlist.insert(pango.AttrWeight(pango.WEIGHT_BOLD, 0,
-            len(_('Owner')) + 1))
-        label.set_attributes(attrlist)
-        label.set_alignment(0, 0.5)
-        page.pack_start(label, False, False)        
+        if stats != None:
+            label = gtk.Label('%.1f kiB' % (stats.st_size / 1024.0))
+            label.set_alignment(0, 0.5)
+            infobox.pack_start(label, False, False)
+            # Other info below the thumb + main info box
+            label = gtk.Label(_('Location') + ':   ' +
+                encoding.to_unicode(os.path.dirname(
+                window.file_handler.get_path_to_page())))
+            attrlist = pango.AttrList()
+            attrlist.insert(pango.AttrWeight(pango.WEIGHT_BOLD, 0,
+                len(_('Location')) + 1))
+            label.set_attributes(attrlist)
+            label.set_alignment(0, 0.5)
+            page.pack_start(label, False, False)
+            label = gtk.Label(_('Accessed') + ':   ' +
+                time.strftime('%Y-%m-%d [%H:%M:%S]',
+                time.localtime(stats.st_atime)))
+            attrlist = pango.AttrList()
+            attrlist.insert(pango.AttrWeight(pango.WEIGHT_BOLD, 0,
+                len(_('Accessed')) + 1))
+            label.set_attributes(attrlist)
+            label.set_alignment(0, 0.5)
+            page.pack_start(label, False, False)
+            label = gtk.Label(_('Modified') + ':   ' +
+                time.strftime('%Y-%m-%d [%H:%M:%S]',
+                time.localtime(stats.st_mtime)))
+            attrlist = pango.AttrList()
+            attrlist.insert(pango.AttrWeight(pango.WEIGHT_BOLD, 0,
+                len(_('Modified')) + 1))
+            label.set_attributes(attrlist)
+            label.set_alignment(0, 0.5)
+            page.pack_start(label, False, False)
+            label = gtk.Label(_('Permissions') + ':   ' +
+                oct(stat.S_IMODE(stats.st_mode)))
+            attrlist = pango.AttrList()
+            attrlist.insert(pango.AttrWeight(pango.WEIGHT_BOLD, 0,
+                len(_('Permissions')) + 1))
+            label.set_attributes(attrlist)
+            label.set_alignment(0, 0.5)
+            page.pack_start(label, False, False)
+            try:
+                uid = pwd.getpwuid(stats.st_uid)[0]
+            except:
+                uid = str(stats.st_uid)
+            label = gtk.Label(_('Owner') + ':   ' + uid)
+            attrlist = pango.AttrList()
+            attrlist.insert(pango.AttrWeight(pango.WEIGHT_BOLD, 0,
+                len(_('Owner')) + 1))
+            label.set_attributes(attrlist)
+            label.set_alignment(0, 0.5)
+            page.pack_start(label, False, False)
         notebook.append_page(page, gtk.Label(_('Image')))
   
         self.vbox.show_all()

@@ -1,6 +1,10 @@
 # ============================================================================
 # filehandler.py - File handler for Comix. Opens files and keeps track
 # of images, pages and caches.
+#
+# Other modules should *never* read directly from the files pointed to by
+# paths given by the FileHandler's methods. The files are not even
+# guaranteed to exist at all times.
 # ============================================================================
 
 import os
@@ -10,13 +14,18 @@ import locale
 import tempfile
 import gc
 import shutil
+import threading
+import time
+import re
 
 import gtk
 
 import archive
 import cursor
 import encoding
+import image
 from preferences import prefs
+import thumbnail
 
 class FileHandler:
 
@@ -31,22 +40,26 @@ class FileHandler:
         self._current_image_index = None
         self._comment_files = []
         self._raw_pixbufs = {}
+        self._extractor = archive.Extractor()
+        self._condition = None
+        self._image_re = re.compile(r'\.(jpg|jpeg|png|gif|tif|tiff)\s*$', re.I)
+        #self._comment_re = re.compile(r'\.(%s)'%  , re.I)
 
-    def _get_pixbuf(self, page):
+    def _get_pixbuf(self, index):
         
         """
         Returns the pixbuf for <page> from cache.
         Pixbufs not found in cache are fetched from disk first. 
         """
 
-        if not self._raw_pixbufs.has_key(page):
+        if not self._raw_pixbufs.has_key(index):
+            self._wait_on_page(index + 1)
             try:
-                self._raw_pixbufs[page] = gtk.gdk.pixbuf_new_from_file(
-                    self._image_files[page])
+                self._raw_pixbufs[index] = gtk.gdk.pixbuf_new_from_file(
+                    self._image_files[index])
             except:
-                self._raw_pixbufs[page] = gtk.image_new_from_stock(
-                    gtk.STOCK_MISSING_IMAGE, gtk.ICON_SIZE_BUTTON).get_pixbuf()
-        return self._raw_pixbufs[page]
+                self._raw_pixbufs[index] = self._get_missing_image()
+        return self._raw_pixbufs[index]
 
     def get_pixbufs(self, single=False):
 
@@ -206,7 +219,8 @@ class FileHandler:
             return False
 
         cursor.set_cursor_type(cursor.WAIT)
-        self.close_file()
+        if self.file_loaded:
+            self.close_file()
         while gtk.events_pending():
             gtk.main_iteration(False)
 
@@ -216,20 +230,37 @@ class FileHandler:
         # --------------------------------------------------------------------
         if self.archive_type:
             self._base_path = path
-            archive.extract_archive(path, self._tmp_dir)
-            for dirname, dirs, files in os.walk(self._tmp_dir):
-                for f in files:
-                    fpath = os.path.join(dirname, f)
-                    if is_image_file(fpath):
-                        self._image_files.append(fpath)
-                    elif (os.path.splitext(f)[1].lower() in
-                      prefs['comment extensions']):
-                        self._comment_files.append(fpath)
-                    elif archive.archive_mime_type(fpath):
-                        subdir = tempfile.mkdtemp(dir=dirname, prefix=f)
-                        archive.extract_archive(fpath, subdir)
-                        dirs.append(subdir)
-            self._image_files.sort()  # We don't sort archives after locale
+            #t = time.time()
+            self._condition = self._extractor.setup(path, self._tmp_dir)
+            #print 'create extractor:', time.time() - t
+            #t = time.time()
+            files = self._extractor.get_files()
+            #print files
+            image_files = filter(self._image_re.search, files)
+            image_files.sort()
+            self._image_files = \
+                [os.path.join(self._tmp_dir, f) for f in image_files]
+            self._extractor.set_files(image_files)
+            #print 'sort:', time.time() - t
+            #t = time.time()
+            self._extractor.extract()
+            #print 'extract:', time.time() - t
+            #t = time.time()
+
+            #archive.extract_archive(path, self._tmp_dir)
+            #for dirname, dirs, files in os.walk(self._tmp_dir):
+            #    for f in files:
+            #        fpath = os.path.join(dirname, f)
+            #        if is_image_file(fpath):
+            #            self._image_files.append(fpath)
+            #        elif (os.path.splitext(f)[1].lower() in
+            #          prefs['comment extensions']):
+            #            self._comment_files.append(fpath)
+                    #elif archive.archive_mime_type(fpath):
+                    #    subdir = tempfile.mkdtemp(dir=dirname, prefix=f)
+                    #    archive.extract_archive(fpath, subdir)
+                    #    dirs.append(subdir)
+            #self._image_files.sort()  # We don't sort archives after locale
             if start_page <= 0:
                 if self._window.is_double_page:
                     self._current_image_index = self.get_number_of_pages() - 2
@@ -238,6 +269,7 @@ class FileHandler:
             else:
                 self._current_image_index = start_page - 1
             self._current_image_index = max(0, self._current_image_index)
+            #print 'other:', time.time() - t
 
         # --------------------------------------------------------------------
         # If <path> is an image we scan it's directory for more images and
@@ -274,22 +306,36 @@ class FileHandler:
         self._window.ui_manager.recent.add(path)
 
     def close_file(self, *args):
+        
+        """ Runs tasks for "closing" the currently opened file(s) """
+
         self.file_loaded = False
         self._base_path = None
-        shutil.rmtree(self._tmp_dir)
-        self._tmp_dir = tempfile.mkdtemp(prefix='comix.')
         self._image_files = []
         self._current_image_index = None
         self._comment_files = []
         self._raw_pixbufs.clear()
         self._window.clear()
         self._window.ui_manager.set_sensitivities()
+        self._extractor.stop()
+        thread_delete(self._tmp_dir)
+        self._tmp_dir = tempfile.mkdtemp(prefix='comix.')
         gc.collect()
 
     def cleanup(self):
-        shutil.rmtree(self._tmp_dir)
+        
+        """ Runs clean-up tasks. Should be called prior to exit """
+
+        self._extractor.stop()
+        thread_delete(self._tmp_dir)
 
     def _open_next_archive(self):
+
+        """
+        Opens the archive that comes directly after the currently loaded
+        archive in that archive's directory listing, sorted alphabetically.
+        """
+
         arch_dir = os.path.dirname(self._base_path)
         files = os.listdir(arch_dir)
         files.sort(locale.strcoll)
@@ -301,6 +347,12 @@ class FileHandler:
                 return
 
     def _open_previous_archive(self):
+        
+        """
+        Opens the archive that comes directly before the currently loaded
+        archive in that archive's directory listing, sorted alphabetically.
+        """
+
         arch_dir = os.path.dirname(self._base_path)
         files = os.listdir(arch_dir)
         files.sort(locale.strcoll)
@@ -310,6 +362,13 @@ class FileHandler:
             if archive.archive_mime_type(path):
                 self.open_file(path, 0)
                 return
+
+    def _get_missing_image(self):
+        
+        """ Returns a pixbuf depicting a missing/broken image. """
+
+        return self._window.render_icon(gtk.STOCK_MISSING_IMAGE,
+            gtk.ICON_SIZE_DIALOG)
 
     def is_last_page(self):
         
@@ -340,16 +399,27 @@ class FileHandler:
 
         return len(self._comment_files)
 
-    def get_comment(self, num):
+    def get_comment_text(self, num):
         
         """ 
-        Returns the path to comment <num> or None if comment <num> does 
-        not exist.
+        Returns the text in comment <num> or None if comment <num> is not
+        readable.
         """
         
-        if num > self.get_number_of_comments():
-            return None
-        return self._comment_files[num - 1]
+        self._wait_on_comment(num)
+        try:
+            fd = open(self._comment_files[num - 1])
+            text = fd.read()
+            fd.close()
+        except:
+            text = None
+        return text
+
+    def get_comment_name(self, num):
+        
+        """ Returns the filename of comment <num>. """
+
+        return self._comment_files[num]
 
     def get_pretty_current_filename(self):
         
@@ -394,6 +464,103 @@ class FileHandler:
         if self.archive_type:
             return self.get_path_to_base()
         return self._image_files[self._current_image_index]
+
+    def get_size(self, page=None):
+        
+        """
+        Returns a tuple (width, height) with the size of <page>. If <page>
+        is None, returns the size of the current page.
+        """
+
+        self._wait_on_page(page)
+        info = gtk.gdk.pixbuf_get_file_info(self.get_path_to_page(page))
+        if info != None:
+            return (info[1], info[2])
+        return (0, 0)
+
+    def get_mime_name(self, page=None):
+
+        """
+        Returns a string with the name of the mime type of <page>. If
+        <page> is None, returns the mime type name of the current page.
+        """
+
+        self._wait_on_page(page)
+        info = gtk.gdk.pixbuf_get_file_info(self.get_path_to_page(page))
+        if info != None:
+            return info[0]['name'].upper()
+        return _('Unknown filetype')
+    
+    def get_thumbnail(self, page=None, width=128, height=128, create=False):
+        
+        """
+        Returns a thumbnail pixbuf of <page> with dimensions <width>x<height>.
+        Returns a thumbnail for the current page if <page> is None.
+        If <create> is True, and the <width>x<height> <= 128x128, the 
+        thumbnail is stored on disk.        
+        """
+        
+        self._wait_on_page(page)
+        path = self.get_path_to_page(page)
+        if width <= 128 and height <= 128:
+            thumb = thumbnail.get_thumbnail(path, create)
+        else:
+            try:
+                thumb = gtk.gdk.pixbuf_new_from_file_at_size(path, width,
+                    height)
+            except:
+                thumb = None
+        if thumb == None:
+            thumb = self._get_missing_image()
+        thumb = image.fit_in_rectangle(thumb, width, height)
+        return thumb
+    
+    def get_stats(self, page=None):
+        
+        """
+        Returns a stat object as used by the Python stat module for <page>.
+        If <page> is None return a stat object for the current page.
+        Returns None if the stat object can not be produced (e.g. broken file).
+        """
+        
+        self._wait_on_page(page)
+        try:
+            stats = os.stat(self.get_path_to_page(page))
+        except:
+            stats = None
+        return stats
+
+    def _wait_on_page(self, page):
+        
+        """
+        Blocks the running (main) thread until the file corresponding to 
+        <page> has been fully extracted.
+        """
+        
+        # We don't have to wait for files not in an archive
+        if not self.archive_type:
+            return
+        if page == None:
+            page = self.get_current_page()
+        self._condition.acquire()
+        while not self._extractor.is_ready(page - 1):
+            self._condition.wait()
+        self._condition.release()
+
+    def _wait_on_comment(self, num):
+        pass
+
+
+def thread_delete(path):
+    
+    """
+    Starts a threaded removal of the directory tree rooted at <path>.
+    This is to avoid long blockings when removing large temporary dirs.
+    """
+    
+    del_thread = threading.Thread(target=shutil.rmtree, args=(path,))
+    del_thread.setDaemon(False)
+    del_thread.start()
 
 def is_image_file(path):
     

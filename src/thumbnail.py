@@ -35,9 +35,9 @@ def create_thumbnail(path):
     thumbnail directory. A pixbuf for the thumbnail is returned.
     """
 
-    if not filehandler.is_image_file(path):
-        return None
     pixbuf = _get_pixbuf128(path)
+    if pixbuf == None:
+        return None
     mime, width, height = gtk.gdk.pixbuf_get_file_info(path)
     if width <= 128 and height <= 128:
         return pixbuf
@@ -66,7 +66,6 @@ def create_thumbnail(path):
         os.chmod(thumbpath, 0600)
     except:
         print '! thumbnail.py: Could not write', thumbpath, '\n'
-        return None
     return pixbuf
 
 def get_thumbnail(path, create=True):
@@ -76,6 +75,8 @@ def get_thumbnail(path, create=True):
     directory of stored thumbnails. If a thumbnail for the file doesn't
     exist we create a thumbnail pixbuf from the original. If <create>
     is True we also save this new thumbnail in the thumbnail directory.
+    If no thumbnail for <path> can be produced (for whatever reason), 
+    return None.
     """
 
     uri = 'file://' + pathname2url(os.path.normpath(path))
@@ -84,11 +85,14 @@ def get_thumbnail(path, create=True):
         if create:
             return create_thumbnail(path)
         return _get_pixbuf128(path)
-    info = Image.open(thumbpath).info
-    if (not info.has_key('Thumb::MTime') or 
-      os.stat(path).st_mtime != int(info['Thumb::MTime'])):
-        if create:
-            return create_thumbnail(path)
-        return _get_pixbuf128(path)
-    return gtk.gdk.pixbuf_new_from_file(thumbpath)
+    try:
+        info = Image.open(thumbpath).info
+        if (not info.has_key('Thumb::MTime') or 
+        os.stat(path).st_mtime != int(info['Thumb::MTime'])):
+            if create:
+                return create_thumbnail(path)
+            return _get_pixbuf128(path)
+        return gtk.gdk.pixbuf_new_from_file(thumbpath)
+    except:
+        return None
 

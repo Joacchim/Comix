@@ -83,17 +83,12 @@ class ThumbnailSidebar(gtk.HBox):
             self._window.file_handler.get_number_of_pages())
         while self._counter.incr():
             i = self._counter.get()
-            path = self._window.file_handler.get_path_to_page(i)
             if self._window.file_handler.archive_type:
                 create = False
             else:
                 create = prefs['create thumbnails']
-            pixbuf = thumbnail.get_thumbnail(path, create)
-            if pixbuf == None:
-                pixbuf = gtk.image_new_from_stock(gtk.STOCK_MISSING_IMAGE,
-                    gtk.ICON_SIZE_BUTTON).get_pixbuf()
-            pixbuf = image.fit_in_rectangle(pixbuf, prefs['thumbnail size'],
-                                            prefs['thumbnail size'])
+            pixbuf = self._window.file_handler.get_thumbnail(i,
+                prefs['thumbnail size'], prefs['thumbnail size'], create)
             if prefs['show page numbers on thumbnails']:
                 _add_page_number(pixbuf, i)
             pixbuf = image.add_border(pixbuf, 1)

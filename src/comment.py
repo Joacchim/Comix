@@ -38,7 +38,7 @@ class _CommentsDialog(gtk.Dialog):
         tag_table = gtk.TextTagTable()
         tag_table.add(tag)
 
-        for num in xrange(self._file_handler.get_number_of_comments()):
+        for num in xrange(1, self._file_handler.get_number_of_comments() + 1):
             page = gtk.VBox(False)
             page.set_border_width(12)
             scrolled = gtk.ScrolledWindow()
@@ -49,12 +49,9 @@ class _CommentsDialog(gtk.Dialog):
             inbox = gtk.EventBox()
             inbox.set_border_width(6)
             outbox.add(inbox)
-            path = self._file_handler.get_comment(num)
-            try:
-                fd = open(path)
-                text = fd.read()
-                fd.close()
-            except:
+            name = os.path.basename(self._file_handler.get_comment_name(num))
+            text = self._file_handler.get_comment_text(num)
+            if text == None:
                 text = _('Could not read %s') % path
             text_buffer = gtk.TextBuffer(tag_table)
             text_buffer.set_text(encoding.to_unicode(text))
@@ -63,7 +60,7 @@ class _CommentsDialog(gtk.Dialog):
             inbox.add(text_view)
             bg_color = text_view.get_default_attributes().bg_color
             outbox.modify_bg(gtk.STATE_NORMAL, bg_color)
-            tab_label = gtk.Label(encoding.to_unicode(os.path.basename(path)))
+            tab_label = gtk.Label(encoding.to_unicode(name))
             notebook.insert_page(page, tab_label)
 
         self.action_area.get_children()[0].grab_focus()
