@@ -51,7 +51,7 @@ class FileHandler:
         self._extractor = archive.Extractor()
         self._condition = None
         self._image_re = re.compile(r'\.(jpg|jpeg|png|gif|tif|tiff)\s*$', re.I)
-        #self._comment_re = re.compile(r'\.(%s)'%  , re.I)
+        self.update_comment_extensions()
 
     def _get_pixbuf(self, index):
         
@@ -247,9 +247,14 @@ class FileHandler:
             image_files.sort()
             self._image_files = \
                 [os.path.join(self._tmp_dir, f) for f in image_files]
-            for i, name in enumerate(image_files):
-                self._name_table[self._image_files[i]] = name
-            
+            comment_files = filter(self._comment_re.search, files)
+            self._comment_files = \
+                [os.path.join(self._tmp_dir, f) for f in comment_files]
+            for name, path in zip(image_files, self._image_files):
+                self._name_table[path] = name
+            for name, path in zip(comment_files, self._comment_files):
+                self._name_table[path] = name
+
             if start_page <= 0:
                 if self._window.is_double_page:
                     self._current_image_index = self.get_number_of_pages() - 2
@@ -272,7 +277,7 @@ class FileHandler:
                 image_files.remove(name)
                 image_files.insert(i, name)
             
-            self._extractor.set_files(image_files)
+            self._extractor.set_files(image_files + comment_files)
             self._extractor.extract()
 
         # --------------------------------------------------------------------
@@ -424,7 +429,17 @@ class FileHandler:
         
         """ Return the filename of comment <num>. """
 
-        return self._comment_files[num]
+        return self._comment_files[num - 1]
+
+    def update_comment_extensions(self):
+        
+        """ 
+        Update the regular expression used to filter out comments in
+        archives by their filename.
+        """
+        
+        exts = '|'.join(prefs['comment extensions'])
+        self._comment_re = re.compile(r'\.(%s)\s*$' % exts, re.I)
 
     def get_pretty_current_filename(self):
         
@@ -541,19 +556,27 @@ class FileHandler:
         
         """
         Block the running (main) thread until the file corresponding to 
-        <page> has been fully extracted.
+        image <page> has been fully extracted.
         """
         
-        # We don't have to wait for files not in an archive
-        if not self.archive_type:
-            return
         path = self.get_path_to_page(page)
         self._wait_on_file(path)
 
     def _wait_on_comment(self, num):
-        pass
+        
+        """
+        Block the running (main) thread until the file corresponding to 
+        comment <num> has been fully extracted.
+        """
 
+        path = self._comment_files[num - 1]
+        self._wait_on_file(path)
+    
     def _wait_on_file(self, path):
+        
+        # We don't have to wait for files not in an archive
+        if not self.archive_type:
+            return
         name = self._name_table[path]
         self._condition.acquire()
         while not self._extractor.is_ready(name):
