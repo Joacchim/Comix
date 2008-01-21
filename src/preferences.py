@@ -1,5 +1,5 @@
 # ============================================================================
-# preferences.py - Preference handler for Comix.
+# preferences.py - Preference handler.
 # ============================================================================
 
 import os
@@ -61,6 +61,9 @@ prefs = {
 _config_path = os.path.join(constants.COMIX_DIR, 'preferences_pickle')
 
 def read_config_file():
+    
+    """ Read preferences data from disk. """
+
     if os.path.isfile(_config_path):
         try:
             config = open(_config_path)
@@ -75,6 +78,9 @@ def read_config_file():
             os.remove(_config_path)
 
 def write_config_to_file():
+    
+    """ Write preference data to disk. """
+
     config = open(_config_path, 'w')
     cPickle.dump(constants.VERSION, config, cPickle.HIGHEST_PROTOCOL)
     cPickle.dump(prefs, config, cPickle.HIGHEST_PROTOCOL)

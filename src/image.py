@@ -1,8 +1,9 @@
 # ============================================================================
-# image.py - Image modification module for Comix.
+# image.py - Various image manipulations.
 # ============================================================================
 
 import gtk
+import Image
 
 import preferences
 
@@ -10,15 +11,15 @@ def fit_in_rectangle(src, width, height, interp=None, scale_up=False,
   rotation=0):
     
     """
-    Returns a pixbuf from <src> scaled to fit into a rectangle with
-    dimensions <width> x <height>. A negative <width> or <height> means an
-    unbounded dimension, both cannot be negative.
+    Scale (and return) a pixbuf so that it fits in a rectangle with
+    dimensions <width> x <height>. A negative <width> or <height>
+    means an unbounded dimension - both cannot be negative.
 
-    If rotation is 90, 180 or 270 we rotate <src> so that the rotated
-    pixbuf is fitted in the rectangle.
+    If <rotation> is 90, 180 or 270 we rotate <src> first so that the
+    rotated pixbuf is fitted in the rectangle.
     
     If <interp> is set it is used as the scaling method, otherwise the
-    default value from preferences is used.
+    default value from the preferences module is used.
     
     Unless <scale_up> is True we don't stretch images smaller than the
     given rectangle.
@@ -70,19 +71,12 @@ def fit_2_in_rectangle(src1, src2, width, height, interp=None, scale_up=False,
   rotation=0):
     
     """
-    Returns a 2-tuple with two pixbufs scaled from <src1> and <src2>
-    to fit together (side-by-side) into a rectangle with dimensions
-    <width> x <height>. A negative <width> or <height> means an
-    unbounded dimension, both cannot be negative. The images are scaled
-    so that a gap of 2 px will fit between them in the rectangle.
+    Scale two pixbufs so that they fit together (side-by-side) into a
+    rectangle with dimensions <width> x <height>. If one pixbuf does not
+    use all of its allotted space, the other one is given it, so that the
+    pixbufs are not necessarily scaled to the same percentage.
 
-    If rotation is 90, 180 or 270 we rotate the pixbufs.
-    
-    If <interp> is set it is used as the scaling method, otherwise the
-    default value from preferences is used.
-    
-    Unless <scale_up> is True we don't stretch images smaller than the
-    given rectangle.
+    See fit_in_rectangle() for more info on the parameters.
     """
 
     # "Unbounded" really means "bounded to 10000 px" - for simplicity.
@@ -120,7 +114,7 @@ def fit_2_in_rectangle(src1, src2, width, height, interp=None, scale_up=False,
 def add_border(pixbuf, thickness, colour=0x000000FF):
 
     """
-    Returns a pixbuf from <pixbuf> with a <thickness> px border of 
+    Return a pixbuf from <pixbuf> with a <thickness> px border of 
     <colour> added.
     """
 
@@ -131,4 +125,24 @@ def add_border(pixbuf, thickness, colour=0x000000FF):
     pixbuf.copy_area(0, 0, pixbuf.get_width(), pixbuf.get_height(),
         canvas, thickness, thickness)
     return canvas
+
+def pil_to_pixbuf(image):
+    
+    """ Return a pixbuf created from the PIL <image>. """
+
+    imagestr = image.tostring()
+    IS_RGBA = image.mode == 'RGBA'
+    return gtk.gdk.pixbuf_new_from_data(imagestr, gtk.gdk.COLORSPACE_RGB,
+        IS_RGBA, 8, image.size[0], image.size[1],
+        (IS_RGBA and 4 or 3) * image.size[0])
+
+def pixbuf_to_pil(pixbuf):
+    
+    """ Return a PIL image created from <pixbuf>. """
+
+    dimensions = pixbuf.get_width(), pixbuf.get_height()
+    stride = pixbuf.get_rowstride()
+    pixels = pixbuf.get_pixels()
+    mode = pixbuf.get_has_alpha() and 'RGBA' or 'RGB'
+    return Image.frombuffer(mode, dimensions, pixels, 'raw', mode, stride, 1)
 

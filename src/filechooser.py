@@ -1,5 +1,5 @@
 # ============================================================================
-# filechooser.py - FileChooserDialog implementation for Comix.
+# filechooser.py - FileChooserDialog implementation.
 # ============================================================================
 
 import os

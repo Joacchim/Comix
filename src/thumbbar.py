@@ -1,5 +1,5 @@
 # ============================================================================
-# thumbbar.py - Thumbnail sidebar for Comix.
+# thumbbar.py - Thumbnail sidebar for main window.
 # ============================================================================
 
 import time
@@ -10,7 +10,6 @@ import ImageDraw
 
 import image
 from preferences import prefs
-import pilpixbuf
 import thumbnail
 
 class ThumbnailSidebar(gtk.HBox):
@@ -170,6 +169,6 @@ def _add_page_number(pixbuf, page):
     im = Image.new('RGB', (width, height), (0, 0, 0))
     draw = ImageDraw.Draw(im)
     draw.text((1, -1), text, fill=(255, 255, 255))
-    num_pixbuf = pilpixbuf.pil_to_pixbuf(im)
+    num_pixbuf = image.pil_to_pixbuf(im)
     num_pixbuf.copy_area(0, 0, width, height, pixbuf, 0, 0)
 

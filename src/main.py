@@ -1,5 +1,5 @@
 # ============================================================================
-# main.py - Main window for Comix.
+# main.py - Main window.
 # ============================================================================
 
 import sys
@@ -13,7 +13,6 @@ import encoding
 import event
 import filehandler
 import image
-import pilpixbuf
 import preferences
 from preferences import prefs
 import ui
@@ -22,6 +21,11 @@ import status
 import thumbbar
 
 class MainWindow(gtk.Window):
+    
+    """
+    The Comix main window, is created at start and terminates the program
+    when closed.
+    """
 
     def __init__(self):
         gtk.Window.__init__(self, gtk.WINDOW_TOPLEVEL)
@@ -172,7 +176,9 @@ class MainWindow(gtk.Window):
 
     def draw_image(self, at_bottom=False):
         
-        """ Draws the current page(s) and updates titlebar and statusbar. """
+        """
+        Draw the current page(s) and update the titlebar and statusbar.
+        """
 
         self._display_active_widgets()
 
@@ -288,7 +294,10 @@ class MainWindow(gtk.Window):
 
     def new_page(self, at_bottom=False):
         
-        """ Draws a *new* page correctly. """
+        """
+        Draw a *new* page correctly (as opposed to redrawing the same image
+        with a new size or whatever.)
+        """
         
         if not self._keep_rotation:
             self._rotation = 0
@@ -418,8 +427,8 @@ class MainWindow(gtk.Window):
     def scroll(self, x, y):
 
         """
-        Scrolls <x> px horizontally and <y> px vertically.
-        Returns True if call resulted in new adjustment values, False
+        Scroll <x> px horizontally and <y> px vertically.
+        Return True if call resulted in new adjustment values, False
         otherwise.
         """
 
@@ -441,6 +450,8 @@ class MainWindow(gtk.Window):
     def scroll_to_fixed(self, horiz=None, vert=None):
         
         """
+        Scroll using one of several fixed values.
+
         If either <horiz> or <vert> is as below, the display is scrolled as
         follows:
 
@@ -511,6 +522,9 @@ class MainWindow(gtk.Window):
             self._hadjust.set_value(hadjust_upper)
 
     def clear(self):
+        
+        """ Clear the currently displayed data (i.e. "close" the file) """
+
         self._left_image.clear()
         self._right_image.clear()
         self.thumbnailsidebar.clear()
@@ -519,7 +533,7 @@ class MainWindow(gtk.Window):
 
     def displayed_double(self):
         
-        """ Returns True if two pages are currently displayed. """
+        """ Return True if two pages are currently displayed. """
 
         return (self.is_double_page and self.file_handler.get_current_page() !=
             self.file_handler.get_number_of_pages())
@@ -527,7 +541,7 @@ class MainWindow(gtk.Window):
     def get_visible_area_size(self):
         
         """
-        Returns a 2-tuple with the width and height of the visible part
+        Return a 2-tuple with the width and height of the visible part
         of the main layout area.
         """
 
@@ -554,7 +568,7 @@ class MainWindow(gtk.Window):
     def _display_active_widgets(self):
         
         """ 
-        Hides and/or shows main window widgets depending on the current
+        Hide and/or show main window widgets depending on the current
         state.
         """
 
@@ -601,7 +615,7 @@ class MainWindow(gtk.Window):
         
     def _set_title(self):
         
-        """ Sets the title acording to current state. """
+        """ Set the title acording to current state. """
 
         if self.displayed_double():
             self.set_title(encoding.to_unicode( 
@@ -619,7 +633,7 @@ class MainWindow(gtk.Window):
 
     def terminate_program(self, *args):
         
-        """ Runs clean-up tasks and exits the program. """
+        """ Run clean-up tasks and exit the program. """
 
         print 'Bye!'
         gtk.main_quit()

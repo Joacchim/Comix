@@ -1,5 +1,5 @@
 # ============================================================================
-# histogram.py - Draws histograms from pixbufs for Comix.
+# histogram.py - Draws histograms (RGB) from pixbufs.
 # ============================================================================
 
 import gtk
@@ -7,12 +7,12 @@ import Image
 import ImageDraw
 import ImageOps
 
-import pilpixbuf
+import image
 
 def draw_histogram(pixbuf, height=150, fill=170, text=True):
     
     """
-    Draws a histogram from <pixbuf> and returns it as another pixbuf.
+    Draw a histogram from <pixbuf> and return it as another pixbuf.
 
     The returned prixbuf will be 256x<height> px. 
 
@@ -26,7 +26,7 @@ def draw_histogram(pixbuf, height=150, fill=170, text=True):
     """
     
     im = Image.new('RGB', (256, height - 1), (30, 30, 30))
-    hist_data = pilpixbuf.pixbuf_to_pil(pixbuf).histogram()
+    hist_data = image.pixbuf_to_pil(pixbuf).histogram()
     maximum = max(hist_data[:768] + [1])
     y_scale = float(height - 2) / maximum
     r = [int(hist_data[n] * y_scale) for n in xrange(256)]
@@ -66,5 +66,5 @@ def draw_histogram(pixbuf, height=150, fill=170, text=True):
         draw.rectangle((0, 0, len(maxstr) * 6 + 2, 10), fill=(30, 30, 30))
         draw.text((2, 0), maxstr, fill=(255, 255, 255))
     im = ImageOps.expand(im, 1, (0, 0, 0))
-    return pilpixbuf.pil_to_pixbuf(im)
+    return image.pil_to_pixbuf(im)
 

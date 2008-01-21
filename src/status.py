@@ -1,5 +1,5 @@
 # ============================================================================
-# status.py - Statusbar for Comix.
+# status.py - Statusbar for main window.
 # ============================================================================
 
 import gtk
@@ -18,7 +18,7 @@ class Statusbar(gtk.Statusbar):
     def set_message(self, message):
         
         """ 
-        Sets a specific message (such as an error message) on the statusbar,
+        Set a specific message (such as an error message) on the statusbar,
         replacing whatever was there earlier.
         """
 
@@ -27,7 +27,7 @@ class Statusbar(gtk.Statusbar):
 
     def set_page_number(self, page, total, double_page=False):
 
-        """ Updates the page number. """
+        """ Update the page number. """
 
         if double_page:
             self.page_info = '%d,%d / %d' % (page, page + 1, total)
@@ -37,7 +37,7 @@ class Statusbar(gtk.Statusbar):
     def set_resolution(self, left_dimensions, right_dimensions=None):
         
         """
-        Updates the resolution data.
+        Update the resolution data.
 
         Takes one or two tuples, (x, y, scale), describing the original 
         resolution of an image as well as the currently displayed scale
@@ -50,13 +50,13 @@ class Statusbar(gtk.Statusbar):
 
     def set_filename(self, filename):
         
-        """ Updates the filename. """
+        """ Update the filename. """
         
         self.filename = encoding.to_unicode(filename)
 
     def update(self):
         
-        """ Updates the statusbar to display the current state. """
+        """ Set the statusbar to display the current state. """
 
         self.pop(0)
         self.push(0, ' %s      |      %s      |      %s' %

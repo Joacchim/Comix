@@ -8,6 +8,8 @@ import zipfile
 import tarfile
 import threading
 
+import time
+
 # ------------------------------------------------------------------------
 # Determine if rar/unrar exists, and bind the executable path to _rar_exec
 # ------------------------------------------------------------------------
@@ -94,12 +96,14 @@ class Extractor:
         
         Note: Random access on gzip or bzip2 compressed tar archives is
         no good idea. These formats are supported *only* for backwards
-        compability. They should not be used for comic book purposes.
-        So, we cheat and ignore the ordering applied with this method on
-        such archives.
+        compability. They are fine formats for some purposes, but should
+        not be used for scanned comic books. So, we cheat and ignore the
+        ordering applied with this method on such archives.
         """
 
-        if self._type != 'gzip' and self._type != 'bzip2':
+        if self._type == 'gzip' or self._type == 'bzip2':
+            self._files = filter(files.count, self._files)
+        else:
             self._files = files
 
     def is_ready(self, name):
@@ -152,17 +156,15 @@ class Extractor:
     def _extract_file(self, name, dst):
         
         """
-        Extract the file named <name> to <dst>, mark the file as "ready",
-        then signal a notify() on the Condition returned by setup().
+        Extract the file named <name> to directory <dst>, mark the file
+        as "ready", then signal a notify() on the Condition returned by
+        setup().
         """
         
         if self._stop:
             sys.exit(0)
         try:
             if self._type == 'zip':
-                if (name.endswith('/') or 
-                  self._zfile.getinfo(name).file_size <= 0):
-                    return
                 dst_name = unicode(name, 'cp437')
                 for enc in (sys.getfilesystemencoding(), 'utf8', 'latin-1'):
                     try:
@@ -187,7 +189,7 @@ class Extractor:
         except:
             # Better to ignore any failed extractions (e.g. from corrupt
             # archive) than to crash here and leave the main thread in a
-            # possible infinite block. Missing/damaged files *should* be
+            # possible infinite block. Damaged files *should* be
             # handled gracefully by the main program anyway.
             pass
         

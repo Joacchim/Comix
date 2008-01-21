@@ -1,5 +1,5 @@
 # ============================================================================
-# icons.py - Loads icons for Comix.
+# icons.py - Load Comix specific icons.
 # ============================================================================
 
 import os
@@ -31,6 +31,12 @@ _icons = (('gimp-flip-horizontal.png',   'comix-flip-horizontal'),
           ('fitmanual.png',              'comix-fitmanual'))
 
 def load():
+    
+    """
+    Load Comix specific icons to the default stock set. Should be called
+    at startup.
+    """
+
     # Some heuristics to find the path to the icon image files.
     cwd = os.path.dirname(os.path.realpath(sys.argv[0]))
     if os.path.isfile(os.path.join(os.path.dirname(cwd), 'images/comix.png')):
