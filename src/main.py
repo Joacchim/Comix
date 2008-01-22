@@ -570,6 +570,12 @@ class MainWindow(gtk.Window):
         return width, height
 
     def set_cursor(self, mode):
+        
+        """
+        Set the cursor on the main layout area to <mode>. You should probably
+        use the cursor_handler instead of using this method directly.
+        """
+
         self._main_layout.window.set_cursor(mode)
         return False
 

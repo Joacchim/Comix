@@ -137,7 +137,7 @@ def uninstall(path):
 def check_dependencies():
     required_found = True
     recommended_found = True
-    print 'Checking dependencies...\n'
+    print 'Checking dependencies ...\n'
     print 'Required dependencies:'
     # Should also check the PyGTK version. To do that we have to load the
     # gtk module though, which normally can't be done while using `sudo`.
@@ -189,7 +189,7 @@ for opt, value in opts:
     if opt == '--dir':
         install_dir = value
         if not os.path.isdir(install_dir):
-            print '\n!!! Error:', install_dir, 'does not exist.\n' 
+            print '\n!!! Error:', install_dir, 'does not exist.' 
             info()
     elif opt == '--no-mime':
         install_mime = False
@@ -206,6 +206,8 @@ if args == ['install']:
     binlink = os.path.join(install_dir, 'bin/comix')
     if os.path.isfile(binlink) or os.path.islink(binlink):
         os.remove(binlink)
+    if not os.path.exists(os.path.dirname(binlink)):
+        os.makedirs(os.path.dirname(binlink))
     os.symlink(os.path.join(install_dir, 'share/comix/src/comix.py'), binlink)
     print 'Installed', binlink
 

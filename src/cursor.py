@@ -37,17 +37,35 @@ class CursorHandler:
                 self._kill_timer()
     
     def enter_fullscreen(self):
+        
+        """
+        Signal that we are entering fullscreen (e.g. that the cursor should
+        auto-hide from now on).
+        """
+
         self._fullscreen = True
         if self._current_cursor == NORMAL:
             self._set_hide_timer()
 
     def exit_fullscreen(self):
+        
+        """
+        Signal that we are leaving fullscreen (e.g. that the cursor should
+        *not* auto-hide from now on).
+        """
+
         self._fullscreen = False
         self._kill_timer()
         if self._current_cursor == NORMAL:
             self.set_cursor_type(NORMAL)
 
     def refresh(self):
+        
+        """
+        Refresh the current cursor (i.e. display it and set a new timer in
+        fullscreen). Used when we move the cursor.
+        """
+
         if self._fullscreen:
             self.set_cursor_type(self._current_cursor)
 
@@ -57,10 +75,8 @@ class CursorHandler:
             self._create_hidden_cursor())
 
     def _kill_timer(self):
-        try:
+        if self._timer_id != None:
             gobject.source_remove(self._timer_id)
-        except:
-            pass
 
     def _create_hidden_cursor(self):
         pixmap = gtk.gdk.Pixmap(None, 1, 1, 1)
