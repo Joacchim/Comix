@@ -198,6 +198,7 @@ class EventHandler:
             #    self.scroll_wheel_event_id = None
             #self.zooming_lens(event.x, event.y, event.time)
         elif event.button == 3:
+            self._window.cursor_handler.set_cursor_type(cursor.NORMAL)
             self._window.popup.popup(None, None, None, event.button,
                 event.time)
 
@@ -205,7 +206,7 @@ class EventHandler:
         
         """ Handle mouse button release events on the main layout area. """
 
-        cursor.set_cursor_type(cursor.NORMAL)
+        self._window.cursor_handler.set_cursor_type(cursor.NORMAL)
         
         if (event.button == 1 and
           event.x_root == self._pressed_pointer_pos_x and
@@ -223,11 +224,13 @@ class EventHandler:
         """ Handle mouse pointer movement events. """
         
         if 'GDK_BUTTON1_MASK' in event.state.value_names:
-            cursor.set_cursor_type(cursor.GRAB)
+            self._window.cursor_handler.set_cursor_type(cursor.GRAB)
             self._window.scroll(self._last_pointer_pos_x - event.x_root,
                                 self._last_pointer_pos_y - event.y_root)
             self._last_pointer_pos_x = event.x_root
             self._last_pointer_pos_y = event.y_root
+        else:
+            self._window.cursor_handler.refresh()
     
     def drag_n_drop_event(self, widget, context, x, y, data, *args):
         

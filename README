@@ -1,63 +1,55 @@
 - Comix README -
 
 NOTE:
---------------------------------------------------------------------------------
-This is the development branch towards Comix 4.0. It is not very stable or
-usable yet, so you are encouraged to use the 3.X version instead.
-
+------------------------------------------------------------------------------
+This is the development branch towards Comix 4.0. It is not complete yet,
+so you are encouraged to use the 3.X version instead.
 
 
 About
---------------------------------------------------------------------------------
-Comix is a user-friendly, customizable image viewer. It is specifically designed
-to handle comic books, but also serves as a generic viewer. It reads images in
-ZIP, RAR or tar archives (also gzip or bzip2 compressed) as well as plain image
-files. It is written in Python and uses GTK+ through the PyGTK bindings. 
-
+------------------------------------------------------------------------------
+Comix is a user-friendly, customizable image viewer. It is specifically
+designed to handle comic books, but also serves as a generic viewer. It reads
+images in ZIP, RAR or tar archives as well as plain image files. It is
+written in Python and uses GTK+ through the PyGTK bindings. 
 
 
 Installation
---------------------------------------------------------------------------------
+------------------------------------------------------------------------------
 Run "python install.py install" as root to install Comix in /usr/local.
 To uninstall, simply run "python install.py uninstall".
 
-If you wish to install Comix in another base directory, use the --installdir
-option. Example: "python install.py install --installdir /usr".
-If you have installed with --installdir, do not forget to use the same option
-when uninstalling.
+If you wish to install Comix in another base directory, use the --dir option.
+
+Example:
+    # python install.py --dir /usr install
+
+If you have installed with --dir, do not forget to use the same option when
+uninstalling.
 
 There is also an option, --no-mime, that can be used to tell install.py that
-it should not register new mime types for cbz, cbr and cbt archives or install
-the thumbnail creation script for these files used by some file managers
-(currently only Nautilus).
+it should not register new mime types for cbz, cbr and cbt archives, or
+install the thumbnail creation script for these files used by some file
+managers (such as Nautilus and Thunar).
 
-If you have not specified --no-mime, you can use --no-balloon to tell the 
-Nautilus thumbnailer to not imprint balloon images on the thumbnails by default.
-If you like your thumbnails plain this option is for you.
-
-    Example:
+As an example of how to install Comix from the downloaded tar.gz file, run
+as the root user (via su or sudo):
     # tar -xzf comix-x.y.tar.gz
     # cd comix-x.y
     # python install.py install
 
-You can even run the "comix" script file by itself from any location, but if
-you want the custom icons and translations to be available you should either
-run it in the source directory, or install it. For an example you could place
-this source directory anywhere and create a symlink somewhere in your PATH
-pointing to the "comix" script file.
-
+If you don't want to install Comix in some system directory, you can just
+execute the file src/comix.py in the unpacked Comix directory to run the
+program. You could also create a symlink somewhere in your PATH pointing to
+this file.
 
 
 Dependencies
 --------------------------------------------------------------------------------
-Comix needs PyGTK 2.8.0 or newer and PIL (Python Imaging Library) 1.1.4 or
+Comix needs Python 2.4, PyGTK 2.10.0 and PIL (Python Imaging Library) 1.1.4 or
 newer to function. 
 
-You also need `unrar` or `rar` if you wish to read RAR (.cbr) archives, and
-`jpegtran` (usually a part of the jpeg library) in order to perform permanent
-lossless operations on JPEG images. These dependencies are optional but
-recommended.
-
+You also need `unrar` or `rar` if you wish to read RAR (.cbr) archives.
 
 
 Credits
@@ -65,11 +57,8 @@ Credits
 Thanks to everyone who have contributed translations, suggestions, bug 
 reports, fixes and donations!
 
-The transformation icons are taken from The Gimp project.
-
-All icons that have "silk" in their filename are taken from and/or derived
-from the Silk Icons set at www.famfamfam.com.
-
+Images with a filename starting with "gimp" are taken from The GIMP and images
+with a filename starting with "tango" are taken from the Tango Desktop Project.
 
 
 Contact
@@ -77,8 +66,7 @@ Contact
 Pontus Ekberg <herrekberg@users.sourceforge.net>
 http://comix.sourceforge.net
 
-Don't hesitate to contact me with any questions.
-
+Don't hesitate to contact me.
 
 
 --------------------------------------------------------------------------------

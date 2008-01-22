@@ -229,7 +229,7 @@ class FileHandler:
                 _('Filetype of "%s" not recognized.') % os.path.basename(path))
             return False
 
-        cursor.set_cursor_type(cursor.WAIT)
+        self._window.cursor_handler.set_cursor_type(cursor.WAIT)
         if self.file_loaded:
             self.close_file()
         while gtk.events_pending():
@@ -306,7 +306,7 @@ class FileHandler:
         self._comment_files.sort()
         self._window.thumbnailsidebar.block()
         self._window.new_page()
-        cursor.set_cursor_type(cursor.NORMAL)
+        self._window.cursor_handler.set_cursor_type(cursor.NORMAL)
         while gtk.events_pending():
             gtk.main_iteration(False)
         self._window.ui_manager.set_sensitivities()

@@ -9,6 +9,7 @@ import shutil
 import gtk
 
 import constants
+import cursor
 import encoding
 import event
 import filehandler
@@ -50,6 +51,7 @@ class MainWindow(gtk.Window):
         self.thumbnailsidebar = thumbbar.ThumbnailSidebar(self)
         self.statusbar = status.Statusbar()
         self.slideshow = slideshow.Slideshow(self)
+        self.cursor_handler = cursor.CursorHandler(self)
         self.ui_manager = ui.MainUI(self)
         self.menubar = self.ui_manager.get_widget('/Menu')
         self.toolbar = self.ui_manager.get_widget('/Tool')
@@ -358,8 +360,10 @@ class MainWindow(gtk.Window):
         self.is_fullscreen = toggleaction.get_active()
         if self.is_fullscreen:
             self.fullscreen()
+            self.cursor_handler.enter_fullscreen()
         else:
             self.unfullscreen()
+            self.cursor_handler.exit_fullscreen()
 
     def change_zoom_mode(self, radioaction, *args):
         mode = radioaction.get_current_value()
@@ -564,6 +568,10 @@ class MainWindow(gtk.Window):
                 width -= self._vscroll.size_request()[0]
                 height -= self._hscroll.size_request()[1]
         return width, height
+
+    def set_cursor(self, mode):
+        self._main_layout.window.set_cursor(mode)
+        return False
 
     def _display_active_widgets(self):
         

@@ -18,9 +18,8 @@ _dialog = None
 class _ComicFileChooserDialog(gtk.Dialog):
     
     def __init__(self, file_handler):
-        gtk.Dialog.__init__(self, title=_('Open'),
-            buttons=(gtk.STOCK_CANCEL, gtk.RESPONSE_CANCEL,
-            gtk.STOCK_OPEN, gtk.RESPONSE_OK))
+        gtk.Dialog.__init__(self, _('Open'), None, 0, (gtk.STOCK_CANCEL,
+            gtk.RESPONSE_CANCEL, gtk.STOCK_OPEN, gtk.RESPONSE_OK))
         
         self._file_handler = file_handler
         self.connect('response', self._response)
@@ -152,7 +151,7 @@ def dialog_open(action, file_handler):
     global _dialog
     if _dialog == None:
         _dialog = _ComicFileChooserDialog(file_handler)
-        _dialog.run()
+        _dialog.show()
 
 def dialog_close(*args):
     global _dialog
