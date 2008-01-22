@@ -70,7 +70,7 @@ def _get_new_archive_thumbnail(path):
     Return a new thumbnail pixbuf for the archive at <path>, and save it
     to disk.
     """
-
+    
     extractor = archive.Extractor()
     tmpdir = tempfile.mkdtemp(prefix='comix_archive_thumb.')
     condition = extractor.setup(path, tmpdir)
@@ -163,6 +163,7 @@ def _guess_cover(files):
     front_re = re.compile('((?<!back)cover)|(front)', re.I)
     images = filter(ext_re.search, files)
     candidates = filter(front_re.search, images)
+    candidates = [c for c in candidates if not 'back' in c.lower()]
     if candidates:
         return candidates[0]
     if images:
