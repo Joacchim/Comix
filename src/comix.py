@@ -79,15 +79,14 @@ if __name__ == '__main__':
     # Use gettext translations as found in the source dir, otherwise
     # based on the install path.
     # --------------------------------------------------------------------
-    exec_path = os.path.realpath(sys.argv[0])
+    exec_path = os.path.abspath(sys.argv[0])
     base_dir = os.path.dirname(os.path.dirname(exec_path))
     if os.path.isdir(os.path.join(base_dir, 'messages')):
         gettext.install('comix', os.path.join(base_dir, 'messages'),
             unicode=True)
     else:
-        gettext.install('comix', os.path.join(base_dir, '/share/locale'),
+        gettext.install('comix', os.path.join(base_dir, 'share/locale'),
             unicode=True)
-    
     preferences.read_config_file()
     icons.load()
     window = main.MainWindow()

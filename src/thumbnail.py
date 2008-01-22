@@ -154,7 +154,7 @@ def _get_pixbuf128(path):
 def _guess_cover(files):
     
     """
-    Return the filename within files that is the most likely to be the
+    Return the filename within <files> that is the most likely to be the
     cover of an archive.
     """
     

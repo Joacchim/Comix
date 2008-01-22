@@ -1,217 +1,251 @@
 #!/usr/bin/env python
 
+"""
+This script installs or uninstalls Comix on your system.
+-------------------------------------------------------------------------------
+Usage: install.py [options] [command]
+
+Commands:
+    install                  Install to /usr/local
+
+    uninstall                Uninstall from /usr/local
+
+Options:
+    --dir <directory>        Install or uninstall in <directory>
+                             instead of /usr/local
+
+    --no-mime                Do not install the file manager thumbnailer
+                             or register new mime types for x-cbz,
+                             x-cbt and x-cbr archive files.
+"""
+
 import os
 import sys
 import getopt
 import shutil
 
-usage_info = """
-This script installs or uninstalls Comix on your system.
-If you encounter any bugs, please report them to herrekberg@users.sf.net.
+source_dir = os.path.dirname(os.path.realpath(__file__))
+install_dir = '/usr/local/'
+install_mime = True
+TRANSLATIONS = ('sv', 'es', 'zh_CN', 'zh_TW', 'pt_BR', 'de', 'it', 'nl',
+    'fr', 'pl', 'el', 'ca', 'ja', 'hu', 'ru', 'hr', 'cz')
+FILES = (("src/about.py", "share/comix/src"),
+         ("src/about.pyc", "share/comix/src"),
+         ("src/archive.py", "share/comix/src"),
+         ("src/archive.pyc", "share/comix/src"),
+         ("src/bookmark.py", "share/comix/src"),
+         ("src/bookmark.pyc", "share/comix/src"),
+         ("src/comix.py", "share/comix/src"),
+         ("src/comment.py", "share/comix/src"),
+         ("src/comment.pyc", "share/comix/src"),
+         ("src/constants.py", "share/comix/src"),
+         ("src/constants.pyc", "share/comix/src"),
+         ("src/cursor.py", "share/comix/src"),
+         ("src/cursor.pyc", "share/comix/src"),
+         ("src/encoding.py", "share/comix/src"),
+         ("src/encoding.pyc", "share/comix/src"),
+         ("src/event.py", "share/comix/src"),
+         ("src/event.pyc", "share/comix/src"),
+         ("src/filechooser.py", "share/comix/src"),
+         ("src/filechooser.pyc", "share/comix/src"),
+         ("src/filehandler.py", "share/comix/src"),
+         ("src/filehandler.pyc", "share/comix/src"),
+         ("src/histogram.py", "share/comix/src"),
+         ("src/histogram.pyc", "share/comix/src"),
+         ("src/icons.py", "share/comix/src"),
+         ("src/icons.pyc", "share/comix/src"),
+         ("src/image.py", "share/comix/src"),
+         ("src/image.pyc", "share/comix/src"),
+         ("src/main.py", "share/comix/src"),
+         ("src/main.pyc", "share/comix/src"),
+         ("src/preferences.py", "share/comix/src"),
+         ("src/preferences.pyc", "share/comix/src"),
+         ("src/properties.py", "share/comix/src"),
+         ("src/properties.pyc", "share/comix/src"),
+         ("src/recent.py", "share/comix/src"),
+         ("src/recent.pyc", "share/comix/src"),
+         ("src/slideshow.py", "share/comix/src"),
+         ("src/slideshow.pyc", "share/comix/src"),
+         ("src/status.py", "share/comix/src"),
+         ("src/status.pyc", "share/comix/src"),
+         ("src/thumbbar.py", "share/comix/src"),
+         ("src/thumbbar.pyc", "share/comix/src"),
+         ("src/thumbnail.py", "share/comix/src"),
+         ("src/thumbnail.pyc", "share/comix/src"),
+         ("src/ui.py", "share/comix/src"),
+         ("src/ui.pyc", "share/comix/src"),
+         ("images/comix.png", "share/comix/images"),
+         ("images/comix.svg", "share/comix/images"),
+         ("images/double-page.png", "share/comix/images"),
+         ("images/fitheight.png", "share/comix/images"),
+         ("images/fitmanual.png", "share/comix/images"),
+         ("images/fitscreen.png", "share/comix/images"),
+         ("images/fitwidth.png", "share/comix/images"),
+         ("images/gimp-comments.png", "share/comix/images"),
+         ("images/gimp-flip-horizontal.png", "share/comix/images"),
+         ("images/gimp-flip-vertical.png", "share/comix/images"),
+         ("images/gimp-rotate-90.png", "share/comix/images"),
+         ("images/gimp-rotate-180.png", "share/comix/images"),
+         ("images/gimp-rotate-270.png", "share/comix/images"),
+         ("images/gimp-thumbnails.png", "share/comix/images"),
+         ("images/gimp-transform.png", "share/comix/images"),
+         ("images/gimp-zoom.png", "share/comix/images"),
+         ("images/lens.png", "share/comix/images"),
+         ("images/library.png", "share/comix/images"),
+         ("images/manga.png", "share/comix/images"),
+         ("images/tango-add-bookmark.png", "share/comix/images"),
+         ("images/tango-archive.png", "share/comix/images"),
+         ("images/tango-colour-adjust.png", "share/comix/images"),
+         ("images/tango-image.png", "share/comix/images"),
+         ("images/tango-library-add.png", "share/comix/images"),
+         ("comix.1.gz", "share/man/man1"),
+         ("comix.desktop", "share/applications"),
+         ("images/comix.png", "share/icons/hicolor/48x48/apps"),
+         ("images/comix.svg", "share/icons/hicolor/scalable/apps"))
 
---------------------------------------------------------------------------------
-
-Usage:
-
- ./install.py install              ---      Install to /usr/local
-
- ./install.py uninstall            ---      Uninstall from /usr/local
-
---------------------------------------------------------------------------------
-
-Options:
-
- --installdir <directory>          ---      Install or uninstall in <directory>
-                                            instead of /usr/local
-
- --no-mime                         ---      Do not install file manager thumbnailer
-                                            or register new mime types for
-                                            x-cbz, x-cbt and x-cbr archive
-                                            files.
-
- --no-balloon                      ---      Nautilus thumbnailer does not
-                                            imprint a balloon on the thumbnails
-                                            by default.
-"""
 
 def info():
-    print usage_info
+    print __doc__
     sys.exit(1)
 
 def install(src, dst):
     try:
-        dst = os.path.join(install_dir, dst)
+        dst = os.path.join(install_dir, dst, os.path.basename(src))
+        src = os.path.join(source_dir, src)
         assert os.path.isfile(src)
         assert not os.path.isdir(dst)
         if not os.path.isdir(os.path.dirname(dst)):
             os.makedirs(os.path.dirname(dst))
         shutil.copy(src, dst)
-        print "Installed", dst
+        print 'Installed', dst
     except:
-        print "Error while installing", dst
+        print 'Could not install', dst
 
 def uninstall(path):
     try:
         path = os.path.join(install_dir, path)
-        if os.path.isfile(path):
+        if os.path.isfile(path) or os.path.islink(path):
             os.remove(path)
         elif os.path.isdir(path):
             shutil.rmtree(path)
         else:
             return
-        print "Removed", path
+        print 'Removed', path
     except:
-        print "Error while removing", path
+        print 'Could not remove', path
 
 def check_dependencies():
     required_found = True
     recommended_found = True
-    print "Checking dependencies..."
-    print
-    print "Required dependencies:"
-    print
+    print 'Checking dependencies...\n'
+    print 'Required dependencies:'
     # Should also check the PyGTK version. To do that we have to load the
     # gtk module though, which normally can't be done while using `sudo`.
     try:
         import pygtk
-        print "    PyGTK ........................ OK"
+        print '    PyGTK ........................ OK'
     except ImportError:
-        print "    !!! PyGTK .................... Not found"
+        print '    !!! PyGTK .................... Not found'
         required_found = False
     try:
         import Image
-        assert Image.VERSION >= "1.1.4"
-        print "    Python Imaging Library ....... OK"
+        assert Image.VERSION >= '1.1.4'
+        print '    Python Imaging Library ....... OK'
     except ImportError:
-        print "    !!! Python Imaging Library ... Not found"
+        print '    !!! Python Imaging Library ... Not found'
         required_found = False
     except AssertionError:
-        print "    !!! Python Imaging Library ... version", Image.VERSION,
-        print "found"
-        print "    !!! Python Imaging Library 1.1.4 or higher is required"
+        print '    !!! Python Imaging Library ... version', Image.VERSION,
+        print 'found'
+        print '    !!! Python Imaging Library 1.1.4 or higher is required'
         required_found = False
-    print "\nRecommended dependencies:\n"
+    print '\nRecommended dependencies:'
     # rar/unrar is only a requirement to read RAR (.cbr) files.
     rar = False
-    for path in os.getenv("PATH").split(":"):
-        if (os.path.isfile(os.path.join(path, "unrar")) or
-            os.path.isfile(os.path.join(path, "rar"))):
-            print "    rar/unrar .................... OK"
+    for path in os.getenv('PATH').split(':'):
+        if (os.path.isfile(os.path.join(path, 'unrar')) or
+            os.path.isfile(os.path.join(path, 'rar'))):
+            print '    rar/unrar .................... OK'
             rar = True
             break
     if not rar:
-        print "    !!! rar/unrar ................ Not found"
-        recommended_found = False
-    # jpegtran is only a requirement to rotate JPEG files.
-    jpegtran = False
-    for path in os.getenv("PATH").split(":"):
-        if os.path.isfile(os.path.join(path, "jpegtran")):
-            print "    jpegtran ..................... OK"
-            jpegtran = True
-            break
-    if not jpegtran:
-        print "    !!! jpegtran ................. Not found"
+        print '    !!! rar/unrar ................ Not found'
         recommended_found = False
     if not required_found:
-        print
-        print "Could not find all required dependencies!"
-        print "Please install them and try again."
-        print
+        print '\nCould not find all required dependencies!'
+        print 'Please install them and try again.'
         sys.exit(1)
     if not recommended_found:
-        print
-        print "Note that not all recommeded dependencies were found."
-        print "Comix has still been installed, but it will not be able to"
-        print "use all it's functions."
+        print '\nNote that not all recommeded dependencies were found.'
+        print 'Comix has still been installed, but will not be able to'
+        print 'use all its functions until they are installed.'
     print
 
-
-###############################################################################
-print 'Install script not yet adopted to 4.X file organization.'
-print 'Quitting...'
-sys.exit(1)
-###############################################################################
-
-install_dir = "/usr/local/"
-no_mime = False
-no_balloon = False
-ISO_CODES = \
-    ("sv", "es", "zh_CN", "zh_TW", "pt_BR", "de", "it", "nl", "fr", "pl",
-    "el", "ca", "ja", "hu", "ru", "hr", "cz")
-
 try:
-    opts, args = \
-        getopt.gnu_getopt(sys.argv[1:], "",
-        ["installdir=", "no-mime", "no-balloon"])
+    opts, args = getopt.gnu_getopt(sys.argv[1:], '', ['dir=', 'no-mime'])
 except getopt.GetoptError:
     info()
 for opt, value in opts:
-    if opt == "--installdir":
+    if opt == '--dir':
         install_dir = value
         if not os.path.isdir(install_dir):
-            print "\n*** Error:", install_dir, "does not exist.\n" 
+            print '\n!!! Error:', install_dir, 'does not exist.\n' 
             info()
-    elif opt == "--no-mime":
-        no_mime = True
-    elif opt == "--no-balloon":
-        no_balloon = True
+    elif opt == '--no-mime':
+        install_mime = False
 
-if args == ["install"]:
+if args == ['install']:
     check_dependencies()
-    print "Installing Comix in", install_dir, "...\n"
-    install("comix", "bin/comix")
-    install("comix.1.gz", "share/man/man1/comix.1.gz")
-    install("comix.desktop", "share/applications/comix.desktop")
-    install("images/logo/comix.png", "share/pixmaps/comix.png")
-    install("images/logo/comix.png", "share/icons/hicolor/48x48/apps/comix.png")
-    install("images/logo/comix.svg",
-        "share/icons/hicolor/scalable/apps/comix.svg")
-    print 'Installed some spam'
-    for imagefile in os.listdir('images'):
-        if os.path.isfile(os.path.join('images', imagefile)):
-            install(os.path.join('images', imagefile),
-                os.path.join('share/pixmaps/comix', imagefile))
-    print 'Installed some spam, spam, eggs and spam'
-    for lang in ISO_CODES:
-        install("messages/" + lang + "/LC_MESSAGES/comix.mo",
-            "share/locale/" + lang + "/LC_MESSAGES/comix.mo")
-    if not no_mime:
-        install("mime/comicthumb", "bin/comicthumb")
-        install("mime/comicthumb.1.gz", "share/man/man1/comicthumb.1.gz")
-        install("mime/comix.xml", "share/mime/packages/comix.xml")
-        os.popen("update-mime-database '" + 
-            os.path.join(install_dir, "share/mime'"))
-        print
-        print "Updated mime database."
-        schemas = \
-            no_balloon and "comicbook-no-balloon.schemas" or "comicbook.schemas"
-        os.popen("export GCONF_CONFIG_SOURCE=`gconftool-2 "
-                 "--get-default-source 2>/dev/null` && gconftool-2 "
-                 "--makefile-install-rule ./mime/%s 2>/dev/null" % schemas)
-        print
-        print "Registered comic archive thumbnailer in gconf (if available)."
-        print "The thumbnailer is to my knowledge supported by Nautilus and Thunar only."
-        print "You might have to restart your file manager before it is activated."
-elif args == ["uninstall"]:
-    print "Uninstalling Comix from", install_dir, "...\n"
-    uninstall("bin/comix")
-    uninstall("share/man/man1/comix.1.gz")
-    uninstall("share/applications/comix.desktop")
-    uninstall("share/pixmaps/comix.png")
-    uninstall("share/icons/hicolor/48x48/apps/comix.png")
-    uninstall("share/icons/hicolor/scalable/apps/comix.svg")
-    uninstall("share/pixmaps/comix")
-    uninstall("bin/comicthumb")
-    uninstall("share/man/man1/comicthumb.1.gz")
-    uninstall("share/mime/packages/comix.xml")
-    for lang in ISO_CODES:
-        uninstall("share/locale/" + lang + "/LC_MESSAGES/comix.mo")
-    uninstall("/tmp/comix")
-    print
-    print "There might still be files in ~/.comix/ left on your system."
-    print "Please remove that directory manually if you do not plan to"
-    print "install Comix again later."
+    print 'Installing Comix to', install_dir, '...\n'
+    for src, dst in FILES:
+        install(src, dst)
+    for lang in TRANSLATIONS:
+        install(os.path.join('messages', lang, 'LC_MESSAGES/comix.mo'),
+            os.path.join('share/locale/', lang, 'LC_MESSAGES'))
+    # Add a symlink, bin/comix, pointing to comix.py
+    binlink = os.path.join(install_dir, 'bin/comix')
+    if os.path.isfile(binlink) or os.path.islink(binlink):
+        os.remove(binlink)
+    os.symlink(os.path.join(install_dir, 'share/comix/src/comix.py'), binlink)
+    print 'Installed', binlink
+
+    if install_mime:
+        install('mime/comicthumb', 'bin')
+        install('mime/comicthumb.1.gz', 'share/man/man1')
+        install('mime/comix.xml', 'share/mime/packages')
+        os.popen('update-mime-database "%s"' % 
+            os.path.join(install_dir, 'share/mime'))
+        print '\nUpdated mime database.'
+        schema = os.path.join(source_dir, 'mime/comicbook.schemas')
+        os.popen('GCONF_CONFIG_SOURCE=$(gconftool-2 --get-default-source) '
+                 'gconftool-2 --makefile-install-rule "%s"' % schema)
+        print '\nRegistered comic archive thumbnailer in gconf (if available).'
+        print 'The thumbnailer is only supported by some file managers,'
+        print 'such as Nautilus and Thunar.'
+        print 'You might have to restart your file manager for the thumbnailer'
+        print 'to be activated.'
+elif args == ['uninstall']:
+    print 'Uninstalling Comix from', install_dir, '...\n'
+    uninstall('bin/comix')
+    uninstall('bin/comicthumb')
+    uninstall('share/comix')
+    uninstall('share/man/man1/comix.1.gz')
+    uninstall('share/man/man1/comicthumb.1.gz')
+    uninstall('share/applications/comix.desktop')
+    uninstall('share/icons/hicolor/48x48/apps/comix.png')
+    uninstall('share/icons/hicolor/scalable/apps/comix.svg')
+    uninstall('share/mime/packages/comix.xml')
+    for lang in TRANSLATIONS:
+        uninstall(os.path.join('share/locale', lang, 'LC_MESSAGES/comix.mo'))
     
+    # These are from old versions of Comix, we try to remove them anyway.
+    uninstall('share/pixmaps/comix.png')
+    uninstall('share/pixmaps/comix')
+    uninstall('/tmp/comix')
+    
+    print '\nThere might still be files in ~/.comix/ left on your system.'
+    print 'Please remove that directory manually if you do not plan to'
+    print 'install Comix again later.'
 else:
     info()
 

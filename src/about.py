@@ -30,7 +30,7 @@ class _AboutDialog(gtk.Dialog):
         box = gtk.VBox(False, 0)
         box.set_border_width(5)
         
-        icon_path = join(dirname(dirname(sys.argv[0])), 'images/logo/comix.svg')
+        icon_path = join(dirname(dirname(sys.argv[0])), 'images/comix.svg')
         if not isfile(icon_path):
             for prefix in [dirname(dirname(sys.argv[0])), '/usr', '/usr/local',
               '/usr/X11R6']:
