@@ -106,9 +106,9 @@ def fit_2_in_rectangle(src1, src2, width, height, interp=None, scale_up=False,
        needed_width_src2 < alloc_width_src2):
        alloc_width_src1 += alloc_width_src2 - needed_width_src2
 
-    return (fit_in_rectangle(src1, alloc_width_src1, height,
+    return (fit_in_rectangle(src1, int(alloc_width_src1), height,
                              interp, scale_up, rotation),
-            fit_in_rectangle(src2, alloc_width_src2, height,
+            fit_in_rectangle(src2, int(alloc_width_src2), height,
                              interp, scale_up, rotation))
     
 def add_border(pixbuf, thickness, colour=0x000000FF):

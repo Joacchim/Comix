@@ -119,32 +119,71 @@ class EventHandler:
             x_step, y_step = self._window.get_visible_area_size()
             x_step = x_step * prefs['space scroll percent'] // 100
             y_step = y_step * prefs['space scroll percent'] // 100
-            if 'GDK_SHIFT_MASK' in event.state.value_names:
-                next_page_function = self._window.previous_page
-                startfirst = 'endfirst'
-                x_step *= -1
-                y_step *= -1
-            else:
-                next_page_function = self._window.next_page
-                startfirst = 'startfirst'
-                
             if self._window.is_manga_mode:
                 x_step *= -1
-            # FIXME: Smart space in DP mode is not implemented
-            if prefs['smart space scroll']:
-                if self._window.displayed_double():
-                    pass
-                else:
-                    if not self._window.scroll(x_step, 0):
-                        if not self._window.scroll(0, y_step):
-                            next_page_function()
+            if 'GDK_SHIFT_MASK' in event.state.value_names:
+                if prefs['smart space scroll']:
+                    if self._window.displayed_double():
+                        if self._window.is_on_first_page():
+                            if not self._window.scroll(-x_step, 0, 'first'):
+                                if not self._window.scroll(0, -y_step):
+                                    self._window.previous_page()
+                                else:
+                                    self._window.scroll_to_fixed(
+                                        horiz='endfirst')
                         else:
-                            self._window.scroll_to_fixed(horiz=startfirst)
-
-            else:           
-                if (self._window.zoom_mode == 'fit' or 
-                  not self._window.scroll(0, y_step)):
-                    next_page_function()
+                            if not self._window.scroll(-x_step, 0, 'second'):
+                                if not self._window.scroll(0, -y_step):
+                                    if not self._window.scroll_to_fixed(
+                                      horiz='endfirst'):
+                                        self._window.previous_page()
+                                    else:
+                                        self._window.scroll_to_fixed(
+                                            vert='bottom')
+                                else:
+                                    self._window.scroll_to_fixed(
+                                        horiz='endsecond')
+                    else:
+                        if not self._window.scroll(-x_step, 0):
+                            if not self._window.scroll(0, -y_step):
+                                self._window.previous_page()
+                            else:
+                                self._window.scroll_to_fixed(horiz='endfirst')
+                else:           
+                    if (self._window.zoom_mode == 'fit' or 
+                      not self._window.scroll(0, -y_step)):
+                        self._window.previous_page()
+            else:
+                if prefs['smart space scroll']:
+                    if self._window.displayed_double():
+                        if self._window.is_on_first_page():
+                            if not self._window.scroll(x_step, 0, 'first'):
+                                if not self._window.scroll(0, y_step):
+                                    if not self._window.scroll_to_fixed(
+                                      horiz='startsecond'):
+                                        self._window.next_page()
+                                    else:
+                                        self._window.scroll_to_fixed(vert='top')
+                                else:
+                                    self._window.scroll_to_fixed(
+                                        horiz='startfirst')
+                        else:
+                            if not self._window.scroll(x_step, 0, 'second'):
+                                if not self._window.scroll(0, y_step):
+                                    self._window.next_page()
+                                else:
+                                    self._window.scroll_to_fixed(
+                                        horiz='startsecond')
+                    else:
+                        if not self._window.scroll(x_step, 0):
+                            if not self._window.scroll(0, y_step):
+                                self._window.next_page()
+                            else:
+                                self._window.scroll_to_fixed(horiz='startfirst')
+                else:           
+                    if (self._window.zoom_mode == 'fit' or 
+                      not self._window.scroll(0, y_step)):
+                        self._window.next_page()
 
         # ----------------------------------------------------------------
         # We kill the signals here for the Up, Down, Space and Enter keys,

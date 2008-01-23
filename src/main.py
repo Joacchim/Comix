@@ -428,10 +428,14 @@ class MainWindow(gtk.Window):
         self._manual_zoom = 100
         self.draw_image()
 
-    def scroll(self, x, y):
+    def scroll(self, x, y, bound=None):
 
         """
-        Scroll <x> px horizontally and <y> px vertically.
+        Scroll <x> px horizontally and <y> px vertically. If <bound> is
+        'first' or 'second', we will not scroll out of the first or second
+        page respectively (dependent on manga mode). The <bound> argument
+        only makes sense in double page mode.
+        
         Return True if call resulted in new adjustment values, False
         otherwise.
         """
@@ -439,11 +443,20 @@ class MainWindow(gtk.Window):
         old_hadjust = self._hadjust.get_value()
         old_vadjust = self._vadjust.get_value()
         visible_width, visible_height = self.get_visible_area_size()
-        hadjust_upper = self._hadjust.upper - visible_width
-        vadjust_upper = self._vadjust.upper - visible_height
+        hadjust_upper = max(0, self._hadjust.upper - visible_width)
+        vadjust_upper = max(0, self._vadjust.upper - visible_height)
+        hadjust_lower = 0
+        if bound != None and self.is_manga_mode:
+            bound = {'first':  'second',
+                     'second': 'first'}[bound]
+        if bound == 'first':
+            hadjust_upper = max(0, hadjust_upper -
+                self._right_image.size_request()[0] - 2)
+        elif bound == 'second':
+            hadjust_lower = self._left_image.size_request()[0] + 2
         new_hadjust = old_hadjust + x
         new_vadjust = old_vadjust + y
-        new_hadjust = max(0, new_hadjust)
+        new_hadjust = max(hadjust_lower, new_hadjust)
         new_vadjust = max(0, new_vadjust)
         new_hadjust = min(hadjust_upper, new_hadjust)
         new_vadjust = min(vadjust_upper, new_vadjust)
@@ -473,25 +486,31 @@ class MainWindow(gtk.Window):
 
         What is considered "start" and "end" depends on whether we are
         using manga mode or not.
-        """
 
+        Return True if call resulted in new adjustment values.
+        """
+        
+        old_hadjust = self._hadjust.get_value()
+        old_vadjust = self._vadjust.get_value()
+        new_vadjust = old_vadjust
+        new_hadjust = old_hadjust
         visible_width, visible_height = self.get_visible_area_size()
         vadjust_upper = self._vadjust.upper - visible_height
         hadjust_upper = self._hadjust.upper - visible_width
 
         if vert == 'top':
-            self._vadjust.set_value(0)
+            new_vadjust = 0
         elif vert == 'middle':
-            self._vadjust.set_value(vadjust_upper / 2)
+            new_vadjust = vadjust_upper / 2
         elif vert == 'bottom':
-            self._vadjust.set_value(vadjust_upper)
+            new_vadjust = vadjust_upper
 
         if not self.displayed_double():
             horiz = {'startsecond': 'endfirst',
                      'endsecond':   'endfirst'}.get(horiz, horiz)
         
         # Manga transformations.
-        if self.is_manga_mode and self.displayed_double():
+        if self.is_manga_mode and self.displayed_double() and horiz != None:
             horiz = {'left':        'left',
                      'middle':      'middle',
                      'right':       'right',
@@ -499,7 +518,7 @@ class MainWindow(gtk.Window):
                      'endfirst':    'startsecond',
                      'startsecond': 'endfirst',
                      'endsecond':   'startfirst'}[horiz]
-        elif self.is_manga_mode:
+        elif self.is_manga_mode and horiz != None:
             horiz = {'left':        'left',
                      'middle':      'middle',
                      'right':       'right',
@@ -507,23 +526,49 @@ class MainWindow(gtk.Window):
                      'endfirst':    'startfirst'}[horiz]
         
         if horiz == 'left':
-            self._hadjust.set_value(0)
+            new_hadjust = 0
         elif horiz == 'middle':
-            self._hadjust.set_value(hadjust_upper / 2)
+            new_hadjust = hadjust_upper / 2
         elif horiz == 'right':
-            self._hadjust.set_value(hadjust_upper)
+            new_hadjust = hadjust_upper 
         elif horiz == 'startfirst':
-            self._hadjust.set_value(0)
+            new_hadjust = 0
         elif horiz == 'endfirst':
             if self.displayed_double():
-                self._hadjust.set_value(
-                    self._left_image.size_request()[0] - visible_width)
+                new_hadjust = self._left_image.size_request()[0] - visible_width
             else:
-                self._hadjust.set_value(hadjust_upper)
+                new_hadjust = hadjust_upper
         elif horiz == 'startsecond':
-            self._hadjust.set_value(self._left_image.size_request()[0] + 2)
+            new_hadjust = self._left_image.size_request()[0] + 2
         elif horiz == 'endsecond':
-            self._hadjust.set_value(hadjust_upper)
+            new_hadjust = hadjust_upper
+        new_hadjust = max(0, new_hadjust)
+        new_vadjust = max(0, new_vadjust)
+        new_hadjust = min(hadjust_upper, new_hadjust)
+        new_vadjust = min(vadjust_upper, new_vadjust)
+        self._vadjust.set_value(new_vadjust)
+        self._hadjust.set_value(new_hadjust)
+        return old_vadjust != new_vadjust or old_hadjust != new_hadjust
+
+    def is_on_first_page(self):
+        
+        """
+        Return True if we are currently viewing the first page, i.e. if we
+        are scrolled as far to the left as possible, or if only the left page
+        is visible on the main layout. In manga mode it is the other way
+        around.
+        """
+
+        if not self.displayed_double():
+            return True
+        width, height = self.get_visible_area_size()
+        if self.is_manga_mode:
+            return (self._hadjust.get_value() >= self._hadjust.upper - width or
+                self._hadjust.get_value() > self._left_image.size_request()[0])
+        else:
+            return (self._hadjust.get_value() == 0 or
+                self._hadjust.get_value() + width <=
+                self._left_image.size_request()[0])
 
     def clear(self):
         
