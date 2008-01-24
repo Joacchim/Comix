@@ -7,6 +7,7 @@ import gtk
 import about
 import bookmark
 import comment
+import enhance
 import filechooser
 import filehandler
 import properties
@@ -58,8 +59,6 @@ class MainUI(gtk.UIManager):
                 '<Control>w', None, window.file_handler.close_file),
             ('quit', gtk.STOCK_QUIT, _('_Quit'),
                 '<Control>q', None, window.terminate_program),
-            ('colour_adjust', 'comix-colour-adjust', _('_Adjust colour...'),
-                'j', None, bogus),
             ('delete', gtk.STOCK_DELETE, _('Delete image'),
                 'Delete', None, bogus),
             ('rotate_90', 'comix-rotate-90', _('_Rotate 90 degrees CW'),
@@ -111,7 +110,7 @@ class MainUI(gtk.UIManager):
                 'z', None, bogus)])
 
         self._actiongroup.add_radio_actions([
-            ('fit_manual_mode', 'comix-fitmanual', _('Manual zoom mode'),
+            ('fit_manual_mode', 'comix-fitmanual', _('M_anual zoom mode'),
                 'a', None, 0),
             ('fit_screen_mode', 'comix-fitscreen', _('Fit-to-_screen mode'),
                 's', None, 1),
@@ -121,11 +120,12 @@ class MainUI(gtk.UIManager):
                 'h', None, 3)],
             0, window.change_zoom_mode)
         
-        # Some actions added separately since they need the main window as
-        # a parameter.
+        # Some actions added separately since they need extra arguments.
         self._actiongroup.add_actions([
             ('properties', gtk.STOCK_PROPERTIES, _('Proper_ties'),
-                '<Alt>Return', None, properties.dialog_open)], window)
+                '<Alt>Return', None, properties.dialog_open),
+            ('enhance_image', 'comix-enhance-image', _('_Enhance image...'),
+                'e', None, enhance.dialog_open)], window)
 
         self._actiongroup.add_actions([
             ('open', gtk.STOCK_OPEN, _('_Open...'),
@@ -186,7 +186,7 @@ class MainUI(gtk.UIManager):
                     <menuitem action="fit_height_mode" />
                     <menuitem action="fit_manual_mode" />
                     <separator />
-                    <menuitem action="colour_adjust" />
+                    <menuitem action="enhance_image" />
                     <separator />
                     <menuitem action="lens" />
                     <separator />

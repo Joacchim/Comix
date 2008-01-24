@@ -5,12 +5,14 @@
 import sys
 import os
 import shutil
+import time
 
 import gtk
 
 import constants
 import cursor
 import encoding
+import enhance
 import event
 import filehandler
 import image
@@ -52,14 +54,15 @@ class MainWindow(gtk.Window):
         self.statusbar = status.Statusbar()
         self.slideshow = slideshow.Slideshow(self)
         self.cursor_handler = cursor.CursorHandler(self)
+        self.enhancer = enhance.ImageEnhancer(self)
         self.ui_manager = ui.MainUI(self)
         self.menubar = self.ui_manager.get_widget('/Menu')
         self.toolbar = self.ui_manager.get_widget('/Tool')
         self.popup = self.ui_manager.get_widget('/Popup')
         self.actiongroup = self.ui_manager.get_action_groups()[0]
-
-        self._left_image = gtk.Image()
-        self._right_image = gtk.Image()
+        self.left_image = gtk.Image()
+        self.right_image = gtk.Image()
+        
         self._image_box = gtk.HBox(False, 2)
         self._main_layout = gtk.Layout()
         self._event_handler = event.EventHandler(self)
@@ -80,8 +83,8 @@ class MainWindow(gtk.Window):
         self.toolbar.set_focus_child(
             self.ui_manager.get_widget('/Tool/expander'))
         
-        self._image_box.add(self._left_image)
-        self._image_box.add(self._right_image)
+        self._image_box.add(self.left_image)
+        self._image_box.add(self.right_image)
         self._image_box.show_all()
         
         self._main_layout.put(self._image_box, 0, 0)
@@ -228,9 +231,11 @@ class MainWindow(gtk.Window):
             if self._vertical_flip:
                 left_pixbuf = left_pixbuf.flip(horizontal=False)
                 right_pixbuf = right_pixbuf.flip(horizontal=False)
+            left_pixbuf = self.enhancer.enhance(left_pixbuf)
+            right_pixbuf = self.enhancer.enhance(right_pixbuf)
             
-            self._left_image.set_from_pixbuf(left_pixbuf)
-            self._right_image.set_from_pixbuf(right_pixbuf)
+            self.left_image.set_from_pixbuf(left_pixbuf)
+            self.right_image.set_from_pixbuf(right_pixbuf)
             x_padding = (width - left_pixbuf.get_width() -
                 right_pixbuf.get_width()) / 2
             y_padding = (height - max(left_pixbuf.get_height(),
@@ -262,9 +267,10 @@ class MainWindow(gtk.Window):
                 pixbuf = pixbuf.flip(horizontal=True)
             if self._vertical_flip:
                 pixbuf = pixbuf.flip(horizontal=False)
+            pixbuf = self.enhancer.enhance(pixbuf)
 
-            self._left_image.set_from_pixbuf(pixbuf)
-            self._right_image.clear()
+            self.left_image.set_from_pixbuf(pixbuf)
+            self.right_image.clear()
             x_padding = (width - pixbuf.get_width()) / 2
             y_padding = (height - pixbuf.get_height()) / 2
 
@@ -273,13 +279,13 @@ class MainWindow(gtk.Window):
             self.statusbar.set_resolution((unscaled_x, unscaled_y,
                 100.0 * pixbuf.get_width() / unscaled_x))
         
-        self._left_image.hide()
-        self._right_image.hide()
+        self.left_image.hide()
+        self.right_image.hide()
         self._main_layout.move(self._image_box, max(0, x_padding),
             max(0, y_padding))
-        self._left_image.show()
+        self.left_image.show()
         if self.displayed_double():
-            self._right_image.show()
+            self.right_image.show()
         self._main_layout.set_size(*self._image_box.size_request())
         if at_bottom:
             self.scroll_to_fixed(horiz='endsecond', vert='bottom')
@@ -292,6 +298,7 @@ class MainWindow(gtk.Window):
         self._set_title()
         while gtk.events_pending():
             gtk.main_iteration(False)
+        enhance.draw_histogram(self.left_image)
         self.file_handler.do_cacheing()
 
     def new_page(self, at_bottom=False):
@@ -451,9 +458,9 @@ class MainWindow(gtk.Window):
                      'second': 'first'}[bound]
         if bound == 'first':
             hadjust_upper = max(0, hadjust_upper -
-                self._right_image.size_request()[0] - 2)
+                self.right_image.size_request()[0] - 2)
         elif bound == 'second':
-            hadjust_lower = self._left_image.size_request()[0] + 2
+            hadjust_lower = self.left_image.size_request()[0] + 2
         new_hadjust = old_hadjust + x
         new_vadjust = old_vadjust + y
         new_hadjust = max(hadjust_lower, new_hadjust)
@@ -535,11 +542,11 @@ class MainWindow(gtk.Window):
             new_hadjust = 0
         elif horiz == 'endfirst':
             if self.displayed_double():
-                new_hadjust = self._left_image.size_request()[0] - visible_width
+                new_hadjust = self.left_image.size_request()[0] - visible_width
             else:
                 new_hadjust = hadjust_upper
         elif horiz == 'startsecond':
-            new_hadjust = self._left_image.size_request()[0] + 2
+            new_hadjust = self.left_image.size_request()[0] + 2
         elif horiz == 'endsecond':
             new_hadjust = hadjust_upper
         new_hadjust = max(0, new_hadjust)
@@ -564,21 +571,22 @@ class MainWindow(gtk.Window):
         width, height = self.get_visible_area_size()
         if self.is_manga_mode:
             return (self._hadjust.get_value() >= self._hadjust.upper - width or
-                self._hadjust.get_value() > self._left_image.size_request()[0])
+                self._hadjust.get_value() > self.left_image.size_request()[0])
         else:
             return (self._hadjust.get_value() == 0 or
                 self._hadjust.get_value() + width <=
-                self._left_image.size_request()[0])
+                self.left_image.size_request()[0])
 
     def clear(self):
         
         """ Clear the currently displayed data (i.e. "close" the file) """
 
-        self._left_image.clear()
-        self._right_image.clear()
+        self.left_image.clear()
+        self.right_image.clear()
         self.thumbnailsidebar.clear()
         self.set_title('Comix')
         self.statusbar.set_message('')
+        enhance.clear_histogram()
 
     def displayed_double(self):
         

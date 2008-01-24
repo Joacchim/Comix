@@ -4,6 +4,8 @@
 
 import gtk
 import Image
+import ImageEnhance
+import ImageOps
 
 import preferences
 
@@ -145,4 +147,28 @@ def pixbuf_to_pil(pixbuf):
     pixels = pixbuf.get_pixels()
     mode = pixbuf.get_has_alpha() and 'RGBA' or 'RGB'
     return Image.frombuffer(mode, dimensions, pixels, 'raw', mode, stride, 1)
+
+def enhance(pixbuf, brightness=1.0, contrast=1.0, saturation=1.0,
+  sharpness=1.0, autocontrast=False):
+    
+    """
+    Return a modified pixbuf from <pixbuf> where the enhancement operations
+    corresponding to each argument has been performed. A value of 1.0 means
+    no change. If <autocontrast> is True it overrides the <contrast> value,
+    but only if the image mode is supported by ImageOps.autocontrast (i.e.
+    it is L or RGB.)
+    """
+    
+    im = pixbuf_to_pil(pixbuf)
+    if brightness != 1.0:
+        im = ImageEnhance.Brightness(im).enhance(brightness)
+    if autocontrast and im.mode in ('L', 'RGB'):
+        im = ImageOps.autocontrast(im, cutoff=0.1)
+    elif contrast != 1.0:
+        im = ImageEnhance.Contrast(im).enhance(contrast)
+    if saturation != 1.0:
+        im = ImageEnhance.Color(im).enhance(saturation)
+    if sharpness != 1.0:
+        im = ImageEnhance.Sharpness(im).enhance(sharpness)
+    return pil_to_pixbuf(im)
 

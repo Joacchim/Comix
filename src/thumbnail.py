@@ -160,7 +160,7 @@ def _guess_cover(files):
     
     files.sort()
     ext_re = re.compile(r'\.(jpg|jpeg|png|gif|tif|tiff)\s*$', re.I)
-    front_re = re.compile('((?<!back)cover)|(front)', re.I)
+    front_re = re.compile('(cover|front)', re.I)
     images = filter(ext_re.search, files)
     candidates = filter(front_re.search, images)
     candidates = [c for c in candidates if not 'back' in c.lower()]
