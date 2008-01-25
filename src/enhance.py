@@ -196,6 +196,9 @@ def draw_histogram(image):
         _dialog.draw_histogram(image)
 
 def clear_histogram():
+    
+    """ Clear the histogram in the dialog, if there is one. """
+
     if _dialog != None:
         _dialog.clear_histogram()
 

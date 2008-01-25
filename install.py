@@ -27,8 +27,10 @@ import shutil
 source_dir = os.path.dirname(os.path.realpath(__file__))
 install_dir = '/usr/local/'
 install_mime = True
+
 TRANSLATIONS = ('sv', 'es', 'zh_CN', 'zh_TW', 'pt_BR', 'de', 'it', 'nl',
     'fr', 'pl', 'el', 'ca', 'ja', 'hu', 'ru', 'hr', 'cz')
+
 FILES = (("src/about.py", "share/comix/src"),
          ("src/about.pyc", "share/comix/src"),
          ("src/archive.py", "share/comix/src"),
@@ -44,6 +46,8 @@ FILES = (("src/about.py", "share/comix/src"),
          ("src/cursor.pyc", "share/comix/src"),
          ("src/encoding.py", "share/comix/src"),
          ("src/encoding.pyc", "share/comix/src"),
+         ("src/enhance.py", "share/comix/src"),
+         ("src/enhance.pyc", "share/comix/src"),
          ("src/event.py", "share/comix/src"),
          ("src/event.pyc", "share/comix/src"),
          ("src/filechooser.py", "share/comix/src"),
@@ -95,7 +99,7 @@ FILES = (("src/about.py", "share/comix/src"),
          ("images/manga.png", "share/comix/images"),
          ("images/tango-add-bookmark.png", "share/comix/images"),
          ("images/tango-archive.png", "share/comix/images"),
-         ("images/tango-colour-adjust.png", "share/comix/images"),
+         ("images/tango-enhance-image.png", "share/comix/images"),
          ("images/tango-image.png", "share/comix/images"),
          ("images/tango-library-add.png", "share/comix/images"),
          ("comix.1.gz", "share/man/man1"),
@@ -103,12 +107,57 @@ FILES = (("src/about.py", "share/comix/src"),
          ("images/comix.png", "share/icons/hicolor/48x48/apps"),
          ("images/comix.svg", "share/icons/hicolor/scalable/apps"))
 
+LINKS = (('../share/comix/src/comix.py', 'bin/comix'),)
+
+MIME_FILES = (('mime/comicthumb', 'bin'),
+              ('mime/comicthumb.1.gz', 'share/man/man1'),
+              ('mime/comix.xml', 'share/mime/packages'),
+              ('mime/icons/16x16/application-x-cbz.png',
+                'share/icons/hicolor/16x16/mimetypes'),
+              ('mime/icons/22x22/application-x-cbz.png',
+                'share/icons/hicolor/22x22/mimetypes'),
+              ('mime/icons/24x24/application-x-cbz.png',
+                'share/icons/hicolor/24x24/mimetypes'),
+              ('mime/icons/32x32/application-x-cbz.png',
+                'share/icons/hicolor/32x32/mimetypes'),
+              ('mime/icons/48x48/application-x-cbz.png',
+                'share/icons/hicolor/48x48/mimetypes'))
+
+MIME_LINKS = (('application-x-cbz.png',
+               'share/icons/hicolor/16x16/mimetypes/application-x-cbr.png'),
+              ('application-x-cbz.png',
+               'share/icons/hicolor/16x16/mimetypes/application-x-cbt.png'),
+              ('application-x-cbz.png',
+               'share/icons/hicolor/22x22/mimetypes/application-x-cbr.png'),
+              ('application-x-cbz.png',
+               'share/icons/hicolor/22x22/mimetypes/application-x-cbt.png'),
+              ('application-x-cbz.png',
+               'share/icons/hicolor/24x24/mimetypes/application-x-cbr.png'),
+              ('application-x-cbz.png',
+               'share/icons/hicolor/24x24/mimetypes/application-x-cbt.png'),
+              ('application-x-cbz.png',
+               'share/icons/hicolor/32x32/mimetypes/application-x-cbr.png'),
+              ('application-x-cbz.png',
+               'share/icons/hicolor/32x32/mimetypes/application-x-cbt.png'),
+              ('application-x-cbz.png',
+               'share/icons/hicolor/48x48/mimetypes/application-x-cbr.png'),
+              ('application-x-cbz.png',
+               'share/icons/hicolor/48x48/mimetypes/application-x-cbt.png'))
 
 def info():
+    
+    """ Print usage info and exit. """
+
     print __doc__
     sys.exit(1)
 
 def install(src, dst):
+    
+    """
+    Copy <src> to <dst>. The <src> path is relative to the source_dir and
+    the <dst> path is a directory relative to the install_dir.
+    """
+
     try:
         dst = os.path.join(install_dir, dst, os.path.basename(src))
         src = os.path.join(source_dir, src)
@@ -122,6 +171,12 @@ def install(src, dst):
         print 'Could not install', dst
 
 def uninstall(path):
+    
+    """
+    Remove the file or directory at <path>, which is relative to the 
+    install_dir.
+    """
+
     try:
         path = os.path.join(install_dir, path)
         if os.path.isfile(path) or os.path.islink(path):
@@ -134,7 +189,29 @@ def uninstall(path):
     except:
         print 'Could not remove', path
 
+def make_link(src, link):
+    
+    """
+    Create a symlink <link> pointing to <src>. The <link> path is relative
+    to the install_dir, and the <src> path is relative to the full path of
+    the created link.
+    """
+
+    try:
+        link = os.path.join(install_dir, link)
+        if os.path.isfile(link) or os.path.islink(link):
+            os.remove(link)
+        if not os.path.exists(os.path.dirname(link)):
+            os.makedirs(os.path.dirname(link))
+        os.symlink(src, link)
+        print 'Symlinked', link
+    except:
+        print 'Could not create symlink', link
+
 def check_dependencies():
+    
+    """ Check for required and recommended dependencies. """
+
     required_found = True
     recommended_found = True
     print 'Checking dependencies ...\n'
@@ -181,6 +258,10 @@ def check_dependencies():
         print 'use all its functions until they are installed.'
     print
 
+
+# ---------------------------------------------------------------------------
+# Parse the command line.
+# ---------------------------------------------------------------------------
 try:
     opts, args = getopt.gnu_getopt(sys.argv[1:], '', ['dir=', 'no-mime'])
 except getopt.GetoptError:
@@ -194,51 +275,59 @@ for opt, value in opts:
     elif opt == '--no-mime':
         install_mime = False
 
+# ---------------------------------------------------------------------------
+# Install Comix.
+# ---------------------------------------------------------------------------
 if args == ['install']:
     check_dependencies()
     print 'Installing Comix to', install_dir, '...\n'
+    if not os.access(install_dir, os.W_OK):
+        print 'You do not have write permissions to', install_dir
+        sys.exit(1)
     for src, dst in FILES:
         install(src, dst)
     for lang in TRANSLATIONS:
         install(os.path.join('messages', lang, 'LC_MESSAGES/comix.mo'),
             os.path.join('share/locale/', lang, 'LC_MESSAGES'))
-    # Add a symlink, bin/comix, pointing to comix.py
-    binlink = os.path.join(install_dir, 'bin/comix')
-    if os.path.isfile(binlink) or os.path.islink(binlink):
-        os.remove(binlink)
-    if not os.path.exists(os.path.dirname(binlink)):
-        os.makedirs(os.path.dirname(binlink))
-    os.symlink(os.path.join(install_dir, 'share/comix/src/comix.py'), binlink)
-    print 'Installed', binlink
-
+    for src, link in LINKS:
+        make_link(src, link)
+    
     if install_mime:
-        install('mime/comicthumb', 'bin')
-        install('mime/comicthumb.1.gz', 'share/man/man1')
-        install('mime/comix.xml', 'share/mime/packages')
+        for src, dst in MIME_FILES:
+            install(src, dst)
+        for src, link in MIME_LINKS:
+            make_link(src, link)
+        os.utime(os.path.join(install_dir, 'share/icons/hicolor'), None)
         os.popen('update-mime-database "%s"' % 
             os.path.join(install_dir, 'share/mime'))
         print '\nUpdated mime database.'
         schema = os.path.join(source_dir, 'mime/comicbook.schemas')
         os.popen('GCONF_CONFIG_SOURCE=$(gconftool-2 --get-default-source) '
-                 'gconftool-2 --makefile-install-rule "%s"' % schema)
+                 'gconftool-2 --makefile-install-rule "%s" 2>/dev/null' %
+                    schema)
         print '\nRegistered comic archive thumbnailer in gconf (if available).'
         print 'The thumbnailer is only supported by some file managers,'
         print 'such as Nautilus and Thunar.'
         print 'You might have to restart your file manager for the thumbnailer'
         print 'to be activated.'
+# ---------------------------------------------------------------------------
+# Uninstall Comix.
+# ---------------------------------------------------------------------------
 elif args == ['uninstall']:
     print 'Uninstalling Comix from', install_dir, '...\n'
-    uninstall('bin/comix')
-    uninstall('bin/comicthumb')
     uninstall('share/comix')
     uninstall('share/man/man1/comix.1.gz')
-    uninstall('share/man/man1/comicthumb.1.gz')
     uninstall('share/applications/comix.desktop')
     uninstall('share/icons/hicolor/48x48/apps/comix.png')
     uninstall('share/icons/hicolor/scalable/apps/comix.svg')
-    uninstall('share/mime/packages/comix.xml')
+    for _, link in LINKS:
+        uninstall(link)
     for lang in TRANSLATIONS:
         uninstall(os.path.join('share/locale', lang, 'LC_MESSAGES/comix.mo'))
+    for src, path in MIME_FILES:
+        uninstall(os.path.join(path, os.path.basename(src)))
+    for _, link in MIME_LINKS:
+        uninstall(link)
     
     # These are from old versions of Comix, we try to remove them anyway.
     uninstall('share/pixmaps/comix.png')
