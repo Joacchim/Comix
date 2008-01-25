@@ -179,7 +179,7 @@ class MainWindow(gtk.Window):
         self.ui_manager.set_sensitivities()
         self.show()
 
-    def draw_image(self, at_bottom=False):
+    def draw_image(self, at_bottom=False, scroll=True):
         
         """
         Draw the current page(s) and update the titlebar and statusbar.
@@ -287,9 +287,9 @@ class MainWindow(gtk.Window):
         if self.displayed_double():
             self.right_image.show()
         self._main_layout.set_size(*self._image_box.size_request())
-        if at_bottom:
+        if scroll and at_bottom:
             self.scroll_to_fixed(horiz='endsecond', vert='bottom')
-        else:
+        elif scroll:
             self.scroll_to_fixed(horiz='startfirst', vert='top')
         
         self.statusbar.set_filename(

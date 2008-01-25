@@ -45,7 +45,7 @@ class ImageEnhancer:
         has been made.
         """
 
-        self._window.draw_image()
+        self._window.draw_image(scroll=False)
 
 class _EnhanceImageDialog(gtk.Dialog):
     
