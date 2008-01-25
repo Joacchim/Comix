@@ -22,6 +22,7 @@ To uninstall, simply run "python install.py uninstall".
 If you wish to install Comix in another base directory, use the --dir option.
 
 Example:
+
     # python install.py --dir /usr install
 
 If you have installed with --dir, do not forget to use the same option when
@@ -34,6 +35,7 @@ managers (such as Nautilus and Thunar).
 
 As an example of how to install Comix from the downloaded tar.gz file, run
 as the root user (via su or sudo):
+
     # tar -xzf comix-x.y.tar.gz
     # cd comix-x.y
     # python install.py install
