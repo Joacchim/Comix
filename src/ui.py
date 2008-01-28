@@ -51,16 +51,12 @@ class MainUI(gtk.UIManager):
                 '<Control>l', None, bogus),
             ('add_to_library', 'comix-library-add', _('_Add to library'),
                 None, None, bogus),
-            ('convert', gtk.STOCK_CONVERT, _('Con_vert archive...'),
-                None, None, bogus),
-            ('extract', gtk.STOCK_SAVE_AS, _('E_xtract image...'),
+            ('edit_archive', gtk.STOCK_EDIT, _('_Edit archive...'),
                 None, None, bogus),
             ('close', gtk.STOCK_CLOSE, _('_Close'),
                 '<Control>w', None, window.file_handler.close_file),
             ('quit', gtk.STOCK_QUIT, _('_Quit'),
                 '<Control>q', None, window.terminate_program),
-            ('delete', gtk.STOCK_DELETE, _('Delete image'),
-                'Delete', None, bogus),
             ('rotate_90', 'comix-rotate-90', _('_Rotate 90 degrees CW'),
                 'r', None, window.rotate_90),
             ('rotate_180','comix-rotate-180', _('Rotate 180 de_grees'),
@@ -158,8 +154,7 @@ class MainUI(gtk.UIManager):
                     <menuitem action="library" />
                     <separator />
                     <menuitem action="add_to_library" />
-                    <menuitem action="convert" />
-                    <menuitem action="extract" /> 
+                    <menuitem action="edit_archive" />
                     <separator />
                     <menuitem action="properties" />
                     <menuitem action="comments" />
@@ -171,9 +166,7 @@ class MainUI(gtk.UIManager):
                     <menuitem action="quit" />
                 </menu>
                 <menu action="menu_edit">
-                    <menuitem action="delete" />
                     <menuitem action="edit_thumbnails" />
-                    <separator />
                     <menuitem action="preferences" />
                 </menu>
                 <menu action="menu_view">
@@ -254,10 +247,15 @@ class MainUI(gtk.UIManager):
                     <separator />
                     <menuitem action="keep_rotation" />
                 </menu>
-                <separator />
-                <menuitem action="properties" />
-                <separator />
-                <menuitem action="open" />
+                <menu action="menu_toolbars">
+                    <menuitem action="menubar" />
+                    <menuitem action="toolbar" />
+                    <menuitem action="statusbar" />
+                    <menuitem action="scrollbar" />
+                    <menuitem action="thumbnails" />
+                    <separator />
+                    <menuitem action="hide all" />
+                </menu>
             </popup>
         </ui>
         """
@@ -284,9 +282,8 @@ class MainUI(gtk.UIManager):
         """ Sets the main UI's widget's sensitivities appropriately. """
 
         general = ('properties',
-                   'convert',
+                   'edit_archive',
                    'close',
-                   'delete',
                    'slideshow',
                    'rotate_90',
                    'rotate_180',
@@ -297,8 +294,7 @@ class MainUI(gtk.UIManager):
                    'previous_page',
                    'first_page',
                    'last_page')
-        archive = ('add_to_library',
-                   'extract')
+        archive = ('add_to_library',)
         comment = ('comments',)
         general_sensitive = False
         archive_sensitive = False
@@ -310,11 +306,11 @@ class MainUI(gtk.UIManager):
                 archive_sensitive = True
                 if self._window.file_handler.get_number_of_comments():
                     comment_sensitive = True 
-        for path in general:
-            self._actiongroup.get_action(path).set_sensitive(general_sensitive)
-        for path in archive:
-            self._actiongroup.get_action(path).set_sensitive(archive_sensitive)
-        for path in comment:
-            self._actiongroup.get_action(path).set_sensitive(comment_sensitive)
+        for name in general:
+            self._actiongroup.get_action(name).set_sensitive(general_sensitive)
+        for name in archive:
+            self._actiongroup.get_action(name).set_sensitive(archive_sensitive)
+        for name in comment:
+            self._actiongroup.get_action(name).set_sensitive(comment_sensitive)
         self.bookmarks.set_sensitive(general_sensitive)
 

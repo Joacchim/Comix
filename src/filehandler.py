@@ -11,7 +11,6 @@ import gc
 import shutil
 import threading
 import re
-import time
 
 import gtk
 

@@ -300,15 +300,16 @@ if args == ['install']:
         os.utime(os.path.join(install_dir, 'share/icons/hicolor'), None)
         os.popen('update-mime-database "%s"' % 
             os.path.join(install_dir, 'share/mime'))
-        print '\nUpdated mime database.'
+        print '\nUpdated mime database (added .cbz, .cbr and .cbt types.)'
         schema = os.path.join(source_dir, 'mime/comicbook.schemas')
         os.popen('GCONF_CONFIG_SOURCE=$(gconftool-2 --get-default-source) '
                  'gconftool-2 --makefile-install-rule "%s" 2>/dev/null' %
                     schema)
-        print '\nRegistered comic archive thumbnailer in gconf (if available).'
-        print 'The thumbnailer is only supported by some file managers,'
-        print 'such as Nautilus and Thunar.'
-        print 'You might have to restart your file manager for the thumbnailer'
+        print '\nRegistered comic archive thumbnailer in gconf (if available.)'
+        print 'The thumbnailer is only supported by some file managers,',
+        print 'such as Nautilus'
+        print 'and Thunar.'
+        print 'You might have to restart the file manager for the thumbnailer',
         print 'to be activated.'
 # ---------------------------------------------------------------------------
 # Uninstall Comix.
