@@ -102,8 +102,8 @@ class MainUI(gtk.UIManager):
                 'k', None, window.change_keep_rotation),
             ('slideshow', gtk.STOCK_MEDIA_PLAY, _('Run _slideshow'),
                 '<Control>S', None, window.slideshow.toggle),
-            ('lens', 'comix-lens', _('Magnifying _lens'),
-                'z', None, bogus)])
+            ('lens', 'comix-lens', _('Magnifying _glass'),
+                'g', None, bogus)])
 
         self._actiongroup.add_radio_actions([
             ('fit_manual_mode', 'comix-fitmanual', _('M_anual zoom mode'),

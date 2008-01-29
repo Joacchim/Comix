@@ -4,6 +4,7 @@
 
 import sys
 import os
+import subprocess
 import zipfile
 import tarfile
 import threading
@@ -69,7 +70,12 @@ class Extractor:
             self._tfile = tarfile.open(src, 'r')
             self._files = self._tfile.getnames()
         elif self._type == 'rar':
-            self._files = os.popen('%s vb "%s"' % (_rar_exec, src)).readlines()
+            if _rar_exec == None:
+                # FIXME: Set statusbar or popup dialog.
+                pass
+            proc = subprocess.Popen([_rar_exec, 'vb', src],
+                stdout=subprocess.PIPE)
+            self._files = proc.stdout.readlines()
             self._files = [name.rstrip('\n') for name in self._files]
         
         self._setupped = True
@@ -184,8 +190,8 @@ class Extractor:
                 if _rar_exec == None:
                     print '! archive.py: Could not find RAR file extractor.\n'
                     return
-                os.popen('%s x -n"%s" -p- -o- -- "%s" "%s"' % (_rar_exec, name,
-                    self._src, dst))
+                subprocess.call([_rar_exec, 'x', '-n' + name, '-p-', '-o-',
+                    '-inul', '--', self._src, dst], stdout=None)
         except:
             # Better to ignore any failed extractions (e.g. from corrupt
             # archive) than to crash here and leave the main thread in a

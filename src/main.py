@@ -16,6 +16,7 @@ import enhance
 import event
 import filehandler
 import image
+import lens
 import preferences
 from preferences import prefs
 import ui
@@ -55,6 +56,7 @@ class MainWindow(gtk.Window):
         self.slideshow = slideshow.Slideshow(self)
         self.cursor_handler = cursor.CursorHandler(self)
         self.enhancer = enhance.ImageEnhancer(self)
+        self.glass = lens.MagnifyingGlass(self)
         self.ui_manager = ui.MainUI(self)
         self.menubar = self.ui_manager.get_widget('/Menu')
         self.toolbar = self.ui_manager.get_widget('/Tool')
@@ -621,6 +623,15 @@ class MainWindow(gtk.Window):
                 width -= self._vscroll.size_request()[0]
                 height -= self._hscroll.size_request()[1]
         return width, height
+
+    def get_full_area_size(self):
+        
+        """
+        Return a 2-tuple with the width and height of the whole main
+        layout area.
+        """
+
+        return self._main_layout.get_size()
 
     def set_cursor(self, mode):
         

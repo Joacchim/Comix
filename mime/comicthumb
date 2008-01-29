@@ -15,6 +15,7 @@ Usage: comicthumb INFILE OUTFILE [SIZE]
 
 import os
 import sys
+import subprocess
 import re
 import cStringIO
 import zipfile
@@ -60,7 +61,9 @@ class Extractor:
             if self._rar == None:
                 print '! Could not find the "rar" or "unrar" executable.'
                 sys.exit(1)
-            self._files = os.popen('%s vb "%s"' % (self._rar, src)).readlines()
+            proc = subprocess.Popen([self._rar, 'vb', src],
+                stdout=subprocess.PIPE)
+            self._files = proc.stdout.readlines()
             self._files = [name.rstrip('\n') for name in self._files]
     
     def get_files(self):
@@ -82,9 +85,9 @@ class Extractor:
         elif self._type in ['tar', 'gzip', 'bzip2']:
             return cStringIO.StringIO(self._tfile.extractfile(chosen).read())
         elif self._type == 'rar':
-            return cStringIO.StringIO(os.popen(
-                '%s p -n"%s" -inul -p- -- "%s"' % 
-                (self._rar, chosen, self._src)).read())
+            proc = subprocess.Popen([self._rar, 'p', '-n' + chosen, '-inul',
+                '-p-', '--', self._src], stdout=subprocess.PIPE)
+            return cStringIO.StringIO(proc.stdout.read())
 
 def archive_mime_type(path):
     

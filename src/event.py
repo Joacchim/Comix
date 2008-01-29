@@ -231,7 +231,7 @@ class EventHandler:
             self._last_pointer_pos_x = event.x_root
             self._last_pointer_pos_y = event.y_root
         elif event.button == 2:
-            print 2
+            self._window.glass.set_lens_cursor(event)
             #if self.scroll_wheel_event_id != None:
             #    self.layout.disconnect(self.scroll_wheel_event_id)
             #    self.scroll_wheel_event_id = None
