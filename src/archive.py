@@ -22,7 +22,7 @@ for path in os.getenv('PATH', '').split(':') + [os.path.curdir]:
     elif os.path.isfile(os.path.join(path, 'rar')):
         _rar_exec = os.path.join(path, 'rar')
         break
-if _rar_exec == None:
+if not _rar_exec:
     print '! Could not find the `rar` or `unrar` executables.'
     print '! RAR files (.cbr) will not be readable.\n'
 
@@ -70,7 +70,7 @@ class Extractor:
             self._tfile = tarfile.open(src, 'r')
             self._files = self._tfile.getnames()
         elif self._type == 'rar':
-            if _rar_exec == None:
+            if not _rar_exec:
                 # FIXME: Set statusbar or popup dialog.
                 pass
             proc = subprocess.Popen([_rar_exec, 'vb', src],
@@ -185,13 +185,16 @@ class Extractor:
                 new.write(self._zfile.read(name))
                 new.close()
             elif self._type in ['tar', 'gzip', 'bzip2']:
-                self._tfile.extract(name, dst)
+                if os.path.normpath(os.path.join(dst, name)).startswith(dst):
+                    self._tfile.extract(name, dst)
+                else:
+                    print ''
             elif self._type == 'rar':
-                if _rar_exec == None:
+                if _rar_exec:
+                    subprocess.call([_rar_exec, 'x', '-n' + name, '-p-', '-o-',
+                        '-inul', '--', self._src, dst])
+                else:
                     print '! archive.py: Could not find RAR file extractor.\n'
-                    return
-                subprocess.call([_rar_exec, 'x', '-n' + name, '-p-', '-o-',
-                    '-inul', '--', self._src, dst], stdout=None)
         except:
             # Better to ignore any failed extractions (e.g. from corrupt
             # archive) than to crash here and leave the main thread in a

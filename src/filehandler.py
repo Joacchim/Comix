@@ -41,7 +41,7 @@ class FileHandler:
         
         self._base_path = None
         self._window = window
-        self._tmp_dir = tempfile.mkdtemp(prefix='comix.')
+        self._tmp_dir = tempfile.mkdtemp(prefix='comix.', suffix=os.sep)
         self._image_files = []
         self._current_image_index = None
         self._comment_files = []
@@ -328,7 +328,7 @@ class FileHandler:
         self._window.ui_manager.set_sensitivities()
         self._extractor.stop()
         thread_delete(self._tmp_dir)
-        self._tmp_dir = tempfile.mkdtemp(prefix='comix.')
+        self._tmp_dir = tempfile.mkdtemp(prefix='comix.', suffix=os.sep)
         gc.collect()
 
     def cleanup(self):
