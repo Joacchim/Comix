@@ -188,7 +188,7 @@ class Extractor:
                 if os.path.normpath(os.path.join(dst, name)).startswith(dst):
                     self._tfile.extract(name, dst)
                 else:
-                    print ''
+                    print '! archive.py: Non-local tar member:', name
             elif self._type == 'rar':
                 if _rar_exec:
                     subprocess.call([_rar_exec, 'x', '-n' + name, '-p-', '-o-',

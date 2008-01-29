@@ -17,8 +17,8 @@ class MagnifyingGlass:
         
         """
         Return the coordinates on the source <pixbuf> that the coordinates
-        <x>, <y> on the main layout area map to. If <first> is False,
-        calculate the positions on the second source <pixbuf> (in double
+        <x>, <y> on the main layout area map to. If <left> is False,
+        calculate the positions on the right source <pixbuf> (in double
         page mode.)
         """
         
