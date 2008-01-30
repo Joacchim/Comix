@@ -8,10 +8,9 @@ import gtk
 
 import cursor
 from preferences import prefs
+import image
 
 # FIXME: Rotation and flipping support.
-# FIXME: Placement of very small images in lens (now jumps around.)
-# FIXME: Border around lens (too costly?)
 
 class MagnifyingGlass:
     
@@ -70,7 +69,6 @@ class MagnifyingGlass:
         Get a pixbuf containing the appropiate image data for the lens
         where <x> and <y> are the positions of the cursor.
         """
-
         canvas = gtk.gdk.Pixbuf(gtk.gdk.COLORSPACE_RGB, True, 8,
             prefs['lens size'], prefs['lens size'])
         canvas.fill(0x000000bb)
@@ -91,8 +89,7 @@ class MagnifyingGlass:
             source_pixbuf = self._window.file_handler.get_pixbufs()
             image_size = self._window.left_image.size_request()
             self._add_subpixbuf(canvas, x, y, image_size, source_pixbuf)
-        canvas
-        return canvas
+        return image.add_border(canvas, 1)
 
     def _add_subpixbuf(self, canvas, x, y, image_size, source_pixbuf,
         other_image_width=0, left=True):
@@ -130,30 +127,20 @@ class MagnifyingGlass:
         source_mag = prefs['lens magnification'] / scale
         width = prefs['lens size'] / source_mag
         height = width
-        paste_top = True
-        paste_left = True
         src_x = x - width / 2
         src_y = y - height / 2
+        dest_x = max(0, int(math.ceil(-src_x * source_mag)))
+        dest_y = max(0, int(math.ceil(-src_y * source_mag)))
         if src_x < 0:
             width += src_x
             src_x = 0
-            paste_left = False
         if src_y < 0:
             height += src_y
             src_y = 0
-            paste_top = False
         width = max(0, min(source_pixbuf.get_width() - src_x, width))
         height = max(0, min(source_pixbuf.get_height() - src_y, height))
         if width < 1 or height < 1:
-            return
-        if paste_top:
-            dest_y = 0
-        else:
-            dest_y = int(canvas.get_height() - source_mag * height)
-        if paste_left:
-            dest_x = 0
-        else:
-            dest_x = int(canvas.get_width() - source_mag * width)
+            return            
         
         subpixbuf = source_pixbuf.subpixbuf(int(src_x), int(src_y),
             int(width), int(height))
@@ -161,6 +148,8 @@ class MagnifyingGlass:
             int(math.ceil(source_mag * subpixbuf.get_width())),
             int(math.ceil(source_mag * subpixbuf.get_height())),
             gtk.gdk.INTERP_TILES)
+        dest_x = min(canvas.get_width() - subpixbuf.get_width(), dest_x)
+        dest_y = min(canvas.get_height() - subpixbuf.get_height(), dest_y)
         subpixbuf.copy_area(0, 0, subpixbuf.get_width(),
             subpixbuf.get_height(), canvas, dest_x, dest_y)            
 
