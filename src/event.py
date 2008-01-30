@@ -36,11 +36,20 @@ class EventHandler:
     def key_press_event(self, widget, event, *args):
         
         """ Handle key press events on the main window. """
+
+        # ----------------------------------------------------------------
+        # Some navigation keys that work as well as the accelerators in
+        # ui.py.
+        # ----------------------------------------------------------------
+        if event.keyval in [gtk.keysyms.KP_Page_Up, gtk.keysyms.BackSpace]:
+            self._window.previous_page()
+        elif event.keyval == gtk.keysyms.KP_Page_Down:
+            self._window.next_page()
         
         # ----------------------------------------------------------------
-        # Numpad aligns the image depending on the key. 
+        # Numpad (without numlock) aligns the image depending on the key. 
         # ----------------------------------------------------------------
-        if event.keyval == gtk.keysyms.KP_1:
+        elif event.keyval == gtk.keysyms.KP_1:
             self._window.scroll_to_fixed(horiz='left', vert='bottom')
         elif event.keyval == gtk.keysyms.KP_2:
             self._window.scroll_to_fixed(horiz='middle', vert='bottom')
@@ -84,22 +93,22 @@ class EventHandler:
         # Arrow keys scroll the image, except in fit-to-screen mode where
         # they flip pages instead.
         # ----------------------------------------------------------------
-        elif event.keyval == gtk.keysyms.Down:
+        elif event.keyval in [gtk.keysyms.Down, gtk.keysyms.KP_Down]:
             if not self._window.zoom_mode == 'fit':
                 self._window.scroll(0, 30)
             else:
                 self._window.next_page()
-        elif event.keyval == gtk.keysyms.Up:
+        elif event.keyval in [gtk.keysyms.Up, gtk.keysyms.KP_Up]:
             if not self._window.zoom_mode == 'fit':
                 self._window.scroll(0, -30)
             else:
                 self._window.previous_page()
-        elif event.keyval == gtk.keysyms.Right:
+        elif event.keyval in [gtk.keysyms.Right, gtk.keysyms.KP_Right]:
             if not self._window.zoom_mode == 'fit':
                 self._window.scroll(30, 0)
             else:
                 self._window.next_page()
-        elif event.keyval == gtk.keysyms.Left:
+        elif event.keyval in [gtk.keysyms.Left, gtk.keysyms.KP_Left]:
             if not self._window.zoom_mode == 'fit':
                 self._window.scroll(-30, 0)
             else:
@@ -115,13 +124,15 @@ class EventHandler:
         #
         # If Shift is pressed we should backtrack instead.
         # ----------------------------------------------------------------
-        elif event.keyval == gtk.keysyms.space:
+        elif event.keyval in [gtk.keysyms.space, gtk.keysyms.KP_Home,
+          gtk.keysyms.KP_End]:
             x_step, y_step = self._window.get_visible_area_size()
             x_step = x_step * prefs['space scroll percent'] // 100
             y_step = y_step * prefs['space scroll percent'] // 100
             if self._window.is_manga_mode:
                 x_step *= -1
-            if 'GDK_SHIFT_MASK' in event.state.value_names:
+            if ('GDK_SHIFT_MASK' in event.state.value_names or 
+              event.keyval == gtk.keysyms.KP_Home):
                 if prefs['smart space scroll']:
                     if self._window.displayed_double():
                         if self._window.is_on_first_page():
@@ -190,7 +201,9 @@ class EventHandler:
         # or they will start fiddling with the thumbnail selector (bad).
         # ----------------------------------------------------------------
         if (event.keyval in [gtk.keysyms.Up, gtk.keysyms.Down,
-          gtk.keysyms.space, gtk.keysyms.KP_Enter] or 
+          gtk.keysyms.space, gtk.keysyms.KP_Enter, gtk.keysyms.KP_Up,
+          gtk.keysyms.KP_Down, gtk.keysyms.KP_Home, gtk.keysyms.KP_End,
+          gtk.keysyms.KP_Page_Up, gtk.keysyms.KP_Page_Down] or 
           (event.keyval == gtk.keysyms.Return and not
           'GDK_MOD1_MASK' in event.state.value_names)):
             self._window.emit_stop_by_name("key_press_event")
