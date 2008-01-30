@@ -43,13 +43,13 @@ class MainWindow(gtk.Window):
         self.zoom_mode = 'fit'          # 'fit', 'width', 'height' or 'manual'
         self.width = None
         self.height = None
+        self.rotation = 0               # In degrees, clockwise
+        self.horizontal_flip = False
+        self.vertical_flip = False
 
         self._keep_rotation = False
         self._manual_zoom = 100         # In percent of original image size
-        self._rotation = 0              # In degrees, clockwise
-        self._horizontal_flip = False
-        self._vertical_flip = False
-
+        
         self.file_handler = filehandler.FileHandler(self)
         self.thumbnailsidebar = thumbbar.ThumbnailSidebar(self)
         self.statusbar = status.Statusbar()
@@ -208,7 +208,7 @@ class MainWindow(gtk.Window):
             right_unscaled_y = right_pixbuf.get_height()
 
             if self.zoom_mode == 'manual':
-                if self._rotation in [90, 270]:
+                if self.rotation in [90, 270]:
                     scale_width = int(self._manual_zoom *
                         (left_pixbuf.get_height() +
                         right_pixbuf.get_height()) // 100)
@@ -226,11 +226,11 @@ class MainWindow(gtk.Window):
 
             left_pixbuf, right_pixbuf = image.fit_2_in_rectangle(
                 left_pixbuf, right_pixbuf, scale_width, scale_height,
-                scale_up=scale_up, rotation=self._rotation)
-            if self._horizontal_flip:
+                scale_up=scale_up, rotation=self.rotation)
+            if self.horizontal_flip:
                 left_pixbuf = left_pixbuf.flip(horizontal=True)
                 right_pixbuf = right_pixbuf.flip(horizontal=True)
-            if self._vertical_flip:
+            if self.vertical_flip:
                 left_pixbuf = left_pixbuf.flip(horizontal=False)
                 right_pixbuf = right_pixbuf.flip(horizontal=False)
             left_pixbuf = self.enhancer.enhance(left_pixbuf)
@@ -259,15 +259,15 @@ class MainWindow(gtk.Window):
                     // 100)
                 scale_height = int(self._manual_zoom * pixbuf.get_height()
                     // 100)
-                if self._rotation in [90, 270]:
+                if self.rotation in [90, 270]:
                     scale_width, scale_height = scale_height, scale_width
                 scale_up = True
 
             pixbuf = image.fit_in_rectangle(pixbuf, scale_width, scale_height,
-                scale_up=scale_up, rotation=self._rotation)
-            if self._horizontal_flip:
+                scale_up=scale_up, rotation=self.rotation)
+            if self.horizontal_flip:
                 pixbuf = pixbuf.flip(horizontal=True)
-            if self._vertical_flip:
+            if self.vertical_flip:
                 pixbuf = pixbuf.flip(horizontal=False)
             pixbuf = self.enhancer.enhance(pixbuf)
 
@@ -311,9 +311,9 @@ class MainWindow(gtk.Window):
         """
         
         if not self._keep_rotation:
-            self._rotation = 0
-            self._horizontal_flip = False
-            self._vertical_flip = False
+            self.rotation = 0
+            self.horizontal_flip = False
+            self.vertical_flip = False
         self.thumbnailsidebar.update_select()
         self.draw_image(at_bottom)
 
@@ -338,23 +338,23 @@ class MainWindow(gtk.Window):
             self.new_page()
 
     def rotate_90(self, *args):
-        self._rotation = (self._rotation + 90) % 360
+        self.rotation = (self.rotation + 90) % 360
         self.draw_image()
 
     def rotate_180(self, *args):
-        self._rotation = (self._rotation + 180) % 360
+        self.rotation = (self.rotation + 180) % 360
         self.draw_image()
 
     def rotate_270(self, *args):
-        self._rotation = (self._rotation + 270) % 360
+        self.rotation = (self.rotation + 270) % 360
         self.draw_image()
 
     def flip_horizontally(self, *args):
-        self._horizontal_flip = not self._horizontal_flip
+        self.horizontal_flip = not self.horizontal_flip
         self.draw_image()
 
     def flip_vertically(self, *args):
-        self._vertical_flip = not self._vertical_flip
+        self.vertical_flip = not self.vertical_flip
         self.draw_image()
 
     def change_double_page(self, toggleaction):

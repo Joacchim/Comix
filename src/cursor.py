@@ -19,7 +19,8 @@ class CursorHandler:
         
         """ 
         Set the cursor to type <cursor>. Supported cursor types are available
-        as constants in this module.
+        as constants in this module. If <cursor> is not one of the cursor
+        constants above, it must be a gtk.gdk.Cursor.
         """
         
         if cursor == NORMAL:
@@ -28,6 +29,8 @@ class CursorHandler:
             mode = gtk.gdk.Cursor(gtk.gdk.FLEUR)
         elif cursor == WAIT:
             mode = gtk.gdk.Cursor(gtk.gdk.WATCH)
+        else:
+            mode = cursor
         self._window.set_cursor(mode)
         self._current_cursor = cursor
         if self._fullscreen:

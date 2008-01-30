@@ -231,11 +231,7 @@ class EventHandler:
             self._last_pointer_pos_x = event.x_root
             self._last_pointer_pos_y = event.y_root
         elif event.button == 2:
-            self._window.glass.set_lens_cursor(event)
-            #if self.scroll_wheel_event_id != None:
-            #    self.layout.disconnect(self.scroll_wheel_event_id)
-            #    self.scroll_wheel_event_id = None
-            #self.zooming_lens(event.x, event.y, event.time)
+            self._window.actiongroup.get_action('lens').set_active(True)
         elif event.button == 3:
             self._window.cursor_handler.set_cursor_type(cursor.NORMAL)
             self._window.popup.popup(None, None, None, event.button,
@@ -251,12 +247,8 @@ class EventHandler:
           event.x_root == self._pressed_pointer_pos_x and
           event.y_root == self._pressed_pointer_pos_y):
             self._window.next_page()
-
-        #if event.button == 2 and self.z_pressed:
-        #    self.actiongroup.get_action('Lens').set_active(False)
-        #if self.scroll_wheel_event_id == None:
-        #    self.scroll_wheel_event_id = \
-        #        self.layout.connect('scroll_event', self.scroll_wheel_event)
+        if event.button == 2:
+            self._window.actiongroup.get_action('lens').set_active(False)
 
     def mouse_move_event(self, widget, event):
         
@@ -268,6 +260,8 @@ class EventHandler:
                                 self._last_pointer_pos_y - event.y_root)
             self._last_pointer_pos_x = event.x_root
             self._last_pointer_pos_y = event.y_root
+        elif self._window.actiongroup.get_action('lens').get_active():
+            self._window.glass.set_lens_cursor(event.x, event.y, event.time)
         else:
             self._window.cursor_handler.refresh()
     
