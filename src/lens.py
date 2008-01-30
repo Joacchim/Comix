@@ -55,16 +55,13 @@ class MagnifyingGlass:
 
     def toggle(self, action):
         
-        """
-        Toggle on or off the lens. For the moment only used to get back the
-        normal cursor immediately on switching off, without moving the
-        cursor.
-        
-        FIXME: Should also work the other way around, i.e. get a lens cursor
-        directly on activation without waiting for mouse movement.
-        """
+        """ Toggle on or off the lens. """
 
-        if not action.get_active():
+        if action.get_active():
+            self._timer = None
+            x, y = self._window._main_layout.get_pointer()
+            self.set_lens_cursor(x, y, None)
+        else:
             self._window.cursor_handler.set_cursor_type(cursor.NORMAL)
 
     def _get_lens_pixbuf(self, x, y):

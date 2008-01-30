@@ -184,7 +184,7 @@ class EventHandler:
                     if (self._window.zoom_mode == 'fit' or 
                       not self._window.scroll(0, y_step)):
                         self._window.next_page()
-
+        
         # ----------------------------------------------------------------
         # We kill the signals here for the Up, Down, Space and Enter keys,
         # or they will start fiddling with the thumbnail selector (bad).
@@ -205,7 +205,9 @@ class EventHandler:
         wheel flips pages in fit-to-screen mode and scrolls the
         scrollbars otherwise.
         """
-
+        
+        if 'GDK_BUTTON2_MASK' in event.state.value_names:
+            return
         if event.direction == gtk.gdk.SCROLL_UP:
             if self._window.zoom_mode == 'fit':
                 self._window.previous_page()
