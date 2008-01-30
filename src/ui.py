@@ -14,7 +14,7 @@ import properties
 import recent
 
 def bogus(*args):
-    print 'Weeee...'
+    print 'Feature not implemented yet.'
 
 class MainUI(gtk.UIManager):
 
