@@ -95,22 +95,22 @@ class EventHandler:
         # ----------------------------------------------------------------
         elif event.keyval in [gtk.keysyms.Down, gtk.keysyms.KP_Down]:
             if not self._window.zoom_mode == 'fit':
-                self._window.scroll(0, 30)
+                self._window.scroll(0, 40)
             else:
                 self._window.next_page()
         elif event.keyval in [gtk.keysyms.Up, gtk.keysyms.KP_Up]:
             if not self._window.zoom_mode == 'fit':
-                self._window.scroll(0, -30)
+                self._window.scroll(0, -40)
             else:
                 self._window.previous_page()
         elif event.keyval in [gtk.keysyms.Right, gtk.keysyms.KP_Right]:
             if not self._window.zoom_mode == 'fit':
-                self._window.scroll(30, 0)
+                self._window.scroll(40, 0)
             else:
                 self._window.next_page()
         elif event.keyval in [gtk.keysyms.Left, gtk.keysyms.KP_Left]:
             if not self._window.zoom_mode == 'fit':
-                self._window.scroll(-30, 0)
+                self._window.scroll(-40, 0)
             else:
                 self._window.previous_page()
 
@@ -225,12 +225,12 @@ class EventHandler:
             if self._window.zoom_mode == 'fit':
                 self._window.previous_page()
             else:
-                self._window.scroll(0, -50)
+                self._window.scroll(0, -70)
         elif event.direction == gtk.gdk.SCROLL_DOWN:
             if self._window.zoom_mode == 'fit':
                 self._window.next_page()
             else:
-                self._window.scroll(0, 50)
+                self._window.scroll(0, 70)
         elif event.direction == gtk.gdk.SCROLL_RIGHT:
             self._window.next_page()
         elif event.direction == gtk.gdk.SCROLL_LEFT:

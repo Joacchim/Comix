@@ -58,7 +58,7 @@ class MagnifyingGlass:
 
         if action.get_active():
             self._timer = None
-            x, y = self._window._main_layout.get_pointer()
+            x, y = self._window.get_layout_pointer_position()
             self.set_lens_cursor(x, y, None)
         else:
             self._window.cursor_handler.set_cursor_type(cursor.NORMAL)

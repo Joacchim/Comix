@@ -624,14 +624,17 @@ class MainWindow(gtk.Window):
                 height -= self._hscroll.size_request()[1]
         return width, height
 
-    def get_full_area_size(self):
+    def get_layout_pointer_position(self):
         
         """
-        Return a 2-tuple with the width and height of the whole main
-        layout area.
+        Return a 2-tuple with the x and y coordinates of the pointer on the
+        main layout area, relative to the layout.
         """
-
-        return self._main_layout.get_size()
+        
+        x, y = self._main_layout.get_pointer()
+        x += self._hadjust.get_value()
+        y += self._vadjust.get_value()
+        return (x, y)
 
     def set_cursor(self, mode):
         
