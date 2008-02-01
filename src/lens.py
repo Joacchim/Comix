@@ -141,6 +141,10 @@ class MagnifyingGlass:
             y = source_pixbuf.get_height() - y
         elif self._window.rotation == 270:
             x, y = source_pixbuf.get_width() - y, x
+        if self._window.horizontal_flip:
+            x = source_pixbuf.get_width() - x
+        if self._window.vertical_flip:
+            y = source_pixbuf.get_height() - y
         
         src_x = x - width / 2
         src_y = y - height / 2
@@ -171,7 +175,10 @@ class MagnifyingGlass:
         elif self._window.rotation == 270:
             subpixbuf = subpixbuf.rotate_simple(
                 gtk.gdk.PIXBUF_ROTATE_COUNTERCLOCKWISE)
-        
+        if self._window.horizontal_flip:
+            subpixbuf = subpixbuf.flip(horizontal=True)
+        if self._window.vertical_flip:
+            subpixbuf = subpixbuf.flip(horizontal=False)
         if paste_left:
             dest_x = 0
         else:
