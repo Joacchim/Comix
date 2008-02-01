@@ -191,6 +191,13 @@ class Extractor:
                     print '! archive.py: Non-local tar member:', name, '\n'
             elif self._type == 'rar':
                 if _rar_exec:
+                    # Note: A bug in Python (issue 1336) can in rare cases
+                    # cause a timing error when spawning a subprocess that
+                    # will hang both the parent and child process. The 
+                    # effect of this is that Comix crashes completely.
+                    # There isn't much to do (if you want to read RAR archives)
+                    # other than to hope you will not be bitten by this bug,
+                    # except upgrade to a Python version where this is fixed.
                     subprocess.call([_rar_exec, 'x', '-n' + name, '-p-', '-o-',
                         '-inul', '--', self._src, dst])
                 else:

@@ -54,7 +54,7 @@ class MagnifyingGlass:
 
     def toggle(self, action):
         
-        """ Toggle on or off the lens. """
+        """ Toggle on or off the lens depending on the state of <action>. """
 
         if action.get_active():
             self._timer = None
@@ -120,17 +120,30 @@ class MagnifyingGlass:
         padding_y = max(0, (area_y - image_size[1]) // 2)
         x -= padding_x
         y -= padding_y
-        scale = float(source_pixbuf.get_width()) / image_size[0]
+        if self._window.rotation in [90, 270]:
+            scale = float(source_pixbuf.get_height()) / image_size[0]
+        else:
+            scale = float(source_pixbuf.get_width()) / image_size[0]
         x *= scale
         y *= scale
-        
         source_mag = prefs['lens magnification'] / scale
         width = prefs['lens size'] / source_mag
         height = width
+        paste_left = x > width / 2
+        paste_top = y > height / 2
+        dest_x = max(0, int(math.ceil((width / 2 - x) * source_mag)))
+        dest_y = max(0, int(math.ceil((height / 2 - y) * source_mag)))
+
+        if self._window.rotation == 90:
+            x, y = y, source_pixbuf.get_height() - x
+        elif self._window.rotation == 180:
+            x = source_pixbuf.get_width() - x
+            y = source_pixbuf.get_height() - y
+        elif self._window.rotation == 270:
+            x, y = source_pixbuf.get_width() - y, x
+        
         src_x = x - width / 2
         src_y = y - height / 2
-        dest_x = max(0, int(math.ceil(-src_x * source_mag)))
-        dest_y = max(0, int(math.ceil(-src_y * source_mag)))
         if src_x < 0:
             width += src_x
             src_x = 0
@@ -148,8 +161,26 @@ class MagnifyingGlass:
             int(math.ceil(source_mag * subpixbuf.get_width())),
             int(math.ceil(source_mag * subpixbuf.get_height())),
             gtk.gdk.INTERP_TILES)
-        dest_x = min(canvas.get_width() - subpixbuf.get_width(), dest_x)
-        dest_y = min(canvas.get_height() - subpixbuf.get_height(), dest_y)
+
+        if self._window.rotation == 90:
+            subpixbuf = subpixbuf.rotate_simple(
+                gtk.gdk.PIXBUF_ROTATE_CLOCKWISE)
+        elif self._window.rotation == 180:
+            subpixbuf = subpixbuf.rotate_simple(
+                gtk.gdk.PIXBUF_ROTATE_UPSIDEDOWN)
+        elif self._window.rotation == 270:
+            subpixbuf = subpixbuf.rotate_simple(
+                gtk.gdk.PIXBUF_ROTATE_COUNTERCLOCKWISE)
+        
+        if paste_left:
+            dest_x = 0
+        else:
+            dest_x = min(canvas.get_width() - subpixbuf.get_width(), dest_x)
+        if paste_top:
+            dest_y = 0
+        else:
+            dest_y = min(canvas.get_height() - subpixbuf.get_height(), dest_y)
+
         subpixbuf.copy_area(0, 0, subpixbuf.get_width(),
             subpixbuf.get_height(), canvas, dest_x, dest_y)            
 

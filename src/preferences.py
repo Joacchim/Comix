@@ -33,7 +33,7 @@ prefs = {
     'interp mode': gtk.gdk.INTERP_TILES,
     #'last convert type': 'zip',
     'lens magnification': 2,
-    'lens size': 200,
+    'lens size': 180,
     'lens update interval': 15,
     #'library cover size': 128,
     #'lib window height': gtk.gdk.screen_get_default().get_height() * 3 / 4,

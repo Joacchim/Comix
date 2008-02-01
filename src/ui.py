@@ -1,5 +1,5 @@
 # ============================================================================
-# ui.py - UI definitions for Comix.
+# ui.py - UI definitions for main window.
 # ============================================================================
 
 import gtk
@@ -17,6 +17,11 @@ def bogus(*args):
     print 'Feature not implemented yet.'
 
 class MainUI(gtk.UIManager):
+    
+    """
+    Logically this isn't really a separate module from main.py, but it is
+    given it's own file for the sake of readability.
+    """
 
     def __init__(self, window):
         gtk.UIManager.__init__(self)
