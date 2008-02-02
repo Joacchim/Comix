@@ -23,16 +23,16 @@ class _ComicFileChooserDialog(gtk.Dialog):
         
         self._file_handler = file_handler
         self.connect('response', self._response)
-        self.connect('delete_event', dialog_close)
         self.set_default_response(gtk.RESPONSE_OK)
         self.set_has_separator(False)
 
         self._filechooser = gtk.FileChooserWidget()
         self._filechooser.connect('file-activated', self._response, 
             gtk.RESPONSE_OK)
-        self.vbox.pack_start(self._filechooser)
-        self._filechooser.set_border_width(10)
         self._filechooser.set_size_request(680, 420)
+        self.vbox.pack_start(self._filechooser)
+        self.set_border_width(4)
+        self._filechooser.set_border_width(6)
         
         preview_box = gtk.VBox(False, 10)
         preview_box.set_size_request(130, 0)
@@ -100,7 +100,7 @@ class _ComicFileChooserDialog(gtk.Dialog):
         if prefs['open defaults to last browsed']:
             self._filechooser.set_current_folder(prefs['path of last browsed'])
 
-        self.vbox.show_all()
+        self.show_all()
 
     def _update_preview(self, *args):
         path = self._filechooser.get_preview_filename()
@@ -137,26 +137,24 @@ class _ComicFileChooserDialog(gtk.Dialog):
             if os.path.isdir(path):
                 self._filechooser.set_current_folder(path)
                 return
-            dialog_close()
+            close_dialog()
             while gtk.events_pending():
                 gtk.main_iteration(False)
             self._file_handler.open_file(path)
             if prefs['open defaults to last browsed']:
                 prefs['path of last browsed'] = os.path.dirname(path)
-        elif response == gtk.RESPONSE_CANCEL:
-            dialog_close()
+        elif response in [gtk.RESPONSE_CANCEL, gtk.RESPONSE_DELETE_EVENT]:
+            close_dialog()
 
 
-def dialog_open(action, file_handler):
+def open_dialog(action, file_handler):
     global _dialog
     if _dialog == None:
         _dialog = _ComicFileChooserDialog(file_handler)
-        _dialog.show()
 
-def dialog_close(*args):
+def close_dialog(*args):
     global _dialog
     if _dialog != None:
         _dialog.destroy()
         _dialog = None
-
 

@@ -87,7 +87,7 @@ if __name__ == '__main__':
     else:
         gettext.install('comix', os.path.join(base_dir, 'share/locale'),
             unicode=True)
-    preferences.read_config_file()
+    preferences.read_preferences_file()
     icons.load()
     window = main.MainWindow()
     if len(sys.argv) >= 2:

@@ -721,7 +721,7 @@ class MainWindow(gtk.Window):
         self.file_handler.cleanup()
         if not os.path.exists(constants.COMIX_DIR):
             os.mkdir(constants.COMIX_DIR)
-        preferences.write_config_to_file()
-        self.ui_manager.bookmarks.write_bookmarks_to_file()
+        preferences.write_preferences_file()
+        self.ui_manager.bookmarks.write_bookmarks_file()
         sys.exit(0)
 

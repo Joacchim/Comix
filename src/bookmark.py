@@ -12,7 +12,7 @@ import constants
 import image
 import thumbnail
 
-_pickle_path = os.path.join(constants.COMIX_DIR, 'bookmarks_pickle')
+_pickle_path = os.path.join(constants.COMIX_DIR, 'bookmarks.pickle')
 
 class _Bookmark(gtk.ImageMenuItem):
     
@@ -162,7 +162,7 @@ class _BookmarksStore:
 
         return len(self._bookmarks) == 0
 
-    def write_bookmarks_to_file(self):
+    def write_bookmarks_file(self):
         
         """ Store relevant bookmark info in the comix directory """
 
@@ -255,11 +255,11 @@ class BookmarksMenu(gtk.Menu):
 
         self._actiongroup.get_action('add_bookmark').set_sensitive(loaded)
 
-    def write_bookmarks_to_file(self):
+    def write_bookmarks_file(self):
         
         """ Store relevant bookmark info in the comix directory """
 
-        self._bookmarks_store.write_bookmarks_to_file()
+        self._bookmarks_store.write_bookmarks_file()
 
 
 class _BookmarksDialog(gtk.Dialog):
@@ -277,7 +277,8 @@ class _BookmarksDialog(gtk.Dialog):
         self.set_default_response(gtk.RESPONSE_CLOSE)
 
         scrolled = gtk.ScrolledWindow()
-        scrolled.set_border_width(8)
+        self.set_border_width(4)
+        scrolled.set_border_width(6)
         scrolled.set_shadow_type(gtk.SHADOW_IN)
         scrolled.set_policy(gtk.POLICY_AUTOMATIC, gtk.POLICY_AUTOMATIC)
         self.vbox.pack_start(scrolled)

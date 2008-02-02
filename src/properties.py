@@ -25,10 +25,11 @@ class _PropertiesDialog(gtk.Dialog):
         
         self.set_resizable(False)
         self.set_has_separator(False)
-        self.connect('response', dialog_close)
-        self.connect('delete_event', dialog_close)
+        self.connect('response', close_dialog)
         self.set_default_response(gtk.RESPONSE_CLOSE)
         notebook = gtk.Notebook()
+        self.set_border_width(4)
+        notebook.set_border_width(6)
         self.vbox.pack_start(notebook, False, False, 0)
         
         if window.file_handler.archive_type:
@@ -233,15 +234,14 @@ class _PropertiesDialog(gtk.Dialog):
             page.pack_start(label, False, False)
         notebook.append_page(page, gtk.Label(_('Image')))
   
-        self.vbox.show_all()
+        self.show_all()
 
-def dialog_open(action, window):
+def open_dialog(action, window):
     global _dialog
     if _dialog == None:
         _dialog = _PropertiesDialog(window)
-        _dialog.show()
 
-def dialog_close(*args):
+def close_dialog(*args):
     global _dialog
     if _dialog != None:
         _dialog.destroy()

@@ -61,14 +61,14 @@ class _EnhanceImageDialog(gtk.Dialog):
         self.set_has_separator(False)
         self.set_resizable(False)
         self.connect('response', self._response)
-        self.connect('delete_event', dialog_close)
         self.set_default_response(gtk.RESPONSE_OK)
         
         self._enhancer = enhancer
         self._block = False
 
         vbox = gtk.VBox(False, 10)
-        vbox.set_border_width(10)
+        self.set_border_width(4)
+        vbox.set_border_width(6)
         self.vbox.add(vbox)
         
         self._hist_image = gtk.Image()
@@ -80,7 +80,6 @@ class _EnhanceImageDialog(gtk.Dialog):
         vbox.pack_start(hbox, False, False, 2)
         vbox_left = gtk.VBox(False, 4)
         vbox_right = gtk.VBox(False, 4)
-        #vbox_right.set_size_request(230, -1)
         hbox.pack_start(vbox_left, False, False, 2)
         hbox.pack_start(vbox_right, True, True, 2)
 
@@ -175,8 +174,8 @@ class _EnhanceImageDialog(gtk.Dialog):
         self._enhancer.signal_update()
         
     def _response(self, dialog, response):
-        if response == gtk.RESPONSE_OK:
-            dialog_close()
+        if response in [gtk.RESPONSE_OK, gtk.RESPONSE_DELETE_EVENT]:
+            close_dialog()
         elif response == gtk.RESPONSE_NO:
             self._block = True
             self._brightness_scale.set_value(1.0)
@@ -202,7 +201,7 @@ def clear_histogram():
     if _dialog != None:
         _dialog.clear_histogram()
 
-def dialog_open(action, window):
+def open_dialog(action, window):
 
     """ Create and display the (singleton) image enhancement dialog. """
 
@@ -211,7 +210,7 @@ def dialog_open(action, window):
         _dialog = _EnhanceImageDialog(window.enhancer)
         draw_histogram(window.left_image)
 
-def dialog_close(*args):
+def close_dialog(*args):
     
     """ Destroy the image enhancement dialog. """
 

@@ -10,6 +10,7 @@ import comment
 import enhance
 import filechooser
 import filehandler
+import preferences
 import properties
 import recent
 
@@ -45,11 +46,9 @@ class MainUI(gtk.UIManager):
             ('zoom_out', gtk.STOCK_ZOOM_OUT, _('Zoom _out'),
                 'KP_Subtract', None, window.manual_zoom_out),
             ('zoom_original', gtk.STOCK_ZOOM_100, _('_Normal size'),
-                '<Control>0', None, window.manual_zoom_original),
-            ('preferences', gtk.STOCK_PREFERENCES, _('Pr_eferences'),
-                None, None, bogus),
+                '<Control>0', None, window.manual_zoom_original), 
             ('about', gtk.STOCK_ABOUT, _('_About'),
-                None, None, about.dialog_open),
+                None, None, about.open_dialog),
             ('edit_thumbnails', 'comix-thumbnails', _('_Manage thumbnails...'),
                 None, None, bogus),
             ('library', 'comix-library', _('_Library...'),
@@ -124,15 +123,17 @@ class MainUI(gtk.UIManager):
         # Some actions added separately since they need extra arguments.
         self._actiongroup.add_actions([
             ('properties', gtk.STOCK_PROPERTIES, _('Proper_ties'),
-                '<Alt>Return', None, properties.dialog_open),
+                '<Alt>Return', None, properties.open_dialog),
             ('enhance_image', 'comix-enhance-image', _('_Enhance image...'),
-                'e', None, enhance.dialog_open)], window)
+                'e', None, enhance.open_dialog),
+            ('preferences', gtk.STOCK_PREFERENCES, _('Pr_eferences'),
+                None, None, preferences.open_dialog)], window)
 
         self._actiongroup.add_actions([
             ('open', gtk.STOCK_OPEN, _('_Open...'),
-                '<Control>o', None, filechooser.dialog_open),
+                '<Control>o', None, filechooser.open_dialog),
             ('comments', 'comix-comments', _('View _comments'),
-                'c', None, comment.dialog_open)], window.file_handler)
+                'c', None, comment.open_dialog)], window.file_handler)
 
         ui_description = """
         <ui>

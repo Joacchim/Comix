@@ -8,8 +8,6 @@ import zipfile
 import tarfile
 import threading
 
-import time
-
 import process
 
 # ------------------------------------------------------------------------

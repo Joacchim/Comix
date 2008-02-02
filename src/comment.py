@@ -15,19 +15,18 @@ _dialog = None
 class _CommentsDialog(gtk.Dialog):
 
     def __init__(self, file_handler):
+        self._file_handler = file_handler
         gtk.Dialog.__init__(self, _('Comments'), None, 0,
             (gtk.STOCK_CLOSE, gtk.RESPONSE_CLOSE))
-        self._file_handler = file_handler
-
         self.set_has_separator(False)
         self.set_resizable(True)
-        self.connect('response', dialog_close)
-        self.connect('delete_event', dialog_close)
-        self.set_default_size(550, 550)
+        self.connect('response', close_dialog)
+        self.set_default_size(600, 550)
         
         notebook = gtk.Notebook()
+        self.set_border_width(4)
+        notebook.set_border_width(6)
         self.vbox.pack_start(notebook)
-        self.vbox.set_border_width(10)
         tag = gtk.TextTag()
         tag.set_property('editable', False)
         tag.set_property('editable-set', True)
@@ -40,7 +39,7 @@ class _CommentsDialog(gtk.Dialog):
 
         for num in xrange(1, self._file_handler.get_number_of_comments() + 1):
             page = gtk.VBox(False)
-            page.set_border_width(12)
+            page.set_border_width(8)
             scrolled = gtk.ScrolledWindow()
             scrolled.set_policy(gtk.POLICY_AUTOMATIC, gtk.POLICY_AUTOMATIC)
             page.pack_start(scrolled)
@@ -64,19 +63,18 @@ class _CommentsDialog(gtk.Dialog):
             notebook.insert_page(page, tab_label)
 
         self.action_area.get_children()[0].grab_focus()
-        self.vbox.show_all()
+        self.show_all()
         
 
-def dialog_open(action, file_handler):
+def open_dialog(action, file_handler):
     
     """ Create and display the (singleton) comments dialog. """
 
     global _dialog
     if _dialog == None:
         _dialog = _CommentsDialog(file_handler)
-        _dialog.show()
 
-def dialog_close(*args):
+def close_dialog(*args):
     
     """ Destroy the comments dialog. """
 

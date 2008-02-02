@@ -19,11 +19,13 @@ class _AboutDialog(gtk.Dialog):
             (gtk.STOCK_CLOSE, gtk.RESPONSE_CLOSE))
         self.set_has_separator(False)
         self.set_resizable(False)
-        self.connect('response', dialog_close)
-        self.connect('delete_event', dialog_close)
+        self.connect('response', close_dialog)
         
         notebook = gtk.Notebook()
         self.vbox.pack_start(notebook, False, False, 0)
+        self.set_border_width(4)
+        notebook.set_border_width(6)
+
         # ----------------------------------------------------------------
         # About tab.
         # ----------------------------------------------------------------
@@ -99,19 +101,18 @@ class _AboutDialog(gtk.Dialog):
 
         notebook.insert_page(box, gtk.Label(_('Credits')))
         self.action_area.get_children()[0].grab_focus()
-        self.vbox.show_all()
+        self.show_all()
         
 
-def dialog_open(*args):
+def open_dialog(*args):
 
     """ Create and display the (singleton) about dialog. """
 
     global _dialog
     if _dialog == None:
         _dialog = _AboutDialog()
-        _dialog.show()
 
-def dialog_close(*args):
+def close_dialog(*args):
     
     """ Destroy the about dialog. """
 

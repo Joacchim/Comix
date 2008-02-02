@@ -58,9 +58,48 @@ prefs = {
     'window width': gtk.gdk.screen_get_default().get_width() / 2
 }
 
-_config_path = os.path.join(constants.COMIX_DIR, 'preferences_pickle')
+_config_path = os.path.join(constants.COMIX_DIR, 'preferences.pickle')
+_dialog = None
 
-def read_config_file():
+class _PreferencesDialog(gtk.Dialog):
+    
+    def __init__(self, window):
+        self._window = window
+        gtk.Dialog.__init__(self, _('Edit bookmarks'), window, 0,
+            (gtk.STOCK_CANCEL, gtk.RESPONSE_CANCEL, gtk.STOCK_OK,
+            gtk.RESPONSE_OK))
+        self.connect('response', self._response)
+        self.set_has_separator(False)
+        self.set_resizable(True)
+        self.set_default_response(gtk.RESPONSE_OK)
+        self.vbox.set_border_width(10)
+        
+        self.show_all()
+
+    def _response(self, dialog, response):
+        if response == gtk.RESPONSE_CANCEL:
+            print 'cancel'
+            close_dialog()
+        elif response == gtk.RESPONSE_OK:
+            print 'ok'
+            close_dialog()
+        elif response == gtk.RESPONSE_DELETE_EVENT:
+            print 'close'
+            close_dialog()
+
+
+def open_dialog(action, window):
+    global _dialog
+    if _dialog == None:
+        _dialog = _PreferencesDialog(window)
+
+def close_dialog(*args):
+    global _dialog
+    if _dialog != None:
+        _dialog.destroy()
+        _dialog = None
+
+def read_preferences_file():
     
     """ Read preferences data from disk. """
 
@@ -77,7 +116,7 @@ def read_config_file():
             print '! preferences.py: Error reading or writing', _config_path
             os.remove(_config_path)
 
-def write_config_to_file():
+def write_preferences_file():
     
     """ Write preference data to disk. """
 
