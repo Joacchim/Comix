@@ -72,7 +72,9 @@ class _PreferencesDialog(gtk.Dialog):
         self.set_has_separator(False)
         self.set_resizable(True)
         self.set_default_response(gtk.RESPONSE_OK)
-        self.vbox.set_border_width(10)
+        notebook = gtk.Notebook()
+        self.set_border_width(4)
+        notebook.set_border_width(6)
         
         self.show_all()
 
