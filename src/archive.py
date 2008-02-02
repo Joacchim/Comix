@@ -4,12 +4,13 @@
 
 import sys
 import os
-import subprocess
 import zipfile
 import tarfile
 import threading
 
 import time
+
+import process
 
 # ------------------------------------------------------------------------
 # Determine if rar/unrar exists, and bind the executable path to _rar_exec
@@ -73,9 +74,10 @@ class Extractor:
             if not _rar_exec:
                 # FIXME: Set statusbar or popup dialog.
                 pass
-            proc = subprocess.Popen([_rar_exec, 'vb', src],
-                stdout=subprocess.PIPE)
-            self._files = proc.stdout.readlines()
+            proc = process.Process([_rar_exec, 'vb', src])
+            fobj = proc.spawn()
+            self._files = fobj.readlines()
+            proc.wait()
             self._files = [name.rstrip('\n') for name in self._files]
         
         self._setupped = True
@@ -191,15 +193,10 @@ class Extractor:
                     print '! archive.py: Non-local tar member:', name, '\n'
             elif self._type == 'rar':
                 if _rar_exec:
-                    # Note: A bug in Python (issue 1336) can in rare cases
-                    # cause a timing error when spawning a subprocess that
-                    # will hang both the parent and child process. The 
-                    # effect of this is that Comix crashes completely.
-                    # There isn't much to do (if you want to read RAR archives)
-                    # other than to hope you will not be bitten by this bug,
-                    # except upgrade to a Python version where this is fixed.
-                    subprocess.call([_rar_exec, 'x', '-n' + name, '-p-', '-o-',
-                        '-inul', '--', self._src, dst])
+                    proc = process.Process([_rar_exec, 'x', '-n' + name,
+                        '-p-', '-o-', '-inul', '--', self._src, dst])
+                    proc.spawn()
+                    proc.wait()
                 else:
                     print '! archive.py: Could not find RAR file extractor.\n'
         except:

@@ -15,7 +15,7 @@ Usage: comicthumb INFILE OUTFILE [SIZE]
 
 import os
 import sys
-import subprocess
+import gc
 import re
 import cStringIO
 import zipfile
@@ -27,6 +27,54 @@ except ImportError:
     print '! Could not import the Image module (PIL).'
     print __doc__
     sys.exit(1)
+
+class Process:
+    
+    def __init__(self, args):
+        
+        """
+        Create a Process where <args> is a sequence of arguments that defines
+        the process. The first element of <args> shuld be the full path to 
+        the executable file to be run.
+
+        This avoids using Python's broken modules "subprocess" et al. (see
+        Python issue 1336.)
+        """
+
+        self._args = args
+        self._pid = None
+    
+    def spawn(self):
+        
+        """
+        Spawn the process defined by the args in __init__. Return a file-like
+        object linked to the spawned process' stdout.
+        """
+
+        gc.disable() # Avoid Python issue 1336!
+        read_pipe, write_pipe = os.pipe()
+        self._pid = os.fork()
+        if self._pid == 0:
+            try:
+                os.close(read_pipe)
+                os.dup2(write_pipe, 1)
+                os.execv(self._args[0], self._args)
+            except:
+                sys.stderr.write('Could not execute %s\n' % str(self._args[0]))
+                sys.exit(1)
+        gc.enable()
+        os.close(write_pipe)
+        return os.fdopen(read_pipe)
+
+    def wait(self):
+        
+        """ Wait for the process to terminate. """
+        
+        if self._pid:
+            os.waitpid(self._pid, 0)
+        else:
+            raise Exception, 'Process not spawned'
+
 
 class Extractor:
     
@@ -61,9 +109,10 @@ class Extractor:
             if self._rar == None:
                 print '! Could not find the "rar" or "unrar" executable.'
                 sys.exit(1)
-            proc = subprocess.Popen([self._rar, 'vb', src],
-                stdout=subprocess.PIPE)
-            self._files = proc.stdout.readlines()
+            proc = Process([self._rar, 'vb', src])
+            fobj = proc.spawn()
+            self._files = fobj.readlines()
+            proc.wait()
             self._files = [name.rstrip('\n') for name in self._files]
     
     def get_files(self):
@@ -85,9 +134,10 @@ class Extractor:
         elif self._type in ['tar', 'gzip', 'bzip2']:
             return cStringIO.StringIO(self._tfile.extractfile(chosen).read())
         elif self._type == 'rar':
-            proc = subprocess.Popen([self._rar, 'p', '-n' + chosen, '-inul',
-                '-p-', '--', self._src], stdout=subprocess.PIPE)
-            return cStringIO.StringIO(proc.stdout.read())
+            proc = Process([self._rar, 'p', '-n' + chosen, '-inul',
+                '-p-', '--', self._src])
+            fobj = proc.spawn()
+            return cStringIO.StringIO(fobj.read())
 
 def archive_mime_type(path):
     
