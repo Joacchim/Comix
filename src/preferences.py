@@ -73,9 +73,12 @@ class _PreferencesDialog(gtk.Dialog):
         self.set_resizable(True)
         self.set_default_response(gtk.RESPONSE_OK)
         notebook = gtk.Notebook()
+        self.vbox.pack_start(notebook)
         self.set_border_width(4)
         notebook.set_border_width(6)
         
+        page = gtk.VBox(False, 12)
+
         self.show_all()
 
     def _response(self, dialog, response):

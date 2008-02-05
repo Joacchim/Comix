@@ -31,7 +31,7 @@ class EventHandler:
                 prefs['window height'] = event.height
             self._window.width = event.width
             self._window.height = event.height
-            self._window.draw_image()
+            self._window.draw_image(scroll=False)
 
     def key_press_event(self, widget, event, *args):
         

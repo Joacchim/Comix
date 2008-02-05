@@ -56,11 +56,11 @@ class _AboutDialog(gtk.Dialog):
         '</span></b></big></big></big></big>\n\n' +
         _('Comix is an image viewer specifically designed to handle comics.') +
         '\n' +
-        _('It reads Zip, RAR and tar archives, as well as plain image files.') +
+        _('It reads ZIP, RAR and tar archives, as well as plain image files.') +
         '\n\n' +
         _('Comix is licensed under the GNU General Public License.') +
         '\n\n' +
-        '<small>Copyright © 2005-2007 Pontus Ekberg\n\n' +
+        '<small>Copyright © 2005-2008 Pontus Ekberg\n\n' +
         'herrekberg@users.sourceforge.net\n' +
         'http://comix.sourceforge.net</small>\n')
         box.pack_start(label, True, True, 0)

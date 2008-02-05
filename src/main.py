@@ -191,7 +191,7 @@ class MainWindow(gtk.Window):
 
         if not self.file_handler.file_loaded:
             return
-
+        
         width, height = self.get_visible_area_size()
         scale_width = self.zoom_mode == 'height' and -1 or width
         scale_height = self.zoom_mode == 'width' and -1 or height
@@ -270,7 +270,7 @@ class MainWindow(gtk.Window):
             if self.vertical_flip:
                 pixbuf = pixbuf.flip(horizontal=False)
             pixbuf = self.enhancer.enhance(pixbuf)
-
+            
             self.left_image.set_from_pixbuf(pixbuf)
             self.right_image.clear()
             x_padding = (width - pixbuf.get_width()) / 2
@@ -281,19 +281,24 @@ class MainWindow(gtk.Window):
             self.statusbar.set_resolution((unscaled_x, unscaled_y,
                 100.0 * pixbuf.get_width() / unscaled_x))
         
+        #w, h = self.left_image.get_size()
+        #self.left_image.window.begin_paint_rect((0, 0, w, h))
         self.left_image.hide()
         self.right_image.hide()
         self._main_layout.move(self._image_box, max(0, x_padding),
             max(0, y_padding))
-        self.left_image.show()
-        if self.displayed_double():
-            self.right_image.show()
-        self._main_layout.set_size(*self._image_box.size_request())
+        
         if scroll and at_bottom:
             self.scroll_to_fixed(horiz='endsecond', vert='bottom')
         elif scroll:
             self.scroll_to_fixed(horiz='startfirst', vert='top')
-        
+        self.left_image.show()
+        if self.displayed_double():
+            self.right_image.show()
+        else:
+            self.right_image.hide()
+        #self.left_image.window.end_paint()
+        self._main_layout.set_size(*self._image_box.size_request())
         self.statusbar.set_filename(
             self.file_handler.get_pretty_current_filename())
         self.statusbar.update()

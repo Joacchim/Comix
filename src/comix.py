@@ -6,7 +6,7 @@
 
 Comix 4.0dev - GTK Comic Book Viewer
 
-Copyright (C) 2005-2007 Pontus Ekberg
+Copyright (C) 2005-2008 Pontus Ekberg
 <herrekberg@users.sourceforge.net>
 
 -------------------------------------------------------------------------
