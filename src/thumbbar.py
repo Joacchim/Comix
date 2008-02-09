@@ -3,6 +3,7 @@
 # ============================================================================
 
 import gtk
+import gobject
 import Image
 import ImageDraw
 
@@ -17,7 +18,6 @@ class ThumbnailSidebar(gtk.HBox):
     def __init__(self, window):
         gtk.HBox.__init__(self, False, 0)
         self._window = window
-        self._block = False    
         self._visible = False
         self._loaded = False
         self._height = 0
@@ -48,14 +48,15 @@ class ThumbnailSidebar(gtk.HBox):
 
         self._selection.connect('changed', self._selection_event)
         self._layout.connect('scroll_event', self._scroll_event)
+        #self.connect('show', self.show)
 
     def get_width(self):
         return self._layout.size_request()[0] + self._scroll.size_request()[0]
 
-    def show(self):
+    def show(self, *args):
         self.show_all()
-        if not self._loaded:
-            self.load_thumbnails()
+        #if not self._loaded:
+        #    self.load_thumbnails()
         if not self._visible:
             self._layout.set_size(0, self._height)
             self._visible = True
@@ -73,13 +74,15 @@ class ThumbnailSidebar(gtk.HBox):
         self._counter = _Counter(0)
 
     def load_thumbnails(self):
-        if (not prefs['show thumbnails'] or prefs['hide all'] or
-          (self._window.is_fullscreen and prefs['hide all in fullscreen']) or
-          not self._window.file_handler.file_loaded or self._loaded or 
-          self._block):
+        if (self._loaded or not self._window.file_handler.file_loaded or 
+          not prefs['show thumbnails'] or prefs['hide all'] or
+          (self._window.is_fullscreen and prefs['hide all in fullscreen'])):
             return
-        
+
         self._loaded = True
+        gobject.idle_add(self._load)
+
+    def _load(self):
         self._counter = _Counter(
             self._window.file_handler.get_number_of_pages())
         while self._counter.incr():
@@ -121,20 +124,6 @@ class ThumbnailSidebar(gtk.HBox):
             value = max(0, value)
             value = min(self._vadjust.upper - self._vadjust.page_size, value)
             self._vadjust.set_value(value)
-
-    def block(self):
-        
-        """
-        Used by filehandler.py when opening a new file to make sure that
-        the viewed page is displayed before we start loading thumbnails.
-        Otherwise we might get stuck waiting for an image to get extracted
-        for the thumbbar while the main image doesn't get displayed. 
-        """
-
-        self._block = True
-
-    def unblock(self):
-        self._block = False
 
     def _selection_event(self, widget):
         try:

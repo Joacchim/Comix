@@ -303,14 +303,11 @@ class FileHandler:
             self.file_loaded = True
         
         self._comment_files.sort()
-        self._window.thumbnailsidebar.block()
-        self._window.new_page()
         self._window.cursor_handler.set_cursor_type(cursor.NORMAL)
+        self._window.ui_manager.set_sensitivities()
+        self._window.new_page()
         while gtk.events_pending():
             gtk.main_iteration(False)
-        self._window.ui_manager.set_sensitivities()
-        self._window.thumbnailsidebar.unblock()
-        self._window.thumbnailsidebar.load_thumbnails()
         self._window.ui_manager.recent.add(path)
 
     def close_file(self, *args):

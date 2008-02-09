@@ -84,6 +84,7 @@ class MainWindow(gtk.Window):
         # we don't activate it with space or some other key. (alternative?)
         self.toolbar.set_focus_child(
             self.ui_manager.get_widget('/Tool/expander'))
+        self.toolbar.set_style(gtk.TOOLBAR_ICONS)
         
         self._image_box.add(self.left_image)
         self._image_box.add(self.right_image)
@@ -307,6 +308,7 @@ class MainWindow(gtk.Window):
             gtk.main_iteration(False)
         enhance.draw_histogram(self.left_image)
         self.file_handler.do_cacheing()
+        self.thumbnailsidebar.load_thumbnails()
 
     def new_page(self, at_bottom=False):
         
@@ -657,7 +659,7 @@ class MainWindow(gtk.Window):
         Hide and/or show main window widgets depending on the current
         state.
         """
-
+        
         if not prefs['hide all'] and not (self.is_fullscreen and 
           prefs['hide all in fullscreen']):
             if prefs['show toolbar']:
@@ -668,10 +670,6 @@ class MainWindow(gtk.Window):
                 self.statusbar.show_all()
             else:
                 self.statusbar.hide_all()
-            if prefs['show thumbnails']:
-                self.thumbnailsidebar.show()
-            else:
-                self.thumbnailsidebar.hide()
             if prefs['show menubar']:
                 self.menubar.show_all()
             else:
@@ -691,6 +689,10 @@ class MainWindow(gtk.Window):
             else:
                 self._vscroll.hide_all()
                 self._hscroll.hide_all()
+            if prefs['show thumbnails']:
+                self.thumbnailsidebar.show()
+            else:
+                self.thumbnailsidebar.hide()
         else:
             self.toolbar.hide_all()
             self.menubar.hide_all()
