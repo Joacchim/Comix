@@ -92,5 +92,8 @@ if __name__ == '__main__':
     window = main.MainWindow()
     if len(sys.argv) >= 2:
         window.file_handler.open_file(os.path.normpath(sys.argv[1]))
-    gtk.main()
+    try:
+        gtk.main()
+    except KeyboardInterrupt:
+        window.terminate_program()
 

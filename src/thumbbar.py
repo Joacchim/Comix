@@ -2,8 +2,6 @@
 # thumbbar.py - Thumbnail sidebar for main window.
 # ============================================================================
 
-import time
-
 import gtk
 import Image
 import ImageDraw
@@ -13,6 +11,8 @@ from preferences import prefs
 import thumbnail
 
 class ThumbnailSidebar(gtk.HBox):
+    
+    """ A thumbnail sidebar including scrollbar for the main window. """
     
     def __init__(self, window):
         gtk.HBox.__init__(self, False, 0)
@@ -74,8 +74,9 @@ class ThumbnailSidebar(gtk.HBox):
 
     def load_thumbnails(self):
         if (not prefs['show thumbnails'] or prefs['hide all'] or
-          not self._window.file_handler.file_loaded or
-          self._loaded or self._block):
+          (self._window.is_fullscreen and prefs['hide all in fullscreen']) or
+          not self._window.file_handler.file_loaded or self._loaded or 
+          self._block):
             return
         
         self._loaded = True
@@ -102,6 +103,12 @@ class ThumbnailSidebar(gtk.HBox):
         self.update_select()
 
     def update_select(self):
+        
+        """
+        Select the thumbnail for the currently viewed page and make sure that
+        the thumbbar is scrolled so that the selected thumb is in view.
+        """
+
         if not self._loaded:
             return
         self._selection.select_path(
@@ -116,6 +123,14 @@ class ThumbnailSidebar(gtk.HBox):
             self._vadjust.set_value(value)
 
     def block(self):
+        
+        """
+        Used by filehandler.py when opening a new file to make sure that
+        the viewed page is displayed before we start loading thumbnails.
+        Otherwise we might get stuck waiting for an image to get extracted
+        for the thumbbar while the main image doesn't get displayed. 
+        """
+
         self._block = True
 
     def unblock(self):

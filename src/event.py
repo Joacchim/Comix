@@ -13,10 +13,11 @@ class EventHandler:
     
     def __init__(self, window):
         self._window = window
-        self._last_pointer_pos_x = None
-        self._last_pointer_pos_y = None
-        self._pressed_pointer_pos_x = None
-        self._pressed_pointer_pos_y = None
+        self._last_pointer_pos_x = 0
+        self._last_pointer_pos_y = 0
+        self._pressed_pointer_pos_x = 0
+        self._pressed_pointer_pos_y = 0
+        self._drag_timer = None
 
     def resize_event(self, widget, event):
             
@@ -270,11 +271,15 @@ class EventHandler:
         """ Handle mouse pointer movement events. """
         
         if 'GDK_BUTTON1_MASK' in event.state.value_names:
+            if (self._drag_timer != None and 
+              event.time < self._drag_timer + 10):
+                return
             self._window.cursor_handler.set_cursor_type(cursor.GRAB)
             self._window.scroll(self._last_pointer_pos_x - event.x_root,
                                 self._last_pointer_pos_y - event.y_root)
             self._last_pointer_pos_x = event.x_root
             self._last_pointer_pos_y = event.y_root
+            self._drag_timer = event.time
         elif self._window.actiongroup.get_action('lens').get_active():
             self._window.glass.set_lens_cursor(event.x, event.y, event.time)
         else:

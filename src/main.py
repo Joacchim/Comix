@@ -186,7 +186,7 @@ class MainWindow(gtk.Window):
         """
         Draw the current page(s) and update the titlebar and statusbar.
         """
-
+        
         self._display_active_widgets()
 
         if not self.file_handler.file_loaded:
@@ -250,7 +250,7 @@ class MainWindow(gtk.Window):
                 (right_unscaled_x, right_unscaled_y,
                 100.0 * right_pixbuf.get_width() / right_unscaled_x))
         else:
-            pixbuf = self.file_handler.get_pixbufs()
+            pixbuf = self.file_handler.get_pixbufs(single=True)
             unscaled_x = pixbuf.get_width()
             unscaled_y = pixbuf.get_height()
 
@@ -722,7 +722,8 @@ class MainWindow(gtk.Window):
         """ Run clean-up tasks and exit the program. """
 
         print 'Bye!'
-        gtk.main_quit()
+        if gtk.main_level() > 0:
+            gtk.main_quit()
         self.file_handler.cleanup()
         if not os.path.exists(constants.COMIX_DIR):
             os.mkdir(constants.COMIX_DIR)
