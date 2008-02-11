@@ -134,8 +134,8 @@ class Extractor:
         elif self._type in ['tar', 'gzip', 'bzip2']:
             return cStringIO.StringIO(self._tfile.extractfile(chosen).read())
         elif self._type == 'rar':
-            proc = Process([self._rar, 'p', '-n' + chosen, '-inul',
-                '-p-', '--', self._src])
+            proc = Process([self._rar, 'p', '-inul', '-p-', '--',
+                self._src, chosen])
             fobj = proc.spawn()
             return cStringIO.StringIO(fobj.read())
 

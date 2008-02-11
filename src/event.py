@@ -207,7 +207,7 @@ class EventHandler:
           gtk.keysyms.KP_Page_Up, gtk.keysyms.KP_Page_Down] or 
           (event.keyval == gtk.keysyms.Return and not
           'GDK_MOD1_MASK' in event.state.value_names)):
-            self._window.emit_stop_by_name("key_press_event")
+            self._window.emit_stop_by_name('key_press_event')
             return True
         else:
             return False

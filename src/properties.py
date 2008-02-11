@@ -16,6 +16,82 @@ import image
 
 _dialog = None
 
+class _Page(gtk.VBox):
+    
+    """
+    A page to put in the gtk.Notebook. Contains info about a file (an image
+    or an archive.)
+    """
+    
+    def __init__(self):
+        gtk.VBox.__init__(self, False, 12)
+        
+        self.set_border_width(12)
+        topbox = gtk.HBox(False, 12)
+        self.pack_start(topbox, False)
+        self._thumb = gtk.Image()
+        topbox.pack_start(self._thumb, False, False)
+        borderbox = gtk.EventBox()
+        borderbox.modify_bg(gtk.STATE_NORMAL, gtk.gdk.color_parse('#333'))
+        borderbox.set_size_request(-1, 130)
+        topbox.pack_start(borderbox)
+        insidebox = gtk.EventBox()
+        insidebox.set_border_width(1)
+        insidebox.modify_bg(gtk.STATE_NORMAL, gtk.gdk.color_parse('#ddb'))
+        borderbox.add(insidebox)
+        self._mainbox = gtk.VBox(False, 5)
+        self._mainbox.set_border_width(10)
+        insidebox.add(self._mainbox)
+
+    def set_thumbnail(self, pixbuf):
+        pixbuf = image.add_border(pixbuf, 1)
+        self._thumb.set_from_pixbuf(pixbuf)
+
+    def set_filename(self, filename):
+        
+        """
+        Set the filename to be displayed to <filename>. Call this before
+        set_main_info().
+        """
+
+        label = gtk.Label(encoding.to_unicode(filename))
+        label.set_alignment(0, 0.5)
+        attrlist = pango.AttrList()
+        attrlist.insert(pango.AttrWeight(pango.WEIGHT_BOLD, 0,
+            len(label.get_text())))
+        label.set_attributes(attrlist)
+        self._mainbox.pack_start(label, False, False)
+        self._mainbox.pack_start(gtk.VBox()) # Just to add space (better way?)
+
+    def set_main_info(self, info):
+        
+        """
+        Set the information in the main info box (below the filename) to
+        the values in the sequence <info>.
+        """
+
+        for text in info:
+            label = gtk.Label(text)
+            label.set_alignment(0, 0.5)
+            self._mainbox.pack_start(label, False, False)
+
+    def set_secondary_info(self, info):
+        
+        """
+        Set the information below the main info box to the values in the
+        sequence <info>. Each entry in info should be a tuple (desc, value).
+        """
+
+        for desc, value in info:
+            label = gtk.Label('%s:  %s' % (desc, value))
+            attrlist = pango.AttrList()
+            attrlist.insert(pango.AttrWeight(pango.WEIGHT_BOLD, 0,
+                len(desc) + 1))
+            label.set_attributes(attrlist)
+            label.set_alignment(0, 0.5)
+            self.pack_start(label, False, False)
+
+
 class _PropertiesDialog(gtk.Dialog):
 
     def __init__(self, window):
@@ -36,204 +112,71 @@ class _PropertiesDialog(gtk.Dialog):
             # ------------------------------------------------------------
             # Archive tab
             # ------------------------------------------------------------
-            stats = os.stat(window.file_handler.get_path_to_base())
-            page = gtk.VBox(False, 12)
-            page.set_border_width(12)
-            topbox = gtk.HBox(False, 12)
-            page.pack_start(topbox, False)
-            # Add thumbnail
-            thumb_pb = window.file_handler.get_thumbnail(1, width=200,
-                height=128)
-            thumb_pb = image.add_border(thumb_pb, 1)
-            thumb = gtk.Image()
-            thumb.set_from_pixbuf(thumb_pb)
-            topbox.pack_start(thumb, False, False)
-            # Add coloured box for main info
-            borderbox = gtk.EventBox()
-            borderbox.modify_bg(gtk.STATE_NORMAL, gtk.gdk.color_parse('#333'))
-            borderbox.set_size_request(-1, 130)
-            topbox.pack_start(borderbox)
-            insidebox = gtk.EventBox()
-            insidebox.set_border_width(1)
-            insidebox.modify_bg(gtk.STATE_NORMAL, gtk.gdk.color_parse('#ddb'))
-            borderbox.add(insidebox)
-            infobox = gtk.VBox(False, 5)
-            infobox.set_border_width(10)
-            insidebox.add(infobox)
-            # Add bold archive name
-            label = gtk.Label(encoding.to_unicode(
-                window.file_handler.get_pretty_current_filename()))
-            label.set_alignment(0, 0.5)
-            attrlist = pango.AttrList()
-            attrlist.insert(pango.AttrWeight(pango.WEIGHT_BOLD, 0,
-                len(label.get_text())))
-            label.set_attributes(attrlist)
-            infobox.pack_start(label, False, False)
-            infobox.pack_start(gtk.VBox()) # Just to add space (better way?)
-            # Add the rest of the main info to the coloured box
-            label = gtk.Label(_('%d pages') %
-                window.file_handler.get_number_of_pages())
-            label.set_alignment(0, 0.5)
-            infobox.pack_start(label, False, False)
-            label = gtk.Label(_('%d comments') %
-                window.file_handler.get_number_of_comments())
-            label.set_alignment(0, 0.5)
-            infobox.pack_start(label, False, False)
-            label = gtk.Label(archive.get_name(
-                window.file_handler.archive_type))
-            label.set_alignment(0, 0.5)
-            infobox.pack_start(label, False, False)
-            label = gtk.Label('%.1f MiB' % (stats.st_size / 1048576.0))
-            label.set_alignment(0, 0.5)
-            infobox.pack_start(label, False, False)
-            # Other info below
-            label = gtk.Label(_('Location') + ':   ' +
-                encoding.to_unicode(os.path.dirname(
-                window.file_handler.get_path_to_base())))
-            attrlist = pango.AttrList()
-            attrlist.insert(pango.AttrWeight(pango.WEIGHT_BOLD, 0,
-                len(_('Location')) + 1))
-            label.set_attributes(attrlist)
-            label.set_alignment(0, 0.5)
-            page.pack_start(label, False, False)
-            label = gtk.Label(_('Accessed') + ':   ' +
-                time.strftime('%Y-%m-%d [%H:%M:%S]',
-                time.localtime(stats.st_atime)))
-            attrlist = pango.AttrList()
-            attrlist.insert(pango.AttrWeight(pango.WEIGHT_BOLD, 0,
-                len(_('Accessed')) + 1))
-            label.set_attributes(attrlist)
-            label.set_alignment(0, 0.5)
-            page.pack_start(label, False, False)
-            label = gtk.Label(_('Modified') + ':   ' +
-                time.strftime('%Y-%m-%d [%H:%M:%S]',
-                time.localtime(stats.st_mtime)))
-            attrlist = pango.AttrList()
-            attrlist.insert(pango.AttrWeight(pango.WEIGHT_BOLD, 0,
-                len(_('Modified')) + 1))
-            label.set_attributes(attrlist)
-            label.set_alignment(0, 0.5)
-            page.pack_start(label, False, False)
-            label = gtk.Label(_('Permissions') + ':   ' +
-                oct(stat.S_IMODE(stats.st_mode)))
-            attrlist = pango.AttrList()
-            attrlist.insert(pango.AttrWeight(pango.WEIGHT_BOLD, 0,
-                len(_('Permissions')) + 1))
-            label.set_attributes(attrlist)
-            label.set_alignment(0, 0.5)
-            page.pack_start(label, False, False)
+            page = _Page()
+            thumb = window.file_handler.get_thumbnail(1, width=200, height=128)
+            page.set_thumbnail(thumb)
+            filename = window.file_handler.get_pretty_current_filename()
+            page.set_filename(filename)
             try:
-                uid = pwd.getpwuid(stats.st_uid)[0]
+                stats = os.stat(window.file_handler.get_path_to_base())
+                main_info = (
+                    _('%d pages') % window.file_handler.get_number_of_pages(),
+                    _('%d comments') %
+                        window.file_handler.get_number_of_comments(),
+                    archive.get_name(window.file_handler.archive_type),
+                    '%.1f MiB' % (stats.st_size / 1048576.0))
+                page.set_main_info(main_info)
+                try:
+                    uid = pwd.getpwuid(stats.st_uid)[0]
+                except:
+                    uid = str(stats.st_uid)
+                secondary_info = (
+                    (_('Location'), encoding.to_unicode(os.path.dirname(
+                    window.file_handler.get_path_to_base()))),
+                    (_('Accessed'), time.strftime('%Y-%m-%d [%H:%M:%S]',
+                    time.localtime(stats.st_atime))),
+                    (_('Modified'), time.strftime('%Y-%m-%d [%H:%M:%S]',
+                    time.localtime(stats.st_mtime))),
+                    (_('Permissions'), oct(stat.S_IMODE(stats.st_mode))),
+                    (_('Owner'), uid))
+                page.set_secondary_info(secondary_info)
             except:
-                uid = str(stats.st_uid)
-            label = gtk.Label(_('Owner') + ':   ' + uid)
-            attrlist = pango.AttrList()
-            attrlist.insert(pango.AttrWeight(pango.WEIGHT_BOLD, 0,
-                len(_('Owner')) + 1))
-            label.set_attributes(attrlist)
-            label.set_alignment(0, 0.5)
-            page.pack_start(label, False, False)
+                pass
             notebook.append_page(page, gtk.Label(_('Archive')))
         
         # ----------------------------------------------------------------
         # Image tab
         # ----------------------------------------------------------------
-        stats = window.file_handler.get_stats()
-        page = gtk.VBox(False, 12)
-        page.set_border_width(12)
-        topbox = gtk.HBox(False, 12)
-        page.pack_start(topbox)
-        # Add thumbnail
-        thumb_pb = window.file_handler.get_thumbnail(width=200, height=128)
-        thumb_pb = image.add_border(thumb_pb, 1)
-        thumb = gtk.Image()
-        thumb.set_from_pixbuf(thumb_pb)
-        topbox.pack_start(thumb, False, False)
-        # Add coloured main info box
-        borderbox = gtk.EventBox()
-        borderbox.modify_bg(gtk.STATE_NORMAL, gtk.gdk.color_parse('#333'))
-        borderbox.set_size_request(-1, 130)
-        topbox.pack_start(borderbox)
-        insidebox = gtk.EventBox()
-        insidebox.set_border_width(1)
-        insidebox.modify_bg(gtk.STATE_NORMAL, gtk.gdk.color_parse('#ddb'))
-        borderbox.add(insidebox)
-        infobox = gtk.VBox(False, 5)
-        infobox.set_border_width(10)
-        insidebox.add(infobox)
-        # Add bold filename
         path = window.file_handler.get_path_to_page()
-        filename = encoding.to_unicode(os.path.basename(path))
-        label = gtk.Label(filename)
-        label.set_alignment(0, 0.5)
-        attrlist = pango.AttrList()
-        attrlist.insert(pango.AttrWeight(pango.WEIGHT_BOLD, 0,
-            len(label.get_text())))
-        label.set_attributes(attrlist)
-        infobox.pack_start(label, False, False)
-        infobox.pack_start(gtk.VBox()) # Just to add space (any better way?)
-        # Add the rest of the main info
-        width, height = window.file_handler.get_size()
-        mime_name = window.file_handler.get_mime_name()
-        label = gtk.Label('%dx%d px' % (width, height))
-        label.set_alignment(0, 0.5)
-        infobox.pack_start(label, False, False)
-        label = gtk.Label(mime_name)
-        label.set_alignment(0, 0.5)
-        infobox.pack_start(label, False, False)
-        if stats != None:
-            label = gtk.Label('%.1f kiB' % (stats.st_size / 1024.0))
-            label.set_alignment(0, 0.5)
-            infobox.pack_start(label, False, False)
-            # Other info below the thumb + main info box
-            label = gtk.Label(_('Location') + ':   ' +
-                encoding.to_unicode(os.path.dirname(
-                window.file_handler.get_path_to_page())))
-            attrlist = pango.AttrList()
-            attrlist.insert(pango.AttrWeight(pango.WEIGHT_BOLD, 0,
-                len(_('Location')) + 1))
-            label.set_attributes(attrlist)
-            label.set_alignment(0, 0.5)
-            page.pack_start(label, False, False)
-            label = gtk.Label(_('Accessed') + ':   ' +
-                time.strftime('%Y-%m-%d [%H:%M:%S]',
-                time.localtime(stats.st_atime)))
-            attrlist = pango.AttrList()
-            attrlist.insert(pango.AttrWeight(pango.WEIGHT_BOLD, 0,
-                len(_('Accessed')) + 1))
-            label.set_attributes(attrlist)
-            label.set_alignment(0, 0.5)
-            page.pack_start(label, False, False)
-            label = gtk.Label(_('Modified') + ':   ' +
-                time.strftime('%Y-%m-%d [%H:%M:%S]',
-                time.localtime(stats.st_mtime)))
-            attrlist = pango.AttrList()
-            attrlist.insert(pango.AttrWeight(pango.WEIGHT_BOLD, 0,
-                len(_('Modified')) + 1))
-            label.set_attributes(attrlist)
-            label.set_alignment(0, 0.5)
-            page.pack_start(label, False, False)
-            label = gtk.Label(_('Permissions') + ':   ' +
-                oct(stat.S_IMODE(stats.st_mode)))
-            attrlist = pango.AttrList()
-            attrlist.insert(pango.AttrWeight(pango.WEIGHT_BOLD, 0,
-                len(_('Permissions')) + 1))
-            label.set_attributes(attrlist)
-            label.set_alignment(0, 0.5)
-            page.pack_start(label, False, False)
+        page = _Page()
+        thumb = window.file_handler.get_thumbnail(width=200, height=128)
+        page.set_thumbnail(thumb)       
+        filename = os.path.basename(path)
+        page.set_filename(filename)
+        try:
+            stats = os.stat(path)
+            width, height = window.file_handler.get_size()
+            main_info = ( 
+                '%dx%d px' % (width, height),
+                window.file_handler.get_mime_name(),
+                '%.1f kiB' % (stats.st_size / 1024.0))
+            page.set_main_info(main_info)
             try:
                 uid = pwd.getpwuid(stats.st_uid)[0]
             except:
                 uid = str(stats.st_uid)
-            label = gtk.Label(_('Owner') + ':   ' + uid)
-            attrlist = pango.AttrList()
-            attrlist.insert(pango.AttrWeight(pango.WEIGHT_BOLD, 0,
-                len(_('Owner')) + 1))
-            label.set_attributes(attrlist)
-            label.set_alignment(0, 0.5)
-            page.pack_start(label, False, False)
+            secondary_info = (
+                (_('Location'), encoding.to_unicode(os.path.dirname(path))),
+                (_('Accessed'), time.strftime('%Y-%m-%d [%H:%M:%S]',
+                time.localtime(stats.st_atime))),
+                (_('Modified'), time.strftime('%Y-%m-%d [%H:%M:%S]',
+                time.localtime(stats.st_mtime))),
+                (_('Permissions'), oct(stat.S_IMODE(stats.st_mode))),
+                (_('Owner'), uid))
+            page.set_secondary_info(secondary_info)
+        except:
+            pass
         notebook.append_page(page, gtk.Label(_('Image')))
-  
         self.show_all()
 
 def open_dialog(action, window):

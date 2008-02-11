@@ -724,6 +724,7 @@ class MainWindow(gtk.Window):
         """ Run clean-up tasks and exit the program. """
 
         print 'Bye!'
+        self.hide()
         if gtk.main_level() > 0:
             gtk.main_quit()
         self.file_handler.cleanup()

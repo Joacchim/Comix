@@ -171,14 +171,7 @@ class Extractor:
             sys.exit(0)
         try:
             if self._type == 'zip':
-                dst_name = unicode(name, 'cp437')
-                for enc in (sys.getfilesystemencoding(), 'utf8', 'latin-1'):
-                    try:
-                        dst_name = dst_name.encode(enc)
-                        break
-                    except UnicodeError:
-                        continue
-                dst_path = os.path.join(dst, dst_name)
+                dst_path = os.path.join(dst, name)
                 if not os.path.exists(os.path.dirname(dst_path)):
                     os.makedirs(os.path.dirname(dst_path))
                 new = open(dst_path, 'w')
@@ -191,8 +184,8 @@ class Extractor:
                     print '! archive.py: Non-local tar member:', name, '\n'
             elif self._type == 'rar':
                 if _rar_exec:
-                    proc = process.Process([_rar_exec, 'x', '-n' + name,
-                        '-p-', '-o-', '-inul', '--', self._src, dst])
+                    proc = process.Process([_rar_exec, 'x', '-p-', '-o-',
+                        '-inul', '--', self._src, name, dst])
                     proc.spawn()
                     proc.wait()
                 else:

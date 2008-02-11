@@ -48,15 +48,12 @@ class ThumbnailSidebar(gtk.HBox):
 
         self._selection.connect('changed', self._selection_event)
         self._layout.connect('scroll_event', self._scroll_event)
-        #self.connect('show', self.show)
-
+    
     def get_width(self):
         return self._layout.size_request()[0] + self._scroll.size_request()[0]
 
     def show(self, *args):
         self.show_all()
-        #if not self._loaded:
-        #    self.load_thumbnails()
         if not self._visible:
             self._layout.set_size(0, self._height)
             self._visible = True
