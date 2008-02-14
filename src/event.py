@@ -1,10 +1,14 @@
 # ============================================================================
 # event.py - Event handling (keyboard, mouse, etc.) for the main window.
+# 
+# Logically this isn't really a separate module from main.py, but it is
+# given it's own file for the sake of readability.
 # ============================================================================
 
 import urllib
 
 import gtk
+import gobject
 
 import cursor
 from preferences import prefs
@@ -17,7 +21,6 @@ class EventHandler:
         self._last_pointer_pos_y = 0
         self._pressed_pointer_pos_x = 0
         self._pressed_pointer_pos_y = 0
-        self._drag_timer = None
 
     def resize_event(self, widget, event):
             
@@ -209,8 +212,6 @@ class EventHandler:
           'GDK_MOD1_MASK' in event.state.value_names)):
             self._window.emit_stop_by_name('key_press_event')
             return True
-        else:
-            return False
 
     def scroll_wheel_event(self, widget, event, *args):
         
@@ -271,9 +272,6 @@ class EventHandler:
         """ Handle mouse pointer movement events. """
         
         if 'GDK_BUTTON1_MASK' in event.state.value_names:
-            if (self._drag_timer != None and 
-              event.time < self._drag_timer + 10):
-                return
             self._window.cursor_handler.set_cursor_type(cursor.GRAB)
             self._window.scroll(self._last_pointer_pos_x - event.x_root,
                                 self._last_pointer_pos_y - event.y_root)
@@ -281,9 +279,17 @@ class EventHandler:
             self._last_pointer_pos_y = event.y_root
             self._drag_timer = event.time
         elif self._window.actiongroup.get_action('lens').get_active():
-            self._window.glass.set_lens_cursor(event.x, event.y, event.time)
+            self._window.glass.set_lens_cursor(event.x, event.y)
         else:
             self._window.cursor_handler.refresh()
+
+        events = []
+        while gtk.gdk.events_pending():
+            event = gtk.gdk.event_get()
+            if event != None and event.type != gtk.gdk.MOTION_NOTIFY:
+                events.append(event)
+        for event in events:
+            event.put()
     
     def drag_n_drop_event(self, widget, context, x, y, data, *args):
         

@@ -159,7 +159,7 @@ class _PropertiesDialog(gtk.Dialog):
             main_info = ( 
                 '%dx%d px' % (width, height),
                 window.file_handler.get_mime_name(),
-                '%.1f kiB' % (stats.st_size / 1024.0))
+                '%.1f KiB' % (stats.st_size / 1024.0))
             page.set_main_info(main_info)
             try:
                 uid = pwd.getpwuid(stats.st_uid)[0]

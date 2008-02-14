@@ -34,7 +34,6 @@ prefs = {
     #'last convert type': 'zip',
     'lens magnification': 2,
     'lens size': 180,
-    'lens update interval': 15,
     #'library cover size': 128,
     #'lib window height': gtk.gdk.screen_get_default().get_height() * 3 / 4,
     #'lib window width': gtk.gdk.screen_get_default().get_width() * 3 / 4,

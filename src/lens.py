@@ -10,8 +10,6 @@ import cursor
 from preferences import prefs
 import image
 
-# FIXME: Rotation and flipping support.
-
 class MagnifyingGlass:
     
     """
@@ -27,26 +25,17 @@ class MagnifyingGlass:
     
     def __init__(self, window):
         self._window = window
-        self._timer = None
     
-    def set_lens_cursor(self, x, y, millisecs):
+    def set_lens_cursor(self, x, y):
         
         """
         Calculate what image data to put in the lens and update the cursor
-        with it. Since this operation is costly (at least if done hundreds
-        of times each second), we don't actually do anything unless a
-        specified time has passed since the last update.
-
-        <x> and <y> are the positions of the cursor within the main window
-        layout area and <millisecs> is the time of the event that signaled
-        this update. 
+        with it; <x> and <y> are the positions of the cursor within the
+        main window layout area.
         """
 
-        if (self._timer != None and 
-          millisecs < self._timer + prefs['lens update interval'] or
-          not self._window.file_handler.file_loaded):
+        if not self._window.file_handler.file_loaded:
             return
-        self._timer = millisecs
         pixbuf = self._get_lens_pixbuf(x, y)
         cursor = gtk.gdk.Cursor(gtk.gdk.display_get_default(), pixbuf,
             prefs['lens size'] // 2, prefs['lens size'] // 2)
@@ -57,9 +46,8 @@ class MagnifyingGlass:
         """ Toggle on or off the lens depending on the state of <action>. """
 
         if action.get_active():
-            self._timer = None
             x, y = self._window.get_layout_pointer_position()
-            self.set_lens_cursor(x, y, None)
+            self.set_lens_cursor(x, y)
         else:
             self._window.cursor_handler.set_cursor_type(cursor.NORMAL)
 

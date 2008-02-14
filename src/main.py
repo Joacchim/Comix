@@ -72,7 +72,7 @@ class MainWindow(gtk.Window):
         self._hadjust = self._main_layout.get_hadjustment()
         self._vscroll = gtk.VScrollbar(self._vadjust)
         self._hscroll = gtk.HScrollbar(self._hadjust)
-        
+
         # ----------------------------------------------------------------
         # Setup
         # ----------------------------------------------------------------
@@ -189,10 +189,8 @@ class MainWindow(gtk.Window):
         """
         
         self._display_active_widgets()
-
         if not self.file_handler.file_loaded:
             return
-        
         width, height = self.get_visible_area_size()
         scale_width = self.zoom_mode == 'height' and -1 or width
         scale_height = self.zoom_mode == 'width' and -1 or height
@@ -282,13 +280,10 @@ class MainWindow(gtk.Window):
             self.statusbar.set_resolution((unscaled_x, unscaled_y,
                 100.0 * pixbuf.get_width() / unscaled_x))
         
-        #w, h = self.left_image.get_size()
-        #self.left_image.window.begin_paint_rect((0, 0, w, h))
         self.left_image.hide()
         self.right_image.hide()
         self._main_layout.move(self._image_box, max(0, x_padding),
             max(0, y_padding))
-        
         if scroll and at_bottom:
             self.scroll_to_fixed(horiz='endsecond', vert='bottom')
         elif scroll:
@@ -298,7 +293,6 @@ class MainWindow(gtk.Window):
             self.right_image.show()
         else:
             self.right_image.hide()
-        #self.left_image.window.end_paint()
         self._main_layout.set_size(*self._image_box.size_request())
         self.statusbar.set_filename(
             self.file_handler.get_pretty_current_filename())

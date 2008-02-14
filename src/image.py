@@ -29,8 +29,6 @@ def fit_in_rectangle(src, width, height, interp=None, scale_up=False,
     If <src> has an alpha channel it gets a checkboard background.
     """
     
-    # FIXME: Scale if not needed?
-
     # "Unbounded" really means "bounded to 10000 px" - for simplicity.
     # Comix would choke on larger images anyway.
     if width < 0:
