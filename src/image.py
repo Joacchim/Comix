@@ -9,8 +9,7 @@ import ImageOps
 
 import preferences
 
-def fit_in_rectangle(src, width, height, interp=None, scale_up=False,
-  rotation=0):
+def fit_in_rectangle(src, width, height, scale_up=False, rotation=0):
     
     """
     Scale (and return) a pixbuf so that it fits in a rectangle with
@@ -19,10 +18,7 @@ def fit_in_rectangle(src, width, height, interp=None, scale_up=False,
 
     If <rotation> is 90, 180 or 270 we rotate <src> first so that the
     rotated pixbuf is fitted in the rectangle.
-    
-    If <interp> is set it is used as the scaling method, otherwise the
-    default value from the preferences module is used.
-    
+        
     Unless <scale_up> is True we don't stretch images smaller than the
     given rectangle.
 
@@ -51,13 +47,11 @@ def fit_in_rectangle(src, width, height, interp=None, scale_up=False,
         else:
             width = int(max(src.get_width() * height / src.get_height(), 1))
 
-        if interp == None:
-            interp = preferences.prefs['interp mode']
         if src.get_has_alpha():
-            src = src.composite_color_simple(width, height, interp, 255, 8,
-                0x777777, 0x999999)
+            src = src.composite_color_simple(width, height,
+                gtk.gdk.INTERP_TILES, 255, 8, 0x777777, 0x999999)
         else:
-            src = src.scale_simple(width, height, interp)
+            src = src.scale_simple(width, height, gtk.gdk.INTERP_TILES)
 
     if rotation == 90:
         src = src.rotate_simple(gtk.gdk.PIXBUF_ROTATE_CLOCKWISE)
@@ -67,8 +61,7 @@ def fit_in_rectangle(src, width, height, interp=None, scale_up=False,
         src = src.rotate_simple(gtk.gdk.PIXBUF_ROTATE_COUNTERCLOCKWISE)
     return src
 
-def fit_2_in_rectangle(src1, src2, width, height, interp=None, scale_up=False,
-  rotation=0):
+def fit_2_in_rectangle(src1, src2, width, height, scale_up=False, rotation=0):
     
     """
     Scale two pixbufs so that they fit together (side-by-side) into a
@@ -107,9 +100,9 @@ def fit_2_in_rectangle(src1, src2, width, height, interp=None, scale_up=False,
        alloc_width_src1 += alloc_width_src2 - needed_width_src2
 
     return (fit_in_rectangle(src1, int(alloc_width_src1), height,
-                             interp, scale_up, rotation),
+                             scale_up, rotation),
             fit_in_rectangle(src2, int(alloc_width_src2), height,
-                             interp, scale_up, rotation))
+                             scale_up, rotation))
     
 def add_border(pixbuf, thickness, colour=0x000000FF):
 

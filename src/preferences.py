@@ -30,7 +30,6 @@ prefs = {
     'hide all': False,
     'hide all in fullscreen': True,
     'stored hide all values': (True, True, True, True, True),
-    'interp mode': gtk.gdk.INTERP_TILES,
     #'last convert type': 'zip',
     'lens magnification': 2,
     'lens size': 180,

@@ -282,7 +282,7 @@ class EventHandler:
             self._window.glass.set_lens_cursor(event.x, event.y)
         else:
             self._window.cursor_handler.refresh()
-
+        
         events = []
         while gtk.gdk.events_pending():
             event = gtk.gdk.event_get()
