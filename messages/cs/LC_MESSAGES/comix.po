@@ -1,0 +1,1345 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR ORGANIZATION
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"POT-Creation-Date: 2007-05-09 14:55+CEST\n"
+"PO-Revision-Date: 2008-07-05 14:05+0100\n"
+"Last-Translator: Pontus Ekberg <herrekberg@users.sourceforge.net>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: pygettext.py 1.5\n"
+
+#: comix:547
+#: comix:11067
+msgid "Fit-to-screen mode"
+msgstr "Přizpůsobit obrazovce"
+
+#: comix:550
+#: comix:11068
+msgid "Fit width mode"
+msgstr "Přizpůsobit na šířku"
+
+#: comix:553
+#: comix:11069
+msgid "Fit height mode"
+msgstr "Přizpůsobit na výšku"
+
+#: comix:556
+#: comix:11011
+#: comix:11070
+msgid "Manual zoom mode"
+msgstr "Ruční přiblížení"
+
+#: comix:559
+#: comix:11071
+msgid "Double page mode"
+msgstr "Dvoustránkový mód"
+
+#: comix:561
+#: comix:11073
+msgid "Manga mode"
+msgstr "Manga mód"
+
+#: comix:563
+#: comix:11072
+msgid "Magnifying lens"
+msgstr "Lupa"
+
+#: comix:664
+#: comix:6640
+msgid "Library"
+msgstr "Knihovna"
+
+#: comix:694
+msgid "Apply filter on full path"
+msgstr "Použít filtr na celou cestu"
+
+#: comix:700
+msgid "Add archives to library."
+msgstr "Přidat archivy do knihovny."
+
+#: comix:705
+msgid "Remove selected archive from library."
+msgstr "Odstranit vybrané archivy z knihovny."
+
+#: comix:709
+#: comix:1614
+#: comix:1657
+msgid "Clean up"
+msgstr "Vyčistit"
+
+#: comix:713
+msgid "Remove orphaned or outdated library entries."
+msgstr "Odstranit osiřelou nebo zastaralou knihovnu…"
+
+#: comix:717
+msgid "Close this window."
+msgstr "Zavřít toto okno."
+
+#: comix:722
+msgid "Open selected archive."
+msgstr "Otevřít vybraný archiv."
+
+#: comix:779
+msgid "Open"
+msgstr "Otevřít"
+
+#: comix:791
+msgid "All files"
+msgstr "Všechny soubory"
+
+#: comix:802
+msgid "All images"
+msgstr "Všechny obrázky"
+
+#: comix:814
+msgid "All archives"
+msgstr "Všechny archivy"
+
+#: comix:818
+msgid "JPEG image"
+msgstr "Obrázek JPEG"
+
+#: comix:822
+msgid "PNG image"
+msgstr "Obrázek PNG"
+
+#: comix:826
+msgid "GIF image"
+msgstr "Obrázek GIF"
+
+#: comix:830
+msgid "TIFF image"
+msgstr "Obrázek TIFF"
+
+#: comix:834
+msgid "BMP image"
+msgstr "Obrázek BMP"
+
+#: comix:838
+msgid "ICO image"
+msgstr "Obrázek ICO"
+
+#: comix:842
+msgid "XPM image"
+msgstr "Obrázek XPM"
+
+#: comix:846
+msgid "XBM image"
+msgstr "Obrázek XBM"
+
+#: comix:852
+msgid "ZIP archive"
+msgstr "Archiv ZIP"
+
+#: comix:857
+#: comix:6722
+#: comix:7074
+#: comix:7125
+#: comix:7473
+#: comix:8746
+msgid "RAR archive"
+msgstr "Archiv RAR"
+
+#: comix:864
+msgid "tar archive"
+msgstr "Archiv TAR"
+
+#: comix:868
+msgid "Add archives recursively"
+msgstr "Přidat archivy rekurzívně"
+
+#: comix:883
+msgid "Preferences"
+msgstr "Nastavení"
+
+#: comix:889
+msgid "Select folder"
+msgstr "Vybrat složku"
+
+#: comix:892
+msgid "Fullscreen as default"
+msgstr "Na celou obrazovku jako výchozí"
+
+#: comix:893
+msgid "Double page mode as default"
+msgstr "Dvoustránkový mód jako výchozí"
+
+#: comix:895
+msgid "Stretch small images"
+msgstr "Roztáhnout malé obrázky"
+
+#: comix:897
+msgid "Use smart scaling in double page mode"
+msgstr "Použít chytré škálování v dvoustránkovém módu"
+
+#: comix:899
+msgid "Always view comments when opening a new file"
+msgstr "Vždy zobrazit komentáře při otvírání souboru"
+
+#: comix:902
+msgid "Hide menubar, scrollbars etc. in fullscreen mode"
+msgstr "Skrýt ovládací prvky při zobrazení na celou obrazovku"
+
+#: comix:904
+msgid "Cache pages for faster forward flipping"
+msgstr "Přednahrát stránky pro rychlejší listování"
+
+#: comix:907
+msgid "Scroll wheel scrolls horizontally at top and bottom of page"
+msgstr "Posun kolečkem myši k začátku a konci stránky"
+
+#: comix:910
+msgid "Flip page when scrolling off the top or bottom of page"
+msgstr "Otočit stránku při posunu na začátku nebo na  konci stránky"
+
+#: comix:912
+msgid "Hide thumbnail scrollbar"
+msgstr "Skrýt posuvník náhledů"
+
+#: comix:914
+msgid "Space key uses smart scrolling"
+msgstr "Mezerník používá chytré posouvání"
+
+#: comix:917
+msgid "Save window position and size for future sessions"
+msgstr "Uložit velikost a umístění okna pro budoucí sezení"
+
+#: comix:920
+msgid "Go to the next archive in directory after last page"
+msgstr "Přejít na další archiv v adresáři po poslední stránce"
+
+#: comix:922
+msgid "Hide cursor in fullscreen mode"
+msgstr "Skrýt kurzor při zobrazení na celou obrazovku"
+
+#: comix:924
+msgid "Open last viewed file on start"
+msgstr "Otevřít poslední prohlížený soubor při startu"
+
+#: comix:926
+msgid "Show page numbers on thumbnails"
+msgstr "Zobrazit čísla stránek v náhledech"
+
+#: comix:929
+msgid "Always use smart scrolling as if in double page mode"
+msgstr "Vždy používat chytrý posun jako v dvoustránkovém módu"
+
+#: comix:932
+msgid "Use stored thumbnails for images in directories"
+msgstr "Používat uložené náhledy pro obrázky v adresářích"
+
+#: comix:934
+msgid "Use stored thumbnails for images in archives"
+msgstr "Používat uložené náhledy pro obrázky v archivech"
+
+#: comix:937
+msgid "Display only one page in double page mode if the image is wide"
+msgstr "Zobrazit pouze jednu stránku v dvoustránkovém módu pokud obrázek je široký"
+
+#: comix:940
+msgid "Store recently opened files"
+msgstr "Ukládat posledně otevřené soubory"
+
+#: comix:943
+msgid "Always go to this directory in the \"Open\" dialog:"
+msgstr "Vždy jít do následujícího adresáře v dialogu  „Otevřít“:"
+
+#: comix:946
+msgid "Always go to the latest directory in the \"Open\" dialog"
+msgstr "Vždy jít do naposled používaného adresáře v dialogu  „Otevřít“:"
+
+#: comix:970
+msgid "Nearest (quickest, worst quality)"
+msgstr "Nejbližší (nejrychlejší, nejhorší kvalita)"
+
+#: comix:971
+msgid "Tiles"
+msgstr "Dlaždice"
+
+#: comix:972
+msgid "Bilinear"
+msgstr "Bilineární"
+
+#: comix:974
+msgid "Hyper (slowest, best quality)"
+msgstr "Hyper (nejpomalejší, nejlepší kvalita)"
+
+#: comix:976
+msgid "Manual zoom mode as default"
+msgstr "Ruční přiblížení jako výchozí"
+
+#: comix:979
+msgid "Fit-to-screen mode as default"
+msgstr "Přizpůsobit obrazovce jako výchozí"
+
+#: comix:982
+msgid "Fit width mode as default"
+msgstr "Přizpůsobit na šířku jako výchozí"
+
+#: comix:985
+msgid "Fit height mode as default"
+msgstr "Přizpůsobit na výšku jako výchozí"
+
+#: comix:1008
+msgid "Background colour:"
+msgstr "Barva pozadí:"
+
+#: comix:1011
+msgid "Background colour"
+msgstr "Barva pozadí:"
+
+#: comix:1013
+msgid "Toolbar button labels:"
+msgstr "Popisy tlačítek lišty nástrojů:"
+
+#: comix:1017
+msgid "Icons only"
+msgstr "Pouze ikony"
+
+#: comix:1018
+#: comix:4633
+msgid "Text only"
+msgstr "Pouze text"
+
+#: comix:1019
+#: comix:4635
+msgid "Icons and text"
+msgstr "Ikony a text"
+
+#: comix:1020
+msgid "Slideshow delay:"
+msgstr "Prodleva promítání snímků"
+
+#: comix:1036
+msgid "Display"
+msgstr "Zobrazit"
+
+#: comix:1090
+msgid "Behaviour"
+msgstr "Chování"
+
+#: comix:1127
+msgid "Scaling quality"
+msgstr "Kvalita škálování"
+
+#: comix:1152
+msgid "Scaling"
+msgstr "Škálování"
+
+#: comix:1166
+msgid "Treat files with the following extensions as comments:"
+msgstr "Považovat soubory s následujícími příponami za komentáře:"
+
+#: comix:1172
+msgid "Comments"
+msgstr "Komentáře"
+
+#: comix:1197
+msgid "Space key scrolls"
+msgstr "Posun mezerníkem"
+
+#: comix:1201
+#: comix:3994
+#: comix:9407
+#: comix:9436
+#: comix:9439
+#: comix:9446
+#: comix:9448
+msgid "of"
+msgstr "z"
+
+#: comix:1205
+msgid "Window size"
+msgstr "velikosti okna"
+
+#: comix:1206
+msgid "Page size"
+msgstr "velikosti stránky"
+
+#: comix:1208
+msgid "Scroll"
+msgstr "Posun"
+
+#: comix:1222
+msgid "Magnification factor:"
+msgstr "Úroveň zvětšení:"
+
+#: comix:1226
+msgid "Lens size (px):"
+msgstr "Velikost lupy (px):"
+
+#: comix:1230
+msgid "Update interval (milliseconds):"
+msgstr "Interval obnovování (milisekundy):"
+
+#: comix:1235
+msgid "Lens"
+msgstr "Lupa"
+
+#: comix:1249
+msgid "Thumbnail sizes (px):"
+msgstr "Velikost náhledů (px):"
+
+#: comix:1254
+msgid "Library thumbnail sizes (px):"
+msgstr "Velikost náhledů knihovny (px):"
+
+#: comix:1272
+msgid "Thumbnails"
+msgstr "Náhledy"
+
+#: comix:1301
+msgid "Adjust colour"
+msgstr "Upravit barvu"
+
+#: comix:1303
+msgid "Default"
+msgstr "Výchozí"
+
+#: comix:1325
+msgid "Brightness"
+msgstr "Jas"
+
+#: comix:1337
+msgid "Contrast"
+msgstr "Kontrast"
+
+#: comix:1349
+msgid "Saturation"
+msgstr "Sytost"
+
+#: comix:1361
+msgid "Sharpness"
+msgstr "Ostrost"
+
+#: comix:1376
+msgid "Automatically adjust contrast"
+msgstr "Automaticky upravit kontrast"
+
+#: comix:1383
+msgid "Save values for future sessions"
+msgstr "Uložit hodnoty pro budoucí sezení"
+
+#: comix:1395
+msgid "Properties"
+msgstr "Vlastnosti"
+
+#: comix:1413
+msgid "Go to page"
+msgstr "Přejít na stránku"
+
+#: comix:1437
+msgid "Edit bookmarks"
+msgstr "Upravit záložky"
+
+#: comix:1446
+msgid "Title"
+msgstr "Titul"
+
+#: comix:1447
+#: comix:5400
+#: comix:5752
+msgid "Page"
+msgstr "Stránka"
+
+#: comix:1477
+#: comix:1529
+msgid "About"
+msgstr "O programu"
+
+#: comix:1515
+msgid "Comix is an image viewer specifically designed to handle comic books."
+msgstr "Comix je prohlížeč obrázků obzvláště uzpůsobený k práci s komiksy."
+
+#: comix:1517
+msgid "It reads ZIP, RAR and tar archives (also gzip or bzip2 compressed)"
+msgstr "Čte archivy ZIP, RAR a tar (též s komprimací gzip nebo bzip2)"
+
+#: comix:1519
+msgid "as well as plain image files."
+msgstr "stejně jako prosté obrázkové soubory."
+
+#: comix:1521
+msgid "Comix is licensed under the GNU General Public License."
+msgstr "Comix je licencován pod GNU obecnou veřejnou licencí."
+
+#: comix:1538
+msgid "Developer and Swedish translation"
+msgstr "Vývoj a překlad do švédštiny"
+
+#: comix:1540
+msgid "Simplified Chinese translation"
+msgstr "Překlad do zjednodušené čínštiny"
+
+#: comix:1541
+msgid "Spanish translation"
+msgstr "Překlad do španělštiny"
+
+#: comix:1542
+msgid "Brazilian Portuguese translation"
+msgstr "Překlad do brazilské portugalštiny"
+
+#: comix:1544
+msgid "German translation and Nautilus thumbnailer"
+msgstr "Překlad do němčiny a vytvářeč náhledů pro Nautilus"
+
+#: comix:1545
+msgid "Italian translation"
+msgstr "Překlad do italštiny"
+
+#: comix:1546
+msgid "Dutch translation"
+msgstr "Překlad do holandštiny"
+
+#: comix:1547
+msgid "French translation"
+msgstr "Překlad do francouzštiny"
+
+#: comix:1548
+msgid "Polish translation"
+msgstr "Překlad do polštiny"
+
+#: comix:1549
+msgid "Greek translation"
+msgstr "Překlad do řečtiny"
+
+#: comix:1550
+msgid "Catalan translation"
+msgstr "Překlad do katalánštiny"
+
+#: comix:1551
+msgid "Traditional Chinese translation"
+msgstr "Překlad do tradiční čínštiny"
+
+#: comix:1552
+msgid "Japanese translation"
+msgstr "Překlad do japonštiny"
+
+#: comix:1553
+msgid "Hungarian translation"
+msgstr "Překlad do maďarštiny"
+
+#: comix:1554
+msgid "Russian translation"
+msgstr "Překlad do maďarštiny"
+
+#: comix:1555
+msgid "Croatian translation"
+msgstr ""
+
+#: comix:1556
+msgid "Korean translation"
+msgstr ""
+
+#: comix:1557
+msgid "Persian translation"
+msgstr ""
+
+#: comix:1558
+msgid "Indonesian translation"
+msgstr ""
+
+#: comix:1559
+msgid "Czech translation"
+msgstr "Překlad do češtiny"
+
+#: comix:1567
+msgid "Credits"
+msgstr "Poděkování"
+
+#: comix:1576
+msgid "Manage thumbnails"
+msgstr "Správa náhledů"
+
+#: comix:1609
+#: comix:1652
+msgid "Remove all stored thumbnails:"
+msgstr "Odstranit všechny uložené náhledy:"
+
+#: comix:1619
+#: comix:1662
+msgid "Remove orphaned thumbnails:"
+msgstr "Odstranit všechny osiřelé náhledy:"
+
+#: comix:1624
+msgid "Directories"
+msgstr "Adresáře"
+
+#: comix:1667
+msgid "Archives"
+msgstr "Archivy"
+
+#: comix:1677
+msgid "Removing thumbnails"
+msgstr "Odstraňuji náhledy"
+
+#: comix:1717
+msgid "Convert"
+msgstr "Převést na"
+
+#: comix:1726
+msgid "File type"
+msgstr "Typ souboru"
+
+#: comix:1727
+msgid "Extension"
+msgstr "Přípona"
+
+#: comix:1739
+#: comix:4324
+#: comix:4360
+#: comix:6714
+#: comix:7064
+#: comix:7115
+#: comix:7471
+#: comix:8717
+msgid "Zip archive"
+msgstr "Archiv zip"
+
+#: comix:1740
+#: comix:4327
+#: comix:4366
+#: comix:6716
+#: comix:7066
+#: comix:7117
+#: comix:7475
+#: comix:8733
+msgid "Tar archive"
+msgstr "Archiv tar"
+
+#: comix:1741
+#: comix:4331
+#: comix:4362
+#: comix:6718
+#: comix:7069
+#: comix:7120
+#: comix:7476
+#: comix:8729
+msgid "Gzip compressed tar archive"
+msgstr "Archiv tar komprimovaný pomocí gzip"
+
+#: comix:1743
+#: comix:4334
+#: comix:4364
+#: comix:6720
+#: comix:7072
+#: comix:7123
+#: comix:7477
+#: comix:8731
+msgid "Bzip2 compressed tar archive"
+msgstr "Archiv tar komprimovaný pomocí bzip2"
+
+#: comix:1755
+msgid "Delete old archive/directory"
+msgstr "Smazat starý archiv/adresář"
+
+#: comix:1780
+#: comix:6115
+#: comix:6120
+msgid "Permission denied"
+msgstr "Oprávnění zamítnuto"
+
+#: comix:1805
+msgid "Confirm operation"
+msgstr "Potvrdit operaci"
+
+#: comix:4095
+#, python-format
+msgid "Permanently remove %s?"
+msgstr "Navždy odstranit %s?"
+
+#: comix:4099
+#, python-format
+msgid "Perform lossless JPEG operation on %s?"
+msgstr "Provést bezztrátovou operaci JPEG na %s?"
+
+#: comix:4101
+#: comix:4106
+msgid "Some images might be trimmed a bit during the operation."
+msgstr "V průběhu operace mohou být některé obrázky oříznuty."
+
+#: comix:4104
+#, python-format
+msgid "Permanently convert %s to greyscale?"
+msgstr "Nastálo převést %s do odstínů šedi?"
+
+#: comix:4966
+#: comix:4977
+msgid "Location:"
+msgstr "Umístění:"
+
+#: comix:4967
+#: comix:4978
+msgid "Quantity:"
+msgstr "Množství:"
+
+#: comix:4967
+#: comix:4978
+msgid "Total size:"
+msgstr "Celková velikost:"
+
+#: comix:5013
+#: comix:5024
+#: comix:5028
+#: comix:5039
+#: comix:5058
+#: comix:5063
+#: comix:5067
+#: comix:5078
+#: comix:5089
+#: comix:5093
+#: comix:5104
+#: comix:5122
+#: comix:5127
+#: comix:5131
+#: comix:6434
+#: comix:6462
+#: comix:6468
+msgid "Removed:"
+msgstr "Odstraněno:"
+
+#: comix:5029
+#: comix:5068
+#: comix:5094
+#: comix:5132
+#: comix:6382
+#: comix:6469
+msgid "Done!"
+msgstr "Hotovo!"
+
+#: comix:5233
+#: comix:6707
+#: comix:7062
+#: comix:7113
+msgid "pages"
+msgstr "stránek"
+
+#: comix:5239
+msgid "comment"
+msgstr "komentář"
+
+#: comix:5243
+msgid "comments"
+msgstr "komentářů"
+
+#: comix:5267
+#: comix:5453
+#: comix:5806
+msgid "Location"
+msgstr "Umístění"
+
+#: comix:5280
+#: comix:5283
+msgid "In library"
+msgstr "V knihovně"
+
+#: comix:5280
+msgid "Yes"
+msgstr "Ano"
+
+#: comix:5283
+#: comix:5298
+msgid "No"
+msgstr "Ne"
+
+#: comix:5293
+#: comix:5298
+msgid "Bookmarked"
+msgstr "Zazáložkováno"
+
+#: comix:5293
+msgid "Yes, page"
+msgstr "Ano, strana"
+
+#: comix:5306
+#: comix:5462
+#: comix:5815
+msgid "Accessed"
+msgstr "Přistupováno"
+
+#: comix:5316
+#: comix:5473
+#: comix:5826
+msgid "Modified"
+msgstr "Pozměněno"
+
+#: comix:5326
+#: comix:5484
+#: comix:5837
+msgid "Permissions"
+msgstr "Oprávnění"
+
+#: comix:5335
+#: comix:5494
+#: comix:5847
+msgid "Owner"
+msgstr "Vlastník"
+
+#: comix:5345
+msgid "Archive"
+msgstr "Archiv"
+
+#: comix:5511
+#: comix:5864
+msgid "Mode"
+msgstr "Režim"
+
+#: comix:5518
+#: comix:5871
+msgid "Pixel count"
+msgstr "Počet pixelů"
+
+#: comix:5531
+#: comix:5884
+msgid "Pixel sum"
+msgstr "Celkový počet pixelů"
+
+#: comix:5562
+#: comix:5915
+msgid "Extrema"
+msgstr "Mezní hodnota"
+
+#: comix:5601
+#: comix:5954
+msgid "Mean"
+msgstr "Průměr"
+
+#: comix:5629
+#: comix:5982
+msgid "Median"
+msgstr "Střední hodnota"
+
+#: comix:5657
+#: comix:6010
+msgid "Standard deviation"
+msgstr "Standardní odchylka"
+
+#: comix:5689
+msgid "Image"
+msgstr "Obrázek"
+
+#: comix:5692
+msgid "Image 1"
+msgstr "Obrázek 1"
+
+#: comix:6040
+msgid "Image 2"
+msgstr "Obrázek 2"
+
+#: comix:6116
+msgid "Could not delete"
+msgstr "Nemohu smazat"
+
+#: comix:6117
+#: comix:6122
+msgid "Please check your permissions."
+msgstr "Prosím, zkontolujte svá oprávnění"
+
+#: comix:6121
+msgid "Could not create"
+msgstr "Nemohu vytvořit"
+
+#: comix:6233
+#: comix:6243
+#: comix:6377
+#: comix:6381
+msgid "Added:"
+msgstr "Přidáno"
+
+#: comix:6234
+msgid "Adding library entries"
+msgstr "Přidávám položky do knihovny"
+
+#: comix:6435
+msgid "Removing library entries"
+msgstr "Ostraňuji položky z knihovny"
+
+#: comix:7216
+msgid "Extract page"
+msgstr "Vyjmout stránku"
+
+#: comix:7643
+msgid "page"
+msgstr "stránka"
+
+#: comix:8744
+msgid "Could not find the unrar executable. Please install it if you wish to open RAR archives."
+msgstr "Nelze najít unrar. Prosím nainstalujte jej, pokud si přejete otevírat archivy RAR."
+
+#: comix:8749
+msgid "Could not open"
+msgstr "Nelze otevřít"
+
+#: comix:8795
+msgid "is not a file."
+msgstr "není soubor."
+
+#: comix:8798
+msgid "does not exist."
+msgstr "neexistuje."
+
+#: comix:8906
+msgid "Filetype of"
+msgstr "Typ souboru"
+
+#: comix:8908
+msgid "not recognized."
+msgstr "nerozpoznán."
+
+#: comix:8923
+#: comix:11182
+#, python-format
+msgid "No images in \"%s\""
+msgstr "Žádné obrázky v „%s“"
+
+#: comix:9406
+msgid "Comment file"
+msgstr "Soubor komentáře"
+
+#: comix:9422
+msgid "Could not read"
+msgstr "Nelze přečíst"
+
+#: comix:9435
+#: comix:9438
+#: comix:9445
+#: comix:9447
+msgid "Comment"
+msgstr "Komentář"
+
+#: comix:10885
+msgid "_Next page"
+msgstr "_Další stránka"
+
+#: comix:10887
+msgid "_Previous page"
+msgstr "_Předchozí stránka"
+
+#: comix:10889
+msgid "_First page"
+msgstr "_První stránka"
+
+#: comix:10891
+msgid "_Last page"
+msgstr "_Poslední stránka"
+
+#: comix:10893
+msgid "_Go to page..."
+msgstr "_Jít na stránku"
+
+#: comix:10895
+msgid "Manual _Zoom"
+msgstr "_Ruční přiblížení"
+
+#: comix:10896
+msgid "_Zoom in"
+msgstr "_Přiblížit"
+
+#: comix:10898
+msgid "Zoom _out"
+msgstr "_Oddálit"
+
+#: comix:10900
+msgid "_Normal size"
+msgstr "_Skutečná velikost"
+
+#: comix:10902
+msgid "Fit _width"
+msgstr "Přizpůsobit na _šířku"
+
+#: comix:10904
+msgid "Fit _height"
+msgstr "Přizpůsobit na _výšku"
+
+#: comix:10906
+msgid "_Best fit"
+msgstr "_Optimální přizpůsobení"
+
+#: comix:10908
+msgid "_Add bookmark"
+msgstr "_Přidat záložku"
+
+#: comix:10910
+msgid "Clear bookmarks"
+msgstr "Vyčistit záložky…"
+
+#: comix:10913
+msgid "_Edit bookmarks..."
+msgstr "_Upravit záložky…"
+
+#: comix:10915
+msgid "Pr_eferences"
+msgstr "_Nastavení"
+
+#: comix:10917
+msgid "_About"
+msgstr "_O programu"
+
+#: comix:10920
+msgid "_Manage thumbnails..."
+msgstr "_Správa náhledů…"
+
+#: comix:10922
+msgid "Proper_ties"
+msgstr "_Vlastnosti"
+
+#: comix:10924
+msgid "View _comments"
+msgstr "Zobrazit _komentáře"
+
+#: comix:10926
+msgid "_Open..."
+msgstr "_Otevřít…"
+
+#: comix:10928
+msgid "_Recent files"
+msgstr "Ne_dávné soubory"
+
+#: comix:10929
+msgid "Clear recent files"
+msgstr "Vymazat nedávné soubory"
+
+#: comix:10931
+msgid "Open _library..."
+msgstr "Otevřít _knihovnu"
+
+#: comix:10933
+msgid "_Add to library"
+msgstr "_Přidat do knihovny"
+
+#: comix:10935
+msgid "Con_vert..."
+msgstr "Př_evést na…"
+
+#: comix:10937
+msgid "E_xtract image..."
+msgstr "_Vyjmout obrázek…"
+
+#: comix:10939
+msgid "_Close"
+msgstr "_Zavřít"
+
+#: comix:10941
+msgid "_Quit"
+msgstr "_Ukončit"
+
+#: comix:10943
+msgid "_Adjust colour..."
+msgstr "_Upravit barvy…"
+
+#: comix:10945
+msgid "Slideshow"
+msgstr "Promítání snímků"
+
+#: comix:10947
+msgid "Delete image..."
+msgstr "Odstranit obrázek…"
+
+#: comix:10950
+msgid "CW lossless JPEG rotation..."
+msgstr "Bezztrátové pootočení JPEG ve směru hodinových ručiček…"
+
+#: comix:10953
+msgid "CCW lossless JPEG rotation..."
+msgstr "Bezztrátové pootočení JPEG proti směru hodinových ručiček…"
+
+#: comix:10956
+msgid "Horizontal lossless JPEG flip..."
+msgstr "Vodorovné bezztrátové převrácení JPEG…"
+
+#: comix:10959
+msgid "Vertical lossless JPEG flip..."
+msgstr "Svislé bezztrátové převrácení JPEG…"
+
+#: comix:10962
+msgid "Convert JPEG to greyscale..."
+msgstr "Převést JPEG do odstínů šedi…"
+
+#: comix:10964
+#: comix:10966
+msgid "_Bookmarks"
+msgstr "_Záložky"
+
+#: comix:10965
+msgid "_Toolbars"
+msgstr "_Lišty nástrojů"
+
+#: comix:10967
+msgid "_Edit"
+msgstr "_Upravit"
+
+#: comix:10969
+msgid "File o_perations"
+msgstr "_Souborové operace"
+
+#: comix:10970
+msgid "_File"
+msgstr "_Soubor"
+
+#: comix:10971
+#: comix:10972
+msgid "_View"
+msgstr "_Pohled"
+
+#: comix:10973
+#: comix:10974
+msgid "_Go"
+msgstr "_Jít"
+
+#: comix:10975
+msgid "_Help"
+msgstr "_Nápověda"
+
+#: comix:10976
+msgid "_Transform"
+msgstr "_Transformace"
+
+#: comix:10977
+msgid "_Rotate 90 degrees CW"
+msgstr "Pootočit o 90° _ve směru hodinových ručiček"
+
+#: comix:10979
+msgid "Rotate 180 de_grees"
+msgstr "Pootočit _o 180°"
+
+#: comix:10981
+msgid "Rotat_e 90 degrees CCW"
+msgstr "Pootočit o 90° _proti směru hodinových ručiček"
+
+#: comix:10983
+msgid "Fli_p horizontally"
+msgstr "Převrátit vodorovně"
+
+#: comix:10985
+msgid "Flip _vertically"
+msgstr "Převrátit svisle"
+
+#: comix:10988
+msgid "_Fullscreen"
+msgstr "_Celá obrazovka"
+
+#: comix:10990
+msgid "_Double page mode"
+msgstr "_Dvoustránkový mód"
+
+#: comix:10992
+msgid "_Toolbar"
+msgstr "_Lišta nástrojů"
+
+#: comix:10994
+msgid "_Menubar"
+msgstr "Lišta _nabídky"
+
+#: comix:10996
+msgid "St_atusbar"
+msgstr "_Stavová lišta"
+
+#: comix:10998
+msgid "S_crollbars"
+msgstr "_Posuvníky"
+
+#: comix:11000
+msgid "Th_umbnails"
+msgstr "_Náhledy"
+
+#: comix:11002
+msgid "H_ide all"
+msgstr "_Skrýt vše"
+
+#: comix:11004
+msgid "_Manga mode"
+msgstr "_Manga mód"
+
+#: comix:11006
+msgid "_Keep transformation"
+msgstr "_Zachovat transformaci"
+
+#: comix:11008
+msgid "Magnifying _lens"
+msgstr "_Lupa"
+
+#: comix:11012
+msgid "Fit-to-_screen mode"
+msgstr "Přizpůsobit _obrazovce"
+
+#: comix:11013
+msgid "Fit _width mode"
+msgstr "Přizpůsobit na _šířku"
+
+#: comix:11014
+msgid "Fit _height mode"
+msgstr "Přizpůsobit na _výšku"
+
+#: comix:11028
+msgid "Enter fullscreen mode automatically when Comix is started."
+msgstr "Automaticky přepnout na celou obrazovku při spuštění Comixu."
+
+#: comix:11029
+msgid "Enter double page mode automatically when Comix is started."
+msgstr "Automaticky zapnout dvoustránkový mód při spuštění Comixu."
+
+#: comix:11030
+msgid "Enter manual zoom mode automatically when Comix is started."
+msgstr "Automaticky zapnout mód ručního přiblížení při spuštění Comixu."
+
+#: comix:11031
+msgid "Enter fit-to-screen mode automatically when Comix is started."
+msgstr "Automaticky zapnout mód přizpůsobení velikosti obrazovky při spuštění Comixu."
+
+#: comix:11032
+msgid "Enter fit width mode automatically when Comix is started."
+msgstr "Automaticky zapnout mód přizpůsobení na šířku při spuštění Comixu."
+
+#: comix:11033
+msgid "Enter fit height mode automatically when Comix is started."
+msgstr "Automaticky zapnout mód přizpůsobení na výšku při spuštění Comixu."
+
+#: comix:11034
+msgid "Also scale images to a size that is larger than their original size in fit-to-screen mode, fit width mode and fit height mode."
+msgstr "Škálovat též obrázky na velikost větší než jejich původní v módech přizpůsobení velikosti obrazovky, šířce a výšce."
+
+#: comix:11035
+msgid "Scale the images independently when in double page mode and fit-to-screen mode. The smaller of the two images will scale up to fill any extra space that is given."
+msgstr "Škálovat obrázky nezávisle v dvoustránkovém módu a módu přizpůsobení velikosti obrazovky. Menší z obou brázků bude zvětšen tak, aby vyplnil prostor navíc."
+
+#: comix:11036
+msgid "Automatically show any available comments when opening a new file."
+msgstr "Automaticky ukázat všechny dostupné komentáře při otvírání nového souboru."
+
+#: comix:11037
+msgid "Automatically hide scrollbars, menubar, toolbar, statusbar and thumbnails when in fullscreen mode."
+msgstr "Automaticky skrýt posuvníky, lištu nabídky, lištu nástrojů, stavovou lištu a náhledy při zobrazení na celou obrazovku."
+
+#: comix:11038
+msgid "Cache the next page in the archive/directory to increase the perceived speed. This is generally recommended unless you are running low on RAM."
+msgstr "Přednahrát další stránku v archivu/adresáři pro zrychlení otáčení stránek. Toto je obecně doporučeno pokud nemáte nedostatek RAM."
+
+#: comix:11039
+msgid "Move the horizontal scrollbar instead of the vertical when using the scroll wheel at the top or the bottom of the page. The direction will be determined by whether you use manga mode or not."
+msgstr "Pohybovat vodorovným posuvníkem namísto svislým při používání kolečka myši na vršku nebo spodku stránky. Směr je určen zapnutím nebo vypnutím manga módu."
+
+#: comix:11040
+msgid "Flip pages when scrolling \"off the page\" with the scroll wheel, as well as with the arrow keys, even when not in fit-to-screen mode. It takes three \"steps\" with the scroll wheel or arrow keys to trigger this behaviour."
+msgstr "Otáčet stránky při posunu mimo stránku pomocí kolečka myši nebo kurzorovými klávesy i mimo mód přizpůsobení velikosti obrazovky. Docílit tohoto chování vyžaduje tři kroky kolečkem myši nebo klávesou."
+
+#: comix:11041
+msgid "Save the position and the size of the window for the next time you start Comix."
+msgstr "Uložit umístění a velikost okna pro další spuštění Comixu"
+
+#: comix:11042
+msgid "Automatically open the next archive in the directory when scrolling past the last page of the current archive, and automatically open the previous archive in the directory when scrolling past the first page of the current archive."
+msgstr "Automaticky otevřít další archiv v adresáři, když posun přesáhne poslední stránku stávajícího archivu, a automaticky otevřít předchozí archiv v adresáři, když posun přesáhne první stránku stávajícího archivu."
+
+#: comix:11043
+msgid "Hide the cursor when in fullscreen mode."
+msgstr "Skrýt po chvíli kurzor myši při zobrazení na celou obrazovku."
+
+#: comix:11044
+#: comix:11045
+#: comix:11046
+#: comix:11047
+msgid "Set the image scaling method. The best choice is often \"Tiles\", it is quite quick and produces almost as good results as \"Bilinear\" or \"Hyper\"."
+msgstr "Nastavit způsob škálování. Nejlepší volba je často „Dlaždice“, je poměrně rychlá a výsledek je téměř tak dobrý jako při použití nastavení „Bilineární“ nebo „Hyper“."
+
+#: comix:11048
+msgid "Treat files with the following extensions as comment files. Extensions should be separated by whitespaces. They are not case sensitive."
+msgstr "Považovat soubory s následujícími příponami za soubory s komentáři. Přípony mohou být odděleny mezerami. Nerozlišují velikost písmen."
+
+#: comix:11049
+msgid "Use smart scrolling with the space key. Pressing the space key normally scrolls straight down one window height unless at the bottom of the page where it flips pages instead. When this option is set Comix automatically tries to follow the reading flow of the comic book. When pressing the space key it will not only scroll down but will also scroll horizontally to the edge of the page (left or right depending on whether you use manga mode). In double page mode it will go to the edge of the first page if it is in view, otherwise it will go to the edge of the second page. Also, in double page mode with this option, Comix will not flip pages unless at the bottom of the second page. At the bottom of the first page it will instead go to the top of the second page."
+msgstr "Použít chytrý posun mezerníkem. Stisknutí mezerníku běžně posouvá stránku přímo dolů, kde ji posléze otočí na další. Pokud je toto nastavení zapnuto, Comix automaticky zkouší sledovat přirozený směr čtení komiksu. Stisknutí mezerníku pak navíc kromě směrem dolů posouvá stránku vodorovně od okraje k okraji (směr záleží na manga módu). V dvoustránkovém módu jde nejdříve k okraji první stránky, posléze druhé, na další stránku pak otočí až na jejím konci. Na konci první stránky jde namísto toho na začátek stránky druhé."
+
+#: comix:11050
+msgid "Always hide the thumbnail scrollbar."
+msgstr "Vždy skrývat posuvník náhledů."
+
+#: comix:11051
+msgid "Automatically open the last viewed page when Comix is started."
+msgstr "Automaticky otevřít poslední prohlíženou stránku při spuštění Comixu."
+
+#: comix:11052
+msgid "Automatically go to the same directory as last time when opening the \"Open\" dialog."
+msgstr "Automaticky jít do stejného adresáře jako při posledním použití dialogu „Otevřít“."
+
+#: comix:11053
+msgid "Automatically go to this directory when opening the \"Open\" dialog."
+msgstr "Automaticky jít do tohoto adresáře při otevření dialogu „Otevřít“."
+
+#: comix:11054
+msgid "Automatically restore these values the next time Comix is started."
+msgstr "Automaticky obnovit tyto hodnoty při dalším spuštění Comixu."
+
+#: comix:11055
+msgid "Show the page number in the upper left corner of each thumbnail."
+msgstr "Zobrazit číslo stránky v levém horním rohu každého náhledu."
+
+#: comix:11056
+msgid "Automatically adjust the contrast of the images so that the darkest pixel is completely black and the lightest pixel is completely white. This only works with images without an alpha channel."
+msgstr "Automaticky upravit kontrast obrázků tak, že nejtmavší pixel je zcela černý a nejsvětlejší pixel zcela bílý. Toto funguje pouze u obrázků bez alfa kanálu (průhlednosti)."
+
+#: comix:11057
+msgid "The space key uses smart scrolling as if in double page mode even when in single page mode. This can be useful for comics with two scanned pages in each image. The pages are assumed to be of equal size"
+msgstr "Mezerník požívá chytrý posun jako v dvoustránovém módu i při jednostránkovém zobrazení. Toto může být užitečné, pokud byly stránky komiksu naskenovány po dvojcích. Předpokládá se stejná velikost stránek."
+
+#: comix:11058
+msgid "Adjust the lens magnification factor."
+msgstr "Upravit úroveň zvětšovacího skla."
+
+#: comix:11059
+msgid "Set the lens width and height in pixels. A larger lens will use more CPU resources than a small one."
+msgstr "Nastavit šířku a výšku zvětšovacího skla v pixelech. Větší sklo vytíží CPU více než menší."
+
+#: comix:11060
+msgid "Set the maximum update frequency for the magnification lens in milliseconds. Setting the value too low can cause the lens to lag behind when moving the mouse quickly. Setting the value too high can cause the lens to appear choppy."
+msgstr "Nastavit maximální obnovovací frekvenci pro zvětšovací sklo. Nastavení příliš nízké hodnoty může způsobovat prodlevu při rychlejším pohybu myší. Nastavení příliš vysoké hodnoty pak může způsobit, že se lupa bude chovat sekavě."
+
+#: comix:11061
+msgid "Read and write thumbnails in the ~/.thumbnails directory as proposed by the freedesktop.org standard. With this preference set, Comix will use the thumbnails already stored there to speed up thumbnail loading. If there are no thumbnails, Comix will create them and save them there. This is a standard that many applications conform to, thumbnails created by other applications can be used by Comix and vice versa. If this preference is not set, Comix will create thumbnails on the fly every time a directory is opened."
+msgstr "Číst a zapisovat náhledy do adresáře ~/.thumbnails podle standardu freedesktop.org. S tímto nastavením bude Comix využívat dříve uložené náhledy pro vyšší rychlost jejich nahrávání. Pokud zde žádné náhledy nejsou, Comix je vytvoří a uloží. Toto je standard, kterému vyhovuje většina aplikací, náhledy jimi vytvořené tak mohou být využity Comixem a naopak. Pokud tato volba není nastavena, Comix bude vytvářet průběžné náhledy při každém otevření adresáře."
+
+#: comix:11062
+msgid "Also use stored thumbnails for images in archives in a similiar way. Due to restrictions in the freedesktop.org standard, these thumbnails will be stored in ~/.comix and will only be used by Comix. If this preference is not set, Comix will create thumbnails on the fly every time an archive is opened."
+msgstr "Používat též uložené náhledy pro obrázky v archivech obdobným způsobem. Kvůli omezením ve standardu freedesktop.org budou tyto náhledy uloženy v ~/.comix a budou využívány pouze Comixem. Pokud tato volba není nastavena, Comix bude vytvářet průběžné náhledy při každém otevření archivu."
+
+#: comix:11063
+msgid "Only display a single image in double page mode if the image consists of two pages. An image is assumed to consist of two pages if its width is greater than its height."
+msgstr "Zobrazit pouze jediný obrázek v dvoustránkovém módu, pokud se skládá ze dvou stránek. Za takovýto je obrázek považován pokud je jeho šířka větší než jeho výška."
+
+#: comix:11064
+msgid "Filter out archives with regular expressions."
+msgstr "Filtrovat archivy pomocí regulárních výrazů."
+
+#: comix:11065
+msgid "Apply filters on full paths rather than filenames."
+msgstr "Použít filtry na celé cesty spíš než na jména jednotlivých souborů."
+
+#: comix:11066
+msgid "Store a list of the 10 last opened files that can be accessed through the menus."
+msgstr "Ukládat seznam deseti posledně otevřených souborů dostupný v nabídce."
+
+#: comix:11074
+msgid "First page"
+msgstr "První stránka"
+
+#: comix:11075
+msgid "Previous page"
+msgstr "Předchozí stránka"
+
+#: comix:11076
+msgid "Next page"
+msgstr "Další stránka"
+
+#: comix:11077
+msgid "Last page"
+msgstr "Poslední stránka"
+
+#: comix:11078
+msgid "Go to page..."
+msgstr "Jít na stránku…"
+
