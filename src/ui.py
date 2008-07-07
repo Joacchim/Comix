@@ -1,9 +1,8 @@
-# ============================================================================
-# ui.py - UI definitions for main window.
-# 
-# Logically this isn't really a separate module from main.py, but it is
-# given it's own file for the sake of readability.
-# ============================================================================
+"""ui.py - UI definitions for main window.
+
+Logically this isn't really a separate module from main.py, but it is
+given it's own file for the sake of readability.
+"""
 
 import gtk
 
@@ -13,6 +12,7 @@ import comment
 import enhance
 import filechooser
 import filehandler
+import library
 import preferences
 import properties
 import recent
@@ -49,8 +49,6 @@ class MainUI(gtk.UIManager):
                 None, None, about.open_dialog),
             ('edit_thumbnails', 'comix-thumbnails', _('_Manage thumbnails...'),
                 None, None, bogus),
-            ('library', 'comix-library', _('_Library...'),
-                '<Control>l', None, bogus),
             ('add_to_library', 'comix-library-add', _('_Add to library'),
                 None, None, bogus),
             ('edit_archive', gtk.STOCK_EDIT, _('_Edit archive...'),
@@ -124,6 +122,8 @@ class MainUI(gtk.UIManager):
                 '<Alt>Return', None, properties.open_dialog),
             ('enhance_image', 'comix-enhance-image', _('_Enhance image...'),
                 'e', None, enhance.open_dialog),
+            ('library', 'comix-library', _('_Library...'),
+                '<Control>l', None, library.open_dialog),
             ('preferences', gtk.STOCK_PREFERENCES, _('Pr_eferences'),
                 None, None, preferences.open_dialog)], window)
 
@@ -282,9 +282,7 @@ class MainUI(gtk.UIManager):
         self.get_widget('/Tool/expander').set_sensitive(False)
 
     def set_sensitivities(self):
-
-        """ Sets the main UI's widget's sensitivities appropriately. """
-
+        """Sets the main UI's widget's sensitivities appropriately."""
         general = ('properties',
                    'edit_archive',
                    'close',

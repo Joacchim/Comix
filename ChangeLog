@@ -1,7 +1,4 @@
 Comix 4.0
-
-    - Fixed broken tempdir creation so that multiple users now can use Comix
-    at the same time. Thanks to Maciej Katafiasz.
     
     - Various cleanup. Thanks to Maciej Katafiasz.
     
@@ -9,6 +6,16 @@ Comix 4.0
     instead of at the top. Thanks to Dawid Plocki.
 
 Comix 3.6.5
+    
+    - Applied security fix patches to handle unsecure tempfile creation and
+    character escaping in filenames. Thanks to Mamoru Tasaka and others for
+    the patches.
+    
+    - Added a Korean translation by 김민기.
+    
+    - Added a Persian translation by Maryam Sanaat.
+    
+    - Added a Indonesian translation by Andhika Padmawan.
     
     - Added a Czech translation by Jan Nekvasil.
 

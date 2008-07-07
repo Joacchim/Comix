@@ -1,6 +1,4 @@
-# ============================================================================
-# cursor.py - Cursor handler.
-# ============================================================================
+"""cursor.py - Cursor handler."""
 
 import gobject
 import gtk
@@ -16,13 +14,10 @@ class CursorHandler:
         self._current_cursor = NORMAL
 
     def set_cursor_type(self, cursor):
-        
-        """ 
-        Set the cursor to type <cursor>. Supported cursor types are available
-        as constants in this module. If <cursor> is not one of the cursor
-        constants above, it must be a gtk.gdk.Cursor.
+        """Set the cursor to type <cursor>. Supported cursor types are
+        available as constants in this module. If <cursor> is not one of the
+        cursor constants above, it must be a gtk.gdk.Cursor.
         """
-        
         if cursor == NORMAL:
             mode = None
         elif cursor == GRAB:
@@ -40,35 +35,26 @@ class CursorHandler:
                 self._kill_timer()
     
     def enter_fullscreen(self):
-        
+        """Signal that we are entering fullscreen (e.g. that the cursor
+        should auto-hide from now on).
         """
-        Signal that we are entering fullscreen (e.g. that the cursor should
-        auto-hide from now on).
-        """
-
         self._fullscreen = True
         if self._current_cursor == NORMAL:
             self._set_hide_timer()
 
     def exit_fullscreen(self):
-        
-        """
-        Signal that we are leaving fullscreen (e.g. that the cursor should
+        """Signal that we are leaving fullscreen (e.g. that the cursor should
         *not* auto-hide from now on).
         """
-
         self._fullscreen = False
         self._kill_timer()
         if self._current_cursor == NORMAL:
             self.set_cursor_type(NORMAL)
 
     def refresh(self):
-        
-        """
-        Refresh the current cursor (i.e. display it and set a new timer in
+        """Refresh the current cursor (i.e. display it and set a new timer in
         fullscreen). Used when we move the cursor.
         """
-
         if self._fullscreen:
             self.set_cursor_type(self._current_cursor)
 
@@ -78,7 +64,7 @@ class CursorHandler:
             self._create_hidden_cursor())
 
     def _kill_timer(self):
-        if self._timer_id != None:
+        if self._timer_id is not None:
             gobject.source_remove(self._timer_id)
 
     def _create_hidden_cursor(self):

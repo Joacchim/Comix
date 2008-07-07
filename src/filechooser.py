@@ -1,6 +1,4 @@
-# ============================================================================
-# filechooser.py - FileChooserDialog implementation.
-# ============================================================================
+"""filechooser.py - FileChooserDialog implementation."""
 
 import os
 
@@ -106,7 +104,7 @@ class _ComicFileChooserDialog(gtk.Dialog):
         path = self._filechooser.get_preview_filename()
         if path and os.path.isfile(path):
             pixbuf = thumbnail.get_thumbnail(path, prefs['create thumbnails'])
-            if pixbuf == None:
+            if pixbuf is None:
                 self._preview_image.clear()
                 self._namelabel.set_text('')
                 self._sizelabel.set_text('')
@@ -149,12 +147,12 @@ class _ComicFileChooserDialog(gtk.Dialog):
 
 def open_dialog(action, file_handler):
     global _dialog
-    if _dialog == None:
+    if _dialog is None:
         _dialog = _ComicFileChooserDialog(file_handler)
 
 def close_dialog(*args):
     global _dialog
-    if _dialog != None:
+    if _dialog is not None:
         _dialog.destroy()
         _dialog = None
 

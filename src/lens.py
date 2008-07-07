@@ -1,6 +1,4 @@
-# ============================================================================
-# lens.py - Magnifying glass.
-# ============================================================================
+"""lens.py - Magnifying glass."""
 
 import math
 
@@ -12,8 +10,7 @@ import image
 
 class MagnifyingGlass:
     
-    """
-    The MagnifyingGlass creates cursors from the raw pixbufs containing 
+    """The MagnifyingGlass creates cursors from the raw pixbufs containing 
     the unscaled data for the currently displayed images. It does this by
     looking at the cursor position and calculating what image data to put
     in the "lens" cursor. 
@@ -27,13 +24,10 @@ class MagnifyingGlass:
         self._window = window
     
     def set_lens_cursor(self, x, y):
-        
-        """
-        Calculate what image data to put in the lens and update the cursor
+        """Calculate what image data to put in the lens and update the cursor
         with it; <x> and <y> are the positions of the cursor within the
         main window layout area.
         """
-
         if not self._window.file_handler.file_loaded:
             return
         pixbuf = self._get_lens_pixbuf(x, y)
@@ -42,9 +36,7 @@ class MagnifyingGlass:
         self._window.cursor_handler.set_cursor_type(cursor)
 
     def toggle(self, action):
-        
-        """ Toggle on or off the lens depending on the state of <action>. """
-
+        """Toggle on or off the lens depending on the state of <action>."""
         if action.get_active():
             x, y = self._window.get_layout_pointer_position()
             self.set_lens_cursor(x, y)
@@ -52,9 +44,7 @@ class MagnifyingGlass:
             self._window.cursor_handler.set_cursor_type(cursor.NORMAL)
 
     def _get_lens_pixbuf(self, x, y):
-        
-        """
-        Get a pixbuf containing the appropiate image data for the lens
+        """Get a pixbuf containing the appropiate image data for the lens
         where <x> and <y> are the positions of the cursor.
         """
         canvas = gtk.gdk.Pixbuf(gtk.gdk.COLORSPACE_RGB, True, 8,
@@ -80,10 +70,8 @@ class MagnifyingGlass:
         return image.add_border(canvas, 1)
 
     def _add_subpixbuf(self, canvas, x, y, image_size, source_pixbuf,
-        other_image_width=0, left=True):
-        
-        """
-        Copy a subpixbuf from <source_pixbuf> to <canvas> as it should
+        other_image_width=0, left=True): 
+        """Copy a subpixbuf from <source_pixbuf> to <canvas> as it should
         be in the lens if the coordinates <x>, <y> are the mouse pointer
         position on the main window layout area.
 
@@ -96,7 +84,6 @@ class MagnifyingGlass:
         The image we are getting the coordinates for is the left one unless
         <left> is False.
         """
-        
         area_x, area_y = self._window.get_visible_area_size()
         if left:
             padding_x = max(0, 

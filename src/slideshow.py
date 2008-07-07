@@ -1,6 +1,4 @@
-# ============================================================================
-# slideshow.py - Slideshow handler.
-# ============================================================================
+"""slideshow.py - Slideshow handler."""
 
 import gobject
 
@@ -14,28 +12,30 @@ class Slideshow:
         self._id = None
 
     def _start(self):
-        if self._running == False:
+        if not self._running:
             self._id = gobject.timeout_add(prefs['slideshow delay'], self._next)
             self._running = True
+            self._window.update_title()
 
     def _stop(self):
-        if self._running == True:
+        if self._running:
             gobject.source_remove(self._id)
             self._running = False
+            self._window.update_title()
 
     def _next(self):
         if self._window.file_handler.is_last_page():
-            self._window.ui_manager.get_action(
-                '/Menu/menu_go/slideshow').set_active(False)
-            self._running = False
+            self._window.actiongroup.get_action('slideshow').set_active(False)
             return False
         self._window.next_page()
         return True
     
     def toggle(self, action):
-        active = action.get_active()
-        if active:
+        if action.get_active():
             self._start()
         else:
             self._stop()
+
+    def is_running(self):
+        return self._running
 

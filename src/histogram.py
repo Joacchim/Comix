@@ -1,6 +1,4 @@
-# ============================================================================
-# histogram.py - Draws histograms (RGB) from pixbufs.
-# ============================================================================
+"""histogram.py - Draws histograms (RGB) from pixbufs."""
 
 import gtk
 import Image
@@ -10,9 +8,7 @@ import ImageOps
 import image
 
 def draw_histogram(pixbuf, height=170, fill=170, text=True):
-    
-    """
-    Draw a histogram from <pixbuf> and return it as another pixbuf.
+    """Draw a histogram from <pixbuf> and return it as another pixbuf.
 
     The returned prixbuf will be 262x<height> px. 
 
@@ -21,10 +17,7 @@ def draw_histogram(pixbuf, height=170, fill=170, text=True):
 
     If <text> is True a label with the maximum pixel value will be added to
     one corner.
-
-    FIXME: Could probably be optimized.
     """
-    
     im = Image.new('RGB', (258, height - 4), (30, 30, 30))
     hist_data = image.pixbuf_to_pil(pixbuf).histogram()
     maximum = max(hist_data[:768] + [1])

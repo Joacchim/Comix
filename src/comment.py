@@ -1,7 +1,4 @@
-# -*- coding: utf-8 -*-
-# ============================================================================
-# comment.py - Comments dialog.
-# ============================================================================
+"""comment.py - Comments dialog."""
 
 import os
 
@@ -21,6 +18,7 @@ class _CommentsDialog(gtk.Dialog):
         self.set_has_separator(False)
         self.set_resizable(True)
         self.connect('response', close_dialog)
+        self.set_default_response(gtk.RESPONSE_CLOSE)
         self.set_default_size(600, 550)
         
         notebook = gtk.Notebook()
@@ -50,7 +48,7 @@ class _CommentsDialog(gtk.Dialog):
             outbox.add(inbox)
             name = os.path.basename(self._file_handler.get_comment_name(num))
             text = self._file_handler.get_comment_text(num)
-            if text == None:
+            if text is None:
                 text = _('Could not read %s') % path
             text_buffer = gtk.TextBuffer(tag_table)
             text_buffer.set_text(encoding.to_unicode(text))
@@ -62,24 +60,19 @@ class _CommentsDialog(gtk.Dialog):
             tab_label = gtk.Label(encoding.to_unicode(name))
             notebook.insert_page(page, tab_label)
 
-        self.action_area.get_children()[0].grab_focus()
         self.show_all()
         
 
 def open_dialog(action, file_handler):
-    
-    """ Create and display the (singleton) comments dialog. """
-
+    """Create and display the (singleton) comments dialog."""
     global _dialog
-    if _dialog == None:
+    if _dialog is None:
         _dialog = _CommentsDialog(file_handler)
 
 def close_dialog(*args):
-    
-    """ Destroy the comments dialog. """
-
+    """Destroy the comments dialog."""
     global _dialog
-    if _dialog != None:
+    if _dialog is not None:
         _dialog.destroy()
         _dialog = None
 

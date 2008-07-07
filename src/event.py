@@ -1,9 +1,8 @@
-# ============================================================================
-# event.py - Event handling (keyboard, mouse, etc.) for the main window.
-# 
-# Logically this isn't really a separate module from main.py, but it is
-# given it's own file for the sake of readability.
-# ============================================================================
+"""event.py - Event handling (keyboard, mouse, etc.) for the main window.
+
+Logically this isn't really a separate module from main.py, but it is
+given its own file for the sake of readability.
+"""
 
 import urllib
 
@@ -23,9 +22,7 @@ class EventHandler:
         self._pressed_pointer_pos_y = 0
 
     def resize_event(self, widget, event):
-            
-        """ Handle events from resizing and moving the main window. """
-        
+        """Handle events from resizing and moving the main window."""
         if not self._window.is_fullscreen:
             prefs['window x'], prefs['window y'] = self._window.get_position()
         if (event.width != self._window.width or
@@ -38,9 +35,7 @@ class EventHandler:
             self._window.draw_image(scroll=False)
 
     def key_press_event(self, widget, event, *args):
-        
-        """ Handle key press events on the main window. """
-
+        """Handle key press events on the main window."""
         # ----------------------------------------------------------------
         # Some navigation keys that work as well as the accelerators in
         # ui.py.
@@ -214,13 +209,10 @@ class EventHandler:
             return True
 
     def scroll_wheel_event(self, widget, event, *args):
-        
-        """
-        Handle scroll wheel events on the maon layout area. The scroll
+        """Handle scroll wheel events on the maon layout area. The scroll
         wheel flips pages in fit-to-screen mode and scrolls the
         scrollbars otherwise.
         """
-        
         if 'GDK_BUTTON2_MASK' in event.state.value_names:
             return
         if event.direction == gtk.gdk.SCROLL_UP:
@@ -239,9 +231,7 @@ class EventHandler:
             self._window.previous_page()
 
     def mouse_press_event(self, widget, event):
-        
-        """ Handle mouse click events on the main layout area. """
-
+        """Handle mouse click events on the main layout area."""
         if event.button == 1:
             self._pressed_pointer_pos_x = event.x_root
             self._pressed_pointer_pos_y = event.y_root
@@ -255,11 +245,8 @@ class EventHandler:
                 event.time)
 
     def mouse_release_event(self, widget, event):
-        
-        """ Handle mouse button release events on the main layout area. """
-
+        """Handle mouse button release events on the main layout area."""
         self._window.cursor_handler.set_cursor_type(cursor.NORMAL)
-        
         if (event.button == 1 and
           event.x_root == self._pressed_pointer_pos_x and
           event.y_root == self._pressed_pointer_pos_y):
@@ -268,9 +255,7 @@ class EventHandler:
             self._window.actiongroup.get_action('lens').set_active(False)
 
     def mouse_move_event(self, widget, event):
-        
-        """ Handle mouse pointer movement events. """
-        
+        """Handle mouse pointer movement events."""
         if 'GDK_BUTTON1_MASK' in event.state.value_names:
             self._window.cursor_handler.set_cursor_type(cursor.GRAB)
             self._window.scroll(self._last_pointer_pos_x - event.x_root,
@@ -282,19 +267,16 @@ class EventHandler:
             self._window.glass.set_lens_cursor(event.x, event.y)
         else:
             self._window.cursor_handler.refresh()
-        
         events = []
         while gtk.gdk.events_pending():
             event = gtk.gdk.event_get()
-            if event != None and event.type != gtk.gdk.MOTION_NOTIFY:
+            if event is not None and event.type != gtk.gdk.MOTION_NOTIFY:
                 events.append(event)
         for event in events:
             event.put()
     
     def drag_n_drop_event(self, widget, context, x, y, data, *args):
-        
-        """ Handle drag-n-drop events on the main layout area. """
-
+        """Handle drag-n-drop events on the main layout area."""
         uris = data.get_uris()
         if not uris:
             return

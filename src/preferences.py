@@ -1,6 +1,4 @@
-# ============================================================================
-# preferences.py - Preference handler.
-# ============================================================================
+"""preferences.py - Preference handler."""
 
 import os
 import cPickle
@@ -34,8 +32,8 @@ prefs = {
     'lens magnification': 2,
     'lens size': 180,
     #'library cover size': 128,
-    #'lib window height': gtk.gdk.screen_get_default().get_height() * 3 / 4,
-    #'lib window width': gtk.gdk.screen_get_default().get_width() * 3 / 4,
+    'lib window height': gtk.gdk.screen_get_default().get_height() * 3 // 5,
+    'lib window width': gtk.gdk.screen_get_default().get_width() * 2 // 3,
     #'no double page for wide images': True,
     'open defaults to last browsed': True,
     'path of last browsed': os.getenv('HOME'),
@@ -52,8 +50,8 @@ prefs = {
     'smart space scroll': True,
     'space scroll percent': 90,
     'store recent file info': True,
-    'window height': gtk.gdk.screen_get_default().get_height() * 3 / 4, 
-    'window width': gtk.gdk.screen_get_default().get_width() / 2
+    'window height': gtk.gdk.screen_get_default().get_height() * 3 // 4, 
+    'window width': gtk.gdk.screen_get_default().get_width() // 2
 }
 
 _config_path = os.path.join(constants.COMIX_DIR, 'preferences.pickle')
@@ -61,9 +59,11 @@ _dialog = None
 
 class _PreferencesDialog(gtk.Dialog):
     
+    #XXX: Incomplete
+
     def __init__(self, window):
         self._window = window
-        gtk.Dialog.__init__(self, _('Edit bookmarks'), window, 0,
+        gtk.Dialog.__init__(self, _('Preferences'), window, 0,
             (gtk.STOCK_CANCEL, gtk.RESPONSE_CANCEL, gtk.STOCK_OK,
             gtk.RESPONSE_OK))
         self.connect('response', self._response)
@@ -93,36 +93,33 @@ class _PreferencesDialog(gtk.Dialog):
 
 def open_dialog(action, window):
     global _dialog
-    if _dialog == None:
+    if _dialog is None:
         _dialog = _PreferencesDialog(window)
 
 def close_dialog(*args):
     global _dialog
-    if _dialog != None:
+    if _dialog is not None:
         _dialog.destroy()
         _dialog = None
 
 def read_preferences_file():
-    
-    """ Read preferences data from disk. """
-
+    """Read preferences data from disk."""
     if os.path.isfile(_config_path):
         try:
             config = open(_config_path)
             version = cPickle.load(config)
             old_prefs = cPickle.load(config)
             config.close()
-            for key in old_prefs.iterkeys():
-                if prefs.has_key(key):
-                    prefs[key] = old_prefs[key]
-        except:
+        except Exception:
             print '! preferences.py: Error reading or writing', _config_path
             os.remove(_config_path)
+        else:
+            for key in old_prefs:
+                if key in prefs:
+                    prefs[key] = old_prefs[key]
 
 def write_preferences_file():
-    
-    """ Write preference data to disk. """
-
+    """Write preference data to disk."""
     config = open(_config_path, 'w')
     cPickle.dump(constants.VERSION, config, cPickle.HIGHEST_PROTOCOL)
     cPickle.dump(prefs, config, cPickle.HIGHEST_PROTOCOL)

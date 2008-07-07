@@ -1,6 +1,4 @@
-# ============================================================================
-# properties.py - Properties dialog.
-# ============================================================================
+"""properties.py - Properties dialog."""
 
 import os
 import time
@@ -18,9 +16,8 @@ _dialog = None
 
 class _Page(gtk.VBox):
     
-    """
-    A page to put in the gtk.Notebook. Contains info about a file (an image
-    or an archive.)
+    """A page to put in the gtk.Notebook. Contains info about a file (an
+    image or an archive.)
     """
     
     def __init__(self):
@@ -48,12 +45,9 @@ class _Page(gtk.VBox):
         self._thumb.set_from_pixbuf(pixbuf)
 
     def set_filename(self, filename):
-        
-        """
-        Set the filename to be displayed to <filename>. Call this before
+        """Set the filename to be displayed to <filename>. Call this before
         set_main_info().
         """
-
         label = gtk.Label(encoding.to_unicode(filename))
         label.set_alignment(0, 0.5)
         attrlist = pango.AttrList()
@@ -64,24 +58,18 @@ class _Page(gtk.VBox):
         self._mainbox.pack_start(gtk.VBox()) # Just to add space (better way?)
 
     def set_main_info(self, info):
-        
-        """
-        Set the information in the main info box (below the filename) to
+        """Set the information in the main info box (below the filename) to
         the values in the sequence <info>.
         """
-
         for text in info:
             label = gtk.Label(text)
             label.set_alignment(0, 0.5)
             self._mainbox.pack_start(label, False, False)
 
-    def set_secondary_info(self, info):
-        
-        """
-        Set the information below the main info box to the values in the
+    def set_secondary_info(self, info): 
+        """Set the information below the main info box to the values in the
         sequence <info>. Each entry in info should be a tuple (desc, value).
         """
-
         for desc, value in info:
             label = gtk.Label('%s:  %s' % (desc, value))
             attrlist = pango.AttrList()
@@ -128,7 +116,7 @@ class _PropertiesDialog(gtk.Dialog):
                 page.set_main_info(main_info)
                 try:
                     uid = pwd.getpwuid(stats.st_uid)[0]
-                except:
+                except Exception:
                     uid = str(stats.st_uid)
                 secondary_info = (
                     (_('Location'), encoding.to_unicode(os.path.dirname(
@@ -140,7 +128,7 @@ class _PropertiesDialog(gtk.Dialog):
                     (_('Permissions'), oct(stat.S_IMODE(stats.st_mode))),
                     (_('Owner'), uid))
                 page.set_secondary_info(secondary_info)
-            except:
+            except Exception:
                 pass
             notebook.append_page(page, gtk.Label(_('Archive')))
         
@@ -163,7 +151,7 @@ class _PropertiesDialog(gtk.Dialog):
             page.set_main_info(main_info)
             try:
                 uid = pwd.getpwuid(stats.st_uid)[0]
-            except:
+            except Exception:
                 uid = str(stats.st_uid)
             secondary_info = (
                 (_('Location'), encoding.to_unicode(os.path.dirname(path))),
@@ -174,19 +162,19 @@ class _PropertiesDialog(gtk.Dialog):
                 (_('Permissions'), oct(stat.S_IMODE(stats.st_mode))),
                 (_('Owner'), uid))
             page.set_secondary_info(secondary_info)
-        except:
+        except Exception:
             pass
         notebook.append_page(page, gtk.Label(_('Image')))
         self.show_all()
 
 def open_dialog(action, window):
     global _dialog
-    if _dialog == None:
+    if _dialog is None:
         _dialog = _PropertiesDialog(window)
 
 def close_dialog(*args):
     global _dialog
-    if _dialog != None:
+    if _dialog is not None:
         _dialog.destroy()
         _dialog = None 
 

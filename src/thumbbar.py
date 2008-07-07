@@ -1,6 +1,4 @@
-# ============================================================================
-# thumbbar.py - Thumbnail sidebar for main window.
-# ============================================================================
+"""thumbbar.py - Thumbnail sidebar for main window."""
 
 import gtk
 import gobject
@@ -13,7 +11,7 @@ import thumbnail
 
 class ThumbnailSidebar(gtk.HBox):
     
-    """ A thumbnail sidebar including scrollbar for the main window. """
+    """A thumbnail sidebar including scrollbar for the main window."""
     
     def __init__(self, window):
         gtk.HBox.__init__(self, False, 0)
@@ -103,12 +101,9 @@ class ThumbnailSidebar(gtk.HBox):
         self.update_select()
 
     def update_select(self):
-        
+        """Select the thumbnail for the currently viewed page and make sure
+        that the thumbbar is scrolled so that the selected thumb is in view.
         """
-        Select the thumbnail for the currently viewed page and make sure that
-        the thumbbar is scrolled so that the selected thumb is in view.
-        """
-
         if not self._loaded:
             return
         self._selection.select_path(
@@ -126,7 +121,7 @@ class ThumbnailSidebar(gtk.HBox):
         try:
             selected = widget.get_selected_rows()[1][0][0]
             self._window.set_page(selected + 1)
-        except:
+        except Exception:
             pass
 
     def _scroll_event(self, widget, event):
@@ -151,10 +146,8 @@ class _Counter:
         return self._num <= self._roof
 
 
-def _add_page_number(pixbuf, page):
-    
-    """ 
-    Add page number <page> in a black rectangle in the top left corner of
+def _add_page_number(pixbuf, page): 
+    """Add page number <page> in a black rectangle in the top left corner of
     <pixbuf>. This is highly dependent on the dimensions of the built-in 
     font in PIL (bad). If the PIL font was changed, this function would
     likely produce badly positioned numbers on the pixbuf.
@@ -163,7 +156,6 @@ def _add_page_number(pixbuf, page):
     delay overhead when we have a large number of pages. Making this
     function more efficient would be a good idea.
     """
-
     text = str(page)
     width = 6 * len(text) + 2
     height = 10

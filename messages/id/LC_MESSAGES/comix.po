@@ -1,0 +1,1325 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR ORGANIZATION
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Comix-3.6.4\n"
+"POT-Creation-Date: 2007-05-09 14:55+CEST\n"
+"PO-Revision-Date: 2008-04-14 01:36+0700\n"
+"Last-Translator: Andhika Padmawan <andhika.padmawan@gmail.com>\n"
+"Language-Team: Indonesia <id@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: pygettext.py 1.5\n"
+"X-Poedit-Language: Indonesian\n"
+"X-Poedit-Country: INDONESIA\n"
+"X-Poedit-SourceCharset: utf-8\n"
+
+#: comix:547
+#: comix:11064
+msgid "Fit-to-screen mode"
+msgstr "Mode sesuai layar"
+
+#: comix:550
+#: comix:11065
+msgid "Fit width mode"
+msgstr "Mode sesuai lebar"
+
+#: comix:553
+#: comix:11066
+msgid "Fit height mode"
+msgstr "Mode sesuai tinggi"
+
+#: comix:556
+#: comix:11008
+#: comix:11067
+msgid "Manual zoom mode"
+msgstr "Mode pembesaran manual"
+
+#: comix:559
+#: comix:11068
+msgid "Double page mode"
+msgstr "Mode halaman ganda"
+
+#: comix:561
+#: comix:11070
+msgid "Manga mode"
+msgstr "Mode manga"
+
+#: comix:563
+#: comix:11069
+msgid "Magnifying lens"
+msgstr "Kaca pembesar"
+
+#: comix:664
+#: comix:6637
+msgid "Library"
+msgstr "Perpustakan"
+
+#: comix:694
+msgid "Apply filter on full path"
+msgstr "Terapkan filter pada alamat penuh"
+
+#: comix:700
+msgid "Add archives to library."
+msgstr "Tambah arsip ke perpustakaan."
+
+#: comix:705
+msgid "Remove selected archive from library."
+msgstr "Hapus arsip terpilih dari perpustakaan."
+
+#: comix:709
+#: comix:1611
+#: comix:1654
+msgid "Clean up"
+msgstr "Bersihkan"
+
+#: comix:713
+msgid "Remove orphaned or outdated library entries."
+msgstr "Hapus entri perpustakaan yatim atau usang."
+
+#: comix:717
+msgid "Close this window."
+msgstr "Tutup jendela ini."
+
+#: comix:722
+msgid "Open selected archive."
+msgstr "Buka arsip terpilih."
+
+#: comix:779
+msgid "Open"
+msgstr "Buka"
+
+#: comix:791
+msgid "All files"
+msgstr "Semua berkas"
+
+#: comix:802
+msgid "All images"
+msgstr "Semua gambar"
+
+#: comix:814
+msgid "All archives"
+msgstr "Semua arsip"
+
+#: comix:818
+msgid "JPEG image"
+msgstr "Gambar JPEG"
+
+#: comix:822
+msgid "PNG image"
+msgstr "Gambar PNG"
+
+#: comix:826
+msgid "GIF image"
+msgstr "Gambar GIF"
+
+#: comix:830
+msgid "TIFF image"
+msgstr "Gambar TIFF"
+
+#: comix:834
+msgid "BMP image"
+msgstr "Gambar BMP"
+
+#: comix:838
+msgid "ICO image"
+msgstr "Gambar ICO"
+
+#: comix:842
+msgid "XPM image"
+msgstr "Gambar XPM"
+
+#: comix:846
+msgid "XBM image"
+msgstr "Gambar XBM"
+
+#: comix:852
+msgid "ZIP archive"
+msgstr "Arsip ZIP"
+
+#: comix:857
+#: comix:6719
+#: comix:7071
+#: comix:7122
+#: comix:7470
+#: comix:8743
+msgid "RAR archive"
+msgstr "Arsip RAR"
+
+#: comix:864
+msgid "tar archive"
+msgstr "arsip tar"
+
+#: comix:868
+msgid "Add archives recursively"
+msgstr "Tambah arsip secara rekursif"
+
+#: comix:883
+msgid "Preferences"
+msgstr "Pengaturan"
+
+#: comix:889
+msgid "Select folder"
+msgstr "Pilih folder"
+
+#: comix:892
+msgid "Fullscreen as default"
+msgstr "Layar penuh sebagai standar"
+
+#: comix:893
+msgid "Double page mode as default"
+msgstr "Mode halaman ganda sebagai standar"
+
+#: comix:895
+msgid "Stretch small images"
+msgstr "Rentangkan gambar kecil"
+
+#: comix:897
+msgid "Use smart scaling in double page mode"
+msgstr "Gunakan skala cerdas pada mode halaman ganda"
+
+#: comix:899
+msgid "Always view comments when opening a new file"
+msgstr "Selalu tampilkan komentar ketika membuka berkas baru"
+
+#: comix:902
+msgid "Hide menubar, scrollbars etc. in fullscreen mode"
+msgstr "Sembunyikan batang menu, batang gulung, dll. pada mode layar penuh"
+
+#: comix:904
+msgid "Cache pages for faster forward flipping"
+msgstr "Tembolok halaman untuk membalik ke depan lebih cepat"
+
+#: comix:907
+msgid "Scroll wheel scrolls horizontally at top and bottom of page"
+msgstr "Roda gulung menggulung secara horizontal pada atas dan bawah halaman"
+
+#: comix:910
+msgid "Flip page when scrolling off the top or bottom of page"
+msgstr "Balik halaman ketika menggulung ke atas atau bawah halaman"
+
+#: comix:912
+msgid "Hide thumbnail scrollbar"
+msgstr "Sembunyikan batang gulung miniatur gambar"
+
+#: comix:914
+msgid "Space key uses smart scrolling"
+msgstr "Tombol spasi menggunakan penggulung cerdas"
+
+#: comix:917
+msgid "Save window position and size for future sessions"
+msgstr "Simpan posisi dan ukuran jendela untuk sesi yang akan datang"
+
+#: comix:920
+msgid "Go to the next archive in directory after last page"
+msgstr "Pergi ke arsip berikutnya dalam direktori setelah halaman terakhir"
+
+#: comix:922
+msgid "Hide cursor in fullscreen mode"
+msgstr "Sembunyikan kursor pada mode layar penuh"
+
+#: comix:924
+msgid "Open last viewed file on start"
+msgstr "Buka berkas terakhir yang dibuka ketika mulai"
+
+#: comix:926
+msgid "Show page numbers on thumbnails"
+msgstr "Tampilkan nomor halaman dalam miniatur gambar"
+
+#: comix:929
+msgid "Always use smart scrolling as if in double page mode"
+msgstr "Selalu gunakan penggulung cerdas seperti dalam mode halaman ganda"
+
+#: comix:932
+msgid "Use stored thumbnails for images in directories"
+msgstr "Gunakan miniatur gambar tersimpan untuk gambar dalam direktori"
+
+#: comix:934
+msgid "Use stored thumbnails for images in archives"
+msgstr "Gunakan miniatur gambar tersimpan untuk gambar dalam arsip"
+
+#: comix:937
+msgid "Display only one page in double page mode if the image is wide"
+msgstr "Tampilkan hanya satu halaman pada mode halaman ganda jika gambar lebar"
+
+#: comix:940
+msgid "Store recently opened files"
+msgstr "Simpan berkas yang baru dibuka"
+
+#: comix:943
+msgid "Always go to this directory in the \"Open\" dialog:"
+msgstr "Selalu pergi ke direktori ini pada dialog \"Buka\":"
+
+#: comix:946
+msgid "Always go to the latest directory in the \"Open\" dialog"
+msgstr "Selalu pergi ke direktori terakhir pada dialog \"Buka\""
+
+#: comix:970
+msgid "Nearest (quickest, worst quality)"
+msgstr "Terdekat (tercepat, kualitas terburuk)"
+
+#: comix:971
+msgid "Tiles"
+msgstr "Ubin"
+
+#: comix:972
+msgid "Bilinear"
+msgstr "Bilinear"
+
+#: comix:974
+msgid "Hyper (slowest, best quality)"
+msgstr "Hiper (terlambat, kualitas terbaik)"
+
+#: comix:976
+msgid "Manual zoom mode as default"
+msgstr "Mode pembesaran manual sebagai standar"
+
+#: comix:979
+msgid "Fit-to-screen mode as default"
+msgstr "Mode sesuai layar sebagai standar"
+
+#: comix:982
+msgid "Fit width mode as default"
+msgstr "Mode sesuai lebar sebagai standar"
+
+#: comix:985
+msgid "Fit height mode as default"
+msgstr "Mode sesuai tinggi sebagai standar"
+
+#: comix:1008
+msgid "Background colour:"
+msgstr "Warna latar belakang:"
+
+#: comix:1011
+msgid "Background colour"
+msgstr "Warna latar belakang"
+
+#: comix:1013
+msgid "Toolbar button labels:"
+msgstr "Label tombol batang alat:"
+
+#: comix:1017
+msgid "Icons only"
+msgstr "Hanya ikon"
+
+#: comix:1018
+#: comix:4630
+msgid "Text only"
+msgstr "Hanya teks"
+
+#: comix:1019
+#: comix:4632
+msgid "Icons and text"
+msgstr "Ikon dan teks"
+
+#: comix:1020
+msgid "Slideshow delay:"
+msgstr "Jeda presentasi:"
+
+#: comix:1036
+msgid "Display"
+msgstr "Tampilan"
+
+#: comix:1090
+msgid "Behaviour"
+msgstr "Perilaku"
+
+#: comix:1127
+msgid "Scaling quality"
+msgstr "Kualitas skala"
+
+#: comix:1152
+msgid "Scaling"
+msgstr "Skala"
+
+#: comix:1166
+msgid "Treat files with the following extensions as comments:"
+msgstr "Perlakukan berkas dengan ekstensi berikut sebagai komentar:"
+
+#: comix:1172
+msgid "Comments"
+msgstr "Komentar"
+
+#: comix:1197
+msgid "Space key scrolls"
+msgstr "Gulung tombol spasi"
+
+#: comix:1201
+#: comix:3991
+#: comix:9404
+#: comix:9433
+#: comix:9436
+#: comix:9443
+#: comix:9445
+msgid "of"
+msgstr "dari"
+
+#: comix:1205
+msgid "Window size"
+msgstr "Ukuran jendela"
+
+#: comix:1206
+msgid "Page size"
+msgstr "Ukuran halaman"
+
+#: comix:1208
+msgid "Scroll"
+msgstr "Gulung"
+
+#: comix:1222
+msgid "Magnification factor:"
+msgstr "Faktor pembesaran:"
+
+#: comix:1226
+msgid "Lens size (px):"
+msgstr "Ukuran lensa (px):"
+
+#: comix:1230
+msgid "Update interval (milliseconds):"
+msgstr "Interval pemutakhiran (milidetik):"
+
+#: comix:1235
+msgid "Lens"
+msgstr "Lensa"
+
+#: comix:1249
+msgid "Thumbnail sizes (px):"
+msgstr "Ukuran miniatur gambar (px):"
+
+#: comix:1254
+msgid "Library thumbnail sizes (px):"
+msgstr "Ukuran miniatur gambar perpustakaan (px):"
+
+#: comix:1272
+msgid "Thumbnails"
+msgstr "Miniatur gambar"
+
+#: comix:1301
+msgid "Adjust colour"
+msgstr "Sesuaikan warna"
+
+#: comix:1303
+msgid "Default"
+msgstr "Standar"
+
+#: comix:1325
+msgid "Brightness"
+msgstr "Kecerahan"
+
+#: comix:1337
+msgid "Contrast"
+msgstr "Kontras"
+
+#: comix:1349
+msgid "Saturation"
+msgstr "Saturasi"
+
+#: comix:1361
+msgid "Sharpness"
+msgstr "Ketajaman"
+
+#: comix:1376
+msgid "Automatically adjust contrast"
+msgstr "Otomatis menyesuaikan kontras"
+
+#: comix:1383
+msgid "Save values for future sessions"
+msgstr "Simpan nilai untuk sesi yang akan datang"
+
+#: comix:1395
+msgid "Properties"
+msgstr "Properti"
+
+#: comix:1413
+msgid "Go to page"
+msgstr "Pergi ke halamaan"
+
+#: comix:1437
+msgid "Edit bookmarks"
+msgstr "Sunting bookmark"
+
+#: comix:1446
+msgid "Title"
+msgstr "Judul"
+
+#: comix:1447
+#: comix:5397
+#: comix:5749
+msgid "Page"
+msgstr "Halaman"
+
+#: comix:1477
+#: comix:1530
+msgid "About"
+msgstr "Tentang"
+
+#: comix:1515
+msgid "Comix is an image viewer specifically designed to handle comic books."
+msgstr "Comix adalah penampil gambar yang didesain khusus untuk menangani buku komik."
+
+#: comix:1517
+msgid "It reads ZIP, RAR and tar archives (also gzip or bzip2 compressed)"
+msgstr "Comix dapat membaca arsip ZIP, RAR dan tar (juga gzip atau bzip2 terkompres)"
+
+#: comix:1519
+msgid "as well as plain image files."
+msgstr "begitu pula berkas gambar biasa."
+
+#: comix:1521
+msgid "Comix is licensed under the GNU General Public License."
+msgstr "Comix dilisensikan di bawah GNU General Public License."
+
+#: comix:1539
+msgid "Developer and Swedish translation"
+msgstr "Pengembang dan terjemahan bahasa Swedia"
+
+#: comix:1541
+msgid "Simplified Chinese translation"
+msgstr "Terjemahan bahasa China yang disederhanakan"
+
+#: comix:1542
+msgid "Spanish translation"
+msgstr "Terjemahan bahasa Spanyol"
+
+#: comix:1543
+msgid "Brazilian Portuguese translation"
+msgstr "Terjemahan bahasa Portugis Brasil"
+
+#: comix:1545
+msgid "German translation and Nautilus thumbnailer"
+msgstr "Terjemahan bahasa Jerman dan pembuat miniatur gambar Nautilus"
+
+#: comix:1546
+msgid "Italian translation"
+msgstr "Terjemahan bahasa Italia"
+
+#: comix:1547
+msgid "Dutch translation"
+msgstr "Terjemahan bahasa Belanda"
+
+#: comix:1548
+msgid "French translation"
+msgstr "Terjemahan bahasa Prancis"
+
+#: comix:1549
+msgid "Polish translation"
+msgstr "Terjemahan bahasa Polandia"
+
+#: comix:1550
+msgid "Greek translation"
+msgstr "Terjemahan bahasa Yunani"
+
+#: comix:1551
+msgid "Catalan translation"
+msgstr "Terjemahan bahasa Catalan"
+
+#: comix:1552
+msgid "Traditional Chinese translation"
+msgstr "Terjemahan bahasa China tradisional"
+
+#: comix:1553
+msgid "Japanese translation"
+msgstr "Terjemahan bahasa Jepang"
+
+#: comix:1554
+msgid "Hungarian translation"
+msgstr "Terjemahan bahasa Hungaria"
+
+#: comix:1555
+msgid "Russian translation"
+msgstr "Terjemahan bahasa Rusia"
+
+#: comix:1564
+msgid "Credits"
+msgstr "Kredit"
+
+#: comix:1573
+msgid "Manage thumbnails"
+msgstr "Pengaturan miniatur gambar"
+
+#: comix:1606
+#: comix:1649
+msgid "Remove all stored thumbnails:"
+msgstr "Hapus seluruh miniatur gambar tersimpan:"
+
+#: comix:1616
+#: comix:1659
+msgid "Remove orphaned thumbnails:"
+msgstr "Hapus miniatur gambar yatim:"
+
+#: comix:1621
+msgid "Directories"
+msgstr "Direktori"
+
+#: comix:1664
+msgid "Archives"
+msgstr "Arsip"
+
+#: comix:1674
+msgid "Removing thumbnails"
+msgstr "Menghapus miniatur gambar"
+
+#: comix:1714
+msgid "Convert"
+msgstr "Konversi"
+
+#: comix:1723
+msgid "File type"
+msgstr "Jenis berkas"
+
+#: comix:1724
+msgid "Extension"
+msgstr "Ekstensi"
+
+#: comix:1736
+#: comix:4321
+#: comix:4357
+#: comix:6711
+#: comix:7061
+#: comix:7112
+#: comix:7468
+#: comix:8714
+msgid "Zip archive"
+msgstr "Arsip Zip"
+
+#: comix:1737
+#: comix:4324
+#: comix:4363
+#: comix:6713
+#: comix:7063
+#: comix:7114
+#: comix:7472
+#: comix:8730
+msgid "Tar archive"
+msgstr "Arsip Tar"
+
+#: comix:1738
+#: comix:4328
+#: comix:4359
+#: comix:6715
+#: comix:7066
+#: comix:7117
+#: comix:7473
+#: comix:8726
+msgid "Gzip compressed tar archive"
+msgstr "Arsip tar terkompres Gzip"
+
+#: comix:1740
+#: comix:4331
+#: comix:4361
+#: comix:6717
+#: comix:7069
+#: comix:7120
+#: comix:7474
+#: comix:8728
+msgid "Bzip2 compressed tar archive"
+msgstr "Arsip tar terkompres Bzip2"
+
+#: comix:1752
+msgid "Delete old archive/directory"
+msgstr "Hapus arsip/direktori lama"
+
+#: comix:1777
+#: comix:6112
+#: comix:6117
+msgid "Permission denied"
+msgstr "Hak akses ditolak"
+
+#: comix:1802
+msgid "Confirm operation"
+msgstr "Konfirmasi operasi"
+
+#: comix:4092
+msgid "Permanently remove %s?"
+msgstr "Hapus permanen %s?"
+
+#: comix:4096
+msgid "Perform lossless JPEG operation on %s?"
+msgstr "Lakukan operasi JPEG lossless pada %s?"
+
+#: comix:4098
+#: comix:4103
+msgid "Some images might be trimmed a bit during the operation."
+msgstr "Beberapa gambar mungkin terpotong sedikit waktu operasi."
+
+#: comix:4101
+msgid "Permanently convert %s to greyscale?"
+msgstr "Konversi permanen %s ke hitam putih?"
+
+#: comix:4963
+#: comix:4974
+msgid "Location:"
+msgstr "Lokasi:"
+
+#: comix:4964
+#: comix:4975
+msgid "Quantity:"
+msgstr "Jumlah:"
+
+#: comix:4964
+#: comix:4975
+msgid "Total size:"
+msgstr "Total ukuran:"
+
+#: comix:5010
+#: comix:5021
+#: comix:5025
+#: comix:5036
+#: comix:5055
+#: comix:5060
+#: comix:5064
+#: comix:5075
+#: comix:5086
+#: comix:5090
+#: comix:5101
+#: comix:5119
+#: comix:5124
+#: comix:5128
+#: comix:6431
+#: comix:6459
+#: comix:6465
+msgid "Removed:"
+msgstr "Terhapus:"
+
+#: comix:5026
+#: comix:5065
+#: comix:5091
+#: comix:5129
+#: comix:6379
+#: comix:6466
+msgid "Done!"
+msgstr "Selesai!"
+
+#: comix:5230
+#: comix:6704
+#: comix:7059
+#: comix:7110
+msgid "pages"
+msgstr "halaman"
+
+#: comix:5236
+msgid "comment"
+msgstr "komentar"
+
+#: comix:5240
+msgid "comments"
+msgstr "komentar"
+
+#: comix:5264
+#: comix:5450
+#: comix:5803
+msgid "Location"
+msgstr "Lokasi"
+
+#: comix:5277
+msgid "Yes"
+msgstr "Ya"
+
+#: comix:5277
+#: comix:5280
+msgid "In library"
+msgstr "Di perpustakaan"
+
+#: comix:5280
+#: comix:5295
+msgid "No"
+msgstr "Tidak"
+
+#: comix:5290
+msgid "Yes, page"
+msgstr "Ya, halaman"
+
+#: comix:5290
+#: comix:5295
+msgid "Bookmarked"
+msgstr "Di-bookmark"
+
+#: comix:5303
+#: comix:5459
+#: comix:5812
+msgid "Accessed"
+msgstr "Diakses"
+
+#: comix:5313
+#: comix:5470
+#: comix:5823
+msgid "Modified"
+msgstr "Dimodifikasi"
+
+#: comix:5323
+#: comix:5481
+#: comix:5834
+msgid "Permissions"
+msgstr "Hak Akses"
+
+#: comix:5332
+#: comix:5491
+#: comix:5844
+msgid "Owner"
+msgstr "Pemilik"
+
+#: comix:5342
+msgid "Archive"
+msgstr "Arsip"
+
+#: comix:5508
+#: comix:5861
+msgid "Mode"
+msgstr "Mode"
+
+#: comix:5515
+#: comix:5868
+msgid "Pixel count"
+msgstr "Ukuran piksel"
+
+#: comix:5528
+#: comix:5881
+msgid "Pixel sum"
+msgstr "Jumlah piksel"
+
+#: comix:5559
+#: comix:5912
+msgid "Extrema"
+msgstr "Ekstrema"
+
+#: comix:5598
+#: comix:5951
+msgid "Mean"
+msgstr "Mean"
+
+#: comix:5626
+#: comix:5979
+msgid "Median"
+msgstr "Median"
+
+#: comix:5654
+#: comix:6007
+msgid "Standard deviation"
+msgstr "Standar deviasi"
+
+#: comix:5686
+msgid "Image"
+msgstr "Gambar"
+
+#: comix:5689
+msgid "Image 1"
+msgstr "Gambar 1"
+
+#: comix:6037
+msgid "Image 2"
+msgstr "Gambar 2"
+
+#: comix:6113
+msgid "Could not delete"
+msgstr "Tidak dapat menghapus"
+
+#: comix:6114
+#: comix:6119
+msgid "Please check your permissions."
+msgstr "Silakan cek hak akses anda"
+
+#: comix:6118
+msgid "Could not create"
+msgstr "Tidak dapat membuat"
+
+#: comix:6230
+#: comix:6240
+#: comix:6374
+#: comix:6378
+msgid "Added:"
+msgstr "Telah ditambah:"
+
+#: comix:6231
+msgid "Adding library entries"
+msgstr "Menambah entri perpustakaan"
+
+#: comix:6432
+msgid "Removing library entries"
+msgstr "Menghapus entri perpustakaan"
+
+#: comix:7213
+msgid "Extract page"
+msgstr "Mengekstrak halaman"
+
+#: comix:7640
+msgid "page"
+msgstr "halaman"
+
+#: comix:8741
+msgid "Could not find the unrar executable. Please install it if you wish to open RAR archives."
+msgstr "Tidak dapat menemukan unrar yang dapat dieksekusi. Silakan instal unrar jika anda ingin membuka arsip RAR."
+
+#: comix:8746
+msgid "Could not open"
+msgstr "Tidak dapat membuka"
+
+#: comix:8792
+msgid "is not a file."
+msgstr "bukan sebuah berkas."
+
+#: comix:8795
+msgid "does not exist."
+msgstr "Tidak ada."
+
+#: comix:8903
+msgid "Filetype of"
+msgstr "Jenis berkas dari"
+
+#: comix:8905
+msgid "not recognized."
+msgstr "tidak dikenali."
+
+#: comix:8920
+#: comix:11179
+msgid "No images in \"%s\""
+msgstr "Tidak ada gambar di \"%s\""
+
+#: comix:9403
+msgid "Comment file"
+msgstr "Komentar berkas"
+
+#: comix:9419
+msgid "Could not read"
+msgstr "Tidak dapat membaca"
+
+#: comix:9432
+#: comix:9435
+#: comix:9442
+#: comix:9444
+msgid "Comment"
+msgstr "Komentar"
+
+#: comix:10882
+msgid "_Next page"
+msgstr "Halaman selanjutnya (_N)"
+
+#: comix:10884
+msgid "_Previous page"
+msgstr "Halaman sebelumnya (_P)"
+
+#: comix:10886
+msgid "_First page"
+msgstr "Halaman pertama (_F)"
+
+#: comix:10888
+msgid "_Last page"
+msgstr "Halaman terakhir (_L)"
+
+#: comix:10890
+msgid "_Go to page..."
+msgstr "Pergi ke halaman... (_G)"
+
+#: comix:10892
+msgid "Manual _Zoom"
+msgstr "Pembesaran Manual (_Z)"
+
+#: comix:10893
+msgid "_Zoom in"
+msgstr "Pembesaran ke dalam (_Z)"
+
+#: comix:10895
+msgid "Zoom _out"
+msgstr "Pembesaran keluar (_o)"
+
+#: comix:10897
+msgid "_Normal size"
+msgstr "Ukuran normal (_N)"
+
+#: comix:10899
+msgid "Fit _width"
+msgstr "Sesuai lebar (_w)"
+
+#: comix:10901
+msgid "Fit _height"
+msgstr "Sesuai tinggi (_h)"
+
+#: comix:10903
+msgid "_Best fit"
+msgstr "Ukuran terbaik (_B)"
+
+#: comix:10905
+msgid "_Add bookmark"
+msgstr "Tambah bookmark (_A)"
+
+#: comix:10907
+msgid "Clear bookmarks"
+msgstr "Hapus bookmark"
+
+#: comix:10910
+msgid "_Edit bookmarks..."
+msgstr "Sunting bookmark... (_E)"
+
+#: comix:10912
+msgid "Pr_eferences"
+msgstr "P_engaturan"
+
+#: comix:10914
+msgid "_About"
+msgstr "Tentang (_A)"
+
+#: comix:10917
+msgid "_Manage thumbnails..."
+msgstr "Pengaturan _Miniatur gambar... "
+
+#: comix:10919
+msgid "Proper_ties"
+msgstr "Proper_ti"
+
+#: comix:10921
+msgid "View _comments"
+msgstr "Tampilkan komentar (_c)"
+
+#: comix:10923
+msgid "_Open..."
+msgstr "Buka... (_O)"
+
+#: comix:10925
+msgid "_Recent files"
+msgstr "Berkas terkini (_R)"
+
+#: comix:10926
+msgid "Clear recent files"
+msgstr "Hapus berkas terkini"
+
+#: comix:10928
+msgid "Open _library..."
+msgstr "Buka perpustakaan... (_l)"
+
+#: comix:10930
+msgid "_Add to library"
+msgstr "Tambah ke perpustakaan (_A)"
+
+#: comix:10932
+msgid "Con_vert..."
+msgstr "Kon_versi..."
+
+#: comix:10934
+msgid "E_xtract image..."
+msgstr "Ekstrak gambar... (_x)"
+
+#: comix:10936
+msgid "_Close"
+msgstr "Tutup (_C)"
+
+#: comix:10938
+msgid "_Quit"
+msgstr "Keluar (_Q)"
+
+#: comix:10940
+msgid "_Adjust colour..."
+msgstr "Sesuaikan warna... (_A)"
+
+#: comix:10942
+msgid "Slideshow"
+msgstr "Presentasi"
+
+#: comix:10944
+msgid "Delete image..."
+msgstr "Hapus gambar..."
+
+#: comix:10947
+msgid "CW lossless JPEG rotation..."
+msgstr "Rotasi JPEG lossless searah jarum jam..."
+
+#: comix:10950
+msgid "CCW lossless JPEG rotation..."
+msgstr "Rotasi JPEG lossless berlawanan arah jarum jam..."
+
+#: comix:10953
+msgid "Horizontal lossless JPEG flip..."
+msgstr "Balik JPEG lossless secara horizontal..."
+
+#: comix:10956
+msgid "Vertical lossless JPEG flip..."
+msgstr "Balik JPEG lossless secara vertikal..."
+
+#: comix:10959
+msgid "Convert JPEG to greyscale..."
+msgstr "Konversi JPEG ke hitam putih..."
+
+#: comix:10961
+#: comix:10963
+msgid "_Bookmarks"
+msgstr "_Bookmark"
+
+#: comix:10962
+msgid "_Toolbars"
+msgstr "Batang alat (_T)"
+
+#: comix:10964
+msgid "_Edit"
+msgstr "_Sunting"
+
+#: comix:10966
+msgid "File o_perations"
+msgstr "O_perasi berkas"
+
+#: comix:10967
+msgid "_File"
+msgstr "Berkas (_F)"
+
+#: comix:10968
+#: comix:10969
+msgid "_View"
+msgstr "Tampilan (_V)"
+
+#: comix:10970
+#: comix:10971
+msgid "_Go"
+msgstr "Ke (_G)"
+
+#: comix:10972
+msgid "_Help"
+msgstr "Bantuan (_H)"
+
+#: comix:10973
+msgid "_Transform"
+msgstr "Ubah (_T)"
+
+#: comix:10974
+msgid "_Rotate 90 degrees CW"
+msgstr "_Rotasi 90 derajat searah jarum jam"
+
+#: comix:10976
+msgid "Rotate 180 de_grees"
+msgstr "Rotasi 180 derajat (_g)"
+
+#: comix:10978
+msgid "Rotat_e 90 degrees CCW"
+msgstr "Rotasi 90 derajat berlawanan arah jarum jam (_e)"
+
+#: comix:10980
+msgid "Fli_p horizontally"
+msgstr "Putar horizontal (_p)"
+
+#: comix:10982
+msgid "Flip _vertically"
+msgstr "Putar _vertikal"
+
+#: comix:10985
+msgid "_Fullscreen"
+msgstr "Layar penuh (_F)"
+
+#: comix:10987
+msgid "_Double page mode"
+msgstr "Mode halaman ganda (_D)"
+
+#: comix:10989
+msgid "_Toolbar"
+msgstr "Batang alat (_T)"
+
+#: comix:10991
+msgid "_Menubar"
+msgstr "Batang _Menu"
+
+#: comix:10993
+msgid "St_atusbar"
+msgstr "Batang st_atus"
+
+#: comix:10995
+msgid "S_crollbars"
+msgstr "Batang gulung (_c)"
+
+#: comix:10997
+msgid "Th_umbnails"
+msgstr "Miniat_ur"
+
+#: comix:10999
+msgid "H_ide all"
+msgstr "Sembunyikan semua (_i)"
+
+#: comix:11001
+msgid "_Manga mode"
+msgstr "_Mode manga"
+
+#: comix:11003
+msgid "_Keep transformation"
+msgstr "Jaga transformasi (_K)"
+
+#: comix:11005
+msgid "Magnifying _lens"
+msgstr "Kaca pembesar (_l)"
+
+#: comix:11009
+msgid "Fit-to-_screen mode"
+msgstr "Mode _sesuai layar"
+
+#: comix:11010
+msgid "Fit _width mode"
+msgstr "Mode sesuai lebar (_w)"
+
+#: comix:11011
+msgid "Fit _height mode"
+msgstr "Mode sesuai tinggi (_h)"
+
+#: comix:11025
+msgid "Enter fullscreen mode automatically when Comix is started."
+msgstr "Otomatis masuk ke mode layar penuh ketika Comix dijalankan."
+
+#: comix:11026
+msgid "Enter double page mode automatically when Comix is started."
+msgstr "Otomatis masuk ke mode halaman ganda ketika Comix dijalankan."
+
+#: comix:11027
+msgid "Enter manual zoom mode automatically when Comix is started."
+msgstr "Otomatis masuk ke mode pembesaran manual ketika Comix dijalankan."
+
+#: comix:11028
+msgid "Enter fit-to-screen mode automatically when Comix is started."
+msgstr "Otomatis masuk ke mode sesuai layar ketika Comix dijalankan."
+
+#: comix:11029
+msgid "Enter fit width mode automatically when Comix is started."
+msgstr "Otomatis masuk ke mode sesuai lebar ketika Comix dijalankan."
+
+#: comix:11030
+msgid "Enter fit height mode automatically when Comix is started."
+msgstr "Otomatis masuk ke mode sesuai tinggi ketika Comix dijalankan."
+
+#: comix:11031
+msgid "Also scale images to a size that is larger than their original size in fit-to-screen mode, fit width mode and fit height mode."
+msgstr "Juga mengatur skala gambar ke ukuran yang lebih besar dibanding ukuran aslinya pada mode sesuai layar, mode sesuai lebar dan mode sesuai tinggi."
+
+#: comix:11032
+msgid "Scale the images independently when in double page mode and fit-to-screen mode. The smaller of the two images will scale up to fill any extra space that is given."
+msgstr "Mengatur skala gambar secara independen ketika dalam mode halaman ganda dan mode sesuai layar. Gambar yang lebih kecil dari dua gambar tersebut akan dibesarkan untuk mengisi ruang kosong yang tersedia."
+
+#: comix:11033
+msgid "Automatically show any available comments when opening a new file."
+msgstr "Otomatis menampilkan komentar yang tersedia ketika membuka berkas baru."
+
+#: comix:11034
+msgid "Automatically hide scrollbars, menubar, toolbar, statusbar and thumbnails when in fullscreen mode."
+msgstr "Otomatis menyembunyikan batang gulung, batang menu, batang alat, batang status miniatur gambar ketika dalam mode layar penuh."
+
+#: comix:11035
+msgid "Cache the next page in the archive/directory to increase the perceived speed. This is generally recommended unless you are running low on RAM."
+msgstr "Tembolok halaman selanjutnya di arsip/direktori untuk meningkatkan kecepatan. Umumnya hal ini direkomendasikan kecuali anda kehabisan memori pada RAM."
+
+#: comix:11036
+msgid "Move the horizontal scrollbar instead of the vertical when using the scroll wheel at the top or the bottom of the page. The direction will be determined by whether you use manga mode or not."
+msgstr "Pindah batang gulung secara horizontal ketimbang vertikal ketika menggunakan roda gulung pada atas atau bawah halaman. Arah akan ditentukan tergantung apakah anda menggunakan mode manga atau tidak."
+
+#: comix:11037
+msgid "Flip pages when scrolling \"off the page\" with the scroll wheel, as well as with the arrow keys, even when not in fit-to-screen mode. It takes three \"steps\" with the scroll wheel or arrow keys to trigger this behaviour."
+msgstr "Balik halaman ketika menggulung \"di luar halaman\" dengan roda gulung, begitu juga dengan tombol anak panah, bahkan ketika tidak berada dalam mode sesuai layar. Memerlukan tiga \"langkah\" menggunakan roda gulung atau tombol anak panah untuk mengaktifkan perilaku ini."
+
+#: comix:11038
+msgid "Save the position and the size of the window for the next time you start Comix."
+msgstr "Simpan posisi dan ukuran jendela untuk lain kali anda menjalankan Comix."
+
+#: comix:11039
+msgid "Automatically open the next archive in the directory when scrolling past the last page of the current archive, and automatically open the previous archive in the directory when scrolling past the first page of the current archive."
+msgstr "Otomatis membuka arsip berikutnya dalam direktori ketika menggulung halaman terakhir pada arsip sekarang, dan otomatis membuka arsip sebelumnya dalam direktori ketika menggulung halaman pertama pada arsip sekarang."
+
+#: comix:11040
+msgid "Hide the cursor when in fullscreen mode."
+msgstr "Sembunyikan kursor ketika dalam mode layar penuh."
+
+#: comix:11041
+#: comix:11042
+#: comix:11043
+#: comix:11044
+msgid "Set the image scaling method. The best choice is often \"Tiles\", it is quite quick and produces almost as good results as \"Bilinear\" or \"Hyper\"."
+msgstr "Atur metode skala gambar. Pilihan terbaik seringnya adalah \"Ubin\", pilihan ini cukup cepat dan menghasilkan gambar hampir sebagus pada \"Bilinear\" atau \"Hiper\"."
+
+#: comix:11045
+msgid "Treat files with the following extensions as comment files. Extensions should be separated by whitespaces. They are not case sensitive."
+msgstr "Perlakukan berkas dengan ekstensi berikut sebagai berkas komentar. Ekstensi harus dipisahkan dengan spasi. Nama berkas bukan huruf sensitif."
+
+#: comix:11046
+msgid "Use smart scrolling with the space key. Pressing the space key normally scrolls straight down one window height unless at the bottom of the page where it flips pages instead. When this option is set Comix automatically tries to follow the reading flow of the comic book. When pressing the space key it will not only scroll down but will also scroll horizontally to the edge of the page (left or right depending on whether you use manga mode). In double page mode it will go to the edge of the first page if it is in view, otherwise it will go to the edge of the second page. Also, in double page mode with this option, Comix will not flip pages unless at the bottom of the second page. At the bottom of the first page it will instead go to the top of the second page."
+msgstr "Gunakan penggulung cerdas dengan tombol spasi. Menekan tombol spasi normalnya menggulung ke bawah satu tinggi jendela kecuali pada bawah halaman dimana halamannya terbalik. Ketika opsi ini diatur, Comix secara otomatis mencoba untuk mengikuti alur baca buku komik. Ketika menekan tombol spasi, Comix juga akan menggulung secara horizontal ke pinggir halaman (kiri atau kanan tergantung apakah anda menggunakan mode manga). Pada mode halaman ganda, Comix akan pergi ke pinggir halaman pertama jika terlihat, atau akan pergi ke pinggir halaman kedua. Dan juga, pada mode halaman ganda dengan opsi ini, Comix tidak akan membalik halaman kecuali pada akhir halaman kedua. Pada akhir halaman pertama Comix akan pergi ke awal halaman kedua."
+
+#: comix:11047
+msgid "Always hide the thumbnail scrollbar."
+msgstr "Selalu sembunyikan batang gulung miniatur gambar."
+
+#: comix:11048
+msgid "Automatically open the last viewed page when Comix is started."
+msgstr "Otomatis membuka halaman yang terakhir dibuka ketika Comix dijalankan."
+
+#: comix:11049
+msgid "Automatically go to the same directory as last time when opening the \"Open\" dialog."
+msgstr "Otomatis pergi ke direktori yang sama dengan yang terakhir kali dibuka ketika membuka dialog \"Buka\"."
+
+#: comix:11050
+msgid "Automatically go to this directory when opening the \"Open\" dialog."
+msgstr "Otomatis pergi ke direktori ini ketika membuka dialog \"Open\"."
+
+#: comix:11051
+msgid "Automatically restore these values the next time Comix is started."
+msgstr "Otomatis mengembalikan nilai berikut ketika lain kali Comix dijalankan."
+
+#: comix:11052
+msgid "Show the page number in the upper left corner of each thumbnail."
+msgstr "Tampilkan nomor halaman di pojok kiri atas pada setiap miniatur gambar."
+
+#: comix:11053
+msgid "Automatically adjust the contrast of the images so that the darkest pixel is completely black and the lightest pixel is completely white. This only works with images without an alpha channel."
+msgstr "Otomatis menyesuaikan kontras gambar sehingga piksel tergelap berwarna hitam pekat dan piksel terterang berwarna putih bersih. Ini hanya berfungsi pada gambar tanpa saluran alpha."
+
+#: comix:11054
+msgid "The space key uses smart scrolling as if in double page mode even when in single page mode. This can be useful for comics with two scanned pages in each image. The pages are assumed to be of equal size"
+msgstr "Tombol spasi menggunakan penggulung cerdas seperti dalam mode halaman ganda ketika berada dalam mode halaman tunggal. Ini berguna untuk komik dengan dua halaman terpindai pada setiap gambar. Halaman diasumsikan berukuran sama."
+
+#: comix:11055
+msgid "Adjust the lens magnification factor."
+msgstr "Sesuaikan faktor pembesaran lensa."
+
+#: comix:11056
+msgid "Set the lens width and height in pixels. A larger lens will use more CPU resources than a small one."
+msgstr "Atur lebar dan tinggi lensa dalam piksel. Lensa yang lebih besar akan menggunakan sumber daya CPU lebih banyak dibanding lensa yang lebih kecil."
+
+#: comix:11057
+msgid "Set the maximum update frequency for the magnification lens in milliseconds. Setting the value too low can cause the lens to lag behind when moving the mouse quickly. Setting the value too high can cause the lens to appear choppy."
+msgstr "Atur frekuensi pemutakhiran maksimum untuk lensa pembesaran dalam milidetik. Pengaturan nilai terlalu rendah dapat mengakibatkan lensa tertinggal ketika menggerakkan tetikus terlalu cepat. Pengaturan nilai terlalu tinggi dapat mengakibatkan lensa terlihat pecah."
+
+#: comix:11058
+msgid "Read and write thumbnails in the ~/.thumbnails directory as proposed by the freedesktop.org standard. With this preference set, Comix will use the thumbnails already stored there to speed up thumbnail loading. If there are no thumbnails, Comix will create them and save them there. This is a standard that many applications conform to, thumbnails created by other applications can be used by Comix and vice versa. If this preference is not set, Comix will create thumbnails on the fly every time a directory is opened."
+msgstr "Baca dan tulis miniatur gambar pada direktori ~/.thumbnails seperti disarankan oleh standar freedesktop.org. Dengan pengaturan seperti ini, Comix akan menggunakan miniatur yang telah tersimpan disana untuk meningkatkan kecepatan pemuatan miniatur. Jika tidak ada miniatur disana, Comix akan membuat dan menyimpannya disana. Ini adalah standar yang telah berlaku pada banyak aplikasi, miniatur dibuat oleh aplikasi lain dan dapat digunakan oleh Comix dan sebaliknya. Jika pengaturan ini tidak diatur, Comix akan membuat miniatur pada setiap direktori yang dibuka."
+
+#: comix:11059
+msgid "Also use stored thumbnails for images in archives in a similiar way. Due to restrictions in the freedesktop.org standard, these thumbnails will be stored in ~/.comix and will only be used by Comix. If this preference is not set, Comix will create thumbnails on the fly every time an archive is opened."
+msgstr "Menggunakan pula miniatur gambar tersimpan untuk gambar di arsip dalam cara yang mirip. Karena pembatasan pada standar freedesktop.org, miniatur ini akan tersimpan di ~/.comix dan hanya akan digunakan oleh Comix. Jika pengaturan ini tidak diatur, Comix akan membuat miniatur pada setiap direktori yang dibuka."
+
+#: comix:11060
+msgid "Only display a single image in double page mode if the image consists of two pages. An image is assumed to consist of two pages if its width is greater than its height."
+msgstr "Hanya tampilkan gambar tunggal pada mode halaman ganda jika gambar terdiri dari dua halaman. Sebuah gambar diasumsikan terdiri dari dua halaman jika lebarnya lebih besar dari tingginya."
+
+#: comix:11061
+msgid "Filter out archives with regular expressions."
+msgstr "Filter arsip dengan ekspresi reguler."
+
+#: comix:11062
+msgid "Apply filters on full paths rather than filenames."
+msgstr "Terapkan filter pada alamat penuh ketimbang nama berkas."
+
+#: comix:11063
+msgid "Store a list of the 10 last opened files that can be accessed through the menus."
+msgstr "Simpan senarai 10 berkas yang terakhir dibuka agar dapat diakses lewat menu."
+
+#: comix:11071
+msgid "First page"
+msgstr "Halaman pertama"
+
+#: comix:11072
+msgid "Previous page"
+msgstr "Halaman sebelumnya"
+
+#: comix:11073
+msgid "Next page"
+msgstr "Halaman selanjutnya"
+
+#: comix:11074
+msgid "Last page"
+msgstr "Halaman terakhir"
+
+#: comix:11075
+msgid "Go to page..."
+msgstr "Pergi ke halaman..."
+
+

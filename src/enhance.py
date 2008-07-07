@@ -1,6 +1,6 @@
-# ============================================================================
-# enhance.py - Image enhancement handler (e.g. contrast, brightness).
-# ============================================================================
+"""enhance.py - Image enhancement handler and dialog (e.g. contrast,
+brightness etc.)
+"""
 
 import time
 
@@ -13,8 +13,7 @@ _dialog = None
 
 class ImageEnhancer:
     
-    """
-    The ImageEnhancer keeps track of the "enhancement" values and performs
+    """The ImageEnhancer keeps track of the "enhancement" values and performs
     these enhancements on pixbufs. Changes to the ImageEnhancer's values
     can be made using an _EnhanceImageDialog.
     """
@@ -28,9 +27,7 @@ class ImageEnhancer:
         self.autocontrast = False
 
     def enhance(self, pixbuf):
-        
-        """ Return an "enhanced" version of <pixbuf>. """
-
+        """Return an "enhanced" version of <pixbuf>."""
         if (self.brightness != 1.0 or self.contrast != 1.0 or 
           self.saturation != 1.0 or self.sharpness != 1.0 or
           self.autocontrast):
@@ -38,31 +35,27 @@ class ImageEnhancer:
                 self.saturation, self.sharpness, self.autocontrast)
         return pixbuf
 
-    def signal_update(self):
-        
+    def signal_update(self): 
+        """Signal to the main window that a change in the enhancement
+        values has been made.
         """
-        Signal to the main window that a change in the enhancement values 
-        has been made.
-        """
-
         self._window.draw_image(scroll=False)
 
 class _EnhanceImageDialog(gtk.Dialog):
     
-    """
-    A gtk.Dialog which allows modification of the values belonging to an
-    ImageEnhancer.
+    """A gtk.Dialog which allows modification of the values belonging to
+    an ImageEnhancer.
     """
 
     def __init__(self, enhancer):
         gtk.Dialog.__init__(self, _('Enhance image'), None, 0)
         self.add_buttons(_('Default'), gtk.RESPONSE_NO,
-                         gtk.STOCK_OK, gtk.RESPONSE_OK)
+            gtk.STOCK_OK, gtk.RESPONSE_OK)
         self.set_has_separator(False)
         self.set_resizable(False)
         self.connect('response', self._response)
         self.set_default_response(gtk.RESPONSE_OK)
-        
+
         self._enhancer = enhancer
         self._block = False
 
@@ -147,18 +140,14 @@ class _EnhanceImageDialog(gtk.Dialog):
         self.show_all()
         
     def draw_histogram(self, image):
-        
-        """ Draw a histogram representing <image> in the dialog. """
-        
+        """Draw a histogram representing <image> in the dialog."""
         pixbuf = image.get_pixbuf()
-        if pixbuf != None:
+        if pixbuf is not None:
             self._hist_image.set_from_pixbuf(histogram.draw_histogram(pixbuf,
                 text=False))
 
     def clear_histogram(self):
-        
-        """ Clear the histogram in the dialog. """
-
+        """Clear the histogram in the dialog."""
         self._hist_image.clear()
 
     def _change_values(self, *args):
@@ -188,34 +177,26 @@ class _EnhanceImageDialog(gtk.Dialog):
 
 
 def draw_histogram(image):
-    
-    """ Draw a histogram of <image> in the dialog, if there is one. """
-
-    if _dialog != None:
+    """Draw a histogram of <image> in the dialog, if there is one."""
+    if _dialog is not None:
         _dialog.draw_histogram(image)
 
 def clear_histogram():
-    
-    """ Clear the histogram in the dialog, if there is one. """
-
-    if _dialog != None:
+    """Clear the histogram in the dialog, if there is one."""
+    if _dialog is not None:
         _dialog.clear_histogram()
 
 def open_dialog(action, window):
-
-    """ Create and display the (singleton) image enhancement dialog. """
-
+    """Create and display the (singleton) image enhancement dialog."""
     global _dialog
-    if _dialog == None:
+    if _dialog is None:
         _dialog = _EnhanceImageDialog(window.enhancer)
         draw_histogram(window.left_image)
 
 def close_dialog(*args):
-    
-    """ Destroy the image enhancement dialog. """
-
+    """Destroy the image enhancement dialog."""
     global _dialog
-    if _dialog != None:
+    if _dialog is not None:
         _dialog.destroy()
         _dialog = None
 

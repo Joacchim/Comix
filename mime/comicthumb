@@ -1,7 +1,6 @@
 #!/usr/bin/env python
 
-"""
-comicthumb - Thumbnailer for comic book archives, bundled with Comix.
+"""comicthumb - Thumbnailer for comic book archives, bundled with Comix.
 
 comicthumb is dependent on the Python Imaging Library (PIL).
 
@@ -31,26 +30,20 @@ except ImportError:
 class Process:
     
     def __init__(self, args):
-        
-        """
-        Create a Process where <args> is a sequence of arguments that defines
-        the process. The first element of <args> shuld be the full path to 
-        the executable file to be run.
+        """Create a Process where <args> is a sequence of arguments that
+        defines the process. The first element of <args> shuld be the full
+        path to the executable file to be run.
 
         This avoids using Python's broken modules "subprocess" et al. (see
         Python issue 1336.)
         """
-
         self._args = args
         self._pid = None
     
     def spawn(self):
-        
+        """Spawn the process defined by the args in __init__(). Return a
+        file-like object linked to the spawned process' stdout.
         """
-        Spawn the process defined by the args in __init__. Return a file-like
-        object linked to the spawned process' stdout.
-        """
-
         gc.disable() # Avoid Python issue 1336!
         read_pipe, write_pipe = os.pipe()
         self._pid = os.fork()
@@ -67,9 +60,7 @@ class Process:
         return os.fdopen(read_pipe)
 
     def wait(self):
-        
-        """ Wait for the process to terminate. """
-        
+        """Wait for the process to terminate."""
         if self._pid:
             os.waitpid(self._pid, 0)
         else:
@@ -77,16 +68,13 @@ class Process:
 
 
 class Extractor:
-    
-    """
-    Extractor is a class for extracting different archive formats.
+
+    """Extractor is a class for extracting different archive formats.
     This is a much simplified version of the Extractor class from Comix.
     """
-    
-    def __init__(self, src):
-        
-        """ Setup the extractor with archive <src>. """
 
+    def __init__(self, src):
+        """Setup the extractor with archive <src>."""
         self._src = src
         self._type = archive_mime_type(src)
         self._files = []
@@ -116,19 +104,14 @@ class Extractor:
             self._files = [name.rstrip('\n') for name in self._files]
     
     def get_files(self):
-
-        """ Return a list of the files in the archive. """
-
+        """Return a list of the files in the archive."""
         return self._files
         
-    def extract(self, chosen):
-        
-        """
-        Extract the file <chosen> and return it as a cStringIO.StringIO
+    def extract(self, chosen): 
+        """Extract the file <chosen> and return it as a cStringIO.StringIO
         object. The <chosen> file must be one of the files in the list
         returned by the get_files() method.
         """
-
         if self._type == 'zip':
             return cStringIO.StringIO(self._zfile.read(chosen))
         elif self._type in ['tar', 'gzip', 'bzip2']:
@@ -140,9 +123,7 @@ class Extractor:
             return cStringIO.StringIO(fobj.read())
 
 def archive_mime_type(path):
-    
-    """ Return the archive type of <path>. """
-    
+    """Return the archive type of <path>."""
     try:
         if os.path.isfile(path):
             if zipfile.is_zipfile(path):
@@ -160,12 +141,9 @@ def archive_mime_type(path):
     sys.exit(1)
         
 def guess_cover(files):
-    
+    """Return the filename within <files> that is the most likely to be
+    the cover of an archive.
     """
-    Return the filename within <files> that is the most likely to be the
-    cover of an archive.
-    """
-    
     files.sort()
     ext_re = re.compile(r'\.(jpg|jpeg|png|gif|tif|tiff)\s*$', re.I)
     front_re = re.compile('(cover|front)', re.I)

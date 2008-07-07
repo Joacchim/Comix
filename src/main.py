@@ -1,6 +1,4 @@
-# ============================================================================
-# main.py - Main window.
-# ============================================================================
+"""main.py - Main window."""
 
 import sys
 import os
@@ -26,9 +24,8 @@ import thumbbar
 
 class MainWindow(gtk.Window):
     
-    """
-    The Comix main window, is created at start and terminates the program
-    when closed.
+    """The Comix main window, is created at start and terminates the
+    program when closed.
     """
 
     def __init__(self):
@@ -81,7 +78,7 @@ class MainWindow(gtk.Window):
         self.resize(prefs['window width'], prefs['window height'])
 
         # This is a hack to get the focus away from the toolbar so that
-        # we don't activate it with space or some other key. (alternative?)
+        # we don't activate it with space or some other key (alternative?)
         self.toolbar.set_focus_child(
             self.ui_manager.get_widget('/Tool/expander'))
         self.toolbar.set_style(gtk.TOOLBAR_ICONS)
@@ -183,17 +180,20 @@ class MainWindow(gtk.Window):
         self.show()
 
     def draw_image(self, at_bottom=False, scroll=True):
-        
+        """Draw the current page(s) and update the titlebar and statusbar.
         """
-        Draw the current page(s) and update the titlebar and statusbar.
-        """
-        
         self._display_active_widgets()
         if not self.file_handler.file_loaded:
             return
         width, height = self.get_visible_area_size()
-        scale_width = self.zoom_mode == 'height' and -1 or width
-        scale_height = self.zoom_mode == 'width' and -1 or height
+        if self.zoom_mode == 'height':
+            scale_width = -1
+        else:
+            scale_width = width
+        if self.zoom_mode == 'width':
+            scale_height = -1
+        else:
+            scale_height = height
         scale_up = prefs['stretch']
         
         if self.displayed_double():
@@ -297,7 +297,7 @@ class MainWindow(gtk.Window):
         self.statusbar.set_filename(
             self.file_handler.get_pretty_current_filename())
         self.statusbar.update()
-        self._set_title()
+        self.update_title()
         while gtk.events_pending():
             gtk.main_iteration(False)
         enhance.draw_histogram(self.left_image)
@@ -305,12 +305,9 @@ class MainWindow(gtk.Window):
         self.thumbnailsidebar.load_thumbnails()
 
     def new_page(self, at_bottom=False):
-        
+        """Draw a *new* page correctly (as opposed to redrawing the same
+        image with a new size or whatever.)
         """
-        Draw a *new* page correctly (as opposed to redrawing the same image
-        with a new size or whatever.)
-        """
-        
         if not self._keep_rotation:
             self.rotation = 0
             self.horizontal_flip = False
@@ -439,9 +436,7 @@ class MainWindow(gtk.Window):
         self.draw_image()
 
     def scroll(self, x, y, bound=None):
-
-        """
-        Scroll <x> px horizontally and <y> px vertically. If <bound> is
+        """Scroll <x> px horizontally and <y> px vertically. If <bound> is
         'first' or 'second', we will not scroll out of the first or second
         page respectively (dependent on manga mode). The <bound> argument
         only makes sense in double page mode.
@@ -449,14 +444,13 @@ class MainWindow(gtk.Window):
         Return True if call resulted in new adjustment values, False
         otherwise.
         """
-
         old_hadjust = self._hadjust.get_value()
         old_vadjust = self._vadjust.get_value()
         visible_width, visible_height = self.get_visible_area_size()
         hadjust_upper = max(0, self._hadjust.upper - visible_width)
         vadjust_upper = max(0, self._vadjust.upper - visible_height)
         hadjust_lower = 0
-        if bound != None and self.is_manga_mode:
+        if bound is not None and self.is_manga_mode:
             bound = {'first':  'second',
                      'second': 'first'}[bound]
         if bound == 'first':
@@ -475,9 +469,7 @@ class MainWindow(gtk.Window):
         return old_vadjust != new_vadjust or old_hadjust != new_hadjust
 
     def scroll_to_fixed(self, horiz=None, vert=None):
-        
-        """
-        Scroll using one of several fixed values.
+        """Scroll using one of several fixed values.
 
         If either <horiz> or <vert> is as below, the display is scrolled as
         follows:
@@ -499,7 +491,6 @@ class MainWindow(gtk.Window):
 
         Return True if call resulted in new adjustment values.
         """
-        
         old_hadjust = self._hadjust.get_value()
         old_vadjust = self._vadjust.get_value()
         new_vadjust = old_vadjust
@@ -520,7 +511,7 @@ class MainWindow(gtk.Window):
                      'endsecond':   'endfirst'}.get(horiz, horiz)
         
         # Manga transformations.
-        if self.is_manga_mode and self.displayed_double() and horiz != None:
+        if self.is_manga_mode and self.displayed_double() and horiz is not None:
             horiz = {'left':        'left',
                      'middle':      'middle',
                      'right':       'right',
@@ -528,7 +519,7 @@ class MainWindow(gtk.Window):
                      'endfirst':    'startsecond',
                      'startsecond': 'endfirst',
                      'endsecond':   'startfirst'}[horiz]
-        elif self.is_manga_mode and horiz != None:
+        elif self.is_manga_mode and horiz is not None:
             horiz = {'left':        'left',
                      'middle':      'middle',
                      'right':       'right',
@@ -561,14 +552,11 @@ class MainWindow(gtk.Window):
         return old_vadjust != new_vadjust or old_hadjust != new_hadjust
 
     def is_on_first_page(self):
-        
-        """
-        Return True if we are currently viewing the first page, i.e. if we
+        """Return True if we are currently viewing the first page, i.e. if we
         are scrolled as far to the left as possible, or if only the left page
         is visible on the main layout. In manga mode it is the other way
         around.
         """
-
         if not self.displayed_double():
             return True
         width, height = self.get_visible_area_size()
@@ -581,9 +569,7 @@ class MainWindow(gtk.Window):
                 self.left_image.size_request()[0])
 
     def clear(self):
-        
-        """ Clear the currently displayed data (i.e. "close" the file) """
-
+        """Clear the currently displayed data (i.e. "close" the file.)"""
         self.left_image.clear()
         self.right_image.clear()
         self.thumbnailsidebar.clear()
@@ -592,19 +578,14 @@ class MainWindow(gtk.Window):
         enhance.clear_histogram()
 
     def displayed_double(self):
-        
-        """ Return True if two pages are currently displayed. """
-
+        """Return True if two pages are currently displayed."""
         return (self.is_double_page and self.file_handler.get_current_page() !=
             self.file_handler.get_number_of_pages())
 
     def get_visible_area_size(self):
-        
-        """
-        Return a 2-tuple with the width and height of the visible part
+        """Return a 2-tuple with the width and height of the visible part
         of the main layout area.
         """
-
         width, height = self.get_size()
         if not prefs['hide all'] and not (self.is_fullscreen and 
           prefs['hide all in fullscreen']):
@@ -626,34 +607,43 @@ class MainWindow(gtk.Window):
         return width, height
 
     def get_layout_pointer_position(self):
-        
+        """Return a 2-tuple with the x and y coordinates of the pointer
+        on the main layout area, relative to the layout.
         """
-        Return a 2-tuple with the x and y coordinates of the pointer on the
-        main layout area, relative to the layout.
-        """
-        
         x, y = self._main_layout.get_pointer()
         x += self._hadjust.get_value()
         y += self._vadjust.get_value()
         return (x, y)
 
     def set_cursor(self, mode):
-        
+        """Set the cursor on the main layout area to <mode>. You should
+        probably use the cursor_handler instead of using this method
+        directly.
         """
-        Set the cursor on the main layout area to <mode>. You should probably
-        use the cursor_handler instead of using this method directly.
-        """
-
         self._main_layout.window.set_cursor(mode)
         return False
 
-    def _display_active_widgets(self):
-        
-        """ 
-        Hide and/or show main window widgets depending on the current
+    def update_title(self):
+        """Set the title acording to current state."""
+        if self.displayed_double():
+            title = encoding.to_unicode('[%d,%d / %d]  %s - Comix' % (
+                self.file_handler.get_current_page(),
+                self.file_handler.get_current_page() + 1,
+                self.file_handler.get_number_of_pages(),
+                self.file_handler.get_pretty_current_filename()))
+        else:
+            title = encoding.to_unicode('[%d / %d]  %s - Comix' % (
+                self.file_handler.get_current_page(),
+                self.file_handler.get_number_of_pages(),
+                self.file_handler.get_pretty_current_filename()))
+        if self.slideshow.is_running():
+            title = '[%s] %s' % (_('SLIDESHOW'), title)
+        self.set_title(title)
+
+    def _display_active_widgets(self): 
+        """Hide and/or show main window widgets depending on the current
         state.
         """
-        
         if not prefs['hide all'] and not (self.is_fullscreen and 
           prefs['hide all in fullscreen']):
             if prefs['show toolbar']:
@@ -694,30 +684,9 @@ class MainWindow(gtk.Window):
             self.thumbnailsidebar.hide()
             self._vscroll.hide_all()
             self._hscroll.hide_all()
-        
-    def _set_title(self):
-        
-        """ Set the title acording to current state. """
-
-        if self.displayed_double():
-            self.set_title(encoding.to_unicode( 
-                '[%d,%d / %d]  %s - Comix' %
-                (self.file_handler.get_current_page(),
-                self.file_handler.get_current_page() + 1,
-                self.file_handler.get_number_of_pages(),
-                self.file_handler.get_pretty_current_filename())))
-        else:
-            self.set_title(encoding.to_unicode( 
-                '[%d / %d]  %s - Comix' %
-                (self.file_handler.get_current_page(),
-                self.file_handler.get_number_of_pages(),
-                self.file_handler.get_pretty_current_filename())))
 
     def terminate_program(self, *args):
-        
-        """ Run clean-up tasks and exit the program. """
-
-        print 'Bye!'
+        """Run clean-up tasks and exit the program."""
         self.hide()
         if gtk.main_level() > 0:
             gtk.main_quit()
@@ -726,5 +695,6 @@ class MainWindow(gtk.Window):
             os.mkdir(constants.COMIX_DIR)
         preferences.write_preferences_file()
         self.ui_manager.bookmarks.write_bookmarks_file()
+        print 'Bye!'
         sys.exit(0)
 

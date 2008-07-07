@@ -29,7 +29,7 @@ install_dir = '/usr/local/'
 install_mime = True
 
 TRANSLATIONS = ('sv', 'es', 'zh_CN', 'zh_TW', 'pt_BR', 'de', 'it', 'nl',
-    'fr', 'pl', 'el', 'ca', 'ja', 'hu', 'ru', 'hr', 'cz')
+    'fr', 'pl', 'el', 'ca', 'ja', 'hu', 'ru', 'hr', 'cs', 'fa', 'id', 'ko')
 
 FILES = (("src/about.py", "share/comix/src"),
          ("src/about.pyc", "share/comix/src"),
@@ -63,6 +63,8 @@ FILES = (("src/about.py", "share/comix/src"),
          ("src/image.pyc", "share/comix/src"),
          ("src/lens.py", "share/comix/src"),
          ("src/lens.pyc", "share/comix/src"),
+         ("src/library.py", "share/comix/src"),
+         ("src/library.pyc", "share/comix/src"),
          ("src/main.py", "share/comix/src"),
          ("src/main.pyc", "share/comix/src"),
          ("src/preferences.py", "share/comix/src"),
@@ -150,19 +152,14 @@ MIME_LINKS = (('application-x-cbz.png',
                'share/icons/hicolor/48x48/mimetypes/application-x-cbt.png'))
 
 def info():
-    
-    """ Print usage info and exit. """
-
+    """Print usage info and exit."""
     print __doc__
     sys.exit(1)
 
 def install(src, dst):
-    
-    """
-    Copy <src> to <dst>. The <src> path is relative to the source_dir and
+    """Copy <src> to <dst>. The <src> path is relative to the source_dir and
     the <dst> path is a directory relative to the install_dir.
     """
-
     try:
         dst = os.path.join(install_dir, dst, os.path.basename(src))
         src = os.path.join(source_dir, src)
@@ -176,12 +173,9 @@ def install(src, dst):
         print 'Could not install', dst
 
 def uninstall(path):
-    
-    """
-    Remove the file or directory at <path>, which is relative to the 
+    """Remove the file or directory at <path>, which is relative to the 
     install_dir.
     """
-
     try:
         path = os.path.join(install_dir, path)
         if os.path.isfile(path) or os.path.islink(path):
@@ -195,13 +189,10 @@ def uninstall(path):
         print 'Could not remove', path
 
 def make_link(src, link):
-    
-    """
-    Create a symlink <link> pointing to <src>. The <link> path is relative
+    """Create a symlink <link> pointing to <src>. The <link> path is relative
     to the install_dir, and the <src> path is relative to the full path of
     the created link.
     """
-
     try:
         link = os.path.join(install_dir, link)
         if os.path.isfile(link) or os.path.islink(link):
@@ -214,9 +205,7 @@ def make_link(src, link):
         print 'Could not create symlink', link
 
 def check_dependencies():
-    
-    """ Check for required and recommended dependencies. """
-
+    """Check for required and recommended dependencies."""
     required_found = True
     recommended_found = True
     print 'Checking dependencies ...\n'
@@ -296,7 +285,6 @@ if args == ['install']:
             os.path.join('share/locale/', lang, 'LC_MESSAGES'))
     for src, link in LINKS:
         make_link(src, link)
-    
     if install_mime:
         for src, dst in MIME_FILES:
             install(src, dst)

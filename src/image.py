@@ -1,6 +1,4 @@
-# ============================================================================
-# image.py - Various image manipulations.
-# ============================================================================
+"""image.py - Various image manipulations."""
 
 import gtk
 import Image
@@ -9,10 +7,8 @@ import ImageOps
 
 import preferences
 
-def fit_in_rectangle(src, width, height, scale_up=False, rotation=0):
-    
-    """
-    Scale (and return) a pixbuf so that it fits in a rectangle with
+def fit_in_rectangle(src, width, height, scale_up=False, rotation=0): 
+    """Scale (and return) a pixbuf so that it fits in a rectangle with
     dimensions <width> x <height>. A negative <width> or <height>
     means an unbounded dimension - both cannot be negative.
 
@@ -24,7 +20,6 @@ def fit_in_rectangle(src, width, height, scale_up=False, rotation=0):
 
     If <src> has an alpha channel it gets a checkboard background.
     """
-    
     # "Unbounded" really means "bounded to 10000 px" - for simplicity.
     # Comix would choke on larger images anyway.
     if width < 0:
@@ -61,17 +56,14 @@ def fit_in_rectangle(src, width, height, scale_up=False, rotation=0):
         src = src.rotate_simple(gtk.gdk.PIXBUF_ROTATE_COUNTERCLOCKWISE)
     return src
 
-def fit_2_in_rectangle(src1, src2, width, height, scale_up=False, rotation=0):
-    
-    """
-    Scale two pixbufs so that they fit together (side-by-side) into a
+def fit_2_in_rectangle(src1, src2, width, height, scale_up=False, rotation=0): 
+    """Scale two pixbufs so that they fit together (side-by-side) into a
     rectangle with dimensions <width> x <height>. If one pixbuf does not
     use all of its allotted space, the other one is given it, so that the
     pixbufs are not necessarily scaled to the same percentage.
 
     See fit_in_rectangle() for more info on the parameters.
     """
-
     # "Unbounded" really means "bounded to 10000 px" - for simplicity.
     # Comix would choke on larger images anyway.
     if width < 0:
@@ -105,12 +97,9 @@ def fit_2_in_rectangle(src1, src2, width, height, scale_up=False, rotation=0):
                              scale_up, rotation))
     
 def add_border(pixbuf, thickness, colour=0x000000FF):
-
-    """
-    Return a pixbuf from <pixbuf> with a <thickness> px border of 
+    """Return a pixbuf from <pixbuf> with a <thickness> px border of 
     <colour> added.
     """
-
     canvas = gtk.gdk.Pixbuf(gtk.gdk.COLORSPACE_RGB, True, 8,
         pixbuf.get_width() + thickness * 2,
         pixbuf.get_height() + thickness * 2)
@@ -120,9 +109,7 @@ def add_border(pixbuf, thickness, colour=0x000000FF):
     return canvas
 
 def pil_to_pixbuf(image):
-    
-    """ Return a pixbuf created from the PIL <image>. """
-
+    """Return a pixbuf created from the PIL <image>."""
     imagestr = image.tostring()
     IS_RGBA = image.mode == 'RGBA'
     return gtk.gdk.pixbuf_new_from_data(imagestr, gtk.gdk.COLORSPACE_RGB,
@@ -130,9 +117,7 @@ def pil_to_pixbuf(image):
         (IS_RGBA and 4 or 3) * image.size[0])
 
 def pixbuf_to_pil(pixbuf):
-    
-    """ Return a PIL image created from <pixbuf>. """
-
+    """Return a PIL image created from <pixbuf>."""
     dimensions = pixbuf.get_width(), pixbuf.get_height()
     stride = pixbuf.get_rowstride()
     pixels = pixbuf.get_pixels()
@@ -141,15 +126,12 @@ def pixbuf_to_pil(pixbuf):
 
 def enhance(pixbuf, brightness=1.0, contrast=1.0, saturation=1.0,
   sharpness=1.0, autocontrast=False):
-    
-    """
-    Return a modified pixbuf from <pixbuf> where the enhancement operations
+    """Return a modified pixbuf from <pixbuf> where the enhancement operations
     corresponding to each argument has been performed. A value of 1.0 means
     no change. If <autocontrast> is True it overrides the <contrast> value,
     but only if the image mode is supported by ImageOps.autocontrast (i.e.
     it is L or RGB.)
     """
-    
     im = pixbuf_to_pil(pixbuf)
     if brightness != 1.0:
         im = ImageEnhance.Brightness(im).enhance(brightness)

@@ -1,18 +1,15 @@
-# ============================================================================
-# archive.py - Archive handling (extract/create) for Comix.
-# ============================================================================
+"""archive.py - Archive handling (extract/create (not yet)) for Comix."""
 
 import sys
 import os
+import re
 import zipfile
 import tarfile
 import threading
 
 import process
 
-# ------------------------------------------------------------------------
 # Determine if rar/unrar exists, and bind the executable path to _rar_exec
-# ------------------------------------------------------------------------
 _rar_exec = None
 for path in os.getenv('PATH', '').split(':') + [os.path.curdir]:
     if os.path.isfile(os.path.join(path, 'unrar')):
@@ -27,9 +24,8 @@ if not _rar_exec:
 
 
 class Extractor:
-    
-    """
-    Extractor is a threaded class for extracting different archive formats.
+
+    """Extractor is a threaded class for extracting different archive formats.
 
     The Extractor can be loaded with paths to archives (currently ZIP, tar,
     or RAR archives) and a path to a destination directory. Once an archive
@@ -42,17 +38,15 @@ class Extractor:
     Note: Support for gzip/bzip2 compressed tar archives is limited, see
     set_files() for more info.
     """
-    
+
     def __init__(self):
         self._setupped = False
     
     def setup(self, src, dst):
-        
+        """Setup the extractor with archive <src> and destination dir <dst>.
+        Return a threading Condition related to the is_ready() method, or 
+        None if the format of <src> isn't supported.
         """
-        Setup the extractor with archive <src> and destination dir <dst>.
-        Return a threading Condition related to the is_ready() method.
-        """
-
         self._src = src
         self._dst = dst
         self._type = archive_mime_type(src)
@@ -68,34 +62,28 @@ class Extractor:
         elif self._type in ['tar', 'gzip', 'bzip2']:
             self._tfile = tarfile.open(src, 'r')
             self._files = self._tfile.getnames()
-        elif self._type == 'rar':
-            if not _rar_exec:
-                # FIXME: Set statusbar or popup dialog.
-                pass
+        elif self._type == 'rar' and _rar_exec:
             proc = process.Process([_rar_exec, 'vb', src])
             fobj = proc.spawn()
-            self._files = fobj.readlines()
+            self._files = [name.rstrip('\n') for name in fobj.readlines()]
+            fobj.close()
             proc.wait()
-            self._files = [name.rstrip('\n') for name in self._files]
+        else:
+            return None
         
         self._setupped = True
         return self._condition
     
     def get_files(self):
-        
-        """
-        Return a list of names of all the files the extractor is currently
+        """Return a list of names of all the files the extractor is currently
         set for extracting. After a call to setup() this is by default all
         files found in the archive. The paths in the list are relative to
         the archive root and are not absolute for the files once extracted.
         """
-
         return self._files[:]
 
     def set_files(self, files):
-        
-        """
-        Set the files that the extractor should extract from the archive in
+        """Set the files that the extractor should extract from the archive in
         the order of extraction. Normally one would get the list of all files
         in the archive using get_files(), then filter and/or permute this
         list before sending it back using set_files().
@@ -106,97 +94,90 @@ class Extractor:
         not be used for scanned comic books. So, we cheat and ignore the
         ordering applied with this method on such archives.
         """
-
         if self._type == 'gzip' or self._type == 'bzip2':
             self._files = filter(files.count, self._files)
         else:
             self._files = files
 
     def is_ready(self, name):
-
-        """
-        Return True if the file <name> in the extractors file list
+        """Return True if the file <name> in the extractor's file list
         (as set by set_files()) is fully extracted.
         """
-        
         return self._extracted.get(name, False)
 
     def get_mime_type(self):
-        
-        """ Return the mime type name of the extractor's current archive. """
-
+        """Return the mime type name of the extractor's current archive."""
         return self._type
 
     def stop(self):
-        
-        """
-        Signal the extractor to stop extracting and kill the extracting
+        """Signal the extractor to stop extracting and kill the extracting
         thread. Blocks until the extracting thread has terminated.
         """
-
         self._stop = True
         if self._setupped:
             self._extract_thread.join()
             self.setupped = False
 
     def extract(self):
-        
-        """
-        Start extracting the files in the file list one by one using a
+        """Start extracting the files in the file list one by one using a
         new thread. Every time a new file is extracted a notify() will be
-        signalled the Condition that was returned by setup().
+        signalled on the Condition that was returned by setup().
         """
-
         self._extract_thread = threading.Thread(target=self._thread_extract)
         self._extract_thread.setDaemon(False)
         self._extract_thread.start()
 
+    def close(self):
+        """Close any open file objects, need only be called manually if the
+        extract() method isn't called.
+        """
+        if self._type == 'zip':
+            self._zfile.close()
+        elif self._type in ['tar', 'gzip', 'bzip2']:
+            self._tfile.close()
+
     def _thread_extract(self):
-        
-        """ Extract the files in the file list one by one. """
-        
-
+        """Extract the files in the file list one by one."""
         for name in self._files:
-            self._extract_file(name, self._dst)
+            self._extract_file(name)
+        self.close()
 
-    def _extract_file(self, name, dst):
-        
+    def _extract_file(self, name):
+        """Extract the file named <name> to the destination directory,
+        mark the file as "ready", then signal a notify() on the Condition
+        returned by setup().
         """
-        Extract the file named <name> to directory <dst>, mark the file
-        as "ready", then signal a notify() on the Condition returned by
-        setup().
-        """
-        
         if self._stop:
+            self.close()
             sys.exit(0)
         try:
             if self._type == 'zip':
-                dst_path = os.path.join(dst, name)
+                dst_path = os.path.join(self._dst, name)
                 if not os.path.exists(os.path.dirname(dst_path)):
                     os.makedirs(os.path.dirname(dst_path))
                 new = open(dst_path, 'w')
                 new.write(self._zfile.read(name))
                 new.close()
             elif self._type in ['tar', 'gzip', 'bzip2']:
-                if os.path.normpath(os.path.join(dst, name)).startswith(dst):
-                    self._tfile.extract(name, dst)
+                if os.path.normpath(os.path.join(self._dst, name)).startswith(
+                  self._dst):
+                    self._tfile.extract(name, self._dst)
                 else:
                     print '! archive.py: Non-local tar member:', name, '\n'
             elif self._type == 'rar':
                 if _rar_exec:
                     proc = process.Process([_rar_exec, 'x', '-p-', '-o-',
-                        '-inul', '--', self._src, name, dst])
+                        '-inul', '--', self._src, name, self._dst])
                     proc.spawn()
                     proc.wait()
                 else:
                     print '! archive.py: Could not find RAR file extractor.\n'
-        except:
+        except Exception:
             # Better to ignore any failed extractions (e.g. from corrupt
             # archive) than to crash here and leave the main thread in a
-            # possible infinite block. Damaged files *should* be
+            # possible infinite block. Damaged or missing files *should* be
             # handled gracefully by the main program anyway.
             pass
-        
         self._condition.acquire()
         self._extracted[name] = True
         self._condition.notify()
@@ -204,9 +185,7 @@ class Extractor:
 
 
 def archive_mime_type(path):
-    
-    """ Return the archive type of <path> or None for non-archives. """
-    
+    """Return the archive type of <path> or None for non-archives."""
     try:
         if os.path.isfile(path):
             if zipfile.is_zipfile(path):
@@ -222,17 +201,26 @@ def archive_mime_type(path):
                 return 'tar'
             if magic == 'Rar!':
                 return 'rar'
-    except:
+    except Exception:
         print '! archive.py: Error while reading', path, '\n'
     return None
 
 def get_name(archive_type):
-    
-    """ Return a text representation of an archive type. """
-
+    """Return a text representation of an archive type."""
     return {'zip':   _('ZIP archive'),
             'tar':   _('Tar archive'),
             'gzip':  _('Gzip compressed tar archive'),
             'bzip2': _('Bzip2 compressed tar archive'),
             'rar':   _('RAR archive')}[archive_type]
+
+def get_archive_info(path):
+    image_re = re.compile(r'\.(jpg|jpeg|png|gif|tif|tiff)\s*$', re.I)
+    extractor = Extractor()
+    extractor.setup(path, None)
+    mime = extractor.get_mime_type()
+    files = extractor.get_files()
+    extractor.close()
+    num_pages = len(filter(image_re.search, files))
+    size = os.stat(path).st_size
+    return (mime, num_pages, size)
 

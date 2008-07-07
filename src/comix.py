@@ -1,32 +1,25 @@
 #!/usr/bin/env python
-# -*- coding: utf-8 -*-
 
-"""
--------------------------------------------------------------------------
-
-Comix 4.0dev - GTK Comic Book Viewer
+"""Comix - GTK Comic Book Viewer
 
 Copyright (C) 2005-2008 Pontus Ekberg
 <herrekberg@users.sourceforge.net>
-
--------------------------------------------------------------------------
-
-This program is free software; you can redistribute it and/or modify
-it under the terms of the GNU General Public License as published by
-the Free Software Foundation; either version 2 of the License, or
-(at your option) any later version.
-
-This program is distributed in the hope that it will be useful,
-but WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-GNU General Public License for more details.
-
-You should have received a copy of the GNU General Public License
-along with this program; if not, write to the Free Software
-Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
-
--------------------------------------------------------------------------
 """
+
+# -------------------------------------------------------------------------
+# This program is free software; you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation; either version 2 of the License, or
+# (at your option) any later version.
+# 
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+# 
+# You should have received a copy of the GNU General Public License
+# along with this program; if not, write to the Free Software
+# -------------------------------------------------------------------------
 
 import os
 import sys
@@ -54,7 +47,7 @@ except AssertionError:
         '.'.join([str(n) for n in gtk.pygtk_version]))
     print 'Required PyGTK version is: 2.10.0 or higher'
     sys.exit(1)
-except:
+except ImportError:
     print 'PyGTK version 2.10.0 or higher is required to run Comix.'
     print 'No version of PyGTK was found on your system.'
     sys.exit(1)
@@ -68,8 +61,8 @@ except AssertionError:
     print 'Installed PIL version is: %s' % Image.VERSION
     print 'Required PIL version is: 1.1.4 or higher'
     sys.exit(1)
-except:
-    print 'Python Imaging Library (PIL) 1.1.4 or higher is required to run.'
+except ImportError:
+    print 'Python Imaging Library (PIL) 1.1.4 or higher is required.'
     print 'No version of the Python Imaging Library was found on your system.'
     sys.exit(1)
 

@@ -1,6 +1,4 @@
-# ============================================================================
-# icons.py - Load Comix specific icons.
-# ============================================================================
+"""icons.py - Load Comix specific icons."""
 
 import os
 import sys
@@ -31,12 +29,9 @@ _icons = (('gimp-flip-horizontal.png',   'comix-flip-horizontal'),
           ('fitmanual.png',              'comix-fitmanual'))
 
 def load():
-    
-    """
-    Load Comix specific icons to the default stock set. Should be called
+    """Load Comix specific icons to the default stock set. Should be called
     at startup.
     """
-
     # Some heuristics to find the path to the icon image files.
     cwd = os.path.dirname(os.path.realpath(sys.argv[0]))
     if os.path.isfile(os.path.join(os.path.dirname(cwd), 'images/comix.png')):
@@ -58,7 +53,7 @@ def load():
             pixbuf = gtk.gdk.pixbuf_new_from_file(filename)
             iconset = gtk.IconSet(pixbuf)
             factory.add(stockid, iconset)
-        except:
+        except Exception:
             continue
     factory.add_default()
 

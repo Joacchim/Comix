@@ -1,7 +1,5 @@
 # -*- coding: utf-8 -*-
-# ============================================================================
-# about.py - About dialog.
-# ============================================================================
+"""about.py - About dialog."""
 
 from os.path import join, dirname, isfile
 import sys
@@ -20,6 +18,7 @@ class _AboutDialog(gtk.Dialog):
         self.set_has_separator(False)
         self.set_resizable(False)
         self.connect('response', close_dialog)
+        self.set_default_response(gtk.RESPONSE_CLOSE)
         
         notebook = gtk.Notebook()
         self.vbox.pack_start(notebook, False, False, 0)
@@ -31,7 +30,6 @@ class _AboutDialog(gtk.Dialog):
         # ----------------------------------------------------------------
         box = gtk.VBox(False, 0)
         box.set_border_width(5)
-        
         icon_path = join(dirname(dirname(sys.argv[0])), 'images/comix.svg')
         if not isfile(icon_path):
             for prefix in [dirname(dirname(sys.argv[0])), '/usr', '/usr/local',
@@ -45,9 +43,8 @@ class _AboutDialog(gtk.Dialog):
             icon = gtk.Image()
             icon.set_from_pixbuf(pixbuf)
             box.pack_start(icon, False, False, 10)
-        except:
+        except Exception:
             print '! Could not find the icon file "comix.svg"\n'
-        
         label = gtk.Label()
         label.set_markup(
         '<big><big><big><big><b><span foreground="#333333">Com</span>' +
@@ -72,7 +69,6 @@ class _AboutDialog(gtk.Dialog):
         # ----------------------------------------------------------------
         box = gtk.VBox(False, 5)
         box.set_border_width(5)
-
         for nice_person, description in (
             ('Pontus Ekberg', _('Developer')),
             ('Emfox Zhou &amp; Xie Yanbo',
@@ -92,32 +88,29 @@ class _AboutDialog(gtk.Dialog):
             ('Ernő Drabik', _('Hungarian translation')),
             ('Artyom Smirnov', _('Russian translation')),
             ('Adrian C.', _('Croatian translation')),
+            ('김민기', _('Korean translation')),
+            ('Maryam Sanaat', _('Persian translation')),
+            ('Andhika Padmawan', _('Indonesian translation')),
             ('Jan Nekvasil', _('Czech translation'))
             ):
             label = gtk.Label()
             label.set_markup('<b>%s:</b>   %s' % (nice_person, description))
             box.pack_start(label, False, False, 0)
             label.set_alignment(0, 0.5)
-
         notebook.insert_page(box, gtk.Label(_('Credits')))
-        self.action_area.get_children()[0].grab_focus()
         self.show_all()
         
 
 def open_dialog(*args):
-
-    """ Create and display the (singleton) about dialog. """
-
+    """Create and display the (singleton) about dialog."""
     global _dialog
-    if _dialog == None:
+    if _dialog is None:
         _dialog = _AboutDialog()
 
 def close_dialog(*args):
-    
-    """ Destroy the about dialog. """
-
+    """Destroy the about dialog."""
     global _dialog
-    if _dialog != None:
+    if _dialog is not None:
         _dialog.destroy()
         _dialog = None
 
