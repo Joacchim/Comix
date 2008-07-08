@@ -51,7 +51,7 @@ Dependencies
 Comix needs Python 2.4, PyGTK 2.10.0 and PIL (Python Imaging Library) 1.1.4 or
 newer to function. 
 
-You also need the `unrar` or `rar` program installed if you wish to read
+You also need the "unrar" or "rar" program installed if you wish to read
 RAR (.cbr) archives.
 
 
@@ -73,5 +73,5 @@ Don't hesitate to contact me.
 
 
 --------------------------------------------------------------------------------
-Have a nice day, and kids, remember to eat your vegetables.
+Have a nice day.
 

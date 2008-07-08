@@ -383,6 +383,10 @@ class MainWindow(gtk.Window):
             self.zoom_mode = 'width'
         else:
             self.zoom_mode = 'height'
+        sensitive = (self.zoom_mode == 'manual')
+        self.actiongroup.get_action('zoom_in').set_sensitive(sensitive)
+        self.actiongroup.get_action('zoom_out').set_sensitive(sensitive)
+        self.actiongroup.get_action('zoom_original').set_sensitive(sensitive)
         if old_mode != self.zoom_mode:
             self.draw_image()
     
@@ -408,6 +412,12 @@ class MainWindow(gtk.Window):
 
     def change_hide_all(self, *args):
         prefs['hide all'] = not prefs['hide all']
+        sensitive = not prefs['hide all']
+        self.actiongroup.get_action('toolbar').set_sensitive(sensitive)
+        self.actiongroup.get_action('menubar').set_sensitive(sensitive)
+        self.actiongroup.get_action('statusbar').set_sensitive(sensitive)
+        self.actiongroup.get_action('scrollbar').set_sensitive(sensitive)
+        self.actiongroup.get_action('thumbnails').set_sensitive(sensitive)
         self.draw_image()
 
     def change_keep_rotation(self, *args):

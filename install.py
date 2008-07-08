@@ -3,7 +3,7 @@
 """
 This script installs or uninstalls Comix on your system.
 -------------------------------------------------------------------------------
-Usage: install.py [options] [command]
+Usage: install.py [OPTIONS] COMMAND
 
 Commands:
     install                  Install to /usr/local

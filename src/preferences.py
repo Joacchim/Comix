@@ -111,7 +111,7 @@ def read_preferences_file():
             old_prefs = cPickle.load(config)
             config.close()
         except Exception:
-            print '! preferences.py: Error reading or writing', _config_path
+            print '! Error in preferences file "%s", deleting...' % _config_path
             os.remove(_config_path)
         else:
             for key in old_prefs:

@@ -33,12 +33,11 @@ def load():
     at startup.
     """
     # Some heuristics to find the path to the icon image files.
-    cwd = os.path.dirname(os.path.realpath(sys.argv[0]))
-    if os.path.isfile(os.path.join(os.path.dirname(cwd), 'images/comix.png')):
-        icon_path = os.path.join(os.path.dirname(cwd), 'images')
-    else:
-        for prefix in [os.path.dirname(os.path.dirname(sys.argv[0])),
-            '/usr', '/usr/local', '/usr/X11R6']:
+    base = os.path.dirname(os.path.dirname(os.path.realpath(sys.argv[0])))
+    if os.path.isfile(os.path.join(base, 'images/comix.png')): # Source dir
+        icon_path = os.path.join(base, 'images')
+    else: # Installed in some system dir
+        for prefix in [base, '/usr', '/usr/local', '/usr/X11R6']:
             if os.path.isfile(os.path.join(prefix,
                 'share/pixmaps/comix/comix.png')): # Try one
                 icon_path = os.path.join(prefix, 'share/pixmaps/comix')
@@ -54,6 +53,6 @@ def load():
             iconset = gtk.IconSet(pixbuf)
             factory.add(stockid, iconset)
         except Exception:
-            continue
+            print '! Could not load icon "%s".' % stockid
     factory.add_default()
 
