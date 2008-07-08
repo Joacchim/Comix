@@ -79,7 +79,7 @@ class _EnhanceImageDialog(gtk.Dialog):
         label = gtk.Label(_('Brightness') + ':')
         label.set_alignment(1, 0.5)
         vbox_left.pack_start(label, True, False, 2)
-        adj = gtk.Adjustment(1.0, 0, 2.0, 0.01, 0.1)
+        adj = gtk.Adjustment(0.0, -1.0, 1.0, 0.01, 0.1)
         self._brightness_scale = gtk.HScale(adj)
         self._brightness_scale.set_digits(2)
         self._brightness_scale.set_value_pos(gtk.POS_RIGHT)
@@ -90,7 +90,7 @@ class _EnhanceImageDialog(gtk.Dialog):
         label = gtk.Label(_('Contrast') + ':')
         label.set_alignment(1, 0.5)
         vbox_left.pack_start(label, True, False, 2)
-        adj = gtk.Adjustment(1.0, 0, 2.0, 0.01, 0.1)
+        adj = gtk.Adjustment(0.0, -1.0, 1.0, 0.01, 0.1)
         self._contrast_scale = gtk.HScale(adj)
         self._contrast_scale.set_digits(2)
         self._contrast_scale.set_value_pos(gtk.POS_RIGHT)
@@ -101,7 +101,7 @@ class _EnhanceImageDialog(gtk.Dialog):
         label = gtk.Label(_('Saturation') + ':')
         label.set_alignment(1, 0.5)
         vbox_left.pack_start(label, True, False, 2)
-        adj = gtk.Adjustment(1.0, 0, 2.0, 0.01, 0.1)
+        adj = gtk.Adjustment(0.0, -1.0, 1.0, 0.01, 0.1)
         self._saturation_scale = gtk.HScale(adj)
         self._saturation_scale.set_digits(2)
         self._saturation_scale.set_value_pos(gtk.POS_RIGHT)
@@ -112,7 +112,7 @@ class _EnhanceImageDialog(gtk.Dialog):
         label = gtk.Label(_('Sharpness') + ':')
         label.set_alignment(1, 0.5)
         vbox_left.pack_start(label, True, False, 2)
-        adj = gtk.Adjustment(1.0, 0, 2.0, 0.01, 0.1)
+        adj = gtk.Adjustment(0.0, -1.0, 1.0, 0.01, 0.1)
         self._sharpness_scale = gtk.HScale(adj)
         self._sharpness_scale.set_digits(2)
         self._sharpness_scale.set_value_pos(gtk.POS_RIGHT)
@@ -128,10 +128,10 @@ class _EnhanceImageDialog(gtk.Dialog):
         self._autocontrast_button.connect('toggled', self._change_values)
 
         self._block = True
-        self._brightness_scale.set_value(self._enhancer.brightness)
-        self._contrast_scale.set_value(self._enhancer.contrast)
-        self._saturation_scale.set_value(self._enhancer.saturation)
-        self._sharpness_scale.set_value(self._enhancer.sharpness)
+        self._brightness_scale.set_value(self._enhancer.brightness - 1)
+        self._contrast_scale.set_value(self._enhancer.contrast - 1)
+        self._saturation_scale.set_value(self._enhancer.saturation - 1)
+        self._sharpness_scale.set_value(self._enhancer.sharpness - 1)
         self._autocontrast_button.set_active(self._enhancer.autocontrast)
         self._block = False
         self._contrast_scale.set_sensitive(
@@ -153,10 +153,10 @@ class _EnhanceImageDialog(gtk.Dialog):
     def _change_values(self, *args):
         if self._block:
             return
-        self._enhancer.brightness = self._brightness_scale.get_value()
-        self._enhancer.contrast = self._contrast_scale.get_value()
-        self._enhancer.saturation = self._saturation_scale.get_value()
-        self._enhancer.sharpness = self._sharpness_scale.get_value()
+        self._enhancer.brightness = self._brightness_scale.get_value() + 1
+        self._enhancer.contrast = self._contrast_scale.get_value() + 1
+        self._enhancer.saturation = self._saturation_scale.get_value() + 1
+        self._enhancer.sharpness = self._sharpness_scale.get_value() + 1
         self._enhancer.autocontrast = self._autocontrast_button.get_active()
         self._contrast_scale.set_sensitive(
             not self._autocontrast_button.get_active())
@@ -167,10 +167,10 @@ class _EnhanceImageDialog(gtk.Dialog):
             close_dialog()
         elif response == gtk.RESPONSE_NO:
             self._block = True
-            self._brightness_scale.set_value(1.0)
-            self._contrast_scale.set_value(1.0)
-            self._saturation_scale.set_value(1.0)
-            self._sharpness_scale.set_value(1.0)
+            self._brightness_scale.set_value(0.0)
+            self._contrast_scale.set_value(0.0)
+            self._saturation_scale.set_value(0.0)
+            self._sharpness_scale.set_value(0.0)
             self._autocontrast_button.set_active(False)
             self._block = False
             self._change_values(self)

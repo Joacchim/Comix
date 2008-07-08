@@ -72,10 +72,9 @@ class BookmarksMenu(gtk.Menu):
         dialog.
         """
         choice_dialog = gtk.MessageDialog(None, 0 , gtk.MESSAGE_QUESTION,
-            gtk.BUTTONS_YES_NO, 'Clear all bookmarks?')
+            gtk.BUTTONS_YES_NO, _('Clear all bookmarks?'))
         choice_dialog.format_secondary_text(
-            'All stored bookmarks will be removed, ' + 
-            'are you sure you want to continue?')
+            _('All stored bookmarks will be removed, are you sure you want to continue?'))
         response = choice_dialog.run()
         choice_dialog.destroy()
         if response == gtk.RESPONSE_YES:
