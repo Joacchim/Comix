@@ -151,14 +151,10 @@ def _add_page_number(pixbuf, page):
     <pixbuf>. This is highly dependent on the dimensions of the built-in 
     font in PIL (bad). If the PIL font was changed, this function would
     likely produce badly positioned numbers on the pixbuf.
-
-    Adding page numbers on thumbnails introduces a small but measurable
-    delay overhead when we have a large number of pages. Making this
-    function more efficient would be a good idea.
     """
     text = str(page)
-    width = 6 * len(text) + 2
-    height = 10
+    width = min(6 * len(text) + 2, pixbuf.get_width())
+    height = min(10, pixbuf.get_height())
     im = Image.new('RGB', (width, height), (0, 0, 0))
     draw = ImageDraw.Draw(im)
     draw.text((1, -1), text, fill=(255, 255, 255))
