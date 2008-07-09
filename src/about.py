@@ -51,7 +51,7 @@ class _AboutDialog(gtk.Dialog):
         '<span foreground="#79941b">ix</span> <span foreground="#333333">' +
         constants.VERSION +
         '</span></b></big></big></big></big>\n\n' +
-        _('Comix is an image viewer specifically designed to handle comics.') +
+        _('Comix is an image viewer specifically designed to handle comic books.') +
         '\n' +
         _('It reads ZIP, RAR and tar archives, as well as plain image files.') +
         '\n\n' +
@@ -62,6 +62,7 @@ class _AboutDialog(gtk.Dialog):
         'http://comix.sourceforge.net</small>\n')
         box.pack_start(label, True, True, 0)
         label.set_justify(gtk.JUSTIFY_CENTER)
+        label.set_selectable(True)
         notebook.insert_page(box, gtk.Label(_('About')))
         
         # ----------------------------------------------------------------

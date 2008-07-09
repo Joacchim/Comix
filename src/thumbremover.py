@@ -1,0 +1,226 @@
+"""thumbremover.py - Thumbnail maintenance module for Comix.
+Removes and cleans up outdated and orphaned thumbnails.
+"""
+
+import os
+import urllib
+
+import gtk
+import pango
+import Image
+
+import labels
+
+_dialog = None
+_thumb_base = os.path.join(os.getenv('HOME'), '.thumbnails')
+
+class _ThumbnailMaintenanceDialog(gtk.Dialog):
+
+    def __init__(self):
+        self._num_thumbs = 0
+        gtk.Dialog.__init__(self, _('Thumbnail maintenance'), None, 0,
+            (gtk.STOCK_NO, gtk.RESPONSE_NO,
+            gtk.STOCK_YES, gtk.RESPONSE_YES))
+        self.set_has_separator(False)
+        self.set_resizable(False)
+        self.set_border_width(4)
+        self.connect('response', self._response)
+        self.set_default_response(gtk.RESPONSE_YES)
+        main_box = gtk.VBox(False, 5)
+        main_box.set_border_width(6)
+        self.vbox.pack_start(main_box, False, False)
+
+        label = labels.bold_label(_('Cleanup thumbnails'))
+        label.set_alignment(0, 0.5)
+        attrlist = label.get_attributes()
+        attrlist.insert(pango.AttrScale(pango.SCALE_LARGE, 0,
+            len(label.get_text())))
+        label.set_attributes(attrlist)
+        main_box.pack_start(label, False, False, 2)
+        main_box.pack_start(gtk.HSeparator(), False, False, 5)
+
+        label = labels.italic_label(
+            _('Thumbnails for files (such as image files and comic book archives) are stored in your home folder. Many different applications use and create these thumbnails, but sometimes thumbnails remain even though the original files have been removed - wasting space. This dialog can cleanup your stored thumbnails by removing orphaned and outdated thumbnails.'))
+        label.set_alignment(0, 0.5)
+        label.set_line_wrap(True)
+        main_box.pack_start(label, False, False, 10)
+        
+        hbox = gtk.HBox(False, 10)
+        main_box.pack_start(hbox, False, False)
+        left_box = gtk.VBox(False, 5)
+        right_box = gtk.VBox(False, 5)
+        hbox.pack_start(left_box, False, False)
+        hbox.pack_start(right_box, False, False)
+
+        label = labels.bold_label('%s:' % _('Thumbnail directory'))
+        label.set_alignment(1.0, 0.5)
+        left_box.pack_start(label, False, False)
+        label = gtk.Label('%s' % _thumb_base)
+        label.set_alignment(0, 0.5)
+        right_box.pack_start(label, False, False)
+
+        label = labels.bold_label('%s:' % _('Total number of thumbnails'))
+        label.set_alignment(1.0, 0.5)
+        left_box.pack_start(label, False, False)
+        self._num_thumbs_label = gtk.Label(_('Calculating...'))
+        self._num_thumbs_label.set_alignment(0, 0.5)
+        right_box.pack_start(self._num_thumbs_label, False, False)
+
+        label = labels.bold_label('%s:' % _('Total size of thumbnails'))
+        label.set_alignment(1.0, 0.5)
+        left_box.pack_start(label, False, False)
+        self._size_thumbs_label = gtk.Label(_('Calculating...'))
+        self._size_thumbs_label.set_alignment(0, 0.5)
+        right_box.pack_start(self._size_thumbs_label, False, False)
+        
+        label = labels.italic_label(
+            _('Do you want to cleanup orphaned and outdated thumbnails now?'))
+        label.set_alignment(0, 0.5)
+        main_box.pack_start(label, False, False, 10)
+
+        self.show_all()
+        while gtk.events_pending():
+            gtk.main_iteration(False)
+        self._update_num_and_size()
+
+    def _update_num_and_size(self):
+        self._num_thumbs = 0
+        size_thumbs = 0
+        for subdir in ('normal', 'large'):
+            dir_path = os.path.join(_thumb_base, subdir)
+            if os.path.isdir(dir_path):
+                for entry in os.listdir(dir_path):
+                    entry_path = os.path.join(dir_path, entry)
+                    if os.path.isfile(entry_path):
+                        self._num_thumbs += 1
+                        size_thumbs += os.stat(entry_path).st_size
+        self._num_thumbs_label.set_text('%d' % self._num_thumbs)
+        self._size_thumbs_label.set_text('%.1f MiB' % (size_thumbs / 1048576.0))
+
+    def _response(self, dialog, response):
+        if response == gtk.RESPONSE_YES:
+            _ThumbnailRemover(self._num_thumbs)
+            self._update_num_and_size()
+        else:
+            close_dialog()
+
+
+class _ThumbnailRemover(gtk.Dialog):
+    
+    def __init__(self, total_thumbs):
+        self._total_thumbs = total_thumbs
+        self._destroy = False
+        gtk.Dialog.__init__(self, _('Removing thumbnails'), None, 0,
+            (gtk.STOCK_CLOSE, gtk.RESPONSE_CLOSE))
+        self.set_size_request(400, -1)
+        self.set_has_separator(False)
+        self.set_resizable(False)
+        self.set_border_width(4)
+        self.connect('response', self._response)
+        self.set_default_response(gtk.RESPONSE_CLOSE)
+        main_box = gtk.VBox(False, 5)
+        main_box.set_border_width(6)
+        self.vbox.pack_start(main_box, False, False)
+        
+        label = labels.bold_label(_('Removing outdated thumbnails'))
+        label.set_alignment(0, 0.5)
+        attrlist = label.get_attributes()
+        attrlist.insert(pango.AttrScale(pango.SCALE_LARGE, 0,
+            len(label.get_text())))
+        label.set_attributes(attrlist)
+        main_box.pack_start(label, False, False, 2)
+        
+        hbox = gtk.HBox(False, 10)
+        main_box.pack_start(hbox, False, False, 5)
+        left_box = gtk.VBox(False, 5)
+        right_box = gtk.VBox(False, 5)
+        hbox.pack_start(left_box, False, False)
+        hbox.pack_start(right_box, False, False)
+
+        label = labels.bold_label('%s:' % _('Number of removed thumbnails'))
+        label.set_alignment(1.0, 0.5)
+        left_box.pack_start(label, False, False)
+        number_label = gtk.Label('0')
+        number_label.set_alignment(0, 0.5)
+        right_box.pack_start(number_label, False, False)
+
+        label = labels.bold_label('%s:' % _('Total size of removed thumbnails'))
+        label.set_alignment(1.0, 0.5)
+        left_box.pack_start(label, False, False)
+        size_label = gtk.Label('0.0 MiB')
+        size_label.set_alignment(0, 0.5)
+        right_box.pack_start(size_label, False, False)
+
+        bar = gtk.ProgressBar()
+        main_box.pack_start(bar, False, False)
+        
+        removing_label = gtk.Label('')
+        removing_label.set_alignment(0, 0.5)
+        removing_label.set_ellipsize(pango.ELLIPSIZE_MIDDLE)
+        main_box.pack_start(removing_label, False, False)
+
+        self.show_all()
+
+        iteration = 0.0
+        removed_thumbs = 0
+        size_thumbs = 0
+        for subdir in ('normal', 'large'):
+            dir_path = os.path.join(_thumb_base, subdir)
+            if not os.path.isdir(dir_path):
+                continue
+            for entry in os.listdir(dir_path):
+                if self._destroy:
+                    return
+                iteration += 1
+                entry_path = os.path.join(dir_path, entry)
+                if not os.path.isfile(entry_path):
+                    continue
+                stats = os.stat(entry_path)
+                info = Image.open(entry_path).info
+                orig_path = _uri_to_path(info['Thumb::URI'])
+                if orig_path is not None and not (os.path.isfile(orig_path) and
+                  'Thumb::MTime' in info and 
+                  os.stat(orig_path).st_mtime == int(info['Thumb::MTime'])):
+                    os.remove(entry_path)
+                    removed_thumbs += 1
+                    size_thumbs += stats.st_size
+                    number_label.set_text('%d' % removed_thumbs)
+                    size_label.set_text('%.1f MiB' % (size_thumbs / 1048576.0))
+                    removing_label.set_text(_('Removed thumbnail for "%s"') % 
+                        orig_path)
+                    attrlist = pango.AttrList()
+                    attrlist.insert(pango.AttrStyle(pango.STYLE_ITALIC, 0,
+                        len(removing_label.get_text())))
+                    removing_label.set_attributes(attrlist)
+                if iteration % 50 == 0:
+                    bar.set_fraction(iteration / self._total_thumbs)
+                while gtk.events_pending():
+                    gtk.main_iteration(False)
+
+        self._response()
+
+    def _response(self, *args):
+        self._destroy = True
+        self.destroy()
+
+
+def _uri_to_path(uri):
+    """Return the path corresponding to the URI <uri>, unless it is a
+    non-local resource in which case we return None.
+    """
+    if uri.startswith('file://'):
+        return urllib.url2pathname(uri[7:])
+    else:
+        return None
+
+def open_dialog(*args):
+    global _dialog
+    if _dialog is None:
+        _dialog = _ThumbnailMaintenanceDialog()
+
+def close_dialog(*args):
+    global _dialog
+    if _dialog is not None:
+        _dialog.destroy()
+        _dialog = None
+

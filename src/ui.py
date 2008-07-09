@@ -16,6 +16,7 @@ import library
 import preferences
 import properties
 import recent
+import thumbremover
 
 def bogus(*args):
     print 'Feature not implemented yet.'
@@ -47,8 +48,8 @@ class MainUI(gtk.UIManager):
                 '<Control>0', None, window.manual_zoom_original), 
             ('about', gtk.STOCK_ABOUT, _('_About'),
                 None, None, about.open_dialog),
-            ('edit_thumbnails', 'comix-thumbnails', _('_Manage thumbnails...'),
-                None, None, bogus),
+            ('edit_thumbnails', 'comix-thumbnails', _('_Thumbnail maintenance...'),
+                None, None, thumbremover.open_dialog),
             ('add_to_library', 'comix-library-add', _('_Add to library'),
                 None, None, bogus),
             ('edit_archive', gtk.STOCK_EDIT, _('_Edit archive...'),

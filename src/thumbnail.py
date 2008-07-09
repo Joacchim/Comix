@@ -84,11 +84,10 @@ def _get_new_archive_thumbnail(path, dst_dir):
     return pixbuf
 
 def _create_thumbnail(path, dst_dir, image_path=None):
-    """Create a thumbnail from the file at <path> and store it in the standard
-    thumbnail directory, if it is larger than 128x128 px. A pixbuf for the
-    thumbnail is returned.
+    """Create a thumbnail from the file at <path> and store it if it is
+    larger than 128x128 px. A pixbuf for the thumbnail is returned.
 
-    <dst_dir> is the base thumbnail directory.
+    <dst_dir> is the base thumbnail directory (usually ~/.thumbnails/normal).
 
     If <image_path> is not None it is used as the path to the image file
     actually used to create the thumbnail image, although the created 
@@ -117,13 +116,13 @@ def _create_thumbnail(path, dst_dir, image_path=None):
         'tEXt::Thumb::Mimetype':      mime,
         'tEXt::Thumb::Image::Width':  width,
         'tEXt::Thumb::Image::Height': height,
-        'tEXt::Software':             'Comix ' + constants.VERSION
+        'tEXt::Software':             'Comix %s' % constants.VERSION
     }
     try:
         if not os.path.isdir(dst_dir):
             os.makedirs(dst_dir, 0700)
-        pixbuf.save(thumbpath + 'comixtemp', 'png', tEXt_data)
-        os.rename(thumbpath + 'comixtemp', thumbpath)
+        pixbuf.save(thumbpath + '-comixtemp', 'png', tEXt_data)
+        os.rename(thumbpath + '-comixtemp', thumbpath)
         os.chmod(thumbpath, 0600)
     except Exception:
         print '! thumbnail.py: Could not write', thumbpath, '\n'
