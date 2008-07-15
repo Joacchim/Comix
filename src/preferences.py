@@ -24,7 +24,6 @@ prefs = {
     'default fullscreen': False,
     'default zoom mode': 'fit',  # 'fit', 'width', 'height' or 'manual'
     'default manga mode': False,
-    #'emulate double page': False,
     'hide all': False,
     'hide all in fullscreen': True,
     'stored hide all values': (True, True, True, True, True),
@@ -35,9 +34,7 @@ prefs = {
     'lib window height': gtk.gdk.screen_get_default().get_height() * 3 // 5,
     'lib window width': gtk.gdk.screen_get_default().get_width() * 2 // 3,
     #'no double page for wide images': True,
-    'open defaults to last browsed': True,
     'path of last browsed': os.getenv('HOME'),
-    #'default open path': os.getenv('HOME'),
     'show menubar': True,
     'show scrollbar': True,
     'show statusbar': True,
@@ -82,13 +79,11 @@ class _PreferencesDialog(gtk.Dialog):
     def _response(self, dialog, response):
         if response == gtk.RESPONSE_CANCEL:
             print 'cancel'
-            close_dialog()
         elif response == gtk.RESPONSE_OK:
             print 'ok'
-            close_dialog()
         elif response == gtk.RESPONSE_DELETE_EVENT:
             print 'close'
-            close_dialog()
+        close_dialog()
 
 
 def open_dialog(action, window):

@@ -95,8 +95,7 @@ class _ComicFileChooserDialog(gtk.Dialog):
         ffilter.set_name(_('tar archives'))
         self._filechooser.add_filter(ffilter)
 
-        if prefs['open defaults to last browsed']:
-            self._filechooser.set_current_folder(prefs['path of last browsed'])
+        self._filechooser.set_current_folder(prefs['path of last browsed'])
 
         self.show_all()
 
@@ -139,8 +138,7 @@ class _ComicFileChooserDialog(gtk.Dialog):
             while gtk.events_pending():
                 gtk.main_iteration(False)
             self._file_handler.open_file(path)
-            if prefs['open defaults to last browsed']:
-                prefs['path of last browsed'] = os.path.dirname(path)
+            prefs['path of last browsed'] = os.path.dirname(path)
         elif response in [gtk.RESPONSE_CANCEL, gtk.RESPONSE_DELETE_EVENT]:
             close_dialog()
 
