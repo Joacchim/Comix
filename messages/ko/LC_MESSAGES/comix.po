@@ -1,0 +1,1333 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"POT-Creation-Date: 2007-05-09 14:55+CEST\n"
+"PO-Revision-Date: 2008-07-05 13:16+0900\n"
+"Last-Translator: Lv5doraki <kmk1290@gmail.com>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-Language: Korean\n"
+"X-Poedit-Country: KOREA, REPUBLIC OF\n"
+"X-Poedit-SourceCharset: utf-8\n"
+
+#: comix:547
+#: comix:11064
+msgid "Fit-to-screen mode"
+msgstr "화면에 맞춤"
+
+#: comix:550
+#: comix:11065
+msgid "Fit width mode"
+msgstr "가로 폭 맞춤"
+
+#: comix:553
+#: comix:11066
+msgid "Fit height mode"
+msgstr "세로 폭 맞춤"
+
+#: comix:556
+#: comix:11008
+#: comix:11067
+msgid "Manual zoom mode"
+msgstr "수동 줌 조절"
+
+#: comix:559
+#: comix:11068
+msgid "Double page mode"
+msgstr "좌우 페이지 보기"
+
+#: comix:561
+#: comix:11070
+msgid "Manga mode"
+msgstr "만화 페이지순 보기"
+
+#: comix:563
+#: comix:11069
+msgid "Magnifying lens"
+msgstr "렌즈 확대"
+
+#: comix:664
+#: comix:6637
+msgid "Library"
+msgstr "라이브러리"
+
+#: comix:694
+msgid "Apply filter on full path"
+msgstr "모든 경로명에 필터 적용"
+
+#: comix:700
+msgid "Add archives to library."
+msgstr "압축파일을 라이브러리에 추가"
+
+#: comix:705
+msgid "Remove selected archive from library."
+msgstr "선택한 압축파일을 라이브러리에서 삭제"
+
+#: comix:709
+#: comix:1611
+#: comix:1654
+msgid "Clean up"
+msgstr "지우기"
+
+#: comix:713
+msgid "Remove orphaned or outdated library entries."
+msgstr "오래된 라이브러리 항목 삭제"
+
+#: comix:717
+msgid "Close this window."
+msgstr "현재 창 닫기"
+
+#: comix:722
+msgid "Open selected archive."
+msgstr "선택된 압축파일 열기"
+
+#: comix:779
+msgid "Open"
+msgstr "열기"
+
+#: comix:791
+msgid "All files"
+msgstr "모든 파일"
+
+#: comix:802
+msgid "All images"
+msgstr "모든 이미지"
+
+#: comix:814
+msgid "All archives"
+msgstr "모든 압축파일"
+
+#: comix:818
+msgid "JPEG image"
+msgstr "JPEG 이미지"
+
+#: comix:822
+msgid "PNG image"
+msgstr "PNG 이미지"
+
+#: comix:826
+msgid "GIF image"
+msgstr "GIF 이미지"
+
+#: comix:830
+msgid "TIFF image"
+msgstr "TIFF 이미지"
+
+#: comix:834
+msgid "BMP image"
+msgstr "BMP 이미지"
+
+#: comix:838
+msgid "ICO image"
+msgstr "ICO 이미지"
+
+#: comix:842
+msgid "XPM image"
+msgstr "XPM 이미지"
+
+#: comix:846
+msgid "XBM image"
+msgstr "XBM 이미지"
+
+#: comix:852
+msgid "ZIP archive"
+msgstr "ZIP 압축파일"
+
+#: comix:857
+#: comix:6719
+#: comix:7071
+#: comix:7122
+#: comix:7470
+#: comix:8743
+msgid "RAR archive"
+msgstr "RAR 압축파일"
+
+#: comix:864
+msgid "tar archive"
+msgstr "tar 압축파일"
+
+#: comix:868
+msgid "Add archives recursively"
+msgstr "추가 압축파일 복구"
+
+#: comix:883
+msgid "Preferences"
+msgstr "환경설정"
+
+#: comix:889
+msgid "Select folder"
+msgstr "폴더 선택"
+
+#: comix:892
+msgid "Fullscreen as default"
+msgstr "전체화면을 기본값으로 적용"
+
+#: comix:893
+msgid "Double page mode as default"
+msgstr "좌우 페이지 보기를 기본값으로 적용"
+
+#: comix:895
+msgid "Stretch small images"
+msgstr "작은 이미지 확대"
+
+#: comix:897
+msgid "Use smart scaling in double page mode"
+msgstr "좌우 페이지 보기에 스마트 스케일링 사용"
+
+#: comix:899
+msgid "Always view comments when opening a new file"
+msgstr "새로운 파일을 열 때 항상 코멘트를 보기"
+
+#: comix:902
+msgid "Hide menubar, scrollbars etc. in fullscreen mode"
+msgstr "전체화면 모드에서 도구모음, 스크롤바 숨김"
+
+#: comix:904
+msgid "Cache pages for faster forward flipping"
+msgstr "다음 페이지 이미지를 캐쉬"
+
+#: comix:907
+msgid "Scroll wheel scrolls horizontally at top and bottom of page"
+msgstr "페이지의 맨 위와 아래에서 좌우 스크롤한다"
+
+#: comix:910
+msgid "Flip page when scrolling off the top or bottom of page"
+msgstr "페이지의 맨 위나 아래에 왔을 때 페이지를 이동"
+
+#: comix:912
+msgid "Hide thumbnail scrollbar"
+msgstr "미리보기 스크롤 바를 숨김"
+
+#: comix:914
+msgid "Space key uses smart scrolling"
+msgstr "스페이스 키로 스마트 스크롤을 실행"
+
+#: comix:917
+msgid "Save window position and size for future sessions"
+msgstr "윈도우의 위치와 크기를 기록"
+
+#: comix:920
+msgid "Go to the next archive in directory after last page"
+msgstr "마지막 페이지에서 같은 디렉토리의 다음 압축파일을 열기"
+
+#: comix:922
+msgid "Hide cursor in fullscreen mode"
+msgstr "전체화면에서 마우스 커서를 숨김"
+
+#: comix:924
+msgid "Open last viewed file on start"
+msgstr "시작시 마지막에 본 파일을 표시"
+
+#: comix:926
+msgid "Show page numbers on thumbnails"
+msgstr "페이지번호를 미리보기에 표시"
+
+#: comix:929
+msgid "Always use smart scrolling as if in double page mode"
+msgstr "좌우 페이지 표시에서 항상 스마트 스크롤을 실시"
+
+#: comix:932
+msgid "Use stored thumbnails for images in directories"
+msgstr "디렉토리내의 이미지에 미리 기록된 미리보기를 사용"
+
+#: comix:934
+msgid "Use stored thumbnails for images in archives"
+msgstr "압축파일내의 이미지에 미리 기록된 미리보기를 사용"
+
+#: comix:937
+msgid "Display only one page in double page mode if the image is wide"
+msgstr "좌우 페이지 보기로 이미지 폭이 클 때 1장만 보이기"
+
+#: comix:940
+msgid "Store recently opened files"
+msgstr "최근 열린 파일을 기록"
+
+#: comix:943
+msgid "Always go to this directory in the \"Open\" dialog:"
+msgstr "항상 해당 디렉토리로 \"열기 \"대화 상자 실행"
+
+#: comix:946
+msgid "Always go to the latest directory in the \"Open\" dialog"
+msgstr "항상 마지막에 열린 디렉토리로  \"열기 \"대화 상자 실행"
+
+#: comix:970
+msgid "Nearest (quickest, worst quality)"
+msgstr "가장 가까운 보정 (최고 속도, 최저화질)"
+
+#: comix:971
+msgid "Tiles"
+msgstr "타일 보정"
+
+#: comix:972
+msgid "Bilinear"
+msgstr "쌍일차 보정"
+
+#: comix:974
+msgid "Hyper (slowest, best quality)"
+msgstr "하이퍼 보정 (최저 속도, 최고 화질)"
+
+#: comix:976
+msgid "Manual zoom mode as default"
+msgstr "수동 줌 조절을 기본값으로 적용"
+
+#: comix:979
+msgid "Fit-to-screen mode as default"
+msgstr "화면에 맞춤을 기본값으로 적용"
+
+#: comix:982
+msgid "Fit width mode as default"
+msgstr "가로 폭 맞춤을 기본값으로 적용"
+
+#: comix:985
+msgid "Fit height mode as default"
+msgstr "세로 폭 맞춤을 기본값으로 적용"
+
+#: comix:1008
+msgid "Background colour:"
+msgstr "배경색 :"
+
+#: comix:1011
+msgid "Background colour"
+msgstr "배경색"
+
+#: comix:1013
+msgid "Toolbar button labels:"
+msgstr "툴바 버튼 이름 :"
+
+#: comix:1017
+msgid "Icons only"
+msgstr "아이콘"
+
+#: comix:1018
+#: comix:4630
+msgid "Text only"
+msgstr "텍스트"
+
+#: comix:1019
+#: comix:4632
+msgid "Icons and text"
+msgstr "아이콘과 텍스트"
+
+#: comix:1020
+msgid "Slideshow delay:"
+msgstr "슬라이드쇼 지연시간 :"
+
+#: comix:1036
+msgid "Display"
+msgstr "표시"
+
+#: comix:1090
+msgid "Behaviour"
+msgstr "일반"
+
+#: comix:1127
+msgid "Scaling quality"
+msgstr "스케일링 품질"
+
+#: comix:1152
+msgid "Scaling"
+msgstr "스케일링"
+
+#: comix:1166
+msgid "Treat files with the following extensions as comments:"
+msgstr "다음 확장자를 가지는 파일은 주석 취급："
+
+#: comix:1172
+msgid "Comments"
+msgstr "주석"
+
+#: comix:1197
+msgid "Space key scrolls"
+msgstr "스페이스 키로 스크롤："
+
+#: comix:1201
+#: comix:3991
+#: comix:9404
+#: comix:9433
+#: comix:9436
+#: comix:9443
+#: comix:9445
+msgid "of"
+msgstr "of"
+
+#: comix:1205
+msgid "Window size"
+msgstr "창 크기"
+
+#: comix:1206
+msgid "Page size"
+msgstr "페이지 크기"
+
+#: comix:1208
+msgid "Scroll"
+msgstr "스크롤"
+
+#: comix:1222
+msgid "Magnification factor:"
+msgstr "확대율 : "
+
+#: comix:1226
+msgid "Lens size (px):"
+msgstr "렌즈 크기（픽셀）："
+
+#: comix:1230
+msgid "Update interval (milliseconds):"
+msgstr "갱신간격（ms）："
+
+#: comix:1235
+msgid "Lens"
+msgstr "렌즈"
+
+#: comix:1249
+msgid "Thumbnail sizes (px):"
+msgstr "미리보기 크기 (픽셀) : "
+
+#: comix:1254
+msgid "Library thumbnail sizes (px):"
+msgstr "라이브러리 미리보기 크기（픽셀）："
+
+#: comix:1272
+msgid "Thumbnails"
+msgstr "미리보기"
+
+#: comix:1301
+msgid "Adjust colour"
+msgstr "색 조정"
+
+#: comix:1303
+msgid "Default"
+msgstr "기본값"
+
+#: comix:1325
+msgid "Brightness"
+msgstr "명도"
+
+#: comix:1337
+msgid "Contrast"
+msgstr "대비"
+
+#: comix:1349
+msgid "Saturation"
+msgstr "채도"
+
+#: comix:1361
+msgid "Sharpness"
+msgstr "선명함"
+
+#: comix:1376
+msgid "Automatically adjust contrast"
+msgstr "대비 자동조정"
+
+#: comix:1383
+msgid "Save values for future sessions"
+msgstr "다음의 세션 값을 저장"
+
+#: comix:1395
+msgid "Properties"
+msgstr "등록정보"
+
+#: comix:1413
+msgid "Go to page"
+msgstr "페이지 이동"
+
+#: comix:1437
+msgid "Edit bookmarks"
+msgstr "북마크 편집"
+
+#: comix:1446
+msgid "Title"
+msgstr "제목"
+
+#: comix:1447
+#: comix:5397
+#: comix:5749
+msgid "Page"
+msgstr "페이지"
+
+#: comix:1477
+#: comix:1530
+msgid "About"
+msgstr "Comix에 대하여"
+
+#: comix:1515
+msgid "Comix is an image viewer specifically designed to handle comic books."
+msgstr "Comix는 만화책을 취급하기 위해서 디자인 된 만화책 뷰어입니다."
+
+#: comix:1517
+msgid "It reads ZIP, RAR and tar archives (also gzip or bzip2 compressed)"
+msgstr "보통 이미지파일 뿐만 아니라 ZIP, RAR, tar 압축파일을 읽을 수 있습니다."
+
+#: comix:1519
+msgid "as well as plain image files."
+msgstr " (gzip나 bzip2로 압축되어 있어도 읽을 수 있습니다)."
+
+#: comix:1521
+msgid "Comix is licensed under the GNU General Public License."
+msgstr "Comix는 GPL로 라이센스 되고 있습니다."
+
+#: comix:1539
+msgid "Developer and Swedish translation"
+msgstr "개발자 및 스웨덴어 번역"
+
+#: comix:1541
+msgid "Simplified Chinese translation"
+msgstr "간체 중국어 번역"
+
+#: comix:1542
+msgid "Spanish translation"
+msgstr "스페인어 번역"
+
+#: comix:1543
+msgid "Brazilian Portuguese translation"
+msgstr "포르투갈어(브라질) 번역"
+
+#: comix:1545
+msgid "German translation and Nautilus thumbnailer"
+msgstr "독일어 번역과 Nautilus의 미리보기 작성"
+
+#: comix:1546
+msgid "Italian translation"
+msgstr "이탈리아어 번역"
+
+#: comix:1547
+msgid "Dutch translation"
+msgstr "네덜란드어 번역"
+
+#: comix:1548
+msgid "French translation"
+msgstr "프랑스어 번역"
+
+#: comix:1549
+msgid "Polish translation"
+msgstr "폴란드어 번역"
+
+#: comix:1550
+msgid "Greek translation"
+msgstr "그리스어 번역"
+
+#: comix:1551
+msgid "Catalan translation"
+msgstr "카타로니아어 번역"
+
+#: comix:1552
+msgid "Traditional Chinese translation"
+msgstr "정체 중국어 번역"
+
+#: comix:1553
+msgid "Japanese translation"
+msgstr "일본어 번역"
+
+#: comix:1554
+msgid "Hungarian translation"
+msgstr "헝거리어 번역"
+
+#: comix:1555
+msgid "Russian translation"
+msgstr "러시아어 번역"
+
+#: comix:1564
+msgid "Credits"
+msgstr "Credits"
+
+#: comix:1573
+msgid "Manage thumbnails"
+msgstr "미리보기 편집"
+
+#: comix:1606
+#: comix:1649
+msgid "Remove all stored thumbnails:"
+msgstr "저장된 모든 미리보기 삭제"
+
+#: comix:1616
+#: comix:1659
+msgid "Remove orphaned thumbnails:"
+msgstr "오래된 미리보기 삭제"
+
+#: comix:1621
+msgid "Directories"
+msgstr "디렉토리"
+
+#: comix:1664
+msgid "Archives"
+msgstr "압축파일"
+
+#: comix:1674
+msgid "Removing thumbnails"
+msgstr "미리보기 제거"
+
+#: comix:1714
+msgid "Convert"
+msgstr "변환"
+
+#: comix:1723
+msgid "File type"
+msgstr "파일 종류"
+
+#: comix:1724
+msgid "Extension"
+msgstr "확장자"
+
+#: comix:1736
+#: comix:4321
+#: comix:4357
+#: comix:6711
+#: comix:7061
+#: comix:7112
+#: comix:7468
+#: comix:8714
+msgid "Zip archive"
+msgstr "Zip압축파일"
+
+#: comix:1737
+#: comix:4324
+#: comix:4363
+#: comix:6713
+#: comix:7063
+#: comix:7114
+#: comix:7472
+#: comix:8730
+msgid "Tar archive"
+msgstr "Tar압축파일"
+
+#: comix:1738
+#: comix:4328
+#: comix:4359
+#: comix:6715
+#: comix:7066
+#: comix:7117
+#: comix:7473
+#: comix:8726
+msgid "Gzip compressed tar archive"
+msgstr "Gzip으로 된 Tar압축파일"
+
+#: comix:1740
+#: comix:4331
+#: comix:4361
+#: comix:6717
+#: comix:7069
+#: comix:7120
+#: comix:7474
+#: comix:8728
+msgid "Bzip2 compressed tar archive"
+msgstr "Bzip2으로 된 Tar압축파일"
+
+#: comix:1752
+msgid "Delete old archive/directory"
+msgstr "오래된 압축파일/디렉토리 삭제"
+
+#: comix:1777
+#: comix:6112
+#: comix:6117
+msgid "Permission denied"
+msgstr "퍼미션이 거부되었습니다"
+
+#: comix:1802
+msgid "Confirm operation"
+msgstr "확인 작업"
+
+#: comix:4092
+msgid "Permanently remove %s?"
+msgstr "완전히 %s를 삭제합니까?"
+
+#: comix:4096
+msgid "Perform lossless JPEG operation on %s?"
+msgstr "%s에 무손실 JPEG 작업을 실행합니까?"
+
+#: comix:4098
+#: comix:4103
+msgid "Some images might be trimmed a bit during the operation."
+msgstr "일부 이미지 작업을 수행하는 동안 약간 손실 될 수도 있습니다."
+
+#: comix:4101
+msgid "Permanently convert %s to greyscale?"
+msgstr "%s를 그레이스케일로 변환 합니까?"
+
+#: comix:4963
+#: comix:4974
+msgid "Location:"
+msgstr "위치 : "
+
+#: comix:4964
+#: comix:4975
+msgid "Quantity:"
+msgstr "파일수 : "
+
+#: comix:4964
+#: comix:4975
+msgid "Total size:"
+msgstr "총 크기 :"
+
+#: comix:5010
+#: comix:5021
+#: comix:5025
+#: comix:5036
+#: comix:5055
+#: comix:5060
+#: comix:5064
+#: comix:5075
+#: comix:5086
+#: comix:5090
+#: comix:5101
+#: comix:5119
+#: comix:5124
+#: comix:5128
+#: comix:6431
+#: comix:6459
+#: comix:6465
+msgid "Removed:"
+msgstr "삭제되었습니다："
+
+#: comix:5026
+#: comix:5065
+#: comix:5091
+#: comix:5129
+#: comix:6379
+#: comix:6466
+msgid "Done!"
+msgstr "완료되었습니다."
+
+#: comix:5230
+#: comix:6704
+#: comix:7059
+#: comix:7110
+msgid "pages"
+msgstr "페이지"
+
+#: comix:5236
+msgid "comment"
+msgstr "주석"
+
+#: comix:5240
+msgid "comments"
+msgstr "주석"
+
+#: comix:5264
+#: comix:5450
+#: comix:5803
+msgid "Location"
+msgstr "위치"
+
+#: comix:5277
+msgid "Yes"
+msgstr "예"
+
+#: comix:5277
+#: comix:5280
+msgid "In library"
+msgstr "라이브러리"
+
+#: comix:5280
+#: comix:5295
+msgid "No"
+msgstr "아니요"
+
+#: comix:5290
+msgid "Yes, page"
+msgstr "예, 페이지"
+
+#: comix:5290
+#: comix:5295
+msgid "Bookmarked"
+msgstr "북마크"
+
+#: comix:5303
+#: comix:5459
+#: comix:5812
+msgid "Accessed"
+msgstr "마지막 접근"
+
+#: comix:5313
+#: comix:5470
+#: comix:5823
+msgid "Modified"
+msgstr "마지막 수정"
+
+#: comix:5323
+#: comix:5481
+#: comix:5834
+msgid "Permissions"
+msgstr "퍼미션"
+
+#: comix:5332
+#: comix:5491
+#: comix:5844
+msgid "Owner"
+msgstr "소유자"
+
+#: comix:5342
+msgid "Archive"
+msgstr "압축파일"
+
+#: comix:5508
+#: comix:5861
+msgid "Mode"
+msgstr "모드"
+
+#: comix:5515
+#: comix:5868
+msgid "Pixel count"
+msgstr "픽셀 수"
+
+#: comix:5528
+#: comix:5881
+msgid "Pixel sum"
+msgstr "픽셀 합계"
+
+#: comix:5559
+#: comix:5912
+msgid "Extrema"
+msgstr "범위"
+
+#: comix:5598
+#: comix:5951
+msgid "Mean"
+msgstr "평균"
+
+#: comix:5626
+#: comix:5979
+msgid "Median"
+msgstr "중간"
+
+#: comix:5654
+#: comix:6007
+msgid "Standard deviation"
+msgstr "표준 편차"
+
+#: comix:5686
+msgid "Image"
+msgstr "이미지"
+
+#: comix:5689
+msgid "Image 1"
+msgstr "이미지1"
+
+#: comix:6037
+msgid "Image 2"
+msgstr "이미지2"
+
+#: comix:6113
+msgid "Could not delete"
+msgstr "삭제 할 수 없습니다."
+
+#: comix:6114
+#: comix:6119
+msgid "Please check your permissions."
+msgstr "퍼미션을 확인해 주세요"
+
+#: comix:6118
+msgid "Could not create"
+msgstr "생성 할 수 없습니다."
+
+#: comix:6230
+#: comix:6240
+#: comix:6374
+#: comix:6378
+msgid "Added:"
+msgstr "추가 :"
+
+#: comix:6231
+msgid "Adding library entries"
+msgstr "라이브러리 항목을 추가"
+
+#: comix:6432
+msgid "Removing library entries"
+msgstr "라이브러리 항목 삭제"
+
+#: comix:7213
+msgid "Extract page"
+msgstr "페이지 내보내기"
+
+#: comix:7640
+msgid "page"
+msgstr "페이지"
+
+#: comix:8741
+msgid "Could not find the unrar executable. Please install it if you wish to open RAR archives."
+msgstr "unrar가 없습니다.RAR 압축파일을 열고 싶을 때는 unrar를 설치 해 주세요."
+
+#: comix:8746
+msgid "Could not open"
+msgstr "열리지 않습니다."
+
+#: comix:8792
+msgid "is not a file."
+msgstr "(은)는 파일이 아닙니다"
+
+#: comix:8795
+msgid "does not exist."
+msgstr "(은)는 존재하지 않습니다"
+
+#: comix:8903
+msgid "Filetype of"
+msgstr "다음 파일종류"
+
+#: comix:8905
+msgid "not recognized."
+msgstr "(은)는 인식 할 수 없습니다"
+
+#: comix:8920
+#: comix:11179
+msgid "No images in \"%s\""
+msgstr "\"%s\"에 이미지가 없습니다."
+
+#: comix:9403
+msgid "Comment file"
+msgstr "파일에 주석을 추가"
+
+#: comix:9419
+msgid "Could not read"
+msgstr "읽기 실패"
+
+#: comix:9432
+#: comix:9435
+#: comix:9442
+#: comix:9444
+msgid "Comment"
+msgstr "주석"
+
+#: comix:10882
+msgid "_Next page"
+msgstr "다음 페이지(_N)"
+
+#: comix:10884
+msgid "_Previous page"
+msgstr "이전 페이지(_P)"
+
+#: comix:10886
+msgid "_First page"
+msgstr "처음 페이지(_F)"
+
+#: comix:10888
+msgid "_Last page"
+msgstr "마지막 페이지(_L)"
+
+#: comix:10890
+msgid "_Go to page..."
+msgstr "페이지 이동(_G)"
+
+#: comix:10892
+msgid "Manual _Zoom"
+msgstr "수동 줌 조절(_Z)"
+
+#: comix:10893
+msgid "_Zoom in"
+msgstr "확대(_Z)"
+
+#: comix:10895
+msgid "Zoom _out"
+msgstr "축소(_O)"
+
+#: comix:10897
+msgid "_Normal size"
+msgstr "보통 크기(_N)"
+
+#: comix:10899
+msgid "Fit _width"
+msgstr "가로폭 맞춤(_W)"
+
+#: comix:10901
+msgid "Fit _height"
+msgstr "세로폭 맞춤(_H)"
+
+#: comix:10903
+msgid "_Best fit"
+msgstr "최적 맞춤(_B)"
+
+#: comix:10905
+msgid "_Add bookmark"
+msgstr "북마크에 추가(_A)"
+
+#: comix:10907
+msgid "Clear bookmarks"
+msgstr "북마크 지우기"
+
+#: comix:10910
+msgid "_Edit bookmarks..."
+msgstr "북마크 편집(_E)"
+
+#: comix:10912
+msgid "Pr_eferences"
+msgstr "설정(_E)"
+
+#: comix:10914
+msgid "_About"
+msgstr "Comix에 대하여(_A)"
+
+#: comix:10917
+msgid "_Manage thumbnails..."
+msgstr "미리보기 편집(_M)"
+
+#: comix:10919
+msgid "Proper_ties"
+msgstr "등록정보(_T)"
+
+#: comix:10921
+msgid "View _comments"
+msgstr "주석 보기(_C)"
+
+#: comix:10923
+msgid "_Open..."
+msgstr "열기(_O)"
+
+#: comix:10925
+msgid "_Recent files"
+msgstr "최근 파일(_R)"
+
+#: comix:10926
+msgid "Clear recent files"
+msgstr "최근 파일 지우기"
+
+#: comix:10928
+msgid "Open _library..."
+msgstr "라이브러리 열기(_l)"
+
+#: comix:10930
+msgid "_Add to library"
+msgstr "라이브러리에 추가(_A)"
+
+#: comix:10932
+msgid "Con_vert..."
+msgstr "이미지나 압축파일을 변환(_V)"
+
+#: comix:10934
+msgid "E_xtract image..."
+msgstr "이미지 내보내기(_X)"
+
+#: comix:10936
+msgid "_Close"
+msgstr "닫기(_C)"
+
+#: comix:10938
+msgid "_Quit"
+msgstr "종료(_Q)"
+
+#: comix:10940
+msgid "_Adjust colour..."
+msgstr "색상 조절(_A)"
+
+#: comix:10942
+msgid "Slideshow"
+msgstr "슬라이드쇼"
+
+#: comix:10944
+msgid "Delete image..."
+msgstr "이미지 삭제"
+
+#: comix:10947
+msgid "CW lossless JPEG rotation..."
+msgstr "무손실 JPEG 이미지 회전(오른쪽)"
+
+#: comix:10950
+msgid "CCW lossless JPEG rotation..."
+msgstr "무손실 JPEG 이미지 회전(왼쪽)"
+
+#: comix:10953
+msgid "Horizontal lossless JPEG flip..."
+msgstr "무손실 JPEG 이미지 뒤집기(좌우)"
+
+#: comix:10956
+msgid "Vertical lossless JPEG flip..."
+msgstr "무손실 JPEG 이미지 뒤집기(상하)"
+
+#: comix:10959
+msgid "Convert JPEG to greyscale..."
+msgstr "JPEG파일을 그레이스케일로 변환"
+
+#: comix:10961
+#: comix:10963
+msgid "_Bookmarks"
+msgstr "북마크(_B)"
+
+#: comix:10962
+msgid "_Toolbars"
+msgstr "툴바(_T)"
+
+#: comix:10964
+msgid "_Edit"
+msgstr "편집(_E)"
+
+#: comix:10966
+msgid "File o_perations"
+msgstr "파일 조작(_P)"
+
+#: comix:10967
+msgid "_File"
+msgstr "파일(_F)"
+
+#: comix:10968
+#: comix:10969
+msgid "_View"
+msgstr "보기(_V)"
+
+#: comix:10970
+#: comix:10971
+msgid "_Go"
+msgstr "바로가기(_G)"
+
+#: comix:10972
+msgid "_Help"
+msgstr "도움말(_H)"
+
+#: comix:10973
+msgid "_Transform"
+msgstr "이미지 회전(_T)"
+
+#: comix:10974
+msgid "_Rotate 90 degrees CW"
+msgstr "우측으로 90도 회전(_R)"
+
+#: comix:10976
+msgid "Rotate 180 de_grees"
+msgstr "180도 회전(_G)"
+
+#: comix:10978
+msgid "Rotat_e 90 degrees CCW"
+msgstr "좌측으로 90도 회전(_E)"
+
+#: comix:10980
+msgid "Fli_p horizontally"
+msgstr "좌우 뒤집기(_P)"
+
+#: comix:10982
+msgid "Flip _vertically"
+msgstr "상하 뒤집기(_V)"
+
+#: comix:10985
+msgid "_Fullscreen"
+msgstr "전체화면(_F)"
+
+#: comix:10987
+msgid "_Double page mode"
+msgstr "좌우 페이지 보기(_D)"
+
+#: comix:10989
+msgid "_Toolbar"
+msgstr "툴바(_T)"
+
+#: comix:10991
+msgid "_Menubar"
+msgstr "메뉴바(_M)"
+
+#: comix:10993
+msgid "St_atusbar"
+msgstr "상태바(_A)"
+
+#: comix:10995
+msgid "S_crollbars"
+msgstr "스크롤바(_C)"
+
+#: comix:10997
+msgid "Th_umbnails"
+msgstr "미리보기(_U)"
+
+#: comix:10999
+msgid "H_ide all"
+msgstr "모두 숨김(_I)"
+
+#: comix:11001
+msgid "_Manga mode"
+msgstr "만화 페이지순 보기(_M)"
+
+#: comix:11003
+msgid "_Keep transformation"
+msgstr "회전 상태 유지(_K)"
+
+#: comix:11005
+msgid "Magnifying _lens"
+msgstr "렌즈 확대(_l)"
+
+#: comix:11009
+msgid "Fit-to-_screen mode"
+msgstr "화면에 맞춤(_S)"
+
+#: comix:11010
+msgid "Fit _width mode"
+msgstr "가로폭 맞춤(_W)"
+
+#: comix:11011
+msgid "Fit _height mode"
+msgstr "세로폭 맞춤(_H)"
+
+#: comix:11025
+msgid "Enter fullscreen mode automatically when Comix is started."
+msgstr "시작시에 자동으로 전체화면으로 보기"
+
+#: comix:11026
+msgid "Enter double page mode automatically when Comix is started."
+msgstr "시작시에 자동으로 좌우 페이지로 보기"
+
+#: comix:11027
+msgid "Enter manual zoom mode automatically when Comix is started."
+msgstr "시작시에 자동으로 수동 줌으로 보기"
+
+#: comix:11028
+msgid "Enter fit-to-screen mode automatically when Comix is started."
+msgstr "시작시에 자동으로 화면에 맞춤으로 보기"
+
+#: comix:11029
+msgid "Enter fit width mode automatically when Comix is started."
+msgstr "시작시에 자동으로 가로폭 맞춤으로 보기"
+
+#: comix:11030
+msgid "Enter fit height mode automatically when Comix is started."
+msgstr "시작시에 자동으로 세로폭 맞춤으로 보기"
+
+#: comix:11031
+msgid "Also scale images to a size that is larger than their original size in fit-to-screen mode, fit width mode and fit height mode."
+msgstr "화면, 또는 가로폭, 세로폭에 이미지를 맞추는 것으로, 원본 크기가 작은 경우는 확대시킨다"
+
+#: comix:11032
+msgid "Scale the images independently when in double page mode and fit-to-screen mode. The smaller of the two images will scale up to fill any extra space that is given."
+msgstr "좌우 페이지 보기나 화면에 맞출 때, 이미지를 따로 따로 스케일 한다."
+
+#: comix:11033
+msgid "Automatically show any available comments when opening a new file."
+msgstr "새로운 파일을 열 때, 주석이 있으면 자동적으로 표시한다"
+
+#: comix:11034
+msgid "Automatically hide scrollbars, menubar, toolbar, statusbar and thumbnails when in fullscreen mode."
+msgstr "전체화면 보기때에 스크롤, 메뉴, 툴, 상태, 미리보기의 모든 바를 숨긴다"
+
+#: comix:11035
+msgid "Cache the next page in the archive/directory to increase the perceived speed. This is generally recommended unless you are running low on RAM."
+msgstr "속도를 올리기 위해 압축파일이나 디렉토리의 다음의 페이지를 캐쉬한다. RAM의 성능이 낮지 않은 한 추천 합니다."
+
+#: comix:11036
+msgid "Move the horizontal scrollbar instead of the vertical when using the scroll wheel at the top or the bottom of the page. The direction will be determined by whether you use manga mode or not."
+msgstr "페이지의 맨 위나 아래에 왔을 때 좌우 방향의 스크롤 바를 움직인다. 움직일 방향은 만화 표시가 되어 있는가로 판단됩니다."
+
+#: comix:11037
+msgid "Flip pages when scrolling \"off the page\" with the scroll wheel, as well as with the arrow keys, even when not in fit-to-screen mode. It takes three \"steps\" with the scroll wheel or arrow keys to trigger this behaviour."
+msgstr ""
+
+#: comix:11038
+msgid "Save the position and the size of the window for the next time you start Comix."
+msgstr "다음 번 윈도우를 같은 위치, 같은 크기로 시작한다"
+
+#: comix:11039
+msgid "Automatically open the next archive in the directory when scrolling past the last page of the current archive, and automatically open the previous archive in the directory when scrolling past the first page of the current archive."
+msgstr "현재의 압축파일의 마지막 페이지로 스크롤이 맨 밑까지 움직였을 때, 같은 디렉토리에 있는 다음의 압축파일을 자동적으로 연다(최초의 페이지때도 마찬가지)."
+
+#: comix:11040
+msgid "Hide the cursor when in fullscreen mode."
+msgstr "전체화면 보기때 마우스 커서를 숨긴다"
+
+#: comix:11041
+#: comix:11042
+#: comix:11043
+#: comix:11044
+msgid "Set the image scaling method. The best choice is often \"Tiles\", it is quite quick and produces almost as good results as \"Bilinear\" or \"Hyper\"."
+msgstr "이미지의 스켈링법을 설정한다.대체로의 경우, 최선인 것은 타일 보정입니다.이것은 불러오기가 빠르고, 쌍일차 보정이나 하이퍼 보정과 동일한 정도의 화질이 나옵니다."
+
+#: comix:11045
+msgid "Treat files with the following extensions as comment files. Extensions should be separated by whitespaces. They are not case sensitive."
+msgstr "다음의 확장자를 가지는 파일을 주석으로서 취급한다. 확장자는 공백으로 구분해야합니다. 대문자 소문자를 구별하지 않습니다."
+
+#: comix:11046
+msgid "Use smart scrolling with the space key. Pressing the space key normally scrolls straight down one window height unless at the bottom of the page where it flips pages instead. When this option is set Comix automatically tries to follow the reading flow of the comic book. When pressing the space key it will not only scroll down but will also scroll horizontally to the edge of the page (left or right depending on whether you use manga mode). In double page mode it will go to the edge of the first page if it is in view, otherwise it will go to the edge of the second page. Also, in double page mode with this option, Comix will not flip pages unless at the bottom of the second page. At the bottom of the first page it will instead go to the top of the second page."
+msgstr ""
+"스페이스 키로 스마트 스크롤을 이용한다.\n"
+"통상 스페이스 키를 누르면, 스크롤이 아래에서 설정된 양씩 아래에 움직여, 페이지의 맨 밑에 오면 페이지를 이동합니다.\n"
+"이 설정을 실시하면, Comix는 책을 읽는 흐름을 자동적으로 쫓으려고 합니다.스페이스 키를 누르면, 상하 방향의 스크롤 뿐만이 아니라, 좌우 방향의 스크롤도 실시합니다.좌우 페이지 보기때는, 먼저 처음의 페이지의 구석까지 이동해, 다음에 2 페이지눈의 페이지의 구석까지 이동합니다.2 페이지의 제일 구석으로 이동할 때까지는 페이지를 플립 하지 않습니다.1 페이지의 구석에 왔을 때는, 다음에 2 페이지의 맨 위로 이동합니다."
+
+#: comix:11047
+msgid "Always hide the thumbnail scrollbar."
+msgstr "미리보기의 스크롤 바를 항상 숨긴다"
+
+#: comix:11048
+msgid "Automatically open the last viewed page when Comix is started."
+msgstr "시작시에 자동으로 마지막 이미지 열기"
+
+#: comix:11049
+msgid "Automatically go to the same directory as last time when opening the \"Open\" dialog."
+msgstr "\"열기\"를 선택했을 시 자동적으로 마지막에 열린 디렉토리를 선택한다"
+
+#: comix:11050
+msgid "Automatically go to this directory when opening the \"Open\" dialog."
+msgstr "\"열기\"를 선택했을 시 자동적으로 다음의 디렉토리를 선택한다："
+
+#: comix:11051
+msgid "Automatically restore these values the next time Comix is started."
+msgstr "다음 시작시에 설정값을 자동적으로 불러 들인다"
+
+#: comix:11052
+msgid "Show the page number in the upper left corner of each thumbnail."
+msgstr "미리보기의 좌측상단에 페이지번호를 표시한다"
+
+#: comix:11053
+msgid "Automatically adjust the contrast of the images so that the darkest pixel is completely black and the lightest pixel is completely white. This only works with images without an alpha channel."
+msgstr "가장 어두운 픽셀이 검정, 밝은 픽셀이 흰색이 되도록, 자동적으로 대비를 조정한다. 이미지에 알파 채널이 없을 때에 유효가 됩니다."
+
+#: comix:11054
+msgid "The space key uses smart scrolling as if in double page mode even when in single page mode. This can be useful for comics with two scanned pages in each image. The pages are assumed to be of equal size"
+msgstr "단독 페이지 표시때도 좌우 페이지 보기 같이 스페이스 키로 스마트스크롤을 실시한다. 1장의 이미지안에 2매 스캔 한 페이지가 있는 만화를 볼 때에 편리합니다.2개의 페이지는 같은 사이즈로서 다루어집니다."
+
+#: comix:11055
+msgid "Adjust the lens magnification factor."
+msgstr "렌즈의 확대율을 설정한다"
+
+#: comix:11056
+msgid "Set the lens width and height in pixels. A larger lens will use more CPU resources than a small one."
+msgstr "렌즈의 가로폭과 세로폭을 픽셀로 설정한다.렌즈를 크게 하면 보다 많이 CPU를 사용합니다."
+
+#: comix:11057
+msgid "Set the maximum update frequency for the magnification lens in milliseconds. Setting the value too low can cause the lens to lag behind when moving the mouse quickly. Setting the value too high can cause the lens to appear choppy."
+msgstr "렌즈 표시를 갱신하는 빈도를 설정한다.빈도가 너무 낮으면, 마우스가 빨리 움직일 때에 렌즈와의 차이가 생깁니다.반대로 너무 높으면 렌즈가 흔들려 보입니다."
+
+#: comix:11058
+msgid "Read and write thumbnails in the ~/.thumbnails directory as proposed by the freedesktop.org standard. With this preference set, Comix will use the thumbnails already stored there to speed up thumbnail loading. If there are no thumbnails, Comix will create them and save them there. This is a standard that many applications conform to, thumbnails created by other applications can be used by Comix and vice versa. If this preference is not set, Comix will create thumbnails on the fly every time a directory is opened."
+msgstr ""
+"freedesktop.org의 규격에 따라, 미리보기를\"/.thumbnails\" 이하에 기록한다. 이 때, comix는 이미 저장된 이미지를 사용하여 로딩 속도를 높입니다. 미리보기가 없을 때는 이것을 작성해 기록합니다. \n"
+" 이것은 많은 어플리케이션이 따라서 있는 방법으로, 다른 어플리케이션으로 작성된 미리보기는 Comix로 이용 할 수 있어 또 그 역도 할 수 있습니다. \n"
+"이 설정을 실시하지 않을 때, Comix는 디렉토리를 열 때마다 미리보기를 작성합니다."
+
+#: comix:11059
+msgid "Also use stored thumbnails for images in archives in a similiar way. Due to restrictions in the freedesktop.org standard, these thumbnails will be stored in ~/.comix and will only be used by Comix. If this preference is not set, Comix will create thumbnails on the fly every time an archive is opened."
+msgstr "압축파일내의 이미지에 대해서도, 똑같이 기록된 미리보기를 이용한다. freedesktop.org의 규격에 의한 제한 때문에, 이 미리보기는 \"/.comix\" 이하에 기록되어 Comix 밖에 이용 할 수 없습니다. 이 설정을 실시하지 않을 때는, Comix는 압축파일이 열릴 때마다 미리보기를 작성합니다."
+
+#: comix:11060
+msgid "Only display a single image in double page mode if the image consists of two pages. An image is assumed to consist of two pages if its width is greater than its height."
+msgstr "하나의 이미지만을 표시하는 이미지를 좌우 페이지 모드로 구성되어 두 개의 페이지 보여줍니다. 가로폭이 세로폭보다 클 때는 2 페이지로부터 된다고 판단됩니다."
+
+#: comix:11061
+msgid "Filter out archives with regular expressions."
+msgstr "다음의 정규 표현으로 압축파일을 필터링 한다"
+
+#: comix:11062
+msgid "Apply filters on full paths rather than filenames."
+msgstr "필터를 파일명이 아니고 경로명에 적용한다"
+
+#: comix:11063
+msgid "Store a list of the 10 last opened files that can be accessed through the menus."
+msgstr "접근 한 파일중 마지막 10개를 기록한다"
+
+#: comix:11071
+msgid "First page"
+msgstr "처음 페이지"
+
+#: comix:11072
+msgid "Previous page"
+msgstr "이전 페이지"
+
+#: comix:11073
+msgid "Next page"
+msgstr "다음 페이지"
+
+#: comix:11074
+msgid "Last page"
+msgstr "마지막 페이지"
+
+#: comix:11075
+msgid "Go to page..."
+msgstr "페이지 이동"
+
+#~ msgid ""
+#~ "Flip pages when scrolling \"off the page\" with the scroll wheel, even "
+#~ "when not in fit-to-screen mode. It takes three \"steps\" with the scroll "
+#~ "wheel to trigger this behaviour."
+#~ msgstr ""
+#~ "スクリーンに合わせる表示でないときも、スクロールがページの外に出た時はペー"
+#~ "ジを移動する。「３回」スクロールを動かせばページを移動します。"
+

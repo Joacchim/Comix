@@ -1,0 +1,1341 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Comix 3.6\n"
+"POT-Creation-Date: 2007-05-09 14:55+CEST\n"
+"PO-Revision-Date: 2006-10-01 14:15+0800\n"
+"Last-Translator: Hsin-lin Cheng <lancetw@gmail.com>\n"
+"Language-Team: Hsin-lin Cheng <lancetw@gmail.com>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-Language: Chinese\n"
+"X-Poedit-Country: TAIWAN\n"
+"X-Poedit-SourceCharset: utf-8\n"
+
+#: comix:547 comix:11064
+msgid "Fit-to-screen mode"
+msgstr "符合螢幕模式"
+
+#: comix:550 comix:11065
+msgid "Fit width mode"
+msgstr "符合寬度模式"
+
+#: comix:553 comix:11066
+msgid "Fit height mode"
+msgstr "符合高度模式"
+
+#: comix:556 comix:11008 comix:11067
+msgid "Manual zoom mode"
+msgstr "手動縮放模式"
+
+#: comix:559 comix:11068
+msgid "Double page mode"
+msgstr "雙頁模式"
+
+#: comix:561 comix:11070
+msgid "Manga mode"
+msgstr "Manga 漫畫模式"
+
+#: comix:563 comix:11069
+msgid "Magnifying lens"
+msgstr "放大鏡"
+
+#: comix:664 comix:6637
+msgid "Library"
+msgstr "收藏"
+
+#: comix:694
+msgid "Apply filter on full path"
+msgstr "在完整路徑應用過濾器"
+
+#: comix:700
+msgid "Add archives to library."
+msgstr "加入壓縮檔到收藏中。"
+
+#: comix:705
+msgid "Remove selected archive from library."
+msgstr "從收藏中移除所選擇的壓縮檔。"
+
+#: comix:709 comix:1611 comix:1654
+msgid "Clean up"
+msgstr "清理"
+
+#: comix:713
+msgid "Remove orphaned or outdated library entries."
+msgstr "移除被遺棄或過時的收藏項目。"
+
+#: comix:717
+msgid "Close this window."
+msgstr "關閉這個視窗。"
+
+#: comix:722
+msgid "Open selected archive."
+msgstr "開啟被選擇的壓縮檔。"
+
+#: comix:779
+msgid "Open"
+msgstr "開啟"
+
+#: comix:791
+msgid "All files"
+msgstr "所有檔案"
+
+#: comix:802
+msgid "All images"
+msgstr "所有圖片"
+
+#: comix:814
+msgid "All archives"
+msgstr "所有壓縮檔"
+
+#: comix:818
+msgid "JPEG image"
+msgstr "JPEG 圖片"
+
+#: comix:822
+msgid "PNG image"
+msgstr "PNG 圖片"
+
+#: comix:826
+msgid "GIF image"
+msgstr "GIF 圖片"
+
+#: comix:830
+msgid "TIFF image"
+msgstr "TIFF 圖片"
+
+#: comix:834
+msgid "BMP image"
+msgstr "BMP 圖片"
+
+#: comix:838
+msgid "ICO image"
+msgstr "ICO 圖片"
+
+#: comix:842
+msgid "XPM image"
+msgstr "XPM 圖片"
+
+#: comix:846
+msgid "XBM image"
+msgstr "XBM 圖片"
+
+#: comix:852
+msgid "ZIP archive"
+msgstr "ZIP 壓縮檔"
+
+#: comix:857 comix:6719 comix:7071 comix:7122 comix:7470 comix:8743
+msgid "RAR archive"
+msgstr "RAR 壓縮檔"
+
+#: comix:864
+msgid "tar archive"
+msgstr "tar 壓縮檔"
+
+#: comix:868
+msgid "Add archives recursively"
+msgstr "迴遞地加入壓縮檔"
+
+#: comix:883
+msgid "Preferences"
+msgstr "偏好設定"
+
+#: comix:889
+msgid "Select folder"
+msgstr "選擇資料夾"
+
+#: comix:892
+msgid "Fullscreen as default"
+msgstr "將全螢幕設為預設值"
+
+#: comix:893
+msgid "Double page mode as default"
+msgstr "將雙頁模式設為預設值"
+
+#: comix:895
+msgid "Stretch small images"
+msgstr "伸展小型圖片"
+
+#: comix:897
+msgid "Use smart scaling in double page mode"
+msgstr "在雙頁模式使用智慧型縮放"
+
+#: comix:899
+msgid "Always view comments when opening a new file"
+msgstr "當開啟新檔案時總是檢視註解"
+
+#: comix:902
+msgid "Hide menubar, scrollbars etc. in fullscreen mode"
+msgstr "全螢幕模式時隱藏選單列、捲軸等"
+
+#: comix:904
+msgid "Cache pages for faster forward flipping"
+msgstr "為快速翻頁快取頁面"
+
+#: comix:907
+msgid "Scroll wheel scrolls horizontally at top and bottom of page"
+msgstr "在頁面頂端與底部滾動滾輪控制水平捲動"
+
+#: comix:910
+msgid "Flip page when scrolling off the top or bottom of page"
+msgstr "當滾動頁面的頂端或底部時翻頁"
+
+#: comix:912
+msgid "Hide thumbnail scrollbar"
+msgstr "隱藏縮圖捲軸列"
+
+#: comix:914
+msgid "Space key uses smart scrolling"
+msgstr "空白鍵使用智慧型捲動"
+
+#: comix:917
+msgid "Save window position and size for future sessions"
+msgstr "為未來的工作階段儲存視窗位置與大小"
+
+#: comix:920
+msgid "Go to the next archive in directory after last page"
+msgstr "在最後一頁之後轉到資料夾中的下一個壓縮檔"
+
+#: comix:922
+msgid "Hide cursor in fullscreen mode"
+msgstr "全螢幕模式隱藏滑鼠游標"
+
+#: comix:924
+msgid "Open last viewed file on start"
+msgstr "啟動時開啟最後檢視的檔案"
+
+#: comix:926
+msgid "Show page numbers on thumbnails"
+msgstr "在縮圖上顯示頁數"
+
+#: comix:929
+msgid "Always use smart scrolling as if in double page mode"
+msgstr "雙頁模式下總是使用智慧型捲動"
+
+#: comix:932
+msgid "Use stored thumbnails for images in directories"
+msgstr "為資料夾中的圖片使用儲存縮圖"
+
+#: comix:934
+msgid "Use stored thumbnails for images in archives"
+msgstr "為壓縮檔中的圖片使用儲存縮圖"
+
+#: comix:937
+msgid "Display only one page in double page mode if the image is wide"
+msgstr "雙頁模式下若該圖片較寬，僅顯示單頁"
+
+#: comix:940
+msgid "Store recently opened files"
+msgstr "儲存最近開啟的檔案"
+
+#: comix:943
+msgid "Always go to this directory in the \"Open\" dialog:"
+msgstr "「開啟」對話視窗總是轉到此資料夾："
+
+#: comix:946
+msgid "Always go to the latest directory in the \"Open\" dialog"
+msgstr "「開啟」對話視窗總是轉到最後使用的資料夾"
+
+#: comix:970
+msgid "Nearest (quickest, worst quality)"
+msgstr "近似 (最快，品質最差)"
+
+#: comix:971
+msgid "Tiles"
+msgstr "平舖"
+
+#: comix:972
+msgid "Bilinear"
+msgstr "雙線性"
+
+#: comix:974
+msgid "Hyper (slowest, best quality)"
+msgstr "超級 (最慢，品質最佳)"
+
+#: comix:976
+msgid "Manual zoom mode as default"
+msgstr "將手動縮放模式設為預設值"
+
+#: comix:979
+msgid "Fit-to-screen mode as default"
+msgstr "將符合螢幕模式設為預設值"
+
+#: comix:982
+msgid "Fit width mode as default"
+msgstr "將符合寬度模式設為預設值"
+
+#: comix:985
+msgid "Fit height mode as default"
+msgstr "將符合高度模式設為預設值"
+
+#: comix:1008
+msgid "Background colour:"
+msgstr "背景顏色："
+
+#: comix:1011
+msgid "Background colour"
+msgstr "背景顏色"
+
+#: comix:1013
+msgid "Toolbar button labels:"
+msgstr "工具列按鈕標籤："
+
+#: comix:1017
+msgid "Icons only"
+msgstr "祇有圖示"
+
+#: comix:1018 comix:4630
+msgid "Text only"
+msgstr "祇有文字"
+
+#: comix:1019 comix:4632
+msgid "Icons and text"
+msgstr "圖示與文字"
+
+#: comix:1020
+msgid "Slideshow delay:"
+msgstr "投影片放映延遲："
+
+#: comix:1036
+msgid "Display"
+msgstr "顯示"
+
+#: comix:1090
+msgid "Behaviour"
+msgstr "行為"
+
+#: comix:1127
+msgid "Scaling quality"
+msgstr "縮放品質"
+
+#: comix:1152
+msgid "Scaling"
+msgstr "縮放"
+
+#: comix:1166
+msgid "Treat files with the following extensions as comments:"
+msgstr "下列的延伸檔名作為註解檔案處理："
+
+#: comix:1172
+msgid "Comments"
+msgstr "註解"
+
+#: comix:1197
+msgid "Space key scrolls"
+msgstr "空白鍵捲動"
+
+#: comix:1201 comix:3991 comix:9404 comix:9433 comix:9436 comix:9443
+#: comix:9445
+msgid "of"
+msgstr "的"
+
+#: comix:1205
+msgid "Window size"
+msgstr "視窗大小"
+
+#: comix:1206
+msgid "Page size"
+msgstr "頁面大小"
+
+#: comix:1208
+msgid "Scroll"
+msgstr "捲軸"
+
+#: comix:1222
+msgid "Magnification factor:"
+msgstr "放大倍率："
+
+#: comix:1226
+msgid "Lens size (px):"
+msgstr "放大鏡大小 (像素)："
+
+#: comix:1230
+msgid "Update interval (milliseconds):"
+msgstr "更新時間間隔 (毫秒)："
+
+#: comix:1235
+msgid "Lens"
+msgstr "放大鏡"
+
+#: comix:1249
+msgid "Thumbnail sizes (px):"
+msgstr "縮圖大小 (像素)："
+
+#: comix:1254
+msgid "Library thumbnail sizes (px):"
+msgstr "收藏的縮圖大小 (像素)："
+
+#: comix:1272
+msgid "Thumbnails"
+msgstr "縮圖"
+
+#: comix:1301
+msgid "Adjust colour"
+msgstr "顏色"
+
+#: comix:1303
+msgid "Default"
+msgstr "預設"
+
+#: comix:1325
+msgid "Brightness"
+msgstr "亮度"
+
+#: comix:1337
+msgid "Contrast"
+msgstr "對比"
+
+#: comix:1349
+msgid "Saturation"
+msgstr "飽和度"
+
+#: comix:1361
+msgid "Sharpness"
+msgstr "清晰度"
+
+#: comix:1376
+msgid "Automatically adjust contrast"
+msgstr "自動調整對比"
+
+#: comix:1383
+msgid "Save values for future sessions"
+msgstr "為未來的作業階段儲存設定值"
+
+#: comix:1395
+msgid "Properties"
+msgstr "屬性"
+
+#: comix:1413
+msgid "Go to page"
+msgstr "轉到頁面"
+
+#: comix:1437
+msgid "Edit bookmarks"
+msgstr "編輯書籤"
+
+#: comix:1446
+msgid "Title"
+msgstr "標題"
+
+#: comix:1447 comix:5397 comix:5749
+msgid "Page"
+msgstr "頁次"
+
+#: comix:1477 comix:1530
+msgid "About"
+msgstr "關於"
+
+#: comix:1515
+msgid "Comix is an image viewer specifically designed to handle comic books."
+msgstr "Comix 是一個特別設計用來看漫畫書的圖片檢視器。"
+
+#: comix:1517
+msgid "It reads ZIP, RAR and tar archives (also gzip or bzip2 compressed)"
+msgstr "Comix 既可以讀取普通的圖片檔案"
+
+#: comix:1519
+msgid "as well as plain image files."
+msgstr "又能夠讀取 ZIP、RAR、tar 壓縮檔 (包含以 gzip 或 bzip2 壓縮的)。"
+
+#: comix:1521
+msgid "Comix is licensed under the GNU General Public License."
+msgstr "Comix 係採用 GNU 通用公共授權條款。"
+
+#: comix:1539
+msgid "Developer and Swedish translation"
+msgstr "開發者與瑞典語翻譯"
+
+#: comix:1541
+msgid "Simplified Chinese translation"
+msgstr "簡體中文翻譯"
+
+#: comix:1542
+msgid "Spanish translation"
+msgstr "西班牙語翻譯"
+
+#: comix:1543
+msgid "Brazilian Portuguese translation"
+msgstr "巴西葡萄牙語翻譯"
+
+#: comix:1545
+msgid "German translation and Nautilus thumbnailer"
+msgstr "德語翻譯與 Nautilus 縮圖功能作者"
+
+#: comix:1546
+msgid "Italian translation"
+msgstr "義大利語翻譯"
+
+#: comix:1547
+msgid "Dutch translation"
+msgstr "荷蘭語翻譯"
+
+#: comix:1548
+msgid "French translation"
+msgstr "法語翻譯"
+
+#: comix:1549
+msgid "Polish translation"
+msgstr "波蘭語翻譯"
+
+#: comix:1550
+msgid "Greek translation"
+msgstr "希臘語翻譯"
+
+#: comix:1551
+msgid "Catalan translation"
+msgstr "加泰羅尼亞語翻譯"
+
+#: comix:1552
+msgid "Traditional Chinese translation"
+msgstr "繁體中文翻譯"
+
+#: comix:1553
+msgid "Japanese translation"
+msgstr ""
+
+#: comix:1554
+msgid "Hungarian translation"
+msgstr ""
+
+#: comix:1555
+msgid "Russian translation"
+msgstr ""
+
+#: comix:1564
+msgid "Credits"
+msgstr "致謝"
+
+#: comix:1573
+msgid "Manage thumbnails"
+msgstr "管理縮圖"
+
+#: comix:1606 comix:1649
+msgid "Remove all stored thumbnails:"
+msgstr "移除所有已存縮圖："
+
+#: comix:1616 comix:1659
+msgid "Remove orphaned thumbnails:"
+msgstr "移除所有被遺棄的縮圖："
+
+#: comix:1621
+msgid "Directories"
+msgstr "目錄"
+
+#: comix:1664
+msgid "Archives"
+msgstr "壓縮檔"
+
+#: comix:1674
+msgid "Removing thumbnails"
+msgstr "正在移除縮圖"
+
+#: comix:1714
+msgid "Convert"
+msgstr "轉換"
+
+#: comix:1723
+msgid "File type"
+msgstr "檔案型態"
+
+#: comix:1724
+msgid "Extension"
+msgstr "延伸檔名"
+
+#: comix:1736 comix:4321 comix:4357 comix:6711 comix:7061 comix:7112
+#: comix:7468 comix:8714
+msgid "Zip archive"
+msgstr "Zip 壓縮檔"
+
+#: comix:1737 comix:4324 comix:4363 comix:6713 comix:7063 comix:7114
+#: comix:7472 comix:8730
+msgid "Tar archive"
+msgstr "Tar 壓縮檔"
+
+#: comix:1738 comix:4328 comix:4359 comix:6715 comix:7066 comix:7117
+#: comix:7473 comix:8726
+msgid "Gzip compressed tar archive"
+msgstr "以 Gzip 壓縮的 tar 壓縮檔"
+
+#: comix:1740 comix:4331 comix:4361 comix:6717 comix:7069 comix:7120
+#: comix:7474 comix:8728
+msgid "Bzip2 compressed tar archive"
+msgstr "以 Bzip2 壓縮的 tar 壓縮檔"
+
+#: comix:1752
+msgid "Delete old archive/directory"
+msgstr "刪除舊的壓縮檔或資料夾"
+
+#: comix:1777 comix:6112 comix:6117
+msgid "Permission denied"
+msgstr "權限被拒"
+
+#: comix:1802
+msgid "Confirm operation"
+msgstr "確認操作"
+
+#: comix:4092
+msgid "Permanently remove %s?"
+msgstr "永久移除 %s？"
+
+#: comix:4096
+msgid "Perform lossless JPEG operation on %s?"
+msgstr "於 %s 執行 JPEG 無損耗操作？"
+
+#: comix:4098 comix:4103
+msgid "Some images might be trimmed a bit during the operation."
+msgstr "某些圖片在操作期間也許會整齊一點。"
+
+#: comix:4101
+msgid "Permanently convert %s to greyscale?"
+msgstr "將 %s 永久轉換為灰階？"
+
+#: comix:4963 comix:4974
+msgid "Location:"
+msgstr "位置："
+
+#: comix:4964 comix:4975
+msgid "Quantity:"
+msgstr "數量："
+
+#: comix:4964 comix:4975
+msgid "Total size:"
+msgstr "合計大小："
+
+#: comix:5010 comix:5021 comix:5025 comix:5036 comix:5055 comix:5060
+#: comix:5064 comix:5075 comix:5086 comix:5090 comix:5101 comix:5119
+#: comix:5124 comix:5128 comix:6431 comix:6459 comix:6465
+msgid "Removed:"
+msgstr "已移除："
+
+#: comix:5026 comix:5065 comix:5091 comix:5129 comix:6379 comix:6466
+msgid "Done!"
+msgstr "完成！"
+
+#: comix:5230 comix:6704 comix:7059 comix:7110
+msgid "pages"
+msgstr "頁"
+
+#: comix:5236
+msgid "comment"
+msgstr "註解"
+
+#: comix:5240
+msgid "comments"
+msgstr "註解"
+
+#: comix:5264 comix:5450 comix:5803
+msgid "Location"
+msgstr "位置"
+
+#: comix:5277
+msgid "Yes"
+msgstr "是"
+
+#: comix:5277 comix:5280
+msgid "In library"
+msgstr "在收藏中"
+
+#: comix:5280 comix:5295
+msgid "No"
+msgstr "否"
+
+#: comix:5290
+msgid "Yes, page"
+msgstr "是，頁面"
+
+#: comix:5290 comix:5295
+msgid "Bookmarked"
+msgstr "已加入書籤"
+
+#: comix:5303 comix:5459 comix:5812
+msgid "Accessed"
+msgstr "存取時間"
+
+#: comix:5313 comix:5470 comix:5823
+msgid "Modified"
+msgstr "修改時間"
+
+#: comix:5323 comix:5481 comix:5834
+msgid "Permissions"
+msgstr "權限"
+
+#: comix:5332 comix:5491 comix:5844
+msgid "Owner"
+msgstr "擁有者"
+
+#: comix:5342
+msgid "Archive"
+msgstr "壓縮檔"
+
+#: comix:5508 comix:5861
+msgid "Mode"
+msgstr "模式"
+
+#: comix:5515 comix:5868
+msgid "Pixel count"
+msgstr "像素計數"
+
+#: comix:5528 comix:5881
+msgid "Pixel sum"
+msgstr "像素總和"
+
+#: comix:5559 comix:5912
+msgid "Extrema"
+msgstr "極值"
+
+#: comix:5598 comix:5951
+msgid "Mean"
+msgstr "平均數"
+
+#: comix:5626 comix:5979
+msgid "Median"
+msgstr "中位數"
+
+#: comix:5654 comix:6007
+msgid "Standard deviation"
+msgstr "標準差"
+
+#: comix:5686
+msgid "Image"
+msgstr "圖片"
+
+#: comix:5689
+msgid "Image 1"
+msgstr "圖片 1"
+
+#: comix:6037
+msgid "Image 2"
+msgstr "圖片 2"
+
+#: comix:6113
+msgid "Could not delete"
+msgstr "無法刪除"
+
+#: comix:6114 comix:6119
+msgid "Please check your permissions."
+msgstr "請檢查您的權限"
+
+#: comix:6118
+msgid "Could not create"
+msgstr "無法建立"
+
+#: comix:6230 comix:6240 comix:6374 comix:6378
+msgid "Added:"
+msgstr "已加入："
+
+#: comix:6231
+msgid "Adding library entries"
+msgstr "正在加入收藏項目"
+
+#: comix:6432
+msgid "Removing library entries"
+msgstr "正在移除收藏項目"
+
+#: comix:7213
+msgid "Extract page"
+msgstr "解壓縮頁面"
+
+#: comix:7640
+msgid "page"
+msgstr "頁次"
+
+#: comix:8741
+msgid ""
+"Could not find the unrar executable. Please install it if you wish to open "
+"RAR archives."
+msgstr "無法找到 unrar 執行檔。您若想開啟 RAR 壓縮檔請安裝 unrar。"
+
+#: comix:8746
+msgid "Could not open"
+msgstr "無法開啟"
+
+#: comix:8792
+msgid "is not a file."
+msgstr "不是檔案。"
+
+#: comix:8795
+msgid "does not exist."
+msgstr "不存在。"
+
+#: comix:8903
+msgid "Filetype of"
+msgstr "檔案型態是"
+
+#: comix:8905
+msgid "not recognized."
+msgstr "尚未識別。"
+
+#: comix:8920 comix:11179
+msgid "No images in \"%s\""
+msgstr "在「%s」中沒有圖片"
+
+#: comix:9403
+msgid "Comment file"
+msgstr "註解檔案"
+
+#: comix:9419
+msgid "Could not read"
+msgstr "無法讀取"
+
+#: comix:9432 comix:9435 comix:9442 comix:9444
+msgid "Comment"
+msgstr "註解"
+
+#: comix:10882
+msgid "_Next page"
+msgstr "下一頁 (_N)"
+
+#: comix:10884
+msgid "_Previous page"
+msgstr "上一頁 (_P)"
+
+#: comix:10886
+msgid "_First page"
+msgstr "第一頁 (_F)"
+
+#: comix:10888
+msgid "_Last page"
+msgstr "最後一頁 (_L)"
+
+#: comix:10890
+msgid "_Go to page..."
+msgstr "轉到頁面... (_G)"
+
+#: comix:10892
+msgid "Manual _Zoom"
+msgstr "手動縮放 (_Z)"
+
+#: comix:10893
+msgid "_Zoom in"
+msgstr "縮小 (_Z)"
+
+#: comix:10895
+msgid "Zoom _out"
+msgstr "放大 (_o)"
+
+#: comix:10897
+msgid "_Normal size"
+msgstr "正常大小 (_N)"
+
+#: comix:10899
+msgid "Fit _width"
+msgstr "符合寬度 (_w)"
+
+#: comix:10901
+msgid "Fit _height"
+msgstr "符合高度 (_h)"
+
+#: comix:10903
+msgid "_Best fit"
+msgstr "最適大小 (_B)"
+
+#: comix:10905
+msgid "_Add bookmark"
+msgstr "加入書籤 (_A)"
+
+#: comix:10907
+msgid "Clear bookmarks"
+msgstr "清除書籤"
+
+#: comix:10910
+msgid "_Edit bookmarks..."
+msgstr "編輯書籤... (_E)"
+
+#: comix:10912
+msgid "Pr_eferences"
+msgstr "偏好設定 (_e)"
+
+#: comix:10914
+msgid "_About"
+msgstr "關於 (_A)"
+
+#: comix:10917
+msgid "_Manage thumbnails..."
+msgstr "管理書籤... (_M)"
+
+#: comix:10919
+msgid "Proper_ties"
+msgstr "屬性 (_t)"
+
+#: comix:10921
+msgid "View _comments"
+msgstr "檢視註解 (_c)"
+
+#: comix:10923
+msgid "_Open..."
+msgstr "開啟... (_O)"
+
+#: comix:10925
+msgid "_Recent files"
+msgstr "最近的檔案 (_R)"
+
+#: comix:10926
+msgid "Clear recent files"
+msgstr "清除最近的檔案"
+
+#: comix:10928
+msgid "Open _library..."
+msgstr "開啟收藏... (_l)"
+
+#: comix:10930
+msgid "_Add to library"
+msgstr "加到收藏中 (_A)"
+
+#: comix:10932
+msgid "Con_vert..."
+msgstr "轉換 (_v)"
+
+#: comix:10934
+msgid "E_xtract image..."
+msgstr "解壓縮圖片... (_x)"
+
+#: comix:10936
+msgid "_Close"
+msgstr "關閉 (_C)"
+
+#: comix:10938
+msgid "_Quit"
+msgstr "離開 (_Q)"
+
+#: comix:10940
+msgid "_Adjust colour..."
+msgstr "色彩校正... (_A)"
+
+#: comix:10942
+msgid "Slideshow"
+msgstr "投影片放映"
+
+#: comix:10944
+msgid "Delete image..."
+msgstr "刪除圖片..."
+
+#: comix:10947
+msgid "CW lossless JPEG rotation..."
+msgstr "順時針 JPEG 無損耗旋轉..."
+
+#: comix:10950
+msgid "CCW lossless JPEG rotation..."
+msgstr "逆時針 JPEG 無損耗旋轉..."
+
+#: comix:10953
+msgid "Horizontal lossless JPEG flip..."
+msgstr "水平 JPEG 無損耗翻轉"
+
+#: comix:10956
+msgid "Vertical lossless JPEG flip..."
+msgstr "垂直 JPEG 無損耗翻轉"
+
+#: comix:10959
+msgid "Convert JPEG to greyscale..."
+msgstr "將 JPEG 轉換為灰階..."
+
+#: comix:10961 comix:10963
+msgid "_Bookmarks"
+msgstr "書籤 (_B)"
+
+#: comix:10962
+msgid "_Toolbars"
+msgstr "工具列 (_T)"
+
+#: comix:10964
+msgid "_Edit"
+msgstr "編輯 (_E)"
+
+#: comix:10966
+msgid "File o_perations"
+msgstr "檔案操作 (_p)"
+
+#: comix:10967
+msgid "_File"
+msgstr "檔案 (_F)"
+
+#: comix:10968 comix:10969
+msgid "_View"
+msgstr "檢視 (_V)"
+
+#: comix:10970 comix:10971
+msgid "_Go"
+msgstr "前往 (_G)"
+
+#: comix:10972
+msgid "_Help"
+msgstr "說明 (_H)"
+
+#: comix:10973
+msgid "_Transform"
+msgstr "變換 (_T)"
+
+#: comix:10974
+msgid "_Rotate 90 degrees CW"
+msgstr "順時針旋轉 90° (_R)"
+
+#: comix:10976
+msgid "Rotate 180 de_grees"
+msgstr "旋轉 180° (_g)"
+
+#: comix:10978
+msgid "Rotat_e 90 degrees CCW"
+msgstr "逆時針旋轉 90° (_e)"
+
+#: comix:10980
+msgid "Fli_p horizontally"
+msgstr "水平翻轉 (_p)"
+
+#: comix:10982
+msgid "Flip _vertically"
+msgstr "垂直翻轉 (_v)"
+
+#: comix:10985
+msgid "_Fullscreen"
+msgstr "全螢幕 (_F)"
+
+#: comix:10987
+msgid "_Double page mode"
+msgstr "雙頁模式 (_D)"
+
+#: comix:10989
+msgid "_Toolbar"
+msgstr "工具列 (_T)"
+
+#: comix:10991
+msgid "_Menubar"
+msgstr "選單列 (_M)"
+
+#: comix:10993
+msgid "St_atusbar"
+msgstr "狀態列 (_a)"
+
+#: comix:10995
+msgid "S_crollbars"
+msgstr "捲軸列 (_c)"
+
+#: comix:10997
+msgid "Th_umbnails"
+msgstr "縮圖 (_u)"
+
+#: comix:10999
+msgid "H_ide all"
+msgstr "全部隱藏 (_i)"
+
+#: comix:11001
+msgid "_Manga mode"
+msgstr "Manga 漫畫模式 (_M)"
+
+#: comix:11003
+msgid "_Keep transformation"
+msgstr "保持變換 (_K)"
+
+#: comix:11005
+msgid "Magnifying _lens"
+msgstr "放大鏡 (_l)"
+
+#: comix:11009
+msgid "Fit-to-_screen mode"
+msgstr "符合螢幕模式 (_s)"
+
+#: comix:11010
+msgid "Fit _width mode"
+msgstr "符合寬度模式 (_w)"
+
+#: comix:11011
+msgid "Fit _height mode"
+msgstr "符合高度模式 (_h)"
+
+#: comix:11025
+msgid "Enter fullscreen mode automatically when Comix is started."
+msgstr "當 Comix 啟動時自動進入全螢幕模式。"
+
+#: comix:11026
+msgid "Enter double page mode automatically when Comix is started."
+msgstr "當 Comix 啟動時自動進入雙頁模式。"
+
+#: comix:11027
+msgid "Enter manual zoom mode automatically when Comix is started."
+msgstr "當 Comix 啟動時自動進入手動縮放模式。"
+
+#: comix:11028
+msgid "Enter fit-to-screen mode automatically when Comix is started."
+msgstr "當 Comix 啟動時自動進入符合螢幕模式。"
+
+#: comix:11029
+msgid "Enter fit width mode automatically when Comix is started."
+msgstr "當 Comix 啟動時自動進入符合寬度模式。"
+
+#: comix:11030
+msgid "Enter fit height mode automatically when Comix is started."
+msgstr "當 Comix 啟動時自動進入符合高度模式。"
+
+#: comix:11031
+msgid ""
+"Also scale images to a size that is larger than their original size in fit-"
+"to-screen mode, fit width mode and fit height mode."
+msgstr ""
+"並且在符合螢幕模式、符合寬度模式和符合高度模式時，縮放的圖片可以大於它們的原"
+"始大小。"
+
+#: comix:11032
+msgid ""
+"Scale the images independently when in double page mode and fit-to-screen "
+"mode. The smaller of the two images will scale up to fill any extra space "
+"that is given."
+msgstr ""
+"當處於雙頁模式與符合螢幕模式時，各自獨立地縮放圖片。兩張圖片中較小的那張會按"
+"比例放大填滿任何額外給定的空間。"
+
+#: comix:11033
+msgid "Automatically show any available comments when opening a new file."
+msgstr "當開啟新的檔案時自動顯示可用的註解。"
+
+#: comix:11034
+msgid ""
+"Automatically hide scrollbars, menubar, toolbar, statusbar and thumbnails "
+"when in fullscreen mode."
+msgstr "當全螢幕模式時自動隱藏捲軸列、選單列、工具列、狀態列和縮圖。"
+
+#: comix:11035
+msgid ""
+"Cache the next page in the archive/directory to increase the perceived "
+"speed. This is generally recommended unless you are running low on RAM."
+msgstr ""
+"在壓縮檔或資料夾中快取下一頁以加速瀏覽。除非您的記憶體太少，否則通常推薦使"
+"用。"
+
+#: comix:11036
+msgid ""
+"Move the horizontal scrollbar instead of the vertical when using the scroll "
+"wheel at the top or the bottom of the page. The direction will be determined "
+"by whether you use manga mode or not."
+msgstr ""
+"當於此頁的頂端或底部使用滾輪時，移動水平捲軸代替垂直轉軸。此方向會決定出您是"
+"否使用 manga 漫畫模式。"
+
+#: comix:11037
+msgid ""
+"Flip pages when scrolling \"off the page\" with the scroll wheel, as well as "
+"with the arrow keys, even when not in fit-to-screen mode. It takes three "
+"\"steps\" with the scroll wheel or arrow keys to trigger this behaviour."
+msgstr ""
+
+#: comix:11038
+msgid ""
+"Save the position and the size of the window for the next time you start "
+"Comix."
+msgstr "為下一次啟動 Comix 儲存視窗的位置與大小。"
+
+#: comix:11039
+msgid ""
+"Automatically open the next archive in the directory when scrolling past the "
+"last page of the current archive, and automatically open the previous "
+"archive in the directory when scrolling past the first page of the current "
+"archive."
+msgstr ""
+"當捲動超出當前壓縮檔的最後一頁時，自動開啟資料夾中的下一個壓縮檔；當捲動超出"
+"當前壓縮檔的第一頁時，自動開啟資料夾中的上一個壓縮檔。"
+
+#: comix:11040
+msgid "Hide the cursor when in fullscreen mode."
+msgstr "當全螢幕模式時隱藏滑鼠游標。"
+
+#: comix:11041 comix:11042 comix:11043 comix:11044
+msgid ""
+"Set the image scaling method. The best choice is often \"Tiles\", it is "
+"quite quick and produces almost as good results as \"Bilinear\" or \"Hyper\"."
+msgstr ""
+"設定圖片的縮放方式。「平舖」經常是最好的選擇，「平舖」相當快速，並產生幾乎如"
+"同「雙線性」或「超級」一樣好的效果。"
+
+#: comix:11045
+msgid ""
+"Treat files with the following extensions as comment files. Extensions "
+"should be separated by whitespaces. They are not case sensitive."
+msgstr "將下列的延伸檔名視為註解檔案。延伸檔名應以空白間隔。不區分大小寫。"
+
+#: comix:11046
+msgid ""
+"Use smart scrolling with the space key. Pressing the space key normally "
+"scrolls straight down one window height unless at the bottom of the page "
+"where it flips pages instead. When this option is set Comix automatically "
+"tries to follow the reading flow of the comic book. When pressing the space "
+"key it will not only scroll down but will also scroll horizontally to the "
+"edge of the page (left or right depending on whether you use manga mode). In "
+"double page mode it will go to the edge of the first page if it is in view, "
+"otherwise it will go to the edge of the second page. Also, in double page "
+"mode with this option, Comix will not flip pages unless at the bottom of the "
+"second page. At the bottom of the first page it will instead go to the top "
+"of the second page."
+msgstr ""
+"以空白鍵使用智慧捲動。按下空白鍵通常會筆直向下捲動一個視窗高度，到達頁面底部"
+"則會翻頁。當此選項被設定時，Comix 會自動嘗試跟隨漫畫書的閱讀流程。當按下空白"
+"鍵時，不只會捲動向下，還會水平捲動到頁面邊緣 (左或右視您使用的 manga 漫畫模式"
+"而定)。若是在雙頁模式下檢視，將會轉到第一頁的邊緣，要不然轉到第二頁的邊緣。同"
+"樣地，依此選項在雙頁模式下，除非在第二頁的底部，否則 Comix 將不會翻頁。在第一"
+"頁的底部將會轉到第二頁的頂端。"
+
+#: comix:11047
+msgid "Always hide the thumbnail scrollbar."
+msgstr "總是隱藏縮圖捲軸列。"
+
+#: comix:11048
+msgid "Automatically open the last viewed page when Comix is started."
+msgstr "當 Comix 啟動時自動開啟最後瀏覽的頁面。"
+
+#: comix:11049
+msgid ""
+"Automatically go to the same directory as last time when opening the \"Open"
+"\" dialog."
+msgstr "當打開「開啟」對話視窗時自動顯示相同的資料夾。"
+
+#: comix:11050
+msgid "Automatically go to this directory when opening the \"Open\" dialog."
+msgstr "當打開「開啟」對話視窗時自動顯示此資料夾。"
+
+#: comix:11051
+msgid "Automatically restore these values the next time Comix is started."
+msgstr "下一次啟動 Comix 時自動還原這些設定值。"
+
+#: comix:11052
+msgid "Show the page number in the upper left corner of each thumbnail."
+msgstr "在每個縮圖的左上角顯示頁數。"
+
+#: comix:11053
+msgid ""
+"Automatically adjust the contrast of the images so that the darkest pixel is "
+"completely black and the lightest pixel is completely white. This only works "
+"with images without an alpha channel."
+msgstr ""
+"自動調整圖片的對比度好讓最暗的像素全黑，最亮的像素全白。僅在圖片沒有遮罩 "
+"(alpha channel) 時起作用。"
+
+#: comix:11054
+msgid ""
+"The space key uses smart scrolling as if in double page mode even when in "
+"single page mode. This can be useful for comics with two scanned pages in "
+"each image. The pages are assumed to be of equal size"
+msgstr ""
+"即使在單頁模式下也使用如同雙頁模式的空白鍵智慧型捲動。漫畫以雙頁掃描圖片時這"
+"會比較有用。假定頁面的大小都相等。"
+
+#: comix:11055
+msgid "Adjust the lens magnification factor."
+msgstr "調整放大鏡的放大倍率。"
+
+#: comix:11056
+msgid ""
+"Set the lens width and height in pixels. A larger lens will use more CPU "
+"resources than a small one."
+msgstr ""
+"以像素大小設定放大鏡的寬度與高度。較大的放大鏡會比小型的使用更多的 CPU 資源。"
+
+#: comix:11057
+msgid ""
+"Set the maximum update frequency for the magnification lens in milliseconds. "
+"Setting the value too low can cause the lens to lag behind when moving the "
+"mouse quickly. Setting the value too high can cause the lens to appear "
+"choppy."
+msgstr ""
+"以毫秒設定放大鏡的最大更新頻率。設定的數值太低，當快速移動滑鼠時會造成放大鏡"
+"延遲。設的數值太高會造成放大鏡出現震盪。"
+
+#: comix:11058
+msgid ""
+"Read and write thumbnails in the ~/.thumbnails directory as proposed by the "
+"freedesktop.org standard. With this preference set, Comix will use the "
+"thumbnails already stored there to speed up thumbnail loading. If there are "
+"no thumbnails, Comix will create them and save them there. This is a "
+"standard that many applications conform to, thumbnails created by other "
+"applications can be used by Comix and vice versa. If this preference is not "
+"set, Comix will create thumbnails on the fly every time a directory is "
+"opened."
+msgstr ""
+"依 freedesktop.org 所建議的標準於 ~/.thumbnails 資料夾中存取縮圖。以此偏好設"
+"定，Comix 將會使用已經儲存的縮圖來加速縮圖的載入。若無縮圖，Comix 將會建立並"
+"儲存。許多的應用程式遵照此標準，故由其他應用程式建立的縮圖可被 Comix 利用，反"
+"之亦然。如果此偏好尚未設定，Comix 將會於每次資料夾開啟，不工作時建立縮圖。"
+
+#: comix:11059
+msgid ""
+"Also use stored thumbnails for images in archives in a similiar way. Due to "
+"restrictions in the freedesktop.org standard, these thumbnails will be "
+"stored in ~/.comix and will only be used by Comix. If this preference is not "
+"set, Comix will create thumbnails on the fly every time an archive is opened."
+msgstr ""
+"也用類似的方法為壓縮檔中的圖片使用儲存縮圖。由於 freedesktop.org 標準的限制，"
+"這些縮圖會被儲存在 ~/.comix 並祇會被 Comix 使用。若此偏好尚未設定，Comix 將會"
+"於每次壓縮檔開啟，不工作時建立縮圖。"
+
+#: comix:11060
+msgid ""
+"Only display a single image in double page mode if the image consists of two "
+"pages. An image is assumed to consist of two pages if its width is greater "
+"than its height."
+msgstr ""
+"若該圖片是由兩頁組成的，在雙頁模式下僅顯示單張圖片。若圖片的寬度大於高度，就"
+"假定是由兩頁組成 。"
+
+#: comix:11061
+msgid "Filter out archives with regular expressions."
+msgstr "以正規表示式過濾出所有壓縮檔。"
+
+#: comix:11062
+msgid "Apply filters on full paths rather than filenames."
+msgstr "在完整路徑而不是檔名上應用過濾器。"
+
+#: comix:11063
+msgid ""
+"Store a list of the 10 last opened files that can be accessed through the "
+"menus."
+msgstr "儲存最後10個開啟過的檔案列表，並可以從選單選取。"
+
+#: comix:11071
+msgid "First page"
+msgstr "第一頁"
+
+#: comix:11072
+msgid "Previous page"
+msgstr "上一頁"
+
+#: comix:11073
+msgid "Next page"
+msgstr "下一頁"
+
+#: comix:11074
+msgid "Last page"
+msgstr "最後一頁"
+
+#: comix:11075
+msgid "Go to page..."
+msgstr "轉到頁面..."
+
+#~ msgid ""
+#~ "Flip pages when scrolling \"off the page\" with the scroll wheel, even "
+#~ "when not in fit-to-screen mode. It takes three \"steps\" with the scroll "
+#~ "wheel to trigger this behaviour."
+#~ msgstr ""
+#~ "即使不是在符合螢幕模式，當以滾輪捲動「超出本頁」時也翻頁。要觸發此行為滾輪"
+#~ "需要滾動「三步」。"
+
+#~ msgid "No viewable files in"
+#~ msgstr "沒有可以檢視的檔案"
+
+#~ msgid "No images in"
+#~ msgstr "無圖片在"
+
+#~ msgid "Save saturation and contrast for future sessions"
+#~ msgstr "為未來的工作階段儲存飽和度與對比度"
+
+#~ msgid "Saturation (default 1.0):"
+#~ msgstr "飽和度 (預設 1.0)："
+
+#~ msgid "Contrast (default 1.0):"
+#~ msgstr "對比度 (預設 1.0)："
+
+#~ msgid "Clear"
+#~ msgstr "清除"
+
+#~ msgid "Advanced"
+#~ msgstr "進階"
+
+#~ msgid ""
+#~ "Automatically restore the saturation and contrast values the next time "
+#~ "Comix is started."
+#~ msgstr "下次啟動 Comix 時自動還原飽和度與對比度的設定值。"

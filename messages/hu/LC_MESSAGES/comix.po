@@ -1,0 +1,1363 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Comix 3.6.1\n"
+"POT-Creation-Date: 2007-05-09 14:55+CEST\n"
+"PO-Revision-Date: 2007-02-28 20:53+0100\n"
+"Last-Translator: Ernő Drabik <drerno@gmail.com>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-Language: Hungarian\n"
+"X-Poedit-Country: HUNGARY\n"
+
+#: comix:547 comix:11064
+msgid "Fit-to-screen mode"
+msgstr "Képernyőhöz"
+
+#: comix:550 comix:11065
+msgid "Fit width mode"
+msgstr "Szélességhez"
+
+#: comix:553 comix:11066
+msgid "Fit height mode"
+msgstr "Magassághoz"
+
+#: comix:556 comix:11008 comix:11067
+msgid "Manual zoom mode"
+msgstr "Kézi nagyítás"
+
+#: comix:559 comix:11068
+msgid "Double page mode"
+msgstr "Kétlapos mód"
+
+#: comix:561 comix:11070
+msgid "Manga mode"
+msgstr "Manga mód"
+
+#: comix:563 comix:11069
+msgid "Magnifying lens"
+msgstr "Nagyítólencse"
+
+#: comix:664 comix:6637
+msgid "Library"
+msgstr "Gyűjtemény"
+
+#: comix:694
+msgid "Apply filter on full path"
+msgstr "A szűrő alkamazása a teljes elérési útvonalon"
+
+#: comix:700
+msgid "Add archives to library."
+msgstr "Arhívumok hozzáadása a gyűjteményhez."
+
+#: comix:705
+msgid "Remove selected archive from library."
+msgstr "A kiválasztott arhívum törlése a gyűjteményből."
+
+#: comix:709 comix:1611 comix:1654
+msgid "Clean up"
+msgstr "Karbantartás"
+
+#: comix:713
+msgid "Remove orphaned or outdated library entries."
+msgstr ""
+"Árva (már nem megtalálható) vagy elavult könyvtárbejegyzések eltávolítása."
+
+#: comix:717
+msgid "Close this window."
+msgstr "Az aktuális ablak bezárása."
+
+#: comix:722
+msgid "Open selected archive."
+msgstr "A kijelölt archívum megnyitása."
+
+#: comix:779
+msgid "Open"
+msgstr "Megnyitás"
+
+#: comix:791
+msgid "All files"
+msgstr "Minden fájl"
+
+#: comix:802
+msgid "All images"
+msgstr "Minden kép"
+
+#: comix:814
+msgid "All archives"
+msgstr "Minden archívum"
+
+#: comix:818
+msgid "JPEG image"
+msgstr "JPEG kép"
+
+#: comix:822
+msgid "PNG image"
+msgstr "PNG kép"
+
+#: comix:826
+msgid "GIF image"
+msgstr "GIF kép"
+
+#: comix:830
+msgid "TIFF image"
+msgstr "TIFF kép"
+
+#: comix:834
+msgid "BMP image"
+msgstr "BMP kép"
+
+#: comix:838
+msgid "ICO image"
+msgstr "ICO kép"
+
+#: comix:842
+msgid "XPM image"
+msgstr "XPM kép"
+
+#: comix:846
+msgid "XBM image"
+msgstr "XBM kép"
+
+#: comix:852
+msgid "ZIP archive"
+msgstr "Zip archívum"
+
+#: comix:857 comix:6719 comix:7071 comix:7122 comix:7470 comix:8743
+msgid "RAR archive"
+msgstr "RAR archívum"
+
+#: comix:864
+msgid "tar archive"
+msgstr "tar archívum"
+
+#: comix:868
+msgid "Add archives recursively"
+msgstr "Arhívumok rekurzív hozzáadása"
+
+#: comix:883
+msgid "Preferences"
+msgstr "Beállítások"
+
+#: comix:889
+msgid "Select folder"
+msgstr "Könyvtár kiválasztása"
+
+#: comix:892
+msgid "Fullscreen as default"
+msgstr "Teljes képernyős megjelenítés legyen az alapértelmezett"
+
+#: comix:893
+msgid "Double page mode as default"
+msgstr "A kétlapos mód legyen az alapértelmezett"
+
+#: comix:895
+msgid "Stretch small images"
+msgstr "Kisméretű képek kinyújtása"
+
+#: comix:897
+msgid "Use smart scaling in double page mode"
+msgstr "Intelligens méretezés használata kétlapos megjelenítési módban"
+
+#: comix:899
+msgid "Always view comments when opening a new file"
+msgstr "Megjegyzések megjelenítése mindig új fájl megnyitásakor"
+
+#: comix:902
+msgid "Hide menubar, scrollbars etc. in fullscreen mode"
+msgstr "Menüsor, gördítősávok, stb. elrejtése teljes képernyős módban"
+
+#: comix:904
+msgid "Cache pages for faster forward flipping"
+msgstr "Lapok gyorstárba tétele a gyorsabb előre lapozáshoz"
+
+#: comix:907
+msgid "Scroll wheel scrolls horizontally at top and bottom of page"
+msgstr ""
+"Az egérgörgő kerék vízszintesen mozgassa a képet a lap alsó, felső részén"
+
+#: comix:910
+msgid "Flip page when scrolling off the top or bottom of page"
+msgstr "Lapozás a lap alján vagy tetején történő kigördítéskor"
+
+#: comix:912
+msgid "Hide thumbnail scrollbar"
+msgstr "Bélyegképek gördítősávjának az elrejtése"
+
+#: comix:914
+msgid "Space key uses smart scrolling"
+msgstr "A szóköz billentyű intelligens gördítést végez"
+
+#: comix:917
+msgid "Save window position and size for future sessions"
+msgstr "Az ablakpozíciók és méretek mentése a további munkafolyamatokhoz"
+
+#: comix:920
+msgid "Go to the next archive in directory after last page"
+msgstr ""
+"Az utolsó lap megjelenítése után a következő arhívum kerüljön megnyitásra"
+
+#: comix:922
+msgid "Hide cursor in fullscreen mode"
+msgstr "A kurzor elrejtése teljes képernyős módban"
+
+#: comix:924
+msgid "Open last viewed file on start"
+msgstr "Az utoljára megtekintett kép legyen megnyitva a program indításakor"
+
+#: comix:926
+msgid "Show page numbers on thumbnails"
+msgstr "A lapszámok legyenek rajta a bélyegképen"
+
+#: comix:929
+msgid "Always use smart scrolling as if in double page mode"
+msgstr "Dupla lapos módban mindig legyen bekapcsolva az intelligens gördítés"
+
+#: comix:932
+msgid "Use stored thumbnails for images in directories"
+msgstr "A képekhez készített bélyegképek könyvtárakban történő tárolása"
+
+#: comix:934
+msgid "Use stored thumbnails for images in archives"
+msgstr "A képekhez készített bélyegképek arhívumokban történő tárolása"
+
+#: comix:937
+msgid "Display only one page in double page mode if the image is wide"
+msgstr "A kétlapos módban is csak egy képet jelenjen meg, ha az széles"
+
+#: comix:940
+msgid "Store recently opened files"
+msgstr "A legutóbb használt fájlok tárolása"
+
+#: comix:943
+msgid "Always go to this directory in the \"Open\" dialog:"
+msgstr ""
+"A \"Megnyitás\" párbeszédablak kiválasztásakor mindig a megadott könyvtár "
+"jelenjen meg."
+
+#: comix:946
+msgid "Always go to the latest directory in the \"Open\" dialog"
+msgstr ""
+"A \"Megnyitás\" párbeszédablak kiválasztásakor mindig legutoljára használt "
+"könyvtár jelenjen meg."
+
+#: comix:970
+msgid "Nearest (quickest, worst quality)"
+msgstr "Nearest (leggyorsabb, legrosszabb minőség)"
+
+#: comix:971
+msgid "Tiles"
+msgstr "Tiles"
+
+#: comix:972
+msgid "Bilinear"
+msgstr "Bilineáris"
+
+#: comix:974
+msgid "Hyper (slowest, best quality)"
+msgstr "Hyper (leglassabb, legjobb minőségű)"
+
+#: comix:976
+msgid "Manual zoom mode as default"
+msgstr "A kézi nagyítási mód legyen az alapértelmezett"
+
+#: comix:979
+msgid "Fit-to-screen mode as default"
+msgstr "A képernyőmérethez igazított mód legyen az alapértelmezett"
+
+#: comix:982
+msgid "Fit width mode as default"
+msgstr "A szélességhez igazított mód legyen az alapértelmezett"
+
+#: comix:985
+msgid "Fit height mode as default"
+msgstr "A magassághoz igazított mód legyen az alapértelmezett"
+
+#: comix:1008
+msgid "Background colour:"
+msgstr "Háttérszín:"
+
+#: comix:1011
+msgid "Background colour"
+msgstr "Háttérszín"
+
+#: comix:1013
+msgid "Toolbar button labels:"
+msgstr "Eszköztár gombok címkéi:"
+
+#: comix:1017
+msgid "Icons only"
+msgstr "Csak ikonok"
+
+#: comix:1018 comix:4630
+msgid "Text only"
+msgstr "Csak szöveg"
+
+#: comix:1019 comix:4632
+msgid "Icons and text"
+msgstr "Szöveg és ikonok"
+
+#: comix:1020
+msgid "Slideshow delay:"
+msgstr "Diavetítés késletetési ideje:"
+
+#: comix:1036
+msgid "Display"
+msgstr "Képernyő"
+
+#: comix:1090
+msgid "Behaviour"
+msgstr "Viselkedés"
+
+#: comix:1127
+msgid "Scaling quality"
+msgstr "Méretezés minősége"
+
+#: comix:1152
+msgid "Scaling"
+msgstr "Méretezés"
+
+#: comix:1166
+msgid "Treat files with the following extensions as comments:"
+msgstr "A megadott kiterjesztések megjegyzést tartalmazó állományok:"
+
+#: comix:1172
+msgid "Comments"
+msgstr "Megjegyzések"
+
+#: comix:1197
+msgid "Space key scrolls"
+msgstr "A szóköz billentyű gördítése"
+
+#: comix:1201 comix:3991 comix:9404 comix:9433 comix:9436 comix:9443
+#: comix:9445
+msgid "of"
+msgstr " "
+
+#: comix:1205
+msgid "Window size"
+msgstr "az ablakméretnek"
+
+#: comix:1206
+msgid "Page size"
+msgstr "a lapméretnek"
+
+#: comix:1208
+msgid "Scroll"
+msgstr "Gördítés"
+
+#: comix:1222
+msgid "Magnification factor:"
+msgstr "Nagyítási tényező:"
+
+#: comix:1226
+msgid "Lens size (px):"
+msgstr "Lencse mérete (pixelben):"
+
+#: comix:1230
+msgid "Update interval (milliseconds):"
+msgstr "Frissítési időköz (ezredmásodpercben):"
+
+#: comix:1235
+msgid "Lens"
+msgstr "Lencse"
+
+#: comix:1249
+msgid "Thumbnail sizes (px):"
+msgstr "Bélyegképek mérete (pixelben)"
+
+#: comix:1254
+msgid "Library thumbnail sizes (px):"
+msgstr "A gyűjtemény bélyegkép mérete (pixelben):"
+
+#: comix:1272
+msgid "Thumbnails"
+msgstr "Bélyegképek"
+
+#: comix:1301
+msgid "Adjust colour"
+msgstr "Színek beállítása"
+
+#: comix:1303
+msgid "Default"
+msgstr "Alapértelmezett"
+
+#: comix:1325
+msgid "Brightness"
+msgstr "Fényerő"
+
+#: comix:1337
+msgid "Contrast"
+msgstr "Kontraszt"
+
+#: comix:1349
+msgid "Saturation"
+msgstr "Telítettség"
+
+#: comix:1361
+msgid "Sharpness"
+msgstr "Élesség"
+
+#: comix:1376
+msgid "Automatically adjust contrast"
+msgstr "Kontraszt automatikus beállítása"
+
+#: comix:1383
+msgid "Save values for future sessions"
+msgstr "Az értékek elmentése a további munkafolyamatokhoz"
+
+#: comix:1395
+msgid "Properties"
+msgstr "Tulajdonságok"
+
+#: comix:1413
+msgid "Go to page"
+msgstr "Ugrás a megadott oldalra"
+
+#: comix:1437
+msgid "Edit bookmarks"
+msgstr "Könyvjelzők szerkesztése"
+
+#: comix:1446
+msgid "Title"
+msgstr "Cím"
+
+#: comix:1447 comix:5397 comix:5749
+msgid "Page"
+msgstr "Oldal"
+
+#: comix:1477 comix:1530
+msgid "About"
+msgstr "Névjegy"
+
+#: comix:1515
+msgid "Comix is an image viewer specifically designed to handle comic books."
+msgstr ""
+"A Comix egy képnézegető alkalmazás, melyet kimondottan a képregények "
+"megjelenítéséhez terveztek."
+
+#: comix:1517
+msgid "It reads ZIP, RAR and tar archives (also gzip or bzip2 compressed)"
+msgstr ""
+"Az alkalmazás meg tudja nyitni a ZIP, RAR és tar arhívumban lévő képeket "
+
+#: comix:1519
+msgid "as well as plain image files."
+msgstr "(a gzip és bzip2 tömörítettet is) csakúgy, mint a sima képfájlokat."
+
+#: comix:1521
+msgid "Comix is licensed under the GNU General Public License."
+msgstr ""
+"A Comix a GNU General Public License (GNU Általános Nyilvános Licenc) "
+"alapján kerül terjesztésre."
+
+#: comix:1539
+msgid "Developer and Swedish translation"
+msgstr "Fejlesztő, svéd fordítás"
+
+#: comix:1541
+msgid "Simplified Chinese translation"
+msgstr "Egyszerűsített kínai fordítás"
+
+#: comix:1542
+msgid "Spanish translation"
+msgstr "Spanyol fordítás"
+
+#: comix:1543
+msgid "Brazilian Portuguese translation"
+msgstr "Brazíliai portugál fordítás"
+
+#: comix:1545
+msgid "German translation and Nautilus thumbnailer"
+msgstr "Német fordítás, Nautilus bélyegkép modul"
+
+#: comix:1546
+msgid "Italian translation"
+msgstr "Olasz fordítás"
+
+#: comix:1547
+msgid "Dutch translation"
+msgstr "Holland fordítás"
+
+#: comix:1548
+msgid "French translation"
+msgstr "Francia fordítás"
+
+#: comix:1549
+msgid "Polish translation"
+msgstr "Lengyel fordítás"
+
+#: comix:1550
+msgid "Greek translation"
+msgstr "Görög fordítás"
+
+#: comix:1551
+msgid "Catalan translation"
+msgstr "Katalán fordítás"
+
+#: comix:1552
+msgid "Traditional Chinese translation"
+msgstr "Hagyományos kínai fordítás"
+
+#: comix:1553
+msgid "Japanese translation"
+msgstr ""
+
+#: comix:1554
+msgid "Hungarian translation"
+msgstr ""
+
+#: comix:1555
+msgid "Russian translation"
+msgstr ""
+
+#: comix:1564
+msgid "Credits"
+msgstr "Közreműködők"
+
+#: comix:1573
+msgid "Manage thumbnails"
+msgstr "Bélyegképek kezelése"
+
+#: comix:1606 comix:1649
+msgid "Remove all stored thumbnails:"
+msgstr "Az összes eltárolt bélyegkép törlése:"
+
+#: comix:1616 comix:1659
+msgid "Remove orphaned thumbnails:"
+msgstr "Árva (már nem megtalálható) bélyegképek eltávolítása:"
+
+#: comix:1621
+msgid "Directories"
+msgstr "Könyvtárak"
+
+#: comix:1664
+msgid "Archives"
+msgstr "Archívumok"
+
+#: comix:1674
+msgid "Removing thumbnails"
+msgstr "Bélyegképek eltávolítása"
+
+#: comix:1714
+msgid "Convert"
+msgstr "Konvertálás"
+
+#: comix:1723
+msgid "File type"
+msgstr "Fájltípus"
+
+#: comix:1724
+msgid "Extension"
+msgstr "Kiterjesztés"
+
+#: comix:1736 comix:4321 comix:4357 comix:6711 comix:7061 comix:7112
+#: comix:7468 comix:8714
+msgid "Zip archive"
+msgstr "Zip archívum"
+
+#: comix:1737 comix:4324 comix:4363 comix:6713 comix:7063 comix:7114
+#: comix:7472 comix:8730
+msgid "Tar archive"
+msgstr "Tar archívum"
+
+#: comix:1738 comix:4328 comix:4359 comix:6715 comix:7066 comix:7117
+#: comix:7473 comix:8726
+msgid "Gzip compressed tar archive"
+msgstr "tar archívum (gzip-pel tömörített)"
+
+#: comix:1740 comix:4331 comix:4361 comix:6717 comix:7069 comix:7120
+#: comix:7474 comix:8728
+msgid "Bzip2 compressed tar archive"
+msgstr "tar archívum (bzip2-vel tömörített)"
+
+#: comix:1752
+msgid "Delete old archive/directory"
+msgstr "Régi arhívum/könyvtár törlése"
+
+#: comix:1777 comix:6112 comix:6117
+msgid "Permission denied"
+msgstr "Hozzáférés megtagadva"
+
+#: comix:1802
+msgid "Confirm operation"
+msgstr "Művelet jóváhagyása"
+
+#: comix:4092
+msgid "Permanently remove %s?"
+msgstr "Végleges eltávolítás: %s?"
+
+#: comix:4096
+msgid "Perform lossless JPEG operation on %s?"
+msgstr "Veszteségmentes JPEG műveletek végrehajtása: %s?"
+
+#: comix:4098 comix:4103
+msgid "Some images might be trimmed a bit during the operation."
+msgstr "A művelet végrehajtásakor néhány kép szegélye egy kicsit csonkulhat."
+
+#: comix:4101
+msgid "Permanently convert %s to greyscale?"
+msgstr "Végleges szürkeárnyalatossá konvertálás: %s?"
+
+#: comix:4963 comix:4974
+msgid "Location:"
+msgstr "Hely:"
+
+#: comix:4964 comix:4975
+msgid "Quantity:"
+msgstr "Darabszám:"
+
+#: comix:4964 comix:4975
+msgid "Total size:"
+msgstr "Teljes méret:"
+
+#: comix:5010 comix:5021 comix:5025 comix:5036 comix:5055 comix:5060
+#: comix:5064 comix:5075 comix:5086 comix:5090 comix:5101 comix:5119
+#: comix:5124 comix:5128 comix:6431 comix:6459 comix:6465
+msgid "Removed:"
+msgstr "Eltávolítva:"
+
+#: comix:5026 comix:5065 comix:5091 comix:5129 comix:6379 comix:6466
+msgid "Done!"
+msgstr "Kész!"
+
+#: comix:5230 comix:6704 comix:7059 comix:7110
+msgid "pages"
+msgstr "lapok"
+
+#: comix:5236
+msgid "comment"
+msgstr "megjegyzés"
+
+#: comix:5240
+msgid "comments"
+msgstr "megjegyzések"
+
+#: comix:5264 comix:5450 comix:5803
+msgid "Location"
+msgstr "Hely"
+
+#: comix:5277
+msgid "Yes"
+msgstr "Igen"
+
+#: comix:5277 comix:5280
+msgid "In library"
+msgstr "Gyűjteményben van"
+
+#: comix:5280 comix:5295
+msgid "No"
+msgstr "Nem"
+
+#: comix:5290
+msgid "Yes, page"
+msgstr "Igen, oldal"
+
+#: comix:5290 comix:5295
+msgid "Bookmarked"
+msgstr "Könyjelző"
+
+#: comix:5303 comix:5459 comix:5812
+msgid "Accessed"
+msgstr "Utolsó elérés"
+
+#: comix:5313 comix:5470 comix:5823
+msgid "Modified"
+msgstr "Módosítva"
+
+#: comix:5323 comix:5481 comix:5834
+msgid "Permissions"
+msgstr "Jogosultságok"
+
+#: comix:5332 comix:5491 comix:5844
+msgid "Owner"
+msgstr "Tulajdonos"
+
+#: comix:5342
+msgid "Archive"
+msgstr "Archívum"
+
+#: comix:5508 comix:5861
+msgid "Mode"
+msgstr "Mód"
+
+#: comix:5515 comix:5868
+msgid "Pixel count"
+msgstr "Pixelek száma"
+
+#: comix:5528 comix:5881
+msgid "Pixel sum"
+msgstr "Pixelek összesen"
+
+#: comix:5559 comix:5912
+msgid "Extrema"
+msgstr "Szélsőérték"
+
+#: comix:5598 comix:5951
+msgid "Mean"
+msgstr "Középérték"
+
+#: comix:5626 comix:5979
+msgid "Median"
+msgstr "Medián"
+
+#: comix:5654 comix:6007
+msgid "Standard deviation"
+msgstr "Standard szórás"
+
+#: comix:5686
+msgid "Image"
+msgstr "Kép"
+
+#: comix:5689
+msgid "Image 1"
+msgstr "Kép 1"
+
+#: comix:6037
+msgid "Image 2"
+msgstr "Kép 2"
+
+#: comix:6113
+msgid "Could not delete"
+msgstr "Nem törölhető"
+
+#: comix:6114 comix:6119
+msgid "Please check your permissions."
+msgstr "Ellenőrizze a jogosultságait"
+
+#: comix:6118
+msgid "Could not create"
+msgstr "Nem sikerült a létrehozás"
+
+#: comix:6230 comix:6240 comix:6374 comix:6378
+msgid "Added:"
+msgstr "Hozzáadva:"
+
+#: comix:6231
+msgid "Adding library entries"
+msgstr "Gyűjjtemény bejegyzések hozzáadása"
+
+#: comix:6432
+msgid "Removing library entries"
+msgstr "Gyűjtemény bejegyzések eltávolítása"
+
+#: comix:7213
+msgid "Extract page"
+msgstr "Kép kicsomagolása"
+
+#: comix:7640
+msgid "page"
+msgstr "oldal"
+
+#: comix:8741
+msgid ""
+"Could not find the unrar executable. Please install it if you wish to open "
+"RAR archives."
+msgstr ""
+"Az unrar parancsfájl nem található. Kérem telepítse, ha meg szeretné nyitni "
+"a RAR arhívumokat."
+
+#: comix:8746
+msgid "Could not open"
+msgstr "Nem nyitható meg"
+
+#: comix:8792
+msgid "is not a file."
+msgstr "nem fájl."
+
+#: comix:8795
+msgid "does not exist."
+msgstr "nem létezik"
+
+#: comix:8903
+msgid "Filetype of"
+msgstr "Fájltípus"
+
+#: comix:8905
+msgid "not recognized."
+msgstr " nem felismerhető."
+
+#: comix:8920 comix:11179
+msgid "No images in \"%s\""
+msgstr "Nincsenek képek:  \"%s\""
+
+#: comix:9403
+msgid "Comment file"
+msgstr "Megjegyzés fűzése a fájlhoz"
+
+#: comix:9419
+msgid "Could not read"
+msgstr "Nem olvasható"
+
+#: comix:9432 comix:9435 comix:9442 comix:9444
+msgid "Comment"
+msgstr "Megjegyzés"
+
+#: comix:10882
+msgid "_Next page"
+msgstr "_Következő oldal"
+
+#: comix:10884
+msgid "_Previous page"
+msgstr "Előző _oldal"
+
+#: comix:10886
+msgid "_First page"
+msgstr "_Első oldal"
+
+#: comix:10888
+msgid "_Last page"
+msgstr "_Utolsó oldal"
+
+#: comix:10890
+msgid "_Go to page..."
+msgstr "U_grás a megadott oldalra"
+
+#: comix:10892
+msgid "Manual _Zoom"
+msgstr "_Kézi nagyítás"
+
+#: comix:10893
+msgid "_Zoom in"
+msgstr "_Nagyítás"
+
+#: comix:10895
+msgid "Zoom _out"
+msgstr "_Kicsinyítés"
+
+#: comix:10897
+msgid "_Normal size"
+msgstr "N_ormál méret"
+
+#: comix:10899
+msgid "Fit _width"
+msgstr "S_zélességhez igazítás"
+
+#: comix:10901
+msgid "Fit _height"
+msgstr "Ho_sszúsághoz igazítás"
+
+#: comix:10903
+msgid "_Best fit"
+msgstr "Legjobb _illeszkedés"
+
+#: comix:10905
+msgid "_Add bookmark"
+msgstr "Könyvjelző hozzá_adása"
+
+#: comix:10907
+msgid "Clear bookmarks"
+msgstr "A könyvjelzők törlése"
+
+#: comix:10910
+msgid "_Edit bookmarks..."
+msgstr "A könyvjelzők sz_erkesztése"
+
+#: comix:10912
+msgid "Pr_eferences"
+msgstr "B_eállítások"
+
+#: comix:10914
+msgid "_About"
+msgstr "_Névjegy"
+
+#: comix:10917
+msgid "_Manage thumbnails..."
+msgstr "_Bélyegképek kezelése..."
+
+#: comix:10919
+msgid "Proper_ties"
+msgstr "_Tulajdonságok"
+
+#: comix:10921
+msgid "View _comments"
+msgstr "Megjegy_zések megtekintése"
+
+#: comix:10923
+msgid "_Open..."
+msgstr "_Megnyitás..."
+
+#: comix:10925
+msgid "_Recent files"
+msgstr "_Legutóbbi fájlok"
+
+#: comix:10926
+msgid "Clear recent files"
+msgstr "Legutóbbi fájlok listájának törlése"
+
+#: comix:10928
+msgid "Open _library..."
+msgstr "_Gyűjtemény megnyitása..."
+
+#: comix:10930
+msgid "_Add to library"
+msgstr "Ho_zzáadás a gyűjteményhez"
+
+#: comix:10932
+msgid "Con_vert..."
+msgstr "K_onvertálás..."
+
+#: comix:10934
+msgid "E_xtract image..."
+msgstr "Kép ki_csomagolása..."
+
+#: comix:10936
+msgid "_Close"
+msgstr "_Bezárás"
+
+#: comix:10938
+msgid "_Quit"
+msgstr "_Kilépés"
+
+#: comix:10940
+msgid "_Adjust colour..."
+msgstr "Színek _beállítása..."
+
+#: comix:10942
+msgid "Slideshow"
+msgstr "Diavetítés"
+
+#: comix:10944
+msgid "Delete image..."
+msgstr "Kép törlése..."
+
+#: comix:10947
+msgid "CW lossless JPEG rotation..."
+msgstr "CW veszteségmentes JPEG forgatás"
+
+#: comix:10950
+msgid "CCW lossless JPEG rotation..."
+msgstr "CCW veszteségmentes JPEG forgatás"
+
+#: comix:10953
+msgid "Horizontal lossless JPEG flip..."
+msgstr "Veszteségmentes JPEG tükrözés vízszintesen..."
+
+#: comix:10956
+msgid "Vertical lossless JPEG flip..."
+msgstr "Veszteségmentes JPEG tükrözés függőlegesen..."
+
+#: comix:10959
+msgid "Convert JPEG to greyscale..."
+msgstr "JPEG konvertálása szürkeárnyalatossá"
+
+#: comix:10961 comix:10963
+msgid "_Bookmarks"
+msgstr "_Könyvjelzők"
+
+#: comix:10962
+msgid "_Toolbars"
+msgstr "_Eszköztárak"
+
+#: comix:10964
+msgid "_Edit"
+msgstr "S_zerkesztés"
+
+#: comix:10966
+msgid "File o_perations"
+msgstr "Fá_jlműveletek"
+
+#: comix:10967
+msgid "_File"
+msgstr "_Fájl"
+
+#: comix:10968 comix:10969
+msgid "_View"
+msgstr "_Nézet"
+
+#: comix:10970 comix:10971
+msgid "_Go"
+msgstr "_Ugrás"
+
+#: comix:10972
+msgid "_Help"
+msgstr "_Súgó"
+
+#: comix:10973
+msgid "_Transform"
+msgstr "Áta_lakítás"
+
+#: comix:10974
+msgid "_Rotate 90 degrees CW"
+msgstr "A kép elfo_rgatása 90 fokkal"
+
+#: comix:10976
+msgid "Rotate 180 de_grees"
+msgstr "A kép e_lforgatása 180 fokkal"
+
+#: comix:10978
+msgid "Rotat_e 90 degrees CCW"
+msgstr "A kép _elforgatása -90 fokkal"
+
+#: comix:10980
+msgid "Fli_p horizontally"
+msgstr "Tükrözés _vízszintesen"
+
+#: comix:10982
+msgid "Flip _vertically"
+msgstr "Tükrözés _függőlegesen"
+
+#: comix:10985
+msgid "_Fullscreen"
+msgstr "_Teljes képernyő"
+
+#: comix:10987
+msgid "_Double page mode"
+msgstr "_Dupla lapos mód"
+
+#: comix:10989
+msgid "_Toolbar"
+msgstr "_Eszköztár"
+
+#: comix:10991
+msgid "_Menubar"
+msgstr "_Menüsor"
+
+#: comix:10993
+msgid "St_atusbar"
+msgstr "Álla_potsor"
+
+#: comix:10995
+msgid "S_crollbars"
+msgstr "Gö_rdítősávok"
+
+#: comix:10997
+msgid "Th_umbnails"
+msgstr "_Bélyegképek"
+
+#: comix:10999
+msgid "H_ide all"
+msgstr "M_inden elrejtve"
+
+#: comix:11001
+msgid "_Manga mode"
+msgstr "_Manga mód"
+
+#: comix:11003
+msgid "_Keep transformation"
+msgstr "Á_talakítás megtartása"
+
+#: comix:11005
+msgid "Magnifying _lens"
+msgstr "N_agyító"
+
+#: comix:11009
+msgid "Fit-to-_screen mode"
+msgstr "Ké_pernyőmérethez igazítás"
+
+#: comix:11010
+msgid "Fit _width mode"
+msgstr "Széle_sséghez igazítás"
+
+#: comix:11011
+msgid "Fit _height mode"
+msgstr "Ma_gassághoz igazítás"
+
+#: comix:11025
+msgid "Enter fullscreen mode automatically when Comix is started."
+msgstr "A Comix teljes képernyős módban induljon."
+
+#: comix:11026
+msgid "Enter double page mode automatically when Comix is started."
+msgstr "A Comix kétlapos módban induljon."
+
+#: comix:11027
+msgid "Enter manual zoom mode automatically when Comix is started."
+msgstr "A Comix kézi nagyítási módban induljon."
+
+#: comix:11028
+msgid "Enter fit-to-screen mode automatically when Comix is started."
+msgstr "A Comix képernyőmérethez igazított módban induljon."
+
+#: comix:11029
+msgid "Enter fit width mode automatically when Comix is started."
+msgstr "A Comix szélességhez igazított módban induljon."
+
+#: comix:11030
+msgid "Enter fit height mode automatically when Comix is started."
+msgstr "A Comix magassághoz igazított módban induljon."
+
+#: comix:11031
+msgid ""
+"Also scale images to a size that is larger than their original size in fit-"
+"to-screen mode, fit width mode and fit height mode."
+msgstr ""
+"A képernyőmérethez, a szélességhez és magassághoz igazításos módban "
+"kinyújtja (arányosítja) a képet, még ha az nagyobb is, mint az eredeti méret."
+
+#: comix:11032
+msgid ""
+"Scale the images independently when in double page mode and fit-to-screen "
+"mode. The smaller of the two images will scale up to fill any extra space "
+"that is given."
+msgstr ""
+"Dupla lapos és képernyőmérethez igazításos módban a képeket a program "
+"önállóan úgy méretezi, hogy a kisebbik képet kinyújtja annyira, hogy a "
+"rendelkezésre álló üres helyet kitöltse."
+
+#: comix:11033
+msgid "Automatically show any available comments when opening a new file."
+msgstr ""
+"Új állomány megnyitásakor automatikusan jelenjen meg bármilyen rendelkezésre "
+"álló megjegyzés."
+
+#: comix:11034
+msgid ""
+"Automatically hide scrollbars, menubar, toolbar, statusbar and thumbnails "
+"when in fullscreen mode."
+msgstr ""
+"A gördítősávok, menüsor, eszköztár, státuszsor és a bélyegképek "
+"automatikusan rejtve legyenek teljes képernyős módban."
+
+#: comix:11035
+msgid ""
+"Cache the next page in the archive/directory to increase the perceived "
+"speed. This is generally recommended unless you are running low on RAM."
+msgstr ""
+"Az arhívum/könyvtár következő lapját/képét gyorsítótárazza a program a "
+"nagyobb sebesség elérése miatt. Ez egy ajánlott beállítás, kivéve ha kevés a "
+"rendelkezésre álló memória."
+
+#: comix:11036
+msgid ""
+"Move the horizontal scrollbar instead of the vertical when using the scroll "
+"wheel at the top or the bottom of the page. The direction will be determined "
+"by whether you use manga mode or not."
+msgstr ""
+"Az egérgörgő kerék lap alján/tetején történő tekerése a vízszintes "
+"gördítősávot mozgassa a függőleges helyett. Az irányt a manga mód "
+"bekapcsolása/kikapcsolása szabja meg."
+
+#: comix:11037
+msgid ""
+"Flip pages when scrolling \"off the page\" with the scroll wheel, as well as "
+"with the arrow keys, even when not in fit-to-screen mode. It takes three "
+"\"steps\" with the scroll wheel or arrow keys to trigger this behaviour."
+msgstr ""
+
+#: comix:11038
+msgid ""
+"Save the position and the size of the window for the next time you start "
+"Comix."
+msgstr ""
+"A Comix következő indításához jegyezze meg az ablak méretét és a helyzetét."
+
+#: comix:11039
+msgid ""
+"Automatically open the next archive in the directory when scrolling past the "
+"last page of the current archive, and automatically open the previous "
+"archive in the directory when scrolling past the first page of the current "
+"archive."
+msgstr ""
+"Automatikusan megnyitja a következő arhívumot, ha az aktuális utolsó lapját "
+"elhagyjuk, illetve az előzőt, ha az első kép elé lépünk."
+
+#: comix:11040
+msgid "Hide the cursor when in fullscreen mode."
+msgstr "Az egérmutató elrejtése teljes képernyős módban."
+
+#: comix:11041 comix:11042 comix:11043 comix:11044
+msgid ""
+"Set the image scaling method. The best choice is often \"Tiles\", it is "
+"quite quick and produces almost as good results as \"Bilinear\" or \"Hyper\"."
+msgstr ""
+"A kép méretezési módjának beállítása. Legtöbbször a \"Tiles\" mód a legjobb "
+"választás. Gyors és majdnem a  \"Bilinear\" vagy a  \"Hyper\" módhoz hasonló "
+"a végeredmény."
+
+#: comix:11045
+msgid ""
+"Treat files with the following extensions as comment files. Extensions "
+"should be separated by whitespaces. They are not case sensitive."
+msgstr ""
+"A megadott kiterjesztéseket a program megjegyzés fájlként kezeli. Egymástól "
+"szóközzel kell elválasztani őket. Az értelmezés nem kis-, nagybetű érzékeny."
+
+#: comix:11046
+msgid ""
+"Use smart scrolling with the space key. Pressing the space key normally "
+"scrolls straight down one window height unless at the bottom of the page "
+"where it flips pages instead. When this option is set Comix automatically "
+"tries to follow the reading flow of the comic book. When pressing the space "
+"key it will not only scroll down but will also scroll horizontally to the "
+"edge of the page (left or right depending on whether you use manga mode). In "
+"double page mode it will go to the edge of the first page if it is in view, "
+"otherwise it will go to the edge of the second page. Also, in double page "
+"mode with this option, Comix will not flip pages unless at the bottom of the "
+"second page. At the bottom of the first page it will instead go to the top "
+"of the second page."
+msgstr ""
+"A szóköz billentyű intelligens gördítést végez majd. A billentyű lenyomása "
+"alapesetben egy ablakméretnyit gördít lefelé, kivéve a lap alján, ahol is a "
+"következő oldalra lapoz. Ezt a beállítást kijelölve a Comix automatikusan "
+"megpróbálja a képregény olvasási irányát követni. A billentyűt lenyomva "
+"nemcsak lefelé gördíti a képet, de vízszintesen is az oldal széle felé "
+"(balra, vagy jobbra attól függően be van-e kapcsolva a manga mód). Dupla "
+"lapos módban - ha ez a nézet él - az első lap széle felé, máskülönben a "
+"második lap széle felé halad. Ezen túl a dupla lapos módban a Comix nem "
+"lapoz a következő oldalra, hacsak nem a második lap alján áll. Az első lap "
+"alján lapozás helyett a második tetejére mozog majd."
+
+#: comix:11047
+msgid "Always hide the thumbnail scrollbar."
+msgstr "A függőleges gördítősáv legyen mindig elrejtve."
+
+#: comix:11048
+msgid "Automatically open the last viewed page when Comix is started."
+msgstr ""
+"A Comix indításakor automatikusan a legutoljára megnyitott oldal jelenik meg."
+
+#: comix:11049
+msgid ""
+"Automatically go to the same directory as last time when opening the \"Open"
+"\" dialog."
+msgstr ""
+"A \"Megnyitás\" párbeszédablak kiválasztásakor automatikusan mindig a "
+"legutoljára megnyitott könyvtár tartalma jelenjen meg."
+
+#: comix:11050
+msgid "Automatically go to this directory when opening the \"Open\" dialog."
+msgstr ""
+"A \"Megnyitás\" párbeszédablak kiválasztásakor automatikusan mindig a "
+"kiválaszott könyvtár tartalma jelenjen meg."
+
+#: comix:11051
+msgid "Automatically restore these values the next time Comix is started."
+msgstr "A Comix következő indításakor ezek a beállítások lesznek használva."
+
+#: comix:11052
+msgid "Show the page number in the upper left corner of each thumbnail."
+msgstr "Az oldalszámok a bélyegképek bal felső részénél lesznek majd láthatók."
+
+#: comix:11053
+msgid ""
+"Automatically adjust the contrast of the images so that the darkest pixel is "
+"completely black and the lightest pixel is completely white. This only works "
+"with images without an alpha channel."
+msgstr ""
+"A kontraszt automatikusan úgy lesz beállítva, hogy a legsötétebb pixel "
+"teljesen fekete, a legvilágosabb pedig teljesen fehér legyen. Ez csak "
+"alfacsatorna nélküli képeknél használható."
+
+#: comix:11054
+msgid ""
+"The space key uses smart scrolling as if in double page mode even when in "
+"single page mode. This can be useful for comics with two scanned pages in "
+"each image. The pages are assumed to be of equal size"
+msgstr ""
+"A szóköz billentyű intelligens gördítést használ majd, mint a dupla lapos "
+"módban, még akkor is, ha az egylapos mód az aktív. Ez a beállítás akkor "
+"hasznos, ha a egy képen két szkennelt képregény lap van. A lapokat a program "
+"egyenlő méretűnek feltételezi."
+
+#: comix:11055
+msgid "Adjust the lens magnification factor."
+msgstr "A lencse nagyítási szorzója."
+
+#: comix:11056
+msgid ""
+"Set the lens width and height in pixels. A larger lens will use more CPU "
+"resources than a small one."
+msgstr ""
+"A lencse szélességének és magasságának megadása pixelben. A nagyobb méretű "
+"lencse több CPU erőforrást használ fel."
+
+#: comix:11057
+msgid ""
+"Set the maximum update frequency for the magnification lens in milliseconds. "
+"Setting the value too low can cause the lens to lag behind when moving the "
+"mouse quickly. Setting the value too high can cause the lens to appear "
+"choppy."
+msgstr ""
+"A nagyítólencse legnagyobb frissítési frekvenciájának beállítása "
+"ezredmásodpercben megadva. Amennyiben túl kicsi az érték, akkor a lencse "
+"megjelenített képe gyors egérmozgáskor késhet, akadozhat. Túl magas érték "
+"esetén pedig fodrozódó hatás lehetséges."
+
+#: comix:11058
+msgid ""
+"Read and write thumbnails in the ~/.thumbnails directory as proposed by the "
+"freedesktop.org standard. With this preference set, Comix will use the "
+"thumbnails already stored there to speed up thumbnail loading. If there are "
+"no thumbnails, Comix will create them and save them there. This is a "
+"standard that many applications conform to, thumbnails created by other "
+"applications can be used by Comix and vice versa. If this preference is not "
+"set, Comix will create thumbnails on the fly every time a directory is "
+"opened."
+msgstr ""
+"A bélyegképeket a freedesktop.org szabvány szerint a ~/.thumbnails "
+"könyvtárban kezeli (írja/olvassa) a program. Ha aktív ez a beállítás, akkor "
+"a Comix a már ott eltárolt bélyegképeket használja a gyorsabb indexkép "
+"betöltéshez. Amennyiben a könyvtár üres, akkor a Comix ott fogja létrehozza "
+"és elmenteni az indexképeket. Ezt a szabványos módszert sok alkalmazás "
+"használja és ezek képesek az egymás által létrehozott bélyegképeket "
+"használni. Abban az esetben, ha ez a beállítás nem aktív, akkor a Comix az "
+"indexeket az adott könyvtár megnyitásakor fogja legenerálni minden egyes "
+"alkalommal."
+
+#: comix:11059
+msgid ""
+"Also use stored thumbnails for images in archives in a similiar way. Due to "
+"restrictions in the freedesktop.org standard, these thumbnails will be "
+"stored in ~/.comix and will only be used by Comix. If this preference is not "
+"set, Comix will create thumbnails on the fly every time an archive is opened."
+msgstr ""
+"A képekhez készített bélyegképeket arhívumokban tárolja majd a program. A "
+"freedesktop.org féle szabvány megkötéseinek megfelelően ezen indexek a ~/."
+"comix könyvtárban lesznek majd és csak a Comix fogja azokat használni. Abban "
+"az esetben, ha ez a beállítás nem aktív, akkor a Comix az indexeket az adott "
+"arhívum megnyitásakor fogja legenerálni minden egyes alkalommal."
+
+#: comix:11060
+msgid ""
+"Only display a single image in double page mode if the image consists of two "
+"pages. An image is assumed to consist of two pages if its width is greater "
+"than its height."
+msgstr ""
+"A kétlapos megjelenítési módban ha egy kép két lapból áll, akkor egyként "
+"jeleníti meg a program. Akkor beszélünk két lapból álló képről, ha a "
+"szélességük nagyobb a magasságuknál."
+
+#: comix:11061
+msgid "Filter out archives with regular expressions."
+msgstr "Arhívumok kiszűrése reguláris kifejezésekkel."
+
+#: comix:11062
+msgid "Apply filters on full paths rather than filenames."
+msgstr "A szűrők a teljes elérési útvonalra vonatkozzanak, ne a fájlnevekre."
+
+#: comix:11063
+msgid ""
+"Store a list of the 10 last opened files that can be accessed through the "
+"menus."
+msgstr "Az utolsó 10 megnyitott állomány listája elérhető lesz a Fájl menüben."
+
+#: comix:11071
+msgid "First page"
+msgstr "Első oldal"
+
+#: comix:11072
+msgid "Previous page"
+msgstr "Előző oldal"
+
+#: comix:11073
+msgid "Next page"
+msgstr "Következő oldal"
+
+#: comix:11074
+msgid "Last page"
+msgstr "Utolsó oldal"
+
+#: comix:11075
+msgid "Go to page..."
+msgstr "Ugrás a megadott oldalra..."
+
+#~ msgid ""
+#~ "Flip pages when scrolling \"off the page\" with the scroll wheel, even "
+#~ "when not in fit-to-screen mode. It takes three \"steps\" with the scroll "
+#~ "wheel to trigger this behaviour."
+#~ msgstr ""
+#~ "Lapozás történjen, ha az egérgörgő kerék \"kigördítné\" a lapot, még "
+#~ "akkor is, ha nem a képernyőmérethez igazításos mód az aktív. Három "
+#~ "\"gördítés\" szükséges a váltáshoz."

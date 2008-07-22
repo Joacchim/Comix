@@ -1,0 +1,1329 @@
+# Russian translation for Comix
+# This file is distributed under the same license as the Comix package.
+# Translated by Artyom Smirnov <smirnoffjr@gmail.com>, 2007
+msgid ""
+msgstr ""
+"Project-Id-Version: Comix 3.6.3\n"
+"POT-Creation-Date: 2007-05-09 14:55+CEST\n"
+"PO-Revision-Date: 2007-05-03 21:52+0300\n"
+"Last-Translator: Artyom Smirnov <smirnoffjr@gmail.com>\n"
+"Language-Team: Artyom Smirnov <smirnoffjr@gmail.com>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: pygettext.py 1.5\n"
+"X-Poedit-Language: Russian\n"
+"X-Poedit-Country: RUSSIAN FEDERATION\n"
+"X-Poedit-SourceCharset: utf-8\n"
+
+#: comix:547 comix:11064
+msgid "Fit-to-screen mode"
+msgstr "Растянуть на весь экран"
+
+#: comix:550 comix:11065
+msgid "Fit width mode"
+msgstr "Растянуть по-ширине"
+
+#: comix:553 comix:11066
+msgid "Fit height mode"
+msgstr "Растянуть по-высоте"
+
+#: comix:556 comix:11008 comix:11067
+msgid "Manual zoom mode"
+msgstr "Ручное масштабирование"
+
+#: comix:559 comix:11068
+msgid "Double page mode"
+msgstr "Двухстраничный режим"
+
+#: comix:561 comix:11070
+msgid "Manga mode"
+msgstr "Режим манги"
+
+#: comix:563 comix:11069
+msgid "Magnifying lens"
+msgstr "Лупа"
+
+#: comix:664 comix:6637
+msgid "Library"
+msgstr "Библиотека"
+
+#: comix:694
+msgid "Apply filter on full path"
+msgstr "Применить фильтр к полному пути"
+
+#: comix:700
+msgid "Add archives to library."
+msgstr "Добавить архив в библиотеку."
+
+#: comix:705
+msgid "Remove selected archive from library."
+msgstr "Удалить выбранный архив из библиотеки."
+
+#: comix:709 comix:1611 comix:1654
+msgid "Clean up"
+msgstr "Очистка"
+
+#: comix:713
+msgid "Remove orphaned or outdated library entries."
+msgstr "Удалить неправильные и устаревшие элементы библиотеки."
+
+#: comix:717
+msgid "Close this window."
+msgstr "Закрыть окно."
+
+#: comix:722
+msgid "Open selected archive."
+msgstr "Открыть выбранный архив"
+
+#: comix:779
+msgid "Open"
+msgstr "Открыть"
+
+#: comix:791
+msgid "All files"
+msgstr "Все файлы"
+
+#: comix:802
+msgid "All images"
+msgstr "Изображения"
+
+#: comix:814
+msgid "All archives"
+msgstr "Архивы"
+
+#: comix:818
+msgid "JPEG image"
+msgstr "JPEG изображение"
+
+#: comix:822
+msgid "PNG image"
+msgstr "PNG изображения"
+
+#: comix:826
+msgid "GIF image"
+msgstr "GIF изображения"
+
+#: comix:830
+msgid "TIFF image"
+msgstr "TIFF изображения"
+
+#: comix:834
+msgid "BMP image"
+msgstr "BMP изображения"
+
+#: comix:838
+msgid "ICO image"
+msgstr "ICO изображения"
+
+#: comix:842
+msgid "XPM image"
+msgstr "XPM изображения"
+
+#: comix:846
+msgid "XBM image"
+msgstr "XBM изображения"
+
+#: comix:852
+msgid "ZIP archive"
+msgstr "ZIP архивы"
+
+#: comix:857 comix:6719 comix:7071 comix:7122 comix:7470 comix:8743
+msgid "RAR archive"
+msgstr "RAR архивы"
+
+#: comix:864
+msgid "tar archive"
+msgstr "TAR архивы"
+
+#: comix:868
+msgid "Add archives recursively"
+msgstr "Добавить архивы рекурсивно"
+
+#: comix:883
+msgid "Preferences"
+msgstr "Настройки"
+
+#: comix:889
+msgid "Select folder"
+msgstr "Выбрать каталог"
+
+#: comix:892
+msgid "Fullscreen as default"
+msgstr "Полноэкранный режим по умолчанию"
+
+#: comix:893
+msgid "Double page mode as default"
+msgstr "Две страницы по умолчанию"
+
+#: comix:895
+msgid "Stretch small images"
+msgstr "Растягивать маленькие изображения"
+
+#: comix:897
+msgid "Use smart scaling in double page mode"
+msgstr "Использовать умное растягивание в режиме двух страниц"
+
+#: comix:899
+msgid "Always view comments when opening a new file"
+msgstr "Всегда показывать комментарии при открытии нового файла"
+
+#: comix:902
+msgid "Hide menubar, scrollbars etc. in fullscreen mode"
+msgstr "Скрыть меню, полосы прокрутки и т. д. в полноэкранном режиме"
+
+#: comix:904
+msgid "Cache pages for faster forward flipping"
+msgstr "Кэшировать страницы для быстрого переключения на следующую"
+
+#: comix:907
+msgid "Scroll wheel scrolls horizontally at top and bottom of page"
+msgstr "Колесо мыши двигает по-горизонтали вверху и внизу страницы"
+
+#: comix:910
+msgid "Flip page when scrolling off the top or bottom of page"
+msgstr "Колесо мыши листает по-горизонтали вверху и внизу страницы"
+
+#: comix:912
+msgid "Hide thumbnail scrollbar"
+msgstr "Скрыть полусу прокрутки миниатюр"
+
+#: comix:914
+msgid "Space key uses smart scrolling"
+msgstr "Пробел использует умное скроллирование"
+
+#: comix:917
+msgid "Save window position and size for future sessions"
+msgstr "Сохранять позиции и размеры окон"
+
+#: comix:920
+msgid "Go to the next archive in directory after last page"
+msgstr "Перейти к следующему архиву после последней страницы"
+
+#: comix:922
+msgid "Hide cursor in fullscreen mode"
+msgstr "Скрывать курсор в полноэкранном режиме"
+
+#: comix:924
+msgid "Open last viewed file on start"
+msgstr "Открывать последний файл при старте программы"
+
+#: comix:926
+msgid "Show page numbers on thumbnails"
+msgstr "Показывать номера страниц на миниатюрах"
+
+#: comix:929
+msgid "Always use smart scrolling as if in double page mode"
+msgstr "Всегда использовать умное скроллирование в режимк двух страниц"
+
+#: comix:932
+msgid "Use stored thumbnails for images in directories"
+msgstr "Использовать сохраненные миниатюры для изображений в директориях"
+
+#: comix:934
+msgid "Use stored thumbnails for images in archives"
+msgstr "Использовать сохраненные миниатбры для изображений в архивах"
+
+#: comix:937
+msgid "Display only one page in double page mode if the image is wide"
+msgstr ""
+"Показывать только одну страницу в режиме двух страниц, если изображение "
+"широкое"
+
+#: comix:940
+msgid "Store recently opened files"
+msgstr "Сохранять список недавно открытых файлов"
+
+#: comix:943
+msgid "Always go to this directory in the \"Open\" dialog:"
+msgstr "Всегда переходить в эту директорию в диалоге \"Открыть\""
+
+#: comix:946
+msgid "Always go to the latest directory in the \"Open\" dialog"
+msgstr "Всегда переходить в последнюю директорию в диалоге \"Открыть\""
+
+#: comix:970
+msgid "Nearest (quickest, worst quality)"
+msgstr "Ближайший (быстрый, наихудшее качество)"
+
+#: comix:971
+msgid "Tiles"
+msgstr "Плитки"
+
+#: comix:972
+msgid "Bilinear"
+msgstr "Билинейный"
+
+#: comix:974
+msgid "Hyper (slowest, best quality)"
+msgstr "Гипер (медленный, наилучшее качество)"
+
+#: comix:976
+msgid "Manual zoom mode as default"
+msgstr "Ручное масштабирование по умолчанию"
+
+#: comix:979
+msgid "Fit-to-screen mode as default"
+msgstr "Растягивать на весь экран по-умолчанию"
+
+#: comix:982
+msgid "Fit width mode as default"
+msgstr "Растягивать по-ширине по-умолчанию"
+
+#: comix:985
+msgid "Fit height mode as default"
+msgstr "Растягивать по-высоте по-умолчанию"
+
+#: comix:1008
+msgid "Background colour:"
+msgstr "Цвет фона:"
+
+#: comix:1011
+msgid "Background colour"
+msgstr "Цвет фона:"
+
+#: comix:1013
+msgid "Toolbar button labels:"
+msgstr "Надписи в панели инструментов:"
+
+#: comix:1017
+msgid "Icons only"
+msgstr "Только значки"
+
+#: comix:1018 comix:4630
+msgid "Text only"
+msgstr "Только текст"
+
+#: comix:1019 comix:4632
+msgid "Icons and text"
+msgstr "Значки и текст"
+
+#: comix:1020
+msgid "Slideshow delay:"
+msgstr "Задержка слайдшоу:"
+
+#: comix:1036
+msgid "Display"
+msgstr "Вид"
+
+#: comix:1090
+msgid "Behaviour"
+msgstr "Поведение"
+
+#: comix:1127
+msgid "Scaling quality"
+msgstr "Качество масштабирования"
+
+#: comix:1152
+msgid "Scaling"
+msgstr "Масштабирование"
+
+#: comix:1166
+msgid "Treat files with the following extensions as comments:"
+msgstr "Считать файлы со следующим расширением как комментарии:"
+
+#: comix:1172
+msgid "Comments"
+msgstr "Комментарии"
+
+#: comix:1197
+msgid "Space key scrolls"
+msgstr "Пробел скроллирует"
+
+#: comix:1201 comix:3991 comix:9404 comix:9433 comix:9436 comix:9443
+#: comix:9445
+msgid "of"
+msgstr "от"
+
+#: comix:1205
+msgid "Window size"
+msgstr "размера окна"
+
+#: comix:1206
+msgid "Page size"
+msgstr "размера страницы"
+
+#: comix:1208
+msgid "Scroll"
+msgstr "Скроллировать"
+
+#: comix:1222
+msgid "Magnification factor:"
+msgstr "Коэффициент увеличения"
+
+#: comix:1226
+msgid "Lens size (px):"
+msgstr "Размер линзы (в пикселях)"
+
+#: comix:1230
+msgid "Update interval (milliseconds):"
+msgstr "Частота обновления (в миллисекундах)"
+
+#: comix:1235
+msgid "Lens"
+msgstr "Линза"
+
+#: comix:1249
+msgid "Thumbnail sizes (px):"
+msgstr "Размер миниатюр (в пикселях)"
+
+#: comix:1254
+msgid "Library thumbnail sizes (px):"
+msgstr "Размер миниатюр в библиотеке (в пикселях)"
+
+#: comix:1272
+msgid "Thumbnails"
+msgstr "Миниатюры"
+
+#: comix:1301
+msgid "Adjust colour"
+msgstr "Настройка цвета"
+
+#: comix:1303
+msgid "Default"
+msgstr "По умолчанию"
+
+#: comix:1325
+msgid "Brightness"
+msgstr "Яркость"
+
+#: comix:1337
+msgid "Contrast"
+msgstr "Контрастность"
+
+#: comix:1349
+msgid "Saturation"
+msgstr "Насышеность"
+
+#: comix:1361
+msgid "Sharpness"
+msgstr "Резкость"
+
+#: comix:1376
+msgid "Automatically adjust contrast"
+msgstr "Автоматически настраивать контрастность"
+
+#: comix:1383
+msgid "Save values for future sessions"
+msgstr "Сохранять значения"
+
+#: comix:1395
+msgid "Properties"
+msgstr "Свойства"
+
+#: comix:1413
+msgid "Go to page"
+msgstr "Перейти к странице"
+
+#: comix:1437
+msgid "Edit bookmarks"
+msgstr "Редактировать закладки"
+
+#: comix:1446
+msgid "Title"
+msgstr "Название"
+
+#: comix:1447 comix:5397 comix:5749
+msgid "Page"
+msgstr "Страница"
+
+#: comix:1477 comix:1530
+msgid "About"
+msgstr "О программе"
+
+#: comix:1515
+msgid "Comix is an image viewer specifically designed to handle comic books."
+msgstr "Comix - это просмотрщик ориентированный на комиксы"
+
+#: comix:1517
+msgid "It reads ZIP, RAR and tar archives (also gzip or bzip2 compressed)"
+msgstr "Он работает с ZIP, RAR и tar архивами (сжатыми gzip и bzip2)"
+
+#: comix:1519
+msgid "as well as plain image files."
+msgstr "также хорошо, как и с обычными изображениями."
+
+#: comix:1521
+msgid "Comix is licensed under the GNU General Public License."
+msgstr "Comix распространяется согласно лицензии GNU General Public License."
+
+#: comix:1539
+msgid "Developer and Swedish translation"
+msgstr "Разработчики и Шведский перевод"
+
+#: comix:1541
+msgid "Simplified Chinese translation"
+msgstr "Упрощенный Китайский перевод"
+
+#: comix:1542
+msgid "Spanish translation"
+msgstr "Испанский перевод"
+
+#: comix:1543
+msgid "Brazilian Portuguese translation"
+msgstr "Бразильский Португальский перевод"
+
+#: comix:1545
+msgid "German translation and Nautilus thumbnailer"
+msgstr "Немецкий перевод и генератор миниатюр для Nautilus"
+
+#: comix:1546
+msgid "Italian translation"
+msgstr "Итальянский перевод"
+
+#: comix:1547
+msgid "Dutch translation"
+msgstr "Голландский перевод"
+
+#: comix:1548
+msgid "French translation"
+msgstr "Французский перевод"
+
+#: comix:1549
+msgid "Polish translation"
+msgstr "Польский перевод"
+
+#: comix:1550
+msgid "Greek translation"
+msgstr "Греческий перевод"
+
+#: comix:1551
+msgid "Catalan translation"
+msgstr "Каталанский перевод"
+
+#: comix:1552
+msgid "Traditional Chinese translation"
+msgstr "Традиционный Китайский перевод"
+
+#: comix:1553
+msgid "Japanese translation"
+msgstr ""
+
+#: comix:1554
+msgid "Hungarian translation"
+msgstr ""
+
+#: comix:1555
+msgid "Russian translation"
+msgstr ""
+
+#: comix:1564
+msgid "Credits"
+msgstr "Разработчики"
+
+#: comix:1573
+msgid "Manage thumbnails"
+msgstr "Управление миниатюрами"
+
+#: comix:1606 comix:1649
+msgid "Remove all stored thumbnails:"
+msgstr "Удалить все миниатюры:"
+
+#: comix:1616 comix:1659
+msgid "Remove orphaned thumbnails:"
+msgstr "Удалить неправильные миниатюры:"
+
+#: comix:1621
+msgid "Directories"
+msgstr "Каталоги"
+
+#: comix:1664
+msgid "Archives"
+msgstr "Архивы"
+
+#: comix:1674
+msgid "Removing thumbnails"
+msgstr "Удалить миниатюры"
+
+#: comix:1714
+msgid "Convert"
+msgstr "Конвертировать"
+
+#: comix:1723
+msgid "File type"
+msgstr "Тип файла"
+
+#: comix:1724
+msgid "Extension"
+msgstr "Расширение"
+
+#: comix:1736 comix:4321 comix:4357 comix:6711 comix:7061 comix:7112
+#: comix:7468 comix:8714
+msgid "Zip archive"
+msgstr "Zip архив"
+
+#: comix:1737 comix:4324 comix:4363 comix:6713 comix:7063 comix:7114
+#: comix:7472 comix:8730
+msgid "Tar archive"
+msgstr "Tar архив"
+
+#: comix:1738 comix:4328 comix:4359 comix:6715 comix:7066 comix:7117
+#: comix:7473 comix:8726
+msgid "Gzip compressed tar archive"
+msgstr "Tar архив сжатый gzip"
+
+#: comix:1740 comix:4331 comix:4361 comix:6717 comix:7069 comix:7120
+#: comix:7474 comix:8728
+msgid "Bzip2 compressed tar archive"
+msgstr "Tar архив сжатый bzip2"
+
+#: comix:1752
+msgid "Delete old archive/directory"
+msgstr "Удалить старый архив/директорию"
+
+#: comix:1777 comix:6112 comix:6117
+msgid "Permission denied"
+msgstr "Доступ запрещен"
+
+#: comix:1802
+msgid "Confirm operation"
+msgstr "Подтверждение операции"
+
+#: comix:4092
+msgid "Permanently remove %s?"
+msgstr "Удалить %s навсегда?"
+
+#: comix:4096
+msgid "Perform lossless JPEG operation on %s?"
+msgstr "Произвести JPEG преобразование без потерь над %s"
+
+#: comix:4098 comix:4103
+msgid "Some images might be trimmed a bit during the operation."
+msgstr "Некоторые изображения могут быть обрезаны во время преобразования"
+
+#: comix:4101
+msgid "Permanently convert %s to greyscale?"
+msgstr "Преобразовать %s в серые тона?"
+
+#: comix:4963 comix:4974
+msgid "Location:"
+msgstr "Расположение:"
+
+#: comix:4964 comix:4975
+msgid "Quantity:"
+msgstr "Количество:"
+
+#: comix:4964 comix:4975
+msgid "Total size:"
+msgstr "Размер:"
+
+#: comix:5010 comix:5021 comix:5025 comix:5036 comix:5055 comix:5060
+#: comix:5064 comix:5075 comix:5086 comix:5090 comix:5101 comix:5119
+#: comix:5124 comix:5128 comix:6431 comix:6459 comix:6465
+msgid "Removed:"
+msgstr "Удалено:"
+
+#: comix:5026 comix:5065 comix:5091 comix:5129 comix:6379 comix:6466
+msgid "Done!"
+msgstr "Все!"
+
+#: comix:5230 comix:6704 comix:7059 comix:7110
+msgid "pages"
+msgstr "страниц"
+
+#: comix:5236
+msgid "comment"
+msgstr "комментарий"
+
+#: comix:5240
+msgid "comments"
+msgstr "комментариев"
+
+#: comix:5264 comix:5450 comix:5803
+msgid "Location"
+msgstr "Расположение"
+
+#: comix:5277
+msgid "Yes"
+msgstr "Да"
+
+#: comix:5277 comix:5280
+msgid "In library"
+msgstr "В библиотеке"
+
+#: comix:5280 comix:5295
+msgid "No"
+msgstr "Нет"
+
+#: comix:5290
+msgid "Yes, page"
+msgstr "Да, страница"
+
+#: comix:5290 comix:5295
+msgid "Bookmarked"
+msgstr "Закладка"
+
+#: comix:5303 comix:5459 comix:5812
+msgid "Accessed"
+msgstr "Доступ"
+
+#: comix:5313 comix:5470 comix:5823
+msgid "Modified"
+msgstr "Модифицирован"
+
+#: comix:5323 comix:5481 comix:5834
+msgid "Permissions"
+msgstr "Права"
+
+#: comix:5332 comix:5491 comix:5844
+msgid "Owner"
+msgstr "Владелец"
+
+#: comix:5342
+msgid "Archive"
+msgstr "Архив"
+
+#: comix:5508 comix:5861
+msgid "Mode"
+msgstr "Режим"
+
+#: comix:5515 comix:5868
+msgid "Pixel count"
+msgstr "Количество пикселей"
+
+#: comix:5528 comix:5881
+msgid "Pixel sum"
+msgstr "Сумма пикселей"
+
+#: comix:5559 comix:5912
+msgid "Extrema"
+msgstr "Экстремумы"
+
+#: comix:5598 comix:5951
+msgid "Mean"
+msgstr "Значит"
+
+#: comix:5626 comix:5979
+msgid "Median"
+msgstr "Медиана"
+
+#: comix:5654 comix:6007
+msgid "Standard deviation"
+msgstr "Стандартное отклонение"
+
+#: comix:5686
+msgid "Image"
+msgstr "Изображение"
+
+#: comix:5689
+msgid "Image 1"
+msgstr "Изображение 1"
+
+#: comix:6037
+msgid "Image 2"
+msgstr "Изображение 2"
+
+#: comix:6113
+msgid "Could not delete"
+msgstr "Не могу удалить"
+
+#: comix:6114 comix:6119
+msgid "Please check your permissions."
+msgstr "Пожалуйста проверьте права."
+
+#: comix:6118
+msgid "Could not create"
+msgstr "Не могу создать"
+
+#: comix:6230 comix:6240 comix:6374 comix:6378
+msgid "Added:"
+msgstr "Добавлено:"
+
+#: comix:6231
+msgid "Adding library entries"
+msgstr "Добавление элементов библиотеки"
+
+#: comix:6432
+msgid "Removing library entries"
+msgstr "Удаление элементов библиотеки"
+
+#: comix:7213
+msgid "Extract page"
+msgstr "Извлечь страницу"
+
+#: comix:7640
+msgid "page"
+msgstr "страница"
+
+#: comix:8741
+msgid ""
+"Could not find the unrar executable. Please install it if you wish to open "
+"RAR archives."
+msgstr ""
+"Не могу найти программу unrar. Пожалуйста установите ее, если Вы хотите "
+"работать с RAR архивами"
+
+#: comix:8746
+msgid "Could not open"
+msgstr "Не могу открыть"
+
+#: comix:8792
+msgid "is not a file."
+msgstr "не файл."
+
+#: comix:8795
+msgid "does not exist."
+msgstr "не существует."
+
+#: comix:8903
+msgid "Filetype of"
+msgstr "Тип файла"
+
+#: comix:8905
+msgid "not recognized."
+msgstr "не распознан."
+
+#: comix:8920 comix:11179
+msgid "No images in \"%s\""
+msgstr "Нет изображений в \"%s\""
+
+#: comix:9403
+msgid "Comment file"
+msgstr "Файл комментариев"
+
+#: comix:9419
+msgid "Could not read"
+msgstr "Не могу прочитать"
+
+#: comix:9432 comix:9435 comix:9442 comix:9444
+msgid "Comment"
+msgstr "Комментарий"
+
+#: comix:10882
+msgid "_Next page"
+msgstr "_Следующая страница"
+
+#: comix:10884
+msgid "_Previous page"
+msgstr "П_редыдущая страница"
+
+#: comix:10886
+msgid "_First page"
+msgstr "_Первая страница"
+
+#: comix:10888
+msgid "_Last page"
+msgstr "П_оследняя страница"
+
+#: comix:10890
+msgid "_Go to page..."
+msgstr "Перейти _к странице..."
+
+#: comix:10892
+msgid "Manual _Zoom"
+msgstr "Ручное масш_табирование"
+
+#: comix:10893
+msgid "_Zoom in"
+msgstr "_Приблизить"
+
+#: comix:10895
+msgid "Zoom _out"
+msgstr "_Отдалить"
+
+#: comix:10897
+msgid "_Normal size"
+msgstr "_Нормальный размер"
+
+#: comix:10899
+msgid "Fit _width"
+msgstr "Растянуть по-_ширине"
+
+#: comix:10901
+msgid "Fit _height"
+msgstr "Растянуть по-_высоте"
+
+#: comix:10903
+msgid "_Best fit"
+msgstr "_Лучший размер"
+
+#: comix:10905
+msgid "_Add bookmark"
+msgstr "_Добавить закладку"
+
+#: comix:10907
+msgid "Clear bookmarks"
+msgstr "_Очистить закладки"
+
+#: comix:10910
+msgid "_Edit bookmarks..."
+msgstr "_Редактировать закладки..."
+
+#: comix:10912
+msgid "Pr_eferences"
+msgstr "_Настройки"
+
+#: comix:10914
+msgid "_About"
+msgstr "_О программе"
+
+#: comix:10917
+msgid "_Manage thumbnails..."
+msgstr "_Управление миниатюрами..."
+
+#: comix:10919
+msgid "Proper_ties"
+msgstr "_Свойства"
+
+#: comix:10921
+msgid "View _comments"
+msgstr "_Показать комментарии"
+
+#: comix:10923
+msgid "_Open..."
+msgstr "_Открыть..."
+
+#: comix:10925
+msgid "_Recent files"
+msgstr "Последние _файлы"
+
+#: comix:10926
+msgid "Clear recent files"
+msgstr "Очистить список последних файлов"
+
+#: comix:10928
+msgid "Open _library..."
+msgstr "Открыть _библиотеку..."
+
+#: comix:10930
+msgid "_Add to library"
+msgstr "_Добавить в библиотеку"
+
+#: comix:10932
+msgid "Con_vert..."
+msgstr "_Конвертировать"
+
+#: comix:10934
+msgid "E_xtract image..."
+msgstr "_Извлечь изображение..."
+
+#: comix:10936
+msgid "_Close"
+msgstr "_Закрыть"
+
+#: comix:10938
+msgid "_Quit"
+msgstr "_Выход"
+
+#: comix:10940
+msgid "_Adjust colour..."
+msgstr "Настроить _цвет..."
+
+#: comix:10942
+msgid "Slideshow"
+msgstr "_Слайд-шоу"
+
+#: comix:10944
+msgid "Delete image..."
+msgstr "Удалить изображение..."
+
+#: comix:10947
+msgid "CW lossless JPEG rotation..."
+msgstr "JPEG поворот без-потери качества по-часовой стрелке..."
+
+#: comix:10950
+msgid "CCW lossless JPEG rotation..."
+msgstr "JPEG поворот без-потери качества против часовой стрелки.."
+
+#: comix:10953
+msgid "Horizontal lossless JPEG flip..."
+msgstr "JPEG отражение без-потери качества по-горизонтали..."
+
+#: comix:10956
+msgid "Vertical lossless JPEG flip..."
+msgstr "JPEG отражение без-потери качества по-вертикали..."
+
+#: comix:10959
+msgid "Convert JPEG to greyscale..."
+msgstr "Конвертировать JPEG в серый..."
+
+#: comix:10961 comix:10963
+msgid "_Bookmarks"
+msgstr "_Закладки"
+
+#: comix:10962
+msgid "_Toolbars"
+msgstr "_Инструменты"
+
+#: comix:10964
+msgid "_Edit"
+msgstr "_Редактировать"
+
+#: comix:10966
+msgid "File o_perations"
+msgstr "Оп_ерации с файлами"
+
+#: comix:10967
+msgid "_File"
+msgstr "_Файл"
+
+#: comix:10968 comix:10969
+msgid "_View"
+msgstr "_Вид"
+
+#: comix:10970 comix:10971
+msgid "_Go"
+msgstr "_Перейти"
+
+#: comix:10972
+msgid "_Help"
+msgstr "_Помощь"
+
+#: comix:10973
+msgid "_Transform"
+msgstr "_Преобразовать"
+
+#: comix:10974
+msgid "_Rotate 90 degrees CW"
+msgstr "Повернуть на 90 градусов по _часовой стрелке"
+
+#: comix:10976
+msgid "Rotate 180 de_grees"
+msgstr "П_овернуть на 180 градусов"
+
+#: comix:10978
+msgid "Rotat_e 90 degrees CCW"
+msgstr "Повернуть на 90 градусов _против часовой стрелки"
+
+#: comix:10980
+msgid "Fli_p horizontally"
+msgstr "Отразить по-_горизонтали"
+
+#: comix:10982
+msgid "Flip _vertically"
+msgstr "Отразить по-_вертикали"
+
+#: comix:10985
+msgid "_Fullscreen"
+msgstr "Полно_экранный режим"
+
+#: comix:10987
+msgid "_Double page mode"
+msgstr "Режим _двух страниц"
+
+#: comix:10989
+msgid "_Toolbar"
+msgstr "_Инструменты"
+
+#: comix:10991
+msgid "_Menubar"
+msgstr "_Меню"
+
+#: comix:10993
+msgid "St_atusbar"
+msgstr "_Строка статуса"
+
+#: comix:10995
+msgid "S_crollbars"
+msgstr "С_кроллеры"
+
+#: comix:10997
+msgid "Th_umbnails"
+msgstr "Ми_ниатюры"
+
+#: comix:10999
+msgid "H_ide all"
+msgstr "Скрыть _все"
+
+#: comix:11001
+msgid "_Manga mode"
+msgstr "Режим _манги"
+
+#: comix:11003
+msgid "_Keep transformation"
+msgstr "_Сохранить преобразования"
+
+#: comix:11005
+msgid "Magnifying _lens"
+msgstr "_Лупа"
+
+#: comix:11009
+msgid "Fit-to-_screen mode"
+msgstr "_Растянуть на весь экран"
+
+#: comix:11010
+msgid "Fit _width mode"
+msgstr "Растянуть по _ширине"
+
+#: comix:11011
+msgid "Fit _height mode"
+msgstr "Растянуть по _высоте"
+
+#: comix:11025
+msgid "Enter fullscreen mode automatically when Comix is started."
+msgstr "Входить в полноэкранный режим автоматически при старте Comix"
+
+#: comix:11026
+msgid "Enter double page mode automatically when Comix is started."
+msgstr "Входить в режим двухстраничный автоматически при старте Comix"
+
+#: comix:11027
+msgid "Enter manual zoom mode automatically when Comix is started."
+msgstr "Входить в режим ручного масштабирования автоматически при старте Comix"
+
+#: comix:11028
+msgid "Enter fit-to-screen mode automatically when Comix is started."
+msgstr "Растягивать на весь экран автоматически при старте Comix"
+
+#: comix:11029
+msgid "Enter fit width mode automatically when Comix is started."
+msgstr "Растягивать по-ширине автоматически при старте Comix"
+
+#: comix:11030
+msgid "Enter fit height mode automatically when Comix is started."
+msgstr "Растягивать по-высоте автоматически при старте Comix"
+
+#: comix:11031
+msgid ""
+"Also scale images to a size that is larger than their original size in fit-"
+"to-screen mode, fit width mode and fit height mode."
+msgstr "Умещать изображение на экране если оно больше его по размеру"
+
+#: comix:11032
+msgid ""
+"Scale the images independently when in double page mode and fit-to-screen "
+"mode. The smaller of the two images will scale up to fill any extra space "
+"that is given."
+msgstr ""
+"Масштабировать изображения независимо в режиме двух страниц и режиме "
+"растягивания на весь экран. Наименьшее из двух изображений будет "
+"смаштабировано, чтобы заполнить  все доступное пространство."
+
+#: comix:11033
+msgid "Automatically show any available comments when opening a new file."
+msgstr "Автоматически показывать доступные комментарии при открытии файла."
+
+#: comix:11034
+msgid ""
+"Automatically hide scrollbars, menubar, toolbar, statusbar and thumbnails "
+"when in fullscreen mode."
+msgstr ""
+"Автоматически скрывать полосы прокрутки, меню, панель инструментов, строку "
+"статуса и миниатюры в полноэкранном режиме."
+
+#: comix:11035
+msgid ""
+"Cache the next page in the archive/directory to increase the perceived "
+"speed. This is generally recommended unless you are running low on RAM."
+msgstr ""
+"Кэшировать следующую страницу в архиве/директории для увеличения скорости "
+"отзыва. Используйте эту опцию если у Вас достаточно оперативной памяти."
+
+#: comix:11036
+msgid ""
+"Move the horizontal scrollbar instead of the vertical when using the scroll "
+"wheel at the top or the bottom of the page. The direction will be determined "
+"by whether you use manga mode or not."
+msgstr ""
+"Двигать горизонтальную полосу прокрутки вместо вертикальной при "
+"использовании колеса, когда курсор находится вверзу или внизу страницы. "
+"Направление будет зависеть используете ли Вы режим манги или нет."
+
+#: comix:11037
+msgid ""
+"Flip pages when scrolling \"off the page\" with the scroll wheel, as well as "
+"with the arrow keys, even when not in fit-to-screen mode. It takes three "
+"\"steps\" with the scroll wheel or arrow keys to trigger this behaviour."
+msgstr ""
+
+#: comix:11038
+msgid ""
+"Save the position and the size of the window for the next time you start "
+"Comix."
+msgstr "Сохранять позицию и размер окна до следующего запуска Comix."
+
+#: comix:11039
+msgid ""
+"Automatically open the next archive in the directory when scrolling past the "
+"last page of the current archive, and automatically open the previous "
+"archive in the directory when scrolling past the first page of the current "
+"archive."
+msgstr ""
+"Переходить с последней страницы текущего архива на первую страницу "
+"следующего в директории, и с первой  страницы текущего, на последнюю "
+"предыдущего."
+
+#: comix:11040
+msgid "Hide the cursor when in fullscreen mode."
+msgstr "Скрывать курсор в полноэкранном режиме"
+
+#: comix:11041 comix:11042 comix:11043 comix:11044
+msgid ""
+"Set the image scaling method. The best choice is often \"Tiles\", it is "
+"quite quick and produces almost as good results as \"Bilinear\" or \"Hyper\"."
+msgstr ""
+"Установка метода растягивания изображения. Наилучшим выбором обычно является "
+"метод \"Плитки\", он быстрый и дает почти такой же результат как \"Билинейный"
+"\" или \"Гипер\"."
+
+#: comix:11045
+msgid ""
+"Treat files with the following extensions as comment files. Extensions "
+"should be separated by whitespaces. They are not case sensitive."
+msgstr ""
+"Считать файлы с указанными расширениями как файлы комментариев. Расширения "
+"должны быть отделены друг от друга пробелами. Расширения не чувствительны к "
+"регистру."
+
+#: comix:11046
+msgid ""
+"Use smart scrolling with the space key. Pressing the space key normally "
+"scrolls straight down one window height unless at the bottom of the page "
+"where it flips pages instead. When this option is set Comix automatically "
+"tries to follow the reading flow of the comic book. When pressing the space "
+"key it will not only scroll down but will also scroll horizontally to the "
+"edge of the page (left or right depending on whether you use manga mode). In "
+"double page mode it will go to the edge of the first page if it is in view, "
+"otherwise it will go to the edge of the second page. Also, in double page "
+"mode with this option, Comix will not flip pages unless at the bottom of the "
+"second page. At the bottom of the first page it will instead go to the top "
+"of the second page."
+msgstr "Использовать умное скроллирование пробелом."
+
+#: comix:11047
+msgid "Always hide the thumbnail scrollbar."
+msgstr "Всегда скрывать полосы прокрутки"
+
+#: comix:11048
+msgid "Automatically open the last viewed page when Comix is started."
+msgstr ""
+"Автоматически открывать последнюю просмотренную страницу при запуске Comix."
+
+#: comix:11049
+msgid ""
+"Automatically go to the same directory as last time when opening the \"Open"
+"\" dialog."
+msgstr "Запоминать директорию для диалога \"Открыть\""
+
+#: comix:11050
+msgid "Automatically go to this directory when opening the \"Open\" dialog."
+msgstr "Автоматически переходить в эту директорию в диалоге \"Открыть\""
+
+#: comix:11051
+msgid "Automatically restore these values the next time Comix is started."
+msgstr "Автоматически восстанавливать данные значения при старте Comix"
+
+#: comix:11052
+msgid "Show the page number in the upper left corner of each thumbnail."
+msgstr "Показывать номера страниц в верхнем левом углу каждой миниатюры"
+
+#: comix:11053
+msgid ""
+"Automatically adjust the contrast of the images so that the darkest pixel is "
+"completely black and the lightest pixel is completely white. This only works "
+"with images without an alpha channel."
+msgstr ""
+"Автоматически подстраивать контрастность изображений так, чтобы черные "
+"пиксели были полностью черными, а белые - полностью белыми. Работает только "
+"с изображениями без альфа-канала."
+
+#: comix:11054
+msgid ""
+"The space key uses smart scrolling as if in double page mode even when in "
+"single page mode. This can be useful for comics with two scanned pages in "
+"each image. The pages are assumed to be of equal size"
+msgstr ""
+"Пробел использует умное скроллирование как в двухстраничном режиме даже во "
+"время режима одной страницы."
+
+#: comix:11055
+msgid "Adjust the lens magnification factor."
+msgstr "Настроить коэффициент увеличения линзы"
+
+#: comix:11056
+msgid ""
+"Set the lens width and height in pixels. A larger lens will use more CPU "
+"resources than a small one."
+msgstr ""
+"Установить высоту и ширину линзы в пикселях. Большая линза требует больше "
+"процессорного времени чем маленькая."
+
+#: comix:11057
+#, fuzzy
+msgid ""
+"Set the maximum update frequency for the magnification lens in milliseconds. "
+"Setting the value too low can cause the lens to lag behind when moving the "
+"mouse quickly. Setting the value too high can cause the lens to appear "
+"choppy."
+msgstr "Установить максимальную частоту обновления для линзы в миллисекундах. "
+
+#: comix:11058
+msgid ""
+"Read and write thumbnails in the ~/.thumbnails directory as proposed by the "
+"freedesktop.org standard. With this preference set, Comix will use the "
+"thumbnails already stored there to speed up thumbnail loading. If there are "
+"no thumbnails, Comix will create them and save them there. This is a "
+"standard that many applications conform to, thumbnails created by other "
+"applications can be used by Comix and vice versa. If this preference is not "
+"set, Comix will create thumbnails on the fly every time a directory is "
+"opened."
+msgstr ""
+"Использовать для хранения миниатюр каталог ~/.thumbnails как указывает "
+"стандарт freedesktop.org. C этой опцией Comix будет использовать уже "
+"сохраненные миниатюры для ускорения показа. Если мниатюр нет, то Comix будет "
+"создавать их и сохранять там. Иначе Comix будет создавать миниатюры каждый "
+"раз \"на лету\"."
+
+#: comix:11059
+msgid ""
+"Also use stored thumbnails for images in archives in a similiar way. Due to "
+"restrictions in the freedesktop.org standard, these thumbnails will be "
+"stored in ~/.comix and will only be used by Comix. If this preference is not "
+"set, Comix will create thumbnails on the fly every time an archive is opened."
+msgstr ""
+"Использовать сохраненные миниатюры для изображений в архивах. Эти миниатюры "
+"будут сохраняться в каталоге Comix и использоваться только им.  Иначе Comix "
+"будет создавать миниатюры каждый раз \"на лету\" при открытии архива."
+
+#: comix:11060
+msgid ""
+"Only display a single image in double page mode if the image consists of two "
+"pages. An image is assumed to consist of two pages if its width is greater "
+"than its height."
+msgstr ""
+"Показывать одну страницу в двухстраничном режиме, если изображение содержит "
+"в себе две страницы. Считается, что в изображении две страницы, если его "
+"ширина больше чем высота."
+
+#: comix:11061
+msgid "Filter out archives with regular expressions."
+msgstr "Фильтровать архивы с помощью регулярных выражений"
+
+#: comix:11062
+msgid "Apply filters on full paths rather than filenames."
+msgstr "Предпочтительнее применять фильтры на полный путь, чем на имена файлов"
+
+#: comix:11063
+msgid ""
+"Store a list of the 10 last opened files that can be accessed through the "
+"menus."
+msgstr "Хранить последние 10 открытых файлов"
+
+#: comix:11071
+msgid "First page"
+msgstr "Первая страница"
+
+#: comix:11072
+msgid "Previous page"
+msgstr "Предыдущая страница"
+
+#: comix:11073
+msgid "Next page"
+msgstr "Следующая страница"
+
+#: comix:11074
+msgid "Last page"
+msgstr "Последняя страница"
+
+#: comix:11075
+msgid "Go to page..."
+msgstr "Перейти к странице..."
+
+#~ msgid ""
+#~ "Flip pages when scrolling \"off the page\" with the scroll wheel, even "
+#~ "when not in fit-to-screen mode. It takes three \"steps\" with the scroll "
+#~ "wheel to trigger this behaviour."
+#~ msgstr ""
+#~ "Перелистывать страницы при дохождении до края при прокручивании колесом "
+#~ "иыши, даже если не в режиме растягивания на весь экран. Колесо мыши "
+#~ "должно сделать три \"шага\" для перелистывании на следующую страницу."
