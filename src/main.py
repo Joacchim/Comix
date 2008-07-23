@@ -3,6 +3,7 @@
 import sys
 import os
 import shutil
+import threading
 
 import gtk
 
@@ -700,5 +701,9 @@ class MainWindow(gtk.Window):
         preferences.write_preferences_file()
         self.ui_manager.bookmarks.write_bookmarks_file()
         print 'Bye!'
+        # This hack is to avoid Python issue #1856.
+        for thread in threading.enumerate():
+            if thread is not threading.currentThread():
+                thread.join()
         sys.exit(0)
 

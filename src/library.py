@@ -2,6 +2,7 @@
 
 import gtk
 import pango
+import gobject
 
 import archive
 import librarybackend
@@ -14,24 +15,39 @@ class _LibraryDialog(gtk.Window):
 
     def __init__(self, window):
         gtk.Window.__init__(self, gtk.WINDOW_TOPLEVEL)
-        self.set_size_request(300, 300)
+        self.set_size_request(400, 300)
         self.resize(prefs['lib window width'], prefs['lib window height'])
         self.set_title(_('Library'))
         self.connect('delete_event', self._close)
         
         self._window = window
         self._backend = librarybackend.LibraryBackend()
-        self._destroy = False
+        self._stop_update = False
         
         self._main_liststore = gtk.ListStore(gtk.gdk.Pixbuf, int)
-        self._iconview = gtk.IconView(self._main_liststore)
-        self._iconview.set_pixbuf_column(0)
-        self._iconview.connect('item_activated', self._open_book)
-        self._iconview.connect('selection_changed', self._update_info)
+        iconview = gtk.IconView(self._main_liststore)
+        iconview.set_pixbuf_column(0)
+        iconview.connect('item_activated', self._open_book)
+        iconview.connect('selection_changed', self._update_info)
         scrolled = gtk.ScrolledWindow()
         scrolled.set_policy(gtk.POLICY_AUTOMATIC, gtk.POLICY_AUTOMATIC)
-        scrolled.add(self._iconview)
-        self._iconview.modify_base(gtk.STATE_NORMAL, gtk.gdk.Color())
+        scrolled.add(iconview)
+        iconview.modify_base(gtk.STATE_NORMAL, gtk.gdk.Color())
+        iconview.enable_model_drag_source(0, [], gtk.gdk.ACTION_MOVE)
+
+        self._collection_treestore = gtk.TreeStore(str, int)
+        treeview = gtk.TreeView(self._collection_treestore)
+        treeview.connect('cursor_changed', self._change_collection)
+        treeview.set_headers_visible(False)
+        treeview.set_rules_hint(True)
+        cellrenderer = gtk.CellRendererText()
+        column = gtk.TreeViewColumn(None, cellrenderer, markup=0)
+        treeview.append_column(column)
+        #column.pack_start(cellrenderer, True)
+        #column.add_attribute(cellrenderer, 'text', 0)
+        sidebar = gtk.ScrolledWindow()
+        sidebar.set_policy(gtk.POLICY_NEVER, gtk.POLICY_AUTOMATIC)
+        sidebar.add(treeview)
 
         self._statusbar = gtk.Statusbar()
         self._statusbar.set_has_resize_grip(True)
@@ -90,12 +106,8 @@ class _LibraryDialog(gtk.Window):
         #open_button.connect()
         hbox.pack_start(open_button, False, False)
         
-        # The side box
-        sidebox = gtk.VBox(False, 6)
-
-
         self._table = gtk.Table(2, 2, False)
-        self._table.attach(sidebox, 0, 1, 0, 1, gtk.FILL,
+        self._table.attach(sidebar, 0, 1, 0, 1, gtk.FILL,
             gtk.EXPAND|gtk.FILL)
         self._table.attach(scrolled, 1, 2, 0, 1, gtk.EXPAND|gtk.FILL,
             gtk.EXPAND|gtk.FILL)
@@ -103,26 +115,57 @@ class _LibraryDialog(gtk.Window):
             gtk.FILL)
         self._table.attach(self._statusbar, 0, 2, 2, 3, gtk.FILL, gtk.FILL)
         self.add(self._table)
-
-        self._iconview.enable_model_drag_source(0, [], gtk.gdk.ACTION_MOVE)
         
+        self._display_collections()
         self.show_all()
 
-    def load_covers(self):
-        for i, book in enumerate(self._backend.get_books_in_collection()):
+    def _display_covers(self, collection):
+        self._stop_update = False
+        self._main_liststore.clear()
+        for i, book in enumerate(self._backend.get_books_in_collection(
+          collection)):
             pixbuf = self._backend.get_book_cover(book[0])
             if pixbuf is None:
                 continue 
-            pixbuf = image.fit_in_rectangle(pixbuf, 90, 128)
+            pixbuf = image.fit_in_rectangle(pixbuf,
+                int(0.67 * prefs['library cover size']),
+                prefs['library cover size'])
             pixbuf = image.add_border(pixbuf, 2, 0xFFFFFFFF)
             self._main_liststore.append([pixbuf, book[0]])
             if i % 15 == 0:
                 while gtk.events_pending():
                     gtk.main_iteration(False)
-                if self._destroy:
+                if self._stop_update:
                     return
+        self._stop_update = True
+
+    def _display_collections(self):
+        """Display the library collections in the sidebar."""
+        def _add(parent_iter, supercoll):
+            for coll in self._backend.get_collections_in_collection(supercoll):
+                child_iter = self._collection_treestore.append(parent_iter,
+                    [coll[1], coll[0]])
+                _add(child_iter, coll[0])
+
+        self._collection_treestore.clear()
+        self._collection_treestore.append(None, ['<b>%s</b>' % _('All books'),
+            -1])
+        _add(None, None)
+
+    def _change_collection(self, treeview):
+        """Change the viewed collection to the currently selected one in
+        the sidebar."""
+        cursor = treeview.get_cursor()
+        if cursor is None:
+            return
+        iterator = self._collection_treestore.get_iter(cursor[0])
+        collection = self._collection_treestore.get_value(iterator, 1)
+        if collection == -1: # The "All" collection
+            collection = None
+        gobject.idle_add(self._display_covers, collection)
 
     def _update_info(self, iconview):
+        """Update the info box using the currently selected book."""
         selected = iconview.get_selected_items()
         if not selected:
             return
@@ -147,7 +190,7 @@ class _LibraryDialog(gtk.Window):
         self._statusbar.push(0, ' %s' % encoding.to_unicode(message))
 
     def _open_book(self, iconview, path):
-        """Open the book at the (liststore) """
+        """Open the book at the (liststore) <path>."""
         iterator = self._main_liststore.get_iter(path)
         book = self._main_liststore.get_value(iterator, 1)
         info = self._backend.get_detailed_book_info(book)
@@ -156,8 +199,9 @@ class _LibraryDialog(gtk.Window):
         self._window.file_handler.open_file(path)
 
     def _close(self, *args):
+        """Close the library and do required cleanup tasks."""
         prefs['lib window width'], prefs['lib window height'] = self.get_size()
-        self._destroy = True
+        self._stop_update = True
         self._backend.close()
         close_dialog()
 
@@ -169,7 +213,6 @@ def open_dialog(action, window):
             print '! You need an sqlite wrapper to use the library.'
         else:
             _dialog = _LibraryDialog(window)
-            _dialog.load_covers()
 
 def close_dialog(*args):
     global _dialog

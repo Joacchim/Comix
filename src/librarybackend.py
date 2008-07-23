@@ -44,7 +44,7 @@ class LibraryBackend:
         return cur.fetchone()
 
     def get_books_in_collection(self, collection=None):
-        """Return a Cursor with all the books in <collection>, or ALL
+        """Return a sequence with all the books in <collection>, or *ALL*
         books if <collection> is None."""
         if collection is None:
             cur = self._con.execute('''select id from Book
@@ -53,14 +53,20 @@ class LibraryBackend:
             cur = self._con.execute('''select id from Book
                 where id in (select book from Contain where collection=?)
                 order by path''', (collection,))
-        return cur
+        return cur.fetchall()
 
-    def get_collections_in_collection(self, collection):
-        """Return a Cursor with all the subcollections in <collection>."""
-        cur = self._con.execute('''select id, name from Collection
-            where supercollection=? 
-            order by name''', (collection,))
-        return cur
+    def get_collections_in_collection(self, collection=None):
+        """Return a sequence with all the subcollections in <collection>,
+        or all top-level collections if <collection> is None."""
+        if collection is None:
+            cur = self._con.execute('''select id, name from Collection
+                where supercollection isnull
+                order by name''')
+        else:
+            cur = self._con.execute('''select id, name from Collection
+                where supercollection=? 
+                order by name''', (collection,))
+        return cur.fetchall()
 
     def add_book(self, path):
         """Add the archive at <path> to the library."""
