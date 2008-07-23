@@ -96,7 +96,7 @@ class FileHandler:
             if not page in wanted_pixbufs:
                 del self._raw_pixbufs[page]
         if sys.version_info[:3] >= (2, 5, 0):
-            gc.collect(0)  # FIXME: Try this (i.e. get Python 2.5)!
+            gc.collect(0)
         else:
             gc.collect()
 
@@ -105,25 +105,23 @@ class FileHandler:
             self._get_pixbuf(wanted)
 
     def next_page(self):
-        """Set up filehandler to the next page. Return True if this is not
-        the same page.
+        """Set up filehandler to the next page. Return True if this results
+        in a new page.
         """
         if not self.file_loaded:
             return False
-        old_image = self.get_current_page()
+        old_page = self.get_current_page()
         step = self._window.is_double_page and 2 or 1
         if self.get_current_page() + step > self.get_number_of_pages():
             if prefs['auto open next archive'] and self.archive_type:
                 self._open_next_archive()
             return False
         self._current_image_index += step
-        self._current_image_index = min(self.get_number_of_pages() - 1,
-            self._current_image_index)
-        return old_image != self.get_current_page()
+        return old_page != self.get_current_page()
 
     def previous_page(self):
-        """Set up filehandler to the previous page. Return True if this is not
-        the same page.
+        """Set up filehandler to the previous page. Return True if this
+        results in a new page.
         """
         if not self.file_loaded:
             return False
@@ -131,42 +129,42 @@ class FileHandler:
             if prefs['auto open next archive'] and self.archive_type:
                 self._open_previous_archive()
             return False
-        old_image = self.get_current_page()
+        old_page = self.get_current_page()
         step = self._window.is_double_page and 2 or 1
         self._current_image_index -= step
         self._current_image_index = max(0, self._current_image_index)
-        return old_image != self.get_current_page()
+        return old_page != self.get_current_page()
 
     def first_page(self):
-        """Set up filehandler to the first page. Return True if this is not
-        the same page.
+        """Set up filehandler to the first page. Return True if this
+        results in a new page.
         """
         if not self.file_loaded:
             return False
-        old_image = self.get_current_page()
+        old_page = self.get_current_page()
         self._current_image_index = 0
-        return old_image != self.get_current_page()
+        return old_page != self.get_current_page()
 
     def last_page(self):
-        """Set up filehandler to the last page. Return True if this is not
-        the same page.
+        """Set up filehandler to the last page. Return True if this results
+        in a new page.
         """
         if not self.file_loaded:
             return False
-        old_image = self.get_current_page()
+        old_page = self.get_current_page()
         offset = self._window.is_double_page and 2 or 1
         self._current_image_index = max(0, self.get_number_of_pages() - offset)
-        return old_image != self.get_current_page()
+        return old_page != self.get_current_page()
 
     def set_page(self, page_num):
-        """Set up filehandler to the page <page_num>. Return True if this is
-        not the same page.
+        """Set up filehandler to the page <page_num>. Return True if this
+        results in a new page.
         """
-        old_image = self.get_current_page()
         if not 0 < page_num <= self.get_number_of_pages():
             return False
+        old_page = self.get_current_page()
         self._current_image_index = page_num - 1
-        return old_image != self.get_current_page()
+        return old_page != self.get_current_page()
 
     def open_file(self, path, start_page=1):
         """Open the file pointed to by <path>.
@@ -174,11 +172,12 @@ class FileHandler:
         If <path> is an image we add all images in its directory to the
         _image_files.
 
-        If <path> is an archive we decompresses it to the _tmp_dir and adds
+        If <path> is an archive we decompresses it to the _tmp_dir and add
         all images in the decompressed tree to _image_files and all comments
-        to _comment_files. If <start_image> is not set we set the current
-        page to 1 (first page), if it is set we set it to the value of
-        <start_page>. If <start_page> is non-positive it means the last image.
+        to _comment_files. If <start_page> is not set we set the current
+        page to 1 (first page), if it is set we set the current page to the
+        value of <start_page>. If <start_page> is non-positive it means the
+        last image.
 
         Return True if the file is successfully loaded.
         """
@@ -190,7 +189,7 @@ class FileHandler:
                 self._window.statusbar.set_message(_('"%s" is a directory.') % 
                     os.path.basename(path))
             else:
-                self._window.statusbar.set_message(_('"%s" does not exist.') % 
+                self._window.statusbar.set_message(_('"%s" is not a file.') % 
                     os.path.basename(path))
             return False
 
@@ -208,8 +207,8 @@ class FileHandler:
 
         # --------------------------------------------------------------------
         # If <path> is an archive we create an Extractor for it and set the
-        # files with file endings indicating image files or comments as the
-        # ones to be extracted.
+        # files in it with file endings indicating image files or comments
+        # as the ones to be extracted.
         # --------------------------------------------------------------------
         if self.archive_type:
             self._base_path = path
@@ -252,7 +251,7 @@ class FileHandler:
             self._extractor.extract()
 
         # --------------------------------------------------------------------
-        # If <path> is an image we scan it's directory for more images.
+        # If <path> is an image we scan its directory for more images.
         # --------------------------------------------------------------------
         else:
             self._base_path = os.path.dirname(path)
@@ -280,7 +279,7 @@ class FileHandler:
         self._window.ui_manager.recent.add(path)
 
     def close_file(self, *args):
-        """Run tasks for "closing" the currently opened file(s)"""
+        """Run tasks for "closing" the currently opened file(s)."""
         self.file_loaded = False
         self._base_path = None
         self._image_files = []
@@ -296,7 +295,7 @@ class FileHandler:
         gc.collect()
 
     def cleanup(self):
-        """Run clean-up tasks. Should be called prior to exit"""
+        """Run clean-up tasks. Should be called prior to exit."""
         self._extractor.stop()
         thread_delete(self._tmp_dir)
 

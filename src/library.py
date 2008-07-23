@@ -139,7 +139,15 @@ class _LibraryDialog(gtk.Window):
         self._pageslabel.set_text(_('%d pages') % info[3])
         self._sizelabel.set_text('%.1f MiB' % (info[5] / 1048576.0))
 
+    def _set_status_message(self, message):
+        """Set a specific message on the statusbar, replacing whatever was
+        there earlier.
+        """
+        self._statusbar.pop(0)
+        self._statusbar.push(0, ' %s' % encoding.to_unicode(message))
+
     def _open_book(self, iconview, path):
+        """Open the book at the (liststore) """
         iterator = self._main_liststore.get_iter(path)
         book = self._main_liststore.get_value(iterator, 1)
         info = self._backend.get_detailed_book_info(book)

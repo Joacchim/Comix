@@ -40,7 +40,7 @@ class _ThumbnailMaintenanceDialog(gtk.Dialog):
         main_box.pack_start(gtk.HSeparator(), False, False, 5)
 
         label = labels.italic_label(
-            _('Thumbnails for files (such as image files and comic book archives) are stored in your home folder. Many different applications use and create these thumbnails, but sometimes thumbnails remain even though the original files have been removed - wasting space. This dialog can cleanup your stored thumbnails by removing orphaned and outdated thumbnails.'))
+            _('Thumbnails for files (such as image files and comic book archives) are stored in your home directory. Many different applications use and create these thumbnails, but sometimes thumbnails remain even though the original files have been removed - wasting space. This dialog can cleanup your stored thumbnails by removing orphaned and outdated thumbnails.'))
         label.set_alignment(0, 0.5)
         label.set_line_wrap(True)
         main_box.pack_start(label, False, False, 10)

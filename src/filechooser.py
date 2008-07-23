@@ -47,7 +47,7 @@ class _ComicFileChooserDialog(gtk.Dialog):
         self._filechooser.set_use_preview_label(False)
         preview_box.show_all()
         self._filechooser.connect('update-preview', self._update_preview)
-
+        
         ffilter = gtk.FileFilter()
         ffilter.add_pattern('*')
         ffilter.set_name(_('All files'))

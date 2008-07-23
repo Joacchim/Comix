@@ -3,7 +3,6 @@
 import sys
 import os
 import shutil
-import time
 
 import gtk
 
@@ -99,19 +98,19 @@ class MainWindow(gtk.Window):
        
         table = gtk.Table(2, 2, False)
         table.attach(self.thumbnailsidebar, 0, 1, 2, 5, gtk.FILL,
-                          gtk.FILL|gtk.EXPAND, 0, 0)
+            gtk.FILL|gtk.EXPAND, 0, 0)
         table.attach(self._main_layout, 1, 2, 2, 3, gtk.FILL|gtk.EXPAND,
-                          gtk.FILL|gtk.EXPAND, 0, 0)
+            gtk.FILL|gtk.EXPAND, 0, 0)
         table.attach(self._vscroll, 2, 3, 2, 3, gtk.FILL|gtk.SHRINK,
-                          gtk.FILL|gtk.SHRINK, 0, 0)
+            gtk.FILL|gtk.SHRINK, 0, 0)
         table.attach(self._hscroll, 1, 2, 4, 5, gtk.FILL|gtk.SHRINK,
-                          gtk.FILL, 0, 0)
+            gtk.FILL, 0, 0)
         table.attach(self.menubar, 0, 3, 0, 1, gtk.FILL|gtk.SHRINK,
-                          gtk.FILL, 0, 0)
+            gtk.FILL, 0, 0)
         table.attach(self.toolbar, 0, 3, 1, 2, gtk.FILL|gtk.SHRINK,
-                          gtk.FILL, 0, 0)
+            gtk.FILL, 0, 0)
         table.attach(self.statusbar, 0, 3, 5, 6, gtk.FILL|gtk.SHRINK,
-                          gtk.FILL, 0, 0)
+            gtk.FILL, 0, 0)
         
         if prefs['default double page']:
             self.actiongroup.get_action('double_page').activate()
@@ -159,14 +158,11 @@ class MainWindow(gtk.Window):
                                         [('text/uri-list', 0, 0)],
                                         gtk.gdk.ACTION_COPY)
 
-        self.connect('delete_event',
-            self.terminate_program)
-        self.connect('key_press_event',
-            self._event_handler.key_press_event)
+        self.connect('delete_event', self.terminate_program)
+        self.connect('key_press_event', self._event_handler.key_press_event)
         self.connect('button_release_event',
             self._event_handler.mouse_release_event)
-        self.connect('configure_event',
-            self._event_handler.resize_event)
+        self.connect('configure_event', self._event_handler.resize_event)
         self._main_layout.connect('scroll_event',
             self._event_handler.scroll_wheel_event)
         self._main_layout.connect('button_press_event',
@@ -197,10 +193,9 @@ class MainWindow(gtk.Window):
         scale_up = prefs['stretch']
         
         if self.displayed_double():
+            left_pixbuf, right_pixbuf = self.file_handler.get_pixbufs()
             if self.is_manga_mode:
-                right_pixbuf, left_pixbuf = self.file_handler.get_pixbufs()
-            else:
-                left_pixbuf, right_pixbuf = self.file_handler.get_pixbufs()
+                right_pixbuf, left_pixbuf = left_pixbuf, right_pixbuf
             left_unscaled_x = left_pixbuf.get_width()
             left_unscaled_y = left_pixbuf.get_height()
             right_unscaled_x = right_pixbuf.get_width()
@@ -209,18 +204,18 @@ class MainWindow(gtk.Window):
             if self.zoom_mode == 'manual':
                 if self.rotation in [90, 270]:
                     scale_width = int(self._manual_zoom *
-                        (left_pixbuf.get_height() +
-                        right_pixbuf.get_height()) // 100)
-                    scale_height = int(self._manual_zoom * max(
-                        left_pixbuf.get_width(),
-                        right_pixbuf.get_width()) // 100)
+                        (left_pixbuf.get_height() + right_pixbuf.get_height())
+                        / 100)
+                    scale_height = int(self._manual_zoom * 
+                        max(left_pixbuf.get_width(), right_pixbuf.get_width())
+                        / 100)
                 else:
                     scale_width = int(self._manual_zoom * 
-                        (left_pixbuf.get_width() +
-                        right_pixbuf.get_width()) // 100)
-                    scale_height = int(self._manual_zoom * max(
-                        left_pixbuf.get_height(),
-                        right_pixbuf.get_height()) // 100)
+                        (left_pixbuf.get_width() + right_pixbuf.get_width())
+                        / 100)
+                    scale_height = int(self._manual_zoom * 
+                        max(left_pixbuf.get_height(), right_pixbuf.get_height())
+                        / 100)
                 scale_up = True
 
             left_pixbuf, right_pixbuf = image.fit_2_in_rectangle(
@@ -254,10 +249,9 @@ class MainWindow(gtk.Window):
             unscaled_y = pixbuf.get_height()
 
             if self.zoom_mode == 'manual':
-                scale_width = int(self._manual_zoom * pixbuf.get_width()
-                    // 100)
+                scale_width = int(self._manual_zoom * pixbuf.get_width() / 100)
                 scale_height = int(self._manual_zoom * pixbuf.get_height()
-                    // 100)
+                    / 100)
                 if self.rotation in [90, 270]:
                     scale_width, scale_height = scale_height, scale_width
                 scale_up = True
@@ -306,14 +300,14 @@ class MainWindow(gtk.Window):
 
     def new_page(self, at_bottom=False):
         """Draw a *new* page correctly (as opposed to redrawing the same
-        image with a new size or whatever.)
+        image with a new size or whatever).
         """
         if not self._keep_rotation:
             self.rotation = 0
             self.horizontal_flip = False
             self.vertical_flip = False
         self.thumbnailsidebar.update_select()
-        self.draw_image(at_bottom)
+        self.draw_image(at_bottom=at_bottom)
 
     def next_page(self, *args):
         if self.file_handler.next_page():
@@ -373,13 +367,13 @@ class MainWindow(gtk.Window):
             self.cursor_handler.exit_fullscreen()
 
     def change_zoom_mode(self, radioaction, *args):
-        mode = radioaction.get_current_value()
+        new_mode = radioaction.get_current_value()
         old_mode = self.zoom_mode
-        if mode == 0:
+        if new_mode == 0:
             self.zoom_mode = 'manual'
-        elif mode == 1:
+        elif new_mode == 1:
             self.zoom_mode = 'fit'
-        elif mode == 2:
+        elif new_mode == 2:
             self.zoom_mode = 'width'
         else:
             self.zoom_mode = 'height'
@@ -579,7 +573,7 @@ class MainWindow(gtk.Window):
                 self.left_image.size_request()[0])
 
     def clear(self):
-        """Clear the currently displayed data (i.e. "close" the file.)"""
+        """Clear the currently displayed data (i.e. "close" the file)."""
         self.left_image.clear()
         self.right_image.clear()
         self.thumbnailsidebar.clear()
