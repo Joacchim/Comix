@@ -221,11 +221,21 @@ class EventHandler:
         if event.direction == gtk.gdk.SCROLL_UP:
             if self._window.zoom_mode == 'fit':
                 self._window.previous_page()
+            elif self._window.zoom_mode == 'height':
+                if self._window.is_manga_mode:
+                    self._window.scroll(70, 0)
+                else:
+                    self._window.scroll(-70, 0)
             else:
                 self._window.scroll(0, -70)
         elif event.direction == gtk.gdk.SCROLL_DOWN:
             if self._window.zoom_mode == 'fit':
                 self._window.next_page()
+            elif self._window.zoom_mode == 'height':
+                if self._window.is_manga_mode:
+                    self._window.scroll(-70, 0)
+                else:
+                    self._window.scroll(70, 0)
             else:
                 self._window.scroll(0, 70)
         elif event.direction == gtk.gdk.SCROLL_RIGHT:

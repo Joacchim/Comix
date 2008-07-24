@@ -257,7 +257,7 @@ class MainWindow(gtk.Window):
                 if self.rotation in (90, 270):
                     scale_width, scale_height = scale_height, scale_width
                 scale_up = True
-
+            
             pixbuf = image.fit_in_rectangle(pixbuf, scale_width, scale_height,
                 scale_up=scale_up, rotation=self.rotation)
             if self.horizontal_flip:
@@ -279,21 +279,22 @@ class MainWindow(gtk.Window):
                 self.file_handler.get_number_of_pages())
             self.statusbar.set_resolution((unscaled_x, unscaled_y,
                 scale_percent))
-
-        self.left_image.hide()
-        self.right_image.hide()
+        
+        self._image_box.window.freeze_updates()
         self._main_layout.move(self._image_box, max(0, x_padding),
             max(0, y_padding))
-        if scroll and at_bottom:
-            self.scroll_to_fixed(horiz='endsecond', vert='bottom')
-        elif scroll:
-            self.scroll_to_fixed(horiz='startfirst', vert='top')
         self.left_image.show()
         if self.displayed_double():
             self.right_image.show()
         else:
             self.right_image.hide()
         self._main_layout.set_size(*self._image_box.size_request())
+        if scroll and at_bottom:
+            self.scroll_to_fixed(horiz='endsecond', vert='bottom')
+        elif scroll:
+            self.scroll_to_fixed(horiz='startfirst', vert='top')
+        self._image_box.window.thaw_updates()
+
         self.statusbar.set_filename(
             self.file_handler.get_pretty_current_filename())
         self.statusbar.update()
