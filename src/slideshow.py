@@ -4,8 +4,9 @@ import gobject
 
 from preferences import prefs
 
+
 class Slideshow:
-    
+
     def __init__(self, window):
         self._window = window
         self._running = False
@@ -29,7 +30,7 @@ class Slideshow:
             return False
         self._window.next_page()
         return True
-    
+
     def toggle(self, action):
         if action.get_active():
             self._start()
@@ -38,4 +39,3 @@ class Slideshow:
 
     def is_running(self):
         return self._running
-

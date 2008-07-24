@@ -19,13 +19,14 @@ import image
 from preferences import prefs
 import thumbnail
 
+
 class FileHandler:
-    
+
     """The FileHandler keeps track of images, pages, caches and reads files.
 
     When the Filehandler's methods refer to pages, they are indexed from 1,
     i.e. the first page is page 1 etc.
-    
+
     Other modules should *never* read directly from the files pointed to by
     paths given by the FileHandler's methods. The files are not even
     guaranteed to exist at all times since the extraction of archives is
@@ -35,7 +36,7 @@ class FileHandler:
     def __init__(self, window):
         self.file_loaded = False
         self.archive_type = None
-        
+
         self._window = window
         self._base_path = None
         self._tmp_dir = tempfile.mkdtemp(prefix='comix.', suffix=os.sep)
@@ -51,9 +52,9 @@ class FileHandler:
 
     def _get_pixbuf(self, index):
         """Return the pixbuf indexed by <index> from cache.
-        Pixbufs not found in cache are fetched from disk first. 
+        Pixbufs not found in cache are fetched from disk first.
         """
-        if not self._raw_pixbufs.has_key(index):
+        if index not in self._raw_pixbufs:
             self._wait_on_page(index + 1)
             try:
                 self._raw_pixbufs[index] = gtk.gdk.pixbuf_new_from_file(
@@ -66,7 +67,7 @@ class FileHandler:
         """Return the pixbuf(s) for the image(s) that should be currently
         displayed, from cache. Return two pixbufs in double-page mode unless
         <single> is True. Pixbufs not found in cache are fetched from
-        disk first. 
+        disk first.
         """
         if not self._window.displayed_double() or single:
             return self._get_pixbuf(self._current_image_index)
@@ -77,24 +78,23 @@ class FileHandler:
         """Make sure that the correct pixbufs are stored in cache. These
         are (in the current implementation) the current image(s), and
         if cacheing is enabled, also the one or two pixbufs before and
-        after them. All other pixbufs are deleted and garbage collected 
+        after them. All other pixbufs are deleted and garbage collected
         directly in order to save memory.
         """
         # Get list of wanted pixbufs.
         viewed = self._window.is_double_page and 2 or 1
         if prefs['cache']:
-            wanted_pixbufs = range(max(0, self._current_image_index - viewed), 
+            wanted_pixbufs = range(max(0, self._current_image_index - viewed),
                 min(self._current_image_index + viewed * 2,
                     self.get_number_of_pages()))
         else:
-            wanted_pixbufs = range(self._current_image_index, 
+            wanted_pixbufs = range(self._current_image_index,
                 min(self._current_image_index + viewed,
                     self.get_number_of_pages()))
-        
+
         # Remove old pixbufs.
-        for page in self._raw_pixbufs.keys()[:]:
-            if not page in wanted_pixbufs:
-                del self._raw_pixbufs[page]
+        for page in set(self._raw_pixbufs) - set(wanted_pixbufs):
+            del self._raw_pixbufs[page]
         if sys.version_info[:3] >= (2, 5, 0):
             gc.collect(0)
         else:
@@ -186,10 +186,10 @@ class FileHandler:
         # --------------------------------------------------------------------
         if not os.path.isfile(path):
             if os.path.isdir(path):
-                self._window.statusbar.set_message(_('"%s" is a directory.') % 
+                self._window.statusbar.set_message(_('"%s" is a directory.') %
                     os.path.basename(path))
             else:
-                self._window.statusbar.set_message(_('"%s" is not a file.') % 
+                self._window.statusbar.set_message(_('"%s" is not a file.') %
                     os.path.basename(path))
             return False
 
@@ -234,11 +234,11 @@ class FileHandler:
             else:
                 self._current_image_index = start_page - 1
             self._current_image_index = max(0, self._current_image_index)
-            
+
             depth = self._window.is_double_page and 2 or 1
             priority_ordering = (
                 range(self._current_image_index,
-                    self._current_image_index + depth * 2) + 
+                    self._current_image_index + depth * 2) +
                 range(self._current_image_index - depth,
                     self._current_image_index)[::-1])
             priority_ordering = [image_files[p] for p in priority_ordering
@@ -266,12 +266,12 @@ class FileHandler:
         # If there are no viewable image files found.
         # --------------------------------------------------------------------
         if not self._image_files:
-            self._window.statusbar.set_message(_('No images in "%s"') % 
+            self._window.statusbar.set_message(_('No images in "%s"') %
                 os.path.basename(path))
             self.file_loaded = False
         else:
             self.file_loaded = True
-        
+
         self._comment_files.sort()
         self._window.cursor_handler.set_cursor_type(cursor.NORMAL)
         self._window.ui_manager.set_sensitivities()
@@ -374,7 +374,7 @@ class FileHandler:
         """Return the filename of comment <num>."""
         return self._comment_files[num - 1]
 
-    def update_comment_extensions(self): 
+    def update_comment_extensions(self):
         """Update the regular expression used to filter out comments in
         archives by their filename.
         """
@@ -413,7 +413,7 @@ class FileHandler:
             return self.get_path_to_base()
         return self._image_files[self._current_image_index]
 
-    def get_size(self, page=None):  
+    def get_size(self, page=None):
         """Return a tuple (width, height) with the size of <page>. If <page>
         is None, return the size of the current page.
         """
@@ -432,14 +432,14 @@ class FileHandler:
         if info is not None:
             return info[0]['name'].upper()
         return _('Unknown filetype')
-    
-    def get_thumbnail(self, page=None, width=128, height=128, create=False): 
+
+    def get_thumbnail(self, page=None, width=128, height=128, create=False):
         """Return a thumbnail pixbuf of <page> that fit in a box with
         dimensions <width>x<height>. Return a thumbnail for the current
         page if <page> is None.
 
-        If <create> is True, and <width>x<height> <= 128x128, the 
-        thumbnail is also stored on disk.        
+        If <create> is True, and <width>x<height> <= 128x128, the
+        thumbnail is also stored on disk.
         """
         self._wait_on_page(page)
         path = self.get_path_to_page(page)
@@ -455,7 +455,7 @@ class FileHandler:
             thumb = self._get_missing_image()
         thumb = image.fit_in_rectangle(thumb, width, height)
         return thumb
-    
+
     def get_stats(self, page=None):
         """Return a stat object as used by the Python stat module for <page>.
         If <page> is None, return a stat object for the current page.
@@ -468,20 +468,20 @@ class FileHandler:
             stats = None
         return stats
 
-    def _wait_on_page(self, page): 
-        """Block the running (main) thread until the file corresponding to 
+    def _wait_on_page(self, page):
+        """Block the running (main) thread until the file corresponding to
         image <page> has been fully extracted.
         """
         path = self.get_path_to_page(page)
         self._wait_on_file(path)
 
     def _wait_on_comment(self, num):
-        """Block the running (main) thread until the file corresponding to 
+        """Block the running (main) thread until the file corresponding to
         comment <num> has been fully extracted.
         """
         path = self._comment_files[num - 1]
         self._wait_on_file(path)
-    
+
     def _wait_on_file(self, path):
         """Block the running (main) thread if the file <path> is from an
         archive and has not yet been extracted. Return when the file is
@@ -504,6 +504,7 @@ def thread_delete(path):
     del_thread.setDaemon(False)
     del_thread.start()
 
+
 def is_image_file(path):
     """Return True if the file at <path> is an image file recognized by PyGTK.
     """
@@ -511,4 +512,3 @@ def is_image_file(path):
         info = gtk.gdk.pixbuf_get_file_info(path)
         return info is not None
     return False
-

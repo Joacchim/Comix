@@ -18,11 +18,13 @@ import properties
 import recent
 import thumbremover
 
+
 def bogus(*args):
     print 'Feature not implemented yet.'
 
+
 class MainUI(gtk.UIManager):
-    
+
     def __init__(self, window):
         gtk.UIManager.__init__(self)
         self._window = window
@@ -38,14 +40,14 @@ class MainUI(gtk.UIManager):
                 'Page_Up', None, window.previous_page),
             ('first_page', gtk.STOCK_GOTO_FIRST, _('_First page'),
                 'Home', None, window.first_page),
-            ('last_page',gtk.STOCK_GOTO_LAST, _('_Last page'),
+            ('last_page', gtk.STOCK_GOTO_LAST, _('_Last page'),
                 'End', None, window.last_page),
             ('zoom_in', gtk.STOCK_ZOOM_IN, _('_Zoom in'),
                 'KP_Add', None, window.manual_zoom_in),
             ('zoom_out', gtk.STOCK_ZOOM_OUT, _('Zoom _out'),
                 'KP_Subtract', None, window.manual_zoom_out),
             ('zoom_original', gtk.STOCK_ZOOM_100, _('_Normal size'),
-                '<Control>0', None, window.manual_zoom_original), 
+                '<Control>0', None, window.manual_zoom_original),
             ('about', gtk.STOCK_ABOUT, _('_About'),
                 None, None, about.open_dialog),
             ('edit_thumbnails', 'comix-thumbnails', _('_Thumbnail maintenance...'),
@@ -116,7 +118,7 @@ class MainUI(gtk.UIManager):
             ('fit_height_mode', 'comix-fitheight', _('Fit _height mode'),
                 'h', None, 3)],
             0, window.change_zoom_mode)
-        
+
         # Some actions added separately since they need extra arguments.
         self._actiongroup.add_actions([
             ('properties', gtk.STOCK_PROPERTIES, _('Proper_ties'),
@@ -267,15 +269,15 @@ class MainUI(gtk.UIManager):
 
         self.add_ui_from_string(ui_description)
         self.insert_action_group(self._actiongroup, 0)
-        
+
         self.bookmarks = bookmark.BookmarksMenu(self, window)
         self.get_widget('/Menu/menu_bookmarks').set_submenu(self.bookmarks)
         self.get_widget('/Menu/menu_bookmarks').show()
-        
+
         self.recent = recent.RecentFilesMenu(self, window)
         self.get_widget('/Menu/menu_file/menu_recent').set_submenu(self.recent)
         self.get_widget('/Menu/menu_file/menu_recent').show()
-        
+
         window.add_accel_group(self.get_accel_group())
 
         # FIXME: Is there no built-in way to do this?
@@ -308,7 +310,7 @@ class MainUI(gtk.UIManager):
             if self._window.file_handler.archive_type:
                 archive_sensitive = True
                 if self._window.file_handler.get_number_of_comments():
-                    comment_sensitive = True 
+                    comment_sensitive = True
         for name in general:
             self._actiongroup.get_action(name).set_sensitive(general_sensitive)
         for name in archive:
@@ -316,4 +318,3 @@ class MainUI(gtk.UIManager):
         for name in comment:
             self._actiongroup.get_action(name).set_sensitive(comment_sensitive)
         self.bookmarks.set_sensitive(general_sensitive)
-

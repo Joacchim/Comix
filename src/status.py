@@ -4,6 +4,7 @@ import gtk
 
 import encoding
 
+
 class Statusbar(gtk.Statusbar):
 
     def __init__(self):
@@ -27,10 +28,10 @@ class Statusbar(gtk.Statusbar):
         else:
             self.page_info = '%d / %d' % (page, total)
 
-    def set_resolution(self, left_dimensions, right_dimensions=None):  
+    def set_resolution(self, left_dimensions, right_dimensions=None):
         """Update the resolution data.
 
-        Takes one or two tuples, (x, y, scale), describing the original 
+        Takes one or two tuples, (x, y, scale), describing the original
         resolution of an image as well as the currently displayed scale
         in percent.
         """
@@ -47,4 +48,3 @@ class Statusbar(gtk.Statusbar):
         self.pop(0)
         self.push(0, ' %s      |      %s      |      %s' %
             (self.page_info, self.resolution, self.filename))
-

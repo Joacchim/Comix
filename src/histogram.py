@@ -7,10 +7,11 @@ import ImageOps
 
 import image
 
+
 def draw_histogram(pixbuf, height=170, fill=170, text=True):
     """Draw a histogram from <pixbuf> and return it as another pixbuf.
 
-    The returned prixbuf will be 262x<height> px. 
+    The returned prixbuf will be 262x<height> px.
 
     The value of <fill> determines the colour intensity of the filled graphs,
     valid values are between 0 and 255.
@@ -30,8 +31,8 @@ def draw_histogram(pixbuf, height=170, fill=170, text=True):
     for x in xrange(256):
         for y in xrange(1, max(r[x], g[x], b[x]) + 1):
             r_px = y <= r[x] and fill or 0
-            g_px = y <= g[x] and fill or 0 
-            b_px = y <= b[x] and fill or 0 
+            g_px = y <= g[x] and fill or 0
+            b_px = y <= b[x] and fill or 0
             im_data.putpixel((x + 1, height - 5 - y), (r_px, g_px, b_px))
     # Draw the outlines
     for x in xrange(1, 256):
@@ -61,4 +62,3 @@ def draw_histogram(pixbuf, height=170, fill=170, text=True):
     im = ImageOps.expand(im, 1, (80, 80, 80))
     im = ImageOps.expand(im, 1, (0, 0, 0))
     return image.pil_to_pixbuf(im)
-

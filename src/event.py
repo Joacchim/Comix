@@ -12,8 +12,9 @@ import gobject
 import cursor
 from preferences import prefs
 
+
 class EventHandler:
-    
+
     def __init__(self, window):
         self._window = window
         self._last_pointer_pos_x = 0
@@ -44,9 +45,9 @@ class EventHandler:
             self._window.previous_page()
         elif event.keyval == gtk.keysyms.KP_Page_Down:
             self._window.next_page()
-        
+
         # ----------------------------------------------------------------
-        # Numpad (without numlock) aligns the image depending on the key. 
+        # Numpad (without numlock) aligns the image depending on the key.
         # ----------------------------------------------------------------
         elif event.keyval == gtk.keysyms.KP_1:
             self._window.scroll_to_fixed(horiz='left', vert='bottom')
@@ -66,7 +67,7 @@ class EventHandler:
             self._window.scroll_to_fixed(horiz='middle', vert='top')
         elif event.keyval == gtk.keysyms.KP_9:
             self._window.scroll_to_fixed(horiz='right', vert='top')
-        
+
         # ----------------------------------------------------------------
         # Enter/exit fullscreen. 'f' is also a valid key, defined as an
         # accelerator elsewhere.
@@ -77,17 +78,17 @@ class EventHandler:
             self._window.actiongroup.get_action('fullscreen').activate()
 
         # ----------------------------------------------------------------
-        # Zooming commands for manual zoom mode. These keys complement 
+        # Zooming commands for manual zoom mode. These keys complement
         # others (with the same action) defined as accelerators.
         # ----------------------------------------------------------------
         elif event.keyval in [gtk.keysyms.plus, gtk.keysyms.equal]:
             self._window.actiongroup.get_action('zoom_in').activate()
         elif event.keyval == gtk.keysyms.minus:
             self._window.actiongroup.get_action('zoom_out').activate()
-        elif (event.keyval in [gtk.keysyms._0, gtk.keysyms.KP_0] and 
+        elif (event.keyval in [gtk.keysyms._0, gtk.keysyms.KP_0] and
           'GDK_CONTROL_MASK' in event.state.value_names):
             self._window.actiongroup.get_action('zoom_original').activate()
-        
+
         # ----------------------------------------------------------------
         # Arrow keys scroll the image, except in fit-to-screen mode where
         # they flip pages instead.
@@ -116,8 +117,8 @@ class EventHandler:
         # ----------------------------------------------------------------
         # Space key scrolls down a percentage of the window height or the
         # image height at a time. When at the bottom it flips to the next
-        # page. 
-        # 
+        # page.
+        #
         # It also has a "smart scrolling mode" in which we try to follow
         # the flow of the comic.
         #
@@ -130,7 +131,7 @@ class EventHandler:
             y_step = y_step * prefs['space scroll percent'] // 100
             if self._window.is_manga_mode:
                 x_step *= -1
-            if ('GDK_SHIFT_MASK' in event.state.value_names or 
+            if ('GDK_SHIFT_MASK' in event.state.value_names or
               event.keyval == gtk.keysyms.KP_Home):
                 if prefs['smart space scroll']:
                     if self._window.displayed_double():
@@ -159,8 +160,8 @@ class EventHandler:
                                 self._window.previous_page()
                             else:
                                 self._window.scroll_to_fixed(horiz='endfirst')
-                else:           
-                    if (self._window.zoom_mode == 'fit' or 
+                else:
+                    if (self._window.zoom_mode == 'fit' or
                       not self._window.scroll(0, -y_step)):
                         self._window.previous_page()
             else:
@@ -173,7 +174,8 @@ class EventHandler:
                                       horiz='startsecond'):
                                         self._window.next_page()
                                     else:
-                                        self._window.scroll_to_fixed(vert='top')
+                                        self._window.scroll_to_fixed(
+                                                vert='top')
                                 else:
                                     self._window.scroll_to_fixed(
                                         horiz='startfirst')
@@ -189,12 +191,13 @@ class EventHandler:
                             if not self._window.scroll(0, y_step):
                                 self._window.next_page()
                             else:
-                                self._window.scroll_to_fixed(horiz='startfirst')
-                else:           
-                    if (self._window.zoom_mode == 'fit' or 
+                                self._window.scroll_to_fixed(
+                                    horiz='startfirst')
+                else:
+                    if (self._window.zoom_mode == 'fit' or
                       not self._window.scroll(0, y_step)):
                         self._window.next_page()
-        
+
         # ----------------------------------------------------------------
         # We kill the signals here for the Up, Down, Space and Enter keys,
         # or they will start fiddling with the thumbnail selector (bad).
@@ -202,7 +205,7 @@ class EventHandler:
         if (event.keyval in [gtk.keysyms.Up, gtk.keysyms.Down,
           gtk.keysyms.space, gtk.keysyms.KP_Enter, gtk.keysyms.KP_Up,
           gtk.keysyms.KP_Down, gtk.keysyms.KP_Home, gtk.keysyms.KP_End,
-          gtk.keysyms.KP_Page_Up, gtk.keysyms.KP_Page_Down] or 
+          gtk.keysyms.KP_Page_Up, gtk.keysyms.KP_Page_Down] or
           (event.keyval == gtk.keysyms.Return and not
           'GDK_MOD1_MASK' in event.state.value_names)):
             self._window.emit_stop_by_name('key_press_event')
@@ -274,7 +277,7 @@ class EventHandler:
                 events.append(event)
         for event in events:
             event.put()
-    
+
     def drag_n_drop_event(self, widget, context, x, y, data, *args):
         """Handle drag-n-drop events on the main layout area."""
         uris = data.get_uris()
@@ -287,4 +290,3 @@ class EventHandler:
             uri = uri[5:]
         path = urllib.url2pathname(uri)
         self._window.file_handler.open_file(path)
-

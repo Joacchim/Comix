@@ -11,27 +11,30 @@ import thumbnail
 
 _dialog = None
 
-# We roll our own FileChooserDialog because the one in GTK is buggy
-# with the preview widget.
+
 class _ComicFileChooserDialog(gtk.Dialog):
-    
+
+    """We roll our own FileChooserDialog because the one in GTK is buggy
+    with the preview widget.
+    """
+
     def __init__(self, file_handler):
         gtk.Dialog.__init__(self, _('Open'), None, 0, (gtk.STOCK_CANCEL,
             gtk.RESPONSE_CANCEL, gtk.STOCK_OPEN, gtk.RESPONSE_OK))
-        
+
         self._file_handler = file_handler
         self.connect('response', self._response)
         self.set_default_response(gtk.RESPONSE_OK)
         self.set_has_separator(False)
 
         self._filechooser = gtk.FileChooserWidget()
-        self._filechooser.connect('file-activated', self._response, 
+        self._filechooser.connect('file-activated', self._response,
             gtk.RESPONSE_OK)
         self._filechooser.set_size_request(680, 420)
         self.vbox.pack_start(self._filechooser)
         self.set_border_width(4)
         self._filechooser.set_border_width(6)
-        
+
         preview_box = gtk.VBox(False, 10)
         preview_box.set_size_request(130, 0)
         self._preview_image = gtk.Image()
@@ -47,7 +50,7 @@ class _ComicFileChooserDialog(gtk.Dialog):
         self._filechooser.set_use_preview_label(False)
         preview_box.show_all()
         self._filechooser.connect('update-preview', self._update_preview)
-        
+
         ffilter = gtk.FileFilter()
         ffilter.add_pattern('*')
         ffilter.set_name(_('All files'))
@@ -56,44 +59,26 @@ class _ComicFileChooserDialog(gtk.Dialog):
         ffilter.add_pixbuf_formats()
         ffilter.set_name(_('All images'))
         self._filechooser.add_filter(ffilter)
-        ffilter = gtk.FileFilter()
-        ffilter.add_mime_type('application/x-zip')
-        ffilter.add_mime_type('application/zip')
-        ffilter.add_mime_type('application/x-rar')
-        ffilter.add_mime_type('application/x-tar')
-        ffilter.add_mime_type('application/x-gzip')
-        ffilter.add_mime_type('application/x-bzip2')
-        ffilter.add_mime_type('application/x-cbz')
-        ffilter.add_mime_type('application/x-cbr')
-        ffilter.add_mime_type('application/x-cbt')
-        ffilter.set_name(_('All archives'))
-        self._filechooser.add_filter(ffilter)
-        ffilter = gtk.FileFilter()
-        ffilter.add_mime_type('image/jpeg')
-        ffilter.set_name(_('JPEG images'))
-        self._filechooser.add_filter(ffilter)
-        ffilter = gtk.FileFilter()
-        ffilter.add_mime_type('image/png')
-        ffilter.set_name(_('PNG images'))
-        self._filechooser.add_filter(ffilter)
-        ffilter = gtk.FileFilter()
-        ffilter.add_mime_type('application/x-zip')
-        ffilter.add_mime_type('application/zip')
-        ffilter.add_mime_type('application/x-cbz')
-        ffilter.set_name(_('Zip archives'))
-        self._filechooser.add_filter(ffilter)
-        ffilter = gtk.FileFilter()
-        ffilter.add_mime_type('application/x-rar')
-        ffilter.add_mime_type('application/x-cbr')
-        ffilter.set_name(_('RAR archives'))
-        self._filechooser.add_filter(ffilter)
-        ffilter = gtk.FileFilter()
-        ffilter.add_mime_type('application/x-tar')
-        ffilter.add_mime_type('application/x-gzip')
-        ffilter.add_mime_type('application/x-bzip2')
-        ffilter.add_mime_type('application/x-cbt')
-        ffilter.set_name(_('tar archives'))
-        self._filechooser.add_filter(ffilter)
+
+        def add_filter(name, mimes):
+            ffilter = gtk.FileFilter()
+            for mime in mimes.split():
+                ffilter.add_mime_type(mime)
+            ffilter.set_name(name)
+            self._filechooser.add_filter(ffilter)
+
+        add_filter(_('JPEG images'), 'image/jpeg')
+        add_filter(_('PNG images'), 'image/png')
+
+        add_filter(_('All Archives'), 'application/x-zip application/zip '
+            'application/x-rar application/x-tar application/x-gzip '
+            'application/x-bzip2 application/x-cbz application/x-cbr '
+            'application/x-cbt')
+        add_filter(_('Zip archives'),
+            'application/x-zip application/zip application/x-cbz')
+        add_filter(_('RAR archives'), 'application/x-rar application/x-cbr')
+        add_filter(_('tar archives'), 'application/x-tar application/x-gzip '
+            'application/x-bzip2 application/x-cbt')
 
         self._filechooser.set_current_folder(prefs['path of last browsed'])
 
@@ -148,9 +133,9 @@ def open_dialog(action, file_handler):
     if _dialog is None:
         _dialog = _ComicFileChooserDialog(file_handler)
 
+
 def close_dialog(*args):
     global _dialog
     if _dialog is not None:
         _dialog.destroy()
         _dialog = None
-

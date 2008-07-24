@@ -6,8 +6,9 @@ import gtk
 
 import preferences
 
+
 class RecentFilesMenu(gtk.RecentChooserMenu):
-    
+
     def __init__(self, ui, window):
         self._window = window
         self._manager = gtk.recent_manager_get_default()
@@ -41,4 +42,3 @@ class RecentFilesMenu(gtk.RecentChooserMenu):
             return
         uri = 'file://' + urllib.pathname2url(path)
         self._manager.add_item(uri)
-

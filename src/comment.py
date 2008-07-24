@@ -9,6 +9,7 @@ import encoding
 
 _dialog = None
 
+
 class _CommentsDialog(gtk.Dialog):
 
     def __init__(self, file_handler):
@@ -20,7 +21,7 @@ class _CommentsDialog(gtk.Dialog):
         self.connect('response', close_dialog)
         self.set_default_response(gtk.RESPONSE_CLOSE)
         self.set_default_size(600, 550)
-        
+
         notebook = gtk.Notebook()
         self.set_border_width(4)
         notebook.set_border_width(6)
@@ -61,7 +62,7 @@ class _CommentsDialog(gtk.Dialog):
             notebook.insert_page(page, tab_label)
 
         self.show_all()
-        
+
 
 def open_dialog(action, file_handler):
     """Create and display the (singleton) comments dialog."""
@@ -69,10 +70,10 @@ def open_dialog(action, file_handler):
     if _dialog is None:
         _dialog = _CommentsDialog(file_handler)
 
+
 def close_dialog(*args):
     """Destroy the comments dialog."""
     global _dialog
     if _dialog is not None:
         _dialog.destroy()
         _dialog = None
-

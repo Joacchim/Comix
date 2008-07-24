@@ -10,6 +10,7 @@ import constants
 
 _dialog = None
 
+
 class _AboutDialog(gtk.Dialog):
 
     def __init__(self):
@@ -19,7 +20,7 @@ class _AboutDialog(gtk.Dialog):
         self.set_resizable(False)
         self.connect('response', close_dialog)
         self.set_default_response(gtk.RESPONSE_CLOSE)
-        
+
         notebook = gtk.Notebook()
         self.vbox.pack_start(notebook, False, False, 0)
         self.set_border_width(4)
@@ -34,7 +35,7 @@ class _AboutDialog(gtk.Dialog):
         if not isfile(icon_path):
             for prefix in [dirname(dirname(sys.argv[0])), '/usr', '/usr/local',
               '/usr/X11R6']:
-                icon_path = join(prefix, 
+                icon_path = join(prefix,
                     'share/icons/hicolor/scalable/apps/comix.svg')
                 if isfile(icon_path):
                     break
@@ -64,7 +65,7 @@ class _AboutDialog(gtk.Dialog):
         label.set_justify(gtk.JUSTIFY_CENTER)
         label.set_selectable(True)
         notebook.insert_page(box, gtk.Label(_('About')))
-        
+
         # ----------------------------------------------------------------
         # Credits tab.
         # ----------------------------------------------------------------
@@ -100,7 +101,7 @@ class _AboutDialog(gtk.Dialog):
             label.set_alignment(0, 0.5)
         notebook.insert_page(box, gtk.Label(_('Credits')))
         self.show_all()
-        
+
 
 def open_dialog(*args):
     """Create and display the (singleton) about dialog."""
@@ -108,10 +109,10 @@ def open_dialog(*args):
     if _dialog is None:
         _dialog = _AboutDialog()
 
+
 def close_dialog(*args):
     """Destroy the about dialog."""
     global _dialog
     if _dialog is not None:
         _dialog.destroy()
         _dialog = None
-

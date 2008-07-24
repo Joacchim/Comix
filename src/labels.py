@@ -3,6 +3,7 @@
 import gtk
 import pango
 
+
 def bold_label(text):
     """Return a bold gtk.Label with <text>."""
     label = gtk.Label(text)
@@ -12,6 +13,7 @@ def bold_label(text):
     label.set_attributes(attrlist)
     return label
 
+
 def italic_label(text):
     """Return an italic gtk.Label with <text>."""
     label = gtk.Label(text)
@@ -20,4 +22,3 @@ def italic_label(text):
         len(text)))
     label.set_attributes(attrlist)
     return label
-

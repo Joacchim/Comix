@@ -12,7 +12,7 @@ import constants
 # ------------------------------------------------------------------------
 prefs = {
     #'auto comments': False,
-    'comment extensions': ['txt',  'nfo'],
+    'comment extensions': ['txt', 'nfo'],
     #'auto load last file': False,
     #'page of last file': 0,
     #'path to last file': '',
@@ -48,15 +48,16 @@ prefs = {
     'smart space scroll': True,
     'space scroll percent': 90,
     'store recent file info': True,
-    'window height': gtk.gdk.screen_get_default().get_height() * 3 // 4, 
+    'window height': gtk.gdk.screen_get_default().get_height() * 3 // 4,
     'window width': gtk.gdk.screen_get_default().get_width() // 2
 }
 
 _config_path = os.path.join(constants.COMIX_DIR, 'preferences.pickle')
 _dialog = None
 
+
 class _PreferencesDialog(gtk.Dialog):
-    
+
     #XXX: Incomplete
 
     def __init__(self, window):
@@ -72,7 +73,7 @@ class _PreferencesDialog(gtk.Dialog):
         self.vbox.pack_start(notebook)
         self.set_border_width(4)
         notebook.set_border_width(6)
-        
+
         page = gtk.VBox(False, 12)
 
         self.show_all()
@@ -92,11 +93,13 @@ def open_dialog(action, window):
     if _dialog is None:
         _dialog = _PreferencesDialog(window)
 
+
 def close_dialog(*args):
     global _dialog
     if _dialog is not None:
         _dialog.destroy()
         _dialog = None
+
 
 def read_preferences_file():
     """Read preferences data from disk."""
@@ -114,10 +117,10 @@ def read_preferences_file():
                 if key in prefs:
                     prefs[key] = old_prefs[key]
 
+
 def write_preferences_file():
     """Write preference data to disk."""
     config = open(_config_path, 'w')
     cPickle.dump(constants.VERSION, config, cPickle.HIGHEST_PROTOCOL)
     cPickle.dump(prefs, config, cPickle.HIGHEST_PROTOCOL)
     config.close()
-

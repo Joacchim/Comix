@@ -8,21 +8,22 @@ import cursor
 from preferences import prefs
 import image
 
+
 class MagnifyingGlass:
-    
-    """The MagnifyingGlass creates cursors from the raw pixbufs containing 
+
+    """The MagnifyingGlass creates cursors from the raw pixbufs containing
     the unscaled data for the currently displayed images. It does this by
     looking at the cursor position and calculating what image data to put
-    in the "lens" cursor. 
+    in the "lens" cursor.
 
     Note: The mapping is highly dependent on the exact layout of the main
     window images, thus this module isn't really independent from the main
     module as it uses implementation details not in the interface.
     """
-    
+
     def __init__(self, window):
         self._window = window
-    
+
     def set_lens_cursor(self, x, y):
         """Calculate what image data to put in the lens and update the cursor
         with it; <x> and <y> are the positions of the cursor within the
@@ -70,7 +71,7 @@ class MagnifyingGlass:
         return image.add_border(canvas, 1)
 
     def _add_subpixbuf(self, canvas, x, y, image_size, source_pixbuf,
-        other_image_width=0, left=True): 
+        other_image_width=0, left=True):
         """Copy a subpixbuf from <source_pixbuf> to <canvas> as it should
         be in the lens if the coordinates <x>, <y> are the mouse pointer
         position on the main window layout area.
@@ -80,13 +81,13 @@ class MagnifyingGlass:
 
         If <other_image_width> is given, it is the width of the "other" image
         in double page mode.
-        
+
         The image we are getting the coordinates for is the left one unless
         <left> is False.
         """
         area_x, area_y = self._window.get_visible_area_size()
         if left:
-            padding_x = max(0, 
+            padding_x = max(0,
                 (area_x - other_image_width - image_size[0]) // 2)
         else:
             padding_x = \
@@ -120,7 +121,7 @@ class MagnifyingGlass:
             x = source_pixbuf.get_width() - x
         if self._window.vertical_flip:
             y = source_pixbuf.get_height() - y
-        
+
         src_x = x - width / 2
         src_y = y - height / 2
         if src_x < 0:
@@ -132,8 +133,8 @@ class MagnifyingGlass:
         width = max(0, min(source_pixbuf.get_width() - src_x, width))
         height = max(0, min(source_pixbuf.get_height() - src_y, height))
         if width < 1 or height < 1:
-            return            
-        
+            return
+
         subpixbuf = source_pixbuf.subpixbuf(int(src_x), int(src_y),
             int(width), int(height))
         subpixbuf = subpixbuf.scale_simple(
@@ -164,5 +165,4 @@ class MagnifyingGlass:
             dest_y = min(canvas.get_height() - subpixbuf.get_height(), dest_y)
 
         subpixbuf.copy_area(0, 0, subpixbuf.get_width(),
-            subpixbuf.get_height(), canvas, dest_x, dest_y)            
-
+            subpixbuf.get_height(), canvas, dest_x, dest_y)

@@ -4,10 +4,11 @@ import sys
 
 _filesystemencoding = sys.getfilesystemencoding()
 
+
 def to_unicode(string):
-    """Convert <string> to unicode. First trie the default filesystem
+    """Convert <string> to unicode. First try the default filesystem
     encoding, and then fall back on some common encodings. If none
-    of the convertions are successful, "???" is returned. 
+    of the convertions are successful, "???" is returned.
     """
     if isinstance(string, unicode):
         return string
@@ -18,4 +19,3 @@ def to_unicode(string):
         except (UnicodeError, LookupError):
             pass
     return u'???'
-

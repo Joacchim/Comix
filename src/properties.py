@@ -14,15 +14,16 @@ import image
 
 _dialog = None
 
+
 class _Page(gtk.VBox):
-    
+
     """A page to put in the gtk.Notebook. Contains info about a file (an
     image or an archive.)
     """
-    
+
     def __init__(self):
         gtk.VBox.__init__(self, False, 12)
-        
+
         self.set_border_width(12)
         topbox = gtk.HBox(False, 12)
         self.pack_start(topbox, False)
@@ -66,7 +67,7 @@ class _Page(gtk.VBox):
             label.set_alignment(0, 0.5)
             self._mainbox.pack_start(label, False, False)
 
-    def set_secondary_info(self, info): 
+    def set_secondary_info(self, info):
         """Set the information below the main info box to the values in the
         sequence <info>. Each entry in info should be a tuple (desc, value).
         """
@@ -83,10 +84,10 @@ class _Page(gtk.VBox):
 class _PropertiesDialog(gtk.Dialog):
 
     def __init__(self, window):
-        
+
         gtk.Dialog.__init__(self, _('Properties'), window, 0,
             (gtk.STOCK_CLOSE, gtk.RESPONSE_CLOSE))
-        
+
         self.set_resizable(False)
         self.set_has_separator(False)
         self.connect('response', close_dialog)
@@ -95,7 +96,7 @@ class _PropertiesDialog(gtk.Dialog):
         self.set_border_width(4)
         notebook.set_border_width(6)
         self.vbox.pack_start(notebook, False, False, 0)
-        
+
         if window.file_handler.archive_type:
             # ------------------------------------------------------------
             # Archive tab
@@ -131,20 +132,20 @@ class _PropertiesDialog(gtk.Dialog):
             except Exception:
                 pass
             notebook.append_page(page, gtk.Label(_('Archive')))
-        
+
         # ----------------------------------------------------------------
         # Image tab
         # ----------------------------------------------------------------
         path = window.file_handler.get_path_to_page()
         page = _Page()
         thumb = window.file_handler.get_thumbnail(width=200, height=128)
-        page.set_thumbnail(thumb)       
+        page.set_thumbnail(thumb)
         filename = os.path.basename(path)
         page.set_filename(filename)
         try:
             stats = os.stat(path)
             width, height = window.file_handler.get_size()
-            main_info = ( 
+            main_info = (
                 '%dx%d px' % (width, height),
                 window.file_handler.get_mime_name(),
                 '%.1f KiB' % (stats.st_size / 1024.0))
@@ -167,14 +168,15 @@ class _PropertiesDialog(gtk.Dialog):
         notebook.append_page(page, gtk.Label(_('Image')))
         self.show_all()
 
+
 def open_dialog(action, window):
     global _dialog
     if _dialog is None:
         _dialog = _PropertiesDialog(window)
 
+
 def close_dialog(*args):
     global _dialog
     if _dialog is not None:
         _dialog.destroy()
-        _dialog = None 
-
+        _dialog = None

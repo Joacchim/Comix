@@ -10,13 +10,14 @@ import constants
 
 _pickle_path = os.path.join(constants.COMIX_DIR, 'bookmarks.pickle')
 
+
 class BookmarksMenu(gtk.Menu):
-    
+
     """BookmarksMenu extends gtk.Menu with convenience methods relating to
     bookmarks. It contains fixed items for adding bookmarks etc. as well
     as dynamic items corresponding to the current bookmarks.
     """
-    
+
     def __init__(self, ui, window):
         gtk.Menu.__init__(self)
 
@@ -42,7 +43,7 @@ class BookmarksMenu(gtk.Menu):
         action = self._actiongroup.get_action('clear_bookmarks')
         action.set_accel_group(ui.get_accel_group())
         self.append(action.create_menu_item())
-        
+
         self.show_all()
         self._separator.hide()
         self._bookmarks_store = _BookmarksStore(self, window.file_handler)
@@ -71,7 +72,7 @@ class BookmarksMenu(gtk.Menu):
         """Remove all bookmarks, if the user presses 'Yes' in a confirmation
         dialog.
         """
-        choice_dialog = gtk.MessageDialog(None, 0 , gtk.MESSAGE_QUESTION,
+        choice_dialog = gtk.MessageDialog(None, 0, gtk.MESSAGE_QUESTION,
             gtk.BUTTONS_YES_NO, _('Clear all bookmarks?'))
         choice_dialog.format_secondary_text(
             _('All stored bookmarks will be removed, are you sure you want to continue?'))
@@ -93,11 +94,11 @@ class BookmarksMenu(gtk.Menu):
 
 
 class _Bookmark(gtk.ImageMenuItem):
-    
+
     """_Bookmark represents one bookmark. It extends the gtk.ImageMenuItem
     and is thus put directly in the bookmarks menu.
     """
-    
+
     def __init__(self, file_handler, name, path, page, numpages, archive_type):
         self._name = name
         self._path = path
@@ -105,7 +106,7 @@ class _Bookmark(gtk.ImageMenuItem):
         self._numpages = numpages
         self._archive_type = archive_type
         self._file_handler = file_handler
-        
+
         gtk.MenuItem.__init__(self, str(self), False)
         if self._archive_type:
             im = gtk.image_new_from_stock('comix-archive', gtk.ICON_SIZE_MENU)
@@ -113,7 +114,7 @@ class _Bookmark(gtk.ImageMenuItem):
             im = gtk.image_new_from_stock('comix-image', gtk.ICON_SIZE_MENU)
         self.set_image(im)
         self.connect('activate', self._load)
-    
+
     def __str__(self):
         return '%s, (%d / %d)' % (self._name, self._page, self._numpages)
 
@@ -143,11 +144,11 @@ class _Bookmark(gtk.ImageMenuItem):
 
 
 class _BookmarksStore:
-    
+
     """The _BookmarksStore is a backend for both the bookmarks menu and dialog.
     Changes in the _BookmarksStore is mirrored in both.
     """
-    
+
     def __init__(self, menu, file_handler):
         self._menu = menu
         self._file_handler = file_handler
@@ -220,9 +221,9 @@ class _BookmarksStore:
 
 
 class _BookmarksDialog(gtk.Dialog):
-    
+
     """_BookmarksDialog lets the user remove and/or rearrange bookmarks."""
-    
+
     def __init__(self, bookmarks_store):
         gtk.Dialog.__init__(self, _('Edit bookmarks'), None, gtk.DIALOG_MODAL,
             (gtk.STOCK_REMOVE, gtk.RESPONSE_NO, gtk.STOCK_CLOSE,
@@ -263,7 +264,7 @@ class _BookmarksDialog(gtk.Dialog):
         self._name_col.set_sizing(gtk.TREE_VIEW_COLUMN_AUTOSIZE)
         self._page_col.set_sizing(gtk.TREE_VIEW_COLUMN_AUTOSIZE)
         self.resize(400, 400)
-        
+
         self.connect('response', self._response)
         self.connect('delete_event', self._close)
         self._treeview.connect('key_press_event', self._key_press_event)
@@ -271,7 +272,7 @@ class _BookmarksDialog(gtk.Dialog):
         for bookmark in self._bookmarks_store.get_bookmarks():
             self._add_bookmark(bookmark)
         self.show_all()
-        
+
     def _add_bookmark(self, bookmark):
         """Add the <bookmark> to the dialog."""
         self._liststore.prepend(bookmark.to_row())
@@ -294,7 +295,7 @@ class _BookmarksDialog(gtk.Dialog):
     def _key_press_event(self, dialog, event, *args):
         if event.keyval == gtk.keysyms.Delete:
             self._remove_selected()
-    
+
     def _close(self, *args):
         """Close the dialog and update the _BookmarksStore with the new
         ordering."""
@@ -308,4 +309,3 @@ class _BookmarksDialog(gtk.Dialog):
             self._bookmarks_store.remove_bookmark(bookmark)
             self._bookmarks_store.add_bookmark(bookmark)
         self.destroy()
-

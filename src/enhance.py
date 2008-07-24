@@ -11,13 +11,14 @@ import image
 
 _dialog = None
 
+
 class ImageEnhancer:
-    
+
     """The ImageEnhancer keeps track of the "enhancement" values and performs
     these enhancements on pixbufs. Changes to the ImageEnhancer's values
     can be made using an _EnhanceImageDialog.
     """
-    
+
     def __init__(self, window):
         self._window = window
         self.brightness = 1.0
@@ -28,21 +29,22 @@ class ImageEnhancer:
 
     def enhance(self, pixbuf):
         """Return an "enhanced" version of <pixbuf>."""
-        if (self.brightness != 1.0 or self.contrast != 1.0 or 
+        if (self.brightness != 1.0 or self.contrast != 1.0 or
           self.saturation != 1.0 or self.sharpness != 1.0 or
           self.autocontrast):
             return image.enhance(pixbuf, self.brightness, self.contrast,
                 self.saturation, self.sharpness, self.autocontrast)
         return pixbuf
 
-    def signal_update(self): 
+    def signal_update(self):
         """Signal to the main window that a change in the enhancement
         values has been made.
         """
         self._window.draw_image(scroll=False)
 
+
 class _EnhanceImageDialog(gtk.Dialog):
-    
+
     """A gtk.Dialog which allows modification of the values belonging to
     an ImageEnhancer.
     """
@@ -63,7 +65,7 @@ class _EnhanceImageDialog(gtk.Dialog):
         self.set_border_width(4)
         vbox.set_border_width(6)
         self.vbox.add(vbox)
-        
+
         self._hist_image = gtk.Image()
         self._hist_image.set_size_request(262, 170)
         vbox.pack_start(self._hist_image)
@@ -119,9 +121,9 @@ class _EnhanceImageDialog(gtk.Dialog):
         self._sharpness_scale.connect('value-changed', self._change_values)
         self._sharpness_scale.set_update_policy(gtk.UPDATE_DELAYED)
         vbox_right.pack_start(self._sharpness_scale, True, False, 2)
-        
+
         vbox.pack_start(gtk.HSeparator())
-        
+
         self._autocontrast_button = \
             gtk.CheckButton(_('Automatically adjust contrast'))
         vbox.pack_start(self._autocontrast_button, False, False, 2)
@@ -136,9 +138,9 @@ class _EnhanceImageDialog(gtk.Dialog):
         self._block = False
         self._contrast_scale.set_sensitive(
             not self._autocontrast_button.get_active())
-        
+
         self.show_all()
-        
+
     def draw_histogram(self, image):
         """Draw a histogram representing <image> in the dialog."""
         pixbuf = image.get_pixbuf()
@@ -161,7 +163,7 @@ class _EnhanceImageDialog(gtk.Dialog):
         self._contrast_scale.set_sensitive(
             not self._autocontrast_button.get_active())
         self._enhancer.signal_update()
-        
+
     def _response(self, dialog, response):
         if response in [gtk.RESPONSE_OK, gtk.RESPONSE_DELETE_EVENT]:
             close_dialog()
@@ -181,10 +183,12 @@ def draw_histogram(image):
     if _dialog is not None:
         _dialog.draw_histogram(image)
 
+
 def clear_histogram():
     """Clear the histogram in the dialog, if there is one."""
     if _dialog is not None:
         _dialog.clear_histogram()
+
 
 def open_dialog(action, window):
     """Create and display the (singleton) image enhancement dialog."""
@@ -193,10 +197,10 @@ def open_dialog(action, window):
         _dialog = _EnhanceImageDialog(window.enhancer)
         draw_histogram(window.left_image)
 
+
 def close_dialog(*args):
     """Destroy the image enhancement dialog."""
     global _dialog
     if _dialog is not None:
         _dialog.destroy()
         _dialog = None
-

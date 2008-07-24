@@ -17,9 +17,13 @@ import thumbnail
 _db_path = os.path.join(constants.COMIX_DIR, 'library.db')
 _cover_dir = os.path.join(constants.COMIX_DIR, 'library_covers')
 
+
 class LibraryBackend:
-    
+
     def __init__(self):
+        if not os.path.exists(constants.COMIX_DIR):
+            os.mkdir(constants.COMIX_DIR)
+
         self._con = dbapi2.connect(_db_path)
         if not self._con.execute('pragma table_info(Book)').fetchall():
             self._create_table_book()
@@ -64,7 +68,7 @@ class LibraryBackend:
                 order by name''')
         else:
             cur = self._con.execute('''select id, name from Collection
-                where supercollection=? 
+                where supercollection=?
                 order by name''', (collection,))
         return cur.fetchall()
 
@@ -104,7 +108,7 @@ class LibraryBackend:
         """Put <subcollection> into <supercollection>."""
         self._con.execute('''update Collection set supercollection = ?
             where id = ?''', (supercollection, subcollection))
-    
+
     def remove_book(self, book):
         """Remove the <book> from the library."""
         self._con.execute('delete from Book where id = ?', (book,))
@@ -158,4 +162,3 @@ class LibraryBackend:
             collection integer not null,
             book integer not null,
             primary key (collection, book))''')
-

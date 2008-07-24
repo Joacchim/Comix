@@ -11,16 +11,17 @@ import os
 import sys
 import gc
 
+
 class Process:
-    
+
     def __init__(self, args):
         """Setup a Process where <args> is a sequence of arguments that defines
-        the process. The first element of <args> shuld be the full path to 
+        the process. The first element of <args> shuld be the full path to
         the executable file to be run.
         """
         self._args = args
         self._pid = None
-    
+
     def spawn(self):
         """Spawn the process defined by the args in __init__(). Return a
         file-like object linked to the spawned process' stdout.
@@ -45,5 +46,4 @@ class Process:
         if self._pid:
             os.waitpid(self._pid, 0)
         else:
-            raise Exception, 'Process not spawned'
-
+            raise (Exception, 'Process not spawned')

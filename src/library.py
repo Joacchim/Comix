@@ -11,6 +11,7 @@ import image
 
 _dialog = None
 
+
 class _LibraryDialog(gtk.Window):
 
     def __init__(self, window):
@@ -19,11 +20,11 @@ class _LibraryDialog(gtk.Window):
         self.resize(prefs['lib window width'], prefs['lib window height'])
         self.set_title(_('Library'))
         self.connect('delete_event', self._close)
-        
+
         self._window = window
         self._backend = librarybackend.LibraryBackend()
         self._stop_update = False
-        
+
         self._main_liststore = gtk.ListStore(gtk.gdk.Pixbuf, int)
         iconview = gtk.IconView(self._main_liststore)
         iconview.set_pixbuf_column(0)
@@ -43,15 +44,13 @@ class _LibraryDialog(gtk.Window):
         cellrenderer = gtk.CellRendererText()
         column = gtk.TreeViewColumn(None, cellrenderer, markup=0)
         treeview.append_column(column)
-        #column.pack_start(cellrenderer, True)
-        #column.add_attribute(cellrenderer, 'text', 0)
         sidebar = gtk.ScrolledWindow()
         sidebar.set_policy(gtk.POLICY_NEVER, gtk.POLICY_AUTOMATIC)
         sidebar.add(treeview)
 
         self._statusbar = gtk.Statusbar()
         self._statusbar.set_has_resize_grip(True)
-    
+
         # The bottom box
         bottombox = gtk.HBox(False, 20)
         bottombox.set_border_width(10)
@@ -105,7 +104,7 @@ class _LibraryDialog(gtk.Window):
         open_button = gtk.Button(None, gtk.STOCK_OPEN)
         #open_button.connect()
         hbox.pack_start(open_button, False, False)
-        
+
         self._table = gtk.Table(2, 2, False)
         self._table.attach(sidebar, 0, 1, 0, 1, gtk.FILL,
             gtk.EXPAND|gtk.FILL)
@@ -115,7 +114,7 @@ class _LibraryDialog(gtk.Window):
             gtk.FILL)
         self._table.attach(self._statusbar, 0, 2, 2, 3, gtk.FILL, gtk.FILL)
         self.add(self._table)
-        
+
         self._display_collections()
         self.show_all()
 
@@ -126,7 +125,7 @@ class _LibraryDialog(gtk.Window):
           collection)):
             pixbuf = self._backend.get_book_cover(book[0])
             if pixbuf is None:
-                continue 
+                continue
             pixbuf = image.fit_in_rectangle(pixbuf,
                 int(0.67 * prefs['library cover size']),
                 prefs['library cover size'])
@@ -141,6 +140,7 @@ class _LibraryDialog(gtk.Window):
 
     def _display_collections(self):
         """Display the library collections in the sidebar."""
+        
         def _add(parent_iter, supercoll):
             for coll in self._backend.get_collections_in_collection(supercoll):
                 child_iter = self._collection_treestore.append(parent_iter,
@@ -214,9 +214,9 @@ def open_dialog(action, window):
         else:
             _dialog = _LibraryDialog(window)
 
+
 def close_dialog(*args):
     global _dialog
     if _dialog is not None:
         _dialog.destroy()
         _dialog = None
-

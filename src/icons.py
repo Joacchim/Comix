@@ -28,6 +28,7 @@ _icons = (('gimp-flip-horizontal.png',   'comix-flip-horizontal'),
           ('fitheight.png',              'comix-fitheight'),
           ('fitmanual.png',              'comix-fitmanual'))
 
+
 def load():
     """Load Comix specific icons to the default stock set. Should be called
     at startup.
@@ -55,4 +56,3 @@ def load():
         except Exception:
             print '! Could not load icon "%s".' % stockid
     factory.add_default()
-

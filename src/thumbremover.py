@@ -14,6 +14,7 @@ import labels
 _dialog = None
 _thumb_base = os.path.join(os.getenv('HOME'), '.thumbnails')
 
+
 class _ThumbnailMaintenanceDialog(gtk.Dialog):
 
     def __init__(self):
@@ -44,7 +45,7 @@ class _ThumbnailMaintenanceDialog(gtk.Dialog):
         label.set_alignment(0, 0.5)
         label.set_line_wrap(True)
         main_box.pack_start(label, False, False, 10)
-        
+
         hbox = gtk.HBox(False, 10)
         main_box.pack_start(hbox, False, False)
         left_box = gtk.VBox(False, 5)
@@ -72,7 +73,7 @@ class _ThumbnailMaintenanceDialog(gtk.Dialog):
         self._size_thumbs_label = gtk.Label(_('Calculating...'))
         self._size_thumbs_label.set_alignment(0, 0.5)
         right_box.pack_start(self._size_thumbs_label, False, False)
-        
+
         label = labels.italic_label(
             _('Do you want to cleanup orphaned and outdated thumbnails now?'))
         label.set_alignment(0, 0.5)
@@ -106,7 +107,7 @@ class _ThumbnailMaintenanceDialog(gtk.Dialog):
 
 
 class _ThumbnailRemover(gtk.Dialog):
-    
+
     def __init__(self, total_thumbs):
         self._total_thumbs = total_thumbs
         self._destroy = False
@@ -121,7 +122,7 @@ class _ThumbnailRemover(gtk.Dialog):
         main_box = gtk.VBox(False, 5)
         main_box.set_border_width(6)
         self.vbox.pack_start(main_box, False, False)
-        
+
         label = labels.bold_label(_('Removing outdated thumbnails'))
         label.set_alignment(0, 0.5)
         attrlist = label.get_attributes()
@@ -129,7 +130,7 @@ class _ThumbnailRemover(gtk.Dialog):
             len(label.get_text())))
         label.set_attributes(attrlist)
         main_box.pack_start(label, False, False, 2)
-        
+
         hbox = gtk.HBox(False, 10)
         main_box.pack_start(hbox, False, False, 5)
         left_box = gtk.VBox(False, 5)
@@ -153,7 +154,7 @@ class _ThumbnailRemover(gtk.Dialog):
 
         bar = gtk.ProgressBar()
         main_box.pack_start(bar, False, False)
-        
+
         removing_label = gtk.Label('')
         removing_label.set_alignment(0, 0.5)
         removing_label.set_ellipsize(pango.ELLIPSIZE_MIDDLE)
@@ -175,18 +176,27 @@ class _ThumbnailRemover(gtk.Dialog):
                 entry_path = os.path.join(dir_path, entry)
                 if not os.path.isfile(entry_path):
                     continue
-                stats = os.stat(entry_path)
-                info = Image.open(entry_path).info
-                orig_path = _uri_to_path(info['Thumb::URI'])
-                if orig_path is not None and not (os.path.isfile(orig_path) and
-                  'Thumb::MTime' in info and 
-                  os.stat(orig_path).st_mtime == int(info['Thumb::MTime'])):
-                    os.remove(entry_path)
+                broken = False
+                try:
+                    stats = os.stat(entry_path)
+                    info = Image.open(entry_path).info
+                    orig_path = _uri_to_path(info['Thumb::URI'])
+                    thumb_mtime = int(info['Thumb::MTime'])
+                    src_mtime = os.stat(orig_path).st_mtime
+                except Exception:
+                    broken = True
+                # Thumb is orphaned or outdated
+                if (broken or not os.path.isfile(orig_path) or
+                  src_mtime != thumb_mtime):
+                    try:
+                        os.remove(entry_path)
+                    except Exception:
+                        continue
                     removed_thumbs += 1
                     size_thumbs += stats.st_size
                     number_label.set_text('%d' % removed_thumbs)
                     size_label.set_text('%.1f MiB' % (size_thumbs / 1048576.0))
-                    removing_label.set_text(_('Removed thumbnail for "%s"') % 
+                    removing_label.set_text(_('Removed thumbnail for "%s"') %
                         orig_path)
                     attrlist = pango.AttrList()
                     attrlist.insert(pango.AttrStyle(pango.STYLE_ITALIC, 0,
@@ -206,21 +216,23 @@ class _ThumbnailRemover(gtk.Dialog):
 
 def _uri_to_path(uri):
     """Return the path corresponding to the URI <uri>, unless it is a
-    non-local resource in which case we return None.
+    non-local resource in which case we return the pathname with the type
+    identifier intact.
     """
     if uri.startswith('file://'):
         return urllib.url2pathname(uri[7:])
     else:
-        return None
+        return urllib.url2pathname(uri)
+
 
 def open_dialog(*args):
     global _dialog
     if _dialog is None:
         _dialog = _ThumbnailMaintenanceDialog()
 
+
 def close_dialog(*args):
     global _dialog
     if _dialog is not None:
         _dialog.destroy()
         _dialog = None
-

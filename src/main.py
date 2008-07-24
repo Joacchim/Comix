@@ -22,20 +22,21 @@ import slideshow
 import status
 import thumbbar
 
+
 class MainWindow(gtk.Window):
-    
+
     """The Comix main window, is created at start and terminates the
     program when closed.
     """
 
     def __init__(self):
         gtk.Window.__init__(self, gtk.WINDOW_TOPLEVEL)
-        
+
         # ----------------------------------------------------------------
         # Attributes
         # ----------------------------------------------------------------
         self.is_fullscreen = False
-        self.is_double_page = False 
+        self.is_double_page = False
         self.is_manga_mode = False
         self.zoom_mode = 'fit'          # 'fit', 'width', 'height' or 'manual'
         self.width = None
@@ -46,7 +47,7 @@ class MainWindow(gtk.Window):
 
         self._keep_rotation = False
         self._manual_zoom = 100         # In percent of original image size
-        
+
         self.file_handler = filehandler.FileHandler(self)
         self.thumbnailsidebar = thumbbar.ThumbnailSidebar(self)
         self.statusbar = status.Statusbar()
@@ -61,7 +62,7 @@ class MainWindow(gtk.Window):
         self.actiongroup = self.ui_manager.get_action_groups()[0]
         self.left_image = gtk.Image()
         self.right_image = gtk.Image()
-        
+
         self._image_box = gtk.HBox(False, 2)
         self._main_layout = gtk.Layout()
         self._event_handler = event.EventHandler(self)
@@ -82,11 +83,11 @@ class MainWindow(gtk.Window):
         self.toolbar.set_focus_child(
             self.ui_manager.get_widget('/Tool/expander'))
         self.toolbar.set_style(gtk.TOOLBAR_ICONS)
-        
+
         self._image_box.add(self.left_image)
         self._image_box.add(self.right_image)
         self._image_box.show_all()
-        
+
         self._main_layout.put(self._image_box, 0, 0)
         self._main_layout.modify_bg(gtk.STATE_NORMAL,
             gtk.gdk.colormap_get_system().alloc_color(gtk.gdk.Color(
@@ -96,7 +97,7 @@ class MainWindow(gtk.Window):
         self._vadjust.page_increment = 1
         self._hadjust.step_increment = 15
         self._hadjust.page_increment = 1
-       
+
         table = gtk.Table(2, 2, False)
         table.attach(self.thumbnailsidebar, 0, 1, 2, 5, gtk.FILL,
             gtk.FILL|gtk.EXPAND, 0, 0)
@@ -112,7 +113,7 @@ class MainWindow(gtk.Window):
             gtk.FILL, 0, 0)
         table.attach(self.statusbar, 0, 3, 5, 6, gtk.FILL|gtk.SHRINK,
             gtk.FILL, 0, 0)
-        
+
         if prefs['default double page']:
             self.actiongroup.get_action('double_page').activate()
         if prefs['default fullscreen']:
@@ -152,7 +153,7 @@ class MainWindow(gtk.Window):
         self._display_active_widgets()
 
         self._main_layout.set_events(gtk.gdk.BUTTON1_MOTION_MASK |
-                                     gtk.gdk.BUTTON2_MOTION_MASK | 
+                                     gtk.gdk.BUTTON2_MOTION_MASK |
                                      gtk.gdk.BUTTON_RELEASE_MASK |
                                      gtk.gdk.POINTER_MOTION_MASK)
         self._main_layout.drag_dest_set(gtk.DEST_DEFAULT_ALL,
@@ -172,7 +173,7 @@ class MainWindow(gtk.Window):
             self._event_handler.mouse_move_event)
         self._main_layout.connect('drag_data_received',
             self._event_handler.drag_n_drop_event)
-        
+
         self.ui_manager.set_sensitivities()
         self.show()
 
@@ -182,17 +183,17 @@ class MainWindow(gtk.Window):
         self._display_active_widgets()
         if not self.file_handler.file_loaded:
             return
-        width, height = self.get_visible_area_size()
+        area_width, area_height = self.get_visible_area_size()
         if self.zoom_mode == 'height':
             scale_width = -1
         else:
-            scale_width = width
+            scale_width = area_width
         if self.zoom_mode == 'width':
             scale_height = -1
         else:
-            scale_height = height
+            scale_height = area_height
         scale_up = prefs['stretch']
-        
+
         if self.displayed_double():
             left_pixbuf, right_pixbuf = self.file_handler.get_pixbufs()
             if self.is_manga_mode:
@@ -203,20 +204,12 @@ class MainWindow(gtk.Window):
             right_unscaled_y = right_pixbuf.get_height()
 
             if self.zoom_mode == 'manual':
-                if self.rotation in [90, 270]:
-                    scale_width = int(self._manual_zoom *
-                        (left_pixbuf.get_height() + right_pixbuf.get_height())
-                        / 100)
-                    scale_height = int(self._manual_zoom * 
-                        max(left_pixbuf.get_width(), right_pixbuf.get_width())
-                        / 100)
-                else:
-                    scale_width = int(self._manual_zoom * 
-                        (left_pixbuf.get_width() + right_pixbuf.get_width())
-                        / 100)
-                    scale_height = int(self._manual_zoom * 
-                        max(left_pixbuf.get_height(), right_pixbuf.get_height())
-                        / 100)
+                scale_width = int(self._manual_zoom *
+                    (left_unscaled_x + right_unscaled_x) / 100)
+                scale_height = int(self._manual_zoom *
+                    (left_unscaled_y + right_unscaled_y) / 100)
+                if self.rotation in (90, 270):
+                    scale_width, scale_height = scale_height, scale_width
                 scale_up = True
 
             left_pixbuf, right_pixbuf = image.fit_2_in_rectangle(
@@ -230,30 +223,38 @@ class MainWindow(gtk.Window):
                 right_pixbuf = right_pixbuf.flip(horizontal=False)
             left_pixbuf = self.enhancer.enhance(left_pixbuf)
             right_pixbuf = self.enhancer.enhance(right_pixbuf)
-            
+
             self.left_image.set_from_pixbuf(left_pixbuf)
             self.right_image.set_from_pixbuf(right_pixbuf)
-            x_padding = (width - left_pixbuf.get_width() -
+            x_padding = (area_width - left_pixbuf.get_width() -
                 right_pixbuf.get_width()) / 2
-            y_padding = (height - max(left_pixbuf.get_height(),
+            y_padding = (area_height - max(left_pixbuf.get_height(),
                 right_pixbuf.get_height())) / 2
-
+            
+            if self.rotation in (90, 270):
+                left_scale_percent = (100.0 * left_pixbuf.get_width() /
+                    left_unscaled_y)
+                right_scale_percent = (100.0 * right_pixbuf.get_width() /
+                    right_unscaled_y)
+            else:
+                left_scale_percent = (100.0 * left_pixbuf.get_width() /
+                    left_unscaled_x)
+                right_scale_percent = (100.0 * right_pixbuf.get_width() /
+                    right_unscaled_x)
             self.statusbar.set_page_number(self.file_handler.get_current_page(),
                 self.file_handler.get_number_of_pages(), double_page=True)
-            self.statusbar.set_resolution((left_unscaled_x, left_unscaled_y,
-                100.0 * left_pixbuf.get_width() / left_unscaled_x), 
-                (right_unscaled_x, right_unscaled_y,
-                100.0 * right_pixbuf.get_width() / right_unscaled_x))
+            self.statusbar.set_resolution(
+                (left_unscaled_x, left_unscaled_y, left_scale_percent),
+                (right_unscaled_x, right_unscaled_y, right_scale_percent))
         else:
             pixbuf = self.file_handler.get_pixbufs(single=True)
             unscaled_x = pixbuf.get_width()
             unscaled_y = pixbuf.get_height()
 
             if self.zoom_mode == 'manual':
-                scale_width = int(self._manual_zoom * pixbuf.get_width() / 100)
-                scale_height = int(self._manual_zoom * pixbuf.get_height()
-                    / 100)
-                if self.rotation in [90, 270]:
+                scale_width = int(self._manual_zoom * unscaled_x / 100)
+                scale_height = int(self._manual_zoom * unscaled_y / 100)
+                if self.rotation in (90, 270):
                     scale_width, scale_height = scale_height, scale_width
                 scale_up = True
 
@@ -264,17 +265,21 @@ class MainWindow(gtk.Window):
             if self.vertical_flip:
                 pixbuf = pixbuf.flip(horizontal=False)
             pixbuf = self.enhancer.enhance(pixbuf)
-            
+
             self.left_image.set_from_pixbuf(pixbuf)
             self.right_image.clear()
-            x_padding = (width - pixbuf.get_width()) / 2
-            y_padding = (height - pixbuf.get_height()) / 2
-
+            x_padding = (area_width - pixbuf.get_width()) / 2
+            y_padding = (area_height - pixbuf.get_height()) / 2
+            
+            if self.rotation in (90, 270):
+                scale_percent = 100.0 * pixbuf.get_width() / unscaled_y
+            else:
+                scale_percent = 100.0 * pixbuf.get_width() / unscaled_x
             self.statusbar.set_page_number(self.file_handler.get_current_page(),
                 self.file_handler.get_number_of_pages())
             self.statusbar.set_resolution((unscaled_x, unscaled_y,
-                100.0 * pixbuf.get_width() / unscaled_x))
-        
+                scale_percent))
+
         self.left_image.hide()
         self.right_image.hide()
         self._main_layout.move(self._image_box, max(0, x_padding),
@@ -370,21 +375,17 @@ class MainWindow(gtk.Window):
     def change_zoom_mode(self, radioaction, *args):
         new_mode = radioaction.get_current_value()
         old_mode = self.zoom_mode
-        if new_mode == 0:
-            self.zoom_mode = 'manual'
-        elif new_mode == 1:
-            self.zoom_mode = 'fit'
-        elif new_mode == 2:
-            self.zoom_mode = 'width'
-        else:
-            self.zoom_mode = 'height'
+        self.zoom_mode = {0: 'manual',
+                          1: 'fit',
+                          2: 'width',
+                          3: 'height'}[new_mode]
         sensitive = (self.zoom_mode == 'manual')
         self.actiongroup.get_action('zoom_in').set_sensitive(sensitive)
         self.actiongroup.get_action('zoom_out').set_sensitive(sensitive)
         self.actiongroup.get_action('zoom_original').set_sensitive(sensitive)
         if old_mode != self.zoom_mode:
             self.draw_image()
-    
+
     def change_toolbar_visibility(self, *args):
         prefs['show toolbar'] = not prefs['show toolbar']
         self.draw_image()
@@ -445,7 +446,7 @@ class MainWindow(gtk.Window):
         'first' or 'second', we will not scroll out of the first or second
         page respectively (dependent on manga mode). The <bound> argument
         only makes sense in double page mode.
-        
+
         Return True if call resulted in new adjustment values, False
         otherwise.
         """
@@ -456,8 +457,7 @@ class MainWindow(gtk.Window):
         vadjust_upper = max(0, self._vadjust.upper - visible_height)
         hadjust_lower = 0
         if bound is not None and self.is_manga_mode:
-            bound = {'first':  'second',
-                     'second': 'first'}[bound]
+            bound = {'first': 'second', 'second': 'first'}[bound]
         if bound == 'first':
             hadjust_upper = max(0, hadjust_upper -
                 self.right_image.size_request()[0] - 2)
@@ -486,7 +486,7 @@ class MainWindow(gtk.Window):
                'endfirst'    = end of first page
                'startsecond' = start of second page
                'endsecond'   = end of second page
-        
+
         vert:  'top'         = top of display
                'middle'      = middle of display
                'bottom'      = bottom of display
@@ -513,8 +513,8 @@ class MainWindow(gtk.Window):
 
         if not self.displayed_double():
             horiz = {'startsecond': 'endfirst',
-                     'endsecond':   'endfirst'}.get(horiz, horiz)
-        
+                     'endsecond': 'endfirst'}.get(horiz, horiz)
+
         # Manga transformations.
         if self.is_manga_mode and self.displayed_double() and horiz is not None:
             horiz = {'left':        'left',
@@ -530,13 +530,13 @@ class MainWindow(gtk.Window):
                      'right':       'right',
                      'startfirst':  'endfirst',
                      'endfirst':    'startfirst'}[horiz]
-        
+
         if horiz == 'left':
             new_hadjust = 0
         elif horiz == 'middle':
             new_hadjust = hadjust_upper / 2
         elif horiz == 'right':
-            new_hadjust = hadjust_upper 
+            new_hadjust = hadjust_upper
         elif horiz == 'startfirst':
             new_hadjust = 0
         elif horiz == 'endfirst':
@@ -592,7 +592,7 @@ class MainWindow(gtk.Window):
         of the main layout area.
         """
         width, height = self.get_size()
-        if not prefs['hide all'] and not (self.is_fullscreen and 
+        if not prefs['hide all'] and not (self.is_fullscreen and
           prefs['hide all in fullscreen']):
             if prefs['show toolbar']:
                 height -= self.toolbar.size_request()[1]
@@ -645,11 +645,11 @@ class MainWindow(gtk.Window):
             title = '[%s] %s' % (_('SLIDESHOW'), title)
         self.set_title(title)
 
-    def _display_active_widgets(self): 
+    def _display_active_widgets(self):
         """Hide and/or show main window widgets depending on the current
         state.
         """
-        if not prefs['hide all'] and not (self.is_fullscreen and 
+        if not prefs['hide all'] and not (self.is_fullscreen and
           prefs['hide all in fullscreen']):
             if prefs['show toolbar']:
                 self.toolbar.show_all()
@@ -706,4 +706,3 @@ class MainWindow(gtk.Window):
             if thread is not threading.currentThread():
                 thread.join()
         sys.exit(0)
-

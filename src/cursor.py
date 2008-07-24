@@ -5,8 +5,9 @@ import gtk
 
 NORMAL, GRAB, WAIT = range(3)
 
+
 class CursorHandler:
-    
+
     def __init__(self, window):
         self._window = window
         self._timer_id = None
@@ -33,7 +34,7 @@ class CursorHandler:
                 self._set_hide_timer()
             else:
                 self._kill_timer()
-    
+
     def enter_fullscreen(self):
         """Signal that we are entering fullscreen (e.g. that the cursor
         should auto-hide from now on).
@@ -60,7 +61,7 @@ class CursorHandler:
 
     def _set_hide_timer(self):
         self._kill_timer()
-        self._timer_id = gobject.timeout_add(2000, self._window.set_cursor, 
+        self._timer_id = gobject.timeout_add(2000, self._window.set_cursor,
             self._create_hidden_cursor())
 
     def _kill_timer(self):
@@ -71,4 +72,3 @@ class CursorHandler:
         pixmap = gtk.gdk.Pixmap(None, 1, 1, 1)
         color = gtk.gdk.Color()
         return gtk.gdk.Cursor(pixmap, pixmap, color, color, 0, 0)
-

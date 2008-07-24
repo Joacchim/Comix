@@ -9,10 +9,11 @@ import image
 from preferences import prefs
 import thumbnail
 
+
 class ThumbnailSidebar(gtk.HBox):
-    
+
     """A thumbnail sidebar including scrollbar for the main window."""
-    
+
     def __init__(self, window):
         gtk.HBox.__init__(self, False, 0)
         self._window = window
@@ -20,7 +21,7 @@ class ThumbnailSidebar(gtk.HBox):
         self._loaded = False
         self._height = 0
         self._counter = None
-        
+
         self._liststore = gtk.ListStore(gtk.gdk.Pixbuf)
         self._treeview = gtk.TreeView(self._liststore)
         self._column = gtk.TreeViewColumn(None)
@@ -46,7 +47,7 @@ class ThumbnailSidebar(gtk.HBox):
 
         self._selection.connect('changed', self._selection_event)
         self._layout.connect('scroll_event', self._scroll_event)
-    
+
     def get_width(self):
         return self._layout.size_request()[0] + self._scroll.size_request()[0]
 
@@ -55,7 +56,7 @@ class ThumbnailSidebar(gtk.HBox):
         if not self._visible:
             self._layout.set_size(0, self._height)
             self._visible = True
-    
+
     def hide(self):
         self._layout.hide_all()
         self._scroll.hide()
@@ -69,7 +70,7 @@ class ThumbnailSidebar(gtk.HBox):
         self._counter = _Counter(0)
 
     def load_thumbnails(self):
-        if (self._loaded or not self._window.file_handler.file_loaded or 
+        if (self._loaded or not self._window.file_handler.file_loaded or
           not prefs['show thumbnails'] or prefs['hide all'] or
           (self._window.is_fullscreen and prefs['hide all in fullscreen'])):
             return
@@ -110,7 +111,7 @@ class ThumbnailSidebar(gtk.HBox):
             self._window.file_handler.get_current_page() - 1)
         rect = self._treeview.get_background_area(
             self._window.file_handler.get_current_page() - 1, self._column)
-        if (rect.y < self._vadjust.get_value() or rect.y + rect.height > 
+        if (rect.y < self._vadjust.get_value() or rect.y + rect.height >
           self._vadjust.get_value() + self._vadjust.page_size):
             value = rect.y + (rect.height // 2) - (self._vadjust.page_size // 2)
             value = max(0, value)
@@ -137,7 +138,7 @@ class _Counter:
     def __init__(self, roof):
         self._roof = roof
         self._num = 0
-    
+
     def get(self):
         return self._num
 
@@ -146,9 +147,9 @@ class _Counter:
         return self._num <= self._roof
 
 
-def _add_page_number(pixbuf, page): 
+def _add_page_number(pixbuf, page):
     """Add page number <page> in a black rectangle in the top left corner of
-    <pixbuf>. This is highly dependent on the dimensions of the built-in 
+    <pixbuf>. This is highly dependent on the dimensions of the built-in
     font in PIL (bad). If the PIL font was changed, this function would
     likely produce badly positioned numbers on the pixbuf.
     """
@@ -160,4 +161,3 @@ def _add_page_number(pixbuf, page):
     draw.text((1, -1), text, fill=(255, 255, 255))
     num_pixbuf = image.pil_to_pixbuf(im)
     num_pixbuf.copy_area(0, 0, width, height, pixbuf, 0, 0)
-

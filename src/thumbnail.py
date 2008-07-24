@@ -20,12 +20,13 @@ import filehandler
 
 _thumbdir = os.path.join(os.getenv('HOME'), '.thumbnails/normal')
 
+
 def get_thumbnail(path, create=True, dst_dir=_thumbdir):
     """Get a thumbnail pixbuf for the file at <path> by looking in the
     directory of stored thumbnails. If a thumbnail for the file doesn't
     exist we create a thumbnail pixbuf from the original. If <create>
     is True we also save this new thumbnail in the thumbnail directory.
-    If no thumbnail for <path> can be produced (for whatever reason), 
+    If no thumbnail for <path> can be produced (for whatever reason),
     return None.
 
     Images and archives are handled transparently. Note though that
@@ -41,14 +42,18 @@ def get_thumbnail(path, create=True, dst_dir=_thumbdir):
         return _get_new_thumbnail(path, create, dst_dir)
     try:
         info = Image.open(thumbpath).info
-        if (not 'Thumb::MTime' in info or 
-          os.stat(path).st_mtime != int(info['Thumb::MTime'])):
+        try:
+            mtime = int(info['Thumb::MTime'])
+        except Exception:
+            mtime = -1
+        if os.stat(path).st_mtime != mtime:
             return _get_new_thumbnail(path, create, dst_dir)
         return gtk.gdk.pixbuf_new_from_file(thumbpath)
     except Exception:
         return None
 
-def _get_new_thumbnail(path, create, dst_dir): 
+
+def _get_new_thumbnail(path, create, dst_dir):
     """Return a new thumbnail pixbuf for the file at <path>. If <create> is
     True we also save it to disk with <dst_dir> as the base thumbnail
     directory.
@@ -60,11 +65,12 @@ def _get_new_thumbnail(path, create, dst_dir):
     if create:
         return _create_thumbnail(path, dst_dir)
     return _get_pixbuf128(path)
-        
+
+
 def _get_new_archive_thumbnail(path, dst_dir):
     """Return a new thumbnail pixbuf for the archive at <path>, and save it
     to disk; <dst_dir> is the base thumbnail directory.
-    """   
+    """
     extractor = archive.Extractor()
     tmpdir = tempfile.mkdtemp(prefix='comix_archive_thumb.')
     condition = extractor.setup(path, tmpdir)
@@ -83,6 +89,7 @@ def _get_new_archive_thumbnail(path, dst_dir):
     shutil.rmtree(tmpdir)
     return pixbuf
 
+
 def _create_thumbnail(path, dst_dir, image_path=None):
     """Create a thumbnail from the file at <path> and store it if it is
     larger than 128x128 px. A pixbuf for the thumbnail is returned.
@@ -90,7 +97,7 @@ def _create_thumbnail(path, dst_dir, image_path=None):
     <dst_dir> is the base thumbnail directory (usually ~/.thumbnails/normal).
 
     If <image_path> is not None it is used as the path to the image file
-    actually used to create the thumbnail image, although the created 
+    actually used to create the thumbnail image, although the created
     thumbnail will still be saved as if for <path>.
     """
     if image_path is None:
@@ -105,7 +112,7 @@ def _create_thumbnail(path, dst_dir, image_path=None):
     uri = 'file://' + pathname2url(os.path.normpath(path))
     thumbpath = _uri_to_thumbpath(uri, dst_dir)
     stat = os.stat(path)
-    mtime = str(stat.st_mtime)
+    mtime = str(int(stat.st_mtime))
     size = str(stat.st_size)
     width = str(width)
     height = str(height)
@@ -128,9 +135,11 @@ def _create_thumbnail(path, dst_dir, image_path=None):
         print '! thumbnail.py: Could not write', thumbpath, '\n'
     return pixbuf
 
+
 def _path_to_thumbpath(path, dst_dir):
     uri = 'file://' + pathname2url(os.path.normpath(path))
     return _uri_to_thumbpath(uri, dst_dir)
+
 
 def _uri_to_thumbpath(uri, dst_dir):
     """Return the full path to the thumbnail for <uri> when <dst_dir> the base
@@ -140,11 +149,13 @@ def _uri_to_thumbpath(uri, dst_dir):
     thumbpath = os.path.join(dst_dir, md5hash + '.png')
     return thumbpath
 
+
 def _get_pixbuf128(path):
     try:
         return gtk.gdk.pixbuf_new_from_file_at_size(path, 128, 128)
     except Exception:
         return None
+
 
 def _guess_cover(files):
     """Return the filename within <files> that is the most likely to be the
@@ -155,10 +166,9 @@ def _guess_cover(files):
     front_re = re.compile('(cover|front)', re.I)
     images = filter(ext_re.search, files)
     candidates = filter(front_re.search, images)
-    candidates = [c for c in candidates if not 'back' in c.lower()]
+    candidates = [c for c in candidates if 'back' not in c.lower()]
     if candidates:
         return candidates[0]
     if images:
         return images[0]
     return None
-

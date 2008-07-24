@@ -11,12 +11,12 @@ Copyright (C) 2005-2008 Pontus Ekberg
 # it under the terms of the GNU General Public License as published by
 # the Free Software Foundation; either version 2 of the License, or
 # (at your option) any later version.
-# 
+#
 # This program is distributed in the hope that it will be useful,
 # but WITHOUT ANY WARRANTY; without even the implied warranty of
 # MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 # GNU General Public License for more details.
-# 
+#
 # You should have received a copy of the GNU General Public License
 # along with this program; if not, write to the Free Software
 # -------------------------------------------------------------------------
@@ -43,7 +43,7 @@ except AssertionError:
     print 'Installed GTK+ version is: %s' % (
         '.'.join([str(n) for n in gtk.gtk_version]))
     print 'Required GTK+ version is: 2.10.0 or higher\n'
-    print 'Installed PyGTK version is: %s' % ( 
+    print 'Installed PyGTK version is: %s' % (
         '.'.join([str(n) for n in gtk.pygtk_version]))
     print 'Required PyGTK version is: 2.10.0 or higher'
     sys.exit(1)
@@ -57,7 +57,7 @@ try:
     assert Image.VERSION >= '1.1.4'
 except AssertionError:
     print "You don't have the required version of the Python Imaging Library"
-    print '(PIL) installed.' 
+    print '(PIL) installed.'
     print 'Installed PIL version is: %s' % Image.VERSION
     print 'Required PIL version is: 1.1.4 or higher'
     sys.exit(1)
@@ -89,4 +89,3 @@ if __name__ == '__main__':
         gtk.main()
     except KeyboardInterrupt:
         window.terminate_program()
-

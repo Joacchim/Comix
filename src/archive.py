@@ -41,10 +41,10 @@ class Extractor:
 
     def __init__(self):
         self._setupped = False
-    
+
     def setup(self, src, dst):
         """Setup the extractor with archive <src> and destination dir <dst>.
-        Return a threading Condition related to the is_ready() method, or 
+        Return a threading Condition related to the is_ready() method, or
         None if the format of <src> isn't supported.
         """
         self._src = src
@@ -55,7 +55,7 @@ class Extractor:
         self._stop = False
         self._extract_thread = None
         self._condition = threading.Condition()
-        
+
         if self._type == 'zip':
             self._zfile = zipfile.ZipFile(src, 'r')
             self._files = self._zfile.namelist()
@@ -70,10 +70,10 @@ class Extractor:
             proc.wait()
         else:
             return None
-        
+
         self._setupped = True
         return self._condition
-    
+
     def get_files(self):
         """Return a list of names of all the files the extractor is currently
         set for extracting. After a call to setup() this is by default all
@@ -87,7 +87,7 @@ class Extractor:
         the order of extraction. Normally one would get the list of all files
         in the archive using get_files(), then filter and/or permute this
         list before sending it back using set_files().
-        
+
         Note: Random access on gzip or bzip2 compressed tar archives is
         no good idea. These formats are supported *only* for backwards
         compability. They are fine formats for some purposes, but should
@@ -205,6 +205,7 @@ def archive_mime_type(path):
         print '! archive.py: Error while reading', path, '\n'
     return None
 
+
 def get_name(archive_type):
     """Return a text representation of an archive type."""
     return {'zip':   _('ZIP archive'),
@@ -212,6 +213,7 @@ def get_name(archive_type):
             'gzip':  _('Gzip compressed tar archive'),
             'bzip2': _('Bzip2 compressed tar archive'),
             'rar':   _('RAR archive')}[archive_type]
+
 
 def get_archive_info(path):
     image_re = re.compile(r'\.(jpg|jpeg|png|gif|tif|tiff)\s*$', re.I)
@@ -223,4 +225,3 @@ def get_archive_info(path):
     num_pages = len(filter(image_re.search, files))
     size = os.stat(path).st_size
     return (mime, num_pages, size)
-
