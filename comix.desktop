@@ -2,7 +2,7 @@
 Encoding=UTF-8
 Name=Comix
 Name[it]=Comix
-GenericName=Comic book viewer
+GenericName=Comic Book Viewer
 GenericName[sv]=Serieboksläsare
 GenericName[fr]=Visionneur de bandes dessinées
 Comment=A viewer for comic book archives
@@ -15,5 +15,6 @@ Exec=comix %f
 Icon=comix
 Terminal=false
 Type=Application
+StartupNotify=true
 Categories=Application;Graphics;Viewer;
 MimeType=application/x-cbz;application/x-cbr;application/x-cbt;image/jpeg;image/png;image/gif;image/tiff;image/bmp;image/x-icon;image/x-xpixmap;image/x-xbitmap;application/x-zip;application/zip;application/x-rar;application/x-tar;application/x-gzip;application/x-bzip2;image/svg+xml;image/svg;image/svg-xml;image/vnd.adobe.svg+xml;text/xml-svg;image/x-portable-anymap;image/x-portable-bitmap;image/x-portable-graymap;image/x-portable-pixmap;image/x-pcx;image/x-cmu-raster;image/x-sun-raster;image/x-tga;
