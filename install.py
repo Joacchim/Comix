@@ -299,7 +299,7 @@ if args == ['install']:
         os.utime(os.path.join(install_dir, 'share/icons/hicolor'), None)
         os.popen('update-mime-database "%s"' % 
             os.path.join(install_dir, 'share/mime'))
-        print '\nUpdated mime database (added .cbz, .cbr and .cbt types.)'
+        print '\nUpdated mime database (added .cbz, .cbr and .cbt file types.)'
         schema = os.path.join(source_dir, 'mime/comicbook.schemas')
         os.popen('GCONF_CONFIG_SOURCE=$(gconftool-2 --get-default-source) '
                  'gconftool-2 --makefile-install-rule "%s" 2>/dev/null' %

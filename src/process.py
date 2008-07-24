@@ -26,7 +26,7 @@ class Process:
         """Spawn the process defined by the args in __init__(). Return a
         file-like object linked to the spawned process' stdout.
         """
-        gc.disable() # Avoid Python issue 1336!
+        gc.disable() # Avoid Python issue #1336!
         read_pipe, write_pipe = os.pipe()
         self._pid = os.fork()
         if self._pid == 0:

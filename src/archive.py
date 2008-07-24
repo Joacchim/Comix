@@ -59,7 +59,7 @@ class Extractor:
         if self._type == 'zip':
             self._zfile = zipfile.ZipFile(src, 'r')
             self._files = self._zfile.namelist()
-        elif self._type in ['tar', 'gzip', 'bzip2']:
+        elif self._type in ('tar', 'gzip', 'bzip2'):
             self._tfile = tarfile.open(src, 'r')
             self._files = self._tfile.getnames()
         elif self._type == 'rar' and _rar_exec:
@@ -94,7 +94,7 @@ class Extractor:
         not be used for scanned comic books. So, we cheat and ignore the
         ordering applied with this method on such archives.
         """
-        if self._type == 'gzip' or self._type == 'bzip2':
+        if self._type in ('gzip', 'bzip2'):
             self._files = filter(files.count, self._files)
         else:
             self._files = files
@@ -133,7 +133,7 @@ class Extractor:
         """
         if self._type == 'zip':
             self._zfile.close()
-        elif self._type in ['tar', 'gzip', 'bzip2']:
+        elif self._type in ('tar', 'gzip', 'bzip2'):
             self._tfile.close()
 
     def _thread_extract(self):
@@ -158,7 +158,7 @@ class Extractor:
                 new = open(dst_path, 'w')
                 new.write(self._zfile.read(name))
                 new.close()
-            elif self._type in ['tar', 'gzip', 'bzip2']:
+            elif self._type in ('tar', 'gzip', 'bzip2'):
                 if os.path.normpath(os.path.join(self._dst, name)).startswith(
                   self._dst):
                     self._tfile.extract(name, self._dst)
@@ -188,6 +188,8 @@ def archive_mime_type(path):
     """Return the archive type of <path> or None for non-archives."""
     try:
         if os.path.isfile(path):
+            if not os.access(path, os.R_OK):
+                return None
             if zipfile.is_zipfile(path):
                 return 'zip'
             fd = open(path, 'rb')
@@ -202,7 +204,7 @@ def archive_mime_type(path):
             if magic == 'Rar!':
                 return 'rar'
     except Exception:
-        print '! archive.py: Error while reading', path, '\n'
+        print '! archive.py: Error while reading', path
     return None
 
 

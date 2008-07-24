@@ -116,6 +116,8 @@ class _ComicFileChooserDialog(gtk.Dialog):
     def _response(self, widget, response):
         if response == gtk.RESPONSE_OK:
             path = self._filechooser.get_filename()
+            if path is None:
+                return
             if os.path.isdir(path):
                 self._filechooser.set_current_folder(path)
                 return

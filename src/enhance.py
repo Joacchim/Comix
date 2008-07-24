@@ -2,8 +2,6 @@
 brightness etc.)
 """
 
-import time
-
 import gtk
 
 import histogram

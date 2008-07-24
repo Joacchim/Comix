@@ -27,8 +27,9 @@ except ImportError:
     print __doc__
     sys.exit(1)
 
+
 class Process:
-    
+
     def __init__(self, args):
         """Create a Process where <args> is a sequence of arguments that
         defines the process. The first element of <args> shuld be the full
@@ -122,6 +123,7 @@ class Extractor:
             fobj = proc.spawn()
             return cStringIO.StringIO(fobj.read())
 
+
 def archive_mime_type(path):
     """Return the archive type of <path>."""
     try:
@@ -139,7 +141,8 @@ def archive_mime_type(path):
         print '! Error while reading "%s"' % path
     print '! "%s" is not an archive.' % path
     sys.exit(1)
-        
+
+
 def guess_cover(files):
     """Return the filename within <files> that is the most likely to be
     the cover of an archive.
@@ -155,6 +158,7 @@ def guess_cover(files):
     if images:
         return images[0]
     return None
+
 
 if __name__ == '__main__':
     try:
@@ -184,4 +188,3 @@ if __name__ == '__main__':
     im = im.convert('RGB')
     im.save(out_path, 'PNG')
     sys.exit(0)
-

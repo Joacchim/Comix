@@ -184,13 +184,16 @@ class FileHandler:
         # --------------------------------------------------------------------
         # If the given <path> is invalid we update the statusbar.
         # --------------------------------------------------------------------
+        if os.path.isdir(path):
+            self._window.statusbar.set_message(
+                _('%s: Target is a directory.') % path)
+            return False
         if not os.path.isfile(path):
-            if os.path.isdir(path):
-                self._window.statusbar.set_message(_('"%s" is a directory.') %
-                    os.path.basename(path))
-            else:
-                self._window.statusbar.set_message(_('"%s" is not a file.') %
-                    os.path.basename(path))
+            self._window.statusbar.set_message(_('%s: No such file.') % path)
+            return False
+        if not os.access(path, os.R_OK):
+            self._window.statusbar.set_message(
+                _('%s: Permission denied.') % path)
             return False
 
         self.archive_type = archive.archive_mime_type(path)
