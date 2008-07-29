@@ -195,11 +195,10 @@ class FileHandler:
             self._window.statusbar.set_message(
                 _('%s: Permission denied.') % path)
             return False
-
         self.archive_type = archive.archive_mime_type(path)
         if not self.archive_type and not is_image_file(path):
             self._window.statusbar.set_message(
-                _('Filetype of "%s" not recognized.') % os.path.basename(path))
+                _('%s: Unsupported file type.') % path)
             return False
 
         self._window.cursor_handler.set_cursor_type(cursor.WAIT)

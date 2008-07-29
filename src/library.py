@@ -3,6 +3,8 @@
 import gtk
 import pango
 import gobject
+import Image
+import ImageDraw
 
 import archive
 import librarybackend
@@ -30,17 +32,20 @@ class _LibraryDialog(gtk.Window):
         iconview.set_pixbuf_column(0)
         iconview.connect('item_activated', self._open_book)
         iconview.connect('selection_changed', self._update_info)
+        iconview.connect_after('drag_begin', self._drag_book_begin)
         scrolled = gtk.ScrolledWindow()
         scrolled.set_policy(gtk.POLICY_AUTOMATIC, gtk.POLICY_AUTOMATIC)
         scrolled.add(iconview)
         iconview.modify_base(gtk.STATE_NORMAL, gtk.gdk.Color())
         iconview.enable_model_drag_source(0, [], gtk.gdk.ACTION_MOVE)
+        iconview.set_selection_mode(gtk.SELECTION_MULTIPLE)
 
         self._collection_treestore = gtk.TreeStore(str, int)
         treeview = gtk.TreeView(self._collection_treestore)
         treeview.connect('cursor_changed', self._change_collection)
         treeview.set_headers_visible(False)
         treeview.set_rules_hint(True)
+        treeview.set_reorderable(True)
         cellrenderer = gtk.CellRendererText()
         column = gtk.TreeViewColumn(None, cellrenderer, markup=0)
         treeview.append_column(column)
@@ -181,6 +186,53 @@ class _LibraryDialog(gtk.Window):
         self._typelabel.set_text(archive.get_name(info[4]))
         self._pageslabel.set_text(_('%d pages') % info[3])
         self._sizelabel.set_text('%.1f MiB' % (info[5] / 1048576.0))
+
+    def _drag_book_begin(self, iconview, context):
+        """Create a cursor image for drag n drop from the library.
+
+        This method relies heavily on implementation details (regarding PIL's 
+        scaling functions and default font) to produce good looking results.
+        If those are changed in a future release of PIL, this method might
+        produce bad looking output (e.g. non-centered text).
+        
+        It's also used with connect_after() to overwrite the cursor
+        automatically created when using enable_model_drag_source(), so in
+        essence it's a hack, an ugly hack, but at least it works."""
+        selected = iconview.get_selected_items()
+        icon_path = selected[-1]
+        num_books = len(selected)
+        iterator = self._main_liststore.get_iter(icon_path)
+        book = self._main_liststore.get_value(iterator, 1)
+
+        cover = self._backend.get_book_cover(book)
+        cover = cover.scale_simple(cover.get_width() // 2,
+            cover.get_height() // 2, gtk.gdk.INTERP_TILES)
+        cover = image.add_border(cover, 1, 0xFFFFFFFF)
+        cover = image.add_border(cover, 1)
+        
+        if num_books > 1:
+            pointer = gtk.gdk.Pixbuf(gtk.gdk.COLORSPACE_RGB, True, 8, 100, 100)
+            pointer.fill(0x00000000)
+            cover_width = cover.get_width()
+            cover_height = cover.get_height()
+            cover.composite(pointer, 0, 0, cover_width, cover_height, 0, 0,
+            1, 1, gtk.gdk.INTERP_TILES, 255)
+            im = Image.new('RGBA', (35, 35), 0x00000000)
+            draw = ImageDraw.Draw(im)
+            draw.ellipse((3, 3, 32, 32), outline=(0, 0, 0), fill=(128, 0, 0))
+            im = im.resize((30, 30), Image.ANTIALIAS)
+            draw = ImageDraw.Draw(im)
+            text = str(num_books)
+            draw.text((15 - (6 * len(text) // 2), 10), text,
+                fill=(255, 255, 255))
+            circle = image.pil_to_pixbuf(im)
+            circle.composite(pointer, cover_width - 15, cover_height - 20,
+                28, 28, cover_width - 15, cover_height - 20, 1, 1,
+                gtk.gdk.INTERP_TILES, 255)
+        else:
+            pointer = cover
+
+        context.set_icon_pixbuf(pointer, -5, -5)
 
     def _set_status_message(self, message):
         """Set a specific message on the statusbar, replacing whatever was
