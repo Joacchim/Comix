@@ -27,25 +27,30 @@ class _LibraryDialog(gtk.Window):
         self._backend = librarybackend.LibraryBackend()
         self._stop_update = False
 
-        self._main_liststore = gtk.ListStore(gtk.gdk.Pixbuf, int)
-        iconview = gtk.IconView(self._main_liststore)
+        self._icon_liststore = gtk.ListStore(gtk.gdk.Pixbuf, int)
+        iconview = gtk.IconView(self._icon_liststore)
         iconview.set_pixbuf_column(0)
         iconview.connect('item_activated', self._open_book)
         iconview.connect('selection_changed', self._update_info)
         iconview.connect_after('drag_begin', self._drag_book_begin)
-        scrolled = gtk.ScrolledWindow()
-        scrolled.set_policy(gtk.POLICY_AUTOMATIC, gtk.POLICY_AUTOMATIC)
-        scrolled.add(iconview)
+        iconview.connect('drag_data_get', self._drag_book_data_get)
+        main_scrolled = gtk.ScrolledWindow()
+        main_scrolled.set_policy(gtk.POLICY_AUTOMATIC, gtk.POLICY_AUTOMATIC)
+        main_scrolled.add(iconview)
         iconview.modify_base(gtk.STATE_NORMAL, gtk.gdk.Color())
-        iconview.enable_model_drag_source(0, [], gtk.gdk.ACTION_MOVE)
+        iconview.enable_model_drag_source(0,
+            [('book', gtk.TARGET_SAME_APP, 0)], gtk.gdk.ACTION_MOVE)
         iconview.set_selection_mode(gtk.SELECTION_MULTIPLE)
 
         self._collection_treestore = gtk.TreeStore(str, int)
         treeview = gtk.TreeView(self._collection_treestore)
         treeview.connect('cursor_changed', self._change_collection)
+        treeview.connect('drag_data_received', self._drag_book_end)
         treeview.set_headers_visible(False)
         treeview.set_rules_hint(True)
         treeview.set_reorderable(True)
+        treeview.enable_model_drag_dest([('book', gtk.TARGET_SAME_APP, 0)],
+            gtk.gdk.ACTION_MOVE)
         cellrenderer = gtk.CellRendererText()
         column = gtk.TreeViewColumn(None, cellrenderer, markup=0)
         treeview.append_column(column)
@@ -62,13 +67,13 @@ class _LibraryDialog(gtk.Window):
         borderbox = gtk.EventBox()
         borderbox.modify_bg(gtk.STATE_NORMAL, gtk.gdk.color_parse('#333'))
         borderbox.set_size_request(300, -1)
-        bottombox.pack_start(borderbox, False, False)
         insidebox = gtk.EventBox()
         insidebox.set_border_width(1)
         insidebox.modify_bg(gtk.STATE_NORMAL, gtk.gdk.color_parse('#ddb'))
-        borderbox.add(insidebox)
         infobox = gtk.VBox(False, 5)
         infobox.set_border_width(10)
+        bottombox.pack_start(borderbox, False, False)
+        borderbox.add(insidebox)
         insidebox.add(infobox)
         self._namelabel = gtk.Label()
         self._namelabel.set_ellipsize(pango.ELLIPSIZE_MIDDLE)
@@ -110,22 +115,21 @@ class _LibraryDialog(gtk.Window):
         #open_button.connect()
         hbox.pack_start(open_button, False, False)
 
-        self._table = gtk.Table(2, 2, False)
-        self._table.attach(sidebar, 0, 1, 0, 1, gtk.FILL,
+        table = gtk.Table(2, 2, False)
+        table.attach(sidebar, 0, 1, 0, 1, gtk.FILL, gtk.EXPAND|gtk.FILL)
+        table.attach(main_scrolled, 1, 2, 0, 1, gtk.EXPAND|gtk.FILL,
             gtk.EXPAND|gtk.FILL)
-        self._table.attach(scrolled, 1, 2, 0, 1, gtk.EXPAND|gtk.FILL,
-            gtk.EXPAND|gtk.FILL)
-        self._table.attach(bottombox, 0, 2, 1, 2, gtk.EXPAND|gtk.FILL,
-            gtk.FILL)
-        self._table.attach(self._statusbar, 0, 2, 2, 3, gtk.FILL, gtk.FILL)
-        self.add(self._table)
+        table.attach(bottombox, 0, 2, 1, 2, gtk.EXPAND|gtk.FILL, gtk.FILL)
+        table.attach(self._statusbar, 0, 2, 2, 3, gtk.FILL, gtk.FILL)
+        self.add(table)
 
         self._display_collections()
         self.show_all()
 
     def _display_covers(self, collection):
+        """Display the books in <collection> in the IconView."""
         self._stop_update = False
-        self._main_liststore.clear()
+        self._icon_liststore.clear()
         for i, book in enumerate(self._backend.get_books_in_collection(
           collection)):
             pixbuf = self._backend.get_book_cover(book[0])
@@ -135,7 +139,7 @@ class _LibraryDialog(gtk.Window):
                 int(0.67 * prefs['library cover size']),
                 prefs['library cover size'])
             pixbuf = image.add_border(pixbuf, 2, 0xFFFFFFFF)
-            self._main_liststore.append([pixbuf, book[0]])
+            self._icon_liststore.append([pixbuf, book[0]])
             if i % 15 == 0:
                 while gtk.events_pending():
                     gtk.main_iteration(False)
@@ -158,8 +162,8 @@ class _LibraryDialog(gtk.Window):
         _add(None, None)
 
     def _change_collection(self, treeview):
-        """Change the viewed collection to the currently selected one in
-        the sidebar."""
+        """Change the viewed collection (in the IconView) to the
+        currently selected one in the sidebar."""
         cursor = treeview.get_cursor()
         if cursor is None:
             return
@@ -175,8 +179,8 @@ class _LibraryDialog(gtk.Window):
         if not selected:
             return
         path = selected[0]
-        iterator = self._main_liststore.get_iter(path)
-        book = self._main_liststore.get_value(iterator, 1)
+        iterator = self._icon_liststore.get_iter(path)
+        book = self._icon_liststore.get_value(iterator, 1)
         info = self._backend.get_detailed_book_info(book)
         self._namelabel.set_text(info[1])
         attrlist = pango.AttrList()
@@ -190,8 +194,8 @@ class _LibraryDialog(gtk.Window):
     def _drag_book_begin(self, iconview, context):
         """Create a cursor image for drag n drop from the library.
 
-        This method relies heavily on implementation details (regarding PIL's 
-        scaling functions and default font) to produce good looking results.
+        This method relies heavily on implementation details regarding PIL's 
+        scaling functions and default font to produce good looking results.
         If those are changed in a future release of PIL, this method might
         produce bad looking output (e.g. non-centered text).
         
@@ -201,8 +205,8 @@ class _LibraryDialog(gtk.Window):
         selected = iconview.get_selected_items()
         icon_path = selected[-1]
         num_books = len(selected)
-        iterator = self._main_liststore.get_iter(icon_path)
-        book = self._main_liststore.get_value(iterator, 1)
+        iterator = self._icon_liststore.get_iter(icon_path)
+        book = self._icon_liststore.get_value(iterator, 1)
 
         cover = self._backend.get_book_cover(book)
         cover = cover.scale_simple(cover.get_width() // 2,
@@ -234,6 +238,34 @@ class _LibraryDialog(gtk.Window):
 
         context.set_icon_pixbuf(pointer, -5, -5)
 
+    def _drag_book_data_get(self, iconview, context, selection, *args):
+        """Fill the SelectionData with (iconview) paths for the dragged books
+        formatted as a string with each path separated by a comma."""
+        paths = iconview.get_selected_items()
+        text = ','.join([str(path[0]) for path in paths])
+        selection.set('text/plain', 8, text)
+
+    def _drag_book_end(self, treeview, context, x, y, selection, *args):
+        """Move books dragged from the IconView to the target collection."""
+        drop_row = treeview.get_dest_row_at_pos(x, y)
+        if drop_row is None:
+            return
+        iterator = self._collection_treestore.get_iter(drop_row[0])
+        dest_collection = self._collection_treestore.get_value(iterator, 1)
+        cursor = treeview.get_cursor()
+        if cursor is None:
+            return
+        iterator = self._collection_treestore.get_iter(cursor[0])
+        src_collection = self._collection_treestore.get_value(iterator, 1)
+        for path_string in selection.get_text().split(','):
+            iterator = self._icon_liststore.get_iter(int(path_string))
+            book = self._icon_liststore.get_value(iterator, 1)
+            if src_collection != -1: # Not the "All" collection
+                self._backend.remove_book_from_collection(book, src_collection)
+                self._icon_liststore.remove(iterator)
+            if dest_collection != -1:
+                self._backend.add_book_to_collection(book, dest_collection)
+                
     def _set_status_message(self, message):
         """Set a specific message on the statusbar, replacing whatever was
         there earlier.
@@ -243,8 +275,8 @@ class _LibraryDialog(gtk.Window):
 
     def _open_book(self, iconview, path):
         """Open the book at the (liststore) <path>."""
-        iterator = self._main_liststore.get_iter(path)
-        book = self._main_liststore.get_value(iterator, 1)
+        iterator = self._icon_liststore.get_iter(path)
+        book = self._icon_liststore.get_value(iterator, 1)
         info = self._backend.get_detailed_book_info(book)
         path = info[2]
         self._close()
