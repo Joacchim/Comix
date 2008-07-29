@@ -7,11 +7,13 @@ import Image
 import ImageDraw
 
 import archive
+import encoding
 import librarybackend
 from preferences import prefs
 import image
 
 _dialog = None
+_COLLECTION_ALL = -1
 
 
 class _LibraryDialog(gtk.Window):
@@ -46,6 +48,7 @@ class _LibraryDialog(gtk.Window):
         treeview = gtk.TreeView(self._collection_treestore)
         treeview.connect('cursor_changed', self._change_collection)
         treeview.connect('drag_data_received', self._drag_book_end)
+        treeview.connect('drag_motion', self._drag_book_motion)
         treeview.set_headers_visible(False)
         treeview.set_rules_hint(True)
         treeview.set_reorderable(True)
@@ -158,7 +161,7 @@ class _LibraryDialog(gtk.Window):
 
         self._collection_treestore.clear()
         self._collection_treestore.append(None, ['<b>%s</b>' % _('All books'),
-            -1])
+            _COLLECTION_ALL])
         _add(None, None)
 
     def _change_collection(self, treeview):
@@ -169,7 +172,7 @@ class _LibraryDialog(gtk.Window):
             return
         iterator = self._collection_treestore.get_iter(cursor[0])
         collection = self._collection_treestore.get_value(iterator, 1)
-        if collection == -1: # The "All" collection
+        if collection == _COLLECTION_ALL:
             collection = None
         gobject.idle_add(self._display_covers, collection)
 
@@ -247,24 +250,57 @@ class _LibraryDialog(gtk.Window):
 
     def _drag_book_end(self, treeview, context, x, y, selection, *args):
         """Move books dragged from the IconView to the target collection."""
-        drop_row = treeview.get_dest_row_at_pos(x, y)
-        if drop_row is None:
+        src_collection, dest_collection = \
+            self._drag_get_src_and_dest_collections(treeview, x, y)
+        if src_collection == dest_collection:
+            self._set_status_message('')
             return
-        iterator = self._collection_treestore.get_iter(drop_row[0])
-        dest_collection = self._collection_treestore.get_value(iterator, 1)
-        cursor = treeview.get_cursor()
-        if cursor is None:
-            return
-        iterator = self._collection_treestore.get_iter(cursor[0])
-        src_collection = self._collection_treestore.get_value(iterator, 1)
         for path_string in selection.get_text().split(','):
             iterator = self._icon_liststore.get_iter(int(path_string))
             book = self._icon_liststore.get_value(iterator, 1)
-            if src_collection != -1: # Not the "All" collection
+            if src_collection != _COLLECTION_ALL:
                 self._backend.remove_book_from_collection(book, src_collection)
                 self._icon_liststore.remove(iterator)
-            if dest_collection != -1:
+            if dest_collection != _COLLECTION_ALL:
                 self._backend.add_book_to_collection(book, dest_collection)
+        self._set_status_message('')
+
+    def _drag_book_motion(self, treeview, context, x, y, *args):
+        """Set the statusbar text when hovering a drag-n-drop over a
+        collection."""
+        src_collection, dest_collection = \
+            self._drag_get_src_and_dest_collections(treeview, x, y)
+        if src_collection == dest_collection:
+            self._set_status_message('')
+            return
+        if src_collection != _COLLECTION_ALL:
+            src_name = self._backend.get_detailed_collection_info(
+                src_collection)[1]
+        if dest_collection != _COLLECTION_ALL:
+            dest_name = self._backend.get_detailed_collection_info(
+                dest_collection)[1]
+        if dest_collection == _COLLECTION_ALL:
+            self._set_status_message(_('Remove books from %s.') % src_name)
+        elif src_collection == _COLLECTION_ALL:
+            self._set_status_message(_('Add books to %s.') % dest_name)
+        else:
+            self._set_status_message(
+                _('Move books from %s to %s.') % (src_name, dest_name))
+        
+    def _drag_get_src_and_dest_collections(self, treeview, x, y):
+        """Convenience function to get the IDs for the source and
+        destination collections during a drag-n-drop."""
+        cursor = treeview.get_cursor()
+        if cursor is None:
+            return 0, 0
+        iterator = self._collection_treestore.get_iter(cursor[0])
+        src_collection = self._collection_treestore.get_value(iterator, 1)
+        drop_row = treeview.get_dest_row_at_pos(x, y)
+        if drop_row is None:
+            return 0, 0
+        iterator = self._collection_treestore.get_iter(drop_row[0])
+        dest_collection = self._collection_treestore.get_value(iterator, 1)
+        return src_collection, dest_collection
                 
     def _set_status_message(self, message):
         """Set a specific message on the statusbar, replacing whatever was

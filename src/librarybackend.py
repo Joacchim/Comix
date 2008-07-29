@@ -47,6 +47,12 @@ class LibraryBackend:
             where id=?''', (book,))
         return cur.fetchone()
 
+    def get_detailed_collection_info(self, collection):
+        """Return a tuple with all the information about <collection>."""
+        cur = self._con.execute('''select * from Collection
+            where id=?''', (collection,))
+        return cur.fetchone()
+
     def get_books_in_collection(self, collection=None):
         """Return a sequence with all the books in <collection>, or *ALL*
         books if <collection> is None."""
