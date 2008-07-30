@@ -106,7 +106,7 @@ class LibraryBackend:
         try:
             self._con.execute('''insert into Contain
                 (collection, book) values (?, ?)''', (collection, book))
-        except dbapi2.DatabaseError:
+        except dbapi2.DatabaseError: # E.g. book already in collection
             pass
         except dbapi2.Error:
             print '! Could not add book %s to collection %s' % (book,

@@ -51,9 +51,9 @@ class _LibraryDialog(gtk.Window):
         treeview.connect('drag_motion', self._drag_book_motion)
         treeview.set_headers_visible(False)
         treeview.set_rules_hint(True)
-        treeview.set_reorderable(True)
         treeview.enable_model_drag_dest([('book', gtk.TARGET_SAME_APP, 0)],
             gtk.gdk.ACTION_MOVE)
+        #treeview.set_reorderable(True)
         cellrenderer = gtk.CellRendererText()
         column = gtk.TreeViewColumn(None, cellrenderer, markup=0)
         treeview.append_column(column)
@@ -250,10 +250,10 @@ class _LibraryDialog(gtk.Window):
 
     def _drag_book_end(self, treeview, context, x, y, selection, *args):
         """Move books dragged from the IconView to the target collection."""
+        self._set_status_message('')
         src_collection, dest_collection = \
             self._drag_get_src_and_dest_collections(treeview, x, y)
         if src_collection == dest_collection:
-            self._set_status_message('')
             return
         for path_string in selection.get_text().split(','):
             iterator = self._icon_liststore.get_iter(int(path_string))
@@ -263,7 +263,6 @@ class _LibraryDialog(gtk.Window):
                 self._icon_liststore.remove(iterator)
             if dest_collection != _COLLECTION_ALL:
                 self._backend.add_book_to_collection(book, dest_collection)
-        self._set_status_message('')
 
     def _drag_book_motion(self, treeview, context, x, y, *args):
         """Set the statusbar text when hovering a drag-n-drop over a
@@ -280,12 +279,12 @@ class _LibraryDialog(gtk.Window):
             dest_name = self._backend.get_detailed_collection_info(
                 dest_collection)[1]
         if dest_collection == _COLLECTION_ALL:
-            self._set_status_message(_('Remove books from %s.') % src_name)
+            self._set_status_message(_('Remove book(s) from "%s".') % src_name)
         elif src_collection == _COLLECTION_ALL:
-            self._set_status_message(_('Add books to %s.') % dest_name)
+            self._set_status_message(_('Add book(s) to "%s".') % dest_name)
         else:
             self._set_status_message(
-                _('Move books from %s to %s.') % (src_name, dest_name))
+                _('Move book(s) from "%s" to "%s".') % (src_name, dest_name))
         
     def _drag_get_src_and_dest_collections(self, treeview, x, y):
         """Convenience function to get the IDs for the source and
