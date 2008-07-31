@@ -197,8 +197,8 @@ class _LibraryDialog(gtk.Window):
     def _drag_book_begin(self, iconview, context):
         """Create a cursor image for drag n drop from the library.
 
-        This method relies heavily on implementation details regarding PIL's 
-        scaling functions and default font to produce good looking results.
+        This method relies on implementation details regarding PIL's 
+        drawing functions and default font to produce good looking results.
         If those are changed in a future release of PIL, this method might
         produce bad looking output (e.g. non-centered text).
         
@@ -224,17 +224,16 @@ class _LibraryDialog(gtk.Window):
             cover_height = cover.get_height()
             cover.composite(pointer, 0, 0, cover_width, cover_height, 0, 0,
             1, 1, gtk.gdk.INTERP_TILES, 255)
-            im = Image.new('RGBA', (35, 35), 0x00000000)
+            im = Image.new('RGBA', (30, 30), 0x00000000)
             draw = ImageDraw.Draw(im)
-            draw.ellipse((3, 3, 32, 32), outline=(0, 0, 0), fill=(128, 0, 0))
-            im = im.resize((30, 30), Image.ANTIALIAS)
+            draw.ellipse((0, 0, 29, 29), outline=(0, 0, 0), fill=(128, 0, 0))
             draw = ImageDraw.Draw(im)
             text = str(num_books)
-            draw.text((15 - (6 * len(text) // 2), 10), text,
+            draw.text((15 - (6 * len(text) // 2), 9), text,
                 fill=(255, 255, 255))
             circle = image.pil_to_pixbuf(im)
             circle.composite(pointer, cover_width - 15, cover_height - 20,
-                28, 28, cover_width - 15, cover_height - 20, 1, 1,
+                29, 29, cover_width - 15, cover_height - 20, 1, 1,
                 gtk.gdk.INTERP_TILES, 255)
         else:
             pointer = cover
