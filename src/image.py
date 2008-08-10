@@ -121,7 +121,7 @@ def add_border(pixbuf, thickness, colour=0x000000FF):
 
 
 def get_most_common_edge_colour(pixbuf):
-    """Return the most commonly occuring pixel value along the four edges
+    """Return the most commonly occurring pixel value along the four edges
     of <pixbuf>. The return value is a sequence, (r, g, b), with 16 bit
     values.
 

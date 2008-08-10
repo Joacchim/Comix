@@ -226,7 +226,7 @@ def check_dependencies():
         required_found = False
     try:
         import Image
-        assert Image.VERSION >= '1.1.4'
+        assert Image.VERSION >= '1.1.5'
         print '    Python Imaging Library ....... OK'
     except ImportError:
         print '    !!! Python Imaging Library ... Not found'
@@ -234,7 +234,7 @@ def check_dependencies():
     except AssertionError:
         print '    !!! Python Imaging Library ... version', Image.VERSION,
         print 'found'
-        print '    !!! Python Imaging Library 1.1.4 or higher is required'
+        print '    !!! Python Imaging Library 1.1.5 or higher is required'
         required_found = False
     print '\nRecommended dependencies:'
     # rar/unrar is only a requirement to read RAR (.cbr) files.

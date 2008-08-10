@@ -20,13 +20,13 @@ class _ThumbnailMaintenanceDialog(gtk.Dialog):
     def __init__(self):
         self._num_thumbs = 0
         gtk.Dialog.__init__(self, _('Thumbnail maintenance'), None, 0,
-            (gtk.STOCK_NO, gtk.RESPONSE_NO,
-            gtk.STOCK_YES, gtk.RESPONSE_YES))
+            (gtk.STOCK_CLOSE, gtk.RESPONSE_CLOSE,
+            gtk.STOCK_OK, gtk.RESPONSE_OK))
         self.set_has_separator(False)
         self.set_resizable(False)
         self.set_border_width(4)
         self.connect('response', self._response)
-        self.set_default_response(gtk.RESPONSE_YES)
+        self.set_default_response(gtk.RESPONSE_OK)
         main_box = gtk.VBox(False, 5)
         main_box.set_border_width(6)
         self.vbox.pack_start(main_box, False, False)
@@ -99,7 +99,7 @@ class _ThumbnailMaintenanceDialog(gtk.Dialog):
         self._size_thumbs_label.set_text('%.1f MiB' % (size_thumbs / 1048576.0))
 
     def _response(self, dialog, response):
-        if response == gtk.RESPONSE_YES:
+        if response == gtk.RESPONSE_OK:
             _ThumbnailRemover(self._num_thumbs)
             self._update_num_and_size()
         else:
@@ -112,7 +112,7 @@ class _ThumbnailRemover(gtk.Dialog):
         self._total_thumbs = total_thumbs
         self._destroy = False
         gtk.Dialog.__init__(self, _('Removing thumbnails'), None, 0,
-            (gtk.STOCK_CLOSE, gtk.RESPONSE_CLOSE))
+            (gtk.STOCK_STOP, gtk.RESPONSE_CLOSE))
         self.set_size_request(400, -1)
         self.set_has_separator(False)
         self.set_resizable(False)

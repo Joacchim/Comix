@@ -29,9 +29,7 @@ import main
 import icons
 import preferences
 
-# ------------------------------------------------------------------------
 # Check for PyGTK and PIL dependencies.
-# ------------------------------------------------------------------------
 try:
     import pygtk
     pygtk.require('2.0')
@@ -54,24 +52,22 @@ except ImportError:
 
 try:
     import Image
-    assert Image.VERSION >= '1.1.4'
+    assert Image.VERSION >= '1.1.5'
 except AssertionError:
     print "You don't have the required version of the Python Imaging Library"
     print '(PIL) installed.'
     print 'Installed PIL version is: %s' % Image.VERSION
-    print 'Required PIL version is: 1.1.4 or higher'
+    print 'Required PIL version is: 1.1.5 or higher'
     sys.exit(1)
 except ImportError:
-    print 'Python Imaging Library (PIL) 1.1.4 or higher is required.'
+    print 'Python Imaging Library (PIL) 1.1.5 or higher is required.'
     print 'No version of the Python Imaging Library was found on your system.'
     sys.exit(1)
 
 
 if __name__ == '__main__':
-    # --------------------------------------------------------------------
     # Use gettext translations as found in the source dir, otherwise
     # based on the install path.
-    # --------------------------------------------------------------------
     exec_path = os.path.abspath(sys.argv[0])
     base_dir = os.path.dirname(os.path.dirname(exec_path))
     if os.path.isdir(os.path.join(base_dir, 'messages')):
