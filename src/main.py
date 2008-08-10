@@ -89,9 +89,7 @@ class MainWindow(gtk.Window):
         self._image_box.show_all()
 
         self._main_layout.put(self._image_box, 0, 0)
-        self._main_layout.modify_bg(gtk.STATE_NORMAL,
-            gtk.gdk.colormap_get_system().alloc_color(gtk.gdk.Color(
-            *prefs['bg colour']), False, True))
+        self._set_bg_colour(prefs['bg colour'])
 
         self._vadjust.step_increment = 15
         self._vadjust.page_increment = 1
@@ -280,6 +278,11 @@ class MainWindow(gtk.Window):
             self.statusbar.set_resolution((unscaled_x, unscaled_y,
                 scale_percent))
         
+        if prefs['smart bg']:
+            im = image.pixbuf_to_pil(self.left_image.get_pixbuf())
+            bg_mean = image.get_median_edge_colour(im)
+            self._set_bg_colour(bg_mean)
+
         self._image_box.window.freeze_updates()
         self._main_layout.move(self._image_box, max(0, x_padding),
             max(0, y_padding))
@@ -581,6 +584,7 @@ class MainWindow(gtk.Window):
         self.thumbnailsidebar.clear()
         self.set_title('Comix')
         self.statusbar.set_message('')
+        self._set_bg_colour(prefs['bg colour'])
         enhance.clear_histogram()
 
     def displayed_double(self):
@@ -627,7 +631,7 @@ class MainWindow(gtk.Window):
         directly.
         """
         self._main_layout.window.set_cursor(mode)
-        return False
+        return False 
 
     def update_title(self):
         """Set the title acording to current state."""
@@ -645,6 +649,14 @@ class MainWindow(gtk.Window):
         if self.slideshow.is_running():
             title = '[%s] %s' % (_('SLIDESHOW'), title)
         self.set_title(title)
+
+    def _set_bg_colour(self, colour):
+        """Set the background colour to <colour>. Colour is a sequence in the
+        format (r, g, b). Values are 16-bit.
+        """
+        self._main_layout.modify_bg(gtk.STATE_NORMAL,
+            gtk.gdk.colormap_get_system().alloc_color(gtk.gdk.Color(
+            *colour), False, True))
 
     def _display_active_widgets(self):
         """Hide and/or show main window widgets depending on the current

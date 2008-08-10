@@ -4,6 +4,7 @@ import gtk
 import Image
 import ImageEnhance
 import ImageOps
+import ImageStat
 
 import preferences
 
@@ -117,6 +118,17 @@ def add_border(pixbuf, thickness, colour=0x000000FF):
     pixbuf.copy_area(0, 0, pixbuf.get_width(), pixbuf.get_height(),
         canvas, thickness, thickness)
     return canvas
+
+
+def get_median_edge_colour(im):
+    """Return the median pixel value of the four edges of the given PIL
+    image. The return value is a sequence, (r, g, b), with 16 bit values.
+    """
+    width, height = im.size
+    mask = Image.new('L', (width - 2, height - 2))
+    mask = ImageOps.expand(mask, border=1, fill=1)
+    stat = ImageStat.Stat(im, mask)
+    return [int(val * 257) for val in stat.median]
 
 
 def pil_to_pixbuf(image):

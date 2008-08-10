@@ -36,6 +36,7 @@ class _LibraryDialog(gtk.Window):
         iconview.connect('selection_changed', self._update_info)
         iconview.connect_after('drag_begin', self._drag_book_begin)
         iconview.connect('drag_data_get', self._drag_book_data_get)
+        iconview.connect('button_press_event', self._book_button_press)
         main_scrolled = gtk.ScrolledWindow()
         main_scrolled.set_policy(gtk.POLICY_AUTOMATIC, gtk.POLICY_AUTOMATIC)
         main_scrolled.add(iconview)
@@ -193,6 +194,18 @@ class _LibraryDialog(gtk.Window):
         self._typelabel.set_text(archive.get_name(info[4]))
         self._pageslabel.set_text(_('%d pages') % info[3])
         self._sizelabel.set_text('%.1f MiB' % (info[5] / 1048576.0))
+
+    def _book_button_press(self, iconview, event):
+        path = iconview.get_path_at_pos(int(event.x), int(event.y))
+        print
+        print path
+        if path is None:
+            return
+        if event.button == 3:
+            if not iconview.path_is_selected(path):
+                iconview.unselect_all()
+                iconview.select_path(path)
+            print 'rightclick'
 
     def _drag_book_begin(self, iconview, context):
         """Create a cursor image for drag n drop from the library.

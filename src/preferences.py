@@ -46,6 +46,7 @@ prefs = {
     'create thumbnails': True,
     'slideshow delay': 3000,
     'smart space scroll': True,
+    'smart bg': False,
     'space scroll percent': 90,
     'store recent file info': True,
     'window height': gtk.gdk.screen_get_default().get_height() * 3 // 4,
