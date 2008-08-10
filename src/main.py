@@ -279,9 +279,8 @@ class MainWindow(gtk.Window):
                 scale_percent))
         
         if prefs['smart bg']:
-            im = image.pixbuf_to_pil(self.left_image.get_pixbuf())
-            bg_mean = image.get_median_edge_colour(im)
-            self._set_bg_colour(bg_mean)
+            bg = image.get_most_common_edge_colour(self.left_image.get_pixbuf())
+            self._set_bg_colour(bg)
 
         self._image_box.window.freeze_updates()
         self._main_layout.move(self._image_box, max(0, x_padding),

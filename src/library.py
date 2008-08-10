@@ -197,8 +197,6 @@ class _LibraryDialog(gtk.Window):
 
     def _book_button_press(self, iconview, event):
         path = iconview.get_path_at_pos(int(event.x), int(event.y))
-        print
-        print path
         if path is None:
             return
         if event.button == 3:

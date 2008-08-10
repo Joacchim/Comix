@@ -120,18 +120,37 @@ def add_border(pixbuf, thickness, colour=0x000000FF):
     return canvas
 
 
-def get_median_edge_colour(im):
-    """Return the median pixel value of the four edges of the given PIL
-    image. The return value is a sequence, (r, g, b), with 16 bit values.
+def get_most_common_edge_colour(pixbuf):
+    """Return the most commonly occuring pixel value along the four edges
+    of <pixbuf>. The return value is a sequence, (r, g, b), with 16 bit
+    values.
+
+    Note: This could be done more cleanly with subpixbuf(), but that
+    doesn't work as expected together with get_pixels().
     """
-    width, height = im.size
-    if width < 2 or height < 2:
-        mask = None
-    else:
-        mask = Image.new('L', (width - 2, height - 2))
-        mask = ImageOps.expand(mask, border=1, fill=0xFF)
-    stat = ImageStat.Stat(im, mask)
-    return [int(val * 257) for val in stat.median][:3]
+    width = pixbuf.get_width()
+    height = pixbuf.get_height()
+    top_edge = gtk.gdk.Pixbuf(gtk.gdk.COLORSPACE_RGB, True, 8, width, 1)
+    bottom_edge = gtk.gdk.Pixbuf(gtk.gdk.COLORSPACE_RGB, True, 8, width, 1)
+    left_edge = gtk.gdk.Pixbuf(gtk.gdk.COLORSPACE_RGB, True, 8, 1, height)
+    right_edge = gtk.gdk.Pixbuf(gtk.gdk.COLORSPACE_RGB, True, 8, 1, height)
+    pixbuf.copy_area(0, 0, width, 1, top_edge, 0, 0)
+    pixbuf.copy_area(0, height - 1, width, 1, bottom_edge, 0, 0)
+    pixbuf.copy_area(0, 0, 1, height, left_edge, 0, 0)
+    pixbuf.copy_area(width - 1, 0, 1, height, right_edge, 0, 0)
+    
+    colour_count = {}
+    for edge in (top_edge, bottom_edge, left_edge, right_edge):
+        im = pixbuf_to_pil(edge)
+        for count, colour in im.getcolors(im.size[0] * im.size[1]):
+            colour_count[colour] = colour_count.setdefault(colour, 0) + count
+    max_count = 0
+    most_common_colour = None
+    for colour, count in colour_count.iteritems():
+        if count > max_count:
+            max_count = count
+            most_common_colour = colour
+    return [val * 257 for val in most_common_colour]
 
 
 def pil_to_pixbuf(image):
