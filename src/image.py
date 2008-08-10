@@ -125,10 +125,13 @@ def get_median_edge_colour(im):
     image. The return value is a sequence, (r, g, b), with 16 bit values.
     """
     width, height = im.size
-    mask = Image.new('L', (width - 2, height - 2))
-    mask = ImageOps.expand(mask, border=1, fill=1)
+    if width < 2 or height < 2:
+        mask = None
+    else:
+        mask = Image.new('L', (width - 2, height - 2))
+        mask = ImageOps.expand(mask, border=1, fill=0xFF)
     stat = ImageStat.Stat(im, mask)
-    return [int(val * 257) for val in stat.median]
+    return [int(val * 257) for val in stat.median][:3]
 
 
 def pil_to_pixbuf(image):
