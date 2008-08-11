@@ -126,14 +126,14 @@ class MainUI(gtk.UIManager):
                 '<Alt>Return', None, properties.open_dialog),
             ('enhance_image', 'comix-enhance-image', _('_Enhance image...'),
                 'e', None, enhance.open_dialog),
-            ('library', 'comix-library', _('_Library...'),
-                '<Control>l', None, library.open_dialog),
             ('preferences', gtk.STOCK_PREFERENCES, _('Pr_eferences'),
                 None, None, preferences.open_dialog)], window)
 
         self._actiongroup.add_actions([
             ('open', gtk.STOCK_OPEN, _('_Open...'),
                 '<Control>o', None, filechooser.open_dialog),
+            ('library', 'comix-library', _('_Library...'),
+                '<Control>l', None, library.open_dialog),
             ('comments', 'comix-comments', _('View _comments'),
                 'c', None, comment.open_dialog)], window.file_handler)
 

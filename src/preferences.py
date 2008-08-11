@@ -29,7 +29,7 @@ prefs = {
     'stored hide all values': (True, True, True, True, True),
     #'last convert type': 'zip',
     'lens magnification': 2,
-    'lens size': 180,
+    'lens size': 200,
     'library cover size': 128,
     'lib window height': gtk.gdk.screen_get_default().get_height() * 3 // 5,
     'lib window width': gtk.gdk.screen_get_default().get_width() * 2 // 3,
