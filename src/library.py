@@ -96,7 +96,6 @@ class _LibraryDialog(gtk.Window):
         table.attach(self._statusbar, 0, 2, 2, 3, gtk.FILL, gtk.FILL)
         self.add(table)
 
-        self.collection_area.display_collections()
         self.show_all()
 
     def open_book(self, book):
@@ -112,8 +111,7 @@ class _LibraryDialog(gtk.Window):
         if not selected:
             return
         path = selected[0]
-        iterator = self.book_area.liststore.get_iter(path)
-        book = self.book_area.liststore.get_value(iterator, 1)
+        book = self.book_area.get_book_at_path(path)
         info = self.backend.get_detailed_book_info(book)
         self._namelabel.set_text(info[1])
         attrlist = pango.AttrList()
@@ -148,12 +146,14 @@ class _CollectionArea(gtk.ScrolledWindow):
     def __init__(self, library):
         gtk.ScrolledWindow.__init__(self)
         self._library = library
-        
+        self.set_policy(gtk.POLICY_NEVER, gtk.POLICY_AUTOMATIC)
+
         self._treestore = gtk.TreeStore(str, int)
         self._treeview = gtk.TreeView(self._treestore)
-        self._treeview.connect('cursor_changed', self._change_collection)
+        self._treeview.connect('cursor_changed', self._collection_selected)
         self._treeview.connect('drag_data_received', self._drag_book_end)
         self._treeview.connect('drag_motion', self._drag_book_motion)
+        self._treeview.connect('button_press_event', self._button_press)
         self._treeview.set_headers_visible(False)
         self._treeview.set_rules_hint(True)
         self._treeview.enable_model_drag_dest(
@@ -163,10 +163,59 @@ class _CollectionArea(gtk.ScrolledWindow):
         column = gtk.TreeViewColumn(None, cellrenderer, markup=0)
         self._treeview.append_column(column)
         self.add(self._treeview)
-        self.set_policy(gtk.POLICY_NEVER, gtk.POLICY_AUTOMATIC)
+        
+        self._ui_manager = gtk.UIManager()
+        ui_description = """
+        <ui>
+            <popup name="Popup">
+                <menuitem action="rename" />
+                <menuitem action="duplicate" />
+                <separator />
+                <menuitem action="remove" />
+            </popup>
+        </ui>
+        """
+        self._ui_manager.add_ui_from_string(ui_description)
+        actiongroup = gtk.ActionGroup('comix-library-collection-area')
+        actiongroup.add_actions([
+        ('rename', None, _('Rename'), None, None, None),
+        ('duplicate', gtk.STOCK_COPY, _('Duplicate collection'), None, None,
+            None),
+        ('remove', gtk.STOCK_REMOVE, _('Remove collection'), None, None,
+            None)])
+        self._ui_manager.insert_action_group(actiongroup, 0)
+        
+        self._display_collections()
+        self._treestore.foreach(self._select_last_collection)
 
-    def display_collections(self):
-        """Display the library collections in the sidebar."""
+    def get_current_collection(self):
+        """Return the collection ID for the currently selected collection,
+        or None if no collection is selected."""
+        cursor = self._treeview.get_cursor()
+        if cursor is None:
+            return
+        return self._get_collection_at_path(cursor[0])
+
+    def _get_collection_at_path(self, path):
+        """Return the collection ID of the collection at the (TreeView)
+        <path>."""
+        iterator = self._treestore.get_iter(path)
+        return self._treestore.get_value(iterator, 1)
+
+    def _collection_selected(self, treeview):
+        """Change the viewed collection (in the _BookArea) to the
+        currently selected one in the sidebar."""
+        collection = self.get_current_collection()
+        if (collection is None or
+          collection == prefs['last library collection']):
+            return
+        prefs['last library collection'] = collection
+        if collection == _COLLECTION_ALL:
+            collection = None
+        gobject.idle_add(self._library.book_area.display_covers, collection)
+
+    def _display_collections(self):
+        """Display the library collections. Should be called on startup."""
         
         def _add(parent_iter, supercoll):
             for coll in self._library.backend.get_collections_in_collection(
@@ -180,24 +229,31 @@ class _CollectionArea(gtk.ScrolledWindow):
             _COLLECTION_ALL])
         _add(None, None)
 
-    def get_current_collection(self):
-        """Return the collection ID for the currently selected collection,
-        or None if no collection is selected."""
-        cursor = self._treeview.get_cursor()
-        if cursor is None:
-            return
-        iterator = self._treestore.get_iter(cursor[0])
-        return self._treestore.get_value(iterator, 1)
+    def _select_last_collection(self, treestore, path, iterator):
+        """Select the collection that was selected the last time the library
+        was used. Should be used with TreeModel.foreach()."""
+        collection = treestore.get_value(iterator, 1)
+        if collection == prefs['last library collection']:
+            prefs['last library collection'] = False # Reset to trigger update
+            self._treeview.expand_to_path(path)
+            self._treeview.set_cursor(path)
+            return True
 
-    def _change_collection(self, treeview):
-        """Change the viewed collection (in the _BookArea) to the
-        currently selected one in the sidebar."""
-        collection = self.get_current_collection()
-        if collection is None:
+    def _button_press(self, treeview, event):
+        """Handle mouse button presses on the _CollectionArea."""
+        pos_tuple = treeview.get_path_at_pos(int(event.x), int(event.y))
+        if pos_tuple is None:
             return
-        if collection == _COLLECTION_ALL:
-            collection = None
-        gobject.idle_add(self._library.book_area.display_covers, collection)
+        path = pos_tuple[0]
+        if event.button == 3:
+            if self._get_collection_at_path(path) == _COLLECTION_ALL:
+                sens = False
+            else:
+                sens = True
+            self._ui_manager.get_action('/Popup/rename').set_sensitive(sens)
+            self._ui_manager.get_action('/Popup/remove').set_sensitive(sens)
+            self._ui_manager.get_widget('/Popup').popup(None, None, None,
+                event.button, event.time)
 
     def _drag_book_end(self, treeview, context, x, y, selection, *args):
         """Move books dragged from the _BookArea to the target collection."""
@@ -246,8 +302,7 @@ class _CollectionArea(gtk.ScrolledWindow):
         drop_row = treeview.get_dest_row_at_pos(x, y)
         if src_collection is None or drop_row is None:
             return 0, 0
-        iterator = self._treestore.get_iter(drop_row[0])
-        dest_collection = self._treestore.get_value(iterator, 1)
+        dest_collection = self._get_collection_at_path(drop_row[0])
         return src_collection, dest_collection
 
 
@@ -261,21 +316,21 @@ class _BookArea(gtk.ScrolledWindow):
         gtk.ScrolledWindow.__init__(self)
         self._library = library
         self._stop_update = False
+        self.set_policy(gtk.POLICY_AUTOMATIC, gtk.POLICY_AUTOMATIC)
         
-        self.liststore = gtk.ListStore(gtk.gdk.Pixbuf, int)
-        self._iconview = gtk.IconView(self.liststore)
+        self._liststore = gtk.ListStore(gtk.gdk.Pixbuf, int)
+        self._iconview = gtk.IconView(self._liststore)
         self._iconview.set_pixbuf_column(0)
         self._iconview.connect('item_activated', self._book_activated)
         self._iconview.connect('selection_changed', self._library.update_info)
-        self._iconview.connect_after('drag_begin', self._drag_book_begin)
-        self._iconview.connect('drag_data_get', self._drag_book_data_get)
-        self._iconview.connect('button_press_event', self._book_button_press)
+        self._iconview.connect_after('drag_begin', self._drag_begin)
+        self._iconview.connect('drag_data_get', self._drag_data_get)
+        self._iconview.connect('button_press_event', self._button_press)
         self._iconview.modify_base(gtk.STATE_NORMAL, gtk.gdk.Color())
         self._iconview.enable_model_drag_source(0,
             [('book', gtk.TARGET_SAME_APP, 0)], gtk.gdk.ACTION_MOVE)
         self._iconview.set_selection_mode(gtk.SELECTION_MULTIPLE)
         self.add(self._iconview)
-        self.set_policy(gtk.POLICY_AUTOMATIC, gtk.POLICY_AUTOMATIC)
         
         self._ui_manager = gtk.UIManager()
         ui_description = """
@@ -304,7 +359,7 @@ class _BookArea(gtk.ScrolledWindow):
     def display_covers(self, collection):
         """Display the books in <collection> in the IconView."""
         self._stop_update = False
-        self.liststore.clear()
+        self._liststore.clear()
         for i, book in enumerate(self._library.backend.get_books_in_collection(
           collection)):
             pixbuf = self._library.backend.get_book_cover(book[0])
@@ -314,7 +369,7 @@ class _BookArea(gtk.ScrolledWindow):
                 int(0.67 * prefs['library cover size']),
                 prefs['library cover size'])
             pixbuf = image.add_border(pixbuf, 2, 0xFFFFFFFF)
-            self.liststore.append([pixbuf, book[0]])
+            self._liststore.append([pixbuf, book[0]])
             if i % 15 == 0: # Don't update GUI for every cover for efficiency.
                 while gtk.events_pending():
                     gtk.main_iteration(False)
@@ -329,13 +384,13 @@ class _BookArea(gtk.ScrolledWindow):
     def remove_book_at_path(self, path):
         """Remove the book at <path> from the ListStore (and thus from
         the _BookArea)."""
-        iterator = self.liststore.get_iter(path)
-        self.liststore.remove(iterator)
+        iterator = self._liststore.get_iter(path)
+        self._liststore.remove(iterator)
 
     def get_book_at_path(self, path):
         """Return the book ID corresponding to the IconView <path>."""
-        iterator = self.liststore.get_iter(path)
-        return self.liststore.get_value(iterator, 1)
+        iterator = self._liststore.get_iter(path)
+        return self._liststore.get_value(iterator, 1)
 
     def _open_selected_book(self, *args):
         """Open the currently selected book."""
@@ -372,7 +427,7 @@ class _BookArea(gtk.ScrolledWindow):
         self._library.set_status_message(
             _('Removed %d book(s) from the library.') % len(selected))
 
-    def _book_button_press(self, iconview, event):
+    def _button_press(self, iconview, event):
         """Handle mouse button presses on the _BookArea."""
         path = iconview.get_path_at_pos(int(event.x), int(event.y))
         if path is None:
@@ -382,23 +437,20 @@ class _BookArea(gtk.ScrolledWindow):
                 iconview.unselect_all()
                 iconview.select_path(path)
             if len(iconview.get_selected_items()) > 1:
-                open_sensitive = False
+                self._ui_manager.get_action('/Popup/open').set_sensitive(False)
             else:
-                open_sensitive = True
+                self._ui_manager.get_action('/Popup/open').set_sensitive(True)
             if (self._library.collection_area.get_current_collection() ==
               _COLLECTION_ALL):
-                remove_collection_sensitive = False
+                self._ui_manager.get_action(
+                    '/Popup/remove from collection').set_sensitive(False)
             else:
-                remove_collection_sensitive = True
-            self._ui_manager.get_action('/Popup/open').set_sensitive(
-                open_sensitive)
-            self._ui_manager.get_action(
-                '/Popup/remove from collection').set_sensitive(
-                remove_collection_sensitive)
+                self._ui_manager.get_action(
+                    '/Popup/remove from collection').set_sensitive(True)
             self._ui_manager.get_widget('/Popup').popup(None, None, None,
                 event.button, event.time)
         
-    def _drag_book_begin(self, iconview, context):
+    def _drag_begin(self, iconview, context):
         """Create a cursor image for drag n drop from the library.
 
         This method relies on implementation details regarding PIL's 
@@ -443,7 +495,7 @@ class _BookArea(gtk.ScrolledWindow):
 
         context.set_icon_pixbuf(pointer, -5, -5)
 
-    def _drag_book_data_get(self, iconview, context, selection, *args):
+    def _drag_data_get(self, iconview, context, selection, *args):
         """Fill the SelectionData with (iconview) paths for the dragged books
         formatted as a string with each path separated by a comma."""
         paths = iconview.get_selected_items()
