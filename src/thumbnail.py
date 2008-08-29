@@ -53,6 +53,20 @@ def get_thumbnail(path, create=True, dst_dir=_thumbdir):
         return None
 
 
+def delete_thumbnail(path, dst_dir=_thumbdir):
+    """Delete the thumbnail (if it exists) for the file at <path>.
+    
+    If <dst_dir> is set it is the base thumbnail directory, if not we use
+    the default .thumbnails/normal/.
+    """
+    thumbpath = _path_to_thumbpath(path, dst_dir)
+    if os.path.isfile(thumbpath):
+        try:
+            os.remove(thumbpath)
+        except Exception:
+            pass
+
+
 def _get_new_thumbnail(path, create, dst_dir):
     """Return a new thumbnail pixbuf for the file at <path>. If <create> is
     True we also save it to disk with <dst_dir> as the base thumbnail

@@ -7,7 +7,7 @@ except ImportError:
     try:
         from pysqlite2 import dbapi2
     except ImportError:
-        print '! Could not find pysqlite2 or sqlite3.'
+        print '! Could neither find pysqlite2 nor sqlite3.'
         dbapi2 = None
 
 import archive
@@ -19,6 +19,9 @@ _cover_dir = os.path.join(constants.COMIX_DIR, 'library_covers')
 
 
 class LibraryBackend:
+    
+    """The LibraryBackend handles the storing and retrieval of library
+    data to and from disk."""
 
     def __init__(self):
         if not os.path.exists(constants.COMIX_DIR):
@@ -33,24 +36,34 @@ class LibraryBackend:
             self._create_table_contain()
 
     def get_book_cover(self, book):
-        """Return a pixbuf with a thumbnail of the cover of <book>."""
-        path = self._con.execute('''select path from Book
-            where id=?''', (book,)).fetchone()[0]
+        """Return a pixbuf with a thumbnail of the cover of <book>, or
+        None if the cover can not be fetched.
+        """
+        try:
+            path = self._con.execute('''select path from Book
+                where id = ?''', (book,)).fetchone()[0]
+        except Exception:
+            print '! Non-existant book #%d' % book
+            return None
         thumb = thumbnail.get_thumbnail(path, create=True, dst_dir=_cover_dir)
         if thumb is None:
-            print '! Could not read %s' % path
+            print '! Could not get cover for %s' % path
         return thumb
 
     def get_detailed_book_info(self, book):
-        """Return a tuple with all the information about <book>."""
+        """Return a tuple with all the information about <book>, or None
+        if <book> is not in the library.
+        """
         cur = self._con.execute('''select * from Book
-            where id=?''', (book,))
+            where id = ?''', (book,))
         return cur.fetchone()
 
     def get_detailed_collection_info(self, collection):
-        """Return a tuple with all the information about <collection>."""
+        """Return a tuple with all the information about <collection>, or
+        None if <collection> is not in the library.
+        """
         cur = self._con.execute('''select * from Collection
-            where id=?''', (collection,))
+            where id = ?''', (collection,))
         return cur.fetchone()
 
     def get_books_in_collection(self, collection=None):
@@ -61,7 +74,7 @@ class LibraryBackend:
                 order by path''')
         else:
             cur = self._con.execute('''select id from Book
-                where id in (select book from Contain where collection=?)
+                where id in (select book from Contain where collection = ?)
                 order by path''', (collection,))
         return cur.fetchall()
 
@@ -74,14 +87,22 @@ class LibraryBackend:
                 order by name''')
         else:
             cur = self._con.execute('''select id, name from Collection
-                where supercollection=?
+                where supercollection = ?
                 order by name''', (collection,))
         return cur.fetchall()
 
+    def get_collection_name(self, collection):
+        """Return the name field of the <collection>, or None if the
+        collection does not exist."""
+        cur = self._con.execute('''select name from Collection
+            where id = ?''', (collection,))
+        return cur.fetchone()
+
     def add_book(self, path):
-        """Add the archive at <path> to the library."""
+        """Add the archive at <path> to the library. Return True if the
+        book was successfully added."""
         if not archive.archive_mime_type(path):
-            return
+            return False
         path = os.path.abspath(path)
         name = os.path.basename(path)
         format, pages, size = archive.get_archive_info(path)
@@ -90,23 +111,30 @@ class LibraryBackend:
             self._con.execute('''insert into Book
                 (name, path, pages, format, size) values (?, ?, ?, ?, ?)''',
                 (name, path, pages, format, size))
+            return True
+        except dbapi2.DatabaseError: # E.g. book already in library
+            pass
         except dbapi2.Error:
-            print '! Could not add book %s' % path
+            print '! Could not add book %s to the library' % path
+        return False
 
     def add_collection(self, name):
-        """Add a new collection with <name> to the library."""
+        """Add a new collection with <name> to the library. Return True
+        if the collection was successfully added."""
         try:
             self._con.execute('''insert into Collection
                 (name) values (?)''', (name,))
+            return True
         except dbapi2.Error:
             print '! Could not add collection %s' % name
+        return False
 
     def add_book_to_collection(self, book, collection):
         """Put <book> into <collection>."""
         try:
             self._con.execute('''insert into Contain
                 (collection, book) values (?, ?)''', (collection, book))
-        except dbapi2.DatabaseError: # E.g. book already in collection
+        except dbapi2.DatabaseError: # E.g. book already in collection.
             pass
         except dbapi2.Error:
             print '! Could not add book %s to collection %s' % (book,
@@ -117,11 +145,45 @@ class LibraryBackend:
         self._con.execute('''update Collection set supercollection = ?
             where id = ?''', (supercollection, subcollection))
 
+    def rename_collection(self, collection, name):
+        """Rename the <collection> to <name>. Return True if the renaming
+        was successful."""
+        try:
+            self._con.execute('''update Collection set name = ?
+                where id = ?''', (name, collection))
+            return True
+        except dbapi2.DatabaseError: # E.g. name taken.
+            pass
+        except dbapi2.Error:
+            print '! Could not rename collection to %s' % name
+        return False
+
+    def duplicate_collection(self, collection):
+        """Duplicate the <collection> by creating a new collection
+        containing the same books. Return True if the duplication was
+        successful.
+        """
+        name = self.get_collection_name(collection)
+        if name is None: # Original collection does not exist.
+            return False
+        copy_name = _('%s (Copy)') % name
+        if self.add_collection(copy_name) is None: # Could not create the new.
+            return False
+        copy_collection = self._con.execute('''select id from Collection
+            where name = ?''', (copy_name,)).fetchone()[0]
+        self._con.execute('''insert or ignore into Contain (collection, book)
+            select ?, book from Contain
+            where collection = ?''', (copy_collection, collection))
+        return True
+
     def remove_book(self, book):
         """Remove the <book> from the library."""
+        info = self.get_detailed_book_info(book)
+        if info is not None:
+            path = info[2]
+            thumbnail.delete_thumbnail(path, dst_dir=_cover_dir)
         self._con.execute('delete from Book where id = ?', (book,))
         self._con.execute('delete from Contain where book = ?', (book,))
-        # FIXME: Remove thumbnail as well.
 
     def remove_collection(self, collection):
         """Remove the <collection> (sans books) from the library."""

@@ -1,4 +1,4 @@
-"""filechooser.py - FileChooserDialog implementation."""
+"""filechooser.py - Custom FileChooserDialog implementation."""
 
 import os
 
@@ -17,7 +17,7 @@ class _ComicFileChooserDialog(gtk.Dialog):
 
     """We roll our own FileChooserDialog because the one in GTK is buggy
     with the preview widget. This is a base class for the
-    _MainFileChooserDialog and the LibraryFileChooserDialog.
+    _MainFileChooserDialog and the _LibraryFileChooserDialog.
     """
 
     def __init__(self):
@@ -69,15 +69,28 @@ class _ComicFileChooserDialog(gtk.Dialog):
             'application/x-bzip2 application/x-cbt')
 
         self.filechooser.set_current_folder(prefs['path of last browsed'])
-
         self.show_all()
 
     def add_filter(self, name, mimes):
+        """Add a filter for <mimes> called <name> to the filechooser."""
         ffilter = gtk.FileFilter()
         for mime in mimes.split():
             ffilter.add_mime_type(mime)
         ffilter.set_name(name)
         self.filechooser.add_filter(ffilter)
+
+    def handle_response(self, response):
+        """Return a list of the paths of the chosen files, or None if the 
+        event only changed the current directory."""
+        if response == gtk.RESPONSE_OK:
+            paths = self.filechooser.get_filenames()
+            if len(paths) == 1 and os.path.isdir(paths[0]):
+                self.filechooser.set_current_folder(paths[0])
+                return None
+            prefs['path of last browsed'] = \
+                self.filechooser.get_current_folder()
+            return paths
+        return []
 
     def _update_preview(self, *args):
         path = self.filechooser.get_preview_filename()
@@ -107,19 +120,6 @@ class _ComicFileChooserDialog(gtk.Dialog):
             self._preview_image.clear()
             self._namelabel.set_text('')
             self._sizelabel.set_text('')
-
-    def handle_response(self, response):
-        """Return a list of the paths of the chosen files, or None if the 
-        event only changed the current directory."""
-        if response == gtk.RESPONSE_OK:
-            paths = self.filechooser.get_filenames()
-            if len(paths) == 1 and os.path.isdir(paths[0]):
-                self.filechooser.set_current_folder(paths[0])
-                return None
-            prefs['path of last browsed'] = \
-                self.filechooser.get_current_folder()
-            return paths
-        return []
 
 
 class _MainFileChooserDialog(_ComicFileChooserDialog):
