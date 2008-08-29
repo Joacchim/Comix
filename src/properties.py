@@ -90,7 +90,7 @@ class _PropertiesDialog(gtk.Dialog):
 
         self.set_resizable(False)
         self.set_has_separator(False)
-        self.connect('response', close_dialog)
+        self.connect('response', _close_dialog)
         self.set_default_response(gtk.RESPONSE_CLOSE)
         notebook = gtk.Notebook()
         self.set_border_width(4)
@@ -173,9 +173,11 @@ def open_dialog(action, window):
     global _dialog
     if _dialog is None:
         _dialog = _PropertiesDialog(window)
+    else:
+        _dialog.present()
 
 
-def close_dialog(*args):
+def _close_dialog(*args):
     global _dialog
     if _dialog is not None:
         _dialog.destroy()

@@ -121,12 +121,15 @@ class LibraryBackend:
         """Remove the <book> from the library."""
         self._con.execute('delete from Book where id = ?', (book,))
         self._con.execute('delete from Contain where book = ?', (book,))
+        # FIXME: Remove thumbnail as well.
 
     def remove_collection(self, collection):
         """Remove the <collection> (sans books) from the library."""
         self._con.execute('delete from Collection where id = ?', (collection,))
         self._con.execute('delete from Contain where collection = ?',
             (collection,))
+        self._con.execute('''update Collection set supercollection = NULL
+            where supercollection = ?''', (collection,))
 
     def remove_book_from_collection(self, book, collection):
         """Remove <book> from <collection>."""

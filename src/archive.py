@@ -173,7 +173,7 @@ class Extractor:
                 else:
                     print '! archive.py: Could not find RAR file extractor.\n'
         except Exception:
-            # Better to ignore any failed extractions (e.g. from corrupt
+            # Better to ignore any failed extractions (e.g. from a corrupt
             # archive) than to crash here and leave the main thread in a
             # possible infinite block. Damaged or missing files *should* be
             # handled gracefully by the main program anyway.
@@ -218,6 +218,8 @@ def get_name(archive_type):
 
 
 def get_archive_info(path):
+    """Return some various info about the archive at <path>."""
+    # FIXME: This is a hack used by the library. Rethink the approach.
     image_re = re.compile(r'\.(jpg|jpeg|png|gif|tif|tiff)\s*$', re.I)
     extractor = Extractor()
     extractor.setup(path, None)

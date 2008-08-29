@@ -1,4 +1,4 @@
-"""histogram.py - Draws histograms (RGB) from pixbufs."""
+"""histogram.py - Draw histograms (RGB) from pixbufs."""
 
 import gtk
 import Image

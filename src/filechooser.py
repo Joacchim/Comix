@@ -9,83 +9,78 @@ import image
 from preferences import prefs
 import thumbnail
 
-_dialog = None
+_main_filechooser_dialog = None
+_library_filechooser_dialog = None
 
 
 class _ComicFileChooserDialog(gtk.Dialog):
 
     """We roll our own FileChooserDialog because the one in GTK is buggy
-    with the preview widget.
+    with the preview widget. This is a base class for the
+    _MainFileChooserDialog and the LibraryFileChooserDialog.
     """
 
-    def __init__(self, file_handler):
+    def __init__(self):
         gtk.Dialog.__init__(self, _('Open'), None, 0, (gtk.STOCK_CANCEL,
             gtk.RESPONSE_CANCEL, gtk.STOCK_OPEN, gtk.RESPONSE_OK))
-
-        self._file_handler = file_handler
-        self.connect('response', self._response)
+        
         self.set_default_response(gtk.RESPONSE_OK)
         self.set_has_separator(False)
 
-        self._filechooser = gtk.FileChooserWidget()
-        self._filechooser.connect('file-activated', self._response,
-            gtk.RESPONSE_OK)
-        self._filechooser.set_size_request(680, 420)
-        self.vbox.pack_start(self._filechooser)
+        self.filechooser = gtk.FileChooserWidget()
+        self.filechooser.set_size_request(680, 420)
+        self.vbox.pack_start(self.filechooser)
         self.set_border_width(4)
-        self._filechooser.set_border_width(6)
+        self.filechooser.set_border_width(6)
+        self.filechooser.connect('file-activated', self._response,
+            gtk.RESPONSE_OK)
 
         preview_box = gtk.VBox(False, 10)
         preview_box.set_size_request(130, 0)
         self._preview_image = gtk.Image()
         self._preview_image.set_size_request(130, 130)
         preview_box.pack_start(self._preview_image, False, False)
-        self._filechooser.set_preview_widget(preview_box)
+        self.filechooser.set_preview_widget(preview_box)
         self._namelabel = gtk.Label()
         self._namelabel.set_ellipsize(pango.ELLIPSIZE_MIDDLE)
         preview_box.pack_start(self._namelabel, False, False)
         self._sizelabel = gtk.Label()
         self._sizelabel.set_ellipsize(pango.ELLIPSIZE_MIDDLE)
         preview_box.pack_start(self._sizelabel, False, False)
-        self._filechooser.set_use_preview_label(False)
+        self.filechooser.set_use_preview_label(False)
         preview_box.show_all()
-        self._filechooser.connect('update-preview', self._update_preview)
+        self.filechooser.connect('update-preview', self._update_preview)
 
         ffilter = gtk.FileFilter()
         ffilter.add_pattern('*')
         ffilter.set_name(_('All files'))
-        self._filechooser.add_filter(ffilter)
-        ffilter = gtk.FileFilter()
-        ffilter.add_pixbuf_formats()
-        ffilter.set_name(_('All images'))
-        self._filechooser.add_filter(ffilter)
+        self.filechooser.add_filter(ffilter)
 
-        def add_filter(name, mimes):
-            ffilter = gtk.FileFilter()
-            for mime in mimes.split():
-                ffilter.add_mime_type(mime)
-            ffilter.set_name(name)
-            self._filechooser.add_filter(ffilter)
-
-        add_filter(_('JPEG images'), 'image/jpeg')
-        add_filter(_('PNG images'), 'image/png')
-
-        add_filter(_('All Archives'), 'application/x-zip application/zip '
+        self.add_filter(_('All Archives'), 'application/x-zip application/zip '
             'application/x-rar application/x-tar application/x-gzip '
             'application/x-bzip2 application/x-cbz application/x-cbr '
             'application/x-cbt')
-        add_filter(_('Zip archives'),
+        self.add_filter(_('Zip archives'),
             'application/x-zip application/zip application/x-cbz')
-        add_filter(_('RAR archives'), 'application/x-rar application/x-cbr')
-        add_filter(_('tar archives'), 'application/x-tar application/x-gzip '
+        self.add_filter(_('RAR archives'),
+            'application/x-rar application/x-cbr')
+        self.add_filter(_('tar archives'),
+            'application/x-tar application/x-gzip '
             'application/x-bzip2 application/x-cbt')
 
-        self._filechooser.set_current_folder(prefs['path of last browsed'])
+        self.filechooser.set_current_folder(prefs['path of last browsed'])
 
         self.show_all()
 
+    def add_filter(self, name, mimes):
+        ffilter = gtk.FileFilter()
+        for mime in mimes.split():
+            ffilter.add_mime_type(mime)
+        ffilter.set_name(name)
+        self.filechooser.add_filter(ffilter)
+
     def _update_preview(self, *args):
-        path = self._filechooser.get_preview_filename()
+        path = self.filechooser.get_preview_filename()
         if path and os.path.isfile(path):
             pixbuf = thumbnail.get_thumbnail(path, prefs['create thumbnails'])
             if pixbuf is None:
@@ -113,31 +108,93 @@ class _ComicFileChooserDialog(gtk.Dialog):
             self._namelabel.set_text('')
             self._sizelabel.set_text('')
 
-    def _response(self, widget, response):
+    def handle_response(self, response):
+        """Return a list of the paths of the chosen files, or None if the 
+        event only changed the current directory."""
         if response == gtk.RESPONSE_OK:
-            path = self._filechooser.get_filename()
-            if path is None:
-                return
-            if os.path.isdir(path):
-                self._filechooser.set_current_folder(path)
-                return
-            close_dialog()
-            while gtk.events_pending():
-                gtk.main_iteration(False)
-            self._file_handler.open_file(path)
-            prefs['path of last browsed'] = os.path.dirname(path)
-        elif response in [gtk.RESPONSE_CANCEL, gtk.RESPONSE_DELETE_EVENT]:
-            close_dialog()
+            paths = self.filechooser.get_filenames()
+            if len(paths) == 1 and os.path.isdir(paths[0]):
+                self.filechooser.set_current_folder(paths[0])
+                return None
+            prefs['path of last browsed'] = \
+                self.filechooser.get_current_folder()
+            return paths
+        return []
 
 
-def open_dialog(action, file_handler):
-    global _dialog
-    if _dialog is None:
-        _dialog = _ComicFileChooserDialog(file_handler)
+class _MainFileChooserDialog(_ComicFileChooserDialog):
+    
+    """The normal FileChooserDialog used with the 'Open' menu item."""
+    
+    def __init__(self, file_handler):
+        _ComicFileChooserDialog.__init__(self)
+        self._file_handler = file_handler
+        self.connect('response', self._response)
+
+        ffilter = gtk.FileFilter()
+        ffilter.add_pixbuf_formats()
+        ffilter.set_name(_('All images'))
+        self.filechooser.add_filter(ffilter)
+        self.add_filter(_('JPEG images'), 'image/jpeg')
+        self.add_filter(_('PNG images'), 'image/png')
+
+    def _response(self, widget, response):
+        paths = super(_MainFileChooserDialog, self).handle_response(response)
+        if paths is None:
+            return
+        _close_main_filechooser_dialog()
+        if paths:
+            self._file_handler.open_file(paths[0])
+
+    
+class _LibraryFileChooserDialog(_ComicFileChooserDialog):
+    
+    """The library FileChooserDialog used when adding books to the library."""
+    
+    def __init__(self, library):
+        _ComicFileChooserDialog.__init__(self)
+        self._library = library
+        self.filechooser.set_select_multiple(True)
+        self.connect('response', self._response)
+
+    def _response(self, widget, response):
+        paths = super(_LibraryFileChooserDialog, self).handle_response(response)
+        if paths is None:
+            return
+        _close_library_filechooser_dialog()
+        if paths:
+            self._library.add_books(paths)
 
 
-def close_dialog(*args):
-    global _dialog
-    if _dialog is not None:
-        _dialog.destroy()
-        _dialog = None
+def open_main_filechooser_dialog(action, file_handler):
+    """Open the main filechooser dialog."""
+    global _main_filechooser_dialog
+    if _main_filechooser_dialog is None:
+        _main_filechooser_dialog = _MainFileChooserDialog(file_handler)
+    else:
+        _main_filechooser_dialog.present()
+
+
+def _close_main_filechooser_dialog(*args):
+    """Close the main filechooser dialog."""
+    global _main_filechooser_dialog
+    if _main_filechooser_dialog is not None:
+        _main_filechooser_dialog.destroy()
+        _main_filechooser_dialog = None
+
+
+def open_library_filechooser_dialog(library):
+    """Open the library filechooser dialog."""
+    global _library_filechooser_dialog
+    if _library_filechooser_dialog is None:
+        _library_filechooser_dialog = _LibraryFileChooserDialog(library)
+    else:
+        _library_filechooser_dialog.present()
+
+
+def _close_library_filechooser_dialog(*args):
+    """Close the library filechooser dialog."""
+    global _library_filechooser_dialog
+    if _library_filechooser_dialog is not None:
+        _library_filechooser_dialog.destroy()
+        _library_filechooser_dialog = None

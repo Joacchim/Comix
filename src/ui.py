@@ -131,7 +131,7 @@ class MainUI(gtk.UIManager):
 
         self._actiongroup.add_actions([
             ('open', gtk.STOCK_OPEN, _('_Open...'),
-                '<Control>o', None, filechooser.open_dialog),
+                '<Control>o', None, filechooser.open_main_filechooser_dialog),
             ('library', 'comix-library', _('_Library...'),
                 '<Control>l', None, library.open_dialog),
             ('comments', 'comix-comments', _('View _comments'),

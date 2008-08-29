@@ -75,7 +75,7 @@ class BookmarksMenu(gtk.Menu):
         choice_dialog = gtk.MessageDialog(None, 0, gtk.MESSAGE_QUESTION,
             gtk.BUTTONS_YES_NO, _('Clear all bookmarks?'))
         choice_dialog.format_secondary_text(
-            _('All stored bookmarks will be removed, are you sure you want to continue?'))
+            _('All stored bookmarks will be removed. Are you sure that you want to continue?'))
         response = choice_dialog.run()
         choice_dialog.destroy()
         if response == gtk.RESPONSE_YES:
@@ -263,7 +263,7 @@ class _BookmarksDialog(gtk.Dialog):
         self._icon_col.set_sizing(gtk.TREE_VIEW_COLUMN_AUTOSIZE)
         self._name_col.set_sizing(gtk.TREE_VIEW_COLUMN_AUTOSIZE)
         self._page_col.set_sizing(gtk.TREE_VIEW_COLUMN_AUTOSIZE)
-        self.resize(400, 400)
+        self.resize(450, 450)
 
         self.connect('response', self._response)
         self.connect('delete_event', self._close)

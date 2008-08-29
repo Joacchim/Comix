@@ -18,7 +18,7 @@ class _CommentsDialog(gtk.Dialog):
             (gtk.STOCK_CLOSE, gtk.RESPONSE_CLOSE))
         self.set_has_separator(False)
         self.set_resizable(True)
-        self.connect('response', close_dialog)
+        self.connect('response', _close_dialog)
         self.set_default_response(gtk.RESPONSE_CLOSE)
         self.set_default_size(600, 550)
 
@@ -69,9 +69,11 @@ def open_dialog(action, file_handler):
     global _dialog
     if _dialog is None:
         _dialog = _CommentsDialog(file_handler)
+    else:
+        _dialog.present()
 
 
-def close_dialog(*args):
+def _close_dialog(*args):
     """Destroy the comments dialog."""
     global _dialog
     if _dialog is not None:

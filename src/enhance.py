@@ -164,7 +164,7 @@ class _EnhanceImageDialog(gtk.Dialog):
 
     def _response(self, dialog, response):
         if response in [gtk.RESPONSE_OK, gtk.RESPONSE_DELETE_EVENT]:
-            close_dialog()
+            _close_dialog()
         elif response == gtk.RESPONSE_NO:
             self._block = True
             self._brightness_scale.set_value(0.0)
@@ -194,9 +194,11 @@ def open_dialog(action, window):
     if _dialog is None:
         _dialog = _EnhanceImageDialog(window.enhancer)
         draw_histogram(window.left_image)
+    else:
+        _dialog.present()
 
 
-def close_dialog(*args):
+def _close_dialog(*args):
     """Destroy the image enhancement dialog."""
     global _dialog
     if _dialog is not None:

@@ -86,16 +86,18 @@ class _PreferencesDialog(gtk.Dialog):
             print 'ok'
         elif response == gtk.RESPONSE_DELETE_EVENT:
             print 'close'
-        close_dialog()
+        _close_dialog()
 
 
 def open_dialog(action, window):
     global _dialog
     if _dialog is None:
         _dialog = _PreferencesDialog(window)
+    else:
+        _dialog.present()
 
 
-def close_dialog(*args):
+def _close_dialog(*args):
     global _dialog
     if _dialog is not None:
         _dialog.destroy()
@@ -111,7 +113,7 @@ def read_preferences_file():
             old_prefs = cPickle.load(config)
             config.close()
         except Exception:
-            print '! Error in preferences file "%s", deleting...' % _config_path
+            print '! Corrupt preferences file "%s", deleting...' % _config_path
             os.remove(_config_path)
         else:
             for key in old_prefs:

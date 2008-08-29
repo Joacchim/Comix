@@ -8,6 +8,7 @@ import ImageDraw
 
 import archive
 import encoding
+import filechooser
 import librarybackend
 from preferences import prefs
 import image
@@ -77,6 +78,7 @@ class _LibraryDialog(gtk.Window):
         add_book_button = gtk.Button(_('Add books'))
         add_book_button.set_image(gtk.image_new_from_stock(
             gtk.STOCK_ADD, gtk.ICON_SIZE_BUTTON))
+        add_book_button.connect('clicked', self._open_add_dialog)
         hbox.pack_start(add_book_button, False, False)
         add_collection_button = gtk.Button(_('Add collection'))
         add_collection_button.set_image(gtk.image_new_from_stock(
@@ -134,7 +136,16 @@ class _LibraryDialog(gtk.Window):
         prefs['lib window width'], prefs['lib window height'] = self.get_size()
         self.book_area.stop_update()
         self.backend.close()
-        close_dialog()
+        _close_dialog()
+
+    def _open_add_dialog(self, *args):
+        """Open up a dialog where books can be added to the library."""
+        filechooser.open_library_filechooser_dialog(self)
+
+    def add_books(self, paths):
+        """Add the books at the filesystem paths in the sequence <paths>
+        to the library."""
+        print paths
 
 
 class _CollectionArea(gtk.ScrolledWindow):
@@ -181,8 +192,8 @@ class _CollectionArea(gtk.ScrolledWindow):
         ('rename', None, _('Rename'), None, None, None),
         ('duplicate', gtk.STOCK_COPY, _('Duplicate collection'), None, None,
             None),
-        ('remove', gtk.STOCK_REMOVE, _('Remove collection'), None, None,
-            None)])
+        ('remove', gtk.STOCK_REMOVE, _('Remove collection...'), None, None,
+            self._remove_collection)])
         self._ui_manager.insert_action_group(actiongroup, 0)
         
         self._display_collections()
@@ -238,6 +249,22 @@ class _CollectionArea(gtk.ScrolledWindow):
             self._treeview.expand_to_path(path)
             self._treeview.set_cursor(path)
             return True
+
+    def _remove_collection(self, action):
+        """Remove the cuurently selected collection from the library, if the
+        user answers 'Yes' in a dialog."""
+        choice_dialog = gtk.MessageDialog(None, 0, gtk.MESSAGE_QUESTION,
+            gtk.BUTTONS_YES_NO, _('Remove collection from the library?'))
+        choice_dialog.format_secondary_text(
+            _('The selected collection will be removed from the library (but the books and subcollections in it will remain). Are you sure that you want to continue?'))
+        response = choice_dialog.run()
+        choice_dialog.destroy()
+        if response == gtk.RESPONSE_YES:
+            collection = self.get_current_collection()
+            self._library.backend.remove_collection(collection)
+            self._display_collections()
+            prefs['last library collection'] = _COLLECTION_ALL
+            self._treestore.foreach(self._select_last_collection)
 
     def _button_press(self, treeview, event):
         """Handle mouse button presses on the _CollectionArea."""
@@ -352,7 +379,7 @@ class _BookArea(gtk.ScrolledWindow):
             _('Remove from this collection'), None, None,
             self._remove_books_from_collection),
         ('remove from library', gtk.STOCK_DELETE,
-            _('Delete from library'), None, None,
+            _('Remove from library...'), None, None,
             self._remove_books_from_library)])
         self._ui_manager.insert_action_group(actiongroup, 0)
 
@@ -418,14 +445,21 @@ class _BookArea(gtk.ScrolledWindow):
 
     def _remove_books_from_library(self, *args):
         """Remove the currently selected book(s) from the library, and thus
-        also from the _BookArea."""
-        selected = self._iconview.get_selected_items()
-        for path in selected:
-            book = self.get_book_at_path(path)
-            self._library.backend.remove_book(book)
-            self.remove_book_at_path(path)
-        self._library.set_status_message(
-            _('Removed %d book(s) from the library.') % len(selected))
+        also from the _BookArea, if the user clicks 'Yes' in a dialog."""
+        choice_dialog = gtk.MessageDialog(None, 0, gtk.MESSAGE_QUESTION,
+            gtk.BUTTONS_YES_NO, _('Remove book(s) from the library?'))
+        choice_dialog.format_secondary_text(
+            _('The selected books will be removed from the library (but the comic book files will be untouched). Are you sure that you want to continue?'))
+        response = choice_dialog.run()
+        choice_dialog.destroy()
+        if response == gtk.RESPONSE_YES:
+            selected = self._iconview.get_selected_items()
+            for path in selected:
+                book = self.get_book_at_path(path)
+                self._library.backend.remove_book(book)
+                self.remove_book_at_path(path)
+            self._library.set_status_message(
+                _('Removed %d book(s) from the library.') % len(selected))
 
     def _button_press(self, iconview, event):
         """Handle mouse button presses on the _BookArea."""
@@ -510,9 +544,11 @@ def open_dialog(action, window):
             print '! You need an sqlite wrapper to use the library.'
         else:
             _dialog = _LibraryDialog(window)
+    else:
+        _dialog.present()
 
 
-def close_dialog(*args):
+def _close_dialog(*args):
     global _dialog
     if _dialog is not None:
         _dialog.destroy()

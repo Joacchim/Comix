@@ -22,7 +22,7 @@ _thumbdir = os.path.join(os.getenv('HOME'), '.thumbnails/normal')
 
 
 def get_thumbnail(path, create=True, dst_dir=_thumbdir):
-    """Get a thumbnail pixbuf for the file at <path> by looking in the
+    """Return a thumbnail pixbuf for the file at <path> by looking in the
     directory of stored thumbnails. If a thumbnail for the file doesn't
     exist we create a thumbnail pixbuf from the original. If <create>
     is True we also save this new thumbnail in the thumbnail directory.
@@ -159,7 +159,7 @@ def _get_pixbuf128(path):
 
 def _guess_cover(files):
     """Return the filename within <files> that is the most likely to be the
-    cover of an archive using simple heuristics.
+    cover of an archive using some simple heuristics.
     """
     files.sort()
     ext_re = re.compile(r'\.(jpg|jpeg|png|gif|tif|tiff)\s*$', re.I)

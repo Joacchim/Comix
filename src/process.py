@@ -1,11 +1,4 @@
-"""process.py - Process spawning module.
-
-The subprocess and popen2 modules in Python are broken (see issue 1336).
-The problem (i.e. complete crash) they can cause happen fairly often (once
-is too often) in Comix when calling "rar" or "unrar" to extract specific
-files from archives. We roll our own very simple process spawning module
-here instead (and surely introduce a whole new array of exciting bugs!)
-"""
+"""process.py - Process spawning module."""
 
 import os
 import sys
@@ -13,6 +6,14 @@ import gc
 
 
 class Process:
+    
+    """The subprocess and popen2 modules in Python are broken (see issue
+    #1336). The problem (i.e. complete crash) they can cause happen fairly
+    often (once is too often) in Comix when calling "rar" or "unrar" to
+    extract specific files from archives. We roll our own very simple
+    process spawning module here instead (and surely introduce a whole
+    new array of exciting bugs!)
+    """
 
     def __init__(self, args):
         """Setup a Process where <args> is a sequence of arguments that defines

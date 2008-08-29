@@ -83,5 +83,5 @@ if __name__ == '__main__':
         window.file_handler.open_file(os.path.normpath(sys.argv[1]))
     try:
         gtk.main()
-    except KeyboardInterrupt:
+    except KeyboardInterrupt: # Will not always work because of threading.
         window.terminate_program()
