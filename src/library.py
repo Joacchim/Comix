@@ -1,5 +1,7 @@
 """library.py - Comic book library."""
 
+from xml.sax.saxutils import escape as xmlescape
+
 import gtk
 import gobject
 import pango
@@ -86,6 +88,7 @@ class _LibraryDialog(gtk.Window):
         add_book_button.connect('clicked', self._open_add_dialog)
         hbox.pack_start(add_book_button, False, False)
         add_collection_button = gtk.Button(_('Add collection')) #FIXME
+        #add_collection_button.connect('clicked', self._add_collection)
         add_collection_button.set_image(gtk.image_new_from_stock(
             gtk.STOCK_ADD, gtk.ICON_SIZE_BUTTON))
         hbox.pack_start(add_collection_button, False, False)
@@ -186,7 +189,7 @@ class _CollectionArea(gtk.ScrolledWindow):
             [('book', gtk.TARGET_SAME_APP, 0)], gtk.gdk.ACTION_MOVE)
         #self._treeview.set_reorderable(True) #FIXME
         cellrenderer = gtk.CellRendererText()
-        column = gtk.TreeViewColumn(None, cellrenderer, markup=0) #FIXME
+        column = gtk.TreeViewColumn(None, cellrenderer, markup=0)
         self._treeview.append_column(column)
         self.add(self._treeview)
         
@@ -241,18 +244,18 @@ class _CollectionArea(gtk.ScrolledWindow):
         prefs['last library collection'] = collection
         gobject.idle_add(self._library.book_area.display_covers, collection)
 
-    def _display_collections(self): #FIXME (escape markup)
+    def _display_collections(self):
         """Display the library collections. Should be called on startup."""
         
         def _add(parent_iter, supercoll):
             for coll in self._library.backend.get_collections_in_collection(
               supercoll):
                 child_iter = self._treestore.append(parent_iter,
-                    [coll[1], coll[0]])
+                    [xmlescape(coll[1]), coll[0]])
                 _add(child_iter, coll[0])
 
         self._treestore.clear()
-        self._treestore.append(None, ['<b>%s</b>' % _('All books'),
+        self._treestore.append(None, ['<b>%s</b>' % xmlescape(_('All books')),
             _COLLECTION_ALL])
         _add(None, None)
     
@@ -301,11 +304,11 @@ class _CollectionArea(gtk.ScrolledWindow):
             _('Please enter a new name for the selected collection.'))
         rename_dialog.set_default_response(gtk.RESPONSE_OK)
         
-        box = gtk.HBox() # To get pixel-exact line-ups.
+        box = gtk.HBox() # To get nice line-ups with the padding.
         rename_dialog.vbox.pack_start(box)
         entry = gtk.Entry()
         entry.set_text(old_name)
-        entry.connect('activate',
+        entry.connect('activate', # Enter on entry is the same as pressing OK.
             lambda x: rename_dialog.response(gtk.RESPONSE_OK))
         box.pack_start(entry, True, True, 6)
         box.show_all()
@@ -314,18 +317,17 @@ class _CollectionArea(gtk.ScrolledWindow):
         new_name = entry.get_text()
         rename_dialog.destroy()
         if response == gtk.RESPONSE_OK and new_name:
-            ok = self._library.backend.rename_collection(collection, new_name)
-            self._display_collections()
-            #self._select_last_collection()
-            if not ok:
+            if self._library.backend.rename_collection(collection, new_name):
+                self._display_collections()
+                self._select_last_collection()
+            else:
                 self._library.set_status_message(
                     _('Could not change the name to "%s".') % new_name)
     
     def _duplicate_collection(self, action):
         """Duplicate the currently selected collection."""
         collection = self.get_current_collection()
-        success = self._library.backend.duplicate_collection(collection)
-        if success:
+        if self._library.backend.duplicate_collection(collection):
             self._display_collections()
             self._select_last_collection()
         else:
@@ -344,6 +346,7 @@ class _CollectionArea(gtk.ScrolledWindow):
             else:
                 sens = True
             self._ui_manager.get_action('/Popup/rename').set_sensitive(sens)
+            self._ui_manager.get_action('/Popup/duplicate').set_sensitive(sens)
             self._ui_manager.get_action('/Popup/remove').set_sensitive(sens)
             self._ui_manager.get_widget('/Popup').popup(None, None, None,
                 event.button, event.time)
