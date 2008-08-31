@@ -218,12 +218,15 @@ def get_name(archive_type):
 
 
 def get_archive_info(path):
-    """Return some various info about the archive at <path>."""
-    # FIXME: This is a hack used by the library. Rethink the approach.
+    """Return a tuple (mime, num_pages, size) with info about the archive
+    at <path>, or None if <path> doesn't point to a supported archive.
+    """
     image_re = re.compile(r'\.(jpg|jpeg|png|gif|tif|tiff)\s*$', re.I)
     extractor = Extractor()
     extractor.setup(path, None)
     mime = extractor.get_mime_type()
+    if mime is None:
+        return None
     files = extractor.get_files()
     extractor.close()
     num_pages = len(filter(image_re.search, files))

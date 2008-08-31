@@ -85,16 +85,18 @@ class _LibraryDialog(gtk.Window):
         add_book_button = gtk.Button(_('Add books'))
         add_book_button.set_image(gtk.image_new_from_stock(
             gtk.STOCK_ADD, gtk.ICON_SIZE_BUTTON))
-        add_book_button.connect('clicked', self._open_add_dialog)
+        add_book_button.connect('clicked', self._add_books_cb)
         hbox.pack_start(add_book_button, False, False)
-        add_collection_button = gtk.Button(_('Add collection')) #FIXME
-        #add_collection_button.connect('clicked', self._add_collection)
+        add_collection_button = gtk.Button(_('Add collection'))
+        add_collection_button.connect('clicked', self._add_collection_cb)
         add_collection_button.set_image(gtk.image_new_from_stock(
             gtk.STOCK_ADD, gtk.ICON_SIZE_BUTTON))
         hbox.pack_start(add_collection_button, False, False)
         hbox.pack_start(gtk.HBox(), True, True)
-        open_button = gtk.Button(None, gtk.STOCK_OPEN) #FIXME
-        hbox.pack_start(open_button, False, False)
+        self._open_button = gtk.Button(None, gtk.STOCK_OPEN)
+        self._open_button.connect('clicked', self.book_area.open_selected_book)
+        self._open_button.set_sensitive(False)
+        hbox.pack_start(self._open_button, False, False)
 
         table = gtk.Table(2, 2, False)
         table.attach(self.collection_area, 0, 1, 0, 1, gtk.FILL,
@@ -118,14 +120,25 @@ class _LibraryDialog(gtk.Window):
 
     def update_info(self, iconview):
         """Update the info box using the currently selected book."""
+        self._open_button.set_sensitive(False)
         selected = iconview.get_selected_items()
         if not selected:
+            self._namelabel.set_text('')
+            self._typelabel.set_text('')
+            self._pageslabel.set_text('')
+            self._sizelabel.set_text('')
             return
         path = selected[0]
         book = self.book_area.get_book_at_path(path)
         info = self.backend.get_detailed_book_info(book)
         if info is None:
+            self._namelabel.set_text('')
+            self._typelabel.set_text('')
+            self._pageslabel.set_text('')
+            self._sizelabel.set_text('')
             return
+        if len(selected) == 1:
+            self._open_button.set_sensitive(True)
         self._namelabel.set_text(info[1])
         attrlist = pango.AttrList()
         attrlist.insert(pango.AttrWeight(pango.WEIGHT_BOLD, 0,
@@ -149,12 +162,6 @@ class _LibraryDialog(gtk.Window):
         self.backend.close()
         _close_dialog()
 
-    def _open_add_dialog(self, *args):
-        """Open up a filechooser dialog from which books can be added to
-        the library.
-        """
-        filechooser.open_library_filechooser_dialog(self)
-
     def add_books(self, paths): #FIXME
         """Add the books at <paths> to the library."""
         print paths
@@ -165,6 +172,38 @@ class _LibraryDialog(gtk.Window):
         if collection == _COLLECTION_ALL:
             self.book_area.display_covers(None)
 
+    def _add_books_cb(self, *args):
+        """Open up a filechooser dialog from which books can be added to
+        the library.
+        """
+        filechooser.open_library_filechooser_dialog(self)
+
+    def _add_collection_cb(self, *args):
+        """Add a new collection to the library, through a dialog."""
+        add_dialog = gtk.MessageDialog(None, 0, gtk.MESSAGE_QUESTION,
+            gtk.BUTTONS_OK_CANCEL, _('Add new collection?'))
+        add_dialog.format_secondary_text(
+            _('Please enter a name for the new collection.'))
+        add_dialog.set_default_response(gtk.RESPONSE_OK)
+        
+        box = gtk.HBox() # To get nice line-ups with the padding.
+        add_dialog.vbox.pack_start(box)
+        entry = gtk.Entry()
+        entry.set_text(_('New collection'))
+        entry.connect('activate', # Enter on entry is the same as pressing OK.
+            lambda x: add_dialog.response(gtk.RESPONSE_OK))
+        box.pack_start(entry, True, True, 6)
+        box.show_all()
+        
+        response = add_dialog.run()
+        name = entry.get_text()
+        add_dialog.destroy()
+        if response == gtk.RESPONSE_OK and name:
+            if self.backend.add_collection(name):
+                self.collection_area.display_collections()
+            else:
+                self.set_status_message(
+                    _('Could not add a collection called "%s".') % name)
 
 class _CollectionArea(gtk.ScrolledWindow):
     
@@ -214,8 +253,7 @@ class _CollectionArea(gtk.ScrolledWindow):
             self._remove_collection)])
         self._ui_manager.insert_action_group(actiongroup, 0)
         
-        self._display_collections()
-        self._select_last_collection()
+        self.display_collections()
 
     def get_current_collection(self):
         """Return the collection ID for the currently selected collection,
@@ -225,6 +263,22 @@ class _CollectionArea(gtk.ScrolledWindow):
         if cursor is None:
             return
         return self._get_collection_at_path(cursor[0])
+
+    def display_collections(self):
+        """Display the library collections. Should be called on startup."""
+        
+        def _add(parent_iter, supercoll):
+            for coll in self._library.backend.get_collections_in_collection(
+              supercoll):
+                child_iter = self._treestore.append(parent_iter,
+                    [xmlescape(coll[1]), coll[0]])
+                _add(child_iter, coll[0])
+
+        self._treestore.clear()
+        self._treestore.append(None, ['<b>%s</b>' % xmlescape(_('All books')),
+            _COLLECTION_ALL])
+        _add(None, None)
+        self._select_last_collection()
 
     def _get_collection_at_path(self, path):
         """Return the collection ID of the collection at the (TreeView)
@@ -244,21 +298,6 @@ class _CollectionArea(gtk.ScrolledWindow):
         prefs['last library collection'] = collection
         gobject.idle_add(self._library.book_area.display_covers, collection)
 
-    def _display_collections(self):
-        """Display the library collections. Should be called on startup."""
-        
-        def _add(parent_iter, supercoll):
-            for coll in self._library.backend.get_collections_in_collection(
-              supercoll):
-                child_iter = self._treestore.append(parent_iter,
-                    [xmlescape(coll[1]), coll[0]])
-                _add(child_iter, coll[0])
-
-        self._treestore.clear()
-        self._treestore.append(None, ['<b>%s</b>' % xmlescape(_('All books')),
-            _COLLECTION_ALL])
-        _add(None, None)
-    
     def _select_last_collection(self):
         """Select the collection that was selected the last time the library
         was used.
@@ -287,9 +326,8 @@ class _CollectionArea(gtk.ScrolledWindow):
         if response == gtk.RESPONSE_YES:
             collection = self.get_current_collection()
             self._library.backend.remove_collection(collection)
-            self._display_collections()
             prefs['last library collection'] = _COLLECTION_ALL
-            self._select_last_collection()
+            self.display_collections()
 
     def _rename_collection(self, action):
         """Rename the currently selected collection, using a dialog."""
@@ -318,8 +356,7 @@ class _CollectionArea(gtk.ScrolledWindow):
         rename_dialog.destroy()
         if response == gtk.RESPONSE_OK and new_name:
             if self._library.backend.rename_collection(collection, new_name):
-                self._display_collections()
-                self._select_last_collection()
+                self.display_collections()
             else:
                 self._library.set_status_message(
                     _('Could not change the name to "%s".') % new_name)
@@ -328,8 +365,7 @@ class _CollectionArea(gtk.ScrolledWindow):
         """Duplicate the currently selected collection."""
         collection = self.get_current_collection()
         if self._library.backend.duplicate_collection(collection):
-            self._display_collections()
-            self._select_last_collection()
+            self.display_collections()
         else:
             self._library.set_status_message(
                 _('Could not duplicate collection.'))
@@ -443,7 +479,7 @@ class _BookArea(gtk.ScrolledWindow):
         actiongroup = gtk.ActionGroup('comix-library-book-area')
         actiongroup.add_actions([
         ('open', gtk.STOCK_OPEN, _('Open'), None, None,
-            self._open_selected_book),
+            self.open_selected_book),
         ('remove from collection', gtk.STOCK_REMOVE,
             _('Remove from this collection'), None, None,
             self._remove_books_from_collection),
@@ -483,6 +519,13 @@ class _BookArea(gtk.ScrolledWindow):
         iterator = self._liststore.get_iter(path)
         return self._liststore.get_value(iterator, 1)
 
+    def open_selected_book(self, *args):
+        """Open the currently selected book."""
+        selected = self._iconview.get_selected_items()
+        if selected:
+            path = selected[0]
+        self._book_activated(self._iconview, path)
+
     def _add_book(self, book):
         """Add the <book> to the ListStore (and thus to the _BookArea)."""
         pixbuf = self._library.backend.get_book_cover(book)
@@ -494,11 +537,6 @@ class _BookArea(gtk.ScrolledWindow):
             prefs['library cover size'])
         pixbuf = image.add_border(pixbuf, 2, 0xFFFFFFFF)
         self._liststore.append([pixbuf, book])
-
-    def _open_selected_book(self, *args):
-        """Open the currently selected book."""
-        path = self._iconview.get_selected_items()[0]
-        self._book_activated(self._iconview, path)
 
     def _book_activated(self, iconview, path):
         """Open the book at the (liststore) <path>."""
@@ -586,21 +624,25 @@ class _BookArea(gtk.ScrolledWindow):
             cover_width = cover.get_width()
             cover_height = cover.get_height()
             pointer = gtk.gdk.Pixbuf(gtk.gdk.COLORSPACE_RGB, True, 8,
-                cover_width + 15, cover_height + 10)
+                max(30, cover_width + 15), max(30, cover_height + 10))
             pointer.fill(0x00000000)
             cover.composite(pointer, 0, 0, cover_width, cover_height, 0, 0,
             1, 1, gtk.gdk.INTERP_TILES, 255)
             im = Image.new('RGBA', (30, 30), 0x00000000)
             draw = ImageDraw.Draw(im)
-            draw.ellipse((0, 0, 29, 29), outline=(0, 0, 0), fill=(128, 0, 0))
-            draw = ImageDraw.Draw(im)
+            draw.polygon(
+                (8, 0, 20, 0, 28, 8, 28, 20, 20, 28, 8, 28, 0, 20, 0, 8),
+                fill=(0, 0, 0), outline=(0, 0, 0))
+            draw.polygon(
+                (8, 1, 20, 1, 27, 8, 27, 20, 20, 27, 8, 27, 1, 20, 1, 8),
+                fill=(128, 0, 0), outline=(255, 255, 255))
             text = str(num_books)
             draw.text((15 - (6 * len(text) // 2), 9), text,
                 fill=(255, 255, 255))
             circle = image.pil_to_pixbuf(im)
-            circle.composite(pointer, cover_width - 15, cover_height - 20,
-                29, 29, cover_width - 15, cover_height - 20, 1, 1,
-                gtk.gdk.INTERP_TILES, 255)
+            circle.composite(pointer, max(0, cover_width - 15),
+                max(0, cover_height - 20), 30, 30, max(0, cover_width - 15),
+                max(0, cover_height - 20), 1, 1, gtk.gdk.INTERP_TILES, 255)
         else:
             pointer = cover
 

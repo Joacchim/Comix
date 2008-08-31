@@ -281,7 +281,7 @@ class MainUI(gtk.UIManager):
 
         window.add_accel_group(self.get_accel_group())
 
-        # FIXME: Is there no built-in way to do this?
+        # Is there no built-in way to do this?
         self.get_widget('/Tool/expander').set_expand(True)
         self.get_widget('/Tool/expander').set_sensitive(False)
 

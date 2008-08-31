@@ -68,7 +68,8 @@ class LibraryBackend:
 
     def get_books_in_collection(self, collection=None):
         """Return a sequence with all the books in <collection>, or *ALL*
-        books if <collection> is None."""
+        books if <collection> is None.
+        """
         if collection is None:
             cur = self._con.execute('''select id from Book
                 order by path''')
@@ -80,7 +81,8 @@ class LibraryBackend:
 
     def get_collections_in_collection(self, collection=None):
         """Return a sequence with all the subcollections in <collection>,
-        or all top-level collections if <collection> is None."""
+        or all top-level collections if <collection> is None.
+        """
         if collection is None:
             cur = self._con.execute('''select id, name from Collection
                 where supercollection isnull
@@ -93,19 +95,22 @@ class LibraryBackend:
 
     def get_collection_name(self, collection):
         """Return the name field of the <collection>, or None if the
-        collection does not exist."""
+        collection does not exist.
+        """
         cur = self._con.execute('''select name from Collection
             where id = ?''', (collection,))
         return cur.fetchone()
 
     def add_book(self, path):
         """Add the archive at <path> to the library. Return True if the
-        book was successfully added."""
-        if not archive.archive_mime_type(path):
-            return False
+        book was successfully added.
+        """
         path = os.path.abspath(path)
         name = os.path.basename(path)
-        format, pages, size = archive.get_archive_info(path)
+        info = archive.get_archive_info(path)
+        if info is None:
+            return False
+        format, pages, size = info
         thumbnail.get_thumbnail(path, create=True, dst_dir=_cover_dir)
         try:
             self._con.execute('''insert into Book
@@ -120,7 +125,8 @@ class LibraryBackend:
 
     def add_collection(self, name):
         """Add a new collection with <name> to the library. Return True
-        if the collection was successfully added."""
+        if the collection was successfully added.
+        """
         try:
             self._con.execute('''insert into Collection
                 (name) values (?)''', (name,))
@@ -147,7 +153,8 @@ class LibraryBackend:
 
     def rename_collection(self, collection, name):
         """Rename the <collection> to <name>. Return True if the renaming
-        was successful."""
+        was successful.
+        """
         try:
             self._con.execute('''update Collection set name = ?
                 where id = ?''', (name, collection))
@@ -210,7 +217,6 @@ class LibraryBackend:
         self._con.close()
 
     def _create_table_book(self):
-        print 'creating table Book...'
         self._con.execute('''create table book (
             id integer primary key,
             name string,
@@ -223,14 +229,12 @@ class LibraryBackend:
             rating integer default 0)''')
 
     def _create_table_collection(self):
-        print 'creating table Collection...'
         self._con.execute('''create table collection (
             id integer primary key,
             name string unique,
             supercollection integer)''')
 
     def _create_table_contain(self):
-        print 'creating table Contain...'
         self._con.execute('''create table contain (
             collection integer not null,
             book integer not null,
