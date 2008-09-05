@@ -31,6 +31,7 @@ prefs = {
     'lens magnification': 2,
     'lens size': 200,
     'library cover size': 128,
+    'auto add books into collections': True,
     'lib window height': gtk.gdk.screen_get_default().get_height() * 3 // 5,
     'lib window width': gtk.gdk.screen_get_default().get_width() * 2 // 3,
     'last library collection': None,

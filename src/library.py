@@ -59,10 +59,10 @@ class _LibraryDialog(gtk.Window):
         self._namelabel.set_ellipsize(pango.ELLIPSIZE_MIDDLE)
         self._namelabel.set_alignment(0, 0.5)
         infobox.pack_start(self._namelabel, False, False)
-        self._typelabel = gtk.Label()
-        self._typelabel.set_ellipsize(pango.ELLIPSIZE_MIDDLE)
-        self._typelabel.set_alignment(0, 0.5)
-        infobox.pack_start(self._typelabel, False, False)
+        self._formatlabel = gtk.Label()
+        self._formatlabel.set_ellipsize(pango.ELLIPSIZE_MIDDLE)
+        self._formatlabel.set_alignment(0, 0.5)
+        infobox.pack_start(self._formatlabel, False, False)
         self._pageslabel = gtk.Label()
         self._pageslabel.set_ellipsize(pango.ELLIPSIZE_MIDDLE)
         self._pageslabel.set_alignment(0, 0.5)
@@ -111,10 +111,9 @@ class _LibraryDialog(gtk.Window):
 
     def open_book(self, book):
         """Open the book with ID <book>."""
-        info = self.backend.get_detailed_book_info(book)
-        if info is None:
+        path = self.backend.get_book_path(book)
+        if path is None:
             return
-        path = info[2]
         self.close()
         self._file_handler.open_file(path)
 
@@ -122,31 +121,36 @@ class _LibraryDialog(gtk.Window):
         """Update the info box using the currently selected book."""
         self._open_button.set_sensitive(False)
         selected = iconview.get_selected_items()
-        if not selected:
-            self._namelabel.set_text('')
-            self._typelabel.set_text('')
-            self._pageslabel.set_text('')
-            self._sizelabel.set_text('')
-            return
-        path = selected[0]
-        book = self.book_area.get_book_at_path(path)
-        info = self.backend.get_detailed_book_info(book)
-        if info is None:
-            self._namelabel.set_text('')
-            self._typelabel.set_text('')
-            self._pageslabel.set_text('')
-            self._sizelabel.set_text('')
-            return
+        if selected:
+            book = self.book_area.get_book_at_path(selected[0])
+            name = self.backend.get_book_name(book)
+            format = self.backend.get_book_format(book)
+            pages = self.backend.get_book_pages(book)
+            size = self.backend.get_book_size(book)
+        else:
+            name = format = pages = size = None
         if len(selected) == 1:
             self._open_button.set_sensitive(True)
-        self._namelabel.set_text(info[1])
+        if name is not None:
+            self._namelabel.set_text(name)
+        else:
+            self._namelabel.set_text('')
+        if format is not None:
+            self._formatlabel.set_text(archive.get_name(format))
+        else:
+            self._formatlabel.set_text('')
+        if pages is not None:
+            self._pageslabel.set_text(_('%d pages') % pages)
+        else:
+            self._pageslabel.set_text('')
+        if size is not None:
+            self._sizelabel.set_text('%.1f MiB' % (size / 1048576.0))
+        else:
+            self._sizelabel.set_text('')
         attrlist = pango.AttrList()
         attrlist.insert(pango.AttrWeight(pango.WEIGHT_BOLD, 0,
             len(self._namelabel.get_text())))
         self._namelabel.set_attributes(attrlist)
-        self._typelabel.set_text(archive.get_name(info[4]))
-        self._pageslabel.set_text(_('%d pages') % info[3])
-        self._sizelabel.set_text('%.1f MiB' % (info[5] / 1048576.0))
                 
     def set_status_message(self, message):
         """Set a specific message on the statusbar, replacing whatever was
@@ -162,15 +166,25 @@ class _LibraryDialog(gtk.Window):
         self.backend.close()
         _close_dialog()
 
-    def add_books(self, paths): #FIXME
-        """Add the books at <paths> to the library."""
-        print paths
+    def add_books(self, paths, collection_name=None): #FIXME
+        """Add the books at <paths> to the library. If <collection_name>
+        is not None, it is the name of a (new or existing) collection the
+        books should be put in.
+        """
+        if collection_name is None:
+            collection = None
+        else:
+            collection = self.backend.get_collection_by_name(collection_name)
+            if collection is None: # Collection by that name doesn't exist.
+                self.backend.add_collection(collection_name)
+                collection = self.backend.get_collection_by_name(
+                    collection_name)
         for path in paths:
-            added = self.backend.add_book(path)
+            added = self.backend.add_book(path, collection)
             print path
-        collection = self.collection_area.get_current_collection()
-        if collection == _COLLECTION_ALL:
-            self.book_area.display_covers(None)
+        if collection is not None:
+            prefs['last library collection'] = collection
+        self.collection_area.display_collections()
 
     def _add_books_cb(self, *args):
         """Open up a filechooser dialog from which books can be added to
@@ -333,7 +347,7 @@ class _CollectionArea(gtk.ScrolledWindow):
         """Rename the currently selected collection, using a dialog."""
         collection = self.get_current_collection()
         try:
-            old_name = self._library.backend.get_collection_name(collection)[0]
+            old_name = self._library.backend.get_collection_name(collection)
         except Exception:
             return
         rename_dialog = gtk.MessageDialog(None, 0, gtk.MESSAGE_QUESTION,
@@ -413,11 +427,11 @@ class _CollectionArea(gtk.ScrolledWindow):
             self._library.set_status_message('')
             return
         if src_collection != _COLLECTION_ALL:
-            src_name = self._library.backend.get_detailed_collection_info(
-                src_collection)[1]
+            src_name = self._library.backend.get_collection_name(
+                src_collection)
         if dest_collection != _COLLECTION_ALL:
-            dest_name = self._library.backend.get_detailed_collection_info(
-                dest_collection)[1]
+            dest_name = self._library.backend.get_collection_name(
+                dest_collection)
         if dest_collection == _COLLECTION_ALL:
             message = _('Remove book(s) from "%s".') % src_name
         elif src_collection == _COLLECTION_ALL:
@@ -496,7 +510,7 @@ class _BookArea(gtk.ScrolledWindow):
             collection = None
         for i, book in enumerate(self._library.backend.get_books_in_collection(
           collection)):
-            self._add_book(book[0])
+            self._add_book(book)
             if i % 15 == 0: # Don't update GUI for every cover for efficiency.
                 while gtk.events_pending():
                     gtk.main_iteration(False)
@@ -552,8 +566,8 @@ class _BookArea(gtk.ScrolledWindow):
             book = self.get_book_at_path(path)
             self._library.backend.remove_book_from_collection(book, collection)
             self.remove_book_at_path(path)
-        coll_name = self._library.backend.get_detailed_collection_info(
-            collection)[1]
+        coll_name = self._library.backend.get_collection_name(
+            collection)
         self._library.set_status_message(
             _('Removed %d book(s) from "%s".') % (len(selected), coll_name))
 

@@ -21,50 +21,29 @@ _cover_dir = os.path.join(constants.COMIX_DIR, 'library_covers')
 class LibraryBackend:
     
     """The LibraryBackend handles the storing and retrieval of library
-    data to and from disk."""
+    data to and from disk.
+    """
 
     def __init__(self):
         if not os.path.exists(constants.COMIX_DIR):
             os.mkdir(constants.COMIX_DIR)
+        
+        def result_factory(cursor, row):
+            """Return rows as sequences only when they have more than
+            one element.
+            """
+            if len(row) == 1:
+                return row[0]
+            return row
 
         self._con = dbapi2.connect(_db_path)
+        self._con.row_factory = result_factory
         if not self._con.execute('pragma table_info(Book)').fetchall():
             self._create_table_book()
         if not self._con.execute('pragma table_info(Collection)').fetchall():
             self._create_table_collection()
         if not self._con.execute('pragma table_info(Contain)').fetchall():
             self._create_table_contain()
-
-    def get_book_cover(self, book):
-        """Return a pixbuf with a thumbnail of the cover of <book>, or
-        None if the cover can not be fetched.
-        """
-        try:
-            path = self._con.execute('''select path from Book
-                where id = ?''', (book,)).fetchone()[0]
-        except Exception:
-            print '! Non-existant book #%d' % book
-            return None
-        thumb = thumbnail.get_thumbnail(path, create=True, dst_dir=_cover_dir)
-        if thumb is None:
-            print '! Could not get cover for %s' % path
-        return thumb
-
-    def get_detailed_book_info(self, book):
-        """Return a tuple with all the information about <book>, or None
-        if <book> is not in the library.
-        """
-        cur = self._con.execute('''select * from Book
-            where id = ?''', (book,))
-        return cur.fetchone()
-
-    def get_detailed_collection_info(self, collection):
-        """Return a tuple with all the information about <collection>, or
-        None if <collection> is not in the library.
-        """
-        cur = self._con.execute('''select * from Collection
-            where id = ?''', (collection,))
-        return cur.fetchone()
 
     def get_books_in_collection(self, collection=None):
         """Return a sequence with all the books in <collection>, or *ALL*
@@ -78,6 +57,61 @@ class LibraryBackend:
                 where id in (select book from Contain where collection = ?)
                 order by path''', (collection,))
         return cur.fetchall()
+
+    def get_book_cover(self, book):
+        """Return a pixbuf with a thumbnail of the cover of <book>, or
+        None if the cover can not be fetched.
+        """
+        try:
+            path = self._con.execute('''select path from Book
+                where id = ?''', (book,)).fetchone()
+        except Exception:
+            print '! Non-existant book #%d' % book
+            return None
+        thumb = thumbnail.get_thumbnail(path, create=True, dst_dir=_cover_dir)
+        if thumb is None:
+            print '! Could not get cover for %s' % path
+        return thumb
+
+    def get_book_path(self, book):
+        """Return the filesystem path to <book>, or None if <book> isn't
+        in the library.
+        """
+        cur = self._con.execute('''select path from Book
+            where id = ?''', (book,))
+        return cur.fetchone()
+
+    def get_book_name(self, book):
+        """Return the name of <book>, or None if <book> isn't in the
+        library.
+        """
+        cur = self._con.execute('''select name from Book
+            where id = ?''', (book,))
+        return cur.fetchone()
+
+    def get_book_pages(self, book):
+        """Return the number of pages in <book>, or None if <book> isn't
+        in the library.
+        """
+        cur = self._con.execute('''select pages from Book
+            where id = ?''', (book,))
+        return cur.fetchone()
+
+    def get_book_format(self, book):
+        """Return the archive format of <book>, or None if <book> isn't
+        in the library.
+        """
+        cur = self._con.execute('''select format from Book
+            where id = ?''', (book,))
+        return cur.fetchone()
+
+    def get_book_size(self, book):
+        """Return the size of <book> in bytes, or None if <book> isn't
+        in the library.
+        """
+        cur = self._con.execute('''select size from Book
+            where id = ?''', (book,))
+        return cur.fetchone()
 
     def get_collections_in_collection(self, collection=None):
         """Return a sequence with all the subcollections in <collection>,
@@ -93,6 +127,14 @@ class LibraryBackend:
                 order by name''', (collection,))
         return cur.fetchall()
 
+    def get_all_collections(self):
+        """Return a sequence with all collections (flattened hierarchy).
+        The sequence is sorted alphabetically by collection name.
+        """
+        cur = self._con.execute('''select id from Collection
+            order by name''')
+        return cur.fetchall()
+
     def get_collection_name(self, collection):
         """Return the name field of the <collection>, or None if the
         collection does not exist.
@@ -101,9 +143,20 @@ class LibraryBackend:
             where id = ?''', (collection,))
         return cur.fetchone()
 
-    def add_book(self, path):
-        """Add the archive at <path> to the library. Return True if the
-        book was successfully added.
+    def get_collection_by_name(self, name):
+        """Return the collection called <name>, or None if no such
+        collection exists. Names are unique, so at most one such collection
+        can exist.
+        """
+        cur = self._con.execute('''select id from Collection
+            where name = ?''', (name,))
+        return cur.fetchone()
+
+    def add_book(self, path, collection=None):
+        """Add the archive at <path> to the library. If <collection> is
+        not None, it is the collection that the books should be put in.
+        Return True if the book was successfully added (or was already
+        added).
         """
         path = os.path.abspath(path)
         name = os.path.basename(path)
@@ -116,12 +169,16 @@ class LibraryBackend:
             self._con.execute('''insert into Book
                 (name, path, pages, format, size) values (?, ?, ?, ?, ?)''',
                 (name, path, pages, format, size))
-            return True
         except dbapi2.DatabaseError: # E.g. book already in library
             pass
         except dbapi2.Error:
             print '! Could not add book %s to the library' % path
-        return False
+            return False
+        if collection is not None:
+            book = self._con.execute('''select id from Book
+                where path = ?''', (path,)).fetchone()
+            self.add_book_to_collection(book, collection)
+        return True
 
     def add_collection(self, name):
         """Add a new collection with <name> to the library. Return True
@@ -177,7 +234,7 @@ class LibraryBackend:
         if self.add_collection(copy_name) is None: # Could not create the new.
             return False
         copy_collection = self._con.execute('''select id from Collection
-            where name = ?''', (copy_name,)).fetchone()[0]
+            where name = ?''', (copy_name,)).fetchone()
         self._con.execute('''insert or ignore into Contain (collection, book)
             select ?, book from Contain
             where collection = ?''', (copy_collection, collection))
@@ -185,9 +242,8 @@ class LibraryBackend:
 
     def remove_book(self, book):
         """Remove the <book> from the library."""
-        info = self.get_detailed_book_info(book)
-        if info is not None:
-            path = info[2]
+        path = self.get_book_path(book)
+        if path is not None:
             thumbnail.delete_thumbnail(path, dst_dir=_cover_dir)
         self._con.execute('delete from Book where id = ?', (book,))
         self._con.execute('delete from Contain where book = ?', (book,))

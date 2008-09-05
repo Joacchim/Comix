@@ -155,15 +155,48 @@ class _LibraryFileChooserDialog(_ComicFileChooserDialog):
         _ComicFileChooserDialog.__init__(self)
         self._library = library
         self.filechooser.set_select_multiple(True)
+        self.filechooser.connect('current-folder-changed',
+            self._set_collection_name)
         self.connect('response', self._response)
+        
+        self._collection_button = gtk.CheckButton(
+            '%s:' % _('Automatically add the books to this collection'), False)
+        self._collection_button.set_active(
+            prefs['auto add books into collections'])
+        self._comboentry = gtk.combo_box_entry_new_text()
+        for collection in self._library.backend.get_all_collections():
+            name = self._library.backend.get_collection_name(collection)
+            self._comboentry.append_text(name)
+        collection_box = gtk.HBox(False, 6)
+        collection_box.pack_start(self._collection_button, False, False)
+        collection_box.pack_start(self._comboentry, True, True)
+        collection_box.show_all()
+        self.filechooser.set_extra_widget(collection_box)
+    
+    def _set_collection_name(self, *args):
+        """Set the text in the ComboBoxEntry to the name of the current
+        directory.
+        """
+        name = os.path.basename(self.filechooser.get_current_folder())
+        self._comboentry.child.set_text(name)
 
     def _response(self, widget, response):
         paths = super(_LibraryFileChooserDialog, self).handle_response(response)
         if paths is None:
             return
-        _close_library_filechooser_dialog()
-        if paths:
-            self._library.add_books(paths)
+        if not paths:
+            _close_library_filechooser_dialog()
+        else:
+            if self._collection_button.get_active():
+                prefs['auto add books into collections'] = True
+                collection_name = self._comboentry.get_active_text()
+                if not collection_name: # No empty-string names.
+                    collection_name = None
+            else:
+                prefs['auto add books into collections'] = False
+                collection_name = None
+            _close_library_filechooser_dialog()
+            self._library.add_books(paths, collection_name)
 
 
 def open_main_filechooser_dialog(action, file_handler):
