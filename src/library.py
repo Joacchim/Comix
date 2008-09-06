@@ -12,6 +12,7 @@ import ImageDraw
 import archive
 import encoding
 import filechooser
+import labels
 import librarybackend
 from preferences import prefs
 import image
@@ -169,7 +170,7 @@ class _LibraryDialog(gtk.Window):
         filechooser.close_library_filechooser_dialog()
         _close_dialog()
 
-    def add_books(self, paths, collection_name=None): #FIXME
+    def add_books(self, paths, collection_name=None):
         """Add the books at <paths> to the library. If <collection_name>
         is not None, it is the name of a (new or existing) collection the
         books should be put in.
@@ -182,9 +183,8 @@ class _LibraryDialog(gtk.Window):
                 self.backend.add_collection(collection_name)
                 collection = self.backend.get_collection_by_name(
                     collection_name)
-        for path in paths:
-            added = self.backend.add_book(path, collection)
-            print 'Added:', path
+
+        _AddBooksProgressDialog(self, paths, collection)
         if collection is not None:
             prefs['last library collection'] = collection
         self.collection_area.display_collections()
@@ -690,7 +690,7 @@ class _BookArea(gtk.ScrolledWindow):
 
     def _drag_data_received(self, widget, context, x, y, data, *args):
         """Handle drag-n-drop events ending on the book area (i.e. from
-        external apps like the filehandler).
+        external apps like the file manager).
         """
         uris = data.get_uris()
         if not uris:
@@ -706,6 +706,73 @@ class _BookArea(gtk.ScrolledWindow):
         collection = self._library.collection_area.get_current_collection()
         collection_name = self._library.backend.get_collection_name(collection)
         self._library.add_books(paths, collection_name)
+
+
+class _AddBooksProgressDialog(gtk.Dialog):
+    
+    """Dialog with a ProgressBar that adds books to the library."""
+    
+    def __init__(self, library, paths, collection):
+        """Adds the books at <paths> to the library, and also to the
+        <collection>, unless it is None.
+        """
+        gtk.Dialog.__init__(self, _('Adding books'), None, gtk.DIALOG_MODAL,
+            (gtk.STOCK_STOP, gtk.RESPONSE_CLOSE))
+        self._destroy = False
+        self.set_size_request(400, -1)
+        self.set_has_separator(False)
+        self.set_resizable(False)
+        self.set_border_width(4)
+        self.connect('response', self._response)
+        self.set_default_response(gtk.RESPONSE_CLOSE)
+
+        main_box = gtk.VBox(False, 5)
+        main_box.set_border_width(6)
+        self.vbox.pack_start(main_box, False, False)
+        hbox = gtk.HBox(False, 10)
+        main_box.pack_start(hbox, False, False, 5)
+        left_box = gtk.VBox(False, 5)
+        right_box = gtk.VBox(False, 5)
+        hbox.pack_start(left_box, False, False)
+        hbox.pack_start(right_box, False, False)
+
+        label = labels.bold_label('%s:' % _('Number of added books'))
+        label.set_alignment(1.0, 0.5)
+        left_box.pack_start(label, False, False)
+        number_label = gtk.Label('0')
+        number_label.set_alignment(0, 0.5)
+        right_box.pack_start(number_label, False, False)
+
+        bar = gtk.ProgressBar()
+        main_box.pack_start(bar, False, False)
+
+        added_label = gtk.Label('')
+        added_label.set_alignment(0, 0.5)
+        added_label.set_ellipsize(pango.ELLIPSIZE_MIDDLE)
+        main_box.pack_start(added_label, False, False)
+        self.show_all()
+
+        total_books = float(len(paths))
+        total_added = 0
+        for i, path in enumerate(paths):
+            if library.backend.add_book(path, collection):
+                total_added += 1
+                number_label.set_text('%d' % total_added)
+            added_label.set_text(_('Adding "%s"...') % path)
+            attrlist = pango.AttrList()
+            attrlist.insert(pango.AttrStyle(pango.STYLE_ITALIC, 0,
+                len(added_label.get_text())))
+            added_label.set_attributes(attrlist)
+            bar.set_fraction((i + 1) / total_books)
+            while gtk.events_pending():
+                gtk.main_iteration(False)
+            if self._destroy:
+                return
+        self._response()
+
+    def _response(self, *args):
+        self._destroy = True
+        self.destroy()
         
 
 def open_dialog(action, window):
