@@ -21,6 +21,7 @@ _dialog = None
 # The "All books" collection is not a real collection stored in the library,
 # but is represented by this ID in the library's TreeModels.
 _COLLECTION_ALL = -1
+_DRAG_EXTERNAL_ID, _DRAG_BOOK_ID, _DRAG_COLLECTION_ID = range(3)
 
 
 class _LibraryDialog(gtk.Window):
@@ -244,14 +245,19 @@ class _CollectionArea(gtk.ScrolledWindow):
         self._treestore = gtk.TreeStore(str, int) # (Name, ID) of collections.
         self._treeview = gtk.TreeView(self._treestore)
         self._treeview.connect('cursor_changed', self._collection_selected)
-        self._treeview.connect('drag_data_received', self._drag_book_received)
-        self._treeview.connect('drag_motion', self._drag_book_motion)
+        self._treeview.connect('drag_data_received', self._drag_data_received)
+        self._treeview.connect('drag_motion', self._drag_motion)
         self._treeview.connect('button_press_event', self._button_press)
+        self._treeview.connect('row_activated', self._expand_row)
         self._treeview.set_headers_visible(False)
         self._treeview.set_rules_hint(True)
         self._treeview.enable_model_drag_dest(
-            [('book', gtk.TARGET_SAME_APP, 0)], gtk.gdk.ACTION_MOVE)
-        #self._treeview.set_reorderable(True) #FIXME
+            [('book', gtk.TARGET_SAME_APP, _DRAG_BOOK_ID),
+            ('collection', gtk.TARGET_SAME_WIDGET, _DRAG_COLLECTION_ID)],
+            gtk.gdk.ACTION_MOVE)
+        self._treeview.enable_model_drag_source(gtk.gdk.BUTTON1_MASK,
+            [('collection', gtk.TARGET_SAME_WIDGET, _DRAG_COLLECTION_ID)],
+            gtk.gdk.ACTION_MOVE)
         cellrenderer = gtk.CellRendererText()
         column = gtk.TreeViewColumn(None, cellrenderer, markup=0)
         self._treeview.append_column(column)
@@ -305,6 +311,7 @@ class _CollectionArea(gtk.ScrolledWindow):
             _COLLECTION_ALL])
         _add(None, None)
         self._select_last_collection()
+        self._treeview.columns_autosize()
 
     def _get_collection_at_path(self, path):
         """Return the collection ID of the collection at the (TreeView)
@@ -328,16 +335,15 @@ class _CollectionArea(gtk.ScrolledWindow):
         """Select the collection that was selected the last time the library
         was used.
         """
-        self._treestore.foreach(self._select_last_collection_aux)
-
-    def _select_last_collection_aux(self, treestore, path, iterator):
-        """Should be used with TreeModel.foreach()."""
-        collection = treestore.get_value(iterator, 1)
-        if collection == prefs['last library collection']:
-            prefs['last library collection'] = None # Reset to trigger update
-            self._treeview.expand_to_path(path)
-            self._treeview.set_cursor(path)
-            return True
+        def aux(treestore, path, iterator):
+            collection = treestore.get_value(iterator, 1)
+            if collection == prefs['last library collection']:
+                # Reset to trigger update of book area.
+                prefs['last library collection'] = None 
+                self._treeview.expand_to_path(path)
+                self._treeview.set_cursor(path)
+                return True
+        self._treestore.foreach(aux)
 
     def _remove_collection(self, action):
         """Remove the currently selected collection from the library, if the
@@ -412,26 +418,47 @@ class _CollectionArea(gtk.ScrolledWindow):
             self._ui_manager.get_widget('/Popup').popup(None, None, None,
                 event.button, event.time)
 
-    def _drag_book_received(self, treeview, context, x, y, selection, *args):
+    def _expand_row(self, treeview, path, column):
+        """Expand the activated row."""
+        treeview.expand_to_path(path)
+
+    def _drag_data_received(self, treeview, context, x, y, selection, drag_id,
+      *args):
         """Move books dragged from the _BookArea to the target collection."""
         self._library.set_status_message('')
         src_collection, dest_collection = \
             self._drag_get_src_and_dest_collections(treeview, x, y)
         if src_collection == dest_collection: # Can't move to ourselves.
             return
-        for path_string in selection.get_text().split(','): # IconView paths
-            book = self._library.book_area.get_book_at_path(int(path_string))
-            if src_collection != _COLLECTION_ALL:
-                self._library.backend.remove_book_from_collection(book,
-                    src_collection)
-                self._library.book_area.remove_book_at_path(int(path_string))
-            if dest_collection != _COLLECTION_ALL:
-                self._library.backend.add_book_to_collection(book,
-                    dest_collection)
+        if drag_id == _DRAG_BOOK_ID:
+            for path_string in selection.get_text().split(','): # IconView path
+                book = self._library.book_area.get_book_at_path(
+                    int(path_string))
+                if src_collection != _COLLECTION_ALL:
+                    self._library.backend.remove_book_from_collection(book,
+                        src_collection)
+                    self._library.book_area.remove_book_at_path(
+                        int(path_string))
+                if dest_collection != _COLLECTION_ALL:
+                    self._library.backend.add_book_to_collection(book,
+                        dest_collection)
+        elif drag_id == _DRAG_COLLECTION_ID:
+            if (dest_collection == _COLLECTION_ALL or
+              src_collection == _COLLECTION_ALL):
+                return
+            self._library.backend.add_collection_to_collection(
+                src_collection, dest_collection)
+            self.display_collections()
 
-    def _drag_book_motion(self, treeview, context, x, y, *args):
-        """Set the library statusbar text when hovering a drag-n-drop
-        over a collection."""
+    def _drag_motion(self, treeview, context, x, y, *args):
+        """Set the library statusbar text when hovering a drag-n-drop over
+        a collection (either books or from the collection area itself).
+        """
+        # Why isn't the drag ID passed along with drag-motion events?
+        if context.get_source_widget() is self._treeview:
+            drag_id = _DRAG_COLLECTION_ID
+        else:
+            drag_id = _DRAG_BOOK_ID
         src_collection, dest_collection = \
             self._drag_get_src_and_dest_collections(treeview, x, y)
         if src_collection == dest_collection:
@@ -444,17 +471,28 @@ class _CollectionArea(gtk.ScrolledWindow):
             dest_name = self._library.backend.get_collection_name(
                 dest_collection)
         if dest_collection == _COLLECTION_ALL:
-            message = _('Remove book(s) from "%s".') % src_name
+            if drag_id == _DRAG_BOOK_ID:
+                message = _('Remove book(s) from "%s".') % src_name
+            elif drag_id == _DRAG_COLLECTION_ID:
+                message = ''
         elif src_collection == _COLLECTION_ALL:
-            message = _('Add book(s) to "%s".') % dest_name
+            if drag_id == _DRAG_BOOK_ID:
+                message = _('Add book(s) to "%s".') % dest_name
+            elif drag_id == _DRAG_COLLECTION_ID:
+                message = ''
         else:
-            message = _('Move book(s) from "%s" to "%s".') % (src_name,
-                dest_name)
+            if drag_id == _DRAG_BOOK_ID:
+                message = _('Move book(s) from "%s" to "%s".') % (src_name,
+                    dest_name)
+            elif drag_id == _DRAG_COLLECTION_ID:
+                message = _('Put collection "%s" into "%s".') % (src_name,
+                    dest_name)
         self._library.set_status_message(message)
-        
+
     def _drag_get_src_and_dest_collections(self, treeview, x, y):
         """Convenience function to get the IDs for the source and
-        destination collections during a drag-n-drop."""
+        destination collections during a drag-n-drop.
+        """
         src_collection = self.get_current_collection()
         drop_row = treeview.get_dest_row_at_pos(x, y)
         if src_collection is None or drop_row is None:
@@ -486,10 +524,11 @@ class _BookArea(gtk.ScrolledWindow):
         self._iconview.connect('button_press_event', self._button_press)
         self._iconview.modify_base(gtk.STATE_NORMAL, gtk.gdk.Color())
         self._iconview.enable_model_drag_source(0,
-            [('book', gtk.TARGET_SAME_APP, 0)], gtk.gdk.ACTION_MOVE)
+            [('book', gtk.TARGET_SAME_APP, _DRAG_BOOK_ID)],
+            gtk.gdk.ACTION_MOVE)
         self._iconview.set_selection_mode(gtk.SELECTION_MULTIPLE)
         self._iconview.drag_dest_set(gtk.DEST_DEFAULT_ALL,
-                                     [('text/uri-list', 0, 0)],
+                                     [('text/uri-list', 0, _DRAG_EXTERNAL_ID)],
                                      gtk.gdk.ACTION_COPY)
         self.add(self._iconview)
 
@@ -539,7 +578,8 @@ class _BookArea(gtk.ScrolledWindow):
 
     def remove_book_at_path(self, path):
         """Remove the book at <path> from the ListStore (and thus from
-        the _BookArea)."""
+        the _BookArea).
+        """
         iterator = self._liststore.get_iter(path)
         self._liststore.remove(iterator)
 
@@ -575,7 +615,8 @@ class _BookArea(gtk.ScrolledWindow):
 
     def _remove_books_from_collection(self, *args):
         """Remove the currently selected book(s) from the current collection,
-        and thus also from the _BookArea."""
+        and thus also from the _BookArea.
+        """
         collection = self._library.collection_area.get_current_collection()
         selected = self._iconview.get_selected_items()
         for path in selected:
@@ -589,7 +630,8 @@ class _BookArea(gtk.ScrolledWindow):
 
     def _remove_books_from_library(self, *args):
         """Remove the currently selected book(s) from the library, and thus
-        also from the _BookArea, if the user clicks 'Yes' in a dialog."""
+        also from the _BookArea, if the user clicks 'Yes' in a dialog.
+        """
         choice_dialog = gtk.MessageDialog(None, 0, gtk.MESSAGE_QUESTION,
             gtk.BUTTONS_YES_NO, _('Remove book(s) from the library?'))
         choice_dialog.format_secondary_text(
@@ -638,7 +680,8 @@ class _BookArea(gtk.ScrolledWindow):
         
         It's also used with connect_after() to overwrite the cursor
         automatically created when using enable_model_drag_source(), so in
-        essence it's a hack, but at least it works."""
+        essence it's a hack, but at least it works.
+        """
         selected = iconview.get_selected_items()
         icon_path = selected[-1]
         num_books = len(selected)
@@ -683,7 +726,8 @@ class _BookArea(gtk.ScrolledWindow):
 
     def _drag_data_get(self, iconview, context, selection, *args):
         """Fill the SelectionData with (iconview) paths for the dragged books
-        formatted as a string with each path separated by a comma."""
+        formatted as a string with each path separated by a comma.
+        """
         paths = iconview.get_selected_items()
         text = ','.join([str(path[0]) for path in paths])
         selection.set('text/plain', 8, text)
