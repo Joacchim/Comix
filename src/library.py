@@ -1,5 +1,6 @@
 """library.py - Comic book library."""
 
+import urllib
 from xml.sax.saxutils import escape as xmlescape
 
 import gtk
@@ -77,10 +78,9 @@ class _LibraryDialog(gtk.Window):
         vbox.pack_start(hbox, False, False)
         label = gtk.Label('%s:' % _('Search'))
         hbox.pack_start(label, False, False)
-        search_entry = gtk.Entry() #FIXME
+        search_entry = gtk.Entry()
         search_entry.connect('activate', self._filter_books_cb)
         hbox.pack_start(search_entry)
-
         vbox.pack_start(gtk.HBox(), True, True)
         hbox = gtk.HBox(False, 10)
         vbox.pack_start(hbox, False, False)
@@ -134,7 +134,7 @@ class _LibraryDialog(gtk.Window):
         if len(selected) == 1:
             self._open_button.set_sensitive(True)
         if name is not None:
-            self._namelabel.set_text(name)
+            self._namelabel.set_text(encoding.to_unicode(name))
         else:
             self._namelabel.set_text('')
         if format is not None:
@@ -207,8 +207,7 @@ class _LibraryDialog(gtk.Window):
         add_dialog.vbox.pack_start(box)
         entry = gtk.Entry()
         entry.set_text(_('New collection'))
-        entry.connect('activate', # Enter on entry is the same as pressing OK.
-            lambda x: add_dialog.response(gtk.RESPONSE_OK))
+        entry.set_activates_default(True)
         box.pack_start(entry, True, True, 6)
         box.show_all()
         
@@ -483,13 +482,17 @@ class _BookArea(gtk.ScrolledWindow):
         self._iconview.connect('selection_changed', self._library.update_info)
         self._iconview.connect_after('drag_begin', self._drag_begin)
         self._iconview.connect('drag_data_get', self._drag_data_get)
+        self._iconview.connect('drag_data_received', self._drag_data_received)
         self._iconview.connect('button_press_event', self._button_press)
         self._iconview.modify_base(gtk.STATE_NORMAL, gtk.gdk.Color())
         self._iconview.enable_model_drag_source(0,
             [('book', gtk.TARGET_SAME_APP, 0)], gtk.gdk.ACTION_MOVE)
         self._iconview.set_selection_mode(gtk.SELECTION_MULTIPLE)
+        self._iconview.drag_dest_set(gtk.DEST_DEFAULT_ALL,
+                                     [('text/uri-list', 0, 0)],
+                                     gtk.gdk.ACTION_COPY)
         self.add(self._iconview)
-        
+
         self._ui_manager = gtk.UIManager()
         ui_description = """
         <ui>
@@ -684,6 +687,25 @@ class _BookArea(gtk.ScrolledWindow):
         paths = iconview.get_selected_items()
         text = ','.join([str(path[0]) for path in paths])
         selection.set('text/plain', 8, text)
+
+    def _drag_data_received(self, widget, context, x, y, data, *args):
+        """Handle drag-n-drop events ending on the book area (i.e. from
+        external apps like the filehandler).
+        """
+        uris = data.get_uris()
+        if not uris:
+            return
+        paths = []
+        for uri in uris:
+            if uri.startswith('file://'):  # Nautilus etc.
+                uri = uri[7:]
+            elif uri.startswith('file:'):  # Xffm etc.
+                uri = uri[5:]
+            path = urllib.url2pathname(uri)
+            paths.append(path)
+        collection = self._library.collection_area.get_current_collection()
+        collection_name = self._library.backend.get_collection_name(collection)
+        self._library.add_books(paths, collection_name)
         
 
 def open_dialog(action, window):

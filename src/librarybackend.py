@@ -28,7 +28,7 @@ class LibraryBackend:
         if not os.path.exists(constants.COMIX_DIR):
             os.mkdir(constants.COMIX_DIR)
         
-        def result_factory(cursor, row):
+        def row_factory(cursor, row):
             """Return rows as sequences only when they have more than
             one element.
             """
@@ -37,7 +37,8 @@ class LibraryBackend:
             return row
 
         self._con = dbapi2.connect(_db_path)
-        self._con.row_factory = result_factory
+        self._con.row_factory = row_factory
+        self._con.text_factory = str
         if not self._con.execute('pragma table_info(Book)').fetchall():
             self._create_table_book()
         if not self._con.execute('pragma table_info(Collection)').fetchall():
