@@ -185,7 +185,7 @@ class _LibraryFileChooserDialog(_ComicFileChooserDialog):
         if paths is None:
             return
         if not paths:
-            _close_library_filechooser_dialog()
+            close_library_filechooser_dialog()
         else:
             if self._collection_button.get_active():
                 prefs['auto add books into collections'] = True
@@ -195,7 +195,7 @@ class _LibraryFileChooserDialog(_ComicFileChooserDialog):
             else:
                 prefs['auto add books into collections'] = False
                 collection_name = None
-            _close_library_filechooser_dialog()
+            close_library_filechooser_dialog()
             self._library.add_books(paths, collection_name)
 
 
@@ -225,7 +225,7 @@ def open_library_filechooser_dialog(library):
         _library_filechooser_dialog.present()
 
 
-def _close_library_filechooser_dialog(*args):
+def close_library_filechooser_dialog(*args):
     """Close the library filechooser dialog."""
     global _library_filechooser_dialog
     if _library_filechooser_dialog is not None:

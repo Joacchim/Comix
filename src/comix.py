@@ -77,7 +77,6 @@ if __name__ == '__main__':
         gettext.install('comix', os.path.join(base_dir, 'share/locale'),
             unicode=True)
     preferences.read_preferences_file()
-    icons.load()
     window = main.MainWindow()
     if len(sys.argv) >= 2:
         window.file_handler.open_file(os.path.normpath(sys.argv[1]))

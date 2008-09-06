@@ -45,17 +45,29 @@ class LibraryBackend:
         if not self._con.execute('pragma table_info(Contain)').fetchall():
             self._create_table_contain()
 
-    def get_books_in_collection(self, collection=None):
+    def get_books_in_collection(self, collection=None, filter_string=None):
         """Return a sequence with all the books in <collection>, or *ALL*
-        books if <collection> is None.
+        books if <collection> is None. If <filter_string> is not None, we
+        only return books where the <filter_string> occurs in the path.
         """
         if collection is None:
-            cur = self._con.execute('''select id from Book
-                order by path''')
+            if filter_string is None:
+                cur = self._con.execute('''select id from Book
+                    order by path''')
+            else:
+                cur = self._con.execute('''select id from Book
+                    where path like ?
+                    order by path''', ("%%%s%%" % filter_string,))
         else:
-            cur = self._con.execute('''select id from Book
-                where id in (select book from Contain where collection = ?)
-                order by path''', (collection,))
+            if filter_string is None:
+                cur = self._con.execute('''select id from Book
+                    where id in (select book from Contain where collection = ?)
+                    order by path''', (collection,))
+            else:
+                cur = self._con.execute('''select id from Book
+                    where id in (select book from Contain where collection = ?)
+                    and path like ?
+                    order by path''', (collection, "%%%s%%" % filter_string))
         return cur.fetchall()
 
     def get_book_cover(self, book):
@@ -87,7 +99,10 @@ class LibraryBackend:
         """
         cur = self._con.execute('''select name from Book
             where id = ?''', (book,))
-        return cur.fetchone()
+        name = cur.fetchone()
+        if name is None:
+            return None
+        return unicode(name)
 
     def get_book_pages(self, book):
         """Return the number of pages in <book>, or None if <book> isn't
@@ -118,11 +133,11 @@ class LibraryBackend:
         or all top-level collections if <collection> is None.
         """
         if collection is None:
-            cur = self._con.execute('''select id, name from Collection
+            cur = self._con.execute('''select id from Collection
                 where supercollection isnull
                 order by name''')
         else:
-            cur = self._con.execute('''select id, name from Collection
+            cur = self._con.execute('''select id from Collection
                 where supercollection = ?
                 order by name''', (collection,))
         return cur.fetchall()
@@ -141,7 +156,10 @@ class LibraryBackend:
         """
         cur = self._con.execute('''select name from Collection
             where id = ?''', (collection,))
-        return cur.fetchone()
+        name = cur.fetchone()
+        if name is None:
+            return None
+        return unicode(name)
 
     def get_collection_by_name(self, name):
         """Return the collection called <name>, or None if no such

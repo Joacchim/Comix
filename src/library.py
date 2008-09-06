@@ -42,7 +42,7 @@ class _LibraryDialog(gtk.Window):
         self.collection_area = _CollectionArea(self)
 
         # The bottom area, with the info box, buttons and such.
-        bottombox = gtk.HBox(False, 20)
+        bottombox = gtk.HBox(False, 12)
         bottombox.set_border_width(10)
         borderbox = gtk.EventBox()
         borderbox.modify_bg(gtk.STATE_NORMAL, gtk.gdk.color_parse('#333'))
@@ -75,10 +75,12 @@ class _LibraryDialog(gtk.Window):
         bottombox.pack_start(vbox, True, True)
         hbox = gtk.HBox(False, 10)
         vbox.pack_start(hbox, False, False)
-        self._search_entry = gtk.Entry() #FIXME
         label = gtk.Label('%s:' % _('Search'))
         hbox.pack_start(label, False, False)
-        hbox.pack_start(self._search_entry)
+        search_entry = gtk.Entry() #FIXME
+        search_entry.connect('activate', self._filter_books_cb)
+        hbox.pack_start(search_entry)
+
         vbox.pack_start(gtk.HBox(), True, True)
         hbox = gtk.HBox(False, 10)
         vbox.pack_start(hbox, False, False)
@@ -164,6 +166,7 @@ class _LibraryDialog(gtk.Window):
         prefs['lib window width'], prefs['lib window height'] = self.get_size()
         self.book_area.stop_update()
         self.backend.close()
+        filechooser.close_library_filechooser_dialog()
         _close_dialog()
 
     def add_books(self, paths, collection_name=None): #FIXME
@@ -181,7 +184,7 @@ class _LibraryDialog(gtk.Window):
                     collection_name)
         for path in paths:
             added = self.backend.add_book(path, collection)
-            print path
+            print 'Added:', path
         if collection is not None:
             prefs['last library collection'] = collection
         self.collection_area.display_collections()
@@ -214,10 +217,19 @@ class _LibraryDialog(gtk.Window):
         add_dialog.destroy()
         if response == gtk.RESPONSE_OK and name:
             if self.backend.add_collection(name):
+                collection = self.backend.get_collection_by_name(name)
+                prefs['last library collection'] = collection
                 self.collection_area.display_collections()
             else:
                 self.set_status_message(
                     _('Could not add a collection called "%s".') % name)
+
+    def _filter_books_cb(self, entry, *args):
+        filter_string = entry.get_text()
+        if not filter_string:
+            filter_string = None
+        collection = self.collection_area.get_current_collection()
+        self.book_area.display_covers(collection, filter_string)
 
 class _CollectionArea(gtk.ScrolledWindow):
     
@@ -284,9 +296,10 @@ class _CollectionArea(gtk.ScrolledWindow):
         def _add(parent_iter, supercoll):
             for coll in self._library.backend.get_collections_in_collection(
               supercoll):
+                name = self._library.backend.get_collection_name(coll)
                 child_iter = self._treestore.append(parent_iter,
-                    [xmlescape(coll[1]), coll[0]])
-                _add(child_iter, coll[0])
+                    [xmlescape(name), coll])
+                _add(child_iter, coll)
 
         self._treestore.clear()
         self._treestore.append(None, ['<b>%s</b>' % xmlescape(_('All books')),
@@ -360,8 +373,7 @@ class _CollectionArea(gtk.ScrolledWindow):
         rename_dialog.vbox.pack_start(box)
         entry = gtk.Entry()
         entry.set_text(old_name)
-        entry.connect('activate', # Enter on entry is the same as pressing OK.
-            lambda x: rename_dialog.response(gtk.RESPONSE_OK))
+        entry.set_activates_default(True)
         box.pack_start(entry, True, True, 6)
         box.show_all()
         
@@ -502,14 +514,14 @@ class _BookArea(gtk.ScrolledWindow):
             self._remove_books_from_library)])
         self._ui_manager.insert_action_group(actiongroup, 0)
 
-    def display_covers(self, collection):
+    def display_covers(self, collection, filter_string=None):
         """Display the books in <collection> in the IconView."""
         self._stop_update = False # To handle new collections during update.
         self._liststore.clear()
         if collection == _COLLECTION_ALL: # The "All" collection is virtual.
             collection = None
         for i, book in enumerate(self._library.backend.get_books_in_collection(
-          collection)):
+          collection, filter_string)):
             self._add_book(book)
             if i % 15 == 0: # Don't update GUI for every cover for efficiency.
                 while gtk.events_pending():
@@ -544,7 +556,8 @@ class _BookArea(gtk.ScrolledWindow):
         """Add the <book> to the ListStore (and thus to the _BookArea)."""
         pixbuf = self._library.backend.get_book_cover(book)
         if pixbuf is None:
-            return
+            pixbuf = self._library.render_icon(gtk.STOCK_MISSING_IMAGE,
+                gtk.ICON_SIZE_DIALOG)
         # The scale (0.67) is for normal aspect ratio for book covers
         pixbuf = image.fit_in_rectangle(pixbuf,
             int(0.67 * prefs['library cover size']),
@@ -629,6 +642,9 @@ class _BookArea(gtk.ScrolledWindow):
         book = self.get_book_at_path(icon_path)
 
         cover = self._library.backend.get_book_cover(book)
+        if cover is None:
+            cover = self._library.render_icon(gtk.STOCK_MISSING_IMAGE,
+                gtk.ICON_SIZE_DIALOG)
         cover = cover.scale_simple(max(0, cover.get_width() // 2),
             max(0, cover.get_height() // 2), gtk.gdk.INTERP_TILES)
         cover = image.add_border(cover, 1, 0xFFFFFFFF)

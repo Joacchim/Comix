@@ -28,31 +28,26 @@ _icons = (('gimp-flip-horizontal.png',   'comix-flip-horizontal'),
           ('fitheight.png',              'comix-fitheight'),
           ('fitmanual.png',              'comix-fitmanual'))
 
+# Some heuristics to find the path to the icon image files.
+base = os.path.dirname(os.path.dirname(os.path.realpath(sys.argv[0])))
+if os.path.isfile(os.path.join(base, 'images/comix.png')): # Source dir
+    icon_path = os.path.join(base, 'images')
+else: # Installed in some system dir
+    for prefix in [base, '/usr', '/usr/local', '/usr/X11R6']:
+        if os.path.isfile(os.path.join(prefix,
+            'share/pixmaps/comix/comix.png')): # Try one
+            icon_path = os.path.join(prefix, 'share/pixmaps/comix')
+            break
 
-def load():
-    """Load Comix specific icons to the default stock set. Should be called
-    at startup.
-    """
-    # Some heuristics to find the path to the icon image files.
-    base = os.path.dirname(os.path.dirname(os.path.realpath(sys.argv[0])))
-    if os.path.isfile(os.path.join(base, 'images/comix.png')): # Source dir
-        icon_path = os.path.join(base, 'images')
-    else: # Installed in some system dir
-        for prefix in [base, '/usr', '/usr/local', '/usr/X11R6']:
-            if os.path.isfile(os.path.join(prefix,
-                'share/pixmaps/comix/comix.png')): # Try one
-                icon_path = os.path.join(prefix, 'share/pixmaps/comix')
-                break
-
-    pixbuf = gtk.gdk.pixbuf_new_from_file(os.path.join(icon_path, 'comix.png'))
-    gtk.window_set_default_icon(pixbuf)
-    factory = gtk.IconFactory()
-    for filename, stockid in _icons:
-        try:
-            filename = os.path.join(icon_path, filename)
-            pixbuf = gtk.gdk.pixbuf_new_from_file(filename)
-            iconset = gtk.IconSet(pixbuf)
-            factory.add(stockid, iconset)
-        except Exception:
-            print '! Could not load icon "%s".' % stockid
-    factory.add_default()
+pixbuf = gtk.gdk.pixbuf_new_from_file(os.path.join(icon_path, 'comix.png'))
+gtk.window_set_default_icon(pixbuf)
+factory = gtk.IconFactory()
+for filename, stockid in _icons:
+    try:
+        filename = os.path.join(icon_path, filename)
+        pixbuf = gtk.gdk.pixbuf_new_from_file(filename)
+        iconset = gtk.IconSet(pixbuf)
+        factory.add(stockid, iconset)
+    except Exception:
+        print '! Could not load icon "%s".' % stockid
+factory.add_default()
