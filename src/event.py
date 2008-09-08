@@ -21,6 +21,7 @@ class EventHandler:
         self._last_pointer_pos_y = 0
         self._pressed_pointer_pos_x = 0
         self._pressed_pointer_pos_y = 0
+        self._waiting_redraw = False
 
     def resize_event(self, widget, event):
         """Handle events from resizing and moving the main window."""
@@ -33,7 +34,15 @@ class EventHandler:
                 prefs['window height'] = event.height
             self._window.width = event.width
             self._window.height = event.height
-            self._window.draw_image(scroll=False)
+            if not self._waiting_redraw:
+                self._waiting_redraw = True
+                gobject.idle_add(self._resize_delayed)
+
+    def _resize_delayed(self):
+        """Callback for delayed image redraw."""
+        self._window.draw_image(scroll=False)
+        self._waiting_redraw = False
+        return False
 
     def key_press_event(self, widget, event, *args):
         """Handle key press events on the main window."""
@@ -269,6 +278,16 @@ class EventHandler:
 
     def mouse_move_event(self, widget, event):
         """Handle mouse pointer movement events."""
+        events = []
+        while gtk.gdk.events_pending():
+            queued_event = gtk.gdk.event_get()
+            if queued_event is not None:
+                if queued_event.type == gtk.gdk.MOTION_NOTIFY:
+                    event = queued_event
+                else:
+                    events.append(queued_event)
+        for queued_event in events:
+            queued_event.put()
         if 'GDK_BUTTON1_MASK' in event.state.value_names:
             self._window.cursor_handler.set_cursor_type(cursor.GRAB)
             self._window.scroll(self._last_pointer_pos_x - event.x_root,
@@ -280,14 +299,7 @@ class EventHandler:
             self._window.glass.set_lens_cursor(event.x, event.y)
         else:
             self._window.cursor_handler.refresh()
-        events = []
-        while gtk.gdk.events_pending():
-            event = gtk.gdk.event_get()
-            if event is not None and event.type != gtk.gdk.MOTION_NOTIFY:
-                events.append(event)
-        for event in events:
-            event.put()
-
+        
     def drag_n_drop_event(self, widget, context, x, y, data, *args):
         """Handle drag-n-drop events on the main layout area."""
         uris = data.get_uris()
