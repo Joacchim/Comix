@@ -21,10 +21,10 @@ class EventHandler:
         self._last_pointer_pos_y = 0
         self._pressed_pointer_pos_x = 0
         self._pressed_pointer_pos_y = 0
+        self._waiting_redraw = False
 
     def resize_event(self, widget, event):
         """Handle events from resizing and moving the main window."""
-        event = _get_latest_event_of_same_type(event)
         if not self._window.is_fullscreen:
             prefs['window x'], prefs['window y'] = self._window.get_position()
         if (event.width != self._window.width or
@@ -34,7 +34,16 @@ class EventHandler:
                 prefs['window height'] = event.height
             self._window.width = event.width
             self._window.height = event.height
-            self._window.draw_image(scroll=False)
+            if not self._waiting_redraw:
+                self._waiting_redraw = True
+                gobject.idle_add(self._resize_delayed,
+                    priority=gobject.PRIORITY_HIGH_IDLE)
+
+    def _resize_delayed(self):
+        """Callback for delayed image redraw."""
+        self._waiting_redraw = False
+        self._window.draw_image(scroll=False)
+        return False
 
     def key_press_event(self, widget, event, *args):
         """Handle key press events on the main window."""
@@ -42,7 +51,7 @@ class EventHandler:
         # Some navigation keys that work as well as the accelerators in
         # ui.py.
         # ----------------------------------------------------------------
-        if event.keyval in [gtk.keysyms.KP_Page_Up, gtk.keysyms.BackSpace]:
+        if event.keyval in (gtk.keysyms.KP_Page_Up, gtk.keysyms.BackSpace):
             self._window.previous_page()
         elif event.keyval == gtk.keysyms.KP_Page_Down:
             self._window.next_page()
@@ -82,11 +91,11 @@ class EventHandler:
         # Zooming commands for manual zoom mode. These keys complement
         # others (with the same action) defined as accelerators.
         # ----------------------------------------------------------------
-        elif event.keyval in [gtk.keysyms.plus, gtk.keysyms.equal]:
+        elif event.keyval in (gtk.keysyms.plus, gtk.keysyms.equal):
             self._window.actiongroup.get_action('zoom_in').activate()
         elif event.keyval == gtk.keysyms.minus:
             self._window.actiongroup.get_action('zoom_out').activate()
-        elif (event.keyval in [gtk.keysyms._0, gtk.keysyms.KP_0] and
+        elif (event.keyval in (gtk.keysyms._0, gtk.keysyms.KP_0) and
           'GDK_CONTROL_MASK' in event.state.value_names):
             self._window.actiongroup.get_action('zoom_original').activate()
 
@@ -94,22 +103,22 @@ class EventHandler:
         # Arrow keys scroll the image, except in fit-to-screen mode where
         # they flip pages instead.
         # ----------------------------------------------------------------
-        elif event.keyval in [gtk.keysyms.Down, gtk.keysyms.KP_Down]:
+        elif event.keyval in (gtk.keysyms.Down, gtk.keysyms.KP_Down):
             if not self._window.zoom_mode == 'fit':
                 self._window.scroll(0, 40)
             else:
                 self._window.next_page()
-        elif event.keyval in [gtk.keysyms.Up, gtk.keysyms.KP_Up]:
+        elif event.keyval in (gtk.keysyms.Up, gtk.keysyms.KP_Up):
             if not self._window.zoom_mode == 'fit':
                 self._window.scroll(0, -40)
             else:
                 self._window.previous_page()
-        elif event.keyval in [gtk.keysyms.Right, gtk.keysyms.KP_Right]:
+        elif event.keyval in (gtk.keysyms.Right, gtk.keysyms.KP_Right):
             if not self._window.zoom_mode == 'fit':
                 self._window.scroll(40, 0)
             else:
                 self._window.next_page()
-        elif event.keyval in [gtk.keysyms.Left, gtk.keysyms.KP_Left]:
+        elif event.keyval in (gtk.keysyms.Left, gtk.keysyms.KP_Left):
             if not self._window.zoom_mode == 'fit':
                 self._window.scroll(-40, 0)
             else:
@@ -203,10 +212,10 @@ class EventHandler:
         # We kill the signals here for the Up, Down, Space and Enter keys,
         # or they will start fiddling with the thumbnail selector (bad).
         # ----------------------------------------------------------------
-        if (event.keyval in [gtk.keysyms.Up, gtk.keysyms.Down,
+        if (event.keyval in (gtk.keysyms.Up, gtk.keysyms.Down,
           gtk.keysyms.space, gtk.keysyms.KP_Enter, gtk.keysyms.KP_Up,
           gtk.keysyms.KP_Down, gtk.keysyms.KP_Home, gtk.keysyms.KP_End,
-          gtk.keysyms.KP_Page_Up, gtk.keysyms.KP_Page_Down] or
+          gtk.keysyms.KP_Page_Up, gtk.keysyms.KP_Page_Down) or
           (event.keyval == gtk.keysyms.Return and not
           'GDK_MOD1_MASK' in event.state.value_names)):
             self._window.emit_stop_by_name('key_press_event')
@@ -299,7 +308,8 @@ class EventHandler:
 
 def _get_latest_event_of_same_type(event):
     """Return the latest event in the event queue that is of the same type
-    as <event>. All events of that type will be removed from the vent queue.
+    as <event>, or <event> itself if no such events are in the queue. All
+    events of that type will be removed from the event queue.
     """
     events = []
     while gtk.gdk.events_pending():
@@ -312,4 +322,3 @@ def _get_latest_event_of_same_type(event):
     for queued_event in events:
         queued_event.put()
     return event
-    
