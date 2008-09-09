@@ -21,10 +21,10 @@ class EventHandler:
         self._last_pointer_pos_y = 0
         self._pressed_pointer_pos_x = 0
         self._pressed_pointer_pos_y = 0
-        self._waiting_redraw = False
 
     def resize_event(self, widget, event):
         """Handle events from resizing and moving the main window."""
+        event = _get_latest_event_of_same_type(event)
         if not self._window.is_fullscreen:
             prefs['window x'], prefs['window y'] = self._window.get_position()
         if (event.width != self._window.width or
@@ -34,15 +34,7 @@ class EventHandler:
                 prefs['window height'] = event.height
             self._window.width = event.width
             self._window.height = event.height
-            if not self._waiting_redraw:
-                self._waiting_redraw = True
-                gobject.idle_add(self._resize_delayed)
-
-    def _resize_delayed(self):
-        """Callback for delayed image redraw."""
-        self._window.draw_image(scroll=False)
-        self._waiting_redraw = False
-        return False
+            self._window.draw_image(scroll=False)
 
     def key_press_event(self, widget, event, *args):
         """Handle key press events on the main window."""
@@ -278,16 +270,7 @@ class EventHandler:
 
     def mouse_move_event(self, widget, event):
         """Handle mouse pointer movement events."""
-        events = []
-        while gtk.gdk.events_pending():
-            queued_event = gtk.gdk.event_get()
-            if queued_event is not None:
-                if queued_event.type == gtk.gdk.MOTION_NOTIFY:
-                    event = queued_event
-                else:
-                    events.append(queued_event)
-        for queued_event in events:
-            queued_event.put()
+        event = _get_latest_event_of_same_type(event)
         if 'GDK_BUTTON1_MASK' in event.state.value_names:
             self._window.cursor_handler.set_cursor_type(cursor.GRAB)
             self._window.scroll(self._last_pointer_pos_x - event.x_root,
@@ -312,3 +295,21 @@ class EventHandler:
             uri = uri[5:]
         path = urllib.url2pathname(uri)
         self._window.file_handler.open_file(path)
+
+
+def _get_latest_event_of_same_type(event):
+    """Return the latest event in the event queue that is of the same type
+    as <event>. All events of that type will be removed from the vent queue.
+    """
+    events = []
+    while gtk.gdk.events_pending():
+        queued_event = gtk.gdk.event_get()
+        if queued_event is not None:
+            if queued_event.type == event.type:
+                event = queued_event
+            else:
+                events.append(queued_event)
+    for queued_event in events:
+        queued_event.put()
+    return event
+    
