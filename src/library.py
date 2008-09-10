@@ -32,7 +32,7 @@ class _LibraryDialog(gtk.Window):
 
     def __init__(self, file_handler):
         gtk.Window.__init__(self, gtk.WINDOW_TOPLEVEL)
-        self.set_size_request(400, 300)
+        self.set_size_request(400, 400)
         self.resize(prefs['lib window width'], prefs['lib window height'])
         self.set_title(_('Library'))
         self.connect('delete_event', self.close)
@@ -42,75 +42,18 @@ class _LibraryDialog(gtk.Window):
         self._statusbar.set_has_resize_grip(True)
         self.backend = librarybackend.LibraryBackend()
         self.book_area = _BookArea(self)
+        self.control_area = _ControlArea(self)
         self.collection_area = _CollectionArea(self)
-
-        # The bottom area, with the info box, buttons and such.
-        bottombox = gtk.HBox(False, 12)
-        bottombox.set_border_width(10)
-        borderbox = gtk.EventBox()
-        borderbox.modify_bg(gtk.STATE_NORMAL, gtk.gdk.color_parse('#333'))
-        borderbox.set_size_request(300, -1)
-        insidebox = gtk.EventBox()
-        insidebox.set_border_width(1)
-        insidebox.modify_bg(gtk.STATE_NORMAL, gtk.gdk.color_parse('#ddb'))
-        infobox = gtk.VBox(False, 5)
-        infobox.set_border_width(10)
-        bottombox.pack_start(borderbox, False, False)
-        borderbox.add(insidebox)
-        insidebox.add(infobox)
-        self._namelabel = gtk.Label()
-        self._namelabel.set_ellipsize(pango.ELLIPSIZE_MIDDLE)
-        self._namelabel.set_alignment(0, 0.5)
-        infobox.pack_start(self._namelabel, False, False)
-        self._formatlabel = gtk.Label()
-        self._formatlabel.set_ellipsize(pango.ELLIPSIZE_MIDDLE)
-        self._formatlabel.set_alignment(0, 0.5)
-        infobox.pack_start(self._formatlabel, False, False)
-        self._pageslabel = gtk.Label()
-        self._pageslabel.set_ellipsize(pango.ELLIPSIZE_MIDDLE)
-        self._pageslabel.set_alignment(0, 0.5)
-        infobox.pack_start(self._pageslabel, False, False)
-        self._sizelabel = gtk.Label()
-        self._sizelabel.set_ellipsize(pango.ELLIPSIZE_MIDDLE)
-        self._sizelabel.set_alignment(0, 0.5)
-        infobox.pack_start(self._sizelabel, False, False)
-        vbox = gtk.VBox(False, 10)
-        bottombox.pack_start(vbox, True, True)
-        hbox = gtk.HBox(False, 6)
-        vbox.pack_start(hbox, False, False)
-        label = gtk.Label('%s:' % _('Search'))
-        hbox.pack_start(label, False, False)
-        search_entry = gtk.Entry()
-        search_entry.connect('activate', self._filter_books_cb)
-        hbox.pack_start(search_entry)
-        vbox.pack_start(gtk.HBox(), True, True)
-        hbox = gtk.HBox(False, 10)
-        vbox.pack_start(hbox, False, False)
-        add_book_button = gtk.Button(_('Add books'))
-        add_book_button.set_image(gtk.image_new_from_stock(
-            gtk.STOCK_ADD, gtk.ICON_SIZE_BUTTON))
-        add_book_button.connect('clicked', self._add_books_cb)
-        hbox.pack_start(add_book_button, False, False)
-        add_collection_button = gtk.Button(_('Add collection'))
-        add_collection_button.connect('clicked', self._add_collection_cb)
-        add_collection_button.set_image(gtk.image_new_from_stock(
-            gtk.STOCK_ADD, gtk.ICON_SIZE_BUTTON))
-        hbox.pack_start(add_collection_button, False, False)
-        hbox.pack_start(gtk.HBox(), True, True)
-        self._open_button = gtk.Button(None, gtk.STOCK_OPEN)
-        self._open_button.connect('clicked', self.book_area.open_selected_book)
-        self._open_button.set_sensitive(False)
-        hbox.pack_start(self._open_button, False, False)
-
+        
         table = gtk.Table(2, 2, False)
         table.attach(self.collection_area, 0, 1, 0, 1, gtk.FILL,
             gtk.EXPAND|gtk.FILL)
         table.attach(self.book_area, 1, 2, 0, 1, gtk.EXPAND|gtk.FILL,
             gtk.EXPAND|gtk.FILL)
-        table.attach(bottombox, 0, 2, 1, 2, gtk.EXPAND|gtk.FILL, gtk.FILL)
+        table.attach(self.control_area, 0, 2, 1, 2, gtk.EXPAND|gtk.FILL,
+            gtk.FILL)
         table.attach(self._statusbar, 0, 2, 2, 3, gtk.FILL, gtk.FILL)
         self.add(table)
-
         self.show_all()
 
     def open_book(self, book):
@@ -120,41 +63,6 @@ class _LibraryDialog(gtk.Window):
             return
         self.close()
         self._file_handler.open_file(path)
-
-    def update_info(self, iconview):
-        """Update the info box using the currently selected book."""
-        self._open_button.set_sensitive(False)
-        selected = iconview.get_selected_items()
-        if selected:
-            book = self.book_area.get_book_at_path(selected[0])
-            name = self.backend.get_book_name(book)
-            format = self.backend.get_book_format(book)
-            pages = self.backend.get_book_pages(book)
-            size = self.backend.get_book_size(book)
-        else:
-            name = format = pages = size = None
-        if len(selected) == 1:
-            self._open_button.set_sensitive(True)
-        if name is not None:
-            self._namelabel.set_text(encoding.to_unicode(name))
-        else:
-            self._namelabel.set_text('')
-        if format is not None:
-            self._formatlabel.set_text(archive.get_name(format))
-        else:
-            self._formatlabel.set_text('')
-        if pages is not None:
-            self._pageslabel.set_text(_('%d pages') % pages)
-        else:
-            self._pageslabel.set_text('')
-        if size is not None:
-            self._sizelabel.set_text('%.1f MiB' % (size / 1048576.0))
-        else:
-            self._sizelabel.set_text('')
-        attrlist = pango.AttrList()
-        attrlist.insert(pango.AttrWeight(pango.WEIGHT_BOLD, 0,
-            len(self._namelabel.get_text())))
-        self._namelabel.set_attributes(attrlist)
                 
     def set_status_message(self, message):
         """Set a specific message on the statusbar, replacing whatever was
@@ -190,50 +98,6 @@ class _LibraryDialog(gtk.Window):
             prefs['last library collection'] = collection
         self.collection_area.display_collections()
 
-    def _add_books_cb(self, *args):
-        """Open up a filechooser dialog from which books can be added to
-        the library.
-        """
-        filechooser.open_library_filechooser_dialog(self)
-
-    def _add_collection_cb(self, *args):
-        """Add a new collection to the library, through a dialog."""
-        add_dialog = gtk.MessageDialog(None, 0, gtk.MESSAGE_QUESTION,
-            gtk.BUTTONS_OK_CANCEL, _('Add new collection?'))
-        add_dialog.format_secondary_text(
-            _('Please enter a name for the new collection.'))
-        add_dialog.set_default_response(gtk.RESPONSE_OK)
-        
-        box = gtk.HBox() # To get nice line-ups with the padding.
-        add_dialog.vbox.pack_start(box)
-        entry = gtk.Entry()
-        entry.set_text(_('New collection'))
-        entry.set_activates_default(True)
-        box.pack_start(entry, True, True, 6)
-        box.show_all()
-        
-        response = add_dialog.run()
-        name = entry.get_text()
-        add_dialog.destroy()
-        if response == gtk.RESPONSE_OK and name:
-            if self.backend.add_collection(name):
-                collection = self.backend.get_collection_by_name(name)
-                prefs['last library collection'] = collection
-                self.collection_area.display_collections()
-            else:
-                message = _('Could not add a new collection called "%s".') % (
-                    name)
-                if self.backend.get_collection_by_name(name) is not None:
-                    message = '%s %s' % (message,
-                        _('A collection by that name already exists.'))
-                self.set_status_message(message)
-
-    def _filter_books_cb(self, entry, *args):
-        filter_string = entry.get_text()
-        if not filter_string:
-            filter_string = None
-        collection = self.collection_area.get_current_collection()
-        self.book_area.display_covers(collection, filter_string)
 
 class _CollectionArea(gtk.ScrolledWindow):
     
@@ -256,10 +120,7 @@ class _CollectionArea(gtk.ScrolledWindow):
         self._treeview.connect('row_activated', self._expand_or_collapse_row)
         self._treeview.set_headers_visible(False)
         self._treeview.set_rules_hint(True)
-        self._treeview.enable_model_drag_dest(
-            [('book', gtk.TARGET_SAME_APP, _DRAG_BOOK_ID),
-            ('collection', gtk.TARGET_SAME_WIDGET, _DRAG_COLLECTION_ID)],
-            gtk.gdk.ACTION_MOVE)
+        self._set_acceptable_drop(True)
         self._treeview.enable_model_drag_source(gtk.gdk.BUTTON1_MASK,
             [('collection', gtk.TARGET_SAME_WIDGET, _DRAG_COLLECTION_ID)],
             gtk.gdk.ACTION_MOVE)
@@ -301,7 +162,7 @@ class _CollectionArea(gtk.ScrolledWindow):
         return self._get_collection_at_path(cursor[0])
 
     def display_collections(self):
-        """Display the library collections, by redrawing them from the
+        """Display the library collections by redrawing them from the
         backend data. Should be called on startup or when the collections
         hierarchy has been changed (e.g. after moving, adding, renaming).
         Any row that was expanded before the call will have it's
@@ -337,7 +198,6 @@ class _CollectionArea(gtk.ScrolledWindow):
             _COLLECTION_ALL])
         _recursive_add(None, None)
         self._treestore.foreach(_expand_and_select)
-        #self._treeview.columns_autosize()
 
     def _get_collection_at_path(self, path):
         """Return the collection ID of the collection at the (TreeView)
@@ -419,10 +279,10 @@ class _CollectionArea(gtk.ScrolledWindow):
 
     def _button_press(self, treeview, event):
         """Handle mouse button presses on the _CollectionArea."""
-        pos_tuple = treeview.get_path_at_pos(int(event.x), int(event.y))
-        if pos_tuple is None:
+        row = treeview.get_path_at_pos(int(event.x), int(event.y))
+        if row is None:
             return
-        path = pos_tuple[0]
+        path = row[0]
         if event.button == 3:
             if self._get_collection_at_path(path) == _COLLECTION_ALL:
                 sens = False
@@ -448,7 +308,7 @@ class _CollectionArea(gtk.ScrolledWindow):
         """
         self._library.set_status_message('')
         drop_row = treeview.get_dest_row_at_pos(x, y)
-        if drop_row is None:
+        if drop_row is None: # Drop "after" the last row. 
             dest_path, pos = ((len(self._treestore) - 1,),
                 gtk.TREE_VIEW_DROP_AFTER)
         else:
@@ -486,7 +346,7 @@ class _CollectionArea(gtk.ScrolledWindow):
         # Why isn't the drag ID passed along with drag-motion events?
         if context.get_source_widget() is self._treeview: # Moving collection.
             model, src_iter = treeview.get_selection().get_selected()
-            if drop_row is None:
+            if drop_row is None: # Drop "after" the last row.
                 dest_path, pos = (len(model) - 1,), gtk.TREE_VIEW_DROP_AFTER
             else:
                 dest_path, pos = drop_row
@@ -555,10 +415,12 @@ class _CollectionArea(gtk.ScrolledWindow):
         """Create a cursor image for drag-n-drop of collections. We use the
         default one (i.e. the row with text), but put the hotspot in the
         top left corner so that one can actually see where one is dropping,
-        which unfortunately isn't the normal case.
+        which unfortunately isn't the default case.
         """
         path = treeview.get_cursor()[0]
         pixmap = treeview.create_row_drag_icon(path)
+        # context.set_icon_pixmap() seems to cause crashes, so we do a
+        # quick and dirty conversion to pixbuf.
         pointer = gtk.gdk.Pixbuf(gtk.gdk.COLORSPACE_RGB, True, 8,
             *pixmap.get_size())
         pointer = pointer.get_from_drawable(pixmap, treeview.get_colormap(),
@@ -578,23 +440,22 @@ class _BookArea(gtk.ScrolledWindow):
         self._stop_update = False
         self.set_policy(gtk.POLICY_AUTOMATIC, gtk.POLICY_AUTOMATIC)
         
-        self._liststore = gtk.ListStore(gtk.gdk.Pixbuf, int) # (Cover, ID)
+        self._liststore = gtk.ListStore(gtk.gdk.Pixbuf, int) # (Cover, ID).
         self._iconview = gtk.IconView(self._liststore)
         self._iconview.set_pixbuf_column(0)
         self._iconview.connect('item_activated', self._book_activated)
-        self._iconview.connect('selection_changed', self._library.update_info)
+        self._iconview.connect('selection_changed', self._selection_changed)
         self._iconview.connect_after('drag_begin', self._drag_begin)
         self._iconview.connect('drag_data_get', self._drag_data_get)
         self._iconview.connect('drag_data_received', self._drag_data_received)
         self._iconview.connect('button_press_event', self._button_press)
-        self._iconview.modify_base(gtk.STATE_NORMAL, gtk.gdk.Color())
+        self._iconview.modify_base(gtk.STATE_NORMAL, gtk.gdk.Color()) # Black.
         self._iconview.enable_model_drag_source(0,
             [('book', gtk.TARGET_SAME_APP, _DRAG_BOOK_ID)],
             gtk.gdk.ACTION_MOVE)
-        self._iconview.set_selection_mode(gtk.SELECTION_MULTIPLE)
         self._iconview.drag_dest_set(gtk.DEST_DEFAULT_ALL,
-                                     [('text/uri-list', 0, _DRAG_EXTERNAL_ID)],
-                                     gtk.gdk.ACTION_COPY)
+            [('text/uri-list', 0, _DRAG_EXTERNAL_ID)], gtk.gdk.ACTION_COPY)
+        self._iconview.set_selection_mode(gtk.SELECTION_MULTIPLE)
         self.add(self._iconview)
 
         self._ui_manager = gtk.UIManager()
@@ -623,7 +484,7 @@ class _BookArea(gtk.ScrolledWindow):
 
     def display_covers(self, collection, filter_string=None):
         """Display the books in <collection> in the IconView."""
-        self._stop_update = False # To handle new collections during update.
+        self._stop_update = False # To handle new re-entry during update.
         self._liststore.clear()
         if collection == _COLLECTION_ALL: # The "All" collection is virtual.
             collection = None
@@ -656,8 +517,9 @@ class _BookArea(gtk.ScrolledWindow):
     def open_selected_book(self, *args):
         """Open the currently selected book."""
         selected = self._iconview.get_selected_items()
-        if selected:
-            path = selected[0]
+        if not selected:
+            return
+        path = selected[0]
         self._book_activated(self._iconview, path)
 
     def _add_book(self, book):
@@ -670,13 +532,24 @@ class _BookArea(gtk.ScrolledWindow):
         pixbuf = image.fit_in_rectangle(pixbuf,
             int(0.67 * prefs['library cover size']),
             prefs['library cover size'])
-        pixbuf = image.add_border(pixbuf, 2, 0xFFFFFFFF)
+        if prefs['library cover size'] < 100:
+            border_thickness = 1
+        else:
+            border_thickness = 2
+        pixbuf = image.add_border(pixbuf, border_thickness, 0xFFFFFFFF)
         self._liststore.append([pixbuf, book])
 
     def _book_activated(self, iconview, path):
         """Open the book at the (liststore) <path>."""
         book = self.get_book_at_path(path)
         self._library.open_book(book)
+
+    def _selection_changed(self, iconview):
+        """Update the displayed info in the _ControlArea when a new book
+        is selected.
+        """
+        selected = iconview.get_selected_items()
+        self._library.control_area.update_info(selected)
 
     def _remove_books_from_collection(self, *args):
         """Remove the currently selected book(s) from the current collection,
@@ -688,8 +561,7 @@ class _BookArea(gtk.ScrolledWindow):
             book = self.get_book_at_path(path)
             self._library.backend.remove_book_from_collection(book, collection)
             self.remove_book_at_path(path)
-        coll_name = self._library.backend.get_collection_name(
-            collection)
+        coll_name = self._library.backend.get_collection_name(collection)
         self._library.set_status_message(
             _('Removed %d book(s) from "%s".') % (len(selected), coll_name))
 
@@ -817,6 +689,178 @@ class _BookArea(gtk.ScrolledWindow):
         self._library.add_books(paths, collection_name)
 
 
+class _ControlArea(gtk.HBox):
+    
+    """The _ControlArea is the bottom area of the library window where
+    information is displayed and controls such as buttons resides.
+    """
+    
+    def __init__(self, library):
+        self._library = library
+        gtk.HBox.__init__(self, False, 12)
+
+        self.set_border_width(10)
+        borderbox = gtk.EventBox()
+        borderbox.modify_bg(gtk.STATE_NORMAL, gtk.gdk.color_parse('#333'))
+        borderbox.set_size_request(250, -1)
+        insidebox = gtk.EventBox()
+        insidebox.set_border_width(1)
+        insidebox.modify_bg(gtk.STATE_NORMAL, gtk.gdk.color_parse('#ddb'))
+        infobox = gtk.VBox(False, 5)
+        infobox.set_border_width(10)
+        self.pack_start(borderbox, False, False)
+        borderbox.add(insidebox)
+        insidebox.add(infobox)
+        self._namelabel = gtk.Label()
+        self._namelabel.set_ellipsize(pango.ELLIPSIZE_MIDDLE)
+        self._namelabel.set_alignment(0, 0.5)
+        infobox.pack_start(self._namelabel, False, False)
+        self._formatlabel = gtk.Label()
+        self._formatlabel.set_ellipsize(pango.ELLIPSIZE_MIDDLE)
+        self._formatlabel.set_alignment(0, 0.5)
+        infobox.pack_start(self._formatlabel, False, False)
+        self._pageslabel = gtk.Label()
+        self._pageslabel.set_ellipsize(pango.ELLIPSIZE_MIDDLE)
+        self._pageslabel.set_alignment(0, 0.5)
+        infobox.pack_start(self._pageslabel, False, False)
+        self._sizelabel = gtk.Label()
+        self._sizelabel.set_ellipsize(pango.ELLIPSIZE_MIDDLE)
+        self._sizelabel.set_alignment(0, 0.5)
+        infobox.pack_start(self._sizelabel, False, False)
+
+        vbox = gtk.VBox(False, 10)
+        self.pack_start(vbox, True, True)
+        hbox = gtk.HBox(False)
+        vbox.pack_start(hbox, False, False)
+        label = gtk.Label('%s:' % _('Search'))
+        hbox.pack_start(label, False, False)
+        search_entry = gtk.Entry()
+        search_entry.connect('activate', self._filter_books)
+        hbox.pack_start(search_entry, True, True, 6)
+        label = gtk.Label('%s:' % _('Cover size'))
+        hbox.pack_start(label, False, False, 6)
+        adjustment = gtk.Adjustment(prefs['library cover size'], 50, 128, 1,
+            10, 0)
+        cover_size_scale = gtk.HScale(adjustment)
+        cover_size_scale.set_size_request(150, -1)
+        cover_size_scale.set_draw_value(False)
+        cover_size_scale.set_update_policy(gtk.UPDATE_DELAYED)
+        cover_size_scale.connect('value_changed', self._change_cover_size)
+        hbox.pack_start(cover_size_scale, False, False)
+        vbox.pack_start(gtk.HBox(), True, True)
+
+        hbox = gtk.HBox(False, 10)
+        vbox.pack_start(hbox, False, False)
+        add_book_button = gtk.Button(_('Add books'))
+        add_book_button.set_image(gtk.image_new_from_stock(
+            gtk.STOCK_ADD, gtk.ICON_SIZE_BUTTON))
+        add_book_button.connect('clicked', self._add_books)
+        hbox.pack_start(add_book_button, False, False)
+        add_collection_button = gtk.Button(_('Add collection'))
+        add_collection_button.connect('clicked', self._add_collection)
+        add_collection_button.set_image(gtk.image_new_from_stock(
+            gtk.STOCK_ADD, gtk.ICON_SIZE_BUTTON))
+        hbox.pack_start(add_collection_button, False, False)
+        hbox.pack_start(gtk.HBox(), True, True)
+        self._open_button = gtk.Button(None, gtk.STOCK_OPEN)
+        self._open_button.connect('clicked',
+            self._library.book_area.open_selected_book)
+        self._open_button.set_sensitive(False)
+        hbox.pack_start(self._open_button, False, False)
+
+    def update_info(self, selected):
+        """Update the info box using the currently <selected> books from
+        the _BookArea.
+        """
+        self._open_button.set_sensitive(False)
+        if selected:
+            book = self._library.book_area.get_book_at_path(selected[0])
+            name = self._library.backend.get_book_name(book)
+            format = self._library.backend.get_book_format(book)
+            pages = self._library.backend.get_book_pages(book)
+            size = self._library.backend.get_book_size(book)
+        else:
+            name = format = pages = size = None
+        if len(selected) == 1:
+            self._open_button.set_sensitive(True)
+        if name is not None:
+            self._namelabel.set_text(encoding.to_unicode(name))
+        else:
+            self._namelabel.set_text('')
+        if format is not None:
+            self._formatlabel.set_text(archive.get_name(format))
+        else:
+            self._formatlabel.set_text('')
+        if pages is not None:
+            self._pageslabel.set_text(_('%d pages') % pages)
+        else:
+            self._pageslabel.set_text('')
+        if size is not None:
+            self._sizelabel.set_text('%.1f MiB' % (size / 1048576.0))
+        else:
+            self._sizelabel.set_text('')
+        attrlist = pango.AttrList()
+        attrlist.insert(pango.AttrWeight(pango.WEIGHT_BOLD, 0,
+            len(self._namelabel.get_text())))
+        self._namelabel.set_attributes(attrlist)
+
+    def _add_books(self, *args):
+        """Open up a filechooser dialog from which books can be added to
+        the library.
+        """
+        filechooser.open_library_filechooser_dialog(self._library)
+
+    def _add_collection(self, *args):
+        """Add a new collection to the library, through a dialog."""
+        add_dialog = gtk.MessageDialog(None, 0, gtk.MESSAGE_QUESTION,
+            gtk.BUTTONS_OK_CANCEL, _('Add new collection?'))
+        add_dialog.format_secondary_text(
+            _('Please enter a name for the new collection.'))
+        add_dialog.set_default_response(gtk.RESPONSE_OK)
+        
+        box = gtk.HBox() # To get nice line-ups with the padding.
+        add_dialog.vbox.pack_start(box)
+        entry = gtk.Entry()
+        entry.set_text(_('New collection'))
+        entry.set_activates_default(True)
+        box.pack_start(entry, True, True, 6)
+        box.show_all()
+        
+        response = add_dialog.run()
+        name = entry.get_text()
+        add_dialog.destroy()
+        if response == gtk.RESPONSE_OK and name:
+            if self._library.backend.add_collection(name):
+                collection = self._library.backend.get_collection_by_name(name)
+                prefs['last library collection'] = collection
+                self._library.collection_area.display_collections()
+            else:
+                message = _('Could not add a new collection called "%s".') % (
+                    name)
+                if (self._library.backend.get_collection_by_name(name)
+                  is not None):
+                    message = '%s %s' % (message,
+                        _('A collection by that name already exists.'))
+                self._library.set_status_message(message)
+
+    def _filter_books(self, entry, *args):
+        """Display only the books in the current collection whose paths
+        contain the string in the gtk.Entry. The string is not
+        case-sensitive.
+        """
+        filter_string = entry.get_text()
+        if not filter_string:
+            filter_string = None
+        collection = self._library.collection_area.get_current_collection()
+        gobject.idle_add(self._library.book_area.display_covers, collection)
+
+    def _change_cover_size(self, scale):
+        """Change the size of the covers in the _BookArea."""
+        prefs['library cover size'] = int(scale.get_value())
+        collection = self._library.collection_area.get_current_collection()
+        gobject.idle_add(self._library.book_area.display_covers, collection)
+
+
 class _AddBooksProgressDialog(gtk.Dialog):
     
     """Dialog with a ProgressBar that adds books to the library."""
@@ -845,7 +889,7 @@ class _AddBooksProgressDialog(gtk.Dialog):
         hbox.pack_start(left_box, False, False)
         hbox.pack_start(right_box, False, False)
 
-        label = labels.bold_label('%s:' % _('Number of added books'))
+        label = labels.bold_label('%s:' % _('Added books'))
         label.set_alignment(1.0, 0.5)
         left_box.pack_start(label, False, False)
         number_label = gtk.Label('0')
@@ -861,7 +905,7 @@ class _AddBooksProgressDialog(gtk.Dialog):
         main_box.pack_start(added_label, False, False)
         self.show_all()
 
-        total_books = float(len(paths))
+        total_paths = float(len(paths))
         total_added = 0
         for i, path in enumerate(paths):
             if library.backend.add_book(path, collection):
@@ -872,7 +916,7 @@ class _AddBooksProgressDialog(gtk.Dialog):
             attrlist.insert(pango.AttrStyle(pango.STYLE_ITALIC, 0,
                 len(added_label.get_text())))
             added_label.set_attributes(attrlist)
-            bar.set_fraction((i + 1) / total_books)
+            bar.set_fraction((i + 1) / total_paths)
             while gtk.events_pending():
                 gtk.main_iteration(False)
             if self._destroy:
