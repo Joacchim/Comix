@@ -171,6 +171,12 @@ class LibraryBackend:
             where name = ?''', (name,))
         return cur.fetchone()
 
+    def get_supercollection(self, collection):
+        """Return the supercollection of <collection>."""
+        cur = self._con.execute('''select supercollection from Collection
+            where id = ?''', (collection,))
+        return cur.fetchone()
+
     def add_book(self, path, collection=None):
         """Add the archive at <path> to the library. If <collection> is
         not None, it is the collection that the books should be put in.
@@ -223,9 +229,17 @@ class LibraryBackend:
                 collection)
 
     def add_collection_to_collection(self, subcollection, supercollection):
-        """Put <subcollection> into <supercollection>."""
-        self._con.execute('''update Collection set supercollection = ?
-            where id = ?''', (supercollection, subcollection))
+        """Put <subcollection> into <supercollection>, or put
+        <subcollection> in the root if <supercollection> is None.
+        """
+        if supercollection is None:
+            self._con.execute('''update Collection
+                set supercollection = NULL
+                where id = ?''', (subcollection,))
+        else:
+            self._con.execute('''update Collection
+                set supercollection = ?
+                where id = ?''', (supercollection, subcollection))
 
     def rename_collection(self, collection, name):
         """Rename the <collection> to <name>. Return True if the renaming
@@ -279,12 +293,6 @@ class LibraryBackend:
         """Remove <book> from <collection>."""
         self._con.execute('''delete from Contain
             where book = ? and collection = ?''', (book, collection))
-
-    def remove_collection_from_collection(self, subcollection):
-        """Remove <subcollection> from its supercollection."""
-        self._con.execute('''update Collection
-            set supercollection = NULL
-            where id = ?''', (subcollection,))
 
     def close(self):
         """Commit changes and close cleanly."""

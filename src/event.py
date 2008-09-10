@@ -297,7 +297,7 @@ class EventHandler:
         uris = data.get_uris()
         if not uris:
             return
-        uri = uris[0]
+        uri = uris[0] # Open only one file.
         if uri.startswith('file://'):  # Nautilus etc.
             uri = uri[7:]
         elif uri.startswith('file:'):  # Xffm etc.

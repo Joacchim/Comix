@@ -164,6 +164,7 @@ class _LibraryFileChooserDialog(_ComicFileChooserDialog):
         self._collection_button.set_active(
             prefs['auto add books into collections'])
         self._comboentry = gtk.combo_box_entry_new_text()
+        self._comboentry.child.set_activates_default(True)
         for collection in self._library.backend.get_all_collections():
             name = self._library.backend.get_collection_name(collection)
             self._comboentry.append_text(name)
