@@ -1,5 +1,6 @@
 """library.py - Comic book library."""
 
+import os
 import urllib
 from xml.sax.saxutils import escape as xmlescape
 
@@ -32,7 +33,6 @@ class _LibraryDialog(gtk.Window):
 
     def __init__(self, file_handler):
         gtk.Window.__init__(self, gtk.WINDOW_TOPLEVEL)
-        self.set_size_request(400, 400)
         self.resize(prefs['lib window width'], prefs['lib window height'])
         self.set_title(_('Library'))
         self.connect('delete_event', self.close)
@@ -702,7 +702,7 @@ class _ControlArea(gtk.HBox):
         self.set_border_width(10)
         borderbox = gtk.EventBox()
         borderbox.modify_bg(gtk.STATE_NORMAL, gtk.gdk.color_parse('#333'))
-        borderbox.set_size_request(250, -1)
+        borderbox.set_size_request(350, -1)
         insidebox = gtk.EventBox()
         insidebox.set_border_width(1)
         insidebox.modify_bg(gtk.STATE_NORMAL, gtk.gdk.color_parse('#ddb'))
@@ -715,18 +715,18 @@ class _ControlArea(gtk.HBox):
         self._namelabel.set_ellipsize(pango.ELLIPSIZE_MIDDLE)
         self._namelabel.set_alignment(0, 0.5)
         infobox.pack_start(self._namelabel, False, False)
-        self._formatlabel = gtk.Label()
-        self._formatlabel.set_ellipsize(pango.ELLIPSIZE_MIDDLE)
-        self._formatlabel.set_alignment(0, 0.5)
-        infobox.pack_start(self._formatlabel, False, False)
         self._pageslabel = gtk.Label()
         self._pageslabel.set_ellipsize(pango.ELLIPSIZE_MIDDLE)
         self._pageslabel.set_alignment(0, 0.5)
         infobox.pack_start(self._pageslabel, False, False)
-        self._sizelabel = gtk.Label()
-        self._sizelabel.set_ellipsize(pango.ELLIPSIZE_MIDDLE)
-        self._sizelabel.set_alignment(0, 0.5)
-        infobox.pack_start(self._sizelabel, False, False)
+        self._filelabel = gtk.Label()
+        self._filelabel.set_ellipsize(pango.ELLIPSIZE_MIDDLE)
+        self._filelabel.set_alignment(0, 0.5)
+        infobox.pack_start(self._filelabel, False, False)
+        self._dirlabel = gtk.Label()
+        self._dirlabel.set_ellipsize(pango.ELLIPSIZE_MIDDLE)
+        self._dirlabel.set_alignment(0, 0.5)
+        infobox.pack_start(self._dirlabel, False, False)
 
         vbox = gtk.VBox(False, 10)
         self.pack_start(vbox, True, True)
@@ -776,29 +776,32 @@ class _ControlArea(gtk.HBox):
         if selected:
             book = self._library.book_area.get_book_at_path(selected[0])
             name = self._library.backend.get_book_name(book)
+            dir_path = os.path.dirname(
+                self._library.backend.get_book_path(book))
             format = self._library.backend.get_book_format(book)
             pages = self._library.backend.get_book_pages(book)
             size = self._library.backend.get_book_size(book)
         else:
-            name = format = pages = size = None
+            name = dir_path = format = pages = size = None
         if len(selected) == 1:
             self._open_button.set_sensitive(True)
         if name is not None:
             self._namelabel.set_text(encoding.to_unicode(name))
         else:
             self._namelabel.set_text('')
-        if format is not None:
-            self._formatlabel.set_text(archive.get_name(format))
-        else:
-            self._formatlabel.set_text('')
         if pages is not None:
             self._pageslabel.set_text(_('%d pages') % pages)
         else:
             self._pageslabel.set_text('')
-        if size is not None:
-            self._sizelabel.set_text('%.1f MiB' % (size / 1048576.0))
+        if format is not None and size is not None:
+            self._filelabel.set_text('%s, %s' % (archive.get_name(format),
+                '%.1f MiB' % (size / 1048576.0)))
         else:
-            self._sizelabel.set_text('')
+            self._filelabel.set_text('')
+        if dir_path is not None:
+            self._dirlabel.set_text(encoding.to_unicode(dir_path))
+        else:
+            self._dirlabel.set_text('')
         attrlist = pango.AttrList()
         attrlist.insert(pango.AttrWeight(pango.WEIGHT_BOLD, 0,
             len(self._namelabel.get_text())))
@@ -852,7 +855,8 @@ class _ControlArea(gtk.HBox):
         if not filter_string:
             filter_string = None
         collection = self._library.collection_area.get_current_collection()
-        gobject.idle_add(self._library.book_area.display_covers, collection)
+        gobject.idle_add(self._library.book_area.display_covers, collection,
+            filter_string)
 
     def _change_cover_size(self, scale):
         """Change the size of the covers in the _BookArea."""

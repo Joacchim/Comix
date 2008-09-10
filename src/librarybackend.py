@@ -307,9 +307,7 @@ class LibraryBackend:
             pages integer,
             format string,
             size integer,
-            added date default current_date,
-            read integer default 0,
-            rating integer default 0)''')
+            added date default current_date)''')
 
     def _create_table_collection(self):
         self._con.execute('''create table collection (
