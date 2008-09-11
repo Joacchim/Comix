@@ -53,8 +53,6 @@ class MainUI(gtk.UIManager):
             ('edit_thumbnails', 'comix-thumbnails',
                 _('_Thumbnail maintenance...'),
                 None, None, thumbremover.open_dialog),
-            ('add_to_library', 'comix-library-add', _('_Add to library'),
-                None, None, bogus),
             ('edit_archive', gtk.STOCK_EDIT, _('_Edit archive...'),
                 None, None, bogus),
             ('close', gtk.STOCK_CLOSE, _('_Close'),
@@ -161,7 +159,6 @@ class MainUI(gtk.UIManager):
                     <menuitem action="open" />
                     <menuitem action="library" />
                     <separator />
-                    <menuitem action="add_to_library" />
                     <menuitem action="edit_archive" />
                     <separator />
                     <menuitem action="properties" />
@@ -300,7 +297,6 @@ class MainUI(gtk.UIManager):
                    'previous_page',
                    'first_page',
                    'last_page')
-        archive = ('add_to_library',)
         comment = ('comments',)
         general_sensitive = False
         archive_sensitive = False
@@ -308,14 +304,10 @@ class MainUI(gtk.UIManager):
 
         if self._window.file_handler.file_loaded:
             general_sensitive = True
-            if self._window.file_handler.archive_type:
-                archive_sensitive = True
-                if self._window.file_handler.get_number_of_comments():
-                    comment_sensitive = True
+            if self._window.file_handler.get_number_of_comments():
+                comment_sensitive = True
         for name in general:
             self._actiongroup.get_action(name).set_sensitive(general_sensitive)
-        for name in archive:
-            self._actiongroup.get_action(name).set_sensitive(archive_sensitive)
         for name in comment:
             self._actiongroup.get_action(name).set_sensitive(comment_sensitive)
         self.bookmarks.set_sensitive(general_sensitive)
