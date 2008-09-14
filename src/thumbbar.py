@@ -17,10 +17,9 @@ class ThumbnailSidebar(gtk.HBox):
     def __init__(self, window):
         gtk.HBox.__init__(self, False, 0)
         self._window = window
-        self._visible = False
         self._loaded = False
+        self._load_task = None
         self._height = 0
-        self._counter = None
 
         self._liststore = gtk.ListStore(gtk.gdk.Pixbuf)
         self._treeview = gtk.TreeView(self._liststore)
@@ -29,10 +28,10 @@ class ThumbnailSidebar(gtk.HBox):
         self._layout = gtk.Layout()
         self._layout.put(self._treeview, 0, 0)
         self._column.set_sizing(gtk.TREE_VIEW_COLUMN_FIXED)
-        self._column.set_fixed_width(prefs['thumbnail size'] + 7)
         self._treeview.append_column(self._column)
         self._column.pack_start(cellrenderer, True)
         self._column.set_attributes(cellrenderer, pixbuf=0)
+        self._column.set_fixed_width(prefs['thumbnail size'] + 7)
         self._layout.set_size_request(prefs['thumbnail size'] + 7, 0)
         self._treeview.set_headers_visible(False)
         self._vadjust = self._layout.get_vadjustment()
@@ -49,57 +48,45 @@ class ThumbnailSidebar(gtk.HBox):
         self._layout.connect('scroll_event', self._scroll_event)
 
     def get_width(self):
+        """Return the width in pixels of the ThumbnailSidebar."""
         return self._layout.size_request()[0] + self._scroll.size_request()[0]
 
     def show(self, *args):
+        """Show the ThumbnailSidebar."""
         self.show_all()
-        if not self._visible:
-            self._layout.set_size(0, self._height)
-            self._visible = True
 
     def hide(self):
-        self._layout.hide_all()
-        self._scroll.hide()
-        self._visible = False
+        """Hide the ThumbnailSidebar."""
+        self.hide_all()
 
     def clear(self):
+        """Clear the ThumbnailSidebar of any loaded thumbnails."""
         self._liststore.clear()
         self._layout.set_size(0, 0)
         self._height = 0
         self._loaded = False
-        self._counter = _Counter(0)
+        self._stop_update = True
+
+    def resize(self):
+        """Reload the thumbnails with the size specified by in the
+        preferences.
+        """
+        self._column.set_fixed_width(prefs['thumbnail size'] + 7)
+        self._layout.set_size_request(prefs['thumbnail size'] + 7, 0)
+        self.clear()
+        self.load_thumbnails()
 
     def load_thumbnails(self):
+        """Load the thumbnails, if it is appropriate to do so."""
         if (self._loaded or not self._window.file_handler.file_loaded or
           not prefs['show thumbnails'] or prefs['hide all'] or
           (self._window.is_fullscreen and prefs['hide all in fullscreen'])):
             return
 
         self._loaded = True
-        gobject.idle_add(self._load)
-
-    def _load(self):
-        self._counter = _Counter(
-            self._window.file_handler.get_number_of_pages())
-        while self._counter.incr():
-            i = self._counter.get()
-            if self._window.file_handler.archive_type:
-                create = False
-            else:
-                create = prefs['create thumbnails']
-            pixbuf = self._window.file_handler.get_thumbnail(i,
-                prefs['thumbnail size'], prefs['thumbnail size'], create)
-            if prefs['show page numbers on thumbnails']:
-                _add_page_number(pixbuf, i)
-            pixbuf = image.add_border(pixbuf, 1)
-            self._liststore.append([pixbuf])
-            self._height += pixbuf.get_height() + 4
-            self._layout.set_size(0, self._height)
-
-            while gtk.events_pending():
-                gtk.main_iteration(False)
-
-        self.update_select()
+        if self._load_task is not None:
+            gobject.source_remove(self._load_task)
+        self._load_task = gobject.idle_add(self._load)
 
     def update_select(self):
         """Select the thumbnail for the currently viewed page and make sure
@@ -118,6 +105,29 @@ class ThumbnailSidebar(gtk.HBox):
             value = min(self._vadjust.upper - self._vadjust.page_size, value)
             self._vadjust.set_value(value)
 
+    def _load(self):
+        if self._window.file_handler.archive_type:
+            create = False
+        else:
+            create = prefs['create thumbnails']
+        self._stop_update = False
+        for i in xrange(1, self._window.file_handler.get_number_of_pages() + 1):
+            pixbuf = self._window.file_handler.get_thumbnail(i,
+                prefs['thumbnail size'], prefs['thumbnail size'], create)
+            if prefs['show page numbers on thumbnails']:
+                _add_page_number(pixbuf, i)
+            pixbuf = image.add_border(pixbuf, 1)
+            self._liststore.append([pixbuf])
+            while gtk.events_pending():
+                gtk.main_iteration(False)
+            if self._stop_update:
+                return
+            self._height += self._treeview.get_background_area(i - 1,
+                self._column).height
+            self._layout.set_size(0, self._height)
+        self._stop_update = True
+        self.update_select()
+
     def _selection_event(self, widget):
         try:
             selected = widget.get_selected_rows()[1][0][0]
@@ -131,20 +141,6 @@ class ThumbnailSidebar(gtk.HBox):
         elif event.direction == gtk.gdk.SCROLL_DOWN:
             upper = self._vadjust.upper - self._vadjust.page_size
             self._vadjust.set_value(min(self._vadjust.get_value() + 60, upper))
-
-
-class _Counter:
-
-    def __init__(self, roof):
-        self._roof = roof
-        self._num = 0
-
-    def get(self):
-        return self._num
-
-    def incr(self):
-        self._num += 1
-        return self._num <= self._roof
 
 
 def _add_page_number(pixbuf, page):

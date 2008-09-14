@@ -23,6 +23,7 @@ class _CommentsDialog(gtk.Dialog):
         self.set_default_size(600, 550)
 
         notebook = gtk.Notebook()
+        notebook.set_scrollable(True)
         self.set_border_width(4)
         notebook.set_border_width(6)
         self.vbox.pack_start(notebook)

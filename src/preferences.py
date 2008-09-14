@@ -8,21 +8,26 @@ import gtk
 import constants
 import labels
 
+ZOOM_MODE_SCREEN = 0
+ZOOM_MODE_WIDTH = 1
+ZOOM_MODE_HEIGHT = 2
+ZOOM_MODE_MANUAL = 3
+
 # ------------------------------------------------------------------------
 # All the preferences are stored here.
 # ------------------------------------------------------------------------
 prefs = {
     'comment extensions': ['txt', 'nfo'],
-    #'auto load last file': False,
-    #'page of last file': 0,
-    #'path to last file': '',
+    'auto load last file': True,
+    'page of last file': 1,
+    'path to last file': '',
     'auto open next archive': True,
     'bg colour': (2100, 2100, 2100),
     'cache': True,
     'stretch': False,
     'default double page': False,
     'default fullscreen': False,
-    'default zoom mode': 'fit',  # 'fit', 'width', 'height' or 'manual'
+    'default zoom mode': ZOOM_MODE_SCREEN,
     'default manga mode': False,
     'hide all': False,
     'hide all in fullscreen': True,
@@ -31,10 +36,10 @@ prefs = {
     'lens size': 200,
     'library cover size': 128,
     'auto add books into collections': True,
-    'lib window height': gtk.gdk.screen_get_default().get_height() * 3 // 5,
-    'lib window width': gtk.gdk.screen_get_default().get_width() * 2 // 3,
+    'lib window height': gtk.gdk.screen_get_default().get_height() * 3 // 4,
+    'lib window width': gtk.gdk.screen_get_default().get_width() * 3 // 4,
     'last library collection': None,
-    #'no double page for wide images': True,
+    #'no double page for wide images': True, # FIXME: Add to prefs dialog?
     'path of last browsed': os.getenv('HOME'),
     'show menubar': True,
     'show scrollbar': True,
@@ -47,7 +52,7 @@ prefs = {
     'slideshow delay': 3000,
     'smart space scroll': True,
     'smart bg': False,
-    'space scroll percent': 90,
+    'space scroll percent': 90, # FIXME: Add to prefs dialog?
     'store recent file info': True,
     'window height': gtk.gdk.screen_get_default().get_height() * 3 // 4,
     'window width': gtk.gdk.screen_get_default().get_width() // 2
@@ -58,6 +63,10 @@ _dialog = None
 
 
 class _PreferencesDialog(gtk.Dialog):
+    
+    """The preferences dialog where most (but not all) settings that are
+    saved between sessions are presented to the user.
+    """
 
     def __init__(self, window):
         self._window = window
@@ -80,28 +89,42 @@ class _PreferencesDialog(gtk.Dialog):
         fixed_bg_button = gtk.RadioButton(None, '%s:' %
             _('Use this colour as background'))
         color_button = gtk.ColorButton(gtk.gdk.Color(*prefs['bg colour']))
+        color_button.connect('color_set', self._color_button_cb)
         page.add_row(fixed_bg_button, color_button)
         dynamic_bg_button = gtk.RadioButton(fixed_bg_button,
             _('Use dynamic background colour.'))
+        dynamic_bg_button.set_active(prefs['smart bg'])
+        dynamic_bg_button.connect('toggled', self._check_button_cb, 'smart bg')
         page.add_row(dynamic_bg_button)
 
         page.new_section(_('Thumbnails'))
         label = gtk.Label('%s:' % _('Thumbnail size (in pixels)'))
-        thumb_size_spinner = gtk.SpinButton()
-        thumb_size_spinner.set_range(40, 128)
+        adjustment = gtk.Adjustment(prefs['thumbnail size'], 20, 128, 1, 10)
+        thumb_size_spinner = gtk.SpinButton(adjustment)
+        thumb_size_spinner.connect('value_changed', self._spinner_cb,
+            'thumbnail size')
         page.add_row(label, thumb_size_spinner)
         thumb_number_button = gtk.CheckButton(
             _('Show page numbers on thumbnails.'))
+        thumb_number_button.set_active(
+            prefs['show page numbers on thumbnails'])
+        thumb_number_button.connect('toggled', self._check_button_cb,
+            'show page numbers on thumbnails')
         page.add_row(thumb_number_button)
         
         page.new_section(_('Magnifying Glass'))
         label = gtk.Label('%s:' % _('Magnifying glass size (in pixels)'))
-        glass_size_spinner = gtk.SpinButton()
-        glass_size_spinner.set_range(40, 400)
+        adjustment = gtk.Adjustment(prefs['lens size'], 50, 400, 1, 10)
+        glass_size_spinner = gtk.SpinButton(adjustment)
+        glass_size_spinner.connect('value_changed', self._spinner_cb,
+            'lens size')
         page.add_row(label, glass_size_spinner)
         label = gtk.Label('%s:' % _('Magnification'))
-        glass_magnification_spinner = gtk.SpinButton(digits=1)
-        glass_magnification_spinner.set_range(1.1, 10.0)
+        adjustment = gtk.Adjustment(prefs['lens magnification'], 1.1, 10.0,
+            0.1, 1.0)
+        glass_magnification_spinner = gtk.SpinButton(adjustment, digits=1)
+        glass_magnification_spinner.connect('value_changed', self._spinner_cb,
+            'lens magnification')
         page.add_row(label, glass_magnification_spinner)
         notebook.append_page(page, gtk.Label(_('Appearance')))
         
@@ -111,29 +134,55 @@ class _PreferencesDialog(gtk.Dialog):
         page = _PreferencePage(150)
         page.new_section(_('Behaviour'))
         auto_open_next_button = gtk.CheckButton(
-            _('Automatically open the next archive.'))
+            _('Automatically open the next archive after the last page.'))
+        auto_open_next_button.set_active(prefs['auto open next archive'])
+        auto_open_next_button.connect('toggled', self._check_button_cb,
+            'auto open next archive')
         page.add_row(auto_open_next_button)
+        auto_open_last_button = gtk.CheckButton(
+            _('Automatically open the last viewed file on startup.'))
+        auto_open_last_button.set_active(prefs['auto load last file'])
+        auto_open_last_button.connect('toggled', self._check_button_cb,
+            'auto load last file')
+        page.add_row(auto_open_last_button)
         smart_space_button = gtk.CheckButton(
             _('Use smart space-button scrolling.'))
+        smart_space_button.set_active(prefs['smart space scroll'])
+        smart_space_button.connect('toggled', self._check_button_cb,
+            'smart space scroll')
         page.add_row(smart_space_button)
         label = gtk.Label('%s:' % _('Slideshow delay (in seconds)'))
-        delay_spinner = gtk.SpinButton(digits=1)
-        delay_spinner.set_range(0.5, 3600.0)
+        adjustment = gtk.Adjustment(prefs['slideshow delay'] / 1000.0,
+            0.5, 3600.0, 0.1, 1)
+        delay_spinner = gtk.SpinButton(adjustment, digits=1)
+        delay_spinner.connect('value_changed', self._spinner_cb,
+            'slideshow delay')
         page.add_row(label, delay_spinner)
 
         page.new_section(_('Files'))
         store_recent_button = gtk.CheckButton(
             _('Store information about recently opened files.'))
+        store_recent_button.set_active(prefs['store recent file info'])
+        store_recent_button.connect('toggled', self._check_button_cb,
+            'store recent file info')
         page.add_row(store_recent_button)
         create_thumbs_button = gtk.CheckButton(
             _('Store thumbnails for opened files.'))
+        create_thumbs_button.set_active(prefs['create thumbnails'])
+        create_thumbs_button.connect('toggled', self._check_button_cb,
+            'create thumbnails')
         page.add_row(create_thumbs_button)
         cache_button = gtk.CheckButton(_('Use a cache to speed up reading.'))
+        cache_button.set_active(prefs['cache'])
+        cache_button.connect('toggled', self._check_button_cb, 'cache')
         page.add_row(cache_button)
 
         page.new_section(_('Comments'))
         label = gtk.Label('%s:' % _('Comment extensions'))
         extensions_entry = gtk.Entry()
+        extensions_entry.set_text(', '.join(prefs['comment extensions']))
+        extensions_entry.connect('activate', self._entry_cb)
+        extensions_entry.connect('focus_out_event', self._entry_cb)
         page.add_row(label, extensions_entry)
         notebook.append_page(page, gtk.Label(_('Behaviour')))
 
@@ -144,25 +193,95 @@ class _PreferencesDialog(gtk.Dialog):
         page.new_section(_('Defaults'))
         double_page_button = gtk.CheckButton(
             _('Use double page mode by default.'))
+        double_page_button.set_active(prefs['default double page'])
+        double_page_button.connect('toggled', self._check_button_cb,
+            'default double page')
         page.add_row(double_page_button)
         fullscreen_button = gtk.CheckButton(_('Use fullscreen by default.'))
+        fullscreen_button.set_active(prefs['default fullscreen'])
+        fullscreen_button.connect('toggled', self._check_button_cb,
+            'default fullscreen')
         page.add_row(fullscreen_button)
         manga_button = gtk.CheckButton(_('Use manga mode by default.'))
+        manga_button.set_active(prefs['default manga mode'])
+        manga_button.connect('toggled', self._check_button_cb,
+            'default manga mode')
         page.add_row(manga_button)
         label = gtk.Label('%s:' % _('Default zoom mode'))
-        zoom_combo = gtk.ComboBox()
+        zoom_combo = gtk.combo_box_new_text()
+        zoom_combo.append_text(_('Fit-to-screen mode'))
+        zoom_combo.append_text(_('Fit width mode'))
+        zoom_combo.append_text(_('Fit height mode'))
+        zoom_combo.append_text(_('Manual zoom mode'))
+        # Change this if the combobox entries are reordered.
+        zoom_combo.set_active(prefs['default zoom mode']) 
+        zoom_combo.connect('changed', self._combo_box_cb)
         page.add_row(label, zoom_combo)
 
         page.new_section(_('Fullscreen'))
         hide_in_fullscreen_button = gtk.CheckButton(
             _('Automatically hide all toolbars in fullscreen.'))
+        hide_in_fullscreen_button.set_active(prefs['hide all in fullscreen'])
+        hide_in_fullscreen_button.connect('toggled', self._check_button_cb,
+            'hide all in fullscreen')
         page.add_row(hide_in_fullscreen_button)
 
         page.new_section(_('Image scaling'))
         stretch_button = gtk.CheckButton(_('Stretch small images.'))
+        stretch_button.set_active(prefs['stretch'])
+        stretch_button.connect('toggled', self._check_button_cb, 'stretch')
         page.add_row(stretch_button)
         notebook.append_page(page, gtk.Label(_('Display')))
         self.show_all()
+
+    def _check_button_cb(self, button, preference):
+        """Callback for all checkbutton-type preferences."""
+        prefs[preference] = button.get_active()
+        if preference == 'smart bg':
+            if not prefs[preference]:
+                self._window.set_bg_colour(prefs['bg colour'])
+            else:
+                self._window.draw_image(scroll=False)
+        elif preference == 'stretch':
+            self._window.draw_image(scroll=False)
+        elif (preference == 'hide all in fullscreen' and
+          self._window.is_fullscreen):
+            self._window.draw_image(scroll=False)
+        elif preference == 'show page numbers on thumbnails':
+            self._window.thumbnailsidebar.clear()
+            self._window.thumbnailsidebar.load_thumbnails()
+
+    def _color_button_cb(self, colorbutton):
+        """Callback for the background colour selection button."""
+        colour = colorbutton.get_color()
+        prefs['bg colour'] = colour.red, colour.green, colour.blue
+        if not prefs['smart bg'] or not self._window.file_handler.file_loaded:
+            self._window.set_bg_colour(prefs['bg colour'])
+
+    def _spinner_cb(self, spinbutton, preference):
+        """Callback for spinner-type preferences."""
+        value = spinbutton.get_value()
+        if preference == 'lens size':
+            prefs[preference] = int(value)
+        elif preference == 'slideshow delay':
+            prefs[preference] = int(value * 1000)
+            self._window.slideshow.update_delay()
+        elif preference == 'thumbnail size':
+            prefs[preference] = int(value)
+            self._window.thumbnailsidebar.resize()
+            self._window.draw_image(scroll=False)
+
+    def _combo_box_cb(self, combobox):
+        """Callback for combobox-type preferences."""
+        zoom_mode = combobox.get_active()
+        prefs['default zoom mode'] = zoom_mode
+
+    def _entry_cb(self, entry, event=None):
+        """Callback for entry-type preferences."""
+        text = entry.get_text()
+        extensions = [e.strip() for e in text.split(',')]
+        prefs['comment extensions'] = [e for e in extensions if e]
+        self._window.file_handler.update_comment_extensions()
 
     def _response(self, dialog, response):
         _close_dialog()

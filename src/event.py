@@ -10,6 +10,7 @@ import gtk
 import gobject
 
 import cursor
+import preferences
 from preferences import prefs
 
 
@@ -21,7 +22,6 @@ class EventHandler:
         self._last_pointer_pos_y = 0
         self._pressed_pointer_pos_x = 0
         self._pressed_pointer_pos_y = 0
-        self._waiting_redraw = False
 
     def resize_event(self, widget, event):
         """Handle events from resizing and moving the main window."""
@@ -34,16 +34,7 @@ class EventHandler:
                 prefs['window height'] = event.height
             self._window.width = event.width
             self._window.height = event.height
-            if not self._waiting_redraw:
-                self._waiting_redraw = True
-                gobject.idle_add(self._resize_delayed,
-                    priority=gobject.PRIORITY_HIGH_IDLE)
-
-    def _resize_delayed(self):
-        """Callback for delayed image redraw."""
-        self._waiting_redraw = False
-        self._window.draw_image(scroll=False)
-        return False
+            self._window.draw_image(scroll=False)
 
     def key_press_event(self, widget, event, *args):
         """Handle key press events on the main window."""
@@ -104,22 +95,22 @@ class EventHandler:
         # they flip pages instead.
         # ----------------------------------------------------------------
         elif event.keyval in (gtk.keysyms.Down, gtk.keysyms.KP_Down):
-            if not self._window.zoom_mode == 'fit':
+            if not self._window.zoom_mode == preferences.ZOOM_MODE_SCREEN:
                 self._window.scroll(0, 40)
             else:
                 self._window.next_page()
         elif event.keyval in (gtk.keysyms.Up, gtk.keysyms.KP_Up):
-            if not self._window.zoom_mode == 'fit':
+            if not self._window.zoom_mode == preferences.ZOOM_MODE_SCREEN:
                 self._window.scroll(0, -40)
             else:
                 self._window.previous_page()
         elif event.keyval in (gtk.keysyms.Right, gtk.keysyms.KP_Right):
-            if not self._window.zoom_mode == 'fit':
+            if not self._window.zoom_mode == preferences.ZOOM_MODE_SCREEN:
                 self._window.scroll(40, 0)
             else:
                 self._window.next_page()
         elif event.keyval in (gtk.keysyms.Left, gtk.keysyms.KP_Left):
-            if not self._window.zoom_mode == 'fit':
+            if not self._window.zoom_mode == preferences.ZOOM_MODE_SCREEN:
                 self._window.scroll(-40, 0)
             else:
                 self._window.previous_page()
@@ -171,8 +162,8 @@ class EventHandler:
                             else:
                                 self._window.scroll_to_fixed(horiz='endfirst')
                 else:
-                    if (self._window.zoom_mode == 'fit' or
-                      not self._window.scroll(0, -y_step)):
+                    if (self._window.zoom_mode == preferences.ZOOM_MODE_SCREEN
+                      or not self._window.scroll(0, -y_step)):
                         self._window.previous_page()
             else:
                 if prefs['smart space scroll']:
@@ -204,8 +195,8 @@ class EventHandler:
                                 self._window.scroll_to_fixed(
                                     horiz='startfirst')
                 else:
-                    if (self._window.zoom_mode == 'fit' or
-                      not self._window.scroll(0, y_step)):
+                    if (self._window.zoom_mode == preferences.ZOOM_MODE_SCREEN
+                      or not self._window.scroll(0, y_step)):
                         self._window.next_page()
 
         # ----------------------------------------------------------------
@@ -229,9 +220,9 @@ class EventHandler:
         if 'GDK_BUTTON2_MASK' in event.state.value_names:
             return
         if event.direction == gtk.gdk.SCROLL_UP:
-            if self._window.zoom_mode == 'fit':
+            if self._window.zoom_mode == preferences.ZOOM_MODE_SCREEN:
                 self._window.previous_page()
-            elif self._window.zoom_mode == 'height':
+            elif self._window.zoom_mode == preferences.ZOOM_MODE_HEIGHT:
                 if self._window.is_manga_mode:
                     self._window.scroll(70, 0)
                 else:
@@ -239,9 +230,9 @@ class EventHandler:
             else:
                 self._window.scroll(0, -70)
         elif event.direction == gtk.gdk.SCROLL_DOWN:
-            if self._window.zoom_mode == 'fit':
+            if self._window.zoom_mode == preferences.ZOOM_MODE_SCREEN:
                 self._window.next_page()
-            elif self._window.zoom_mode == 'height':
+            elif self._window.zoom_mode == preferences.ZOOM_MODE_HEIGHT:
                 if self._window.is_manga_mode:
                     self._window.scroll(-70, 0)
                 else:

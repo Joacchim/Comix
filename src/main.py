@@ -6,6 +6,7 @@ import shutil
 import threading
 
 import gtk
+import gobject
 
 import constants
 import cursor
@@ -38,7 +39,7 @@ class MainWindow(gtk.Window):
         self.is_fullscreen = False
         self.is_double_page = False
         self.is_manga_mode = False
-        self.zoom_mode = 'fit'          # 'fit', 'width', 'height' or 'manual'
+        self.zoom_mode = preferences.ZOOM_MODE_SCREEN
         self.width = None
         self.height = None
         self.rotation = 0               # In degrees, clockwise
@@ -47,6 +48,7 @@ class MainWindow(gtk.Window):
 
         self._keep_rotation = False
         self._manual_zoom = 100         # In percent of original image size
+        self._waiting_for_redraw = False
 
         self.file_handler = filehandler.FileHandler(self)
         self.thumbnailsidebar = thumbbar.ThumbnailSidebar(self)
@@ -89,7 +91,7 @@ class MainWindow(gtk.Window):
         self._image_box.show_all()
 
         self._main_layout.put(self._image_box, 0, 0)
-        self._set_bg_colour(prefs['bg colour'])
+        self.set_bg_colour(prefs['bg colour'])
 
         self._vadjust.step_increment = 15
         self._vadjust.page_increment = 1
@@ -118,14 +120,14 @@ class MainWindow(gtk.Window):
             self.actiongroup.get_action('fullscreen').activate()
         if prefs['default manga mode']:
             self.actiongroup.get_action('manga_mode').activate()
-        if prefs['default zoom mode'] == 'manual':
-            self.actiongroup.get_action('fit_manual_mode').activate()
-        elif prefs['default zoom mode'] == 'fit':
+        if prefs['default zoom mode'] == preferences.ZOOM_MODE_SCREEN:
             self.actiongroup.get_action('fit_screen_mode').activate()
-        elif prefs['default zoom mode'] == 'width':
+        elif prefs['default zoom mode'] == preferences.ZOOM_MODE_WIDTH:
             self.actiongroup.get_action('fit_width_mode').activate()
-        else:
+        elif prefs['default zoom mode'] == preferences.ZOOM_MODE_HEIGHT:
             self.actiongroup.get_action('fit_height_mode').activate()
+        elif prefs['default zoom mode'] == preferences.ZOOM_MODE_MANUAL:
+            self.actiongroup.get_action('fit_manual_mode').activate()
         if prefs['show toolbar']:
             prefs['show toolbar'] = False
             self.actiongroup.get_action('toolbar').activate()
@@ -178,15 +180,22 @@ class MainWindow(gtk.Window):
     def draw_image(self, at_bottom=False, scroll=True):
         """Draw the current page(s) and update the titlebar and statusbar.
         """
+        if not self._waiting_for_redraw: # Don't stack up redraws.
+            self._waiting_for_redraw = True
+            gobject.idle_add(self._draw_image, at_bottom, scroll,
+                priority=gobject.PRIORITY_HIGH_IDLE)
+
+    def _draw_image(self, at_bottom, scroll):
+        self._waiting_for_redraw = False
         self._display_active_widgets()
         if not self.file_handler.file_loaded:
-            return
+            return False
         area_width, area_height = self.get_visible_area_size()
-        if self.zoom_mode == 'height':
+        if self.zoom_mode == preferences.ZOOM_MODE_HEIGHT:
             scale_width = -1
         else:
             scale_width = area_width
-        if self.zoom_mode == 'width':
+        if self.zoom_mode == preferences.ZOOM_MODE_WIDTH:
             scale_height = -1
         else:
             scale_height = area_height
@@ -201,7 +210,7 @@ class MainWindow(gtk.Window):
             right_unscaled_x = right_pixbuf.get_width()
             right_unscaled_y = right_pixbuf.get_height()
 
-            if self.zoom_mode == 'manual':
+            if self.zoom_mode == preferences.ZOOM_MODE_MANUAL:
                 scale_width = int(self._manual_zoom *
                     (left_unscaled_x + right_unscaled_x) / 100)
                 scale_height = int(self._manual_zoom *
@@ -249,7 +258,7 @@ class MainWindow(gtk.Window):
             unscaled_x = pixbuf.get_width()
             unscaled_y = pixbuf.get_height()
 
-            if self.zoom_mode == 'manual':
+            if self.zoom_mode == preferences.ZOOM_MODE_MANUAL:
                 scale_width = int(self._manual_zoom * unscaled_x / 100)
                 scale_height = int(self._manual_zoom * unscaled_y / 100)
                 if self.rotation in (90, 270):
@@ -280,7 +289,7 @@ class MainWindow(gtk.Window):
         
         if prefs['smart bg']:
             bg = image.get_most_common_edge_colour(self.left_image.get_pixbuf())
-            self._set_bg_colour(bg)
+            self.set_bg_colour(bg)
 
         self._image_box.window.freeze_updates()
         self._main_layout.move(self._image_box, max(0, x_padding),
@@ -306,6 +315,7 @@ class MainWindow(gtk.Window):
         enhance.draw_histogram(self.left_image)
         self.file_handler.do_cacheing()
         self.thumbnailsidebar.load_thumbnails()
+        return False
 
     def new_page(self, at_bottom=False):
         """Draw a *new* page correctly (as opposed to redrawing the same
@@ -376,13 +386,9 @@ class MainWindow(gtk.Window):
             self.cursor_handler.exit_fullscreen()
 
     def change_zoom_mode(self, radioaction, *args):
-        new_mode = radioaction.get_current_value()
         old_mode = self.zoom_mode
-        self.zoom_mode = {0: 'manual',
-                          1: 'fit',
-                          2: 'width',
-                          3: 'height'}[new_mode]
-        sensitive = (self.zoom_mode == 'manual')
+        self.zoom_mode = radioaction.get_current_value()
+        sensitive = (self.zoom_mode == preferences.ZOOM_MODE_MANUAL)
         self.actiongroup.get_action('zoom_in').set_sensitive(sensitive)
         self.actiongroup.get_action('zoom_out').set_sensitive(sensitive)
         self.actiongroup.get_action('zoom_original').set_sensitive(sensitive)
@@ -583,7 +589,7 @@ class MainWindow(gtk.Window):
         self.thumbnailsidebar.clear()
         self.set_title('Comix')
         self.statusbar.set_message('')
-        self._set_bg_colour(prefs['bg colour'])
+        self.set_bg_colour(prefs['bg colour'])
         enhance.clear_histogram()
 
     def displayed_double(self):
@@ -606,13 +612,14 @@ class MainWindow(gtk.Window):
                 width -= self.thumbnailsidebar.get_width()
             if prefs['show menubar']:
                 height -= self.menubar.size_request()[1]
-            if prefs['show scrollbar'] and self.zoom_mode == 'width':
-                width -= self._vscroll.size_request()[0]
-            elif prefs['show scrollbar'] and self.zoom_mode == 'height':
-                height -= self._hscroll.size_request()[1]
-            elif prefs['show scrollbar'] and self.zoom_mode == 'manual':
-                width -= self._vscroll.size_request()[0]
-                height -= self._hscroll.size_request()[1]
+            if prefs['show scrollbar']:
+                if self.zoom_mode == preferences.ZOOM_MODE_WIDTH:
+                    width -= self._vscroll.size_request()[0]
+                elif self.zoom_mode == preferences.ZOOM_MODE_HEIGHT:
+                    height -= self._hscroll.size_request()[1]
+                elif self.zoom_mode == preferences.ZOOM_MODE_MANUAL:
+                    width -= self._vscroll.size_request()[0]
+                    height -= self._hscroll.size_request()[1]
         return width, height
 
     def get_layout_pointer_position(self):
@@ -649,7 +656,7 @@ class MainWindow(gtk.Window):
             title = '[%s] %s' % (_('SLIDESHOW'), title)
         self.set_title(title)
 
-    def _set_bg_colour(self, colour):
+    def set_bg_colour(self, colour):
         """Set the background colour to <colour>. Colour is a sequence in the
         format (r, g, b). Values are 16-bit.
         """
@@ -676,15 +683,15 @@ class MainWindow(gtk.Window):
             else:
                 self.menubar.hide_all()
             if (prefs['show scrollbar'] and
-              self.zoom_mode == 'width'):
+              self.zoom_mode == preferences.ZOOM_MODE_WIDTH):
                 self._vscroll.show_all()
                 self._hscroll.hide_all()
             elif (prefs['show scrollbar'] and
-              self.zoom_mode == 'height'):
+              self.zoom_mode == preferences.ZOOM_MODE_HEIGHT):
                 self._vscroll.hide_all()
                 self._hscroll.show_all()
             elif (prefs['show scrollbar'] and
-              self.zoom_mode == 'manual'):
+              self.zoom_mode == preferences.ZOOM_MODE_MANUAL):
                 self._vscroll.show_all()
                 self._hscroll.show_all()
             else:
@@ -707,6 +714,12 @@ class MainWindow(gtk.Window):
         self.hide()
         if gtk.main_level() > 0:
             gtk.main_quit()
+        if prefs['auto load last file'] and self.file_handler.file_loaded:
+            prefs['path to last file'] = self.file_handler.get_real_path()
+            prefs['page of last file'] = self.file_handler.get_current_page()
+        else:
+            prefs['path to last file'] = ''
+            prefs['page of last file'] = 1
         self.file_handler.cleanup()
         if not os.path.exists(constants.COMIX_DIR):
             os.mkdir(constants.COMIX_DIR)

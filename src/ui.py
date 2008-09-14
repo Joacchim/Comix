@@ -108,14 +108,14 @@ class MainUI(gtk.UIManager):
                 'g', None, window.glass.toggle)])
 
         self._actiongroup.add_radio_actions([
-            ('fit_manual_mode', 'comix-fitmanual', _('M_anual zoom mode'),
-                'a', None, 0),
             ('fit_screen_mode', 'comix-fitscreen', _('Fit-to-_screen mode'),
-                's', None, 1),
+                's', None, preferences.ZOOM_MODE_SCREEN),
             ('fit_width_mode', 'comix-fitwidth', _('Fit _width mode'),
-                'w', None, 2),
+                'w', None, preferences.ZOOM_MODE_WIDTH),
             ('fit_height_mode', 'comix-fitheight', _('Fit _height mode'),
-                'h', None, 3)],
+                'h', None, preferences.ZOOM_MODE_HEIGHT),
+            ('fit_manual_mode', 'comix-fitmanual', _('M_anual zoom mode'),
+                'a', None, preferences.ZOOM_MODE_MANUAL)],
             0, window.change_zoom_mode)
 
         # Some actions added separately since they need extra arguments.

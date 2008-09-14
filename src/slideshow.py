@@ -6,6 +6,8 @@ from preferences import prefs
 
 
 class Slideshow:
+    
+    """Slideshow handler that manages starting and stopping of slideshows."""
 
     def __init__(self, window):
         self._window = window
@@ -32,10 +34,18 @@ class Slideshow:
         return True
 
     def toggle(self, action):
+        """Toggle a slideshow on or off."""
         if action.get_active():
             self._start()
         else:
             self._stop()
 
     def is_running(self):
+        """Return True if a slideshow is currently running."""
         return self._running
+
+    def update_delay(self):
+        """Update the delay time a started slideshow is using."""
+        if self.is_running():
+            self._stop()
+            self._start()
