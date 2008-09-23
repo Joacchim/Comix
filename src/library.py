@@ -736,6 +736,8 @@ class _ControlArea(gtk.HBox):
         hbox.pack_start(label, False, False)
         search_entry = gtk.Entry()
         search_entry.connect('activate', self._filter_books)
+        search_entry.set_tooltip_text(
+            _('Display only those books that have the specified string in their full path. The matching is not case sensitive.'))
         hbox.pack_start(search_entry, True, True, 6)
         label = gtk.Label('%s:' % _('Cover size'))
         hbox.pack_start(label, False, False, 6)
@@ -755,16 +757,20 @@ class _ControlArea(gtk.HBox):
         add_book_button.set_image(gtk.image_new_from_stock(
             gtk.STOCK_ADD, gtk.ICON_SIZE_BUTTON))
         add_book_button.connect('clicked', self._add_books)
+        add_book_button.set_tooltip_text(_('Add more books to the library.'))
         hbox.pack_start(add_book_button, False, False)
         add_collection_button = gtk.Button(_('Add collection'))
         add_collection_button.connect('clicked', self._add_collection)
         add_collection_button.set_image(gtk.image_new_from_stock(
             gtk.STOCK_ADD, gtk.ICON_SIZE_BUTTON))
+        add_collection_button.set_tooltip_text(
+            _('Add a new empty collection.'))
         hbox.pack_start(add_collection_button, False, False)
         hbox.pack_start(gtk.HBox(), True, True)
         self._open_button = gtk.Button(None, gtk.STOCK_OPEN)
         self._open_button.connect('clicked',
             self._library.book_area.open_selected_book)
+        self._open_button.set_tooltip_text(_('Open the selected book.'))
         self._open_button.set_sensitive(False)
         hbox.pack_start(self._open_button, False, False)
 

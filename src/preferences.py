@@ -93,6 +93,8 @@ class _PreferencesDialog(gtk.Dialog):
         page.new_section(_('Background'))
         fixed_bg_button = gtk.RadioButton(None, '%s:' %
             _('Use this colour as background'))
+        fixed_bg_button.set_tooltip_text(
+            _('Always use this selected colour as the background colour.'))
         color_button = gtk.ColorButton(gtk.gdk.Color(*prefs['bg colour']))
         color_button.connect('color_set', self._color_button_cb)
         page.add_row(fixed_bg_button, color_button)
@@ -100,6 +102,8 @@ class _PreferencesDialog(gtk.Dialog):
             _('Use dynamic background colour.'))
         dynamic_bg_button.set_active(prefs['smart bg'])
         dynamic_bg_button.connect('toggled', self._check_button_cb, 'smart bg')
+        dynamic_bg_button.set_tooltip_text(
+            _('Automatically pick a background colour that fits the viewed image.'))
         page.add_row(dynamic_bg_button)
 
         page.new_section(_('Thumbnails'))
@@ -123,6 +127,8 @@ class _PreferencesDialog(gtk.Dialog):
         glass_size_spinner = gtk.SpinButton(adjustment)
         glass_size_spinner.connect('value_changed', self._spinner_cb,
             'lens size')
+        glass_size_spinner.set_tooltip_text(
+            _('Set the size of the magnifying glass. It is a square with a side of this many pixels.'))
         page.add_row(label, glass_size_spinner)
         label = gtk.Label('%s:' % _('Magnification'))
         adjustment = gtk.Adjustment(prefs['lens magnification'], 1.1, 10.0,
@@ -130,6 +136,8 @@ class _PreferencesDialog(gtk.Dialog):
         glass_magnification_spinner = gtk.SpinButton(adjustment, digits=1)
         glass_magnification_spinner.connect('value_changed', self._spinner_cb,
             'lens magnification')
+        glass_magnification_spinner.set_tooltip_text(
+            _('Set the magnification level of the magnifying glass.'))
         page.add_row(label, glass_magnification_spinner)
         notebook.append_page(page, gtk.Label(_('Appearance')))
         
@@ -143,24 +151,32 @@ class _PreferencesDialog(gtk.Dialog):
         auto_open_next_button.set_active(prefs['auto open next archive'])
         auto_open_next_button.connect('toggled', self._check_button_cb,
             'auto open next archive')
+        auto_open_next_button.set_tooltip_text(
+            _('Automatically open the next archive in the directory when flipping past the last page, or the previous archive when flipping past the first page.'))
         page.add_row(auto_open_next_button)
         auto_open_last_button = gtk.CheckButton(
             _('Automatically open the last viewed file on startup.'))
         auto_open_last_button.set_active(prefs['auto load last file'])
         auto_open_last_button.connect('toggled', self._check_button_cb,
             'auto load last file')
+        auto_open_last_button.set_tooltip_text(
+            _('Automatically open, on start-up, whatever file was open when Comix was last closed.'))
         page.add_row(auto_open_last_button)
         smart_space_button = gtk.CheckButton(
             _('Use smart space-button scrolling.'))
         smart_space_button.set_active(prefs['smart space scroll'])
         smart_space_button.connect('toggled', self._check_button_cb,
             'smart space scroll')
+        smart_space_button.set_tooltip_text(
+            _('Use "smart scrolling" with the space key. Normally the space key scrolls only right down (or up when shift is pressed), but with this preference set it also scrolls sideways and so tries to follow the natural reading order of the comic book.'))
         page.add_row(smart_space_button)
         step_length_button = gtk.CheckButton(
             _('Flip two pages in double page mode.'))
         step_length_button.set_active(prefs['double step in double page mode'])
         step_length_button.connect('toggled', self._check_button_cb,
             'double step in double page mode')
+        step_length_button.set_tooltip_text(
+            _('Flip two pages, instead of one, each time we flip pages in double page mode.'))
         page.add_row(step_length_button)
         label = gtk.Label('%s:' % _('Slideshow delay (in seconds)'))
         adjustment = gtk.Adjustment(prefs['slideshow delay'] / 1000.0,
@@ -176,16 +192,22 @@ class _PreferencesDialog(gtk.Dialog):
         store_recent_button.set_active(prefs['store recent file info'])
         store_recent_button.connect('toggled', self._check_button_cb,
             'store recent file info')
+        store_recent_button.set_tooltip_text(
+            _('Add information about all files opened from within Comix to the shared recent files list.'))
         page.add_row(store_recent_button)
         create_thumbs_button = gtk.CheckButton(
             _('Store thumbnails for opened files.'))
         create_thumbs_button.set_active(prefs['create thumbnails'])
         create_thumbs_button.connect('toggled', self._check_button_cb,
             'create thumbnails')
+        create_thumbs_button.set_tooltip_text(
+            _('Store thumbnails for opened files according to the freedesktop.org specification. These thumbnails are shared by many other applications, such as most file managers.'))
         page.add_row(create_thumbs_button)
         cache_button = gtk.CheckButton(_('Use a cache to speed up reading.'))
         cache_button.set_active(prefs['cache'])
         cache_button.connect('toggled', self._check_button_cb, 'cache')
+        cache_button.set_tooltip_text(
+            _('Cache the images that are next to the currently viewed image in order to speed up reading. Since the speed improvements are quite big, it is recommended that you have this preference set, unless you are running short on free RAM.'))
         page.add_row(cache_button)
         notebook.append_page(page, gtk.Label(_('Behaviour')))
 
@@ -233,6 +255,8 @@ class _PreferencesDialog(gtk.Dialog):
         stretch_button = gtk.CheckButton(_('Stretch small images.'))
         stretch_button.set_active(prefs['stretch'])
         stretch_button.connect('toggled', self._check_button_cb, 'stretch')
+        stretch_button.set_tooltip_text(
+            _('Stretch images to a size that is larger than their original size if the current zoom mode requests it. Normally, images are never scaled to be larger than their original size.'))
         page.add_row(stretch_button)
 
         page.new_section(_('Comments'))
@@ -241,6 +265,8 @@ class _PreferencesDialog(gtk.Dialog):
         extensions_entry.set_text(', '.join(prefs['comment extensions']))
         extensions_entry.connect('activate', self._entry_cb)
         extensions_entry.connect('focus_out_event', self._entry_cb)
+        extensions_entry.set_tooltip_text(
+            _('Treat all files found within archives, and that have one of these file endings, as comments.'))
         page.add_row(label, extensions_entry)
         notebook.append_page(page, gtk.Label(_('Display')))
         self.show_all()

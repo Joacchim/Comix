@@ -124,6 +124,8 @@ class _EnhanceImageDialog(gtk.Dialog):
 
         self._autocontrast_button = \
             gtk.CheckButton(_('Automatically adjust contrast'))
+        self._autocontrast_button.set_tooltip_text(
+            _('Automatically adjust contrast (both lightness and darkness), separately for each colour band.'))
         vbox.pack_start(self._autocontrast_button, False, False, 2)
         self._autocontrast_button.connect('toggled', self._change_values)
 
