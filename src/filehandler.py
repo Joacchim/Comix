@@ -82,16 +82,18 @@ class FileHandler:
         directly in order to save memory.
         """
         # Get list of wanted pixbufs.
-        viewed = self._window.is_double_page and 2 or 1
+        first_wanted = self._current_image_index
+        last_wanted = first_wanted + 1
+        if self._window.is_double_page:
+            last_wanted += 1
         if prefs['cache']:
-            wanted_pixbufs = range(max(0, self._current_image_index - viewed),
-                min(self._current_image_index + viewed * 2,
-                    self.get_number_of_pages()))
-        else:
-            wanted_pixbufs = range(self._current_image_index,
-                min(self._current_image_index + viewed,
-                    self.get_number_of_pages()))
-
+            step = self._get_step_length()
+            first_wanted -= step
+            last_wanted += step
+        first_wanted = max(0, first_wanted)
+        last_wanted = min(self.get_number_of_pages(), last_wanted)
+        wanted_pixbufs = range(first_wanted, last_wanted)
+        
         # Remove old pixbufs.
         for page in set(self._raw_pixbufs) - set(wanted_pixbufs):
             del self._raw_pixbufs[page]
@@ -111,12 +113,12 @@ class FileHandler:
         if not self.file_loaded:
             return False
         old_page = self.get_current_page()
-        step = self._window.is_double_page and 2 or 1
-        if self.get_current_page() + step > self.get_number_of_pages():
+        viewed = self._window.is_double_page and 2 or 1
+        if self.get_current_page() + viewed > self.get_number_of_pages():
             if prefs['auto open next archive'] and self.archive_type:
                 self._open_next_archive()
             return False
-        self._current_image_index += step
+        self._current_image_index += self._get_step_length()
         return old_page != self.get_current_page()
 
     def previous_page(self):
@@ -130,7 +132,7 @@ class FileHandler:
                 self._open_previous_archive()
             return False
         old_page = self.get_current_page()
-        step = self._window.is_double_page and 2 or 1
+        step = self._get_step_length()
         self._current_image_index -= step
         self._current_image_index = max(0, self._current_image_index)
         return old_page != self.get_current_page()
@@ -301,45 +303,6 @@ class FileHandler:
         self._extractor.stop()
         thread_delete(self._tmp_dir)
 
-    def _open_next_archive(self):
-        """Open the archive that comes directly after the currently loaded
-        archive in that archive's directory listing, sorted alphabetically.
-        """
-        arch_dir = os.path.dirname(self._base_path)
-        files = os.listdir(arch_dir)
-        files.sort(locale.strcoll)
-        try:
-            current_index = files.index(os.path.basename(self._base_path))
-        except ValueError:
-            return
-        for f in files[current_index + 1:]:
-            path = os.path.join(arch_dir, f)
-            if archive.archive_mime_type(path):
-                self.open_file(path)
-                return
-
-    def _open_previous_archive(self):
-        """Open the archive that comes directly before the currently loaded
-        archive in that archive's directory listing, sorted alphabetically.
-        """
-        arch_dir = os.path.dirname(self._base_path)
-        files = os.listdir(arch_dir)
-        files.sort(locale.strcoll)
-        try:
-            current_index = files.index(os.path.basename(self._base_path))
-        except ValueError:
-            return
-        for f in reversed(files[:current_index]):
-            path = os.path.join(arch_dir, f)
-            if archive.archive_mime_type(path):
-                self.open_file(path, 0)
-                return
-
-    def _get_missing_image(self):
-        """Return a pixbuf depicting a missing/broken image."""
-        return self._window.render_icon(gtk.STOCK_MISSING_IMAGE,
-            gtk.ICON_SIZE_DIALOG)
-
     def is_last_page(self):
         """Return True if at the last page."""
         if self._window.displayed_double():
@@ -469,6 +432,52 @@ class FileHandler:
         except Exception:
             stats = None
         return stats
+
+    def _get_step_length(self):
+        """Return the step length for switching pages."""
+        if (self._window.is_double_page and 
+          prefs['double step in double page mode']):
+            return 2
+        return 1
+
+    def _open_next_archive(self):
+        """Open the archive that comes directly after the currently loaded
+        archive in that archive's directory listing, sorted alphabetically.
+        """
+        arch_dir = os.path.dirname(self._base_path)
+        files = os.listdir(arch_dir)
+        files.sort(locale.strcoll)
+        try:
+            current_index = files.index(os.path.basename(self._base_path))
+        except ValueError:
+            return
+        for f in files[current_index + 1:]:
+            path = os.path.join(arch_dir, f)
+            if archive.archive_mime_type(path):
+                self.open_file(path)
+                return
+
+    def _open_previous_archive(self):
+        """Open the archive that comes directly before the currently loaded
+        archive in that archive's directory listing, sorted alphabetically.
+        """
+        arch_dir = os.path.dirname(self._base_path)
+        files = os.listdir(arch_dir)
+        files.sort(locale.strcoll)
+        try:
+            current_index = files.index(os.path.basename(self._base_path))
+        except ValueError:
+            return
+        for f in reversed(files[:current_index]):
+            path = os.path.join(arch_dir, f)
+            if archive.archive_mime_type(path):
+                self.open_file(path, 0)
+                return
+
+    def _get_missing_image(self):
+        """Return a pixbuf depicting a missing/broken image."""
+        return self._window.render_icon(gtk.STOCK_MISSING_IMAGE,
+            gtk.ICON_SIZE_DIALOG)
 
     def _wait_on_page(self, page):
         """Block the running (main) thread until the file corresponding to

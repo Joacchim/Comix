@@ -32,6 +32,7 @@ prefs = {
     'lens magnification': 2,
     'lens size': 200,
     #'no double page for wide images': True, # FIXME: Add to prefs dialog?
+    'double step in double page mode': True,
     'show page numbers on thumbnails': True,
     'thumbnail size': 80,
     'create thumbnails': True,
@@ -49,7 +50,8 @@ prefs = {
     'show toolbar': True,
     'show thumbnails': True,
     'window height': gtk.gdk.screen_get_default().get_height() * 3 // 4,
-    'window width': gtk.gdk.screen_get_default().get_width() // 2,
+    'window width': min(gtk.gdk.screen_get_default().get_width() * 3 // 4,
+                        gtk.gdk.screen_get_default().get_height() * 5 // 8),
     'library cover size': 128,
     'auto add books into collections': True,
     'last library collection': None,
@@ -150,6 +152,12 @@ class _PreferencesDialog(gtk.Dialog):
         smart_space_button.connect('toggled', self._check_button_cb,
             'smart space scroll')
         page.add_row(smart_space_button)
+        step_length_button = gtk.CheckButton(
+            _('Flip two pages in double page mode.'))
+        step_length_button.set_active(prefs['double step in double page mode'])
+        step_length_button.connect('toggled', self._check_button_cb,
+            'double step in double page mode')
+        page.add_row(step_length_button)
         label = gtk.Label('%s:' % _('Slideshow delay (in seconds)'))
         adjustment = gtk.Adjustment(prefs['slideshow delay'] / 1000.0,
             0.5, 3600.0, 0.1, 1)
@@ -175,14 +183,6 @@ class _PreferencesDialog(gtk.Dialog):
         cache_button.set_active(prefs['cache'])
         cache_button.connect('toggled', self._check_button_cb, 'cache')
         page.add_row(cache_button)
-
-        page.new_section(_('Comments'))
-        label = gtk.Label('%s:' % _('Comment extensions'))
-        extensions_entry = gtk.Entry()
-        extensions_entry.set_text(', '.join(prefs['comment extensions']))
-        extensions_entry.connect('activate', self._entry_cb)
-        extensions_entry.connect('focus_out_event', self._entry_cb)
-        page.add_row(label, extensions_entry)
         notebook.append_page(page, gtk.Label(_('Behaviour')))
 
         # ----------------------------------------------------------------
@@ -230,6 +230,14 @@ class _PreferencesDialog(gtk.Dialog):
         stretch_button.set_active(prefs['stretch'])
         stretch_button.connect('toggled', self._check_button_cb, 'stretch')
         page.add_row(stretch_button)
+
+        page.new_section(_('Comments'))
+        label = gtk.Label('%s:' % _('Comment extensions'))
+        extensions_entry = gtk.Entry()
+        extensions_entry.set_text(', '.join(prefs['comment extensions']))
+        extensions_entry.connect('activate', self._entry_cb)
+        extensions_entry.connect('focus_out_event', self._entry_cb)
+        page.add_row(label, extensions_entry)
         notebook.append_page(page, gtk.Label(_('Display')))
         self.show_all()
 
