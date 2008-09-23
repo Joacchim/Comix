@@ -1,11 +1,5 @@
 - Comix README -
 
-NOTE:
-------------------------------------------------------------------------------
-This is the development branch towards Comix 4.0. It is not complete yet,
-so you are encouraged to use the 3.X version instead.
-
-
 About
 ------------------------------------------------------------------------------
 Comix is a user-friendly, customizable image viewer. It is specifically
@@ -48,8 +42,11 @@ this file.
 
 Dependencies
 --------------------------------------------------------------------------------
-Comix needs Python 2.4, PyGTK 2.10.0 and PIL (Python Imaging Library) 1.1.5 or
+Comix needs Python 2.4, PyGTK 2.12 and PIL (Python Imaging Library) 1.1.5 or
 newer to function. 
+
+To use the library you need pysqlite (which is usually included in the
+standard library for Python 2.5 and later).
 
 You also need the "unrar" or "rar" program installed if you wish to read
 RAR (.cbr) archives.

@@ -42,11 +42,7 @@ class MainWindow(gtk.Window):
         self.zoom_mode = preferences.ZOOM_MODE_SCREEN
         self.width = None
         self.height = None
-        self.rotation = 0               # In degrees, clockwise
-        self.horizontal_flip = False
-        self.vertical_flip = False
 
-        self._keep_rotation = False
         self._manual_zoom = 100         # In percent of original image size
         self._waiting_for_redraw = False
 
@@ -146,6 +142,13 @@ class MainWindow(gtk.Window):
         if prefs['hide all']:
             prefs['hide all'] = False
             self.actiongroup.get_action('hide all').activate()
+        if prefs['keep transformation']:
+            prefs['keep transformation'] = False
+            self.actiongroup.get_action('keep_transformation').activate()
+        else:
+            prefs['rotation'] = 0
+            prefs['vertical flip'] = False
+            prefs['horizontal flip'] = False
 
         self.add(table)
         table.show()
@@ -215,17 +218,17 @@ class MainWindow(gtk.Window):
                     (left_unscaled_x + right_unscaled_x) / 100)
                 scale_height = int(self._manual_zoom *
                     (left_unscaled_y + right_unscaled_y) / 100)
-                if self.rotation in (90, 270):
+                if prefs['rotation'] in (90, 270):
                     scale_width, scale_height = scale_height, scale_width
                 scale_up = True
 
             left_pixbuf, right_pixbuf = image.fit_2_in_rectangle(
                 left_pixbuf, right_pixbuf, scale_width, scale_height,
-                scale_up=scale_up, rotation=self.rotation)
-            if self.horizontal_flip:
+                scale_up=scale_up, rotation=prefs['rotation'])
+            if prefs['horizontal flip']:
                 left_pixbuf = left_pixbuf.flip(horizontal=True)
                 right_pixbuf = right_pixbuf.flip(horizontal=True)
-            if self.vertical_flip:
+            if prefs['vertical flip']:
                 left_pixbuf = left_pixbuf.flip(horizontal=False)
                 right_pixbuf = right_pixbuf.flip(horizontal=False)
             left_pixbuf = self.enhancer.enhance(left_pixbuf)
@@ -238,7 +241,7 @@ class MainWindow(gtk.Window):
             y_padding = (area_height - max(left_pixbuf.get_height(),
                 right_pixbuf.get_height())) / 2
             
-            if self.rotation in (90, 270):
+            if prefs['rotation'] in (90, 270):
                 left_scale_percent = (100.0 * left_pixbuf.get_width() /
                     left_unscaled_y)
                 right_scale_percent = (100.0 * right_pixbuf.get_width() /
@@ -261,15 +264,15 @@ class MainWindow(gtk.Window):
             if self.zoom_mode == preferences.ZOOM_MODE_MANUAL:
                 scale_width = int(self._manual_zoom * unscaled_x / 100)
                 scale_height = int(self._manual_zoom * unscaled_y / 100)
-                if self.rotation in (90, 270):
+                if prefs['rotation'] in (90, 270):
                     scale_width, scale_height = scale_height, scale_width
                 scale_up = True
             
             pixbuf = image.fit_in_rectangle(pixbuf, scale_width, scale_height,
-                scale_up=scale_up, rotation=self.rotation)
-            if self.horizontal_flip:
+                scale_up=scale_up, rotation=prefs['rotation'])
+            if prefs['horizontal flip']:
                 pixbuf = pixbuf.flip(horizontal=True)
-            if self.vertical_flip:
+            if prefs['vertical flip']:
                 pixbuf = pixbuf.flip(horizontal=False)
             pixbuf = self.enhancer.enhance(pixbuf)
 
@@ -278,7 +281,7 @@ class MainWindow(gtk.Window):
             x_padding = (area_width - pixbuf.get_width()) / 2
             y_padding = (area_height - pixbuf.get_height()) / 2
             
-            if self.rotation in (90, 270):
+            if prefs['rotation'] in (90, 270):
                 scale_percent = 100.0 * pixbuf.get_width() / unscaled_y
             else:
                 scale_percent = 100.0 * pixbuf.get_width() / unscaled_x
@@ -321,10 +324,10 @@ class MainWindow(gtk.Window):
         """Draw a *new* page correctly (as opposed to redrawing the same
         image with a new size or whatever).
         """
-        if not self._keep_rotation:
-            self.rotation = 0
-            self.horizontal_flip = False
-            self.vertical_flip = False
+        if not prefs['keep transformation']:
+            prefs['rotation'] = 0
+            prefs['horizontal flip'] = False
+            prefs['vertical flip'] = False
         self.thumbnailsidebar.update_select()
         self.draw_image(at_bottom=at_bottom)
 
@@ -349,23 +352,23 @@ class MainWindow(gtk.Window):
             self.new_page()
 
     def rotate_90(self, *args):
-        self.rotation = (self.rotation + 90) % 360
+        prefs['rotation'] = (prefs['rotation'] + 90) % 360
         self.draw_image()
 
     def rotate_180(self, *args):
-        self.rotation = (self.rotation + 180) % 360
+        prefs['rotation'] = (prefs['rotation'] + 180) % 360
         self.draw_image()
 
     def rotate_270(self, *args):
-        self.rotation = (self.rotation + 270) % 360
+        prefs['rotation'] = (prefs['rotation'] + 270) % 360
         self.draw_image()
 
     def flip_horizontally(self, *args):
-        self.horizontal_flip = not self.horizontal_flip
+        prefs['horizontal flip'] = not prefs['horizontal flip']
         self.draw_image()
 
     def flip_vertically(self, *args):
-        self.vertical_flip = not self.vertical_flip
+        prefs['vertical flip'] = not prefs['vertical flip']
         self.draw_image()
 
     def change_double_page(self, toggleaction):
@@ -425,8 +428,8 @@ class MainWindow(gtk.Window):
         self.actiongroup.get_action('thumbnails').set_sensitive(sensitive)
         self.draw_image()
 
-    def change_keep_rotation(self, *args):
-        self._keep_rotation = not self._keep_rotation
+    def change_keep_transformation(self, *args):
+        prefs['keep transformation'] = not prefs['keep transformation']
 
     def manual_zoom_in(self, *args):
         new_zoom = self._manual_zoom * 1.15

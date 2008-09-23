@@ -100,8 +100,8 @@ class MainUI(gtk.UIManager):
                 'i', None, window.change_hide_all),
             ('manga_mode', 'comix-manga', _('_Manga mode'),
                 'm', None, window.change_manga_mode),
-            ('keep_rotation', None, _('_Keep transformation'),
-                'k', None, window.change_keep_rotation),
+            ('keep_transformation', None, _('_Keep transformation'),
+                'k', None, window.change_keep_transformation),
             ('slideshow', gtk.STOCK_MEDIA_PLAY, _('Run _slideshow'),
                 '<Control>S', None, window.slideshow.toggle),
             ('lens', 'comix-lens', _('Magnifying _glass'),
@@ -196,7 +196,7 @@ class MainUI(gtk.UIManager):
                         <menuitem action="flip_horiz" />
                         <menuitem action="flip_vert" />
                         <separator />
-                        <menuitem action="keep_rotation" />
+                        <menuitem action="keep_transformation" />
                     </menu>
                     <menu action="menu_zoom">
                         <menuitem action="zoom_in" />
@@ -250,7 +250,7 @@ class MainUI(gtk.UIManager):
                     <menuitem action="flip_horiz" />
                     <menuitem action="flip_vert" />
                     <separator />
-                    <menuitem action="keep_rotation" />
+                    <menuitem action="keep_transformation" />
                 </menu>
                 <menu action="menu_toolbars">
                     <menuitem action="menubar" />
@@ -281,6 +281,24 @@ class MainUI(gtk.UIManager):
         # Is there no built-in way to do this?
         self.get_widget('/Tool/expander').set_expand(True)
         self.get_widget('/Tool/expander').set_sensitive(False)
+        
+        self.get_widget('/Tool/first_page').set_tooltip_text(_('First page'))
+        self.get_widget('/Tool/previous_page').set_tooltip_text(
+            _('Previous page'))
+        self.get_widget('/Tool/next_page').set_tooltip_text(_('Next page'))
+        self.get_widget('/Tool/last_page').set_tooltip_text(_('Last page'))
+        self.get_widget('/Tool/fit_screen_mode').set_tooltip_text(
+            _('Fit-to-screen mode'))
+        self.get_widget('/Tool/fit_width_mode').set_tooltip_text(
+            _('Fit width mode'))
+        self.get_widget('/Tool/fit_height_mode').set_tooltip_text(
+            _('Fit height mode'))
+        self.get_widget('/Tool/fit_manual_mode').set_tooltip_text(
+            _('Manual zoom mode'))
+        self.get_widget('/Tool/double_page').set_tooltip_text(
+            _('Double page mode'))
+        self.get_widget('/Tool/manga_mode').set_tooltip_text(_('Manga mode'))
+        self.get_widget('/Tool/lens').set_tooltip_text(_('Magnifying glass'))
 
     def set_sensitivities(self):
         """Sets the main UI's widget's sensitivities appropriately."""

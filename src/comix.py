@@ -34,19 +34,19 @@ try:
     import pygtk
     pygtk.require('2.0')
     import gtk
-    assert gtk.gtk_version >= (2, 10, 0)
-    assert gtk.pygtk_version >= (2, 10, 0)
+    assert gtk.gtk_version >= (2, 12, 0)
+    assert gtk.pygtk_version >= (2, 12, 0)
 except AssertionError:
     print "You don't have the required versions of GTK+ and/or PyGTK installed."
     print 'Installed GTK+ version is: %s' % (
         '.'.join([str(n) for n in gtk.gtk_version]))
-    print 'Required GTK+ version is: 2.10.0 or higher\n'
+    print 'Required GTK+ version is: 2.12.0 or higher\n'
     print 'Installed PyGTK version is: %s' % (
         '.'.join([str(n) for n in gtk.pygtk_version]))
-    print 'Required PyGTK version is: 2.10.0 or higher'
+    print 'Required PyGTK version is: 2.12.0 or higher'
     sys.exit(1)
 except ImportError:
-    print 'PyGTK version 2.10.0 or higher is required to run Comix.'
+    print 'PyGTK version 2.12.0 or higher is required to run Comix.'
     print 'No version of PyGTK was found on your system.'
     sys.exit(1)
 
