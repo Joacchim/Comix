@@ -96,22 +96,22 @@ class EventHandler:
         # ----------------------------------------------------------------
         elif event.keyval in (gtk.keysyms.Down, gtk.keysyms.KP_Down):
             if not self._window.zoom_mode == preferences.ZOOM_MODE_SCREEN:
-                self._window.scroll(0, 40)
+                self._window.scroll(0, 50)
             else:
                 self._window.next_page()
         elif event.keyval in (gtk.keysyms.Up, gtk.keysyms.KP_Up):
             if not self._window.zoom_mode == preferences.ZOOM_MODE_SCREEN:
-                self._window.scroll(0, -40)
+                self._window.scroll(0, -50)
             else:
                 self._window.previous_page()
         elif event.keyval in (gtk.keysyms.Right, gtk.keysyms.KP_Right):
             if not self._window.zoom_mode == preferences.ZOOM_MODE_SCREEN:
-                self._window.scroll(40, 0)
+                self._window.scroll(50, 0)
             else:
                 self._window.next_page()
         elif event.keyval in (gtk.keysyms.Left, gtk.keysyms.KP_Left):
             if not self._window.zoom_mode == preferences.ZOOM_MODE_SCREEN:
-                self._window.scroll(-40, 0)
+                self._window.scroll(-50, 0)
             else:
                 self._window.previous_page()
 
@@ -128,8 +128,8 @@ class EventHandler:
         elif event.keyval in [gtk.keysyms.space, gtk.keysyms.KP_Home,
           gtk.keysyms.KP_End]:
             x_step, y_step = self._window.get_visible_area_size()
-            x_step = x_step * prefs['space scroll percent'] // 100
-            y_step = y_step * prefs['space scroll percent'] // 100
+            x_step = int(x_step * 0.9)
+            y_step = int(y_step * 0.9)
             if self._window.is_manga_mode:
                 x_step *= -1
             if ('GDK_SHIFT_MASK' in event.state.value_names or

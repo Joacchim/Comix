@@ -175,7 +175,7 @@ def _guess_cover(files):
     """Return the filename within <files> that is the most likely to be the
     cover of an archive using some simple heuristics.
     """
-    files.sort()
+    files.sort(key=str.lower)
     ext_re = re.compile(r'\.(jpg|jpeg|png|gif|tif|tiff)\s*$', re.I)
     front_re = re.compile('(cover|front)', re.I)
     images = filter(ext_re.search, files)

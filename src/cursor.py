@@ -11,7 +11,7 @@ class CursorHandler:
     def __init__(self, window):
         self._window = window
         self._timer_id = None
-        self._fullscreen = False
+        self._auto_hide = False
         self._current_cursor = NORMAL
 
     def set_cursor_type(self, cursor):
@@ -29,25 +29,23 @@ class CursorHandler:
             mode = cursor
         self._window.set_cursor(mode)
         self._current_cursor = cursor
-        if self._fullscreen:
+        if self._auto_hide:
             if cursor == NORMAL:
                 self._set_hide_timer()
             else:
                 self._kill_timer()
 
-    def enter_fullscreen(self):
-        """Signal that we are entering fullscreen (e.g. that the cursor
-        should auto-hide from now on).
+    def auto_hide_on(self):
+        """Signal that the cursor should auto-hide from now on (e.g. that
+        we are entering fullscreen).
         """
-        self._fullscreen = True
+        self._auto_hide = True
         if self._current_cursor == NORMAL:
             self._set_hide_timer()
 
-    def exit_fullscreen(self):
-        """Signal that we are leaving fullscreen (e.g. that the cursor should
-        *not* auto-hide from now on).
-        """
-        self._fullscreen = False
+    def auto_hide_off(self):
+        """Signal that the cursor should *not* auto-hide from now on."""
+        self._auto_hide = False
         self._kill_timer()
         if self._current_cursor == NORMAL:
             self.set_cursor_type(NORMAL)
@@ -56,19 +54,19 @@ class CursorHandler:
         """Refresh the current cursor (i.e. display it and set a new timer in
         fullscreen). Used when we move the cursor.
         """
-        if self._fullscreen:
+        if self._auto_hide:
             self.set_cursor_type(self._current_cursor)
 
     def _set_hide_timer(self):
         self._kill_timer()
         self._timer_id = gobject.timeout_add(2000, self._window.set_cursor,
-            self._create_hidden_cursor())
+            self._get_hidden_cursor())
 
     def _kill_timer(self):
         if self._timer_id is not None:
             gobject.source_remove(self._timer_id)
 
-    def _create_hidden_cursor(self):
+    def _get_hidden_cursor(self):
         pixmap = gtk.gdk.Pixmap(None, 1, 1, 1)
         color = gtk.gdk.Color()
         return gtk.gdk.Cursor(pixmap, pixmap, color, color, 0, 0)

@@ -100,7 +100,7 @@ class FileHandler:
         else:
             gc.collect()
 
-        # Cache new pixbufs if not already cached.
+        # Cache new pixbufs if they are not already cached.
         for wanted in wanted_pixbufs:
             self._get_pixbuf(wanted)
 
@@ -217,7 +217,7 @@ class FileHandler:
             self._condition = self._extractor.setup(path, self._tmp_dir)
             files = self._extractor.get_files()
             image_files = filter(self._image_re.search, files)
-            image_files.sort()
+            image_files.sort(key=str.lower)
             self._image_files = \
                 [os.path.join(self._tmp_dir, f) for f in image_files]
             comment_files = filter(self._comment_re.search, files)

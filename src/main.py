@@ -380,10 +380,10 @@ class MainWindow(gtk.Window):
         self.is_fullscreen = toggleaction.get_active()
         if self.is_fullscreen:
             self.fullscreen()
-            self.cursor_handler.enter_fullscreen()
+            self.cursor_handler.auto_hide_on()
         else:
             self.unfullscreen()
-            self.cursor_handler.exit_fullscreen()
+            self.cursor_handler.auto_hide_off()
 
     def change_zoom_mode(self, radioaction, *args):
         old_mode = self.zoom_mode

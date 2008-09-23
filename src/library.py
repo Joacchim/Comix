@@ -532,11 +532,7 @@ class _BookArea(gtk.ScrolledWindow):
         pixbuf = image.fit_in_rectangle(pixbuf,
             int(0.67 * prefs['library cover size']),
             prefs['library cover size'])
-        if prefs['library cover size'] < 100:
-            border_thickness = 1
-        else:
-            border_thickness = 2
-        pixbuf = image.add_border(pixbuf, border_thickness, 0xFFFFFFFF)
+        pixbuf = image.add_border(pixbuf, 1, 0xFFFFFFFF)
         self._liststore.append([pixbuf, book])
 
     def _book_activated(self, iconview, path):
@@ -589,6 +585,10 @@ class _BookArea(gtk.ScrolledWindow):
         path = iconview.get_path_at_pos(int(event.x), int(event.y))
         if path is None:
             return
+        # For some reason we don't always get an item_activated event when
+        # double-clicking on an icon, so we handle it explicitly here.
+        if event.type == gtk.gdk._2BUTTON_PRESS:
+            self._book_activated(iconview, path)
         if event.button == 3:
             if not iconview.path_is_selected(path):
                 iconview.unselect_all()
