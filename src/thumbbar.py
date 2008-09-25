@@ -106,7 +106,7 @@ class ThumbnailSidebar(gtk.HBox):
             self._vadjust.set_value(value)
 
     def _load(self):
-        if self._window.file_handler.archive_type:
+        if self._window.file_handler.archive_type is not None:
             create = False
         else:
             create = prefs['create thumbnails']

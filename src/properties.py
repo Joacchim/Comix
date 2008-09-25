@@ -97,7 +97,7 @@ class _PropertiesDialog(gtk.Dialog):
         notebook.set_border_width(6)
         self.vbox.pack_start(notebook, False, False, 0)
 
-        if window.file_handler.archive_type:
+        if window.file_handler.archive_type is not None:
             # ------------------------------------------------------------
             # Archive tab
             # ------------------------------------------------------------

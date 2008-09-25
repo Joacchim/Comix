@@ -9,6 +9,8 @@ import threading
 
 import process
 
+ZIP, RAR, TAR, GZIP, BZIP2 = range(5)
+
 # Determine if rar/unrar exists, and bind the executable path to _rar_exec
 _rar_exec = None
 for path in os.getenv('PATH', '').split(':') + [os.path.curdir]:
@@ -56,13 +58,13 @@ class Extractor:
         self._extract_thread = None
         self._condition = threading.Condition()
 
-        if self._type == 'zip':
+        if self._type == ZIP:
             self._zfile = zipfile.ZipFile(src, 'r')
             self._files = self._zfile.namelist()
-        elif self._type in ('tar', 'gzip', 'bzip2'):
+        elif self._type in (TAR, GZIP, BZIP2):
             self._tfile = tarfile.open(src, 'r')
             self._files = self._tfile.getnames()
-        elif self._type == 'rar' and _rar_exec:
+        elif self._type == RAR and _rar_exec:
             proc = process.Process([_rar_exec, 'vb', src])
             fobj = proc.spawn()
             self._files = [name.rstrip('\n') for name in fobj.readlines()]
@@ -94,7 +96,7 @@ class Extractor:
         not be used for scanned comic books. So, we cheat and ignore the
         ordering applied with this method on such archives.
         """
-        if self._type in ('gzip', 'bzip2'):
+        if self._type in (GZIP, BZIP2):
             self._files = filter(files.count, self._files)
         else:
             self._files = files
@@ -131,9 +133,9 @@ class Extractor:
         """Close any open file objects, need only be called manually if the
         extract() method isn't called.
         """
-        if self._type == 'zip':
+        if self._type == ZIP:
             self._zfile.close()
-        elif self._type in ('tar', 'gzip', 'bzip2'):
+        elif self._type in (TAR, GZIP, BZIP2):
             self._tfile.close()
 
     def _thread_extract(self):
@@ -151,20 +153,20 @@ class Extractor:
             self.close()
             sys.exit(0)
         try:
-            if self._type == 'zip':
+            if self._type == ZIP:
                 dst_path = os.path.join(self._dst, name)
                 if not os.path.exists(os.path.dirname(dst_path)):
                     os.makedirs(os.path.dirname(dst_path))
                 new = open(dst_path, 'w')
                 new.write(self._zfile.read(name))
                 new.close()
-            elif self._type in ('tar', 'gzip', 'bzip2'):
+            elif self._type in (TAR, GZIP, BZIP2):
                 if os.path.normpath(os.path.join(self._dst, name)).startswith(
                   self._dst):
                     self._tfile.extract(name, self._dst)
                 else:
                     print '! archive.py: Non-local tar member:', name, '\n'
-            elif self._type == 'rar':
+            elif self._type == RAR:
                 if _rar_exec:
                     proc = process.Process([_rar_exec, 'x', '-p-', '-o-',
                         '-inul', '--', self._src, name, self._dst])
@@ -184,6 +186,59 @@ class Extractor:
         self._condition.release()
 
 
+class Packer:
+    
+    """Packer is a threaded class for packing files into Zip archives.
+    
+    It would be straight-forward to add support for more archive types,
+    but basically all other types are less well fitted for this particular
+    task than Zip archives are (yes, really).
+    """
+    
+    def __init__(self, image_files, other_files, archive_path):
+        """Setup a Packer object to create a Zip archive at <archive_path>.
+        All files pointed to by paths in the sequences <image_files> and
+        <other_files> will be included in the archive. The files in
+        <image_files> will be renamed so that the lexical ordering of their
+        filenames matches that of their order in the list. The files in
+        <other_files> will be included as they are.
+        """
+        self._image_files = image_files
+        self._other_files = other_files
+        self._archive_path = archive_path
+        self._pack_thread = None
+        self._lock = threading.Lock() 
+
+    def pack(self):
+        """Pack all the files in the file lists into the archive."""
+        self._pack_thread = threading.Thread(target=self._thread_pack)
+        self._pack_thread.setDaemon(False)
+        self._lock.acquire()
+        self._pack_thread.start()
+
+    def wait(self):
+        """Block until the packer thread has finished."""
+        self._lock.acquire()
+        self._lock.release()
+
+    def _thread_pack(self):
+        zfile = zipfile.ZipFile(self._archive_path, 'w')
+        used_names = []
+        name = os.path.splitext(os.path.basename(self._archive_path))[0]
+        pattern = '%%0%dd - %s%%s' % (len(str(len(self._image_files))), name)
+        for i, path in enumerate(self._image_files):
+            filename = pattern % (i + 1, os.path.splitext(path)[1])
+            zfile.write(path, filename, zipfile.ZIP_STORED)
+            used_names.append(filename)
+        for path in self._other_files:
+            filename = os.path.basename(path)
+            while filename in used_names:
+                filename = '_%s' % filename
+            zfile.write(path, filename, zipfile.ZIP_DEFLATED)
+            used_names.append(filename)
+        zfile.close()
+        self._lock.release()
+
 def archive_mime_type(path):
     """Return the archive type of <path> or None for non-archives."""
     try:
@@ -191,18 +246,18 @@ def archive_mime_type(path):
             if not os.access(path, os.R_OK):
                 return None
             if zipfile.is_zipfile(path):
-                return 'zip'
+                return ZIP
             fd = open(path, 'rb')
             magic = fd.read(4)
             fd.close()
             if tarfile.is_tarfile(path) and os.path.getsize(path) > 0:
                 if magic.startswith('BZh'):
-                    return 'bzip2'
+                    return BZIP2
                 if magic.startswith('\037\213'):
-                    return 'gzip'
-                return 'tar'
+                    return GZIP
+                return TAR
             if magic == 'Rar!':
-                return 'rar'
+                return RAR
     except Exception:
         print '! archive.py: Error while reading', path
     return None
@@ -210,11 +265,11 @@ def archive_mime_type(path):
 
 def get_name(archive_type):
     """Return a text representation of an archive type."""
-    return {'zip':   _('ZIP archive'),
-            'tar':   _('Tar archive'),
-            'gzip':  _('Gzip compressed tar archive'),
-            'bzip2': _('Bzip2 compressed tar archive'),
-            'rar':   _('RAR archive')}[archive_type]
+    return {ZIP:   _('ZIP archive'),
+            TAR:   _('Tar archive'),
+            GZIP:  _('Gzip compressed tar archive'),
+            BZIP2: _('Bzip2 compressed tar archive'),
+            RAR:   _('RAR archive')}[archive_type]
 
 
 def get_archive_info(path):

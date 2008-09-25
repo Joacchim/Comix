@@ -9,6 +9,7 @@ import gtk
 import about
 import bookmark
 import comment
+import edit
 import enhance
 import filechooser
 import filehandler
@@ -17,10 +18,6 @@ import preferences
 import properties
 import recent
 import thumbremover
-
-
-def bogus(*args):
-    print 'Feature not implemented yet.'
 
 
 class MainUI(gtk.UIManager):
@@ -54,7 +51,7 @@ class MainUI(gtk.UIManager):
                 _('_Thumbnail maintenance...'),
                 None, None, thumbremover.open_dialog),
             ('edit_archive', gtk.STOCK_EDIT, _('_Edit archive...'),
-                None, None, bogus),
+                None, None, edit.open_dialog),
             ('close', gtk.STOCK_CLOSE, _('_Close'),
                 '<Control>w', None, window.file_handler.close_file),
             ('quit', gtk.STOCK_QUIT, _('_Quit'),

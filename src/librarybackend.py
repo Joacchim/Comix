@@ -305,7 +305,7 @@ class LibraryBackend:
             name string,
             path string unique,
             pages integer,
-            format string,
+            format integer,
             size integer,
             added date default current_date)''')
 

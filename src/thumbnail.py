@@ -72,7 +72,7 @@ def _get_new_thumbnail(path, create, dst_dir):
     True we also save it to disk with <dst_dir> as the base thumbnail
     directory.
     """
-    if archive.archive_mime_type(path):
+    if archive.archive_mime_type(path) is not None:
         if create:
             return _get_new_archive_thumbnail(path, dst_dir)
         return None

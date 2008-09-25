@@ -108,7 +108,7 @@ class _Bookmark(gtk.ImageMenuItem):
         self._file_handler = file_handler
 
         gtk.MenuItem.__init__(self, str(self), False)
-        if self._archive_type:
+        if self._archive_type is not None:
             im = gtk.image_new_from_stock('comix-archive', gtk.ICON_SIZE_MENU)
         else:
             im = gtk.image_new_from_stock('comix-image', gtk.ICON_SIZE_MENU)

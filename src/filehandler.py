@@ -115,7 +115,8 @@ class FileHandler:
         old_page = self.get_current_page()
         viewed = self._window.is_double_page and 2 or 1
         if self.get_current_page() + viewed > self.get_number_of_pages():
-            if prefs['auto open next archive'] and self.archive_type:
+            if (prefs['auto open next archive'] and 
+              self.archive_type is not None):
                 self._open_next_archive()
             return False
         self._current_image_index += self._get_step_length()
@@ -128,7 +129,8 @@ class FileHandler:
         if not self.file_loaded:
             return False
         if self.get_current_page() == 1:
-            if prefs['auto open next archive'] and self.archive_type:
+            if (prefs['auto open next archive'] and
+              self.archive_type is not None):
                 self._open_previous_archive()
             return False
         old_page = self.get_current_page()
@@ -183,9 +185,7 @@ class FileHandler:
 
         Return True if the file is successfully loaded.
         """
-        # --------------------------------------------------------------------
         # If the given <path> is invalid we update the statusbar.
-        # --------------------------------------------------------------------
         if os.path.isdir(path):
             self._window.statusbar.set_message(
                 _('%s: Target is a directory.') % path)
@@ -198,23 +198,22 @@ class FileHandler:
                 _('%s: Permission denied.') % path)
             return False
         self.archive_type = archive.archive_mime_type(path)
-        if not self.archive_type and not is_image_file(path):
+        if self.archive_type is None and not is_image_file(path):
             self._window.statusbar.set_message(
                 _('%s: Unsupported file type.') % path)
             return False
-
+        
+        # We close the previously opened file.
         self._window.cursor_handler.set_cursor_type(cursor.WAIT)
         if self.file_loaded:
             self.close_file()
         while gtk.events_pending():
             gtk.main_iteration(False)
 
-        # --------------------------------------------------------------------
         # If <path> is an archive we create an Extractor for it and set the
         # files in it with file endings indicating image files or comments
         # as the ones to be extracted.
-        # --------------------------------------------------------------------
-        if self.archive_type:
+        if self.archive_type is not None:
             self._base_path = path
             self._condition = self._extractor.setup(path, self._tmp_dir)
             files = self._extractor.get_files()
@@ -253,10 +252,7 @@ class FileHandler:
 
             self._extractor.set_files(image_files + comment_files)
             self._extractor.extract()
-
-        # --------------------------------------------------------------------
         # If <path> is an image we scan its directory for more images.
-        # --------------------------------------------------------------------
         else:
             self._base_path = os.path.dirname(path)
             for f in os.listdir(self._base_path):
@@ -266,9 +262,6 @@ class FileHandler:
             self._image_files.sort(locale.strcoll)
             self._current_image_index = self._image_files.index(path)
 
-        # --------------------------------------------------------------------
-        # If there are no viewable image files found.
-        # --------------------------------------------------------------------
         if not self._image_files:
             self._window.statusbar.set_message(_('No images in "%s"') %
                 os.path.basename(path))
@@ -350,7 +343,7 @@ class FileHandler:
         """Return a string with the name of the currently viewed file that is
         suitable for printing.
         """
-        if self.archive_type:
+        if self.archive_type is not None:
             return os.path.basename(self._base_path)
         return os.path.join(os.path.basename(self._base_path),
             os.path.basename(self._image_files[self._current_image_index]))
@@ -374,7 +367,7 @@ class FileHandler:
         full path to the archive or the full path to the currently
         viewed image.
         """
-        if self.archive_type:
+        if self.archive_type is not None:
             return self.get_path_to_base()
         return self._image_files[self._current_image_index]
 
@@ -453,7 +446,7 @@ class FileHandler:
             return
         for f in files[current_index + 1:]:
             path = os.path.join(arch_dir, f)
-            if archive.archive_mime_type(path):
+            if archive.archive_mime_type(path) is not None:
                 self.open_file(path)
                 return
 
@@ -470,7 +463,7 @@ class FileHandler:
             return
         for f in reversed(files[:current_index]):
             path = os.path.join(arch_dir, f)
-            if archive.archive_mime_type(path):
+            if archive.archive_mime_type(path) is not None:
                 self.open_file(path, 0)
                 return
 
@@ -498,7 +491,7 @@ class FileHandler:
         archive and has not yet been extracted. Return when the file is
         ready.
         """
-        if not self.archive_type:
+        if self.archive_type is None:
             return
         name = self._name_table[path]
         self._condition.acquire()
