@@ -6,7 +6,7 @@ import ImageEnhance
 import ImageOps
 import ImageStat
 
-import preferences
+from preferences import prefs
 
 
 def fit_in_rectangle(src, width, height, scale_up=False, rotation=0):
@@ -39,8 +39,12 @@ def fit_in_rectangle(src, width, height, scale_up=False, rotation=0):
 
     if not scale_up and src_width <= width and src_height <= height:
         if src.get_has_alpha():
-            src = src.composite_color_simple(src_width, src_height,
-                gtk.gdk.INTERP_TILES, 255, 8, 0x777777, 0x999999)
+            if prefs['checkered bg for transparent images']:
+                src = src.composite_color_simple(src_width, src_height,
+                    gtk.gdk.INTERP_TILES, 255, 8, 0x777777, 0x999999)
+            else:
+                src = src.composite_color_simple(src_width, src_height,
+                    gtk.gdk.INTERP_TILES, 255, 1024, 0xFFFFFF, 0xFFFFFF)
     else:
         if float(src_width) / width > float(src_height) / height:
             height = int(max(src_height * width / src_width, 1))
@@ -48,8 +52,12 @@ def fit_in_rectangle(src, width, height, scale_up=False, rotation=0):
             width = int(max(src_width * height / src_height, 1))
 
         if src.get_has_alpha():
-            src = src.composite_color_simple(width, height,
-                gtk.gdk.INTERP_TILES, 255, 8, 0x777777, 0x999999)
+            if prefs['checkered bg for transparent images']:
+                src = src.composite_color_simple(width, height,
+                    gtk.gdk.INTERP_TILES, 255, 8, 0x777777, 0x999999)
+            else:
+                src = src.composite_color_simple(width, height,
+                    gtk.gdk.INTERP_TILES, 255, 1024, 0xFFFFFF, 0xFFFFFF)
         else:
             src = src.scale_simple(width, height, gtk.gdk.INTERP_TILES)
 

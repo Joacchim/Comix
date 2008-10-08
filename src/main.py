@@ -728,9 +728,9 @@ class MainWindow(gtk.Window):
             os.mkdir(constants.COMIX_DIR)
         preferences.write_preferences_file()
         self.ui_manager.bookmarks.write_bookmarks_file()
-        print 'Bye!'
         # This hack is to avoid Python issue #1856.
         for thread in threading.enumerate():
             if thread is not threading.currentThread():
                 thread.join()
+        print 'Bye!'
         sys.exit(0)

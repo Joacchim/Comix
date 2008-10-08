@@ -143,11 +143,12 @@ class _CollectionArea(gtk.ScrolledWindow):
         self._ui_manager.add_ui_from_string(ui_description)
         actiongroup = gtk.ActionGroup('comix-library-collection-area')
         actiongroup.add_actions([
-        ('rename', None, _('Rename...'), None, None, self._rename_collection),
-        ('duplicate', gtk.STOCK_COPY, _('Duplicate collection'), None, None,
-            self._duplicate_collection),
-        ('remove', gtk.STOCK_REMOVE, _('Remove collection...'), None, None,
-            self._remove_collection)])
+            ('rename', None, _('Rename...'), None, None,
+                self._rename_collection),
+            ('duplicate', gtk.STOCK_COPY, _('Duplicate collection'), None, None,
+                self._duplicate_collection),
+            ('remove', gtk.STOCK_REMOVE, _('Remove collection...'), None, None,
+                self._remove_collection)])
         self._ui_manager.insert_action_group(actiongroup, 0)
         
         self.display_collections()
@@ -472,14 +473,14 @@ class _BookArea(gtk.ScrolledWindow):
         self._ui_manager.add_ui_from_string(ui_description)
         actiongroup = gtk.ActionGroup('comix-library-book-area')
         actiongroup.add_actions([
-        ('open', gtk.STOCK_OPEN, _('Open'), None, None,
-            self.open_selected_book),
-        ('remove from collection', gtk.STOCK_REMOVE,
-            _('Remove from this collection'), None, None,
-            self._remove_books_from_collection),
-        ('remove from library', gtk.STOCK_DELETE,
-            _('Remove from library...'), None, None,
-            self._remove_books_from_library)])
+            ('open', gtk.STOCK_OPEN, _('Open'), None, None,
+                self.open_selected_book),
+            ('remove from collection', gtk.STOCK_REMOVE,
+                _('Remove from this collection'), None, None,
+                self._remove_books_from_collection),
+            ('remove from library', gtk.STOCK_DELETE,
+                _('Remove from library...'), None, None,
+                self._remove_books_from_library)])
         self._ui_manager.insert_action_group(actiongroup, 0)
 
     def display_covers(self, collection, filter_string=None):
@@ -619,9 +620,8 @@ class _BookArea(gtk.ScrolledWindow):
         automatically created when using enable_model_drag_source(), so in
         essence it's a hack, but at least it works.
         """
-        selected = iconview.get_selected_items()
-        icon_path = selected[-1]
-        num_books = len(selected)
+        icon_path = iconview.get_cursor()[0]
+        num_books = len(iconview.get_selected_items())
         book = self.get_book_at_path(icon_path)
 
         cover = self._library.backend.get_book_cover(book)

@@ -50,8 +50,6 @@ class MainUI(gtk.UIManager):
             ('edit_thumbnails', 'comix-thumbnails',
                 _('_Thumbnail maintenance...'),
                 None, None, thumbremover.open_dialog),
-            ('edit_archive', gtk.STOCK_EDIT, _('_Edit archive...'),
-                None, None, edit.open_dialog),
             ('close', gtk.STOCK_CLOSE, _('_Close'),
                 '<Control>w', None, window.file_handler.close_file),
             ('quit', gtk.STOCK_QUIT, _('_Quit'),
@@ -117,6 +115,8 @@ class MainUI(gtk.UIManager):
 
         # Some actions added separately since they need extra arguments.
         self._actiongroup.add_actions([
+            ('edit_archive', gtk.STOCK_EDIT, _('_Edit archive...'),
+                None, None, edit.open_dialog),
             ('properties', gtk.STOCK_PROPERTIES, _('Proper_ties'),
                 '<Alt>Return', None, properties.open_dialog),
             ('enhance_image', 'comix-enhance-image', _('_Enhance image...'),

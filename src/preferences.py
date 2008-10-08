@@ -23,6 +23,7 @@ prefs = {
     'path to last file': '',
     'auto open next archive': True,
     'bg colour': (3000, 3000, 3000),
+    'checkered bg for transparent images': True,
     'cache': True,
     'stretch': False,
     'default double page': False,
@@ -139,6 +140,17 @@ class _PreferencesDialog(gtk.Dialog):
         glass_magnification_spinner.set_tooltip_text(
             _('Set the magnification level of the magnifying glass.'))
         page.add_row(label, glass_magnification_spinner)
+
+        page.new_section(_('Transparency'))
+        checkered_bg_button = gtk.CheckButton(
+            _('Use checkered background for transparent images.'))
+        checkered_bg_button.set_active(
+            prefs['checkered bg for transparent images'])
+        checkered_bg_button.connect('toggled', self._check_button_cb,
+            'checkered bg for transparent images')
+        checkered_bg_button.set_tooltip_text(
+            _('Use a grey checkered background for transparent images. If this preference is unset, the background is plain white instead.'))
+        page.add_row(checkered_bg_button)
         notebook.append_page(page, gtk.Label(_('Appearance')))
         
         # ----------------------------------------------------------------
@@ -279,7 +291,7 @@ class _PreferencesDialog(gtk.Dialog):
                 self._window.set_bg_colour(prefs['bg colour'])
             else:
                 self._window.draw_image(scroll=False)
-        elif preference == 'stretch':
+        elif preference in ('stretch', 'checkered bg for transparent images'):
             self._window.draw_image(scroll=False)
         elif (preference == 'hide all in fullscreen' and
           self._window.is_fullscreen):

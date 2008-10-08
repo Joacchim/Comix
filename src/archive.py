@@ -1,4 +1,4 @@
-"""archive.py - Archive handling (extract/create (not yet)) for Comix."""
+"""archive.py - Archive handling (extract/create) for Comix."""
 
 import sys
 import os
@@ -23,6 +23,7 @@ for path in os.getenv('PATH', '').split(':') + [os.path.curdir]:
 if not _rar_exec:
     print '! Could not find the `rar` or `unrar` executables.'
     print '! RAR files (.cbr) will not be readable.\n'
+del path
 
 
 class Extractor:
@@ -188,56 +189,76 @@ class Extractor:
 
 class Packer:
     
-    """Packer is a threaded class for packing files into Zip archives.
+    """Packer is a threaded class for packing files into ZIP archives.
     
     It would be straight-forward to add support for more archive types,
     but basically all other types are less well fitted for this particular
-    task than Zip archives are (yes, really).
+    task than ZIP archives are (yes, really).
     """
     
     def __init__(self, image_files, other_files, archive_path):
-        """Setup a Packer object to create a Zip archive at <archive_path>.
+        """Setup a Packer object to create a ZIP archive at <archive_path>.
         All files pointed to by paths in the sequences <image_files> and
         <other_files> will be included in the archive. The files in
         <image_files> will be renamed so that the lexical ordering of their
-        filenames matches that of their order in the list. The files in
-        <other_files> will be included as they are.
+        filenames match that of their order in the list. The files in
+        <other_files> will be included as they are, assuming their filenames
+        does not clash with other filenames in the archive. All files are
+        placed in the archive root.
         """
         self._image_files = image_files
         self._other_files = other_files
         self._archive_path = archive_path
         self._pack_thread = None
-        self._lock = threading.Lock() 
+        self._packing_successful = False
 
     def pack(self):
         """Pack all the files in the file lists into the archive."""
         self._pack_thread = threading.Thread(target=self._thread_pack)
         self._pack_thread.setDaemon(False)
-        self._lock.acquire()
         self._pack_thread.start()
 
     def wait(self):
-        """Block until the packer thread has finished."""
-        self._lock.acquire()
-        self._lock.release()
+        """Block until the packer thread has finished. Return True if the
+        packer has finished its work successfully.
+        """
+        if self._pack_thread != None:
+            self._pack_thread.join()
+        return self._packing_successful
 
     def _thread_pack(self):
-        zfile = zipfile.ZipFile(self._archive_path, 'w')
+        try:
+            zfile = zipfile.ZipFile(self._archive_path, 'w')
+        except Exception:
+            print '! Could not create archive', self._archive_path
+            return
         used_names = []
         name = os.path.splitext(os.path.basename(self._archive_path))[0]
         pattern = '%%0%dd - %s%%s' % (len(str(len(self._image_files))), name)
         for i, path in enumerate(self._image_files):
             filename = pattern % (i + 1, os.path.splitext(path)[1])
-            zfile.write(path, filename, zipfile.ZIP_STORED)
+            try:
+                zfile.write(path, filename, zipfile.ZIP_STORED)
+            except Exception:
+                print '! Could not add file %s to add to %s, aborting...' % (
+                    path, self._archive_path)
+                zfile.close()
+                return
             used_names.append(filename)
         for path in self._other_files:
             filename = os.path.basename(path)
             while filename in used_names:
                 filename = '_%s' % filename
-            zfile.write(path, filename, zipfile.ZIP_DEFLATED)
+            try:
+                zfile.write(path, filename, zipfile.ZIP_DEFLATED)
+            except Exception:
+                print '! Could not add file %s to add to %s, aborting...' % (
+                    path, self._archive_path)
+                zfile.close()
+                return
             used_names.append(filename)
         zfile.close()
-        self._lock.release()
+        self._packing_successful = True
 
 def archive_mime_type(path):
     """Return the archive type of <path> or None for non-archives."""
