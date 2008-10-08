@@ -65,8 +65,11 @@ class Extractor:
         elif self._type in (TAR, GZIP, BZIP2):
             self._tfile = tarfile.open(src, 'r')
             self._files = self._tfile.getnames()
-        elif self._type == RAR and _rar_exec:
-            proc = process.Process([_rar_exec, 'vb', src])
+        elif self._type == RAR:
+            if not _rar_exec:
+                print '! Could not find RAR file extractor.'
+                return None
+            proc = process.Process([_rar_exec, 'vb', '--', src])
             fobj = proc.spawn()
             self._files = [name.rstrip('\n') for name in fobj.readlines()]
             fobj.close()
@@ -166,7 +169,7 @@ class Extractor:
                   self._dst):
                     self._tfile.extract(name, self._dst)
                 else:
-                    print '! archive.py: Non-local tar member:', name, '\n'
+                    print '! Non-local tar member:', name, '\n'
             elif self._type == RAR:
                 if _rar_exec:
                     proc = process.Process([_rar_exec, 'x', '-p-', '-o-',
@@ -174,7 +177,7 @@ class Extractor:
                     proc.spawn()
                     proc.wait()
                 else:
-                    print '! archive.py: Could not find RAR file extractor.\n'
+                    print '! Could not find RAR file extractor.'
         except Exception:
             # Better to ignore any failed extractions (e.g. from a corrupt
             # archive) than to crash here and leave the main thread in a
@@ -280,7 +283,7 @@ def archive_mime_type(path):
             if magic == 'Rar!':
                 return RAR
     except Exception:
-        print '! archive.py: Error while reading', path
+        print '! Error while reading', path
     return None
 
 
