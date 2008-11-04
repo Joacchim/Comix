@@ -218,7 +218,7 @@ class FileHandler:
             self._condition = self._extractor.setup(path, self._tmp_dir)
             files = self._extractor.get_files()
             image_files = filter(self._image_re.search, files)
-            _archive_sort(image_files)
+            alphanumeric_sort(image_files)
             self._image_files = \
                 [os.path.join(self._tmp_dir, f) for f in image_files]
             comment_files = filter(self._comment_re.search, files)
@@ -269,7 +269,7 @@ class FileHandler:
         else:
             self.file_loaded = True
 
-        _archive_sort(self._comment_files)
+        alphanumeric_sort(self._comment_files)
         self._window.cursor_handler.set_cursor_type(cursor.NORMAL)
         self._window.ui_manager.set_sensitivities()
         self._window.new_page()
@@ -517,9 +517,10 @@ def is_image_file(path):
         return info is not None
     return False
 
-def _archive_sort(filenames):
+def alphanumeric_sort(filenames):
     """Do an in-place alphanumeric sort of the strings in <filenames>,
-    such that for an example 1.jpg, 2.jpg, 10.jpg is a sorted ordering.
+    such that for an example "1.jpg", "2.jpg", "10.jpg" is a sorted
+    ordering.
     """
     def _format_substring(s):
         if s.isdigit():

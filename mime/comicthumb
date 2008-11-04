@@ -27,6 +27,7 @@ except ImportError:
     print __doc__
     sys.exit(1)
 
+ZIP, RAR, TAR, GZIP, BZIP2 = range(5)
 
 class Process:
 
@@ -80,13 +81,13 @@ class Extractor:
         self._type = archive_mime_type(src)
         self._files = []
         
-        if self._type == 'zip':
+        if self._type == ZIP:
             self._zfile = zipfile.ZipFile(src, 'r')
             self._files = self._zfile.namelist()
-        elif self._type in ['tar', 'gzip', 'bzip2']:
+        elif self._type in [TAR, GZIP, BZIP2]:
             self._tfile = tarfile.open(src, 'r')
             self._files = self._tfile.getnames()
-        elif self._type == 'rar':
+        elif self._type == RAR:
             self._rar = None
             for path in os.getenv('PATH', '').split(':'):
                 if os.path.isfile(os.path.join(path, 'unrar')):
@@ -113,11 +114,11 @@ class Extractor:
         object. The <chosen> file must be one of the files in the list
         returned by the get_files() method.
         """
-        if self._type == 'zip':
+        if self._type == ZIP:
             return cStringIO.StringIO(self._zfile.read(chosen))
-        elif self._type in ['tar', 'gzip', 'bzip2']:
+        elif self._type in [TAR, GZIP, BZIP2]:
             return cStringIO.StringIO(self._tfile.extractfile(chosen).read())
-        elif self._type == 'rar':
+        elif self._type == RAR:
             proc = Process([self._rar, 'p', '-inul', '-p-', '--',
                 self._src, chosen])
             fobj = proc.spawn()
@@ -125,29 +126,34 @@ class Extractor:
 
 
 def archive_mime_type(path):
-    """Return the archive type of <path>."""
+    """Return the archive type of <path> or None for non-archives."""
     try:
         if os.path.isfile(path):
+            if not os.access(path, os.R_OK):
+                return None
             if zipfile.is_zipfile(path):
-                return 'zip'
-            if tarfile.is_tarfile(path):
-                return 'tar'
+                return ZIP
             fd = open(path, 'rb')
             magic = fd.read(4)
             fd.close()
+            if tarfile.is_tarfile(path) and os.path.getsize(path) > 0:
+                if magic.startswith('BZh'):
+                    return BZIP2
+                if magic.startswith('\037\213'):
+                    return GZIP
+                return TAR
             if magic == 'Rar!':
-                return 'rar'
-    except:
-        print '! Error while reading "%s"' % path
-    print '! "%s" is not an archive.' % path
-    sys.exit(1)
+                return RAR
+    except Exception:
+        print '! Error while reading', path
+    return None
 
 
 def guess_cover(files):
     """Return the filename within <files> that is the most likely to be
     the cover of an archive.
     """
-    files.sort(key=str.lower)
+    alphanumeric_sort(files)
     ext_re = re.compile(r'\.(jpg|jpeg|png|gif|tif|tiff)\s*$', re.I)
     front_re = re.compile('(cover|front)', re.I)
     images = filter(ext_re.search, files)
@@ -158,6 +164,19 @@ def guess_cover(files):
     if images:
         return images[0]
     return None
+
+def alphanumeric_sort(filenames):
+    """Do an in-place alphanumeric sort of the strings in <filenames>,
+    such that for an example "1.jpg", "2.jpg", "10.jpg" is a sorted
+    ordering.
+    """
+    def _format_substring(s):
+        if s.isdigit():
+            return int(s)
+        return s.lower()
+
+    rec = re.compile("\d+|\D+")
+    filenames.sort(key=lambda s: map(_format_substring, rec.findall(s)))
 
 
 if __name__ == '__main__':
