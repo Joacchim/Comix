@@ -432,6 +432,7 @@ def _close_dialog(*args):
 def read_preferences_file():
     """Read preferences data from disk."""
     if os.path.isfile(_config_path):
+        config = None
         try:
             config = open(_config_path)
             version = cPickle.load(config)
@@ -439,6 +440,8 @@ def read_preferences_file():
             config.close()
         except Exception:
             print '! Corrupt preferences file "%s", deleting...' % _config_path
+            if config is not None:
+                config.close()
             os.remove(_config_path)
         else:
             for key in old_prefs:
