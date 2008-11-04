@@ -3,7 +3,11 @@
 import os
 import time
 import stat
-import pwd
+try:
+    import pwd
+except ImportError:
+    # Running on non-Unix machine.
+    pass
 
 import gtk
 import pango
