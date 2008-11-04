@@ -66,14 +66,15 @@ class BookmarksMenu(gtk.Menu):
 
     def _edit_bookmarks(self, *args):
         """Open the bookmarks dialog."""
-        _BookmarksDialog(self._bookmarks_store)
+        _BookmarksDialog(self._window, self._bookmarks_store)
 
     def _clear_bookmarks(self, *args):
         """Remove all bookmarks, if the user presses 'Yes' in a confirmation
         dialog.
         """
-        choice_dialog = gtk.MessageDialog(None, 0, gtk.MESSAGE_QUESTION,
-            gtk.BUTTONS_YES_NO, _('Clear all bookmarks?'))
+        choice_dialog = gtk.MessageDialog(self._window, 0,
+            gtk.MESSAGE_QUESTION, gtk.BUTTONS_YES_NO,
+            _('Clear all bookmarks?'))
         choice_dialog.format_secondary_text(
             _('All stored bookmarks will be removed. Are you sure that you want to continue?'))
         response = choice_dialog.run()
@@ -224,8 +225,8 @@ class _BookmarksDialog(gtk.Dialog):
 
     """_BookmarksDialog lets the user remove and/or rearrange bookmarks."""
 
-    def __init__(self, bookmarks_store):
-        gtk.Dialog.__init__(self, _('Edit bookmarks'), None, gtk.DIALOG_MODAL,
+    def __init__(self, window, bookmarks_store):
+        gtk.Dialog.__init__(self, _('Edit bookmarks'), window, gtk.DIALOG_MODAL,
             (gtk.STOCK_REMOVE, gtk.RESPONSE_NO, gtk.STOCK_CLOSE,
             gtk.RESPONSE_CLOSE))
         self._bookmarks_store = bookmarks_store

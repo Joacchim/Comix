@@ -1,6 +1,7 @@
 """library.py - Comic book library."""
 
 import os
+import gc
 import urllib
 from xml.sax.saxutils import escape as xmlescape
 
@@ -76,6 +77,7 @@ class _LibraryDialog(gtk.Window):
         prefs['lib window width'], prefs['lib window height'] = self.get_size()
         self.book_area.stop_update()
         self.backend.close()
+        self.book_area.close()
         filechooser.close_library_filechooser_dialog()
         _close_dialog()
 
@@ -117,6 +119,7 @@ class _CollectionArea(gtk.ScrolledWindow):
         self._treeview.connect('drag_motion', self._drag_motion)
         self._treeview.connect_after('drag_begin', self._drag_begin)
         self._treeview.connect('button_press_event', self._button_press)
+        self._treeview.connect('key_press_event', self._key_press)
         self._treeview.connect('row_activated', self._expand_or_collapse_row)
         self._treeview.set_headers_visible(False)
         self._treeview.set_rules_hint(True)
@@ -218,12 +221,13 @@ class _CollectionArea(gtk.ScrolledWindow):
         prefs['last library collection'] = collection
         gobject.idle_add(self._library.book_area.display_covers, collection)
 
-    def _remove_collection(self, action):
+    def _remove_collection(self, action=None):
         """Remove the currently selected collection from the library, if the
         user answers 'Yes' in a dialog.
         """
-        choice_dialog = gtk.MessageDialog(None, 0, gtk.MESSAGE_QUESTION,
-            gtk.BUTTONS_YES_NO, _('Remove collection from the library?'))
+        choice_dialog = gtk.MessageDialog(self._library, 0,
+            gtk.MESSAGE_QUESTION, gtk.BUTTONS_YES_NO,
+            _('Remove collection from the library?'))
         choice_dialog.format_secondary_text(
             _('The selected collection will be removed from the library (but the books and subcollections in it will remain). Are you sure that you want to continue?'))
         response = choice_dialog.run()
@@ -241,8 +245,9 @@ class _CollectionArea(gtk.ScrolledWindow):
             old_name = self._library.backend.get_collection_name(collection)
         except Exception:
             return
-        rename_dialog = gtk.MessageDialog(None, 0, gtk.MESSAGE_QUESTION,
-            gtk.BUTTONS_OK_CANCEL, _('Rename collection?'))
+        rename_dialog = gtk.MessageDialog(self._library, 0,
+            gtk.MESSAGE_QUESTION, gtk.BUTTONS_OK_CANCEL,
+            _('Rename collection?'))
         rename_dialog.format_secondary_text(
             _('Please enter a new name for the selected collection.'))
         rename_dialog.set_default_response(gtk.RESPONSE_OK)
@@ -294,6 +299,11 @@ class _CollectionArea(gtk.ScrolledWindow):
             self._ui_manager.get_action('/Popup/remove').set_sensitive(sens)
             self._ui_manager.get_widget('/Popup').popup(None, None, None,
                 event.button, event.time)
+
+    def _key_press(self, treeview, event):
+        """Handle key presses on the _CollectionArea."""
+        if event.keyval == gtk.keysyms.Delete:
+            self._remove_collection()
 
     def _expand_or_collapse_row(self, treeview, path, column):
         """Expand or collapse the activated row."""
@@ -450,6 +460,7 @@ class _BookArea(gtk.ScrolledWindow):
         self._iconview.connect('drag_data_get', self._drag_data_get)
         self._iconview.connect('drag_data_received', self._drag_data_received)
         self._iconview.connect('button_press_event', self._button_press)
+        self._iconview.connect('key_press_event', self._key_press)
         self._iconview.modify_base(gtk.STATE_NORMAL, gtk.gdk.Color()) # Black.
         self._iconview.enable_model_drag_source(0,
             [('book', gtk.TARGET_SAME_APP, _DRAG_BOOK_ID)],
@@ -482,6 +493,12 @@ class _BookArea(gtk.ScrolledWindow):
                 _('Remove from library...'), None, None,
                 self._remove_books_from_library)])
         self._ui_manager.insert_action_group(actiongroup, 0)
+
+    def close(self):
+        """We must (for some reason) explicitly clear the ListStore in
+        order to not leak memory.
+        """
+        self._liststore.clear()
 
     def display_covers(self, collection, filter_string=None):
         """Display the books in <collection> in the IconView."""
@@ -529,7 +546,7 @@ class _BookArea(gtk.ScrolledWindow):
         if pixbuf is None:
             pixbuf = self._library.render_icon(gtk.STOCK_MISSING_IMAGE,
                 gtk.ICON_SIZE_DIALOG)
-        # The scale (0.67) is for normal aspect ratio for book covers
+        # The ratio (0.67) is just above the normal aspect ratio for books.
         pixbuf = image.fit_in_rectangle(pixbuf,
             int(0.67 * prefs['library cover size']),
             prefs['library cover size'])
@@ -553,6 +570,8 @@ class _BookArea(gtk.ScrolledWindow):
         and thus also from the _BookArea.
         """
         collection = self._library.collection_area.get_current_collection()
+        if collection == _COLLECTION_ALL:
+            return
         selected = self._iconview.get_selected_items()
         for path in selected:
             book = self.get_book_at_path(path)
@@ -566,8 +585,9 @@ class _BookArea(gtk.ScrolledWindow):
         """Remove the currently selected book(s) from the library, and thus
         also from the _BookArea, if the user clicks 'Yes' in a dialog.
         """
-        choice_dialog = gtk.MessageDialog(None, 0, gtk.MESSAGE_QUESTION,
-            gtk.BUTTONS_YES_NO, _('Remove book(s) from the library?'))
+        choice_dialog = gtk.MessageDialog(self._library, 0,
+            gtk.MESSAGE_QUESTION, gtk.BUTTONS_YES_NO,
+            _('Remove book(s) from the library?'))
         choice_dialog.format_secondary_text(
             _('The selected books will be removed from the library (but the comic book files will be untouched). Are you sure that you want to continue?'))
         response = choice_dialog.run()
@@ -607,6 +627,11 @@ class _BookArea(gtk.ScrolledWindow):
                     '/Popup/remove from collection').set_sensitive(True)
             self._ui_manager.get_widget('/Popup').popup(None, None, None,
                 event.button, event.time)
+
+    def _key_press(self, iconview, event):
+        """Handle key presses on the _BookArea."""
+        if event.keyval == gtk.keysyms.Delete:
+            self._remove_books_from_collection()
         
     def _drag_begin(self, iconview, context):
         """Create a cursor image for drag-n-drop from the library.
@@ -746,7 +771,6 @@ class _ControlArea(gtk.HBox):
         cover_size_scale = gtk.HScale(adjustment)
         cover_size_scale.set_size_request(150, -1)
         cover_size_scale.set_draw_value(False)
-        cover_size_scale.set_update_policy(gtk.UPDATE_DELAYED)
         cover_size_scale.connect('value_changed', self._change_cover_size)
         hbox.pack_start(cover_size_scale, False, False)
         vbox.pack_start(gtk.HBox(), True, True)
@@ -879,8 +903,8 @@ class _AddBooksProgressDialog(gtk.Dialog):
         """Adds the books at <paths> to the library, and also to the
         <collection>, unless it is None.
         """
-        gtk.Dialog.__init__(self, _('Adding books'), None, gtk.DIALOG_MODAL,
-            (gtk.STOCK_STOP, gtk.RESPONSE_CLOSE))
+        gtk.Dialog.__init__(self, _('Adding books'), library,
+            gtk.DIALOG_MODAL, (gtk.STOCK_STOP, gtk.RESPONSE_CLOSE))
         self._destroy = False
         self.set_size_request(400, -1)
         self.set_has_separator(False)
@@ -954,3 +978,4 @@ def _close_dialog(*args):
     if _dialog is not None:
         _dialog.destroy()
         _dialog = None
+        gc.collect()

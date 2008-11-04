@@ -84,7 +84,7 @@ if __name__ == '__main__':
     elif preferences.prefs['auto load last file']:
         window.file_handler.open_file(preferences.prefs['path to last file'],
             preferences.prefs['page of last file'])
-    deprecated.check_for_deprecated_files()
+    deprecated.check_for_deprecated_files(window)
     try:
         gtk.main()
     except KeyboardInterrupt: # Will not always work because of threading.

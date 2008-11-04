@@ -10,8 +10,8 @@ import constants
 
 class _CleanerDialog(gtk.MessageDialog):
 
-    def __init__(self, paths):
-        gtk.MessageDialog.__init__(self, None, 0, gtk.MESSAGE_QUESTION,
+    def __init__(self, window, paths):
+        gtk.MessageDialog.__init__(self, window, 0, gtk.MESSAGE_QUESTION,
             gtk.BUTTONS_YES_NO,
             _('There are deprecated files left on your computer.'))
 
@@ -34,7 +34,7 @@ class _CleanerDialog(gtk.MessageDialog):
         self.destroy()
 
 
-def check_for_deprecated_files():
+def check_for_deprecated_files(window):
     """Check for a number of deprecated files created by older versions of
     Comix. If any are found, we ask the user through a dilaog if they
     should be removed.
@@ -55,5 +55,5 @@ def check_for_deprecated_files():
         if os.path.exists(path):
             found.append(path)
     if found:
-        dialog = _CleanerDialog(found)
+        dialog = _CleanerDialog(window, found)
         dialog.show_all()

@@ -190,12 +190,18 @@ class LibraryBackend:
             return False
         format, pages, size = info
         thumbnail.get_thumbnail(path, create=True, dst_dir=_cover_dir)
+        old = self._con.execute('''select id from Book
+            where path = ?''', (path,)).fetchone()
         try:
-            self._con.execute('''insert into Book
-                (name, path, pages, format, size) values (?, ?, ?, ?, ?)''',
-                (name, path, pages, format, size))
-        except dbapi2.DatabaseError: # E.g. book already in library
-            pass
+            if old is not None:
+                self._con.execute('''update Book set
+                    name = ?, pages = ?, format = ?, size = ?
+                    where path = ?''', (name, pages, format, size, path))
+            else:
+                self._con.execute('''insert into Book
+                    (name, path, pages, format, size)
+                    values (?, ?, ?, ?, ?)''',
+                    (name, path, pages, format, size))
         except dbapi2.Error:
             print '! Could not add book %s to the library' % path
             return False
@@ -264,6 +270,8 @@ class LibraryBackend:
         if name is None: # Original collection does not exist.
             return False
         copy_name = _('%s (Copy)') % name
+        while self.get_collection_by_name(copy_name):
+            copy_name = _('%s (Copy)') % copy_name
         if self.add_collection(copy_name) is None: # Could not create the new.
             return False
         copy_collection = self._con.execute('''select id from Collection

@@ -169,9 +169,10 @@ class _MainFileChooserDialog(_ComicFileChooserDialog):
     
     """The normal filechooser dialog used with the "Open" menu item."""
     
-    def __init__(self, file_handler):
+    def __init__(self, window):
         _ComicFileChooserDialog.__init__(self)
-        self._file_handler = file_handler
+        self._window = window
+        self.set_transient_for(window)
 
         ffilter = gtk.FileFilter()
         ffilter.add_pixbuf_formats()
@@ -183,7 +184,7 @@ class _MainFileChooserDialog(_ComicFileChooserDialog):
     def files_chosen(self, paths):
         _close_main_filechooser_dialog()
         if paths:
-            self._file_handler.open_file(paths[0])
+            self._window.file_handler.open_file(paths[0])
 
     
 class _LibraryFileChooserDialog(_ComicFileChooserDialog):
@@ -193,6 +194,7 @@ class _LibraryFileChooserDialog(_ComicFileChooserDialog):
     def __init__(self, library):
         _ComicFileChooserDialog.__init__(self)
         self._library = library
+        self.set_transient_for(library)
         self.filechooser.set_select_multiple(True)
         self.filechooser.connect('current_folder_changed',
             self._set_collection_name)
@@ -267,11 +269,11 @@ class StandAloneFileChooserDialog(_ComicFileChooserDialog):
         self._paths = paths
 
 
-def open_main_filechooser_dialog(action, file_handler):
+def open_main_filechooser_dialog(action, window):
     """Open the main filechooser dialog."""
     global _main_filechooser_dialog
     if _main_filechooser_dialog is None:
-        _main_filechooser_dialog = _MainFileChooserDialog(file_handler)
+        _main_filechooser_dialog = _MainFileChooserDialog(window)
     else:
         _main_filechooser_dialog.present()
 

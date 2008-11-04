@@ -13,8 +13,8 @@ _dialog = None
 
 class _AboutDialog(gtk.Dialog):
 
-    def __init__(self):
-        gtk.Dialog.__init__(self, _('About'), None, 0,
+    def __init__(self, window):
+        gtk.Dialog.__init__(self, _('About'), window, 0,
             (gtk.STOCK_CLOSE, gtk.RESPONSE_CLOSE))
         self.set_has_separator(False)
         self.set_resizable(False)
@@ -103,11 +103,11 @@ class _AboutDialog(gtk.Dialog):
         self.show_all()
 
 
-def open_dialog(*args):
+def open_dialog(action, window):
     """Create and display the (singleton) about dialog."""
     global _dialog
     if _dialog is None:
-        _dialog = _AboutDialog()
+        _dialog = _AboutDialog(window)
     else:
         _dialog.present()
 

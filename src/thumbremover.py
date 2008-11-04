@@ -17,9 +17,9 @@ _thumb_base = os.path.join(os.getenv('HOME'), '.thumbnails')
 
 class _ThumbnailMaintenanceDialog(gtk.Dialog):
 
-    def __init__(self):
+    def __init__(self, window):
         self._num_thumbs = 0
-        gtk.Dialog.__init__(self, _('Thumbnail maintenance'), None, 0,
+        gtk.Dialog.__init__(self, _('Thumbnail maintenance'), window, 0,
             (gtk.STOCK_CLOSE, gtk.RESPONSE_CLOSE))
         button = self.add_button(_('Cleanup'), gtk.RESPONSE_OK)
         button.set_image(gtk.image_new_from_stock(
@@ -102,7 +102,7 @@ class _ThumbnailMaintenanceDialog(gtk.Dialog):
 
     def _response(self, dialog, response):
         if response == gtk.RESPONSE_OK:
-            _ThumbnailRemover(self._num_thumbs)
+            _ThumbnailRemover(self, self._num_thumbs)
             self._update_num_and_size()
         else:
             _close_dialog()
@@ -110,10 +110,10 @@ class _ThumbnailMaintenanceDialog(gtk.Dialog):
 
 class _ThumbnailRemover(gtk.Dialog):
 
-    def __init__(self, total_thumbs):
+    def __init__(self, parent, total_thumbs):
         self._total_thumbs = total_thumbs
         self._destroy = False
-        gtk.Dialog.__init__(self, _('Removing thumbnails'), None, 0,
+        gtk.Dialog.__init__(self, _('Removing thumbnails'), parent, 0,
             (gtk.STOCK_STOP, gtk.RESPONSE_CLOSE))
         self.set_size_request(400, -1)
         self.set_has_separator(False)
@@ -227,10 +227,10 @@ def _uri_to_path(uri):
         return urllib.url2pathname(uri)
 
 
-def open_dialog(*args):
+def open_dialog(action, window):
     global _dialog
     if _dialog is None:
-        _dialog = _ThumbnailMaintenanceDialog()
+        _dialog = _ThumbnailMaintenanceDialog(window)
     else:
         _dialog.present()
 

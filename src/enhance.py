@@ -47,8 +47,8 @@ class _EnhanceImageDialog(gtk.Dialog):
     an ImageEnhancer.
     """
 
-    def __init__(self, enhancer):
-        gtk.Dialog.__init__(self, _('Enhance image'), None, 0)
+    def __init__(self, window):
+        gtk.Dialog.__init__(self, _('Enhance image'), window, 0)
         self.add_buttons(_('Default'), gtk.RESPONSE_NO,
             gtk.STOCK_OK, gtk.RESPONSE_OK)
         self.set_has_separator(False)
@@ -56,7 +56,7 @@ class _EnhanceImageDialog(gtk.Dialog):
         self.connect('response', self._response)
         self.set_default_response(gtk.RESPONSE_OK)
 
-        self._enhancer = enhancer
+        self._enhancer = window.enhancer
         self._block = False
 
         vbox = gtk.VBox(False, 10)
@@ -194,7 +194,7 @@ def open_dialog(action, window):
     """Create and display the (singleton) image enhancement dialog."""
     global _dialog
     if _dialog is None:
-        _dialog = _EnhanceImageDialog(window.enhancer)
+        _dialog = _EnhanceImageDialog(window)
         draw_histogram(window.left_image)
     else:
         _dialog.present()

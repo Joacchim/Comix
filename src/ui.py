@@ -44,12 +44,7 @@ class MainUI(gtk.UIManager):
             ('zoom_out', gtk.STOCK_ZOOM_OUT, _('Zoom _out'),
                 'KP_Subtract', None, window.manual_zoom_out),
             ('zoom_original', gtk.STOCK_ZOOM_100, _('_Normal size'),
-                '<Control>0', None, window.manual_zoom_original),
-            ('about', gtk.STOCK_ABOUT, _('_About'),
-                None, None, about.open_dialog),
-            ('edit_thumbnails', 'comix-thumbnails',
-                _('_Thumbnail maintenance...'),
-                None, None, thumbremover.open_dialog),
+                '<Control>0', None, window.manual_zoom_original),  
             ('close', gtk.STOCK_CLOSE, _('_Close'),
                 '<Control>w', None, window.file_handler.close_file),
             ('quit', gtk.STOCK_QUIT, _('_Quit'),
@@ -115,22 +110,27 @@ class MainUI(gtk.UIManager):
 
         # Some actions added separately since they need extra arguments.
         self._actiongroup.add_actions([
+            ('about', gtk.STOCK_ABOUT, _('_About'),
+                None, None, about.open_dialog),
+            ('comments', 'comix-comments', _('View _comments'),
+                'c', None, comment.open_dialog),
             ('edit_archive', gtk.STOCK_EDIT, _('_Edit archive...'),
                 None, None, edit.open_dialog),
+            ('open', gtk.STOCK_OPEN, _('_Open...'),
+                '<Control>o', None, filechooser.open_main_filechooser_dialog),
             ('properties', gtk.STOCK_PROPERTIES, _('Proper_ties'),
                 '<Alt>Return', None, properties.open_dialog),
             ('enhance_image', 'comix-enhance-image', _('_Enhance image...'),
                 'e', None, enhance.open_dialog),
+            ('thumbnail_maintenance', 'comix-thumbnails',
+                _('_Thumbnail maintenance...'),
+                None, None, thumbremover.open_dialog),
             ('preferences', gtk.STOCK_PREFERENCES, _('Pr_eferences'),
                 None, None, preferences.open_dialog)], window)
 
         self._actiongroup.add_actions([
-            ('open', gtk.STOCK_OPEN, _('_Open...'),
-                '<Control>o', None, filechooser.open_main_filechooser_dialog),
             ('library', 'comix-library', _('_Library...'),
-                '<Control>l', None, library.open_dialog),
-            ('comments', 'comix-comments', _('View _comments'),
-                'c', None, comment.open_dialog)], window.file_handler)
+                '<Control>l', None, library.open_dialog)], window.file_handler)
 
         ui_description = """
         <ui>
@@ -168,7 +168,7 @@ class MainUI(gtk.UIManager):
                     <menuitem action="quit" />
                 </menu>
                 <menu action="menu_edit">
-                    <menuitem action="edit_thumbnails" />
+                    <menuitem action="thumbnail_maintenance" />
                     <menuitem action="preferences" />
                 </menu>
                 <menu action="menu_view">

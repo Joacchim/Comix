@@ -12,9 +12,8 @@ _dialog = None
 
 class _CommentsDialog(gtk.Dialog):
 
-    def __init__(self, file_handler):
-        self._file_handler = file_handler
-        gtk.Dialog.__init__(self, _('Comments'), None, 0,
+    def __init__(self, window):
+        gtk.Dialog.__init__(self, _('Comments'), window, 0,
             (gtk.STOCK_CLOSE, gtk.RESPONSE_CLOSE))
         self.set_has_separator(False)
         self.set_resizable(True)
@@ -37,7 +36,7 @@ class _CommentsDialog(gtk.Dialog):
         tag_table = gtk.TextTagTable()
         tag_table.add(tag)
 
-        for num in xrange(1, self._file_handler.get_number_of_comments() + 1):
+        for num in xrange(1, window.file_handler.get_number_of_comments() + 1):
             page = gtk.VBox(False)
             page.set_border_width(8)
             scrolled = gtk.ScrolledWindow()
@@ -48,8 +47,8 @@ class _CommentsDialog(gtk.Dialog):
             inbox = gtk.EventBox()
             inbox.set_border_width(6)
             outbox.add(inbox)
-            name = os.path.basename(self._file_handler.get_comment_name(num))
-            text = self._file_handler.get_comment_text(num)
+            name = os.path.basename(window.file_handler.get_comment_name(num))
+            text = window.file_handler.get_comment_text(num)
             if text is None:
                 text = _('Could not read %s') % path
             text_buffer = gtk.TextBuffer(tag_table)
@@ -65,11 +64,11 @@ class _CommentsDialog(gtk.Dialog):
         self.show_all()
 
 
-def open_dialog(action, file_handler):
+def open_dialog(action, window):
     """Create and display the (singleton) comments dialog."""
     global _dialog
     if _dialog is None:
-        _dialog = _CommentsDialog(file_handler)
+        _dialog = _CommentsDialog(window)
     else:
         _dialog.present()
 
