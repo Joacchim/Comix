@@ -161,7 +161,7 @@ class Extractor:
                 dst_path = os.path.join(self._dst, name)
                 if not os.path.exists(os.path.dirname(dst_path)):
                     os.makedirs(os.path.dirname(dst_path))
-                new = open(dst_path, 'w')
+                new = open(dst_path, 'wb')
                 new.write(self._zfile.read(name))
                 new.close()
             elif self._type in (TAR, GZIP, BZIP2):
