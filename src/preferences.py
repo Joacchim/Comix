@@ -312,6 +312,8 @@ class _PreferencesDialog(gtk.Dialog):
         value = spinbutton.get_value()
         if preference == 'lens size':
             prefs[preference] = int(value)
+        elif preference == 'lens magnification':
+            prefs[preference] = value
         elif preference == 'slideshow delay':
             prefs[preference] = int(value * 1000)
             self._window.slideshow.update_delay()
