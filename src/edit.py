@@ -77,15 +77,31 @@ class _EditArchiveDialog(gtk.Dialog):
             gtk.main_iteration(False)
         image_files = self._image_area.get_file_listing()
         other_files = self._other_area.get_file_listing()
-        tmp_path = tempfile.mkstemp(
-            suffix='.%s' % os.path.basename(archive_path),
-            prefix='tmp.', dir=os.path.dirname(archive_path))[1]
-        packer = archive.Packer(image_files, other_files, tmp_path)
-        packer.pack()
-        packing_success = packer.wait()
-        if packing_success:
-            os.rename(tmp_path, archive_path)
-        _close_dialog()
+        try:
+            tmp_path = tempfile.mkstemp(
+                suffix='.%s' % os.path.basename(archive_path),
+                prefix='tmp.', dir=os.path.dirname(archive_path))[1]
+            fail = False
+        except:
+            fail = True
+        if not fail:
+            packer = archive.Packer(image_files, other_files, tmp_path)
+            packer.pack()
+            packing_success = packer.wait()
+            if packing_success:
+                os.rename(tmp_path, archive_path)
+                _close_dialog()
+            else:
+                fail = True
+        if fail:
+            self.window.set_cursor(None)
+            dialog = gtk.MessageDialog(self._window, 0, gtk.MESSAGE_ERROR,
+                gtk.BUTTONS_CLOSE, _("The new archive could not be saved!"))
+            dialog.format_secondary_text(
+                _("The original files have not been removed."))
+            dialog.run()
+            dialog.destroy()
+            self.set_sensitive(True)
 
     def _response(self, dialog, response):
         if response == gtk.RESPONSE_OK:

@@ -7,6 +7,8 @@ import zipfile
 import tarfile
 import threading
 
+import gtk
+
 import process
 
 ZIP, RAR, TAR, GZIP, BZIP2 = range(5)
@@ -68,6 +70,12 @@ class Extractor:
         elif self._type == RAR:
             if not _rar_exec:
                 print '! Could not find RAR file extractor.'
+                dialog = gtk.MessageDialog(None, 0, gtk.MESSAGE_WARNING,
+                    gtk.BUTTONS_CLOSE, _("Could not find RAR file extractor!"))
+                dialog.format_secondary_markup(
+                    _("You need either the <i>rar</i> or <i>unrar</i> program installed in order to read RAR (.cbr) files."))
+                dialog.run()
+                dialog.destroy()
                 return None
             proc = process.Process([_rar_exec, 'vb', '--', src])
             fobj = proc.spawn()
@@ -223,7 +231,7 @@ class Packer:
 
     def wait(self):
         """Block until the packer thread has finished. Return True if the
-        packer has finished its work successfully.
+        packer finished its work successfully.
         """
         if self._pack_thread != None:
             self._pack_thread.join()
@@ -246,6 +254,10 @@ class Packer:
                 print '! Could not add file %s to add to %s, aborting...' % (
                     path, self._archive_path)
                 zfile.close()
+                try:
+                    os.remove(self._archive_path)
+                except:
+                    pass
                 return
             used_names.append(filename)
         for path in self._other_files:
@@ -258,6 +270,10 @@ class Packer:
                 print '! Could not add file %s to add to %s, aborting...' % (
                     path, self._archive_path)
                 zfile.close()
+                try:
+                    os.remove(self._archive_path)
+                except:
+                    pass
                 return
             used_names.append(filename)
         zfile.close()

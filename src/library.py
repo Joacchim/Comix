@@ -38,6 +38,7 @@ class _LibraryDialog(gtk.Window):
         self.set_title(_('Library'))
         self.connect('delete_event', self.close)
         
+        self.filter_string = None
         self._file_handler = file_handler
         self._statusbar = gtk.Statusbar()
         self._statusbar.set_has_resize_grip(True)
@@ -500,14 +501,14 @@ class _BookArea(gtk.ScrolledWindow):
         """
         self._liststore.clear()
 
-    def display_covers(self, collection, filter_string=None):
+    def display_covers(self, collection):
         """Display the books in <collection> in the IconView."""
         self._stop_update = False # To handle new re-entry during update.
         self._liststore.clear()
         if collection == _COLLECTION_ALL: # The "All" collection is virtual.
             collection = None
         for i, book in enumerate(self._library.backend.get_books_in_collection(
-          collection, filter_string)):
+          collection, self._library.filter_string)):
             self._add_book(book)
             if i % 15 == 0: # Don't update GUI for every cover for efficiency.
                 while gtk.events_pending():
@@ -881,12 +882,11 @@ class _ControlArea(gtk.HBox):
         contain the string in the gtk.Entry. The string is not
         case-sensitive.
         """
-        filter_string = entry.get_text()
-        if not filter_string:
-            filter_string = None
+        self._library.filter_string = entry.get_text()
+        if not self._library.filter_string:
+            self._library.filter_string = None
         collection = self._library.collection_area.get_current_collection()
-        gobject.idle_add(self._library.book_area.display_covers, collection,
-            filter_string)
+        gobject.idle_add(self._library.book_area.display_covers, collection)
 
     def _change_cover_size(self, scale):
         """Change the size of the covers in the _BookArea."""
