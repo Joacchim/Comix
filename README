@@ -22,10 +22,10 @@ Example:
 If you have installed with --dir, do not forget to use the same option when
 uninstalling.
 
-There is also an option, --no-mime, that can be used to tell install.py that
+There is another option, --no-mime, that can be used to tell install.py that
 it should not register new mime types for cbz, cbr and cbt archives, or
-install the thumbnail creation script for these files used by some file
-managers (such as Nautilus and Thunar).
+install the thumbnail creation script for these files that is used by some
+file managers (such as Nautilus and Thunar).
 
 As an example of how to install Comix from the downloaded tar.gz file, run
 as the root user (via su or sudo):

@@ -104,7 +104,7 @@ class _PreferencesDialog(gtk.Dialog):
         dynamic_bg_button.set_active(prefs['smart bg'])
         dynamic_bg_button.connect('toggled', self._check_button_cb, 'smart bg')
         dynamic_bg_button.set_tooltip_text(
-            _('Automatically pick a background colour that fits the viewed image.'))
+            _('Automatically pick a background colour that fits the currently viewed image.'))
         page.add_row(dynamic_bg_button)
 
         page.new_section(_('Thumbnails'))
@@ -131,7 +131,7 @@ class _PreferencesDialog(gtk.Dialog):
         glass_size_spinner.set_tooltip_text(
             _('Set the size of the magnifying glass. It is a square with a side of this many pixels.'))
         page.add_row(label, glass_size_spinner)
-        label = gtk.Label('%s:' % _('Magnification'))
+        label = gtk.Label('%s:' % _('Magnification factor'))
         adjustment = gtk.Adjustment(prefs['lens magnification'], 1.1, 10.0,
             0.1, 1.0)
         glass_magnification_spinner = gtk.SpinButton(adjustment, digits=1)
