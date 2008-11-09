@@ -93,7 +93,8 @@ class _AboutDialog(gtk.Dialog):
             ('김민기', _('Korean translation')),
             ('Maryam Sanaat', _('Persian translation')),
             ('Andhika Padmawan', _('Indonesian translation')),
-            ('Jan Nekvasil', _('Czech translation'))
+            ('Jan Nekvasil', _('Czech translation')),
+            ('Victor Castillejo', _('Icon design'))
             ):
             label = gtk.Label()
             label.set_markup('<b>%s:</b>   %s' % (nice_person, description))
