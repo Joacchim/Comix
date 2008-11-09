@@ -71,7 +71,7 @@ class Extractor:
                     return None
             proc = process.Process([_rar_exec, 'vb', '--', src])
             fd = proc.spawn()
-            self._files = [name.rstrip('\n') for name in fd.readlines()]
+            self._files = [name.rstrip(os.linesep) for name in fd.readlines()]
             fd.close()
             proc.wait()
         else:

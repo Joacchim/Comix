@@ -19,6 +19,7 @@ import re
 import cStringIO
 import zipfile
 import tarfile
+import subprocess
 
 try:
     import Image
@@ -29,44 +30,50 @@ except ImportError:
 
 ZIP, RAR, TAR, GZIP, BZIP2 = range(5)
 
+
 class Process:
+    
+    """The subprocess and popen2 modules in Python are broken (see issue
+    #1336). The problem (i.e. complete crash) they can cause happen fairly
+    often (once is too often) in Comix when calling "rar" or "unrar" to
+    extract specific files from archives. We roll our own very simple
+    process spawning module here instead.
+    """
+    # TODO: I can no longer reproduce the issue. Check if this version of
+    # process.py still solves it.
 
     def __init__(self, args):
-        """Create a Process where <args> is a sequence of arguments that
-        defines the process. The first element of <args> shuld be the full
-        path to the executable file to be run.
-
-        This avoids using Python's broken modules "subprocess" et al. (see
-        Python issue 1336.)
+        """Setup a Process where <args> is a sequence of arguments that defines
+        the process, e.g. ['ls', '-a'].
         """
         self._args = args
-        self._pid = None
+        self._proc = None
     
+    def _exec(self):
+        """Spawns the process, and returns its stdout.
+        (NOTE: separate function to make python2.4 exception syntax happy)
+        """
+        try:
+            self._proc = subprocess.Popen(self._args, stdout=subprocess.PIPE)
+            return self._proc.stdout
+        except Exception:
+            return None
+
     def spawn(self):
         """Spawn the process defined by the args in __init__(). Return a
         file-like object linked to the spawned process' stdout.
         """
-        gc.disable() # Avoid Python issue 1336!
-        read_pipe, write_pipe = os.pipe()
-        self._pid = os.fork()
-        if self._pid == 0:
-            try:
-                os.close(read_pipe)
-                os.dup2(write_pipe, 1)
-                os.execv(self._args[0], self._args)
-            except:
-                sys.stderr.write('Could not execute %s\n' % str(self._args[0]))
-                sys.exit(1)
-        gc.enable()
-        os.close(write_pipe)
-        return os.fdopen(read_pipe)
+        try:
+            gc.disable() # Avoid Python issue #1336!
+            return self._exec()
+        finally:
+            gc.enable()
 
     def wait(self):
         """Wait for the process to terminate."""
-        if self._pid:
-            os.waitpid(self._pid, 0)
-        else:
-            raise Exception, 'Process not spawned'
+        if self._proc is None:
+            raise Exception('Process not spawned.')
+        return self._proc.wait()
 
 
 class Extractor:
@@ -89,13 +96,9 @@ class Extractor:
             self._files = self._tfile.getnames()
         elif self._type == RAR:
             self._rar = None
-            for path in os.getenv('PATH', '').split(':'):
-                if os.path.isfile(os.path.join(path, 'unrar')):
-                    self._rar = os.path.join(path, 'unrar')
-                    break
-                elif os.path.isfile(os.path.join(path, 'rar')):
-                    self._rar = os.path.join(path, 'rar')
-                    break
+            for command in ('unrar', 'rar'):
+                if Process([command]).spawn() is not None:
+                    self._rar = command
             if self._rar == None:
                 print '! Could not find the "rar" or "unrar" executable.'
                 sys.exit(1)
