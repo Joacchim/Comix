@@ -1,8 +1,7 @@
 """process.py - Process spawning module."""
 
-import os
-import sys
 import gc
+import subprocess
 
 
 class Process:
@@ -11,40 +10,41 @@ class Process:
     #1336). The problem (i.e. complete crash) they can cause happen fairly
     often (once is too often) in Comix when calling "rar" or "unrar" to
     extract specific files from archives. We roll our own very simple
-    process spawning module here instead (and surely introduce a whole
-    new array of exciting bugs!)
+    process spawning module here instead.
     """
+    # TODO: I can no longer reproduce the issue. Check if this version of
+    # process.py still solves it.
 
     def __init__(self, args):
         """Setup a Process where <args> is a sequence of arguments that defines
-        the process. The first element of <args> shuld be the full path to
-        the executable file to be run.
+        the process, e.g. ['ls', '-a'].
         """
         self._args = args
-        self._pid = None
+        self._proc = None
+    
+    def _exec(self):
+        """Spawns the process, and returns its stdout.
+        (NOTE: separate function to make python2.4 exception syntax happy)
+        """
+        try:
+            self._proc = subprocess.Popen(self._args, stdout=subprocess.PIPE,
+                universal_newlines=True)
+            return self._proc.stdout
+        except Exception:
+            return None
 
     def spawn(self):
         """Spawn the process defined by the args in __init__(). Return a
         file-like object linked to the spawned process' stdout.
         """
-        gc.disable() # Avoid Python issue #1336!
-        read_pipe, write_pipe = os.pipe()
-        self._pid = os.fork()
-        if self._pid == 0:
-            try:
-                os.close(read_pipe)
-                os.dup2(write_pipe, 1)
-                os.execv(self._args[0], self._args)
-            except Exception:
-                sys.stderr.write('Could not execute %s\n' % str(self._args[0]))
-                sys.exit(1)
-        gc.enable()
-        os.close(write_pipe)
-        return os.fdopen(read_pipe)
+        try:
+            gc.disable() # Avoid Python issue #1336!
+            return self._exec()
+        finally:
+            gc.enable()
 
     def wait(self):
         """Wait for the process to terminate."""
-        if self._pid:
-            os.waitpid(self._pid, 0)
-        else:
-            raise (Exception, 'Process not spawned')
+        if self._proc is None:
+            raise Exception('Process not spawned.')
+        return self._proc.wait()

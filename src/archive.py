@@ -12,20 +12,9 @@ import gtk
 import process
 
 ZIP, RAR, TAR, GZIP, BZIP2 = range(5)
+_EXEC_NOT_FOUND = 0
 
-# Determine if rar/unrar exists, and bind the executable path to _rar_exec
 _rar_exec = None
-for path in os.getenv('PATH', '').split(':') + [os.path.curdir]:
-    if os.path.isfile(os.path.join(path, 'unrar')):
-        _rar_exec = os.path.join(path, 'unrar')
-        break
-    elif os.path.isfile(os.path.join(path, 'rar')):
-        _rar_exec = os.path.join(path, 'rar')
-        break
-if not _rar_exec:
-    print '! Could not find the `rar` or `unrar` executables.'
-    print '! RAR files (.cbr) will not be readable.\n'
-del path
 
 
 class Extractor:
@@ -68,21 +57,26 @@ class Extractor:
             self._tfile = tarfile.open(src, 'r')
             self._files = self._tfile.getnames()
         elif self._type == RAR:
-            if not _rar_exec:
-                print '! Could not find RAR file extractor.'
-                dialog = gtk.MessageDialog(None, 0, gtk.MESSAGE_WARNING,
-                    gtk.BUTTONS_CLOSE, _("Could not find RAR file extractor!"))
-                dialog.format_secondary_markup(
-                    _("You need either the <i>rar</i> or <i>unrar</i> program installed in order to read RAR (.cbr) files."))
-                dialog.run()
-                dialog.destroy()
-                return None
+            global _rar_exec
+            if _rar_exec is None:
+                _rar_exec = _get_rar_exec()
+                if _rar_exec is None:
+                    print '! Could not find RAR file extractor.'
+                    dialog = gtk.MessageDialog(None, 0, gtk.MESSAGE_WARNING,
+                        gtk.BUTTONS_CLOSE,
+                        _("Could not find RAR file extractor!"))
+                    dialog.format_secondary_markup(
+                        _("You need either the <i>rar</i> or the <i>unrar</i> program installed in order to read RAR (.cbr) files."))
+                    dialog.run()
+                    dialog.destroy()
+                    return None
             proc = process.Process([_rar_exec, 'vb', '--', src])
-            fobj = proc.spawn()
-            self._files = [name.rstrip('\n') for name in fobj.readlines()]
-            fobj.close()
+            fd = proc.spawn()
+            self._files = [name.rstrip('\n') for name in fd.readlines()]
+            fd.close()
             proc.wait()
         else:
+            print '! Non-supported archive format:', src
             return None
 
         self._setupped = True
@@ -179,7 +173,7 @@ class Extractor:
                 else:
                     print '! Non-local tar member:', name, '\n'
             elif self._type == RAR:
-                if _rar_exec:
+                if _rar_exec is not None:
                     proc = process.Process([_rar_exec, 'x', '-p-', '-o-',
                         '-inul', '--', self._src, name, self._dst])
                     proc.spawn()
@@ -327,3 +321,12 @@ def get_archive_info(path):
     num_pages = len(filter(image_re.search, files))
     size = os.stat(path).st_size
     return (mime, num_pages, size)
+
+def _get_rar_exec():
+    """Return the name of the RAR file executable, or None if no executable
+    is found.
+    """
+    for command in ('unrar', 'rar'):
+        if process.Process([command]).spawn() is not None:
+            return command
+    return None
