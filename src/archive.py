@@ -322,8 +322,8 @@ def get_archive_info(path):
     return (mime, num_pages, size)
 
 def _get_rar_exec():
-    """Return the name of the RAR file executable, or None if no executable
-    is found.
+    """Return the name of the RAR file extractor executable, or None if
+    no such executable is found.
     """
     for command in ('unrar', 'rar'):
         if process.Process([command]).spawn() is not None:

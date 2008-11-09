@@ -48,7 +48,7 @@ newer to function.
 To use the library you need pysqlite (which is usually included in the
 standard library for Python 2.5 and later).
 
-You also need the "unrar" or "rar" program installed if you wish to read
+You also need the "unrar" or the "rar" program installed if you wish to read
 RAR (.cbr) archives.
 
 
