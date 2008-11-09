@@ -72,30 +72,29 @@ class _AboutDialog(gtk.Dialog):
         box = gtk.VBox(False, 5)
         box.set_border_width(5)
         for nice_person, description in (
-            ('Pontus Ekberg', _('Developer')),
-            ('Emfox Zhou &amp; Xie Yanbo',
-            _('Simplified Chinese translation')),
-            ('Manuel Quiñones', _('Spanish translation')),
-            ('Marcelo Góes', _('Brazilian Portuguese translation')),
-            ('Christoph Wolk',
-            _('German translation and Nautilus thumbnailer')),
-            ('Raimondo Giammanco &amp; GhePeU', _('Italian translation')),
-            ('Arthur Nieuwland', _('Dutch translation')),
-            ('Achraf Cherti', _('French translation')),
-            ('Kamil Leduchowski', _('Polish translation')),
-            ('Paul Chatzidimitriou', _('Greek translation')),
-            ('Carles Escrig', _('Catalan translation')),
-            ('Hsin-Lin Cheng', _('Traditional Chinese translation')),
-            ('Mamoru Tasaka', _('Japanese translation')),
-            ('Ernő Drabik', _('Hungarian translation')),
-            ('Artyom Smirnov', _('Russian translation')),
-            ('Adrian C.', _('Croatian translation')),
-            ('김민기', _('Korean translation')),
-            ('Maryam Sanaat', _('Persian translation')),
-            ('Andhika Padmawan', _('Indonesian translation')),
-            ('Jan Nekvasil', _('Czech translation')),
-            ('Victor Castillejo', _('Icon design'))
-            ):
+          ('Pontus Ekberg', _('Developer')),
+          ('Emfox Zhou &amp; Xie Yanbo',
+          _('Simplified Chinese translation')),
+          ('Manuel Quiñones', _('Spanish translation')),
+          ('Marcelo Góes', _('Brazilian Portuguese translation')),
+          ('Christoph Wolk',
+          _('German translation and Nautilus thumbnailer')),
+          ('Raimondo Giammanco &amp; GhePeU', _('Italian translation')),
+          ('Arthur Nieuwland', _('Dutch translation')),
+          ('Achraf Cherti', _('French translation')),
+          ('Kamil Leduchowski', _('Polish translation')),
+          ('Paul Chatzidimitriou', _('Greek translation')),
+          ('Carles Escrig', _('Catalan translation')),
+          ('Hsin-Lin Cheng', _('Traditional Chinese translation')),
+          ('Mamoru Tasaka', _('Japanese translation')),
+          ('Ernő Drabik', _('Hungarian translation')),
+          ('Artyom Smirnov', _('Russian translation')),
+          ('Adrian C.', _('Croatian translation')),
+          ('김민기', _('Korean translation')),
+          ('Maryam Sanaat', _('Persian translation')),
+          ('Andhika Padmawan', _('Indonesian translation')),
+          ('Jan Nekvasil', _('Czech translation')),
+          ('Victor Castillejo', _('Icon design'))):
             label = gtk.Label()
             label.set_markup('<b>%s:</b>   %s' % (nice_person, description))
             box.pack_start(label, False, False, 0)
@@ -105,7 +104,7 @@ class _AboutDialog(gtk.Dialog):
 
 
 def open_dialog(action, window):
-    """Create and display the (singleton) about dialog."""
+    """Create and display the about dialog."""
     global _dialog
     if _dialog is None:
         _dialog = _AboutDialog(window)
