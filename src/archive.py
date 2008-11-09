@@ -12,7 +12,6 @@ import gtk
 import process
 
 ZIP, RAR, TAR, GZIP, BZIP2 = range(5)
-_EXEC_NOT_FOUND = 0
 
 _rar_exec = None
 
