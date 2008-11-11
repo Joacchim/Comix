@@ -37,7 +37,7 @@ class Extractor:
 
     def setup(self, src, dst):
         """Setup the extractor with archive <src> and destination dir <dst>.
-        Return a threading Condition related to the is_ready() method, or
+        Return a threading.Condition related to the is_ready() method, or
         None if the format of <src> isn't supported.
         """
         self._src = src
@@ -102,7 +102,7 @@ class Extractor:
         ordering applied with this method on such archives.
         """
         if self._type in (GZIP, BZIP2):
-            self._files = filter(files.count, self._files)
+            self._files = [x for x in self._files if x in files]
         else:
             self._files = files
 
