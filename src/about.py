@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 """about.py - About dialog."""
 
-from os.path import join, dirname, isfile
+import os
 import sys
 
 import gtk
@@ -31,16 +31,15 @@ class _AboutDialog(gtk.Dialog):
         # ----------------------------------------------------------------
         box = gtk.VBox(False, 0)
         box.set_border_width(5)
-        icon_path = join(dirname(dirname(sys.argv[0])), 'images/comix.svg')
-        if not isfile(icon_path):
-            for prefix in [dirname(dirname(sys.argv[0])), '/usr', '/usr/local',
-              '/usr/X11R6']:
-                icon_path = join(prefix,
-                    'share/icons/hicolor/scalable/apps/comix.svg')
-                if isfile(icon_path):
+        base = os.path.dirname(os.path.dirname(os.path.realpath(sys.argv[0])))
+        icon_path = os.path.join(base, 'images/comix.svg')
+        if not os.path.isfile(icon_path):
+            for prefix in [base, '/usr', '/usr/local', '/usr/X11R6']:
+                icon_path = os.path.join(prefix, 'share/comix/images/comix.svg')
+                if os.path.isfile(icon_path):
                     break
         try:
-            pixbuf = gtk.gdk.pixbuf_new_from_file_at_size(icon_path, 150, 150)
+            pixbuf = gtk.gdk.pixbuf_new_from_file_at_size(icon_path, 200, 200)
             icon = gtk.Image()
             icon.set_from_pixbuf(pixbuf)
             box.pack_start(icon, False, False, 10)

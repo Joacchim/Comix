@@ -27,20 +27,28 @@ def load_icons():
               ('fitwidth.png',               'comix-fitwidth'),
               ('fitheight.png',              'comix-fitheight'),
               ('fitmanual.png',              'comix-fitmanual'))
-
+    
+    icon_path = None
     # Some heuristics to find the path to the icon image files.
     base = os.path.dirname(os.path.dirname(os.path.realpath(sys.argv[0])))
-    if os.path.isfile(os.path.join(base, 'images/comix.png')): # Source dir
+    # Try source directory.
+    if os.path.isfile(os.path.join(base, 'images/16x16/comix.png')):
         icon_path = os.path.join(base, 'images')
-    else: # Installed in some system dir
+    else: # Try system directories.
         for prefix in [base, '/usr', '/usr/local', '/usr/X11R6']:
             if os.path.isfile(os.path.join(prefix,
-                'share/pixmaps/comix/comix.png')): # Try one
-                icon_path = os.path.join(prefix, 'share/pixmaps/comix')
+              'share/comix/images/16x16/comix.png')): # Try one
+                icon_path = os.path.join(prefix, 'share/comix/images')
                 break
-
-    pixbuf = gtk.gdk.pixbuf_new_from_file(os.path.join(icon_path, 'comix.png'))
+    if icon_path is None:
+        return
+    print icon_path
+    
+    # Load window title icon.
+    pixbuf = gtk.gdk.pixbuf_new_from_file(os.path.join(icon_path,
+        '16x16/comix.png'))
     gtk.window_set_default_icon(pixbuf)
+    # Load application icons.
     factory = gtk.IconFactory()
     for filename, stockid in _icons:
         try:

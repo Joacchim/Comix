@@ -95,7 +95,7 @@ FILES = (("src/about.py", "share/comix/src"),
          ("src/thumbremover.pyc", "share/comix/src"),
          ("src/ui.py", "share/comix/src"),
          ("src/ui.pyc", "share/comix/src"),
-         ("images/comix.png", "share/comix/images"),
+         ("images/16x16/comix.png", "share/comix/images/16x16"),
          ("images/comix.svg", "share/comix/images"),
          ("images/double-page.png", "share/comix/images"),
          ("images/fitheight.png", "share/comix/images"),
@@ -120,7 +120,11 @@ FILES = (("src/about.py", "share/comix/src"),
          ("images/tango-image.png", "share/comix/images"),
          ("comix.1.gz", "share/man/man1"),
          ("comix.desktop", "share/applications"),
-         ("images/comix.png", "share/icons/hicolor/48x48/apps"),
+         ("images/16x16/comix.png", "share/icons/hicolor/16x16/apps"),
+         ("images/22x22/comix.png", "share/icons/hicolor/22x22/apps"),
+         ("images/24x24/comix.png", "share/icons/hicolor/24x24/apps"),
+         ("images/32x32/comix.png", "share/icons/hicolor/32x32/apps"),
+         ("images/48x48/comix.png", "share/icons/hicolor/48x48/apps"),
          ("images/comix.svg", "share/icons/hicolor/scalable/apps"))
 
 LINKS = (('../share/comix/src/comix.py', 'bin/comix'),)
@@ -321,6 +325,10 @@ elif args == ['uninstall']:
     uninstall('share/comix')
     uninstall('share/man/man1/comix.1.gz')
     uninstall('share/applications/comix.desktop')
+    uninstall('share/icons/hicolor/16x16/apps/comix.png')
+    uninstall('share/icons/hicolor/22x22/apps/comix.png')
+    uninstall('share/icons/hicolor/24x24/apps/comix.png')
+    uninstall('share/icons/hicolor/32x32/apps/comix.png')
     uninstall('share/icons/hicolor/48x48/apps/comix.png')
     uninstall('share/icons/hicolor/scalable/apps/comix.svg')
     for _, link in LINKS:

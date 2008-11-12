@@ -113,7 +113,7 @@ class FileHandler:
         if not self.file_loaded:
             return False
         old_page = self.get_current_page()
-        viewed = self._window.is_double_page and 2 or 1
+        viewed = self._window.displayed_double() and 2 or 1
         if self.get_current_page() + viewed > self.get_number_of_pages():
             if (prefs['auto open next archive'] and 
               self.archive_type is not None):
@@ -149,7 +149,7 @@ class FileHandler:
         self._current_image_index = 0
         return old_page != self.get_current_page()
 
-    def last_page(self):
+    def last_page(self): # FIXME: virtual DP
         """Set up filehandler to the last page. Return True if this results
         in a new page.
         """
@@ -170,15 +170,24 @@ class FileHandler:
         self._current_image_index = page_num - 1
         return old_page != self.get_current_page()
 
+    def get_virtual_double_page(self):
+        if (not self._window.is_double_page or
+          not prefs['no double page for wide images'] or
+          self.get_current_page() == self.get_number_of_pages()):
+            return False
+        
+        page1 = self._get_pixbuf(self._current_image_index)
+        if page1.get_width() > page1.get_height():
+            return True
+        page2 = self._get_pixbuf(self._current_image_index + 1)
+        if page2.get_width() > page2.get_height():
+            return True
+        return False
+
     def open_file(self, path, start_page=1):
-        """Open the file pointed to by <path>.
-
-        If <path> is an image we add all images in its directory to the
-        _image_files.
-
-        If <path> is an archive we decompresses it to the _tmp_dir and add
-        all images in the decompressed tree to _image_files and all comments
-        to _comment_files. If <start_page> is not set we set the current
+        """Open the file pointed to by <path>. 
+        
+        If <start_page> is not set we set the current
         page to 1 (first page), if it is set we set the current page to the
         value of <start_page>. If <start_page> is non-positive it means the
         last image.
@@ -428,7 +437,7 @@ class FileHandler:
 
     def _get_step_length(self):
         """Return the step length for switching pages."""
-        if (self._window.is_double_page and 
+        if (self._window.displayed_double() and 
           prefs['double step in double page mode']):
             return 2
         return 1
@@ -529,4 +538,3 @@ def alphanumeric_sort(filenames):
 
     rec = re.compile("\d+|\D+")
     filenames.sort(key=lambda s: map(_format_substring, rec.findall(s)))
-

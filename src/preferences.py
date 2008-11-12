@@ -13,9 +13,7 @@ ZOOM_MODE_WIDTH = 1
 ZOOM_MODE_HEIGHT = 2
 ZOOM_MODE_MANUAL = 3
 
-# ------------------------------------------------------------------------
 # All the preferences are stored here.
-# ------------------------------------------------------------------------
 prefs = {
     'comment extensions': ['txt', 'nfo'],
     'auto load last file': False,
@@ -32,7 +30,7 @@ prefs = {
     'default manga mode': False,
     'lens magnification': 2,
     'lens size': 200,
-    #'no double page for wide images': True, # FIXME: Add to prefs dialog?
+    'no double page for wide images': True, # FIXME: Add to prefs dialog?
     'double step in double page mode': True,
     'show page numbers on thumbnails': True,
     'thumbnail size': 80,

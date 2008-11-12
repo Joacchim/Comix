@@ -39,6 +39,7 @@ class MainWindow(gtk.Window):
         self.is_fullscreen = False
         self.is_double_page = False
         self.is_manga_mode = False
+        self.is_virtual_double_page = False # I.e. a wide image is displayed
         self.zoom_mode = preferences.ZOOM_MODE_SCREEN
         self.width = None
         self.height = None
@@ -203,6 +204,8 @@ class MainWindow(gtk.Window):
         else:
             scale_height = area_height
         scale_up = prefs['stretch']
+        self.is_virtual_double_page = \
+            self.file_handler.get_virtual_double_page()
 
         if self.displayed_double():
             left_pixbuf, right_pixbuf = self.file_handler.get_pixbufs()
@@ -597,7 +600,8 @@ class MainWindow(gtk.Window):
 
     def displayed_double(self):
         """Return True if two pages are currently displayed."""
-        return (self.is_double_page and self.file_handler.get_current_page() !=
+        return (self.is_double_page and not self.is_virtual_double_page and
+            self.file_handler.get_current_page() !=
             self.file_handler.get_number_of_pages())
 
     def get_visible_area_size(self):
