@@ -42,7 +42,6 @@ def load_icons():
                 break
     if icon_path is None:
         return
-    print icon_path
     
     # Load window title icon.
     pixbuf = gtk.gdk.pixbuf_new_from_file(os.path.join(icon_path,
