@@ -81,7 +81,7 @@ if __name__ == '__main__':
     icons.load_icons()
     window = main.MainWindow()
     if len(sys.argv) >= 2:
-        window.file_handler.open_file(os.path.normpath(sys.argv[1]))
+        window.file_handler.open_file(os.path.abspath(sys.argv[1]))
     elif preferences.prefs['auto load last file']:
         window.file_handler.open_file(preferences.prefs['path to last file'],
             preferences.prefs['page of last file'])
