@@ -6,6 +6,7 @@ import gtk
 import pango
 
 import image
+import labels
 from preferences import prefs
 import thumbnail
 
@@ -58,10 +59,11 @@ class _ComicFileChooserDialog(gtk.Dialog):
         self._preview_image.set_size_request(130, 130)
         preview_box.pack_start(self._preview_image, False, False)
         self.filechooser.set_preview_widget(preview_box)
-        self._namelabel = gtk.Label()
+        self._namelabel = labels.FormattedLabel(weight=pango.WEIGHT_BOLD,
+            scale=pango.SCALE_SMALL)
         self._namelabel.set_ellipsize(pango.ELLIPSIZE_MIDDLE)
         preview_box.pack_start(self._namelabel, False, False)
-        self._sizelabel = gtk.Label()
+        self._sizelabel = labels.FormattedLabel(scale=pango.SCALE_SMALL)
         self._sizelabel.set_ellipsize(pango.ELLIPSIZE_MIDDLE)
         preview_box.pack_start(self._sizelabel, False, False)
         self.filechooser.set_use_preview_label(False)
@@ -149,16 +151,6 @@ class _ComicFileChooserDialog(gtk.Dialog):
                 self._namelabel.set_text(os.path.basename(path))
                 self._sizelabel.set_text(
                     '%.1f KiB' % (os.stat(path).st_size / 1024.0))
-                attrlist = pango.AttrList()
-                attrlist.insert(pango.AttrWeight(pango.WEIGHT_BOLD, 0,
-                    len(self._namelabel.get_text())))
-                attrlist.insert(pango.AttrSize(8000, 0,
-                    len(self._namelabel.get_text())))
-                self._namelabel.set_attributes(attrlist)
-                attrlist = pango.AttrList()
-                attrlist.insert(pango.AttrSize(8000, 0,
-                    len(self._sizelabel.get_text())))
-                self._sizelabel.set_attributes(attrlist)
         else:
             self._preview_image.clear()
             self._namelabel.set_text('')

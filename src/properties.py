@@ -15,6 +15,7 @@ import pango
 import archive
 import encoding
 import image
+import labels
 
 _dialog = None
 
@@ -53,12 +54,8 @@ class _Page(gtk.VBox):
         """Set the filename to be displayed to <filename>. Call this before
         set_main_info().
         """
-        label = gtk.Label(encoding.to_unicode(filename))
+        label = labels.BoldLabel(encoding.to_unicode(filename))
         label.set_alignment(0, 0.5)
-        attrlist = pango.AttrList()
-        attrlist.insert(pango.AttrWeight(pango.WEIGHT_BOLD, 0,
-            len(label.get_text())))
-        label.set_attributes(attrlist)
         self._mainbox.pack_start(label, False, False)
         self._mainbox.pack_start(gtk.VBox()) # Just to add space (better way?)
 

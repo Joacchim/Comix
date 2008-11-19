@@ -33,7 +33,7 @@ class _ThumbnailMaintenanceDialog(gtk.Dialog):
         main_box.set_border_width(6)
         self.vbox.pack_start(main_box, False, False)
 
-        label = labels.bold_label(_('Cleanup thumbnails'))
+        label = labels.BoldLabel(_('Cleanup thumbnails'))
         label.set_alignment(0, 0.5)
         attrlist = label.get_attributes()
         attrlist.insert(pango.AttrScale(pango.SCALE_LARGE, 0,
@@ -42,7 +42,7 @@ class _ThumbnailMaintenanceDialog(gtk.Dialog):
         main_box.pack_start(label, False, False, 2)
         main_box.pack_start(gtk.HSeparator(), False, False, 5)
 
-        label = labels.italic_label(
+        label = labels.ItalicLabel(
             _('Thumbnails for files (such as image files and comic book archives) are stored in your home directory. Many different applications use and create these thumbnails, but sometimes thumbnails remain even though the original files have been removed - wasting space. This dialog can cleanup your stored thumbnails by removing orphaned and outdated thumbnails.'))
         label.set_alignment(0, 0.5)
         label.set_line_wrap(True)
@@ -55,28 +55,28 @@ class _ThumbnailMaintenanceDialog(gtk.Dialog):
         hbox.pack_start(left_box, False, False)
         hbox.pack_start(right_box, False, False)
 
-        label = labels.bold_label('%s:' % _('Thumbnail directory'))
+        label = labels.BoldLabel('%s:' % _('Thumbnail directory'))
         label.set_alignment(1.0, 0.5)
         left_box.pack_start(label, False, False)
         label = gtk.Label('%s' % _thumb_base)
         label.set_alignment(0, 0.5)
         right_box.pack_start(label, False, False)
 
-        label = labels.bold_label('%s:' % _('Total number of thumbnails'))
+        label = labels.BoldLabel('%s:' % _('Total number of thumbnails'))
         label.set_alignment(1.0, 0.5)
         left_box.pack_start(label, False, False)
         self._num_thumbs_label = gtk.Label(_('Calculating...'))
         self._num_thumbs_label.set_alignment(0, 0.5)
         right_box.pack_start(self._num_thumbs_label, False, False)
 
-        label = labels.bold_label('%s:' % _('Total size of thumbnails'))
+        label = labels.BoldLabel('%s:' % _('Total size of thumbnails'))
         label.set_alignment(1.0, 0.5)
         left_box.pack_start(label, False, False)
         self._size_thumbs_label = gtk.Label(_('Calculating...'))
         self._size_thumbs_label.set_alignment(0, 0.5)
         right_box.pack_start(self._size_thumbs_label, False, False)
 
-        label = labels.italic_label(
+        label = labels.ItalicLabel(
             _('Do you want to cleanup orphaned and outdated thumbnails now?'))
         label.set_alignment(0, 0.5)
         main_box.pack_start(label, False, False, 10)
@@ -125,7 +125,7 @@ class _ThumbnailRemover(gtk.Dialog):
         main_box.set_border_width(6)
         self.vbox.pack_start(main_box, False, False)
 
-        label = labels.bold_label(_('Removing outdated thumbnails'))
+        label = labels.BoldLabel(_('Removing outdated thumbnails'))
         label.set_alignment(0, 0.5)
         attrlist = label.get_attributes()
         attrlist.insert(pango.AttrScale(pango.SCALE_LARGE, 0,
@@ -140,14 +140,14 @@ class _ThumbnailRemover(gtk.Dialog):
         hbox.pack_start(left_box, False, False)
         hbox.pack_start(right_box, False, False)
 
-        label = labels.bold_label('%s:' % _('Number of removed thumbnails'))
+        label = labels.BoldLabel('%s:' % _('Number of removed thumbnails'))
         label.set_alignment(1.0, 0.5)
         left_box.pack_start(label, False, False)
         number_label = gtk.Label('0')
         number_label.set_alignment(0, 0.5)
         right_box.pack_start(number_label, False, False)
 
-        label = labels.bold_label('%s:' % _('Total size of removed thumbnails'))
+        label = labels.BoldLabel('%s:' % _('Total size of removed thumbnails'))
         label.set_alignment(1.0, 0.5)
         left_box.pack_start(label, False, False)
         size_label = gtk.Label('0.0 MiB')
@@ -157,7 +157,7 @@ class _ThumbnailRemover(gtk.Dialog):
         bar = gtk.ProgressBar()
         main_box.pack_start(bar, False, False)
 
-        removing_label = gtk.Label('')
+        removing_label = labels.ItalicLabel()
         removing_label.set_alignment(0, 0.5)
         removing_label.set_ellipsize(pango.ELLIPSIZE_MIDDLE)
         main_box.pack_start(removing_label, False, False)
@@ -200,10 +200,6 @@ class _ThumbnailRemover(gtk.Dialog):
                     size_label.set_text('%.1f MiB' % (size_thumbs / 1048576.0))
                     removing_label.set_text(_('Removed thumbnail for "%s"') %
                         orig_path)
-                    attrlist = pango.AttrList()
-                    attrlist.insert(pango.AttrStyle(pango.STYLE_ITALIC, 0,
-                        len(removing_label.get_text())))
-                    removing_label.set_attributes(attrlist)
                 if iteration % 50 == 0:
                     bar.set_fraction(iteration / self._total_thumbs)
                 while gtk.events_pending():

@@ -1,24 +1,47 @@
-"""labels.py - gtk.Label convenience functions."""
+"""labels.py - gtk.Label convenience classes."""
 
 import gtk
 import pango
 
 
-def bold_label(text):
-    """Return a bold gtk.Label with <text>."""
-    label = gtk.Label(text)
-    attrlist = pango.AttrList()
-    attrlist.insert(pango.AttrWeight(pango.WEIGHT_BOLD, 0,
-        len(text)))
-    label.set_attributes(attrlist)
-    return label
+class FormattedLabel(gtk.Label):
+    
+    """FormattedLabel keeps a label always formatted with some pango weight,
+    style and scale, even when new text is set using set_text().
+    """
+    
+    def __init__(self, text='', weight=pango.WEIGHT_NORMAL,
+      style=pango.STYLE_NORMAL, scale=pango.SCALE_MEDIUM):
+        gtk.Label.__init__(self, text)
+        self._weight = weight
+        self._style = style
+        self._scale = scale
+        self._format()
+
+    def set_text(self, text):
+        gtk.Label.set_text(self, text)
+        self._format()
+
+    def _format(self):
+        text_len = len(self.get_text())
+        attrlist = pango.AttrList()
+        attrlist.insert(pango.AttrWeight(self._weight, 0, text_len))
+        attrlist.insert(pango.AttrStyle(self._style, 0, text_len))
+        attrlist.insert(pango.AttrScale(self._scale, 0, text_len))
+        self.set_attributes(attrlist)
 
 
-def italic_label(text):
-    """Return an italic gtk.Label with <text>."""
-    label = gtk.Label(text)
-    attrlist = pango.AttrList()
-    attrlist.insert(pango.AttrStyle(pango.STYLE_ITALIC, 0,
-        len(text)))
-    label.set_attributes(attrlist)
-    return label
+class BoldLabel(FormattedLabel):
+    
+    """A FormattedLabel that is always bold and otherwise normal."""
+    
+    def __init__(self, text=''):
+        FormattedLabel.__init__(self, text, weight=pango.WEIGHT_BOLD)
+
+
+class ItalicLabel(FormattedLabel):
+    
+    """A FormattedLabel that is always italic and otherwise normal."""
+    
+    def __init__(self, text=''):
+        FormattedLabel.__init__(self, text, style=pango.STYLE_ITALIC)

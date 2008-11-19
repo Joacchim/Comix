@@ -5,6 +5,7 @@ import os
 import sys
 
 import gtk
+import pango
 
 import constants
 
@@ -95,7 +96,11 @@ class _AboutDialog(gtk.Dialog):
           ('Jan Nekvasil', _('Czech translation')),
           ('Victor Castillejo', _('Icon design'))):
             label = gtk.Label()
-            label.set_markup('<b>%s:</b>   %s' % (nice_person, description))
+            label.set_text('%s:   %s' % (nice_person, description))
+            attrlist = pango.AttrList()
+            attrlist.insert(pango.AttrWeight(pango.WEIGHT_BOLD, 0,
+                len(nice_person) + 1))
+            label.set_attributes(attrlist)
             box.pack_start(label, False, False, 0)
             label.set_alignment(0, 0.5)
         notebook.insert_page(box, gtk.Label(_('Credits')))

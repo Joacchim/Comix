@@ -4,6 +4,7 @@ import os
 import cPickle
 
 import gtk
+import pango
 
 import constants
 import labels
@@ -389,7 +390,7 @@ class _PreferenceSection(gtk.VBox):
         gtk.VBox.__init__(self, False, 0)
         self._right_column_width = right_column_width
         self.contentbox = gtk.VBox(False, 6)
-        label = labels.bold_label(header)
+        label = labels.BoldLabel(header)
         label.set_alignment(0, 0.5)
         hbox = gtk.HBox(False, 0)
         hbox.pack_start(gtk.HBox(), False, False, 6)

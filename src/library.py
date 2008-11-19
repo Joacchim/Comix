@@ -737,7 +737,7 @@ class _ControlArea(gtk.HBox):
         self.pack_start(borderbox, False, False)
         borderbox.add(insidebox)
         insidebox.add(infobox)
-        self._namelabel = gtk.Label()
+        self._namelabel = labels.BoldLabel()
         self._namelabel.set_ellipsize(pango.ELLIPSIZE_MIDDLE)
         self._namelabel.set_alignment(0, 0.5)
         infobox.pack_start(self._namelabel, False, False)
@@ -833,10 +833,6 @@ class _ControlArea(gtk.HBox):
             self._dirlabel.set_text(encoding.to_unicode(dir_path))
         else:
             self._dirlabel.set_text('')
-        attrlist = pango.AttrList()
-        attrlist.insert(pango.AttrWeight(pango.WEIGHT_BOLD, 0,
-            len(self._namelabel.get_text())))
-        self._namelabel.set_attributes(attrlist)
 
     def _add_books(self, *args):
         """Open up a filechooser dialog from which books can be added to
@@ -923,7 +919,7 @@ class _AddBooksProgressDialog(gtk.Dialog):
         hbox.pack_start(left_box, False, False)
         hbox.pack_start(right_box, False, False)
 
-        label = labels.bold_label('%s:' % _('Added books'))
+        label = labels.BoldLabel('%s:' % _('Added books'))
         label.set_alignment(1.0, 0.5)
         left_box.pack_start(label, False, False)
         number_label = gtk.Label('0')
@@ -933,7 +929,7 @@ class _AddBooksProgressDialog(gtk.Dialog):
         bar = gtk.ProgressBar()
         main_box.pack_start(bar, False, False)
 
-        added_label = gtk.Label('')
+        added_label = labels.ItalicLabel()
         added_label.set_alignment(0, 0.5)
         added_label.set_ellipsize(pango.ELLIPSIZE_MIDDLE)
         main_box.pack_start(added_label, False, False)
@@ -946,10 +942,6 @@ class _AddBooksProgressDialog(gtk.Dialog):
                 total_added += 1
                 number_label.set_text('%d' % total_added)
             added_label.set_text(_('Adding "%s"...') % path)
-            attrlist = pango.AttrList()
-            attrlist.insert(pango.AttrStyle(pango.STYLE_ITALIC, 0,
-                len(added_label.get_text())))
-            added_label.set_attributes(attrlist)
             bar.set_fraction((i + 1) / total_paths)
             while gtk.events_pending():
                 gtk.main_iteration(False)
