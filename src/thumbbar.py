@@ -1,5 +1,7 @@
 """thumbbar.py - Thumbnail sidebar for main window."""
 
+import urllib
+
 import gtk
 import gobject
 import Image
@@ -23,6 +25,10 @@ class ThumbnailSidebar(gtk.HBox):
 
         self._liststore = gtk.ListStore(gtk.gdk.Pixbuf)
         self._treeview = gtk.TreeView(self._liststore)
+
+        self._treeview.enable_model_drag_source(gtk.gdk.BUTTON1_MASK,
+            [('text/uri-list', 0, 0)], gtk.gdk.ACTION_COPY)
+
         self._column = gtk.TreeViewColumn(None)
         cellrenderer = gtk.CellRendererPixbuf()
         self._layout = gtk.Layout()
@@ -43,7 +49,9 @@ class ThumbnailSidebar(gtk.HBox):
 
         self.pack_start(self._layout)
         self.pack_start(self._scroll)
-
+        
+        self._treeview.connect_after('drag_begin', self._drag_begin)
+        self._treeview.connect('drag_data_get', self._drag_data_get)
         self._selection.connect('changed', self._selection_event)
         self._layout.connect('scroll_event', self._scroll_event)
 
@@ -127,20 +135,55 @@ class ThumbnailSidebar(gtk.HBox):
             self._layout.set_size(0, self._height)
         self._stop_update = True
         self.update_select()
-
-    def _selection_event(self, widget):
+    
+    def _get_selected_row(self):
+        """Return the index of the currently selected row."""
         try:
-            selected = widget.get_selected_rows()[1][0][0]
-            self._window.set_page(selected + 1)
+            return self._selection.get_selected_rows()[1][0][0]
+        except Exception:
+            return None
+
+    def _selection_event(self, tree_selection):
+        """Handle events due to changed thumbnail selection."""
+        try:
+            self._window.set_page(self._get_selected_row() + 1)
         except Exception:
             pass
 
     def _scroll_event(self, widget, event):
+        """Handle scroll events on the thumbnail sidebar."""
         if event.direction == gtk.gdk.SCROLL_UP:
             self._vadjust.set_value(self._vadjust.get_value() - 60)
         elif event.direction == gtk.gdk.SCROLL_DOWN:
             upper = self._vadjust.upper - self._vadjust.page_size
             self._vadjust.set_value(min(self._vadjust.get_value() + 60, upper))
+
+    def _drag_data_get(self, treeview, context, selection, *args):
+        """Put the URI of the selected file into the SelectionData, so that
+        the file can be copied (e.g. to a file manager).
+        """
+        try:
+            selected = self._get_selected_row()
+            path = self._window.file_handler.get_path_to_page(selected + 1)
+            uri = 'file://localhost' + urllib.pathname2url(path)
+            selection.set_uris([uri])
+        except Exception:
+            pass
+
+    def _drag_begin(self, treeview, context):
+        """We hook up on drag_begin events so that we can set the hotspot
+        for the cursor at the top left corner of the thumbnail (so that we
+        might actually see where we are dropping!).
+        """
+        path = treeview.get_cursor()[0]
+        pixmap = treeview.create_row_drag_icon(path)
+        # context.set_icon_pixmap() seems to cause crashes, so we do a
+        # quick and dirty conversion to pixbuf.
+        pointer = gtk.gdk.Pixbuf(gtk.gdk.COLORSPACE_RGB, True, 8,
+            *pixmap.get_size())
+        pointer = pointer.get_from_drawable(pixmap, treeview.get_colormap(),
+            0, 0, 0, 0, *pixmap.get_size())
+        context.set_icon_pixbuf(pointer, -5, -5)
 
 
 def _add_page_number(pixbuf, page):

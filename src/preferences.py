@@ -21,7 +21,7 @@ prefs = {
     'page of last file': 1,
     'path to last file': '',
     'auto open next archive': True,
-    'bg colour': (3000, 3000, 3000),
+    'bg colour': (5000, 5000, 5000),
     'checkered bg for transparent images': True,
     'cache': True,
     'stretch': False,

@@ -166,9 +166,9 @@ class MainWindow(gtk.Window):
 
         self.connect('delete_event', self.terminate_program)
         self.connect('key_press_event', self._event_handler.key_press_event)
-        self.connect('button_release_event',
-            self._event_handler.mouse_release_event)
         self.connect('configure_event', self._event_handler.resize_event)
+        self._main_layout.connect('button_release_event',
+            self._event_handler.mouse_release_event)
         self._main_layout.connect('scroll_event',
             self._event_handler.scroll_wheel_event)
         self._main_layout.connect('button_press_event',

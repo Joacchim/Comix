@@ -704,9 +704,11 @@ class _BookArea(gtk.ScrolledWindow):
             return
         paths = []
         for uri in uris:
-            if uri.startswith('file://'):  # Nautilus etc.
+            if uri.startswith('file://localhost/'):  # Correctly formatted.
+                uri = uri[16:]
+            elif uri.startswith('file:///'):  # Nautilus etc.
                 uri = uri[7:]
-            elif uri.startswith('file:'):  # Xffm etc.
+            elif uri.startswith('file:/'):  # Xffm etc.
                 uri = uri[5:]
             path = urllib.url2pathname(uri)
             paths.append(path)

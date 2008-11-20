@@ -283,15 +283,21 @@ class EventHandler:
         else:
             self._window.cursor_handler.refresh()
         
-    def drag_n_drop_event(self, widget, context, x, y, data, *args):
+    def drag_n_drop_event(self, widget, context, x, y, selection, drag_id,
+      eventtime):
         """Handle drag-n-drop events on the main layout area."""
-        uris = data.get_uris()
+        # The drag source is inside Comix itself, so we ignore.
+        if (context.get_source_widget() is not None):
+            return
+        uris = selection.get_uris()
         if not uris:
             return
         uri = uris[0] # Open only one file.
-        if uri.startswith('file://'):  # Nautilus etc.
+        if uri.startswith('file://localhost/'):  # Correctly formatted.
+            uri = uri[16:]
+        elif uri.startswith('file:///'):  # Nautilus etc.
             uri = uri[7:]
-        elif uri.startswith('file:'):  # Xffm etc.
+        elif uri.startswith('file:/'):  # Xffm etc.
             uri = uri[5:]
         path = urllib.url2pathname(uri)
         self._window.file_handler.open_file(path)
