@@ -31,7 +31,7 @@ prefs = {
     'default manga mode': False,
     'lens magnification': 2,
     'lens size': 200,
-    'no double page for wide images': True, # FIXME: Add to prefs dialog?
+    'no double page for wide images': False,
     'double step in double page mode': True,
     'show page numbers on thumbnails': True,
     'thumbnail size': 80,
@@ -140,6 +140,14 @@ class _PreferencesDialog(gtk.Dialog):
             _('Set the magnification level of the magnifying glass.'))
         page.add_row(label, glass_magnification_spinner)
 
+        page.new_section(_('Image scaling'))
+        stretch_button = gtk.CheckButton(_('Stretch small images.'))
+        stretch_button.set_active(prefs['stretch'])
+        stretch_button.connect('toggled', self._check_button_cb, 'stretch')
+        stretch_button.set_tooltip_text(
+            _('Stretch images to a size that is larger than their original size if the current zoom mode requests it. If this preference is unset, images are never scaled to be larger than their original size.'))
+        page.add_row(stretch_button)
+
         page.new_section(_('Transparency'))
         checkered_bg_button = gtk.CheckButton(
             _('Use checkered background for transparent images.'))
@@ -156,9 +164,38 @@ class _PreferencesDialog(gtk.Dialog):
         # The "Behaviour" tab.
         # ----------------------------------------------------------------
         page = _PreferencePage(150)
-        page.new_section(_('Behaviour'))
+        page.new_section(_('Scroll'))
+        smart_space_button = gtk.CheckButton(
+            _('Use smart space-button scrolling.'))
+        smart_space_button.set_active(prefs['smart space scroll'])
+        smart_space_button.connect('toggled', self._check_button_cb,
+            'smart space scroll')
+        smart_space_button.set_tooltip_text(
+            _('Use "smart scrolling" with the space key. Normally the space key scrolls only right down (or up when shift is pressed), but with this preference set it also scrolls sideways and so tries to follow the natural reading order of the comic book.'))
+        page.add_row(smart_space_button)
+
+        page.new_section(_('Double page mode'))
+        step_length_button = gtk.CheckButton(
+            _('Flip two pages in double page mode.'))
+        step_length_button.set_active(prefs['double step in double page mode'])
+        step_length_button.connect('toggled', self._check_button_cb,
+            'double step in double page mode')
+        step_length_button.set_tooltip_text(
+            _('Flip two pages, instead of one, each time we flip pages in double page mode.'))
+        page.add_row(step_length_button)
+        virtual_double_button = gtk.CheckButton(
+            _('Show only one wide image in double page mode.'))
+        virtual_double_button.set_active(
+            prefs['no double page for wide images'])
+        virtual_double_button.connect('toggled', self._check_button_cb,
+            'no double page for wide images')
+        virtual_double_button.set_tooltip_text(
+            _("When in double page mode, if an image's width exceeds its height, display only one image. This results in that scans that span two pages are displayed properly (i.e. alone) in double page mode."))
+        page.add_row(virtual_double_button)
+
+        page.new_section(_('Files'))
         auto_open_next_button = gtk.CheckButton(
-            _('Automatically open the next archive after the last page.'))
+            _('Automatically open the next archive.'))
         auto_open_next_button.set_active(prefs['auto open next archive'])
         auto_open_next_button.connect('toggled', self._check_button_cb,
             'auto open next archive')
@@ -173,31 +210,6 @@ class _PreferencesDialog(gtk.Dialog):
         auto_open_last_button.set_tooltip_text(
             _('Automatically open, on start-up, whatever file was open when Comix was last closed.'))
         page.add_row(auto_open_last_button)
-        smart_space_button = gtk.CheckButton(
-            _('Use smart space-button scrolling.'))
-        smart_space_button.set_active(prefs['smart space scroll'])
-        smart_space_button.connect('toggled', self._check_button_cb,
-            'smart space scroll')
-        smart_space_button.set_tooltip_text(
-            _('Use "smart scrolling" with the space key. Normally the space key scrolls only right down (or up when shift is pressed), but with this preference set it also scrolls sideways and so tries to follow the natural reading order of the comic book.'))
-        page.add_row(smart_space_button)
-        step_length_button = gtk.CheckButton(
-            _('Flip two pages in double page mode.'))
-        step_length_button.set_active(prefs['double step in double page mode'])
-        step_length_button.connect('toggled', self._check_button_cb,
-            'double step in double page mode')
-        step_length_button.set_tooltip_text(
-            _('Flip two pages, instead of one, each time we flip pages in double page mode.'))
-        page.add_row(step_length_button)
-        label = gtk.Label('%s:' % _('Slideshow delay (in seconds)'))
-        adjustment = gtk.Adjustment(prefs['slideshow delay'] / 1000.0,
-            0.5, 3600.0, 0.1, 1)
-        delay_spinner = gtk.SpinButton(adjustment, digits=1)
-        delay_spinner.connect('value_changed', self._spinner_cb,
-            'slideshow delay')
-        page.add_row(label, delay_spinner)
-
-        page.new_section(_('Files'))
         store_recent_button = gtk.CheckButton(
             _('Store information about recently opened files.'))
         store_recent_button.set_active(prefs['store recent file info'])
@@ -214,6 +226,8 @@ class _PreferencesDialog(gtk.Dialog):
         create_thumbs_button.set_tooltip_text(
             _('Store thumbnails for opened files according to the freedesktop.org specification. These thumbnails are shared by many other applications, such as most file managers.'))
         page.add_row(create_thumbs_button)
+
+        page.new_section(_('Cache'))
         cache_button = gtk.CheckButton(_('Use a cache to speed up reading.'))
         cache_button.set_active(prefs['cache'])
         cache_button.connect('toggled', self._check_button_cb, 'cache')
@@ -225,7 +239,7 @@ class _PreferencesDialog(gtk.Dialog):
         # ----------------------------------------------------------------
         # The "Display" tab.
         # ----------------------------------------------------------------
-        page = _PreferencePage(200)
+        page = _PreferencePage(150)
         page.new_section(_('Defaults'))
         double_page_button = gtk.CheckButton(
             _('Use double page mode by default.'))
@@ -262,13 +276,14 @@ class _PreferencesDialog(gtk.Dialog):
             'hide all in fullscreen')
         page.add_row(hide_in_fullscreen_button)
 
-        page.new_section(_('Image scaling'))
-        stretch_button = gtk.CheckButton(_('Stretch small images.'))
-        stretch_button.set_active(prefs['stretch'])
-        stretch_button.connect('toggled', self._check_button_cb, 'stretch')
-        stretch_button.set_tooltip_text(
-            _('Stretch images to a size that is larger than their original size if the current zoom mode requests it. Normally, images are never scaled to be larger than their original size.'))
-        page.add_row(stretch_button)
+        page.new_section(_('Slideshow'))
+        label = gtk.Label('%s:' % _('Slideshow delay (in seconds)'))
+        adjustment = gtk.Adjustment(prefs['slideshow delay'] / 1000.0,
+            0.5, 3600.0, 0.1, 1)
+        delay_spinner = gtk.SpinButton(adjustment, digits=1)
+        delay_spinner.connect('value_changed', self._spinner_cb,
+            'slideshow delay')
+        page.add_row(label, delay_spinner)
 
         page.new_section(_('Comments'))
         label = gtk.Label('%s:' % _('Comment extensions'))
@@ -277,7 +292,7 @@ class _PreferencesDialog(gtk.Dialog):
         extensions_entry.connect('activate', self._entry_cb)
         extensions_entry.connect('focus_out_event', self._entry_cb)
         extensions_entry.set_tooltip_text(
-            _('Treat all files found within archives, and that have one of these file endings, as comments.'))
+            _('Treat all files found within archives, that have one of these file endings, as comments.'))
         page.add_row(label, extensions_entry)
         notebook.append_page(page, gtk.Label(_('Display')))
         self.show_all()
@@ -290,7 +305,8 @@ class _PreferencesDialog(gtk.Dialog):
                 self._window.set_bg_colour(prefs['bg colour'])
             else:
                 self._window.draw_image(scroll=False)
-        elif preference in ('stretch', 'checkered bg for transparent images'):
+        elif preference in ('stretch', 'checkered bg for transparent images',
+          'no double page for wide images'):
             self._window.draw_image(scroll=False)
         elif (preference == 'hide all in fullscreen' and
           self._window.is_fullscreen):

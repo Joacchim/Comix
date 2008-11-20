@@ -87,9 +87,8 @@ class FileHandler:
         if self._window.is_double_page:
             last_wanted += 1
         if prefs['cache']:
-            step = self._get_step_length()
-            first_wanted -= step
-            last_wanted += step
+            first_wanted -= self._get_backward_step_length()
+            last_wanted += self._get_forward_step_length()
         first_wanted = max(0, first_wanted)
         last_wanted = min(self.get_number_of_pages(), last_wanted)
         wanted_pixbufs = range(first_wanted, last_wanted)
@@ -101,7 +100,7 @@ class FileHandler:
             gc.collect(0)
         else:
             gc.collect()
-
+        
         # Cache new pixbufs if they are not already cached.
         for wanted in wanted_pixbufs:
             self._get_pixbuf(wanted)
@@ -119,7 +118,7 @@ class FileHandler:
               self.archive_type is not None):
                 self._open_next_archive()
             return False
-        self._current_image_index += self._get_step_length()
+        self._current_image_index += self._get_forward_step_length()
         return old_page != self.get_current_page()
 
     def previous_page(self):
@@ -134,9 +133,11 @@ class FileHandler:
                 self._open_previous_archive()
             return False
         old_page = self.get_current_page()
-        step = self._get_step_length()
+        step = self._get_backward_step_length()
+        step = min(self._current_image_index, step)
         self._current_image_index -= step
-        self._current_image_index = max(0, self._current_image_index)
+        if (step == 2 and self.get_virtual_double_page()):
+            self._current_image_index += 1
         return old_page != self.get_current_page()
 
     def first_page(self):
@@ -149,7 +150,7 @@ class FileHandler:
         self._current_image_index = 0
         return old_page != self.get_current_page()
 
-    def last_page(self): # FIXME: virtual DP
+    def last_page(self):
         """Set up filehandler to the last page. Return True if this results
         in a new page.
         """
@@ -157,7 +158,10 @@ class FileHandler:
             return False
         old_page = self.get_current_page()
         offset = self._window.is_double_page and 2 or 1
-        self._current_image_index = max(0, self.get_number_of_pages() - offset)
+        offset = min(self.get_number_of_pages(), offset)
+        self._current_image_index = self.get_number_of_pages() - offset
+        if (offset == 2 and self.get_virtual_double_page()):
+            self._current_image_index += 1
         return old_page != self.get_current_page()
 
     def set_page(self, page_num):
@@ -171,6 +175,11 @@ class FileHandler:
         return old_page != self.get_current_page()
 
     def get_virtual_double_page(self):
+        """Return True if the current state warrants use of virtual
+        double page mode (i.e. if double page mode is on, the corresponding
+        preference is set, and one of the two images that should normally
+        be displayed has a width that exceeds its height).
+        """
         if (not self._window.is_double_page or
           not prefs['no double page for wide images'] or
           self.get_current_page() == self.get_number_of_pages()):
@@ -424,7 +433,7 @@ class FileHandler:
         return thumb
 
     def get_stats(self, page=None):
-        """Return a stat object as used by the Python stat module for <page>.
+        """Return a stat object, as used by the stat module, for <page>.
         If <page> is None, return a stat object for the current page.
         Return None if the stat object can not be produced (e.g. broken file).
         """
@@ -435,9 +444,16 @@ class FileHandler:
             stats = None
         return stats
 
-    def _get_step_length(self):
-        """Return the step length for switching pages."""
+    def _get_forward_step_length(self):
+        """Return the step length for switching pages forwards."""
         if (self._window.displayed_double() and 
+          prefs['double step in double page mode']):
+            return 2
+        return 1
+
+    def _get_backward_step_length(self):
+        """Return the step length for switching pages backwards."""
+        if (self._window.is_double_page and 
           prefs['double step in double page mode']):
             return 2
         return 1
