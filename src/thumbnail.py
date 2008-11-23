@@ -6,7 +6,10 @@ Only normal size (i.e. 128x128 px) thumbnails are supported.
 
 import os
 from urllib import pathname2url, url2pathname
-import md5
+try: # The md5 module is deprecated as of Python 2.5, replaced by hashlib.
+    from hashlib import md5
+except ImportError:
+    from md5 import new as md5
 import re
 import shutil
 import tempfile
@@ -159,7 +162,7 @@ def _uri_to_thumbpath(uri, dst_dir):
     """Return the full path to the thumbnail for <uri> when <dst_dir> the base
     thumbnail directory.
     """
-    md5hash = md5.new(uri).hexdigest()
+    md5hash = md5(uri).hexdigest()
     thumbpath = os.path.join(dst_dir, md5hash + '.png')
     return thumbpath
 
