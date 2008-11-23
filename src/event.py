@@ -91,26 +91,26 @@ class EventHandler:
             self._window.actiongroup.get_action('zoom_original').activate()
 
         # ----------------------------------------------------------------
-        # Arrow keys scroll the image, except in fit-to-screen mode where
+        # Arrow keys scroll the image, except in best fit mode where
         # they flip pages instead.
         # ----------------------------------------------------------------
         elif event.keyval in (gtk.keysyms.Down, gtk.keysyms.KP_Down):
-            if not self._window.zoom_mode == preferences.ZOOM_MODE_SCREEN:
+            if not self._window.zoom_mode == preferences.ZOOM_MODE_BEST:
                 self._window.scroll(0, 50)
             else:
                 self._window.next_page()
         elif event.keyval in (gtk.keysyms.Up, gtk.keysyms.KP_Up):
-            if not self._window.zoom_mode == preferences.ZOOM_MODE_SCREEN:
+            if not self._window.zoom_mode == preferences.ZOOM_MODE_BEST:
                 self._window.scroll(0, -50)
             else:
                 self._window.previous_page()
         elif event.keyval in (gtk.keysyms.Right, gtk.keysyms.KP_Right):
-            if not self._window.zoom_mode == preferences.ZOOM_MODE_SCREEN:
+            if not self._window.zoom_mode == preferences.ZOOM_MODE_BEST:
                 self._window.scroll(50, 0)
             else:
                 self._window.next_page()
         elif event.keyval in (gtk.keysyms.Left, gtk.keysyms.KP_Left):
-            if not self._window.zoom_mode == preferences.ZOOM_MODE_SCREEN:
+            if not self._window.zoom_mode == preferences.ZOOM_MODE_BEST:
                 self._window.scroll(-50, 0)
             else:
                 self._window.previous_page()
@@ -162,8 +162,8 @@ class EventHandler:
                             else:
                                 self._window.scroll_to_fixed(horiz='endfirst')
                 else:
-                    if (self._window.zoom_mode == preferences.ZOOM_MODE_SCREEN
-                      or not self._window.scroll(0, -y_step)):
+                    if (self._window.zoom_mode == preferences.ZOOM_MODE_BEST or
+                      not self._window.scroll(0, -y_step)):
                         self._window.previous_page()
             else:
                 if prefs['smart space scroll']:
@@ -195,8 +195,8 @@ class EventHandler:
                                 self._window.scroll_to_fixed(
                                     horiz='startfirst')
                 else:
-                    if (self._window.zoom_mode == preferences.ZOOM_MODE_SCREEN
-                      or not self._window.scroll(0, y_step)):
+                    if (self._window.zoom_mode == preferences.ZOOM_MODE_BEST or
+                      not self._window.scroll(0, y_step)):
                         self._window.next_page()
 
         # ----------------------------------------------------------------
@@ -214,13 +214,13 @@ class EventHandler:
 
     def scroll_wheel_event(self, widget, event, *args):
         """Handle scroll wheel events on the maon layout area. The scroll
-        wheel flips pages in fit-to-screen mode and scrolls the
-        scrollbars otherwise.
+        wheel flips pages in best fit mode and scrolls the scrollbars
+        otherwise.
         """
         if 'GDK_BUTTON2_MASK' in event.state.value_names:
             return
         if event.direction == gtk.gdk.SCROLL_UP:
-            if self._window.zoom_mode == preferences.ZOOM_MODE_SCREEN:
+            if self._window.zoom_mode == preferences.ZOOM_MODE_BEST:
                 self._window.previous_page()
             elif self._window.zoom_mode == preferences.ZOOM_MODE_HEIGHT:
                 if self._window.is_manga_mode:
@@ -230,7 +230,7 @@ class EventHandler:
             else:
                 self._window.scroll(0, -70)
         elif event.direction == gtk.gdk.SCROLL_DOWN:
-            if self._window.zoom_mode == preferences.ZOOM_MODE_SCREEN:
+            if self._window.zoom_mode == preferences.ZOOM_MODE_BEST:
                 self._window.next_page()
             elif self._window.zoom_mode == preferences.ZOOM_MODE_HEIGHT:
                 if self._window.is_manga_mode:

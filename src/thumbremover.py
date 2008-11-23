@@ -125,14 +125,6 @@ class _ThumbnailRemover(gtk.Dialog):
         main_box.set_border_width(6)
         self.vbox.pack_start(main_box, False, False)
 
-        label = labels.BoldLabel(_('Removing outdated thumbnails'))
-        label.set_alignment(0, 0.5)
-        attrlist = label.get_attributes()
-        attrlist.insert(pango.AttrScale(pango.SCALE_LARGE, 0,
-            len(label.get_text())))
-        label.set_attributes(attrlist)
-        main_box.pack_start(label, False, False, 2)
-
         hbox = gtk.HBox(False, 10)
         main_box.pack_start(hbox, False, False, 5)
         left_box = gtk.VBox(False, 5)
@@ -198,7 +190,7 @@ class _ThumbnailRemover(gtk.Dialog):
                     size_thumbs += stats.st_size
                     number_label.set_text('%d' % removed_thumbs)
                     size_label.set_text('%.1f MiB' % (size_thumbs / 1048576.0))
-                    removing_label.set_text(_('Removed thumbnail for "%s"') %
+                    removing_label.set_text(_("Removed thumbnail for '%s'") %
                         orig_path)
                 if iteration % 50 == 0:
                     bar.set_fraction(iteration / self._total_thumbs)

@@ -40,7 +40,7 @@ class MainWindow(gtk.Window):
         self.is_double_page = False
         self.is_manga_mode = False
         self.is_virtual_double_page = False # I.e. a wide image is displayed
-        self.zoom_mode = preferences.ZOOM_MODE_SCREEN
+        self.zoom_mode = preferences.ZOOM_MODE_BEST
         self.width = None
         self.height = None
 
@@ -117,8 +117,8 @@ class MainWindow(gtk.Window):
             self.actiongroup.get_action('fullscreen').activate()
         if prefs['default manga mode']:
             self.actiongroup.get_action('manga_mode').activate()
-        if prefs['default zoom mode'] == preferences.ZOOM_MODE_SCREEN:
-            self.actiongroup.get_action('fit_screen_mode').activate()
+        if prefs['default zoom mode'] == preferences.ZOOM_MODE_BEST:
+            self.actiongroup.get_action('best_fit_mode').activate()
         elif prefs['default zoom mode'] == preferences.ZOOM_MODE_WIDTH:
             self.actiongroup.get_action('fit_width_mode').activate()
         elif prefs['default zoom mode'] == preferences.ZOOM_MODE_HEIGHT:
@@ -254,7 +254,8 @@ class MainWindow(gtk.Window):
                     left_unscaled_x)
                 right_scale_percent = (100.0 * right_pixbuf.get_width() /
                     right_unscaled_x)
-            self.statusbar.set_page_number(self.file_handler.get_current_page(),
+            self.statusbar.set_page_number(
+                self.file_handler.get_current_page(),
                 self.file_handler.get_number_of_pages(), double_page=True)
             self.statusbar.set_resolution(
                 (left_unscaled_x, left_unscaled_y, left_scale_percent),
@@ -288,13 +289,15 @@ class MainWindow(gtk.Window):
                 scale_percent = 100.0 * pixbuf.get_width() / unscaled_y
             else:
                 scale_percent = 100.0 * pixbuf.get_width() / unscaled_x
-            self.statusbar.set_page_number(self.file_handler.get_current_page(),
+            self.statusbar.set_page_number(
+                self.file_handler.get_current_page(),
                 self.file_handler.get_number_of_pages())
             self.statusbar.set_resolution((unscaled_x, unscaled_y,
                 scale_percent))
         
         if prefs['smart bg']:
-            bg = image.get_most_common_edge_colour(self.left_image.get_pixbuf())
+            bg = image.get_most_common_edge_colour(
+                self.left_image.get_pixbuf())
             self.set_bg_colour(bg)
 
         self._image_box.window.freeze_updates()

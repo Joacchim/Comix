@@ -6,7 +6,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: comix 3.6.3\n"
-"POT-Creation-Date: 2006-09-26 20:16+CEST\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2008-11-22 02:42+0100\n"
 "PO-Revision-Date: 2007-05-25 21:22+0100\n"
 "Last-Translator: Adrian C. <anrxc@sysphere.org>\n"
 "Language-Team: Croatian\n"
@@ -16,1296 +17,1854 @@ msgstr ""
 "Generated-By: pygettext.py 1.5\n"
 "Plural-Forms: nplurals=2; plural=(n==1?0:1);\n"
 
-#: comix:547
-#: comix:11046
-msgid "Fit-to-screen mode"
-msgstr "Uklopi prikaz u zaslon"
-
-#: comix:550
-#: comix:11047
-msgid "Fit width mode"
-msgstr "Prilagodi širini"
-
-#: comix:553
-#: comix:11048
-msgid "Fit height mode"
-msgstr "Prilagodi visini"
-
-#: comix:556
-#: comix:10990
-#: comix:11049
-msgid "Manual zoom mode"
-msgstr "Ručno povećaj"
-
-#: comix:559
-#: comix:11050
-msgid "Double page mode"
-msgstr "Prikaz dvostrukih stranica"
-
-#: comix:561
-#: comix:11052
-msgid "Manga mode"
-msgstr "Manga prikaz"
-
-#: comix:563
-#: comix:11051
-msgid "Magnifying lens"
-msgstr "Povećalo"
-
-#: comix:664
-#: comix:6620
-msgid "Library"
-msgstr "Biblioteka"
-
-#: comix:694
-msgid "Apply filter on full path"
-msgstr "Primjeni filter na cijelu putanju"
-
-#: comix:700
-msgid "Add archives to library."
-msgstr "Dodaj arhive u biblioteku."
-
-#: comix:705
-msgid "Remove selected archive from library."
-msgstr "Ukloni označenu arhivu iz biblioteke"
-
-#: comix:709
-#: comix:1608
-#: comix:1651
-msgid "Clean up"
-msgstr "Počisti"
-
-#: comix:713
-msgid "Remove orphaned or outdated library entries."
-msgstr "Ukloni napuštene ili zastarjele unose iz biblioteke"
-
-#: comix:717
-msgid "Close this window."
-msgstr "Zatvori ovaj prozor."
-
-#: comix:722
-msgid "Open selected archive."
-msgstr "Otvori odabranu arhivu."
-
-#: comix:779
-msgid "Open"
-msgstr "Otvori"
-
-#: comix:791
-msgid "All files"
-msgstr "Sve datoteke"
-
-#: comix:802
-msgid "All images"
-msgstr "Sve slike"
-
-#: comix:814
-msgid "All archives"
-msgstr "Sve arhive"
-
-#: comix:818
-msgid "JPEG image"
-msgstr "JPEG slika"
-
-#: comix:822
-msgid "PNG image"
-msgstr "PNG slika"
-
-#: comix:826
-msgid "GIF image"
-msgstr "GIF slika"
-
-#: comix:830
-msgid "TIFF image"
-msgstr "TIFF slika"
-
-#: comix:834
-msgid "BMP image"
-msgstr "BMP slika"
-
-#: comix:838
-msgid "ICO image"
-msgstr "ICO slika"
-
-#: comix:842
-msgid "XPM image"
-msgstr "XPM slika"
-
-#: comix:846
-msgid "XBM image"
-msgstr "XBM slika"
-
-#: comix:852
-msgid "ZIP archive"
-msgstr "ZIP arhiva"
-
-#: comix:857
-#: comix:6702
-#: comix:7054
-#: comix:7105
-#: comix:7453
-#: comix:8723
-msgid "RAR archive"
-msgstr "RAR arhiva"
-
-#: comix:864
-msgid "tar archive"
-msgstr "tar arhiva"
-
-#: comix:868
-msgid "Add archives recursively"
-msgstr "Dodaj arhive rekurzivno"
-
-#: comix:883
-msgid "Preferences"
-msgstr "Postavke"
-
-#: comix:889
-msgid "Select folder"
-msgstr "Izaberite direktorij"
-
-#: comix:892
-msgid "Fullscreen as default"
-msgstr "Cijeli zaslon kao uobičajeni prikaz"
-
-#: comix:893
-msgid "Double page mode as default"
-msgstr "Dvostruke stranice kao uobičajeni prikaz"
-
-#: comix:895
-msgid "Stretch small images"
-msgstr "Razvuci male slike"
-
-#: comix:897
-msgid "Use smart scaling in double page mode"
-msgstr "Koristi pametno skaliranje kod prikaza dvostrukih stranica"
-
-#: comix:899
-msgid "Always view comments when opening a new file"
-msgstr "Uvijek koristiti komentare kod otvaranja nove datoteke"
-
-#: comix:902
-msgid "Hide menubar, scrollbars etc. in fullscreen mode"
-msgstr "Sakrij traku izbornika, klizače itd. u prikazu preko cijelog zaslona"
-
-#: comix:904
-msgid "Cache pages for faster forward flipping"
-msgstr "Pohranjuj stranice u međuspremnik zbog bržeg okretanja"
-
-#: comix:907
-msgid "Scroll wheel scrolls horizontally at top and bottom of page"
-msgstr "Vrtnja kotačića pomiče vodoravno na vrhu i dnu stranice"
-
-#: comix:910
-msgid "Flip page when scrolling off the top or bottom of page"
-msgstr "Okreni stranicu kada se kotačić pomiče preko vrha ili dna stranice"
-
-#: comix:912
-msgid "Hide thumbnail scrollbar"
-msgstr "Sakrij klizač na umanjenom prikazu stranica"
-
-#: comix:914
-msgid "Space key uses smart scrolling"
-msgstr "Space koristi pametno klizanje"
-
-#: comix:917
-msgid "Save window position and size for future sessions"
-msgstr "Pohrani položaj i veličinu prozora za buduće sesije"
-
-#: comix:920
-msgid "Go to the next archive in directory after last page"
-msgstr "Nakon zadnje stranice pređi na sljedeću arhivu u direktoriju"
-
-#: comix:922
-msgid "Hide cursor in fullscreen mode"
-msgstr "Sakrij pokazivač kod pregleda preko cijelog zaslona"
-
-#: comix:924
-msgid "Open last viewed file on start"
-msgstr "Kod pokretanja otvori posljednje pregledanu datoteku"
-
-#: comix:926
-msgid "Show page numbers on thumbnails"
-msgstr "Prikaži broj stranice na sličicama"
-
-#: comix:929
-msgid "Always use smart scrolling as if in double page mode"
-msgstr "Uvijek koristi pametno klizanje kao kod prikaza dvostrukih stranica"
-
-#: comix:932
-msgid "Use stored thumbnails for images in directories"
-msgstr "Upotrijebi pohranjene sličice za slike u direktorijima"
-
-#: comix:934
-msgid "Use stored thumbnails for images in archives"
-msgstr "Upotrijebi pohranjene sličice za slike u arhivama"
-
-#: comix:937
-msgid "Display only one page in double page mode if the image is wide"
-msgstr "Prikaži samo jednu stranicu kod dvostrukog prikaza ako je slika široka"
-
-#: comix:940
-msgid "Store recently opened files"
-msgstr "Pohrani nedavno otvorene datoteke"
-
-#: comix:943
-msgid "Always go to this directory in the \"Open\" dialog:"
-msgstr "Uvijek idi u ovaj direktorij u dijalogu izbornika \"Otvori\":"
-
-#: comix:946
-msgid "Always go to the latest directory in the \"Open\" dialog"
-msgstr "Uvijek idi u posljednji direktorij u dijalogu izbornika \"Otvori\""
-
-#: comix:970
-msgid "Nearest (quickest, worst quality)"
-msgstr "Najbliže (najbrže, najgora kvaliteta)"
-
-#: comix:971
-msgid "Tiles"
-msgstr "Pločice"
-
-#: comix:972
-msgid "Bilinear"
-msgstr "Bilinearno"
-
-#: comix:974
-msgid "Hyper (slowest, best quality)"
-msgstr "Hiper (najsporije, najbolja kvaliteta)"
-
-#: comix:976
-msgid "Manual zoom mode as default"
-msgstr "Ručno povećavanje kao uobičajeni prikaz"
-
-#: comix:979
-msgid "Fit-to-screen mode as default"
-msgstr "Uklopi u zaslon kao uobičajeni prikaz"
-
-#: comix:982
-msgid "Fit width mode as default"
-msgstr "Prilagodi visini kao uobičajeni prikaz"
-
-#: comix:985
-msgid "Fit height mode as default"
-msgstr "Prilagodi visini kao uobičajeni prikaz"
-
-#: comix:1008
-msgid "Background colour:"
-msgstr "Boja pozadine:"
-
-#: comix:1011
-msgid "Background colour"
-msgstr "Boja pozadine"
-
-#: comix:1013
-msgid "Toolbar button labels:"
-msgstr "Oznake na alatnoj traci:"
-
-#: comix:1017
-msgid "Icons only"
-msgstr "Samo ikone"
-
-#: comix:1018
-#: comix:4613
-msgid "Text only"
-msgstr "Samo tekst"
-
-#: comix:1019
-#: comix:4615
-msgid "Icons and text"
-msgstr "Ikone i tekst"
-
-#: comix:1020
-msgid "Slideshow delay:"
-msgstr "Zadrška kod prikaza prezentacija"
-
-#: comix:1036
-msgid "Display"
-msgstr "Prikaz"
-
-#: comix:1090
-msgid "Behaviour"
-msgstr "Ponašanje"
-
-#: comix:1127
-msgid "Scaling quality"
-msgstr "Kvaliteta skaliranja"
-
-#: comix:1152
-msgid "Scaling"
-msgstr "Skaliranje"
-
-#: comix:1166
-msgid "Treat files with the following extensions as comments:"
-msgstr "Tretiraj datoteke sa sljedećim ekstenzijama kao komentare:"
-
-#: comix:1172
-msgid "Comments"
-msgstr "Komentari"
-
-#: comix:1197
-msgid "Space key scrolls"
-msgstr "Space pomiče"
-
-#: comix:1201
-#: comix:3974
-#: comix:9386
-#: comix:9415
-#: comix:9418
-#: comix:9425
-#: comix:9427
-msgid "of"
-msgstr "od"
-
-#: comix:1205
-msgid "Window size"
-msgstr "Veličine prozora"
-
-#: comix:1206
-msgid "Page size"
-msgstr "Veličine stranice"
-
-#: comix:1208
-msgid "Scroll"
-msgstr "Pomicanje"
-
-#: comix:1222
-msgid "Magnification factor:"
-msgstr "Faktor uvećanja:"
-
-#: comix:1226
-msgid "Lens size (px):"
-msgstr "Veličina leće (px):"
-
-#: comix:1230
-msgid "Update interval (milliseconds):"
-msgstr "Vrijeme obnavljanja (milisekunde):"
-
-#: comix:1235
-msgid "Lens"
-msgstr "Leća"
-
-#: comix:1249
-msgid "Thumbnail sizes (px):"
-msgstr "Veličina sličica (px):"
-
-#: comix:1254
-msgid "Library thumbnail sizes (px):"
-msgstr "Veličina sličica u biblioteci (px):"
-
-#: comix:1272
-msgid "Thumbnails"
-msgstr "Sličice"
-
-#: comix:1301
-msgid "Adjust colour"
-msgstr "Podesi boju"
-
-#: comix:1303
-msgid "Default"
-msgstr "Uobičajeno"
-
-#: comix:1325
-msgid "Brightness"
-msgstr "Svjetlina"
-
-#: comix:1337
-msgid "Contrast"
-msgstr "Kontrast"
-
-#: comix:1349
-msgid "Saturation"
-msgstr "Zasićenje"
-
-#: comix:1361
-msgid "Sharpness"
-msgstr "Oštrina"
-
-#: comix:1376
-msgid "Automatically adjust contrast"
-msgstr "Automatski podesi kontrast"
-
-#: comix:1383
-msgid "Save values for future sessions"
-msgstr "Sačuvaj vrijednosti za buduće sesije"
-
-#: comix:1395
-msgid "Properties"
-msgstr "Postavke"
-
-#: comix:1413
-msgid "Go to page"
-msgstr "Idi na stranicu"
-
-#: comix:1437
-msgid "Edit bookmarks"
-msgstr "Uredi oznake"
-
-#: comix:1446
-msgid "Title"
-msgstr "Naslov"
-
-#: comix:1447
-#: comix:5380
-#: comix:5732
-msgid "Page"
-msgstr "Stranica"
-
-#: comix:1477
-#: comix:1530
+#: src/about.py:18 src/about.py:67
 msgid "About"
 msgstr "O programu"
 
-#: comix:1515
+#: src/about.py:55
 msgid "Comix is an image viewer specifically designed to handle comic books."
 msgstr "Comix je preglednik slika posebno dizajniran za rukovanje stripovima."
 
-#: comix:1517
-msgid "It reads ZIP, RAR and tar archives (also gzip or bzip2 compressed)"
-msgstr "Može čitati ZIP, RAR i tar arhive (kao i one sažete s gzip ili bzip2 programom)"
+#: src/about.py:57
+msgid "It reads ZIP, RAR and tar archives, as well as plain image files."
+msgstr ""
 
-#: comix:1519
-msgid "as well as plain image files."
-msgstr "kao i obične slike"
-
-#: comix:1521
+#: src/about.py:59
 msgid "Comix is licensed under the GNU General Public License."
 msgstr "Comix je licenciran pod uvjetima GNU opće javne licence"
 
-#: comix:1539
-msgid "Developer and Swedish translation"
-msgstr "Programer i švedski prijevod"
+#: src/about.py:75
+msgid "Developer"
+msgstr ""
 
-#: comix:1541
+#: src/about.py:77
 msgid "Simplified Chinese translation"
 msgstr "Pojednostavljeni kineski prijevod"
 
-#: comix:1542
+#: src/about.py:78
 msgid "Spanish translation"
 msgstr "Španjolski prijevod"
 
-#: comix:1543
+#: src/about.py:79
 msgid "Brazilian Portuguese translation"
 msgstr "Brazilsko portugalski prijevod"
 
-#: comix:1545
+#: src/about.py:81
 msgid "German translation and Nautilus thumbnailer"
 msgstr "Njemački prijevod i Nautilusov program za prikazivanje sličica"
 
-#: comix:1546
+#: src/about.py:82
 msgid "Italian translation"
 msgstr "Talijanski prijevod"
 
-#: comix:1547
+#: src/about.py:83
 msgid "Dutch translation"
 msgstr "Nizozemski prijevod"
 
-#: comix:1548
+#: src/about.py:84
 msgid "French translation"
 msgstr "Francuski prijevod"
 
-#: comix:1549
+#: src/about.py:85
 msgid "Polish translation"
 msgstr "Poljski prijevod"
 
-#: comix:1550
+#: src/about.py:86
 msgid "Greek translation"
 msgstr "Grčki prijevod"
 
-#: comix:1551
+#: src/about.py:87
 msgid "Catalan translation"
 msgstr "Katalonski prijevod"
 
-#: comix:1552
+#: src/about.py:88
 msgid "Traditional Chinese translation"
 msgstr "Tradicionalni kineski prijevod"
 
-#: comix:1561
+#: src/about.py:89
+msgid "Japanese translation"
+msgstr ""
+
+#: src/about.py:90
+msgid "Hungarian translation"
+msgstr ""
+
+#: src/about.py:91
+msgid "Russian translation"
+msgstr ""
+
+#: src/about.py:92
+msgid "Croatian translation"
+msgstr ""
+
+#: src/about.py:93
+msgid "Korean translation"
+msgstr ""
+
+#: src/about.py:94
+msgid "Persian translation"
+msgstr ""
+
+#: src/about.py:95
+msgid "Indonesian translation"
+msgstr ""
+
+#: src/about.py:96
+msgid "Czech translation"
+msgstr ""
+
+#: src/about.py:97
+msgid "Icon design"
+msgstr ""
+
+#: src/about.py:106
 msgid "Credits"
 msgstr "Zahvale"
 
-#: comix:1570
-msgid "Manage thumbnails"
-msgstr "Upravljanje sličicama"
+#: src/archive.py:66
+msgid "Could not find RAR file extractor!"
+msgstr ""
 
-#: comix:1603
-#: comix:1646
-msgid "Remove all stored thumbnails:"
-msgstr "Ukloni sve pohranjene sličice:"
+#: src/archive.py:68
+msgid ""
+"You need either the <i>rar</i> or the <i>unrar</i> program installed in "
+"order to read RAR (.cbr) files."
+msgstr ""
 
-#: comix:1613
-#: comix:1656
-msgid "Remove orphaned thumbnails:"
-msgstr "Ukloni napuštene sličice:"
+#: src/archive.py:301
+msgid "ZIP archive"
+msgstr "ZIP arhiva"
 
-#: comix:1618
-msgid "Directories"
-msgstr "Direktoriji"
-
-#: comix:1661
-msgid "Archives"
-msgstr "Arhive"
-
-#: comix:1671
-msgid "Removing thumbnails"
-msgstr "Uklanjam sličice"
-
-#: comix:1711
-msgid "Convert"
-msgstr "Pretvori"
-
-#: comix:1720
-msgid "File type"
-msgstr "Tip datoteke"
-
-#: comix:1721
-msgid "Extension"
-msgstr "Ekstenzija"
-
-#: comix:1733
-#: comix:4304
-#: comix:4340
-#: comix:6694
-#: comix:7044
-#: comix:7095
-#: comix:7451
-#: comix:8694
-msgid "Zip archive"
-msgstr "Zip arhiva"
-
-#: comix:1734
-#: comix:4307
-#: comix:4346
-#: comix:6696
-#: comix:7046
-#: comix:7097
-#: comix:7455
-#: comix:8710
+#: src/archive.py:302
 msgid "Tar archive"
 msgstr "Tar arhiva"
 
-#: comix:1735
-#: comix:4311
-#: comix:4342
-#: comix:6698
-#: comix:7049
-#: comix:7100
-#: comix:7456
-#: comix:8706
+#: src/archive.py:303
 msgid "Gzip compressed tar archive"
 msgstr "Tar arhiva sažeta programom Gzip"
 
-#: comix:1737
-#: comix:4314
-#: comix:4344
-#: comix:6700
-#: comix:7052
-#: comix:7103
-#: comix:7457
-#: comix:8708
+#: src/archive.py:304
 msgid "Bzip2 compressed tar archive"
 msgstr "Tar arhiva sažeta programom Bzip2"
 
-#: comix:1749
-msgid "Delete old archive/directory"
-msgstr "Ukloni staru arhivu/direktorij"
-
-#: comix:1774
-#: comix:6095
-#: comix:6100
-msgid "Permission denied"
-msgstr "Pristup odbijen"
-
-#: comix:1799
-msgid "Confirm operation"
-msgstr "Potvrdi operaciju"
-
-#: comix:4075
-msgid "Permanently remove %s?"
-msgstr "Trajno ukloni %s?"
-
-#: comix:4079
-msgid "Perform lossless JPEG operation on %s?"
-msgstr "Izvedi JPEG transformaciju bez gubitaka na %s?"
-
-#: comix:4081
-#: comix:4086
-msgid "Some images might be trimmed a bit during the operation."
-msgstr "Neke slike mogu biti obrubljene tijekom operacije."
-
-#: comix:4084
-msgid "Permanently convert %s to greyscale?"
-msgstr "Trajno prebaci %s u sive tonove?"
-
-#: comix:4946
-#: comix:4957
-msgid "Location:"
-msgstr "Lokacija:"
-
-#: comix:4947
-#: comix:4958
-msgid "Quantity:"
-msgstr "Količina:"
-
-#: comix:4947
-#: comix:4958
-msgid "Total size:"
-msgstr "Ukupna veličina:"
-
-#: comix:4993
-#: comix:5004
-#: comix:5008
-#: comix:5019
-#: comix:5038
-#: comix:5043
-#: comix:5047
-#: comix:5058
-#: comix:5069
-#: comix:5073
-#: comix:5084
-#: comix:5102
-#: comix:5107
-#: comix:5111
-#: comix:6414
-#: comix:6442
-#: comix:6448
-msgid "Removed:"
-msgstr "Uklonjeno:"
-
-#: comix:5009
-#: comix:5048
-#: comix:5074
-#: comix:5112
-#: comix:6362
-#: comix:6449
-msgid "Done!"
-msgstr "Gotovo!"
-
-#: comix:5213
-#: comix:6687
-#: comix:7042
-#: comix:7093
-msgid "pages"
-msgstr "stranica"
-
-#: comix:5219
-msgid "comment"
-msgstr "komentar"
-
-#: comix:5223
-msgid "comments"
-msgstr "komentari"
-
-#: comix:5247
-#: comix:5433
-#: comix:5786
-msgid "Location"
-msgstr "Lokacija"
-
-#: comix:5260
-msgid "Yes"
-msgstr "Da"
-
-#: comix:5260
-#: comix:5263
-msgid "In library"
-msgstr "U biblioteci"
-
-#: comix:5263
-#: comix:5278
-msgid "No"
-msgstr "Ne"
-
-#: comix:5273
-msgid "Yes, page"
-msgstr "Da, stranica"
-
-#: comix:5273
-#: comix:5278
-msgid "Bookmarked"
-msgstr "Označeno"
-
-#: comix:5286
-#: comix:5442
-#: comix:5795
-msgid "Accessed"
-msgstr "Pristupljeno"
-
-#: comix:5296
-#: comix:5453
-#: comix:5806
-msgid "Modified"
-msgstr "Mijenjano"
-
-#: comix:5306
-#: comix:5464
-#: comix:5817
-msgid "Permissions"
-msgstr "Dozvole"
-
-#: comix:5315
-#: comix:5474
-#: comix:5827
-msgid "Owner"
-msgstr "Vlasnik"
-
-#: comix:5325
-msgid "Archive"
-msgstr "Arhiva"
-
-#: comix:5491
-#: comix:5844
-msgid "Mode"
-msgstr "Način"
-
-#: comix:5498
-#: comix:5851
-msgid "Pixel count"
-msgstr "Broj piksela"
-
-#: comix:5511
-#: comix:5864
-msgid "Pixel sum"
-msgstr "Zbroj piksela"
-
-#: comix:5542
-#: comix:5895
-msgid "Extrema"
-msgstr "Extrema"
-
-#: comix:5581
-#: comix:5934
-msgid "Mean"
-msgstr "Prosječni"
-
-#: comix:5609
-#: comix:5962
-msgid "Median"
-msgstr "Središnji"
-
-#: comix:5637
-#: comix:5990
-msgid "Standard deviation"
-msgstr "Standardno"
-
-#: comix:5669
-msgid "Image"
-msgstr "Slika"
-
-#: comix:5672
-msgid "Image 1"
-msgstr "Slika 1"
-
-#: comix:6020
-msgid "Image 2"
-msgstr "Slika 2"
-
-#: comix:6096
-msgid "Could not delete"
-msgstr "Nije moguće ukloniti"
-
-#: comix:6097
-#: comix:6102
-msgid "Please check your permissions."
-msgstr "Provjerite vaše privilegije."
-
-#: comix:6101
-msgid "Could not create"
-msgstr "Nije moguće stvoriti"
-
-#: comix:6213
-#: comix:6223
-#: comix:6357
-#: comix:6361
-msgid "Added:"
-msgstr "Dodano:"
-
-#: comix:6214
-msgid "Adding library entries"
-msgstr "Dodajem unose u biblioteku"
-
-#: comix:6415
-msgid "Removing library entries"
-msgstr "Uklanjam unose iz biblioteke"
-
-#: comix:7196
-msgid "Extract page"
-msgstr "Izvuci stranicu"
-
-#: comix:7623
-msgid "page"
-msgstr "stranice"
-
-#: comix:8721
-msgid "Could not find the unrar executable. Please install it if you wish to open RAR archives."
-msgstr "Nije pronađena unrar izvršna datoteka. Molim instalirajte unrar ako želite otvarati RAR arhive."
-
-#: comix:8726
-msgid "Could not open"
-msgstr "Nije moguće otvoriti"
-
-#: comix:8774
-msgid "is not a file."
-msgstr "nije datoteka."
-
-#: comix:8777
-msgid "does not exist."
-msgstr "ne postoji."
-
-#: comix:8885
-msgid "Filetype of"
-msgstr "Vrsta datoteke od"
-
-#: comix:8887
-msgid "not recognized."
-msgstr "nije prepoznata."
-
-#: comix:8902
-#: comix:11161
-msgid "No images in \"%s\""
-msgstr "Nema slika u \"%s\""
-
-#: comix:9385
-msgid "Comment file"
-msgstr "Datoteka s komentarom"
-
-#: comix:9401
-msgid "Could not read"
-msgstr "Nije moguće pročitati"
-
-#: comix:9414
-#: comix:9417
-#: comix:9424
-#: comix:9426
-msgid "Comment"
-msgstr "Komentar"
-
-#: comix:10864
-msgid "_Next page"
-msgstr "_Sljedeća stranica"
-
-#: comix:10866
-msgid "_Previous page"
-msgstr "_Prethodna stranica"
-
-#: comix:10868
-msgid "_First page"
-msgstr "P_rva stranica"
-
-#: comix:10870
-msgid "_Last page"
-msgstr "_Zadnja stranica"
-
-#: comix:10872
-msgid "_Go to page..."
-msgstr "_Idi na stranicu..."
-
-#: comix:10874
-msgid "Manual _Zoom"
-msgstr "Ručno Po_većaj"
-
-#: comix:10875
-msgid "_Zoom in"
-msgstr "_Uvećaj"
-
-#: comix:10877
-msgid "Zoom _out"
-msgstr "U_manji"
-
-#: comix:10879
-msgid "_Normal size"
-msgstr "_Normalna veličina"
-
-#: comix:10881
-msgid "Fit _width"
-msgstr "Prilagodi _širinu"
-
-#: comix:10883
-msgid "Fit _height"
-msgstr "Prilagodi _visinu"
-
-#: comix:10885
-msgid "_Best fit"
-msgstr "_Najbolje pristajanje"
-
-#: comix:10887
+#: src/archive.py:305
+msgid "RAR archive"
+msgstr "RAR arhiva"
+
+#: src/bookmark.py:27
 msgid "_Add bookmark"
 msgstr "_Dodaj oznaku"
 
-#: comix:10889
-msgid "Clear bookmarks"
-msgstr "Obriši oznake"
-
-#: comix:10892
+#: src/bookmark.py:29
 msgid "_Edit bookmarks..."
 msgstr "_Uredi oznake..."
 
-#: comix:10894
-msgid "Pr_eferences"
-msgstr "Po_stavke"
+#: src/bookmark.py:31
+msgid "_Clear bookmarks..."
+msgstr ""
 
-#: comix:10896
-msgid "_About"
-msgstr "_O programu"
+#: src/bookmark.py:77
+msgid "Clear all bookmarks?"
+msgstr ""
 
-#: comix:10899
-msgid "_Manage thumbnails..."
-msgstr "_Upravljanje sličicama..."
+#: src/bookmark.py:79
+msgid ""
+"All stored bookmarks will be removed. Are you sure that you want to continue?"
+msgstr ""
 
-#: comix:10901
-msgid "Proper_ties"
-msgstr "Pos_tavke"
+#: src/bookmark.py:229
+msgid "Edit bookmarks"
+msgstr "Uredi oznake"
 
-#: comix:10903
-msgid "View _comments"
-msgstr "Pogledaj _komentare"
+#: src/bookmark.py:255 src/edit.py:267
+msgid "Name"
+msgstr ""
 
-#: comix:10905
-msgid "_Open..."
-msgstr "_Otvori..."
+#: src/bookmark.py:256
+msgid "Page"
+msgstr "Stranica"
 
-#: comix:10907
-msgid "_Recent files"
-msgstr "_Skorašnje datoteke"
+#: src/comment.py:16 src/preferences.py:288
+msgid "Comments"
+msgstr "Komentari"
 
-#: comix:10908
-msgid "Clear recent files"
-msgstr "Obriši skorašnje datoteke"
+#: src/comment.py:53
+#, python-format
+msgid "Could not read %s"
+msgstr ""
 
-#: comix:10910
-msgid "Open _library..."
-msgstr "Otvori _biblioteku..."
+#: src/deprecated.py:16
+msgid "There are deprecated files left on your computer."
+msgstr ""
 
-#: comix:10912
-msgid "_Add to library"
-msgstr "_Dodaj u biblioteku"
+#: src/deprecated.py:22
+msgid ""
+"Some old files (that were used for storing preferences, the library, "
+"bookmarks etc. for older versions of Comix) were found on your computer. If "
+"you do not plan on using the older versions of Comix again, you should "
+"remove these files in order to save some disk space. Do you want these files "
+"to be removed for you now?"
+msgstr ""
 
-#: comix:10914
-msgid "Con_vert..."
-msgstr "Pre_tvori..."
+#: src/edit.py:28
+msgid "Edit archive"
+msgstr ""
 
-#: comix:10916
-msgid "E_xtract image..."
-msgstr "I_zvuci sliku..."
+#: src/edit.py:36
+msgid "Import"
+msgstr ""
 
-#: comix:10918
-msgid "_Close"
-msgstr "_Zatvori"
+#: src/edit.py:50
+msgid "Images"
+msgstr ""
 
-#: comix:10920
-msgid "_Quit"
-msgstr "_Izlaz"
+#: src/edit.py:51
+msgid "Other files"
+msgstr ""
 
-#: comix:10922
-msgid "_Adjust colour..."
-msgstr "_Podesi boju..."
+#: src/edit.py:99
+msgid "The new archive could not be saved!"
+msgstr ""
 
-#: comix:10924
+#: src/edit.py:101
+msgid "The original files have not been removed."
+msgstr ""
+
+#: src/edit.py:115
+msgid "Archives are stored as ZIP files."
+msgstr ""
+
+#: src/edit.py:168 src/edit.py:285
+msgid "Remove from archive"
+msgstr ""
+
+#: src/edit.py:255
+msgid ""
+"Please note that the only files that are automatically added to this list "
+"are those files in archives that Comix recognizes as comments."
+msgstr ""
+
+#: src/edit.py:270
+msgid "Size"
+msgstr ""
+
+#: src/enhance.py:51
+msgid "Enhance image"
+msgstr ""
+
+#: src/enhance.py:52
+msgid "Defaults"
+msgstr ""
+
+#: src/enhance.py:79
+msgid "Brightness"
+msgstr "Svjetlina"
+
+#: src/enhance.py:90
+msgid "Contrast"
+msgstr "Kontrast"
+
+#: src/enhance.py:101
+msgid "Saturation"
+msgstr "Zasićenje"
+
+#: src/enhance.py:112
+msgid "Sharpness"
+msgstr "Oštrina"
+
+#: src/enhance.py:126
+msgid "Automatically adjust contrast."
+msgstr ""
+
+#: src/enhance.py:128
+msgid ""
+"Automatically adjust contrast (both lightness and darkness), separately for "
+"each colour band."
+msgstr ""
+
+#: src/filechooser.py:35 src/library.py:489
+msgid "Open"
+msgstr "Otvori"
+
+#: src/filechooser.py:39
+msgid "Save"
+msgstr ""
+
+#: src/filechooser.py:75
+msgid "All files"
+msgstr "Sve datoteke"
+
+#: src/filechooser.py:78
+msgid "All Archives"
+msgstr ""
+
+#: src/filechooser.py:82
+msgid "ZIP archives"
+msgstr ""
+
+#: src/filechooser.py:84
+msgid "RAR archives"
+msgstr ""
+
+#: src/filechooser.py:86
+msgid "Tar archives"
+msgstr ""
+
+#: src/filechooser.py:125
+#, python-format
+msgid "A file named '%s' already exists. Do you want to replace it?"
+msgstr ""
+
+#: src/filechooser.py:128
+msgid "Replacing it will overwrite its contents."
+msgstr ""
+
+#: src/filechooser.py:171 src/filechooser.py:249
+msgid "All images"
+msgstr "Sve slike"
+
+#: src/filechooser.py:173 src/filechooser.py:251
+msgid "JPEG images"
+msgstr ""
+
+#: src/filechooser.py:174 src/filechooser.py:252
+msgid "PNG images"
+msgstr ""
+
+#: src/filechooser.py:195
+msgid "Automatically add the books to this collection"
+msgstr ""
+
+#: src/filehandler.py:209
+#, python-format
+msgid "Could not open %s: Is a directory."
+msgstr ""
+
+#: src/filehandler.py:213
+#, python-format
+msgid "Could not open %s: No such file."
+msgstr ""
+
+#: src/filehandler.py:217
+#, python-format
+msgid "Could not open %s: Permission denied."
+msgstr ""
+
+#: src/filehandler.py:222
+#, python-format
+msgid "Could not open %s: Unknown file type."
+msgstr ""
+
+#: src/filehandler.py:285
+#, python-format
+msgid "No images in '%s'"
+msgstr ""
+
+#: src/filehandler.py:411
+msgid "Unknown filetype"
+msgstr ""
+
+#: src/librarybackend.py:272 src/librarybackend.py:274
+msgid "(Copy)"
+msgstr ""
+
+#: src/library.py:38
+msgid "Library"
+msgstr "Biblioteka"
+
+#: src/library.py:150
+msgid "Rename..."
+msgstr ""
+
+#: src/library.py:152
+msgid "Duplicate collection"
+msgstr ""
+
+#: src/library.py:154
+msgid "Remove collection..."
+msgstr ""
+
+#: src/library.py:202
+msgid "All books"
+msgstr ""
+
+#: src/library.py:231
+msgid "Remove collection from the library?"
+msgstr ""
+
+#: src/library.py:233
+msgid ""
+"The selected collection will be removed from the library (but the books and "
+"subcollections in it will remain). Are you sure that you want to continue?"
+msgstr ""
+
+#: src/library.py:251
+msgid "Rename collection?"
+msgstr ""
+
+#: src/library.py:253
+msgid "Please enter a new name for the selected collection."
+msgstr ""
+
+#: src/library.py:271
+#, python-format
+msgid "Could not change the name to '%s'."
+msgstr ""
+
+#: src/library.py:275 src/library.py:881
+msgid "A collection by that name already exists."
+msgstr ""
+
+#: src/library.py:285
+msgid "Could not duplicate collection."
+msgstr ""
+
+#: src/library.py:382
+msgid "Root"
+msgstr ""
+
+#: src/library.py:386
+#, python-format
+msgid ""
+"Put the collection '%(subcollection)s' in the collection '%(supercollection)"
+"s'."
+msgstr ""
+
+#: src/library.py:407
+#, python-format
+msgid "Add books to '%s'."
+msgstr ""
+
+#: src/library.py:411
+#, python-format
+msgid ""
+"Move books from '%(source collection)s' to '%(destination collection)s'."
+msgstr ""
+
+#: src/library.py:492
+msgid "Remove from this collection"
+msgstr ""
+
+#: src/library.py:495
+msgid "Remove from the library..."
+msgstr ""
+
+#: src/library.py:588
+#, python-format
+msgid "Removed %(num)d book(s) from '%(collection)s'."
+msgstr ""
+
+#: src/library.py:597
+msgid "Remove books from the library?"
+msgstr ""
+
+#: src/library.py:599
+msgid ""
+"The selected books will be removed from the library (but the original files "
+"will be untouched). Are you sure that you want to continue?"
+msgstr ""
+
+#: src/library.py:609
+#, python-format
+msgid "Removed %d book(s) from the library."
+msgstr ""
+
+#: src/library.py:769
+msgid "Search"
+msgstr ""
+
+#: src/library.py:774
+msgid ""
+"Display only those books that have the specified text string in their full "
+"path. The search is not case sensitive."
+msgstr ""
+
+#: src/library.py:776
+msgid "Cover size"
+msgstr ""
+
+#: src/library.py:789
+msgid "Add books"
+msgstr ""
+
+#: src/library.py:793
+msgid "Add more books to the library."
+msgstr ""
+
+#: src/library.py:795
+msgid "Add collection"
+msgstr ""
+
+#: src/library.py:800
+msgid "Add a new empty collection."
+msgstr ""
+
+#: src/library.py:806
+msgid "Open the selected book."
+msgstr ""
+
+#: src/library.py:832 src/properties.py:113
+#, python-format
+msgid "%d pages"
+msgstr ""
+
+#: src/library.py:854
+msgid "Add new collection?"
+msgstr ""
+
+#: src/library.py:856
+msgid "Please enter a name for the new collection."
+msgstr ""
+
+#: src/library.py:862
+msgid "New collection"
+msgstr ""
+
+#: src/library.py:876
+#, python-format
+msgid "Could not add a new collection called '%s'."
+msgstr ""
+
+#: src/library.py:910
+msgid "Adding books"
+msgstr ""
+
+#: src/library.py:930
+msgid "Added books"
+msgstr ""
+
+#: src/library.py:952
+#, python-format
+msgid "Adding '%s'..."
+msgstr ""
+
+#: src/main.py:666
+msgid "SLIDESHOW"
+msgstr ""
+
+#: src/preferences.py:78
+msgid "Preferences"
+msgstr "Postavke"
+
+#: src/preferences.py:93
+msgid "Background"
+msgstr ""
+
+#: src/preferences.py:95
+msgid "Use this colour as background"
+msgstr ""
+
+#: src/preferences.py:97
+msgid "Always use this selected colour as the background colour."
+msgstr ""
+
+#: src/preferences.py:102
+msgid "Use dynamic background colour."
+msgstr ""
+
+#: src/preferences.py:106
+msgid "Automatically pick a background colour that fits the viewed image."
+msgstr ""
+
+#: src/preferences.py:109
+msgid "Thumbnails"
+msgstr "Sličice"
+
+#: src/preferences.py:110
+msgid "Thumbnail size (in pixels)"
+msgstr ""
+
+#: src/preferences.py:117
+msgid "Show page numbers on thumbnails."
+msgstr ""
+
+#: src/preferences.py:124
+msgid "Magnifying Glass"
+msgstr ""
+
+#: src/preferences.py:125
+msgid "Magnifying glass size (in pixels)"
+msgstr ""
+
+#: src/preferences.py:131
+msgid ""
+"Set the size of the magnifying glass. It is a square with a side of this "
+"many pixels."
+msgstr ""
+
+#: src/preferences.py:133
+msgid "Magnification factor"
+msgstr ""
+
+#: src/preferences.py:140
+msgid "Set the magnification factor of the magnifying glass."
+msgstr ""
+
+#: src/preferences.py:143
+msgid "Image scaling"
+msgstr ""
+
+#: src/preferences.py:144
+msgid "Stretch small images."
+msgstr ""
+
+#: src/preferences.py:148
+msgid ""
+"Stretch images to a size that is larger than their original size if the "
+"current zoom mode requests it. If this preference is unset, images are never "
+"scaled to be larger than their original size."
+msgstr ""
+
+#: src/preferences.py:151
+msgid "Transparency"
+msgstr ""
+
+#: src/preferences.py:153
+msgid "Use checkered background for transparent images."
+msgstr ""
+
+#: src/preferences.py:159
+msgid ""
+"Use a grey checkered background for transparent images. If this preference "
+"is unset, the background is plain white instead."
+msgstr ""
+
+#: src/preferences.py:161
+msgid "Appearance"
+msgstr ""
+
+#: src/preferences.py:167
+msgid "Scroll"
+msgstr "Pomicanje"
+
+#: src/preferences.py:169
+msgid "Use smart space key scrolling."
+msgstr ""
+
+#: src/preferences.py:174
+msgid ""
+"Use smart scrolling with the space key. Normally the space key scrolls only "
+"right down (or up when shift is pressed), but with this preference set it "
+"also scrolls sideways and so tries to follow the natural reading order of "
+"the comic book."
+msgstr ""
+
+#: src/preferences.py:177 src/ui.py:296
+msgid "Double page mode"
+msgstr "Prikaz dvostrukih stranica"
+
+#: src/preferences.py:179
+msgid "Flip two pages in double page mode."
+msgstr ""
+
+#: src/preferences.py:184
+msgid ""
+"Flip two pages, instead of one, each time we flip pages in double page mode."
+msgstr ""
+
+#: src/preferences.py:187
+msgid "Show only one wide image in double page mode."
+msgstr ""
+
+#: src/preferences.py:193
+msgid ""
+"Display only one image in double page mode, if the image's width exceeds its "
+"height. The result of this is that scans that span two pages are displayed "
+"properly (i.e. alone) also in double page mode."
+msgstr ""
+
+#: src/preferences.py:196
+msgid "Files"
+msgstr ""
+
+#: src/preferences.py:198
+msgid "Automatically open the next archive."
+msgstr ""
+
+#: src/preferences.py:203
+msgid ""
+"Automatically open the next archive in the directory when flipping past the "
+"last page, or the previous archive when flipping past the first page."
+msgstr ""
+
+#: src/preferences.py:206
+msgid "Automatically open the last viewed file on startup."
+msgstr ""
+
+#: src/preferences.py:211
+msgid ""
+"Automatically open, on startup, the file that was open when Comix was last "
+"closed."
+msgstr ""
+
+#: src/preferences.py:214
+msgid "Store information about recently opened files."
+msgstr ""
+
+#: src/preferences.py:219
+msgid ""
+"Add information about all files opened from within Comix to the shared "
+"recent files list."
+msgstr ""
+
+#: src/preferences.py:222
+msgid "Store thumbnails for opened files."
+msgstr ""
+
+#: src/preferences.py:227
+msgid ""
+"Store thumbnails for opened files according to the freedesktop.org "
+"specification. These thumbnails are shared by many other applications, such "
+"as most file managers."
+msgstr ""
+
+#: src/preferences.py:230
+msgid "Cache"
+msgstr ""
+
+#: src/preferences.py:231
+msgid "Use a cache to speed up browsing."
+msgstr ""
+
+#: src/preferences.py:235
+msgid ""
+"Cache the images that are next to the currently viewed image in order to "
+"speed up browsing. Since the speed improvements are quite big, it is "
+"recommended that you have this preference set, unless you are running short "
+"on free RAM."
+msgstr ""
+
+#: src/preferences.py:237
+msgid "Behaviour"
+msgstr "Ponašanje"
+
+#: src/preferences.py:243
+msgid "Default modes"
+msgstr ""
+
+#: src/preferences.py:245
+msgid "Use double page mode by default."
+msgstr ""
+
+#: src/preferences.py:250
+msgid "Use fullscreen by default."
+msgstr ""
+
+#: src/preferences.py:255
+msgid "Use manga mode by default."
+msgstr ""
+
+#: src/preferences.py:260
+msgid "Default zoom mode"
+msgstr ""
+
+#: src/preferences.py:262 src/ui.py:288
+msgid "Best fit mode"
+msgstr ""
+
+#: src/preferences.py:263 src/ui.py:290
+msgid "Fit width mode"
+msgstr "Prilagodi širini"
+
+#: src/preferences.py:264 src/ui.py:292
+msgid "Fit height mode"
+msgstr "Prilagodi visini"
+
+#: src/preferences.py:265 src/ui.py:294
+msgid "Manual zoom mode"
+msgstr "Ručno povećaj"
+
+#: src/preferences.py:271
+msgid "Fullscreen"
+msgstr ""
+
+#: src/preferences.py:273
+msgid "Automatically hide all toolbars in fullscreen."
+msgstr ""
+
+#: src/preferences.py:279
 msgid "Slideshow"
 msgstr "Prezentacija"
 
-#: comix:10926
-msgid "Delete image..."
-msgstr "Obriši sliku..."
+#: src/preferences.py:280
+msgid "Slideshow delay (in seconds)"
+msgstr ""
 
-#: comix:10929
-msgid "CW lossless JPEG rotation..."
-msgstr "JPEG zakretanje bez gubitaka u smjeru kazaljke na satu..."
+#: src/preferences.py:289
+msgid "Comment extensions"
+msgstr ""
 
-#: comix:10932
-msgid "CCW lossless JPEG rotation..."
-msgstr "JPEG zakretanje bez gubitaka obrnuto od kazaljke na satu..."
+#: src/preferences.py:295
+msgid ""
+"Treat all files found within archives, that have one of these file endings, "
+"as comments."
+msgstr ""
 
-#: comix:10935
-msgid "Horizontal lossless JPEG flip..."
-msgstr "Vodoravno okreni JPEG bez gubitaka..."
+#: src/preferences.py:297
+msgid "Display"
+msgstr "Prikaz"
 
-#: comix:10938
-msgid "Vertical lossless JPEG flip..."
-msgstr "Okomito okreni JPEG bez gubitaka..."
+#: src/properties.py:89
+msgid "Properties"
+msgstr "Postavke"
 
-#: comix:10941
-msgid "Convert JPEG to greyscale..."
-msgstr "Prebaci JPEG u sive tonove..."
+#: src/properties.py:114
+#, python-format
+msgid "%d comments"
+msgstr ""
 
-#: comix:10943
-#: comix:10945
-msgid "_Bookmarks"
-msgstr "_Oznake"
+#: src/properties.py:124 src/properties.py:159
+msgid "Location"
+msgstr "Lokacija"
 
-#: comix:10944
-msgid "_Toolbars"
-msgstr "_Alatne trake"
+#: src/properties.py:126 src/properties.py:160
+msgid "Accessed"
+msgstr "Pristupljeno"
 
-#: comix:10946
-msgid "_Edit"
-msgstr "_Podesi"
+#: src/properties.py:128 src/properties.py:162
+msgid "Modified"
+msgstr "Mijenjano"
 
-#: comix:10948
-msgid "File o_perations"
-msgstr "Rad _s datotekama"
+#: src/properties.py:130 src/properties.py:164
+msgid "Permissions"
+msgstr "Dozvole"
 
-#: comix:10949
-msgid "_File"
-msgstr "_Datoteka"
+#: src/properties.py:131 src/properties.py:165
+msgid "Owner"
+msgstr "Vlasnik"
 
-#: comix:10950
-#: comix:10951
-msgid "_View"
-msgstr "_Pregled"
+#: src/properties.py:135
+msgid "Archive"
+msgstr "Arhiva"
 
-#: comix:10952
-#: comix:10953
-msgid "_Go"
-msgstr "_Idi"
+#: src/properties.py:169
+msgid "Image"
+msgstr "Slika"
 
-#: comix:10954
-msgid "_Help"
-msgstr "_Pomoć"
+#: src/thumbremover.py:22
+msgid "Thumbnail maintenance"
+msgstr ""
 
-#: comix:10955
-msgid "_Transform"
-msgstr "_Transformacija"
+#: src/thumbremover.py:24
+msgid "Cleanup"
+msgstr ""
 
-#: comix:10956
+#: src/thumbremover.py:36
+msgid "Cleanup thumbnails"
+msgstr ""
+
+#: src/thumbremover.py:46
+msgid ""
+"Thumbnails for files (such as image files and comic book archives) are "
+"stored in your home directory. Many different applications use and create "
+"these thumbnails, but sometimes thumbnails remain even though the original "
+"files have been removed - wasting space. This dialog can cleanup your stored "
+"thumbnails by removing orphaned and outdated thumbnails."
+msgstr ""
+
+#: src/thumbremover.py:58
+msgid "Thumbnail directory"
+msgstr ""
+
+#: src/thumbremover.py:65
+msgid "Total number of thumbnails"
+msgstr ""
+
+#: src/thumbremover.py:68 src/thumbremover.py:75
+msgid "Calculating..."
+msgstr ""
+
+#: src/thumbremover.py:72
+msgid "Total size of thumbnails"
+msgstr ""
+
+#: src/thumbremover.py:80
+msgid "Do you want to cleanup orphaned and outdated thumbnails now?"
+msgstr ""
+
+#: src/thumbremover.py:116
+msgid "Removing thumbnails"
+msgstr "Uklanjam sličice"
+
+#: src/thumbremover.py:135
+msgid "Number of removed thumbnails"
+msgstr ""
+
+#: src/thumbremover.py:142
+msgid "Total size of removed thumbnails"
+msgstr ""
+
+#: src/thumbremover.py:193
+#, python-format
+msgid "Removed thumbnail for '%s'"
+msgstr ""
+
+#: src/ui.py:34
+msgid "_Next page"
+msgstr "_Sljedeća stranica"
+
+#: src/ui.py:36
+msgid "_Previous page"
+msgstr "_Prethodna stranica"
+
+#: src/ui.py:38
+msgid "_First page"
+msgstr "P_rva stranica"
+
+#: src/ui.py:40
+msgid "_Last page"
+msgstr "_Zadnja stranica"
+
+#: src/ui.py:42
+msgid "_Zoom in"
+msgstr "_Uvećaj"
+
+#: src/ui.py:44
+msgid "Zoom _out"
+msgstr "U_manji"
+
+#: src/ui.py:46
+msgid "O_riginal size"
+msgstr ""
+
+#: src/ui.py:48
+msgid "_Close"
+msgstr "_Zatvori"
+
+#: src/ui.py:50
+msgid "_Quit"
+msgstr "_Izlaz"
+
+#: src/ui.py:52
 msgid "_Rotate 90 degrees CW"
 msgstr "_Okreni za 90 stupnjeva u smjeru kazaljke na satu"
 
-#: comix:10958
+#: src/ui.py:54
 msgid "Rotate 180 de_grees"
 msgstr "Okreni za 180 _stupnjeva"
 
-#: comix:10960
+#: src/ui.py:56
 msgid "Rotat_e 90 degrees CCW"
 msgstr "Okre_ni za 90 stupnjeva obrnuto od smjera kazaljke na satu"
 
-#: comix:10962
+#: src/ui.py:58
 msgid "Fli_p horizontally"
 msgstr "Okreni _vodoravno"
 
-#: comix:10964
+#: src/ui.py:60
 msgid "Flip _vertically"
 msgstr "Okreni _okomito"
 
-#: comix:10967
+#: src/ui.py:62
+msgid "Manual _Zoom"
+msgstr "Ručno Po_većaj"
+
+#: src/ui.py:63
+msgid "Open _recent"
+msgstr ""
+
+#: src/ui.py:64
+msgid "_Bookmarks"
+msgstr "_Oznake"
+
+#: src/ui.py:65
+msgid "T_oolbars"
+msgstr ""
+
+#: src/ui.py:66
+msgid "_Edit"
+msgstr "_Podesi"
+
+#: src/ui.py:67
+msgid "_File"
+msgstr "_Datoteka"
+
+#: src/ui.py:68
+msgid "_View"
+msgstr "_Pregled"
+
+#: src/ui.py:69
+msgid "_Go"
+msgstr "_Idi"
+
+#: src/ui.py:70
+msgid "_Help"
+msgstr "_Pomoć"
+
+#: src/ui.py:71
+msgid "_Transform"
+msgstr "_Transformacija"
+
+#: src/ui.py:75
 msgid "_Fullscreen"
 msgstr "_Preko cijelog zaslona"
 
-#: comix:10969
+#: src/ui.py:77
 msgid "_Double page mode"
 msgstr "Prikaz _dvostrukih stranica"
 
-#: comix:10971
+#: src/ui.py:79
 msgid "_Toolbar"
 msgstr "_Alatna traka"
 
-#: comix:10973
+#: src/ui.py:81
 msgid "_Menubar"
 msgstr "_Traka izbornika"
 
-#: comix:10975
+#: src/ui.py:83
 msgid "St_atusbar"
 msgstr "Traka _stanja"
 
-#: comix:10977
+#: src/ui.py:85
 msgid "S_crollbars"
 msgstr "Kli_zači"
 
-#: comix:10979
+#: src/ui.py:87
 msgid "Th_umbnails"
 msgstr "Sliči_ce"
 
-#: comix:10981
+#: src/ui.py:89
 msgid "H_ide all"
 msgstr "_Sakrij sve"
 
-#: comix:10983
+#: src/ui.py:91
 msgid "_Manga mode"
 msgstr "_Manga prikaz"
 
-#: comix:10985
+#: src/ui.py:93
 msgid "_Keep transformation"
 msgstr "_Zadrži transformaciju"
 
-#: comix:10987
-msgid "Magnifying _lens"
-msgstr "_Povećalo"
+#: src/ui.py:95
+msgid "Run _slideshow"
+msgstr ""
 
-#: comix:10991
-msgid "Fit-to-_screen mode"
-msgstr "_Uklopi prikaz u zaslon"
+#: src/ui.py:97
+msgid "Magnifying _glass"
+msgstr ""
 
-#: comix:10992
+#: src/ui.py:101
+msgid "_Best fit mode"
+msgstr ""
+
+#: src/ui.py:103
 msgid "Fit _width mode"
 msgstr "Pri_lagodi širini"
 
-#: comix:10993
+#: src/ui.py:105
 msgid "Fit _height mode"
 msgstr "Prilagodi _visini"
 
-#: comix:11007
-msgid "Enter fullscreen mode automatically when Comix is started."
-msgstr "Prikaži prikaz preko cijelog zaslona automatski kada se Comix pokrene."
+#: src/ui.py:107
+msgid "M_anual zoom mode"
+msgstr ""
 
-#: comix:11008
-msgid "Enter double page mode automatically when Comix is started."
-msgstr "Prikaži dvostruke stranice automatski kada se Comix pokrene."
+#: src/ui.py:113
+msgid "_About"
+msgstr "_O programu"
 
-#: comix:11009
-msgid "Enter manual zoom mode automatically when Comix is started."
-msgstr "Pokreni ručno povećavanje automatski kada se Comix pokrene."
+#: src/ui.py:115
+msgid "_View comments..."
+msgstr ""
 
-#: comix:11010
-msgid "Enter fit-to-screen mode automatically when Comix is started."
-msgstr "Pokreni uklapanje prikaza u zaslon automatski kada se Comix pokrene."
+#: src/ui.py:117
+msgid "_Edit archive..."
+msgstr ""
 
-#: comix:11011
-msgid "Enter fit width mode automatically when Comix is started."
-msgstr "Pokreni prilagodbu širini automatski kada se Comix pokrene."
+#: src/ui.py:119
+msgid "_Open..."
+msgstr "_Otvori..."
 
-#: comix:11012
-msgid "Enter fit height mode automatically when Comix is started."
-msgstr "Pokreni prilagodbu visini automatski kada se Comix pokrene."
+#: src/ui.py:121
+msgid "_Properties"
+msgstr ""
 
-#: comix:11013
-msgid "Also scale images to a size that is larger than their original size in fit-to-screen mode, fit width mode and fit height mode."
-msgstr "Prilagodi slike veličini koja je veća nego izvorna, kada se prikaz uklapa u zaslon ili prilagođava po širini ili veličini."
+#: src/ui.py:123
+msgid "_Enhance image..."
+msgstr ""
 
-#: comix:11014
-msgid "Scale the images independently when in double page mode and fit-to-screen mode. The smaller of the two images will scale up to fill any extra space that is given."
-msgstr "Prilagodi slike nezavisno kada je uključen prikaz dvostrukih stranica i prikaz uklapanja u ekran. Manja slika će se prilagoditi većoj da popuni prazan prostor."
+#: src/ui.py:126
+msgid "_Thumbnail maintenance..."
+msgstr ""
 
-#: comix:11015
-msgid "Automatically show any available comments when opening a new file."
-msgstr "Automatski prikaži dostupne komentare kod otvaranje datoteke."
+#: src/ui.py:128
+msgid "Pr_eferences"
+msgstr "Po_stavke"
 
-#: comix:11016
-msgid "Automatically hide scrollbars, menubar, toolbar, statusbar and thumbnails when in fullscreen mode."
-msgstr "Automatski sakrij klizače, izborničku, alatnu i statusnu traku te sličice kod prikaza preko cijelog zaslona."
+#: src/ui.py:132
+msgid "_Library..."
+msgstr ""
 
-#: comix:11017
-msgid "Cache the next page in the archive/directory to increase the perceived speed. This is generally recommended unless you are running low on RAM."
-msgstr "Pohrani sljedeću sliku u arhivi/direktoriju da bi naizgled povećali brzinu. Ovo je preporučeno osim ako imate malo radne memorije."
-
-#: comix:11018
-msgid "Move the horizontal scrollbar instead of the vertical when using the scroll wheel at the top or the bottom of the page. The direction will be determined by whether you use manga mode or not."
-msgstr "Pomakni vodoravni klizač umjesto okomitog kada se kotačić koristi na vrhu ili dnu stranice. Smjer će biti određen ovisno o tome koristite li Manga prikaz ili ne."
-
-#: comix:11019
-msgid "Flip pages when scrolling \"off the page\" with the scroll wheel, even when not in fit-to-screen mode. It takes three \"steps\" with the scroll wheel to trigger this behaviour."
-msgstr "Okreni stranice kod klizanja \"preko ruba stranice\" kotačićem, čak i kada se ne koristi prikaz uklopljen u zaslon. Potrebno je napraviti tri \"koraka\" kotačićem da bi se pokrenuo ovaj postupak."
-
-#: comix:11020
-msgid "Save the position and the size of the window for the next time you start Comix."
-msgstr "Pohrani položaj i veličinu prozora za sljedeći put kada se Comix pokrene."
-
-#: comix:11021
-msgid "Automatically open the next archive in the directory when scrolling past the last page of the current archive, and automatically open the previous archive in the directory when scrolling past the first page of the current archive."
-msgstr "Automatsko otvaranje sljedeće arhive u direktoriju kod okretanja kotačića na dnu zadnje stranice trenutne arhive, i automatski otvori prijašnju arhivu kod okretanja kotačića na vrhu prve stranice trenutne arhive."
-
-#: comix:11022
-msgid "Hide the cursor when in fullscreen mode."
-msgstr "Sakrij pokazivač pri pregledu preko cijelog zaslona."
-
-#: comix:11023
-#: comix:11024
-#: comix:11025
-#: comix:11026
-msgid "Set the image scaling method. The best choice is often \"Tiles\", it is quite quick and produces almost as good results as \"Bilinear\" or \"Hyper\"."
-msgstr "Podesi metodu skaliranja slika. Najbolji izbor su često \"Pločice\", vrlo je brz i daje gotovo iste rezultate kao \"Bilinearno\" ili \"Hiper\"."
-
-#: comix:11027
-msgid "Treat files with the following extensions as comment files. Extensions should be separated by whitespaces. They are not case sensitive."
-msgstr "Tretiraj datoteke sa sljedećim ekstenzijama kao datoteke s komentarima. Ekstenzije bi trebale biti razdvojene sa razmacima. Ne razlikuje velika i mala slova."
-
-#: comix:11028
-msgid "Use smart scrolling with the space key. Pressing the space key normally scrolls straight down one window height unless at the bottom of the page where it flips pages instead. When this option is set Comix automatically tries to follow the reading flow of the comic book. When pressing the space key it will not only scroll down but will also scroll horizontally to the edge of the page (left or right depending on whether you use manga mode). In double page mode it will go to the edge of the first page if it is in view, otherwise it will go to the edge of the second page. Also, in double page mode with this option, Comix will not flip pages unless at the bottom of the second page. At the bottom of the first page it will instead go to the top of the second page."
-msgstr "Koristi pametno klizanje sa space tipkom. Pritisak na tipku space normalno rezultira klizanjem ravno do dna za jednu visinu prozora osim ako je na dnu stranice, onda ju prebaci. Kada je ova opcija uključena, Comix automatski pokušava pratiti tok čitanja stripa. Kod pritiska na tipku space neće samo otklizati do dna stranice nego će i pomaknuti klizač vodoravno do ruba stranice (u desno ili lijevo ovisi da li koristite manga prikaz). Kod prikaza dvostrukih stranica otići će do ruba prve stranice ako je u dosegu, inače će otići do ruba druge stranice. Također kod takvog prikaza sa ovom opcijom uključenom, Comix neće prebaciti stranicu osim ako je na dnu druge stranice. Na dnu prve stranice će otići na početak druge stranice."
-
-#: comix:11029
-msgid "Always hide the thumbnail scrollbar."
-msgstr "Uvijek sakrij klizač sličica."
-
-#: comix:11030
-msgid "Automatically open the last viewed page when Comix is started."
-msgstr "Automatski otvori zadnju pregledanu stranicu kada se Comix pokreće."
-
-#: comix:11031
-msgid "Automatically go to the same directory as last time when opening the \"Open\" dialog."
-msgstr "Automatski idi u zadnje pristupljeni direktorij, kod otvaranja dijaloga \"Otvori\" izbornika."
-
-#: comix:11032
-msgid "Automatically go to this directory when opening the \"Open\" dialog."
-msgstr "Automatski idi u ovaj direktorij kod otvaranja dijaloga \"Otvori\" izbornika."
-
-#: comix:11033
-msgid "Automatically restore these values the next time Comix is started."
-msgstr "Automatski obnovi ove vrijednosti sljedeći puta kada se Comix pokrene."
-
-#: comix:11034
-msgid "Show the page number in the upper left corner of each thumbnail."
-msgstr "Prikaži broj stranice u gornjem lijevom uglu svake sličice."
-
-#: comix:11035
-msgid "Automatically adjust the contrast of the images so that the darkest pixel is completely black and the lightest pixel is completely white. This only works with images without an alpha channel."
-msgstr "Automatski prilagodi kontrast slika tako da je najmračniji piksel kompletno crn a najsvjetliji piksel kompletno bijel. Ovo će raditi samo sa slikama koje nemaju alpha kanal."
-
-#: comix:11036
-msgid "The space key uses smart scrolling as if in double page mode even when in single page mode. This can be useful for comics with two scanned pages in each image. The pages are assumed to be of equal size"
-msgstr "Tipka space koristi pametno klizanje kao kod prikaza dvostrukih stranica, čak i kada prikazuje pojedinačne stranice. Ovo može biti korisno kod čitanja stripova koji već imaju skenirane po dvije stranice u istoj slici. Pretpostavlja se da su stranice jednake veličine."
-
-#: comix:11037
-msgid "Adjust the lens magnification factor."
-msgstr "Podesi faktor uvećanja leće."
-
-#: comix:11038
-msgid "Set the lens width and height in pixels. A larger lens will use more CPU resources than a small one."
-msgstr "Podesi širinu i visinu leće u pikselima. Veća leća će zahtjevati više resursa nego malena."
-
-#: comix:11039
-msgid "Set the maximum update frequency for the magnification lens in milliseconds. Setting the value too low can cause the lens to lag behind when moving the mouse quickly. Setting the value too high can cause the lens to appear choppy."
-msgstr "Podesi maksimalnu frekvenciju ažuriranja za povećanje leće, u milisekundama. Postavljanje pre niske vrijednosti može rezultirati zastajkivanjem leće kod brzih pokreta pokazivačem. Postavljanje pre visoke vrijednosti može rezultirati prividom da leća \"titra\"."
-
-#: comix:11040
-msgid "Read and write thumbnails in the ~/.thumbnails directory as proposed by the freedesktop.org standard. With this preference set, Comix will use the thumbnails already stored there to speed up thumbnail loading. If there are no thumbnails, Comix will create them and save them there. This is a standard that many applications conform to, thumbnails created by other applications can be used by Comix and vice versa. If this preference is not set, Comix will create thumbnails on the fly every time a directory is opened."
-msgstr "Čitanje i pisanje sličica u ~/.thumbnails direktoriju što je predloženi freedesktop.org standard. Sa ovom postavkom uključenom Comix će koristiti sličice koje su vec pohranjene tamo da bi ubrzao učitavanje sličica. Ako u direktoriju nema sličica Comix će ih nakon stvaranja tamo pohranjivati. Ovo je standard koji mnoge aplikacije poštuju, Comix može koristiti sličice koje su stvorile druge aplikacije i obrnuto. Ukoliko nije uključeno Comix će stvarati sličice \"u letu\" svaki puta kada je neki direktorij otvoren."
-
-#: comix:11041
-msgid "Also use stored thumbnails for images in archives in a similiar way. Due to restrictions in the freedesktop.org standard, these thumbnails will be stored in ~/.comix and will only be used by Comix. If this preference is not set, Comix will create thumbnails on the fly every time an archive is opened."
-msgstr "Na sličan način koristi pohranjene sličice za slike koje se nalaze u arhivama. Zbog ograničenja u freedesktop.org standardu ove sličice će biti pohranjene u direktorij ~/.comix i pristupat će im samo Comix. Ukoliko nije uključeno Comix će stvarati sličice \"u letu\" svaki puta kada je neka arhiva otvorena."
-
-#: comix:11042
-msgid "Only display a single image in double page mode if the image consists of two pages. An image is assumed to consist of two pages if its width is greater than its height."
-msgstr "Prikaži samo jednu sliku kod prikaza dvostrukih stranica, ako se slika sastoji od dvije stranice. Pretpostavljeno je da se slika sastoji od dvije stranice ako joj je širina veća od visine."
-
-#: comix:11043
-msgid "Filter out archives with regular expressions."
-msgstr "Filtriraj arhive sa regularnim izrazima."
-
-#: comix:11044
-msgid "Apply filters on full paths rather than filenames."
-msgstr "Primjeni filtere na punu putanju umjesto samo na imena."
-
-#: comix:11045
-msgid "Store a list of the 10 last opened files that can be accessed through the menus."
-msgstr "Pohrani popis 10 zadnje otvorenih datoteka kojima se može pristupiti kroz izbornike."
-
-#: comix:11053
+#: src/ui.py:282
 msgid "First page"
 msgstr "Prva stranica"
 
-#: comix:11054
+#: src/ui.py:284
 msgid "Previous page"
 msgstr "Prijašnja stranica"
 
-#: comix:11055
+#: src/ui.py:285
 msgid "Next page"
 msgstr "Sljedeća stranica"
 
-#: comix:11056
+#: src/ui.py:286
 msgid "Last page"
 msgstr "Zadnja stranica"
 
-#: comix:11057
-msgid "Go to page..."
-msgstr "Idi na stranicu..."
+#: src/ui.py:297
+msgid "Manga mode"
+msgstr "Manga prikaz"
 
+#: src/ui.py:298
+msgid "Magnifying glass"
+msgstr ""
+
+#~ msgid "No images in \"%s\""
+#~ msgstr "Nema slika u \"%s\""
+
+#~ msgid "Default"
+#~ msgstr "Uobičajeno"
+
+#~ msgid "Automatically adjust contrast"
+#~ msgstr "Automatski podesi kontrast"
+
+#~ msgid "Fit-to-screen mode"
+#~ msgstr "Uklopi prikaz u zaslon"
+
+#~ msgid "_Normal size"
+#~ msgstr "_Normalna veličina"
+
+#~ msgid "_Toolbars"
+#~ msgstr "_Alatne trake"
+
+#~ msgid "Fit-to-_screen mode"
+#~ msgstr "_Uklopi prikaz u zaslon"
+
+#~ msgid "View _comments"
+#~ msgstr "Pogledaj _komentare"
+
+#~ msgid "Proper_ties"
+#~ msgstr "Pos_tavke"
+
+#~ msgid "Magnifying lens"
+#~ msgstr "Povećalo"
+
+#~ msgid "Apply filter on full path"
+#~ msgstr "Primjeni filter na cijelu putanju"
+
+#~ msgid "Add archives to library."
+#~ msgstr "Dodaj arhive u biblioteku."
+
+#~ msgid "Remove selected archive from library."
+#~ msgstr "Ukloni označenu arhivu iz biblioteke"
+
+#~ msgid "Clean up"
+#~ msgstr "Počisti"
+
+#~ msgid "Remove orphaned or outdated library entries."
+#~ msgstr "Ukloni napuštene ili zastarjele unose iz biblioteke"
+
+#~ msgid "Close this window."
+#~ msgstr "Zatvori ovaj prozor."
+
+#~ msgid "Open selected archive."
+#~ msgstr "Otvori odabranu arhivu."
+
+#~ msgid "All archives"
+#~ msgstr "Sve arhive"
+
+#~ msgid "JPEG image"
+#~ msgstr "JPEG slika"
+
+#~ msgid "PNG image"
+#~ msgstr "PNG slika"
+
+#~ msgid "GIF image"
+#~ msgstr "GIF slika"
+
+#~ msgid "TIFF image"
+#~ msgstr "TIFF slika"
+
+#~ msgid "BMP image"
+#~ msgstr "BMP slika"
+
+#~ msgid "ICO image"
+#~ msgstr "ICO slika"
+
+#~ msgid "XPM image"
+#~ msgstr "XPM slika"
+
+#~ msgid "XBM image"
+#~ msgstr "XBM slika"
+
+#~ msgid "tar archive"
+#~ msgstr "tar arhiva"
+
+#~ msgid "Add archives recursively"
+#~ msgstr "Dodaj arhive rekurzivno"
+
+#~ msgid "Select folder"
+#~ msgstr "Izaberite direktorij"
+
+#~ msgid "Fullscreen as default"
+#~ msgstr "Cijeli zaslon kao uobičajeni prikaz"
+
+#~ msgid "Double page mode as default"
+#~ msgstr "Dvostruke stranice kao uobičajeni prikaz"
+
+#~ msgid "Stretch small images"
+#~ msgstr "Razvuci male slike"
+
+#~ msgid "Use smart scaling in double page mode"
+#~ msgstr "Koristi pametno skaliranje kod prikaza dvostrukih stranica"
+
+#~ msgid "Always view comments when opening a new file"
+#~ msgstr "Uvijek koristiti komentare kod otvaranja nove datoteke"
+
+#~ msgid "Hide menubar, scrollbars etc. in fullscreen mode"
+#~ msgstr ""
+#~ "Sakrij traku izbornika, klizače itd. u prikazu preko cijelog zaslona"
+
+#~ msgid "Cache pages for faster forward flipping"
+#~ msgstr "Pohranjuj stranice u međuspremnik zbog bržeg okretanja"
+
+#~ msgid "Scroll wheel scrolls horizontally at top and bottom of page"
+#~ msgstr "Vrtnja kotačića pomiče vodoravno na vrhu i dnu stranice"
+
+#~ msgid "Flip page when scrolling off the top or bottom of page"
+#~ msgstr "Okreni stranicu kada se kotačić pomiče preko vrha ili dna stranice"
+
+#~ msgid "Hide thumbnail scrollbar"
+#~ msgstr "Sakrij klizač na umanjenom prikazu stranica"
+
+#~ msgid "Space key uses smart scrolling"
+#~ msgstr "Space koristi pametno klizanje"
+
+#~ msgid "Save window position and size for future sessions"
+#~ msgstr "Pohrani položaj i veličinu prozora za buduće sesije"
+
+#~ msgid "Go to the next archive in directory after last page"
+#~ msgstr "Nakon zadnje stranice pređi na sljedeću arhivu u direktoriju"
+
+#~ msgid "Hide cursor in fullscreen mode"
+#~ msgstr "Sakrij pokazivač kod pregleda preko cijelog zaslona"
+
+#~ msgid "Open last viewed file on start"
+#~ msgstr "Kod pokretanja otvori posljednje pregledanu datoteku"
+
+#~ msgid "Show page numbers on thumbnails"
+#~ msgstr "Prikaži broj stranice na sličicama"
+
+#~ msgid "Always use smart scrolling as if in double page mode"
+#~ msgstr "Uvijek koristi pametno klizanje kao kod prikaza dvostrukih stranica"
+
+#~ msgid "Use stored thumbnails for images in directories"
+#~ msgstr "Upotrijebi pohranjene sličice za slike u direktorijima"
+
+#~ msgid "Use stored thumbnails for images in archives"
+#~ msgstr "Upotrijebi pohranjene sličice za slike u arhivama"
+
+#~ msgid "Display only one page in double page mode if the image is wide"
+#~ msgstr ""
+#~ "Prikaži samo jednu stranicu kod dvostrukog prikaza ako je slika široka"
+
+#~ msgid "Store recently opened files"
+#~ msgstr "Pohrani nedavno otvorene datoteke"
+
+#~ msgid "Always go to this directory in the \"Open\" dialog:"
+#~ msgstr "Uvijek idi u ovaj direktorij u dijalogu izbornika \"Otvori\":"
+
+#~ msgid "Always go to the latest directory in the \"Open\" dialog"
+#~ msgstr "Uvijek idi u posljednji direktorij u dijalogu izbornika \"Otvori\""
+
+#~ msgid "Nearest (quickest, worst quality)"
+#~ msgstr "Najbliže (najbrže, najgora kvaliteta)"
+
+#~ msgid "Tiles"
+#~ msgstr "Pločice"
+
+#~ msgid "Bilinear"
+#~ msgstr "Bilinearno"
+
+#~ msgid "Hyper (slowest, best quality)"
+#~ msgstr "Hiper (najsporije, najbolja kvaliteta)"
+
+#~ msgid "Manual zoom mode as default"
+#~ msgstr "Ručno povećavanje kao uobičajeni prikaz"
+
+#~ msgid "Fit-to-screen mode as default"
+#~ msgstr "Uklopi u zaslon kao uobičajeni prikaz"
+
+#~ msgid "Fit width mode as default"
+#~ msgstr "Prilagodi visini kao uobičajeni prikaz"
+
+#~ msgid "Fit height mode as default"
+#~ msgstr "Prilagodi visini kao uobičajeni prikaz"
+
+#~ msgid "Background colour:"
+#~ msgstr "Boja pozadine:"
+
+#~ msgid "Background colour"
+#~ msgstr "Boja pozadine"
+
+#~ msgid "Toolbar button labels:"
+#~ msgstr "Oznake na alatnoj traci:"
+
+#~ msgid "Icons only"
+#~ msgstr "Samo ikone"
+
+#~ msgid "Text only"
+#~ msgstr "Samo tekst"
+
+#~ msgid "Icons and text"
+#~ msgstr "Ikone i tekst"
+
+#~ msgid "Slideshow delay:"
+#~ msgstr "Zadrška kod prikaza prezentacija"
+
+#~ msgid "Scaling quality"
+#~ msgstr "Kvaliteta skaliranja"
+
+#~ msgid "Scaling"
+#~ msgstr "Skaliranje"
+
+#~ msgid "Treat files with the following extensions as comments:"
+#~ msgstr "Tretiraj datoteke sa sljedećim ekstenzijama kao komentare:"
+
+#~ msgid "Space key scrolls"
+#~ msgstr "Space pomiče"
+
+#~ msgid "of"
+#~ msgstr "od"
+
+#~ msgid "Window size"
+#~ msgstr "Veličine prozora"
+
+#~ msgid "Page size"
+#~ msgstr "Veličine stranice"
+
+#~ msgid "Magnification factor:"
+#~ msgstr "Faktor uvećanja:"
+
+#~ msgid "Lens size (px):"
+#~ msgstr "Veličina leće (px):"
+
+#~ msgid "Update interval (milliseconds):"
+#~ msgstr "Vrijeme obnavljanja (milisekunde):"
+
+#~ msgid "Lens"
+#~ msgstr "Leća"
+
+#~ msgid "Thumbnail sizes (px):"
+#~ msgstr "Veličina sličica (px):"
+
+#~ msgid "Library thumbnail sizes (px):"
+#~ msgstr "Veličina sličica u biblioteci (px):"
+
+#~ msgid "Adjust colour"
+#~ msgstr "Podesi boju"
+
+#~ msgid "Save values for future sessions"
+#~ msgstr "Sačuvaj vrijednosti za buduće sesije"
+
+#~ msgid "Go to page"
+#~ msgstr "Idi na stranicu"
+
+#~ msgid "Title"
+#~ msgstr "Naslov"
+
+#~ msgid "It reads ZIP, RAR and tar archives (also gzip or bzip2 compressed)"
+#~ msgstr ""
+#~ "Može čitati ZIP, RAR i tar arhive (kao i one sažete s gzip ili bzip2 "
+#~ "programom)"
+
+#~ msgid "as well as plain image files."
+#~ msgstr "kao i obične slike"
+
+#~ msgid "Developer and Swedish translation"
+#~ msgstr "Programer i švedski prijevod"
+
+#~ msgid "Manage thumbnails"
+#~ msgstr "Upravljanje sličicama"
+
+#~ msgid "Remove all stored thumbnails:"
+#~ msgstr "Ukloni sve pohranjene sličice:"
+
+#~ msgid "Remove orphaned thumbnails:"
+#~ msgstr "Ukloni napuštene sličice:"
+
+#~ msgid "Directories"
+#~ msgstr "Direktoriji"
+
+#~ msgid "Archives"
+#~ msgstr "Arhive"
+
+#~ msgid "Convert"
+#~ msgstr "Pretvori"
+
+#~ msgid "File type"
+#~ msgstr "Tip datoteke"
+
+#~ msgid "Extension"
+#~ msgstr "Ekstenzija"
+
+#~ msgid "Zip archive"
+#~ msgstr "Zip arhiva"
+
+#~ msgid "Delete old archive/directory"
+#~ msgstr "Ukloni staru arhivu/direktorij"
+
+#~ msgid "Permission denied"
+#~ msgstr "Pristup odbijen"
+
+#~ msgid "Confirm operation"
+#~ msgstr "Potvrdi operaciju"
+
+#~ msgid "Permanently remove %s?"
+#~ msgstr "Trajno ukloni %s?"
+
+#~ msgid "Perform lossless JPEG operation on %s?"
+#~ msgstr "Izvedi JPEG transformaciju bez gubitaka na %s?"
+
+#~ msgid "Some images might be trimmed a bit during the operation."
+#~ msgstr "Neke slike mogu biti obrubljene tijekom operacije."
+
+#~ msgid "Permanently convert %s to greyscale?"
+#~ msgstr "Trajno prebaci %s u sive tonove?"
+
+#~ msgid "Location:"
+#~ msgstr "Lokacija:"
+
+#~ msgid "Quantity:"
+#~ msgstr "Količina:"
+
+#~ msgid "Total size:"
+#~ msgstr "Ukupna veličina:"
+
+#~ msgid "Removed:"
+#~ msgstr "Uklonjeno:"
+
+#~ msgid "Done!"
+#~ msgstr "Gotovo!"
+
+#~ msgid "pages"
+#~ msgstr "stranica"
+
+#~ msgid "comment"
+#~ msgstr "komentar"
+
+#~ msgid "comments"
+#~ msgstr "komentari"
+
+#~ msgid "In library"
+#~ msgstr "U biblioteci"
+
+#~ msgid "Yes"
+#~ msgstr "Da"
+
+#~ msgid "No"
+#~ msgstr "Ne"
+
+#~ msgid "Bookmarked"
+#~ msgstr "Označeno"
+
+#~ msgid "Yes, page"
+#~ msgstr "Da, stranica"
+
+#~ msgid "Mode"
+#~ msgstr "Način"
+
+#~ msgid "Pixel count"
+#~ msgstr "Broj piksela"
+
+#~ msgid "Pixel sum"
+#~ msgstr "Zbroj piksela"
+
+#~ msgid "Extrema"
+#~ msgstr "Extrema"
+
+#~ msgid "Mean"
+#~ msgstr "Prosječni"
+
+#~ msgid "Median"
+#~ msgstr "Središnji"
+
+#~ msgid "Standard deviation"
+#~ msgstr "Standardno"
+
+#~ msgid "Image 1"
+#~ msgstr "Slika 1"
+
+#~ msgid "Image 2"
+#~ msgstr "Slika 2"
+
+#~ msgid "Could not delete"
+#~ msgstr "Nije moguće ukloniti"
+
+#~ msgid "Please check your permissions."
+#~ msgstr "Provjerite vaše privilegije."
+
+#~ msgid "Could not create"
+#~ msgstr "Nije moguće stvoriti"
+
+#~ msgid "Added:"
+#~ msgstr "Dodano:"
+
+#~ msgid "Adding library entries"
+#~ msgstr "Dodajem unose u biblioteku"
+
+#~ msgid "Removing library entries"
+#~ msgstr "Uklanjam unose iz biblioteke"
+
+#~ msgid "Extract page"
+#~ msgstr "Izvuci stranicu"
+
+#~ msgid "page"
+#~ msgstr "stranice"
+
+#~ msgid ""
+#~ "Could not find the unrar executable. Please install it if you wish to "
+#~ "open RAR archives."
+#~ msgstr ""
+#~ "Nije pronađena unrar izvršna datoteka. Molim instalirajte unrar ako "
+#~ "želite otvarati RAR arhive."
+
+#~ msgid "Could not open"
+#~ msgstr "Nije moguće otvoriti"
+
+#~ msgid "is not a file."
+#~ msgstr "nije datoteka."
+
+#~ msgid "does not exist."
+#~ msgstr "ne postoji."
+
+#~ msgid "Filetype of"
+#~ msgstr "Vrsta datoteke od"
+
+#~ msgid "not recognized."
+#~ msgstr "nije prepoznata."
+
+#~ msgid "Comment file"
+#~ msgstr "Datoteka s komentarom"
+
+#~ msgid "Could not read"
+#~ msgstr "Nije moguće pročitati"
+
+#~ msgid "Comment"
+#~ msgstr "Komentar"
+
+#~ msgid "_Go to page..."
+#~ msgstr "_Idi na stranicu..."
+
+#~ msgid "Fit _width"
+#~ msgstr "Prilagodi _širinu"
+
+#~ msgid "Fit _height"
+#~ msgstr "Prilagodi _visinu"
+
+#~ msgid "_Best fit"
+#~ msgstr "_Najbolje pristajanje"
+
+#~ msgid "Clear bookmarks"
+#~ msgstr "Obriši oznake"
+
+#~ msgid "_Manage thumbnails..."
+#~ msgstr "_Upravljanje sličicama..."
+
+#~ msgid "_Recent files"
+#~ msgstr "_Skorašnje datoteke"
+
+#~ msgid "Clear recent files"
+#~ msgstr "Obriši skorašnje datoteke"
+
+#~ msgid "Open _library..."
+#~ msgstr "Otvori _biblioteku..."
+
+#~ msgid "_Add to library"
+#~ msgstr "_Dodaj u biblioteku"
+
+#~ msgid "Con_vert..."
+#~ msgstr "Pre_tvori..."
+
+#~ msgid "E_xtract image..."
+#~ msgstr "I_zvuci sliku..."
+
+#~ msgid "_Adjust colour..."
+#~ msgstr "_Podesi boju..."
+
+#~ msgid "Delete image..."
+#~ msgstr "Obriši sliku..."
+
+#~ msgid "CW lossless JPEG rotation..."
+#~ msgstr "JPEG zakretanje bez gubitaka u smjeru kazaljke na satu..."
+
+#~ msgid "CCW lossless JPEG rotation..."
+#~ msgstr "JPEG zakretanje bez gubitaka obrnuto od kazaljke na satu..."
+
+#~ msgid "Horizontal lossless JPEG flip..."
+#~ msgstr "Vodoravno okreni JPEG bez gubitaka..."
+
+#~ msgid "Vertical lossless JPEG flip..."
+#~ msgstr "Okomito okreni JPEG bez gubitaka..."
+
+#~ msgid "Convert JPEG to greyscale..."
+#~ msgstr "Prebaci JPEG u sive tonove..."
+
+#~ msgid "File o_perations"
+#~ msgstr "Rad _s datotekama"
+
+#~ msgid "Magnifying _lens"
+#~ msgstr "_Povećalo"
+
+#~ msgid "Enter fullscreen mode automatically when Comix is started."
+#~ msgstr ""
+#~ "Prikaži prikaz preko cijelog zaslona automatski kada se Comix pokrene."
+
+#~ msgid "Enter double page mode automatically when Comix is started."
+#~ msgstr "Prikaži dvostruke stranice automatski kada se Comix pokrene."
+
+#~ msgid "Enter manual zoom mode automatically when Comix is started."
+#~ msgstr "Pokreni ručno povećavanje automatski kada se Comix pokrene."
+
+#~ msgid "Enter fit-to-screen mode automatically when Comix is started."
+#~ msgstr ""
+#~ "Pokreni uklapanje prikaza u zaslon automatski kada se Comix pokrene."
+
+#~ msgid "Enter fit width mode automatically when Comix is started."
+#~ msgstr "Pokreni prilagodbu širini automatski kada se Comix pokrene."
+
+#~ msgid "Enter fit height mode automatically when Comix is started."
+#~ msgstr "Pokreni prilagodbu visini automatski kada se Comix pokrene."
+
+#~ msgid ""
+#~ "Also scale images to a size that is larger than their original size in "
+#~ "fit-to-screen mode, fit width mode and fit height mode."
+#~ msgstr ""
+#~ "Prilagodi slike veličini koja je veća nego izvorna, kada se prikaz uklapa "
+#~ "u zaslon ili prilagođava po širini ili veličini."
+
+#~ msgid ""
+#~ "Scale the images independently when in double page mode and fit-to-screen "
+#~ "mode. The smaller of the two images will scale up to fill any extra space "
+#~ "that is given."
+#~ msgstr ""
+#~ "Prilagodi slike nezavisno kada je uključen prikaz dvostrukih stranica i "
+#~ "prikaz uklapanja u ekran. Manja slika će se prilagoditi većoj da popuni "
+#~ "prazan prostor."
+
+#~ msgid "Automatically show any available comments when opening a new file."
+#~ msgstr "Automatski prikaži dostupne komentare kod otvaranje datoteke."
+
+#~ msgid ""
+#~ "Automatically hide scrollbars, menubar, toolbar, statusbar and thumbnails "
+#~ "when in fullscreen mode."
+#~ msgstr ""
+#~ "Automatski sakrij klizače, izborničku, alatnu i statusnu traku te sličice "
+#~ "kod prikaza preko cijelog zaslona."
+
+#~ msgid ""
+#~ "Cache the next page in the archive/directory to increase the perceived "
+#~ "speed. This is generally recommended unless you are running low on RAM."
+#~ msgstr ""
+#~ "Pohrani sljedeću sliku u arhivi/direktoriju da bi naizgled povećali "
+#~ "brzinu. Ovo je preporučeno osim ako imate malo radne memorije."
+
+#~ msgid ""
+#~ "Move the horizontal scrollbar instead of the vertical when using the "
+#~ "scroll wheel at the top or the bottom of the page. The direction will be "
+#~ "determined by whether you use manga mode or not."
+#~ msgstr ""
+#~ "Pomakni vodoravni klizač umjesto okomitog kada se kotačić koristi na vrhu "
+#~ "ili dnu stranice. Smjer će biti određen ovisno o tome koristite li Manga "
+#~ "prikaz ili ne."
+
+#~ msgid ""
+#~ "Save the position and the size of the window for the next time you start "
+#~ "Comix."
+#~ msgstr ""
+#~ "Pohrani položaj i veličinu prozora za sljedeći put kada se Comix pokrene."
+
+#~ msgid ""
+#~ "Automatically open the next archive in the directory when scrolling past "
+#~ "the last page of the current archive, and automatically open the previous "
+#~ "archive in the directory when scrolling past the first page of the "
+#~ "current archive."
+#~ msgstr ""
+#~ "Automatsko otvaranje sljedeće arhive u direktoriju kod okretanja kotačića "
+#~ "na dnu zadnje stranice trenutne arhive, i automatski otvori prijašnju "
+#~ "arhivu kod okretanja kotačića na vrhu prve stranice trenutne arhive."
+
+#~ msgid "Hide the cursor when in fullscreen mode."
+#~ msgstr "Sakrij pokazivač pri pregledu preko cijelog zaslona."
+
+#~ msgid ""
+#~ "Set the image scaling method. The best choice is often \"Tiles\", it is "
+#~ "quite quick and produces almost as good results as \"Bilinear\" or \"Hyper"
+#~ "\"."
+#~ msgstr ""
+#~ "Podesi metodu skaliranja slika. Najbolji izbor su često \"Pločice\", vrlo "
+#~ "je brz i daje gotovo iste rezultate kao \"Bilinearno\" ili \"Hiper\"."
+
+#~ msgid ""
+#~ "Treat files with the following extensions as comment files. Extensions "
+#~ "should be separated by whitespaces. They are not case sensitive."
+#~ msgstr ""
+#~ "Tretiraj datoteke sa sljedećim ekstenzijama kao datoteke s komentarima. "
+#~ "Ekstenzije bi trebale biti razdvojene sa razmacima. Ne razlikuje velika i "
+#~ "mala slova."
+
+#~ msgid ""
+#~ "Use smart scrolling with the space key. Pressing the space key normally "
+#~ "scrolls straight down one window height unless at the bottom of the page "
+#~ "where it flips pages instead. When this option is set Comix automatically "
+#~ "tries to follow the reading flow of the comic book. When pressing the "
+#~ "space key it will not only scroll down but will also scroll horizontally "
+#~ "to the edge of the page (left or right depending on whether you use manga "
+#~ "mode). In double page mode it will go to the edge of the first page if it "
+#~ "is in view, otherwise it will go to the edge of the second page. Also, in "
+#~ "double page mode with this option, Comix will not flip pages unless at "
+#~ "the bottom of the second page. At the bottom of the first page it will "
+#~ "instead go to the top of the second page."
+#~ msgstr ""
+#~ "Koristi pametno klizanje sa space tipkom. Pritisak na tipku space "
+#~ "normalno rezultira klizanjem ravno do dna za jednu visinu prozora osim "
+#~ "ako je na dnu stranice, onda ju prebaci. Kada je ova opcija uključena, "
+#~ "Comix automatski pokušava pratiti tok čitanja stripa. Kod pritiska na "
+#~ "tipku space neće samo otklizati do dna stranice nego će i pomaknuti "
+#~ "klizač vodoravno do ruba stranice (u desno ili lijevo ovisi da li "
+#~ "koristite manga prikaz). Kod prikaza dvostrukih stranica otići će do ruba "
+#~ "prve stranice ako je u dosegu, inače će otići do ruba druge stranice. "
+#~ "Također kod takvog prikaza sa ovom opcijom uključenom, Comix neće "
+#~ "prebaciti stranicu osim ako je na dnu druge stranice. Na dnu prve "
+#~ "stranice će otići na početak druge stranice."
+
+#~ msgid "Always hide the thumbnail scrollbar."
+#~ msgstr "Uvijek sakrij klizač sličica."
+
+#~ msgid "Automatically open the last viewed page when Comix is started."
+#~ msgstr "Automatski otvori zadnju pregledanu stranicu kada se Comix pokreće."
+
+#~ msgid ""
+#~ "Automatically go to the same directory as last time when opening the "
+#~ "\"Open\" dialog."
+#~ msgstr ""
+#~ "Automatski idi u zadnje pristupljeni direktorij, kod otvaranja dijaloga "
+#~ "\"Otvori\" izbornika."
+
+#~ msgid "Automatically go to this directory when opening the \"Open\" dialog."
+#~ msgstr ""
+#~ "Automatski idi u ovaj direktorij kod otvaranja dijaloga \"Otvori\" "
+#~ "izbornika."
+
+#~ msgid "Automatically restore these values the next time Comix is started."
+#~ msgstr ""
+#~ "Automatski obnovi ove vrijednosti sljedeći puta kada se Comix pokrene."
+
+#~ msgid "Show the page number in the upper left corner of each thumbnail."
+#~ msgstr "Prikaži broj stranice u gornjem lijevom uglu svake sličice."
+
+#~ msgid ""
+#~ "Automatically adjust the contrast of the images so that the darkest pixel "
+#~ "is completely black and the lightest pixel is completely white. This only "
+#~ "works with images without an alpha channel."
+#~ msgstr ""
+#~ "Automatski prilagodi kontrast slika tako da je najmračniji piksel "
+#~ "kompletno crn a najsvjetliji piksel kompletno bijel. Ovo će raditi samo "
+#~ "sa slikama koje nemaju alpha kanal."
+
+#~ msgid ""
+#~ "The space key uses smart scrolling as if in double page mode even when in "
+#~ "single page mode. This can be useful for comics with two scanned pages in "
+#~ "each image. The pages are assumed to be of equal size"
+#~ msgstr ""
+#~ "Tipka space koristi pametno klizanje kao kod prikaza dvostrukih stranica, "
+#~ "čak i kada prikazuje pojedinačne stranice. Ovo može biti korisno kod "
+#~ "čitanja stripova koji već imaju skenirane po dvije stranice u istoj "
+#~ "slici. Pretpostavlja se da su stranice jednake veličine."
+
+#~ msgid "Adjust the lens magnification factor."
+#~ msgstr "Podesi faktor uvećanja leće."
+
+#~ msgid ""
+#~ "Set the lens width and height in pixels. A larger lens will use more CPU "
+#~ "resources than a small one."
+#~ msgstr ""
+#~ "Podesi širinu i visinu leće u pikselima. Veća leća će zahtjevati više "
+#~ "resursa nego malena."
+
+#~ msgid ""
+#~ "Set the maximum update frequency for the magnification lens in "
+#~ "milliseconds. Setting the value too low can cause the lens to lag behind "
+#~ "when moving the mouse quickly. Setting the value too high can cause the "
+#~ "lens to appear choppy."
+#~ msgstr ""
+#~ "Podesi maksimalnu frekvenciju ažuriranja za povećanje leće, u "
+#~ "milisekundama. Postavljanje pre niske vrijednosti može rezultirati "
+#~ "zastajkivanjem leće kod brzih pokreta pokazivačem. Postavljanje pre "
+#~ "visoke vrijednosti može rezultirati prividom da leća \"titra\"."
+
+#~ msgid ""
+#~ "Read and write thumbnails in the ~/.thumbnails directory as proposed by "
+#~ "the freedesktop.org standard. With this preference set, Comix will use "
+#~ "the thumbnails already stored there to speed up thumbnail loading. If "
+#~ "there are no thumbnails, Comix will create them and save them there. This "
+#~ "is a standard that many applications conform to, thumbnails created by "
+#~ "other applications can be used by Comix and vice versa. If this "
+#~ "preference is not set, Comix will create thumbnails on the fly every time "
+#~ "a directory is opened."
+#~ msgstr ""
+#~ "Čitanje i pisanje sličica u ~/.thumbnails direktoriju što je predloženi "
+#~ "freedesktop.org standard. Sa ovom postavkom uključenom Comix će koristiti "
+#~ "sličice koje su vec pohranjene tamo da bi ubrzao učitavanje sličica. Ako "
+#~ "u direktoriju nema sličica Comix će ih nakon stvaranja tamo pohranjivati. "
+#~ "Ovo je standard koji mnoge aplikacije poštuju, Comix može koristiti "
+#~ "sličice koje su stvorile druge aplikacije i obrnuto. Ukoliko nije "
+#~ "uključeno Comix će stvarati sličice \"u letu\" svaki puta kada je neki "
+#~ "direktorij otvoren."
+
+#~ msgid ""
+#~ "Also use stored thumbnails for images in archives in a similiar way. Due "
+#~ "to restrictions in the freedesktop.org standard, these thumbnails will be "
+#~ "stored in ~/.comix and will only be used by Comix. If this preference is "
+#~ "not set, Comix will create thumbnails on the fly every time an archive is "
+#~ "opened."
+#~ msgstr ""
+#~ "Na sličan način koristi pohranjene sličice za slike koje se nalaze u "
+#~ "arhivama. Zbog ograničenja u freedesktop.org standardu ove sličice će "
+#~ "biti pohranjene u direktorij ~/.comix i pristupat će im samo Comix. "
+#~ "Ukoliko nije uključeno Comix će stvarati sličice \"u letu\" svaki puta "
+#~ "kada je neka arhiva otvorena."
+
+#~ msgid ""
+#~ "Only display a single image in double page mode if the image consists of "
+#~ "two pages. An image is assumed to consist of two pages if its width is "
+#~ "greater than its height."
+#~ msgstr ""
+#~ "Prikaži samo jednu sliku kod prikaza dvostrukih stranica, ako se slika "
+#~ "sastoji od dvije stranice. Pretpostavljeno je da se slika sastoji od "
+#~ "dvije stranice ako joj je širina veća od visine."
+
+#~ msgid "Filter out archives with regular expressions."
+#~ msgstr "Filtriraj arhive sa regularnim izrazima."
+
+#~ msgid "Apply filters on full paths rather than filenames."
+#~ msgstr "Primjeni filtere na punu putanju umjesto samo na imena."
+
+#~ msgid ""
+#~ "Store a list of the 10 last opened files that can be accessed through the "
+#~ "menus."
+#~ msgstr ""
+#~ "Pohrani popis 10 zadnje otvorenih datoteka kojima se može pristupiti kroz "
+#~ "izbornike."
+
+#~ msgid "Go to page..."
+#~ msgstr "Idi na stranicu..."
+
+#~ msgid ""
+#~ "Flip pages when scrolling \"off the page\" with the scroll wheel, even "
+#~ "when not in fit-to-screen mode. It takes three \"steps\" with the scroll "
+#~ "wheel to trigger this behaviour."
+#~ msgstr ""
+#~ "Okreni stranice kod klizanja \"preko ruba stranice\" kotačićem, čak i "
+#~ "kada se ne koristi prikaz uklopljen u zaslon. Potrebno je napraviti tri "
+#~ "\"koraka\" kotačićem da bi se pokrenuo ovaj postupak."

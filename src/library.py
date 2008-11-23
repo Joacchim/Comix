@@ -268,7 +268,7 @@ class _CollectionArea(gtk.ScrolledWindow):
             if self._library.backend.rename_collection(collection, new_name):
                 self.display_collections()
             else:
-                message = _('Could not change the name to "%s".') % new_name
+                message = _("Could not change the name to '%s'.") % new_name
                 if (self._library.backend.get_collection_by_name(new_name)
                   is not None):
                     message = '%s %s' % (message,
@@ -383,8 +383,8 @@ class _CollectionArea(gtk.ScrolledWindow):
             else:
                 dest_name = self._library.backend.get_collection_name(
                     dest_collection)
-            message = (_('Put the collection "%s" in the collection "%s".') %
-                (src_name, dest_name))
+            message = (_("Put the collection '%(subcollection)s' in the collection '%(supercollection)s'.") %
+                {'subcollection': src_name, 'supercollection': dest_name})
         else: # Moving book(s).
             if drop_row is None:
                 self._set_acceptable_drop(False)
@@ -404,12 +404,13 @@ class _CollectionArea(gtk.ScrolledWindow):
             dest_name = self._library.backend.get_collection_name(
                 dest_collection)
             if src_collection == _COLLECTION_ALL:
-                message = _('Add book(s) to "%s".') % dest_name
+                message = _("Add books to '%s'.") % dest_name
             else:
                 src_name = self._library.backend.get_collection_name(
                     src_collection)
-                message = _('Move book(s) from "%s" to "%s".') % (src_name,
-                    dest_name)
+                message = (_("Move books from '%(source collection)s' to '%(destination collection)s'.") % 
+                    {'source collection': src_name,
+                    'destination collection': dest_name})
         self._set_acceptable_drop(True)
         self._library.set_status_message(message)
 
@@ -491,14 +492,18 @@ class _BookArea(gtk.ScrolledWindow):
                 _('Remove from this collection'), None, None,
                 self._remove_books_from_collection),
             ('remove from library', gtk.STOCK_DELETE,
-                _('Remove from library...'), None, None,
+                _('Remove from the library...'), None, None,
                 self._remove_books_from_library)])
         self._ui_manager.insert_action_group(actiongroup, 0)
 
     def close(self):
-        """We must (for some reason) explicitly clear the ListStore in
-        order to not leak memory.
-        """
+        """Run clean-up tasks for the _BookArea prior to closing."""
+        
+        # We must unselect all or we will trigger selection_changed events
+        # when closing with multiple books selected.
+        self._iconview.unselect_all()
+        # We must (for some reason) explicitly clear the ListStore in
+        # order to not leak memory.
         self._liststore.clear()
 
     def display_covers(self, collection):
@@ -580,7 +585,8 @@ class _BookArea(gtk.ScrolledWindow):
             self.remove_book_at_path(path)
         coll_name = self._library.backend.get_collection_name(collection)
         self._library.set_status_message(
-            _('Removed %d book(s) from "%s".') % (len(selected), coll_name))
+            _("Removed %(num)d book(s) from '%(collection)s'.") %
+            {'num': len(selected), 'collection': coll_name})
 
     def _remove_books_from_library(self, *args):
         """Remove the currently selected book(s) from the library, and thus
@@ -588,9 +594,9 @@ class _BookArea(gtk.ScrolledWindow):
         """
         choice_dialog = gtk.MessageDialog(self._library, 0,
             gtk.MESSAGE_QUESTION, gtk.BUTTONS_YES_NO,
-            _('Remove book(s) from the library?'))
+            _('Remove books from the library?'))
         choice_dialog.format_secondary_text(
-            _('The selected books will be removed from the library (but the comic book files will be untouched). Are you sure that you want to continue?'))
+            _('The selected books will be removed from the library (but the original files will be untouched). Are you sure that you want to continue?'))
         response = choice_dialog.run()
         choice_dialog.destroy()
         if response == gtk.RESPONSE_YES:
@@ -765,7 +771,7 @@ class _ControlArea(gtk.HBox):
         search_entry = gtk.Entry()
         search_entry.connect('activate', self._filter_books)
         search_entry.set_tooltip_text(
-            _('Display only those books that have the specified string in their full path. The matching is not case sensitive.'))
+            _('Display only those books that have the specified text string in their full path. The search is not case sensitive.'))
         hbox.pack_start(search_entry, True, True, 6)
         label = gtk.Label('%s:' % _('Cover size'))
         hbox.pack_start(label, False, False, 6)
@@ -867,7 +873,7 @@ class _ControlArea(gtk.HBox):
                 prefs['last library collection'] = collection
                 self._library.collection_area.display_collections()
             else:
-                message = _('Could not add a new collection called "%s".') % (
+                message = _("Could not add a new collection called '%s'.") % (
                     name)
                 if (self._library.backend.get_collection_by_name(name)
                   is not None):
@@ -943,7 +949,7 @@ class _AddBooksProgressDialog(gtk.Dialog):
             if library.backend.add_book(path, collection):
                 total_added += 1
                 number_label.set_text('%d' % total_added)
-            added_label.set_text(_('Adding "%s"...') % path)
+            added_label.set_text(_("Adding '%s'...") % path)
             bar.set_fraction((i + 1) / total_paths)
             while gtk.events_pending():
                 gtk.main_iteration(False)

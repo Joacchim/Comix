@@ -269,9 +269,9 @@ class LibraryBackend:
         name = self.get_collection_name(collection)
         if name is None: # Original collection does not exist.
             return False
-        copy_name = _('%s (Copy)') % name
+        copy_name = name + ' ' + _('(Copy)')
         while self.get_collection_by_name(copy_name):
-            copy_name = _('%s (Copy)') % copy_name
+            copy_name = copy_name + ' ' + _('(Copy)')
         if self.add_collection(copy_name) is None: # Could not create the new.
             return False
         copy_collection = self._con.execute('''select id from Collection

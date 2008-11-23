@@ -83,7 +83,7 @@ class _ComicFileChooserDialog(gtk.Dialog):
             ('application/x-zip', 'application/zip', 'application/x-cbz'))
         self.add_filter(_('RAR archives'),
             ('application/x-rar', 'application/x-cbr'))
-        self.add_filter(_('tar archives'),
+        self.add_filter(_('Tar archives'),
             ('application/x-tar', 'application/x-gzip',
             'application/x-bzip2', 'application/x-cbt'))
 
@@ -122,7 +122,7 @@ class _ComicFileChooserDialog(gtk.Dialog):
               and os.path.exists(paths[0])):
                 overwrite_dialog = gtk.MessageDialog(None, 0,
                     gtk.MESSAGE_QUESTION, gtk.BUTTONS_OK_CANCEL,
-                    _('A file named "%s" already exists. Do you want to replace it?') %
+                    _("A file named '%s' already exists. Do you want to replace it?") %
                     os.path.basename(paths[0]))
                 overwrite_dialog.format_secondary_text(
                     _('Replacing it will overwrite its contents.'))

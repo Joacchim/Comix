@@ -206,19 +206,20 @@ class FileHandler:
         # If the given <path> is invalid we update the statusbar.
         if os.path.isdir(path):
             self._window.statusbar.set_message(
-                _('%s: Target is a directory.') % path)
+                _('Could not open %s: Is a directory.') % path)
             return False
         if not os.path.isfile(path):
-            self._window.statusbar.set_message(_('%s: No such file.') % path)
+            self._window.statusbar.set_message(
+                _('Could not open %s: No such file.') % path)
             return False
         if not os.access(path, os.R_OK):
             self._window.statusbar.set_message(
-                _('%s: Permission denied.') % path)
+                _('Could not open %s: Permission denied.') % path)
             return False
         self.archive_type = archive.archive_mime_type(path)
         if self.archive_type is None and not is_image_file(path):
             self._window.statusbar.set_message(
-                _('%s: Unsupported file type.') % path)
+                _('Could not open %s: Unknown file type.') % path)
             return False
         
         # We close the previously opened file.
@@ -281,7 +282,7 @@ class FileHandler:
             self._current_image_index = self._image_files.index(path)
 
         if not self._image_files:
-            self._window.statusbar.set_message(_('No images in "%s"') %
+            self._window.statusbar.set_message(_("No images in '%s'") %
                 os.path.basename(path))
             self.file_loaded = False
         else:

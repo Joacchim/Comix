@@ -19,7 +19,7 @@ class _CleanerDialog(gtk.MessageDialog):
         self.connect('response', self._response)
 
         self.format_secondary_text(
-            _('Some old files (that were used for storing preferences, the library, bookmarks, etc. for older versions of Comix) were found on your computer. If you do not plan on using the older versions of Comix again, you should remove these files in order to save some disk space. Do you want these files to be removed for you now?'))
+            _('Some old files (that were used for storing preferences, the library, bookmarks etc. for older versions of Comix) were found on your computer. If you do not plan on using the older versions of Comix again, you should remove these files in order to save some disk space. Do you want these files to be removed for you now?'))
     
     def _response(self, dialog, response):
         if response == gtk.RESPONSE_YES:

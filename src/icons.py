@@ -23,7 +23,7 @@ def load_icons():
               ('lens.png',                   'comix-lens'),
               ('double-page.png',            'comix-double-page'),
               ('manga.png',                  'comix-manga'),
-              ('fitscreen.png',              'comix-fitscreen'),
+              ('fitbest.png',                'comix-fitbest'),
               ('fitwidth.png',               'comix-fitwidth'),
               ('fitheight.png',              'comix-fitheight'),
               ('fitmanual.png',              'comix-fitmanual'))

@@ -49,7 +49,7 @@ class _EnhanceImageDialog(gtk.Dialog):
 
     def __init__(self, window):
         gtk.Dialog.__init__(self, _('Enhance image'), window, 0)
-        self.add_buttons(_('Default'), gtk.RESPONSE_NO,
+        self.add_buttons(_('Defaults'), gtk.RESPONSE_NO,
             gtk.STOCK_OK, gtk.RESPONSE_OK)
         self.set_has_separator(False)
         self.set_resizable(False)
@@ -123,7 +123,7 @@ class _EnhanceImageDialog(gtk.Dialog):
         vbox.pack_start(gtk.HSeparator())
 
         self._autocontrast_button = \
-            gtk.CheckButton(_('Automatically adjust contrast'))
+            gtk.CheckButton(_('Automatically adjust contrast.'))
         self._autocontrast_button.set_tooltip_text(
             _('Automatically adjust contrast (both lightness and darkness), separately for each colour band.'))
         vbox.pack_start(self._autocontrast_button, False, False, 2)

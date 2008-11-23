@@ -43,7 +43,7 @@ class MainUI(gtk.UIManager):
                 'KP_Add', None, window.manual_zoom_in),
             ('zoom_out', gtk.STOCK_ZOOM_OUT, _('Zoom _out'),
                 'KP_Subtract', None, window.manual_zoom_out),
-            ('zoom_original', gtk.STOCK_ZOOM_100, _('_Normal size'),
+            ('zoom_original', gtk.STOCK_ZOOM_100, _('O_riginal size'),
                 '<Control>0', None, window.manual_zoom_original),  
             ('close', gtk.STOCK_CLOSE, _('_Close'),
                 '<Control>w', None, window.file_handler.close_file),
@@ -62,7 +62,7 @@ class MainUI(gtk.UIManager):
             ('menu_zoom', 'comix-zoom', _('Manual _Zoom')),
             ('menu_recent', None, _('Open _recent')),
             ('menu_bookmarks', None, _('_Bookmarks')),
-            ('menu_toolbars', None, _('_Toolbars')),
+            ('menu_toolbars', None, _('T_oolbars')),
             ('menu_edit', None, _('_Edit')),
             ('menu_file', None, _('_File')),
             ('menu_view', None, _('_View')),
@@ -98,27 +98,27 @@ class MainUI(gtk.UIManager):
                 'g', None, window.glass.toggle)])
 
         self._actiongroup.add_radio_actions([
-            ('fit_screen_mode', 'comix-fitscreen', _('Fit-to-_screen mode'),
-                's', None, preferences.ZOOM_MODE_SCREEN),
+            ('best_fit_mode', 'comix-fitbest', _('_Best fit mode'),
+                'b', None, preferences.ZOOM_MODE_BEST),
             ('fit_width_mode', 'comix-fitwidth', _('Fit _width mode'),
                 'w', None, preferences.ZOOM_MODE_WIDTH),
             ('fit_height_mode', 'comix-fitheight', _('Fit _height mode'),
                 'h', None, preferences.ZOOM_MODE_HEIGHT),
             ('fit_manual_mode', 'comix-fitmanual', _('M_anual zoom mode'),
                 'a', None, preferences.ZOOM_MODE_MANUAL)],
-            0, window.change_zoom_mode)
+            3, window.change_zoom_mode)
 
         # Some actions added separately since they need extra arguments.
         self._actiongroup.add_actions([
             ('about', gtk.STOCK_ABOUT, _('_About'),
                 None, None, about.open_dialog),
-            ('comments', 'comix-comments', _('View _comments'),
+            ('comments', 'comix-comments', _('_View comments...'),
                 'c', None, comment.open_dialog),
             ('edit_archive', gtk.STOCK_EDIT, _('_Edit archive...'),
                 None, None, edit.open_dialog),
             ('open', gtk.STOCK_OPEN, _('_Open...'),
                 '<Control>o', None, filechooser.open_main_filechooser_dialog),
-            ('properties', gtk.STOCK_PROPERTIES, _('Proper_ties'),
+            ('properties', gtk.STOCK_PROPERTIES, _('_Properties'),
                 '<Alt>Return', None, properties.open_dialog),
             ('enhance_image', 'comix-enhance-image', _('_Enhance image...'),
                 'e', None, enhance.open_dialog),
@@ -140,7 +140,7 @@ class MainUI(gtk.UIManager):
                 <toolitem action="next_page" />
                 <toolitem action="last_page" />
                 <toolitem action="expander" />
-                <toolitem action="fit_screen_mode" />
+                <toolitem action="best_fit_mode" />
                 <toolitem action="fit_width_mode" />
                 <toolitem action="fit_height_mode" />
                 <toolitem action="fit_manual_mode" />
@@ -176,7 +176,7 @@ class MainUI(gtk.UIManager):
                     <menuitem action="double_page" />
                     <menuitem action="manga_mode" />
                     <separator />
-                    <menuitem action="fit_screen_mode" />
+                    <menuitem action="best_fit_mode" />
                     <menuitem action="fit_width_mode" />
                     <menuitem action="fit_height_mode" />
                     <menuitem action="fit_manual_mode" />
@@ -234,7 +234,7 @@ class MainUI(gtk.UIManager):
                 <menuitem action="double_page" />
                 <menuitem action="manga_mode" />
                 <separator />
-                <menuitem action="fit_screen_mode" />
+                <menuitem action="best_fit_mode" />
                 <menuitem action="fit_width_mode" />
                 <menuitem action="fit_height_mode" />
                 <menuitem action="fit_manual_mode" />
@@ -284,8 +284,8 @@ class MainUI(gtk.UIManager):
             _('Previous page'))
         self.get_widget('/Tool/next_page').set_tooltip_text(_('Next page'))
         self.get_widget('/Tool/last_page').set_tooltip_text(_('Last page'))
-        self.get_widget('/Tool/fit_screen_mode').set_tooltip_text(
-            _('Fit-to-screen mode'))
+        self.get_widget('/Tool/best_fit_mode').set_tooltip_text(
+            _('Best fit mode'))
         self.get_widget('/Tool/fit_width_mode').set_tooltip_text(
             _('Fit width mode'))
         self.get_widget('/Tool/fit_height_mode').set_tooltip_text(

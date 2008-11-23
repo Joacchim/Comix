@@ -123,9 +123,9 @@ class _PropertiesDialog(gtk.Dialog):
                 secondary_info = (
                     (_('Location'), encoding.to_unicode(os.path.dirname(
                     window.file_handler.get_path_to_base()))),
-                    (_('Accessed'), time.strftime('%Y-%m-%d [%H:%M:%S]',
+                    (_('Accessed'), time.strftime('%Y-%m-%d, %H:%M:%S',
                     time.localtime(stats.st_atime))),
-                    (_('Modified'), time.strftime('%Y-%m-%d [%H:%M:%S]',
+                    (_('Modified'), time.strftime('%Y-%m-%d, %H:%M:%S',
                     time.localtime(stats.st_mtime))),
                     (_('Permissions'), oct(stat.S_IMODE(stats.st_mode))),
                     (_('Owner'), uid))
@@ -157,9 +157,9 @@ class _PropertiesDialog(gtk.Dialog):
                 uid = str(stats.st_uid)
             secondary_info = (
                 (_('Location'), encoding.to_unicode(os.path.dirname(path))),
-                (_('Accessed'), time.strftime('%Y-%m-%d [%H:%M:%S]',
+                (_('Accessed'), time.strftime('%Y-%m-%d, %H:%M:%S',
                 time.localtime(stats.st_atime))),
-                (_('Modified'), time.strftime('%Y-%m-%d [%H:%M:%S]',
+                (_('Modified'), time.strftime('%Y-%m-%d, %H:%M:%S',
                 time.localtime(stats.st_mtime))),
                 (_('Permissions'), oct(stat.S_IMODE(stats.st_mode))),
                 (_('Owner'), uid))

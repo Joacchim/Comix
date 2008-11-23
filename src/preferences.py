@@ -9,7 +9,7 @@ import pango
 import constants
 import labels
 
-ZOOM_MODE_SCREEN = 0
+ZOOM_MODE_BEST = 0
 ZOOM_MODE_WIDTH = 1
 ZOOM_MODE_HEIGHT = 2
 ZOOM_MODE_MANUAL = 3
@@ -27,7 +27,7 @@ prefs = {
     'stretch': False,
     'default double page': False,
     'default fullscreen': False,
-    'default zoom mode': ZOOM_MODE_SCREEN,
+    'default zoom mode': ZOOM_MODE_BEST,
     'default manga mode': False,
     'lens magnification': 2,
     'lens size': 200,
@@ -103,7 +103,7 @@ class _PreferencesDialog(gtk.Dialog):
         dynamic_bg_button.set_active(prefs['smart bg'])
         dynamic_bg_button.connect('toggled', self._check_button_cb, 'smart bg')
         dynamic_bg_button.set_tooltip_text(
-            _('Automatically pick a background colour that fits the currently viewed image.'))
+            _('Automatically pick a background colour that fits the viewed image.'))
         page.add_row(dynamic_bg_button)
 
         page.new_section(_('Thumbnails'))
@@ -137,7 +137,7 @@ class _PreferencesDialog(gtk.Dialog):
         glass_magnification_spinner.connect('value_changed', self._spinner_cb,
             'lens magnification')
         glass_magnification_spinner.set_tooltip_text(
-            _('Set the magnification level of the magnifying glass.'))
+            _('Set the magnification factor of the magnifying glass.'))
         page.add_row(label, glass_magnification_spinner)
 
         page.new_section(_('Image scaling'))
@@ -166,12 +166,12 @@ class _PreferencesDialog(gtk.Dialog):
         page = _PreferencePage(150)
         page.new_section(_('Scroll'))
         smart_space_button = gtk.CheckButton(
-            _('Use smart space-button scrolling.'))
+            _('Use smart space key scrolling.'))
         smart_space_button.set_active(prefs['smart space scroll'])
         smart_space_button.connect('toggled', self._check_button_cb,
             'smart space scroll')
         smart_space_button.set_tooltip_text(
-            _('Use "smart scrolling" with the space key. Normally the space key scrolls only right down (or up when shift is pressed), but with this preference set it also scrolls sideways and so tries to follow the natural reading order of the comic book.'))
+            _('Use smart scrolling with the space key. Normally the space key scrolls only right down (or up when shift is pressed), but with this preference set it also scrolls sideways and so tries to follow the natural reading order of the comic book.'))
         page.add_row(smart_space_button)
 
         page.new_section(_('Double page mode'))
@@ -190,7 +190,7 @@ class _PreferencesDialog(gtk.Dialog):
         virtual_double_button.connect('toggled', self._check_button_cb,
             'no double page for wide images')
         virtual_double_button.set_tooltip_text(
-            _("When in double page mode, if an image's width exceeds its height, display only one image. This results in that scans that span two pages are displayed properly (i.e. alone) in double page mode."))
+            _("Display only one image in double page mode, if the image's width exceeds its height. The result of this is that scans that span two pages are displayed properly (i.e. alone) also in double page mode."))
         page.add_row(virtual_double_button)
 
         page.new_section(_('Files'))
@@ -208,7 +208,7 @@ class _PreferencesDialog(gtk.Dialog):
         auto_open_last_button.connect('toggled', self._check_button_cb,
             'auto load last file')
         auto_open_last_button.set_tooltip_text(
-            _('Automatically open, on start-up, whatever file was open when Comix was last closed.'))
+            _('Automatically open, on startup, the file that was open when Comix was last closed.'))
         page.add_row(auto_open_last_button)
         store_recent_button = gtk.CheckButton(
             _('Store information about recently opened files.'))
@@ -228,19 +228,19 @@ class _PreferencesDialog(gtk.Dialog):
         page.add_row(create_thumbs_button)
 
         page.new_section(_('Cache'))
-        cache_button = gtk.CheckButton(_('Use a cache to speed up reading.'))
+        cache_button = gtk.CheckButton(_('Use a cache to speed up browsing.'))
         cache_button.set_active(prefs['cache'])
         cache_button.connect('toggled', self._check_button_cb, 'cache')
         cache_button.set_tooltip_text(
-            _('Cache the images that are next to the currently viewed image in order to speed up reading. Since the speed improvements are quite big, it is recommended that you have this preference set, unless you are running short on free RAM.'))
+            _('Cache the images that are next to the currently viewed image in order to speed up browsing. Since the speed improvements are quite big, it is recommended that you have this preference set, unless you are running short on free RAM.'))
         page.add_row(cache_button)
         notebook.append_page(page, gtk.Label(_('Behaviour')))
 
         # ----------------------------------------------------------------
         # The "Display" tab.
         # ----------------------------------------------------------------
-        page = _PreferencePage(150)
-        page.new_section(_('Defaults'))
+        page = _PreferencePage(180)
+        page.new_section(_('Default modes'))
         double_page_button = gtk.CheckButton(
             _('Use double page mode by default.'))
         double_page_button.set_active(prefs['default double page'])
@@ -259,7 +259,7 @@ class _PreferencesDialog(gtk.Dialog):
         page.add_row(manga_button)
         label = gtk.Label('%s:' % _('Default zoom mode'))
         zoom_combo = gtk.combo_box_new_text()
-        zoom_combo.append_text(_('Fit-to-screen mode'))
+        zoom_combo.append_text(_('Best fit mode'))
         zoom_combo.append_text(_('Fit width mode'))
         zoom_combo.append_text(_('Fit height mode'))
         zoom_combo.append_text(_('Manual zoom mode'))

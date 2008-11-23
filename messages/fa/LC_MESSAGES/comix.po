@@ -5,7 +5,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: comix 3.6.4\n"
-"POT-Creation-Date: 2007-07-20 16:52+CEST\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2008-11-22 02:42+0100\n"
 "PO-Revision-Date: 2008-05-21 12:40+0330\n"
 "Last-Translator: Meelad Zakaria <meelad@farsiweb.info>\n"
 "Language-Team: Persian \n"
@@ -14,1241 +15,1853 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: pygettext.py 1.5\n"
 
-
-#: comix:547 comix:11064
-msgid "Fit-to-screen mode"
-msgstr "حالت منطبق با صفحهٔ نمایش"
-
-#: comix:550 comix:11065
-msgid "Fit width mode"
-msgstr "حالت منطبق با عرض صفحه"
-
-#: comix:553 comix:11066
-msgid "Fit height mode"
-msgstr "حالت منطبق با ارتفاع صفحه"
-
-#: comix:556 comix:11008 comix:11067
-msgid "Manual zoom mode"
-msgstr "حالت زوم دستی"
-
-#: comix:559 comix:11068
-msgid "Double page mode"
-msgstr "حالت دو صفحه‌ای"
-
-#: comix:561 comix:11070
-msgid "Manga mode"
-msgstr "حالت ژاپنی"
-
-#: comix:563 comix:11069
-msgid "Magnifying lens"
-msgstr "عدسی بزرگ‌نما"
-
-#: comix:664 comix:6637
-msgid "Library"
-msgstr "کتاب‌خانه"
-
-#: comix:694
-msgid "Apply filter on full path"
-msgstr "صافی بر مسیر کامل اعمال شود"
-
-#: comix:700
-msgid "Add archives to library."
-msgstr "اضافه کردن بایگانی‌ها به کتاب‌خانه"
-
-#: comix:705
-msgid "Remove selected archive from library."
-msgstr "حذف بایگانی انتخاب‌شده از کتاب‌خانه"
-
-#: comix:709 comix:1611 comix:1654
-msgid "Clean up"
-msgstr "‍پاک‌سازی"
-
-#: comix:713
-msgid "Remove orphaned or outdated library entries."
-msgstr "حذف مدخل‌های کهنه یا یتیم از کتابخانه."
-
-#: comix:717
-msgid "Close this window."
-msgstr "بستن این پنجره"
-
-#: comix:722
-msgid "Open selected archive."
-msgstr "باز کردن بایگانی انتخاب‌شده"
-
-#: comix:779
-msgid "Open"
-msgstr "باز کردن"
-
-#: comix:791
-msgid "All files"
-msgstr "همهٔ پرونده‌ها"
-
-#: comix:802
-msgid "All images"
-msgstr "همهٔ تصاویر"
-
-#: comix:814
-msgid "All archives"
-msgstr "همهٔ بایگانی‌ها"
-
-#: comix:818
-msgid "JPEG image"
-msgstr "تصویر JPEG"
-
-#: comix:822
-msgid "PNG image"
-msgstr "تصویر PNG"
-
-#: comix:826
-msgid "GIF image"
-msgstr "تصویر GIF"
-
-#: comix:830
-msgid "TIFF image"
-msgstr "تصویر TIFF"
-
-#: comix:834
-msgid "BMP image"
-msgstr "تصویر BMP"
-
-#: comix:838
-msgid "ICO image"
-msgstr "تصویر ICO"
-
-#: comix:842
-msgid "XPM image"
-msgstr "تصویر XPM"
-
-#: comix:846
-msgid "XBM image"
-msgstr "تصویر XBM"
-
-#: comix:852
-msgid "ZIP archive"
-msgstr "بایگانی ZIP"
-
-#: comix:857 comix:6719 comix:7071 comix:7122 comix:7470 comix:8743
-msgid "RAR archive"
-msgstr "بایگانی RAR"
-
-#: comix:864
-msgid "tar archive"
-msgstr "بایگانی tar"
-
-#: comix:868
-msgid "Add archives recursively"
-msgstr "بایگانی‌ها به صورت بازگشتی اضافه شوند"
-
-#: comix:883
-msgid "Preferences"
-msgstr "ترجیحات"
-
-#: comix:889
-msgid "Select folder"
-msgstr "انتخاب پوشه"
-
-#: comix:892
-msgid "Fullscreen as default"
-msgstr "حالت تمام‌صفحه به صورت پیش‌فرض"
-
-#: comix:893
-msgid "Double page mode as default"
-msgstr "حالت دو صفحه‌ای به صورت پیش‌فرض"
-
-#: comix:895
-msgid "Stretch small images"
-msgstr "تصاویر کوچک به اندازهٔ کادر نمایش داده شوند"
-
-#: comix:897
-msgid "Use smart scaling in double page mode"
-msgstr "در حالت دو صفحه‌ای از تغییر اندازهٔ هوشمند استفاده شود"
-
-#: comix:899
-msgid "Always view comments when opening a new file"
-msgstr "هنگام باز شدن پرونده‌های جدید، همیشه توضیحات نمایش داده شوند"
-
-#: comix:902
-msgid "Hide menubar, scrollbars etc. in fullscreen mode"
-msgstr "در حالت تمام‌صفحه نوار منو، نوارهای لغزش و غیره مخفی شود"
-
-#: comix:904
-msgid "Cache pages for faster forward flipping"
-msgstr "برای جلو رفتن سریع‌تر، صفحات در حافظهٔ نهان ذخیره شوند"
-
-#: comix:907
-msgid "Scroll wheel scrolls horizontally at top and bottom of page"
-msgstr "چرخ لغزش موشی در بالا و پایین صفحه سبب لغزش افقی شود"
-
-#: comix:910
-msgid "Flip page when scrolling off the top or bottom of page"
-msgstr "هنگام لغزش وقتی به بالا یا پایین صفحه رسید، به صفحهٔ قبل یا بعد برود"
-
-#: comix:912
-msgid "Hide thumbnail scrollbar"
-msgstr "نوار لغزش مسطوره‌ها مخفی شود"
-
-#: comix:914
-msgid "Space key uses smart scrolling"
-msgstr "کلید فاصله برای لغزش هوشمند استفاده شود"
-
-#: comix:917
-msgid "Save window position and size for future sessions"
-msgstr "موقعیت و اندازهٔ پنجره برای نشست‌های بعدی ذخیره شود"
-
-#: comix:920
-msgid "Go to the next archive in directory after last page"
-msgstr "پس از آخرین صفحه بایگانی بعدی در شاخه باز شود"
-
-#: comix:922
-msgid "Hide cursor in fullscreen mode"
-msgstr "در حالت تمام‌صفحه، مکان‌نما مخفی شود"
-
-#: comix:924
-msgid "Open last viewed file on start"
-msgstr "هنگام آغاز برنامه آخرین پروندهٔ دیده‌شده باز شود"
-
-#: comix:926
-msgid "Show page numbers on thumbnails"
-msgstr "شمارهٔ صفحه روی مسطوره‌ها نشان داده شود"
-
-#: comix:929
-msgid "Always use smart scrolling as if in double page mode"
-msgstr "همیشه از لغزش هوشمند مانند حالت دو صفحه‌ای استفاده شود"
-
-#: comix:932
-msgid "Use stored thumbnails for images in directories"
-msgstr "برای تصاویر شاخه‌ها از مسطوره‌های ذخیره‌شده استفاده شود"
-
-#: comix:934
-msgid "Use stored thumbnails for images in archives"
-msgstr "برای تصاویر بایگانی‌ها از مسطوره‌های ذخیره‌شده استفاده شود"
-
-#: comix:937
-msgid "Display only one page in double page mode if the image is wide"
-msgstr "در حالت دو صفحه‌ای اگر تصویر بزرگ است، فقط یک صفحه نمایش داده شود"
-
-#: comix:940
-msgid "Store recently opened files"
-msgstr "پرونده‌های به‌تازگی بازشده ذخیره شوند"
-
-#: comix:943
-msgid "Always go to this directory in the \"Open\" dialog:"
-msgstr "محاورهٔ «باز کردن» همیشه به این شاخه برود:"
-
-#: comix:946
-msgid "Always go to the latest directory in the \"Open\" dialog"
-msgstr "محاورهٔ «باز کردن» همیشه به آخرین شاخهٔ بازشده برود"
-
-#: comix:970
-msgid "Nearest (quickest, worst quality)"
-msgstr "نزدیک‌ترین (سریع‌ترین، بدترین کیفیت)"
-
-#: comix:971
-msgid "Tiles"
-msgstr "تکه تکه"
-
-#: comix:972
-msgid "Bilinear"
-msgstr "دوخطی"
-
-#: comix:974
-msgid "Hyper (slowest, best quality)"
-msgstr "دقیق (آهسته‌ترین، بهترین کیفیت)"
-
-#: comix:976
-msgid "Manual zoom mode as default"
-msgstr "حالت زوم دستی به صورت پیش‌فرض"
-
-#: comix:979
-msgid "Fit-to-screen mode as default"
-msgstr "حالت منطبق با صفحهٔ نمایش به صورت پیش‌فرض"
-
-#: comix:982
-msgid "Fit width mode as default"
-msgstr "حالت منطبق با عرض  صفحه به صورت پیش‌فرض"
-
-#: comix:985
-msgid "Fit height mode as default"
-msgstr "حالت منطبق با ارتفاع صفحه به صورت پیش‌فرض"
-
-#: comix:1008
-msgid "Background colour:"
-msgstr "رنگ پس‌زمینه:"
-
-#: comix:1011
-msgid "Background colour"
-msgstr "رنگ پس‌زمینه"
-
-#: comix:1013
-msgid "Toolbar button labels:"
-msgstr "برچسب دگمه‌های نوار ابزار:"
-
-#: comix:1017
-msgid "Icons only"
-msgstr "فقط شمایل"
-
-#: comix:1018 comix:4630
-msgid "Text only"
-msgstr "فقط متن"
-
-#: comix:1019 comix:4632
-msgid "Icons and text"
-msgstr "شمایل و متن"
-
-#: comix:1020
-msgid "Slideshow delay:"
-msgstr "تأخیر نمایش اسلایدی:"
-
-#: comix:1036
-msgid "Display"
-msgstr "نمایش"
-
-#: comix:1090
-msgid "Behaviour"
-msgstr "رفتار"
-
-#: comix:1127
-msgid "Scaling quality"
-msgstr "کیفیت تغییر اندازه"
-
-#: comix:1152
-msgid "Scaling"
-msgstr "تغییر اندازه"
-
-#: comix:1166
-msgid "Treat files with the following extensions as comments:"
-msgstr "با پرونده‌های دارای پسوندهای زیر مثل توضیحات رفتار شود:"
-
-#: comix:1172
-msgid "Comments"
-msgstr "توضیحات"
-
-#: comix:1197
-msgid "Space key scrolls"
-msgstr "مقدار لغزش کلید فاصله:"
-
-#: comix:1201 comix:3991 comix:9404 comix:9433 comix:9436 comix:9443
-#: comix:9445
-msgid "of"
-msgstr "از"
-
-#: comix:1205
-msgid "Window size"
-msgstr "اندازهٔ پنجره"
-
-#: comix:1206
-msgid "Page size"
-msgstr "اندازهٔ صفحه"
-
-#: comix:1208
-msgid "Scroll"
-msgstr "لغزش"
-
-#: comix:1222
-msgid "Magnification factor:"
-msgstr "ضریب بزرگ‌نمایی:"
-
-#: comix:1226
-msgid "Lens size (px):"
-msgstr "اندازهٔ عدسی (نقطه):"
-
-#: comix:1230
-msgid "Update interval (milliseconds):"
-msgstr "فاصلهٔ زمانی به‌روزرسانی (میلی‌ثانیه):"
-
-#: comix:1235
-msgid "Lens"
-msgstr "عدسی"
-
-#: comix:1249
-msgid "Thumbnail sizes (px):"
-msgstr "اندازهٔ مسطوره‌ها (نقطه):"
-
-#: comix:1254
-msgid "Library thumbnail sizes (px):"
-msgstr "اندازهٔ مسطوره‌های کتاب‌خانه (نقطه):"
-
-#: comix:1272
-msgid "Thumbnails"
-msgstr "مسطوره‌ها"
-
-#: comix:1301
-msgid "Adjust colour"
-msgstr "تنظیم رنگ"
-
-#: comix:1303
-msgid "Default"
-msgstr "پیش‌فرض"
-
-#: comix:1325
-msgid "Brightness"
-msgstr "روشنی"
-
-#: comix:1337
-msgid "Contrast"
-msgstr "کنتراست"
-
-#: comix:1349
-msgid "Saturation"
-msgstr "اشباع"
-
-#: comix:1361
-msgid "Sharpness"
-msgstr "وضوح"
-
-#: comix:1376
-msgid "Automatically adjust contrast"
-msgstr "کنتراست به صورت خودکار تنظیم شود"
-
-#: comix:1383
-msgid "Save values for future sessions"
-msgstr "مقادیر برای نشست‌های آینده ذخیره شود"
-
-#: comix:1395
-msgid "Properties"
-msgstr "ویژگی‌ها"
-
-#: comix:1413
-msgid "Go to page"
-msgstr "رفتن به صفحهٔ"
-
-#: comix:1437
-msgid "Edit bookmarks"
-msgstr "ویرایش نشانک‌ها"
-
-#: comix:1446
-msgid "Title"
-msgstr "عنوان"
-
-#: comix:1447 comix:5397 comix:5749
-msgid "Page"
-msgstr "صفحه"
-
-#: comix:1477 comix:1529
+#: src/about.py:18 src/about.py:67
 msgid "About"
 msgstr "درباره"
 
-#: comix:1515
+#: src/about.py:55
 msgid "Comix is an image viewer specifically designed to handle comic books."
-msgstr "کامیکس یک نمایش‌دهندهٔ تصویر است که به طور اختصاصی برای کار کردن با کتاب‌های کامیک طراحی شده است."
+msgstr ""
+"کامیکس یک نمایش‌دهندهٔ تصویر است که به طور اختصاصی برای کار کردن با کتاب‌های "
+"کامیک طراحی شده است."
 
-#: comix:1517
-msgid "It reads ZIP, RAR and tar archives (also gzip or bzip2 compressed)"
-msgstr 
-"این نرم‌افزار بایگانی‌های ZIP، RAR و tar (و همچنین پرونده‌هایی که با gzip یا bzip2 فشرده شده‌اند) "
+#: src/about.py:57
+msgid "It reads ZIP, RAR and tar archives, as well as plain image files."
+msgstr ""
 
-#: comix:1519
-msgid "as well as plain image files."
-msgstr "و همچنین پرونده‌های تصویری ساده را می‌خواند."
-
-#: comix:1521
+#: src/about.py:59
 msgid "Comix is licensed under the GNU General Public License."
-msgstr 
-"کامیکس دارای مجوز عمومی همگانی GNU است."
+msgstr "کامیکس دارای مجوز عمومی همگانی GNU است."
 
-#: comix:1538
-msgid "Developer and Swedish translation"
-msgstr "برنامه‌سازی و ترجمهٔ سوئدی"
+#: src/about.py:75
+msgid "Developer"
+msgstr ""
 
-#: comix:1540
+#: src/about.py:77
 msgid "Simplified Chinese translation"
 msgstr "ترجمهٔ چینی ساده‌شده"
 
-#: comix:1541
+#: src/about.py:78
 msgid "Spanish translation"
 msgstr "ترجمهٔ اسپانیایی"
 
-#: comix:1542
+#: src/about.py:79
 msgid "Brazilian Portuguese translation"
 msgstr "ترجمهٔ پرتغالی برزیلی"
 
-#: comix:1544
+#: src/about.py:81
 msgid "German translation and Nautilus thumbnailer"
 msgstr "ترجمهٔ آلمانی و مسطوره‌ساز ناتیلوس"
 
-#: comix:1545
+#: src/about.py:82
 msgid "Italian translation"
 msgstr "ترجمهٔ ایتالیایی"
 
-#: comix:1546
+#: src/about.py:83
 msgid "Dutch translation"
 msgstr "ترجمهٔ هلندی"
 
-#: comix:1547
+#: src/about.py:84
 msgid "French translation"
 msgstr "ترجمهٔ فرانسوی"
 
-#: comix:1548
+#: src/about.py:85
 msgid "Polish translation"
 msgstr "ترجمهٔ لهستانی"
 
-#: comix:1549
+#: src/about.py:86
 msgid "Greek translation"
 msgstr "ترجمهٔ یونانی"
 
-#: comix:1550
+#: src/about.py:87
 msgid "Catalan translation"
 msgstr "ترجمهٔ کاتالانی"
 
-#: comix:1551
+#: src/about.py:88
 msgid "Traditional Chinese translation"
 msgstr "ترجمهٔ چینی سنتی"
 
-#: comix:1552
+#: src/about.py:89
 msgid "Japanese translation"
 msgstr "ترجمهٔ ژاپنی"
 
-#: comix:1553
+#: src/about.py:90
 msgid "Hungarian translation"
 msgstr "ترجمهٔ مجاری"
 
-#: comix:1554
+#: src/about.py:91
 msgid "Russian translation"
 msgstr "ترجمهٔ روسی"
 
-#: comix:1555
+#: src/about.py:92
 msgid "Croatian translation"
 msgstr "ترجمهٔ کرواتی"
 
-#: comix:1556
+#: src/about.py:93
+msgid "Korean translation"
+msgstr ""
+
+#: src/about.py:94
+msgid "Persian translation"
+msgstr ""
+
+#: src/about.py:95
+msgid "Indonesian translation"
+msgstr ""
+
+#: src/about.py:96
 msgid "Czech translation"
 msgstr "ترجمهٔ چکی"
 
-#: comix:1564
+#: src/about.py:97
+msgid "Icon design"
+msgstr ""
+
+#: src/about.py:106
 msgid "Credits"
 msgstr "دست‌اندرکاران"
 
-#: comix:1573
-msgid "Manage thumbnails"
-msgstr "مدیریت مسطوره‌ها"
+#: src/archive.py:66
+msgid "Could not find RAR file extractor!"
+msgstr ""
 
-#: comix:1606 comix:1649
-msgid "Remove all stored thumbnails:"
-msgstr "همهٔ مسطوره‌های ذخیره‌شده حذف شوند:"
+#: src/archive.py:68
+msgid ""
+"You need either the <i>rar</i> or the <i>unrar</i> program installed in "
+"order to read RAR (.cbr) files."
+msgstr ""
 
-#: comix:1616 comix:1659
-msgid "Remove orphaned thumbnails:"
-msgstr "مسطوره‌های یتیم‌شده حذف شوند:"
-
-#: comix:1621
-msgid "Directories"
-msgstr "شاخه‌ها"
-
-#: comix:1664
-msgid "Archives"
-msgstr "بایگانی‌ها"
-
-#: comix:1674
-msgid "Removing thumbnails"
-msgstr "در حال حذف مسطوره‌ها"
-
-#: comix:1714
-msgid "Convert"
-msgstr "تبدیل"
-
-#: comix:1723
-msgid "File type"
-msgstr "نوع پرونده"
-
-#: comix:1724
-msgid "Extension"
-msgstr "پسوند"
-
-#: comix:1736 comix:4321 comix:4357 comix:6711 comix:7061 comix:7112
-#: comix:7468 comix:8714
-msgid "Zip archive"
+#: src/archive.py:301
+msgid "ZIP archive"
 msgstr "بایگانی ZIP"
 
-#: comix:1737 comix:4324 comix:4363 comix:6713 comix:7063 comix:7114
-#: comix:7472 comix:8730
+#: src/archive.py:302
 msgid "Tar archive"
 msgstr "بایگانی tar"
 
-#: comix:1738 comix:4328 comix:4359 comix:6715 comix:7066 comix:7117
-#: comix:7473 comix:8726
+#: src/archive.py:303
 msgid "Gzip compressed tar archive"
 msgstr "بایگانی tar فشرده‌شده به صورت gzip"
 
-#: comix:1740 comix:4331 comix:4361 comix:6717 comix:7069 comix:7120
-#: comix:7474 comix:8728
+#: src/archive.py:304
 msgid "Bzip2 compressed tar archive"
 msgstr "بایگانی tar فشرده‌شده به صورت bzip2"
 
-#: comix:1752
-msgid "Delete old archive/directory"
-msgstr "بایگانی/شاخهٔ قدیمی حذف شود."
-
-#: comix:1777 comix:6112 comix:6117
-msgid "Permission denied"
-msgstr "اجازه داده نشد"
-
-#: comix:1802
-msgid "Confirm operation"
-msgstr "تأیید عملیات"
-
-#: comix:4092
-msgid "Permanently remove %s?"
-msgstr "%s برای همیشه حذف شود؟"
-
-#: comix:4096
-msgid "Perform lossless JPEG operation on %s?"
-msgstr "عملیات JPEG بی‌خسارت روی %s انجام شود؟"
-
-#: comix:4098 comix:4103
-msgid "Some images might be trimmed a bit during the operation."
-msgstr "ممکن است در طول عملیات حاشیهٔ بعضی تصاویر کمی بریده شوند."
-
-#: comix:4101
-msgid "Permanently convert %s to greyscale?"
-msgstr "%s برای همیشه به سایه‌خاکستری تبدیل شود؟"
-
-#: comix:4963 comix:4974
-msgid "Location:"
-msgstr "مکان:"
-
-#: comix:4964 comix:4975
-msgid "Quantity:"
-msgstr "کمیت:"
-
-#: comix:4964 comix:4975
-msgid "Total size:"
-msgstr "اندازهٔ کلی:"
-
-#: comix:5010 comix:5021 comix:5025 comix:5036 comix:5055 comix:5060
-#: comix:5064 comix:5075 comix:5086 comix:5090 comix:5101 comix:5119
-#: comix:5124 comix:5128 comix:6431 comix:6459 comix:6465
-msgid "Removed:"
-msgstr "حذف‌شده:"
-
-#: comix:5026 comix:5065 comix:5091 comix:5129 comix:6379 comix:6466
-msgid "Done!"
-msgstr "انجام شد!"
-
-#: comix:5230 comix:6704 comix:7059 comix:7110
-msgid "pages"
-msgstr "صفحه"
-
-#: comix:5236
-msgid "comment"
-msgstr "توضیح"
-
-#: comix:5240
-msgid "comments"
-msgstr "توضیح"
-
-#: comix:5264 comix:5450 comix:5803
-msgid "Location"
-msgstr "مکان"
-
-#: comix:5277
-msgid "Yes"
-msgstr "بله"
-
-#: comix:5277 comix:5280
-msgid "In library"
-msgstr "در کتاب‌خانه"
-
-#: comix:5280 comix:5295
-msgid "No"
-msgstr "نه"
-
-#: comix:5290
-msgid "Yes, page"
-msgstr "بله، صفحهٔ"
-
-#: comix:5290 comix:5295
-msgid "Bookmarked"
-msgstr "نشانک‌گذاری شده"
-
-#: comix:5303 comix:5459 comix:5812
-msgid "Accessed"
-msgstr "آخرین دسترسی"
-
-#: comix:5313 comix:5470 comix:5823
-msgid "Modified"
-msgstr "آخرین تغییر"
-
-#: comix:5323 comix:5481 comix:5834
-msgid "Permissions"
-msgstr "اجازه‌ها"
-
-#: comix:5332 comix:5491 comix:5844
-msgid "Owner"
-msgstr "مالک"
-
-#: comix:5342
-msgid "Archive"
-msgstr "بایگانی"
-
-#: comix:5508 comix:5861
-msgid "Mode"
-msgstr "حالت"
-
-#: comix:5515 comix:5868
-msgid "Pixel count"
-msgstr "تعداد نقاط"
-
-#: comix:5528 comix:5881
-msgid "Pixel sum"
-msgstr "مجموع نقاط"
-
-#: comix:5559 comix:5912
-msgid "Extrema"
-msgstr "بیشینه"
-
-#: comix:5598 comix:5951
-msgid "Mean"
-msgstr "میانگین"
-
-#: comix:5626 comix:5979
-msgid "Median"
-msgstr "میانه"
-
-#: comix:5654 comix:6007
-msgid "Standard deviation"
-msgstr "انحراف معیار استاندارد"
-
-#: comix:5686
-msgid "Image"
-msgstr "تصویر"
-
-#: comix:5689
-msgid "Image 1"
-msgstr "تصویر ۱"
-
-#: comix:6037
-msgid "Image 2"
-msgstr "تصویر ۲"
-
-#: comix:6113
-msgid "Could not delete"
-msgstr "قابل حذف نیست"
-
-#: comix:6114 comix:6119
-msgid "Please check your permissions."
-msgstr "لطفاً اجازه‌هایتان را بررسی کنید."
-
-#: comix:6118
-msgid "Could not create"
-msgstr "قابل ایجاد نیست"
-
-#: comix:6230 comix:6240 comix:6374 comix:6378
-msgid "Added:"
-msgstr "اضافه شده:"
-
-#: comix:6231
-msgid "Adding library entries"
-msgstr "در حال اضافه کردن مدخل‌های کتاب‌خانه"
-
-#: comix:6432
-msgid "Removing library entries"
-msgstr "در حال حذف مدخل‌های کتاب‌خانه"
-
-#: comix:7213
-msgid "Extract page"
-msgstr "استخراج صفحه"
-
-#: comix:7640
-msgid "page"
-msgstr "صفحه"
-
-#: comix:8741
-msgid "Could not find the unrar executable. Please install it if you wish to open RAR archives."
-msgstr 
-"پروندهٔ اجرایی بازکنندهٔ RAR پیدا نمی‌شود. اگر می‌خواهید بایگانی‌های RAR را باز کنید، لطفاً آن را نصب کنید."
-
-#: comix:8746
-msgid "Could not open"
-msgstr "قابل باز کردن نیست"
-
-#: comix:8792
-msgid "is not a file."
-msgstr "پرونده نیست."
-
-#: comix:8795
-msgid "does not exist."
-msgstr "وجود ندارد."
-
-#: comix:8903
-msgid "Filetype of"
-msgstr "نوع پروندهٔ"
-
-#: comix:8905
-msgid "not recognized."
-msgstr "شناخته‌نشده است."
-
-#: comix:8920 comix:11179
-msgid "No images in \"%s\""
-msgstr "هیچ تصویری در «%s» نیست."
-
-#: comix:9403
-msgid "Comment file"
-msgstr "پروندهٔ توضیح"
-
-#: comix:9419
-msgid "Could not read"
-msgstr "قابل خواندن نیست"
-
-#: comix:9432 comix:9435 comix:9442 comix:9444
-msgid "Comment"
-msgstr "توضیح"
-
-#: comix:10882
-msgid "_Next page"
-msgstr "صفحهٔ _بعد"
-
-#: comix:10884
-msgid "_Previous page"
-msgstr "صفحهٔ _قبل"
-
-#: comix:10886
-msgid "_First page"
-msgstr "صفحهٔ _اول"
-
-#: comix:10888
-msgid "_Last page"
-msgstr "صفحهٔ آ_خر"
-
-#: comix:10890
-msgid "_Go to page..."
-msgstr "_رفتن به صفحهٔ..."
-
-#: comix:10892
-msgid "Manual _Zoom"
-msgstr "_زوم دستی"
-
-#: comix:10893
-msgid "_Zoom in"
-msgstr "_زوم به جلو"
-
-#: comix:10895
-msgid "Zoom _out"
-msgstr "زوم به _عقب"
-
-#: comix:10897
-msgid "_Normal size"
-msgstr "اندازهٔ _طبیعی"
-
-#: comix:10899
-msgid "Fit _width"
-msgstr "منطبق با عر_ض"
-
-#: comix:10901
-msgid "Fit _height"
-msgstr "منطبق به _طول"
-
-#: comix:10903
-msgid "_Best fit"
-msgstr "_بهترین تطابق"
-
-#: comix:10905
+#: src/archive.py:305
+msgid "RAR archive"
+msgstr "بایگانی RAR"
+
+#: src/bookmark.py:27
 msgid "_Add bookmark"
 msgstr "اضافه کردن نشانک_"
 
-#: comix:10907
-msgid "Clear bookmarks"
-msgstr "پاک‌سازی نشانک‌ها"
-
-#: comix:10910
+#: src/bookmark.py:29
 msgid "_Edit bookmarks..."
 msgstr "_ویرایش نشانک‌ها..."
 
-#: comix:10912
-msgid "Pr_eferences"
-msgstr "تر_جیحات"
+#: src/bookmark.py:31
+msgid "_Clear bookmarks..."
+msgstr ""
 
-#: comix:10914
-msgid "_About"
-msgstr "_درباره"
+#: src/bookmark.py:77
+msgid "Clear all bookmarks?"
+msgstr ""
 
-#: comix:10917
-msgid "_Manage thumbnails..."
-msgstr "_مدیریت مسطوره‌ها..."
+#: src/bookmark.py:79
+msgid ""
+"All stored bookmarks will be removed. Are you sure that you want to continue?"
+msgstr ""
 
-#: comix:10919
-msgid "Proper_ties"
-msgstr "ویژ_گی‌ها"
+#: src/bookmark.py:229
+msgid "Edit bookmarks"
+msgstr "ویرایش نشانک‌ها"
 
-#: comix:10921
-msgid "View _comments"
-msgstr "نمایش _توضیحات"
+#: src/bookmark.py:255 src/edit.py:267
+msgid "Name"
+msgstr ""
 
-#: comix:10923
-msgid "_Open..."
-msgstr "_باز کردن..."
+#: src/bookmark.py:256
+msgid "Page"
+msgstr "صفحه"
 
-#: comix:10925
-msgid "_Recent files"
-msgstr "_پرونده‌های اخیر"
+#: src/comment.py:16 src/preferences.py:288
+msgid "Comments"
+msgstr "توضیحات"
 
-#: comix:10926
-msgid "Clear recent files"
-msgstr "پاک‌سازی فهرست پرونده‌های اخیر"
+#: src/comment.py:53
+#, python-format
+msgid "Could not read %s"
+msgstr ""
 
-#: comix:10928
-msgid "Open _library..."
-msgstr "باز کردن _کتاب‌خانه..."
+#: src/deprecated.py:16
+msgid "There are deprecated files left on your computer."
+msgstr ""
 
-#: comix:10930
-msgid "_Add to library"
-msgstr "_اضافه کردن به کتاب‌خانه"
+#: src/deprecated.py:22
+msgid ""
+"Some old files (that were used for storing preferences, the library, "
+"bookmarks etc. for older versions of Comix) were found on your computer. If "
+"you do not plan on using the older versions of Comix again, you should "
+"remove these files in order to save some disk space. Do you want these files "
+"to be removed for you now?"
+msgstr ""
 
-#: comix:10932
-msgid "Con_vert..."
-msgstr "تب_دیل..."
+#: src/edit.py:28
+msgid "Edit archive"
+msgstr ""
 
-#: comix:10934
-msgid "E_xtract image..."
-msgstr "است_خراج تصویر..."
+#: src/edit.py:36
+msgid "Import"
+msgstr ""
 
-#: comix:10936
-msgid "_Close"
-msgstr "ب_ستن"
+#: src/edit.py:50
+msgid "Images"
+msgstr ""
 
-#: comix:10938
-msgid "_Quit"
-msgstr "_خروج"
+#: src/edit.py:51
+msgid "Other files"
+msgstr ""
 
-#: comix:10940
-msgid "_Adjust colour..."
-msgstr "_تنظیم رنگ..."
+#: src/edit.py:99
+msgid "The new archive could not be saved!"
+msgstr ""
 
-#: comix:10942
+#: src/edit.py:101
+msgid "The original files have not been removed."
+msgstr ""
+
+#: src/edit.py:115
+msgid "Archives are stored as ZIP files."
+msgstr ""
+
+#: src/edit.py:168 src/edit.py:285
+msgid "Remove from archive"
+msgstr ""
+
+#: src/edit.py:255
+msgid ""
+"Please note that the only files that are automatically added to this list "
+"are those files in archives that Comix recognizes as comments."
+msgstr ""
+
+#: src/edit.py:270
+msgid "Size"
+msgstr ""
+
+#: src/enhance.py:51
+msgid "Enhance image"
+msgstr ""
+
+#: src/enhance.py:52
+msgid "Defaults"
+msgstr ""
+
+#: src/enhance.py:79
+msgid "Brightness"
+msgstr "روشنی"
+
+#: src/enhance.py:90
+msgid "Contrast"
+msgstr "کنتراست"
+
+#: src/enhance.py:101
+msgid "Saturation"
+msgstr "اشباع"
+
+#: src/enhance.py:112
+msgid "Sharpness"
+msgstr "وضوح"
+
+#: src/enhance.py:126
+msgid "Automatically adjust contrast."
+msgstr ""
+
+#: src/enhance.py:128
+msgid ""
+"Automatically adjust contrast (both lightness and darkness), separately for "
+"each colour band."
+msgstr ""
+
+#: src/filechooser.py:35 src/library.py:489
+msgid "Open"
+msgstr "باز کردن"
+
+#: src/filechooser.py:39
+msgid "Save"
+msgstr ""
+
+#: src/filechooser.py:75
+msgid "All files"
+msgstr "همهٔ پرونده‌ها"
+
+#: src/filechooser.py:78
+msgid "All Archives"
+msgstr ""
+
+#: src/filechooser.py:82
+msgid "ZIP archives"
+msgstr ""
+
+#: src/filechooser.py:84
+msgid "RAR archives"
+msgstr ""
+
+#: src/filechooser.py:86
+msgid "Tar archives"
+msgstr ""
+
+#: src/filechooser.py:125
+#, python-format
+msgid "A file named '%s' already exists. Do you want to replace it?"
+msgstr ""
+
+#: src/filechooser.py:128
+msgid "Replacing it will overwrite its contents."
+msgstr ""
+
+#: src/filechooser.py:171 src/filechooser.py:249
+msgid "All images"
+msgstr "همهٔ تصاویر"
+
+#: src/filechooser.py:173 src/filechooser.py:251
+msgid "JPEG images"
+msgstr ""
+
+#: src/filechooser.py:174 src/filechooser.py:252
+msgid "PNG images"
+msgstr ""
+
+#: src/filechooser.py:195
+msgid "Automatically add the books to this collection"
+msgstr ""
+
+#: src/filehandler.py:209
+#, python-format
+msgid "Could not open %s: Is a directory."
+msgstr ""
+
+#: src/filehandler.py:213
+#, python-format
+msgid "Could not open %s: No such file."
+msgstr ""
+
+#: src/filehandler.py:217
+#, python-format
+msgid "Could not open %s: Permission denied."
+msgstr ""
+
+#: src/filehandler.py:222
+#, python-format
+msgid "Could not open %s: Unknown file type."
+msgstr ""
+
+#: src/filehandler.py:285
+#, python-format
+msgid "No images in '%s'"
+msgstr ""
+
+#: src/filehandler.py:411
+msgid "Unknown filetype"
+msgstr ""
+
+#: src/librarybackend.py:272 src/librarybackend.py:274
+msgid "(Copy)"
+msgstr ""
+
+#: src/library.py:38
+msgid "Library"
+msgstr "کتاب‌خانه"
+
+#: src/library.py:150
+msgid "Rename..."
+msgstr ""
+
+#: src/library.py:152
+msgid "Duplicate collection"
+msgstr ""
+
+#: src/library.py:154
+msgid "Remove collection..."
+msgstr ""
+
+#: src/library.py:202
+msgid "All books"
+msgstr ""
+
+#: src/library.py:231
+msgid "Remove collection from the library?"
+msgstr ""
+
+#: src/library.py:233
+msgid ""
+"The selected collection will be removed from the library (but the books and "
+"subcollections in it will remain). Are you sure that you want to continue?"
+msgstr ""
+
+#: src/library.py:251
+msgid "Rename collection?"
+msgstr ""
+
+#: src/library.py:253
+msgid "Please enter a new name for the selected collection."
+msgstr ""
+
+#: src/library.py:271
+#, python-format
+msgid "Could not change the name to '%s'."
+msgstr ""
+
+#: src/library.py:275 src/library.py:881
+msgid "A collection by that name already exists."
+msgstr ""
+
+#: src/library.py:285
+msgid "Could not duplicate collection."
+msgstr ""
+
+#: src/library.py:382
+msgid "Root"
+msgstr ""
+
+#: src/library.py:386
+#, python-format
+msgid ""
+"Put the collection '%(subcollection)s' in the collection '%(supercollection)"
+"s'."
+msgstr ""
+
+#: src/library.py:407
+#, python-format
+msgid "Add books to '%s'."
+msgstr ""
+
+#: src/library.py:411
+#, python-format
+msgid ""
+"Move books from '%(source collection)s' to '%(destination collection)s'."
+msgstr ""
+
+#: src/library.py:492
+msgid "Remove from this collection"
+msgstr ""
+
+#: src/library.py:495
+msgid "Remove from the library..."
+msgstr ""
+
+#: src/library.py:588
+#, python-format
+msgid "Removed %(num)d book(s) from '%(collection)s'."
+msgstr ""
+
+#: src/library.py:597
+msgid "Remove books from the library?"
+msgstr ""
+
+#: src/library.py:599
+msgid ""
+"The selected books will be removed from the library (but the original files "
+"will be untouched). Are you sure that you want to continue?"
+msgstr ""
+
+#: src/library.py:609
+#, python-format
+msgid "Removed %d book(s) from the library."
+msgstr ""
+
+#: src/library.py:769
+msgid "Search"
+msgstr ""
+
+#: src/library.py:774
+msgid ""
+"Display only those books that have the specified text string in their full "
+"path. The search is not case sensitive."
+msgstr ""
+
+#: src/library.py:776
+msgid "Cover size"
+msgstr ""
+
+#: src/library.py:789
+msgid "Add books"
+msgstr ""
+
+#: src/library.py:793
+msgid "Add more books to the library."
+msgstr ""
+
+#: src/library.py:795
+msgid "Add collection"
+msgstr ""
+
+#: src/library.py:800
+msgid "Add a new empty collection."
+msgstr ""
+
+#: src/library.py:806
+msgid "Open the selected book."
+msgstr ""
+
+#: src/library.py:832 src/properties.py:113
+#, python-format
+msgid "%d pages"
+msgstr ""
+
+#: src/library.py:854
+msgid "Add new collection?"
+msgstr ""
+
+#: src/library.py:856
+msgid "Please enter a name for the new collection."
+msgstr ""
+
+#: src/library.py:862
+msgid "New collection"
+msgstr ""
+
+#: src/library.py:876
+#, python-format
+msgid "Could not add a new collection called '%s'."
+msgstr ""
+
+#: src/library.py:910
+msgid "Adding books"
+msgstr ""
+
+#: src/library.py:930
+msgid "Added books"
+msgstr ""
+
+#: src/library.py:952
+#, python-format
+msgid "Adding '%s'..."
+msgstr ""
+
+#: src/main.py:666
+msgid "SLIDESHOW"
+msgstr ""
+
+#: src/preferences.py:78
+msgid "Preferences"
+msgstr "ترجیحات"
+
+#: src/preferences.py:93
+msgid "Background"
+msgstr ""
+
+#: src/preferences.py:95
+msgid "Use this colour as background"
+msgstr ""
+
+#: src/preferences.py:97
+msgid "Always use this selected colour as the background colour."
+msgstr ""
+
+#: src/preferences.py:102
+msgid "Use dynamic background colour."
+msgstr ""
+
+#: src/preferences.py:106
+msgid "Automatically pick a background colour that fits the viewed image."
+msgstr ""
+
+#: src/preferences.py:109
+msgid "Thumbnails"
+msgstr "مسطوره‌ها"
+
+#: src/preferences.py:110
+msgid "Thumbnail size (in pixels)"
+msgstr ""
+
+#: src/preferences.py:117
+msgid "Show page numbers on thumbnails."
+msgstr ""
+
+#: src/preferences.py:124
+msgid "Magnifying Glass"
+msgstr ""
+
+#: src/preferences.py:125
+msgid "Magnifying glass size (in pixels)"
+msgstr ""
+
+#: src/preferences.py:131
+msgid ""
+"Set the size of the magnifying glass. It is a square with a side of this "
+"many pixels."
+msgstr ""
+
+#: src/preferences.py:133
+msgid "Magnification factor"
+msgstr ""
+
+#: src/preferences.py:140
+msgid "Set the magnification factor of the magnifying glass."
+msgstr ""
+
+#: src/preferences.py:143
+msgid "Image scaling"
+msgstr ""
+
+#: src/preferences.py:144
+msgid "Stretch small images."
+msgstr ""
+
+#: src/preferences.py:148
+msgid ""
+"Stretch images to a size that is larger than their original size if the "
+"current zoom mode requests it. If this preference is unset, images are never "
+"scaled to be larger than their original size."
+msgstr ""
+
+#: src/preferences.py:151
+msgid "Transparency"
+msgstr ""
+
+#: src/preferences.py:153
+msgid "Use checkered background for transparent images."
+msgstr ""
+
+#: src/preferences.py:159
+msgid ""
+"Use a grey checkered background for transparent images. If this preference "
+"is unset, the background is plain white instead."
+msgstr ""
+
+#: src/preferences.py:161
+msgid "Appearance"
+msgstr ""
+
+#: src/preferences.py:167
+msgid "Scroll"
+msgstr "لغزش"
+
+#: src/preferences.py:169
+msgid "Use smart space key scrolling."
+msgstr ""
+
+#: src/preferences.py:174
+msgid ""
+"Use smart scrolling with the space key. Normally the space key scrolls only "
+"right down (or up when shift is pressed), but with this preference set it "
+"also scrolls sideways and so tries to follow the natural reading order of "
+"the comic book."
+msgstr ""
+
+#: src/preferences.py:177 src/ui.py:296
+msgid "Double page mode"
+msgstr "حالت دو صفحه‌ای"
+
+#: src/preferences.py:179
+msgid "Flip two pages in double page mode."
+msgstr ""
+
+#: src/preferences.py:184
+msgid ""
+"Flip two pages, instead of one, each time we flip pages in double page mode."
+msgstr ""
+
+#: src/preferences.py:187
+msgid "Show only one wide image in double page mode."
+msgstr ""
+
+#: src/preferences.py:193
+msgid ""
+"Display only one image in double page mode, if the image's width exceeds its "
+"height. The result of this is that scans that span two pages are displayed "
+"properly (i.e. alone) also in double page mode."
+msgstr ""
+
+#: src/preferences.py:196
+msgid "Files"
+msgstr ""
+
+#: src/preferences.py:198
+msgid "Automatically open the next archive."
+msgstr ""
+
+#: src/preferences.py:203
+msgid ""
+"Automatically open the next archive in the directory when flipping past the "
+"last page, or the previous archive when flipping past the first page."
+msgstr ""
+
+#: src/preferences.py:206
+msgid "Automatically open the last viewed file on startup."
+msgstr ""
+
+#: src/preferences.py:211
+msgid ""
+"Automatically open, on startup, the file that was open when Comix was last "
+"closed."
+msgstr ""
+
+#: src/preferences.py:214
+msgid "Store information about recently opened files."
+msgstr ""
+
+#: src/preferences.py:219
+msgid ""
+"Add information about all files opened from within Comix to the shared "
+"recent files list."
+msgstr ""
+
+#: src/preferences.py:222
+msgid "Store thumbnails for opened files."
+msgstr ""
+
+#: src/preferences.py:227
+msgid ""
+"Store thumbnails for opened files according to the freedesktop.org "
+"specification. These thumbnails are shared by many other applications, such "
+"as most file managers."
+msgstr ""
+
+#: src/preferences.py:230
+msgid "Cache"
+msgstr ""
+
+#: src/preferences.py:231
+msgid "Use a cache to speed up browsing."
+msgstr ""
+
+#: src/preferences.py:235
+msgid ""
+"Cache the images that are next to the currently viewed image in order to "
+"speed up browsing. Since the speed improvements are quite big, it is "
+"recommended that you have this preference set, unless you are running short "
+"on free RAM."
+msgstr ""
+
+#: src/preferences.py:237
+msgid "Behaviour"
+msgstr "رفتار"
+
+#: src/preferences.py:243
+msgid "Default modes"
+msgstr ""
+
+#: src/preferences.py:245
+msgid "Use double page mode by default."
+msgstr ""
+
+#: src/preferences.py:250
+msgid "Use fullscreen by default."
+msgstr ""
+
+#: src/preferences.py:255
+msgid "Use manga mode by default."
+msgstr ""
+
+#: src/preferences.py:260
+msgid "Default zoom mode"
+msgstr ""
+
+#: src/preferences.py:262 src/ui.py:288
+msgid "Best fit mode"
+msgstr ""
+
+#: src/preferences.py:263 src/ui.py:290
+msgid "Fit width mode"
+msgstr "حالت منطبق با عرض صفحه"
+
+#: src/preferences.py:264 src/ui.py:292
+msgid "Fit height mode"
+msgstr "حالت منطبق با ارتفاع صفحه"
+
+#: src/preferences.py:265 src/ui.py:294
+msgid "Manual zoom mode"
+msgstr "حالت زوم دستی"
+
+#: src/preferences.py:271
+msgid "Fullscreen"
+msgstr ""
+
+#: src/preferences.py:273
+msgid "Automatically hide all toolbars in fullscreen."
+msgstr ""
+
+#: src/preferences.py:279
 msgid "Slideshow"
 msgstr "نمایش اسلایدی"
 
-#: comix:10944
-msgid "Delete image..."
-msgstr "حذف تصویر..."
+#: src/preferences.py:280
+msgid "Slideshow delay (in seconds)"
+msgstr ""
 
-#: comix:10947
-msgid "CW lossless JPEG rotation..."
-msgstr "دوران JPEG بی‌خسارت در جهت ساعت..."
+#: src/preferences.py:289
+msgid "Comment extensions"
+msgstr ""
 
-#: comix:10950
-msgid "CCW lossless JPEG rotation..."
-msgstr "دوران JPEG بی‌خسارت در خلاف جهت ساعت..."
+#: src/preferences.py:295
+msgid ""
+"Treat all files found within archives, that have one of these file endings, "
+"as comments."
+msgstr ""
 
-#: comix:10953
-msgid "Horizontal lossless JPEG flip..."
-msgstr "پشت و رو کردن افقی JPEG بی‌خسارت..."
+#: src/preferences.py:297
+msgid "Display"
+msgstr "نمایش"
 
-#: comix:10956
-msgid "Vertical lossless JPEG flip..."
-msgstr 
-"پشت و رو کردن عمودی JPEG بی‌خسارت..."
+#: src/properties.py:89
+msgid "Properties"
+msgstr "ویژگی‌ها"
 
-#: comix:10959
-msgid "Convert JPEG to greyscale..."
-msgstr "تبدیل JPEG به سایه‌خاکستری..."
+#: src/properties.py:114
+#, python-format
+msgid "%d comments"
+msgstr ""
 
-#: comix:10961 comix:10963
-msgid "_Bookmarks"
-msgstr "نشان_ک‌ها"
+#: src/properties.py:124 src/properties.py:159
+msgid "Location"
+msgstr "مکان"
 
-#: comix:10962
-msgid "_Toolbars"
-msgstr "نوارهای _ابزار"
+#: src/properties.py:126 src/properties.py:160
+msgid "Accessed"
+msgstr "آخرین دسترسی"
 
-#: comix:10964
-msgid "_Edit"
-msgstr "_ویرایش"
+#: src/properties.py:128 src/properties.py:162
+msgid "Modified"
+msgstr "آخرین تغییر"
 
-#: comix:10966
-msgid "File o_perations"
-msgstr "ع_ملیات پرونده"
+#: src/properties.py:130 src/properties.py:164
+msgid "Permissions"
+msgstr "اجازه‌ها"
 
-#: comix:10967
-msgid "_File"
-msgstr "_پرونده"
+#: src/properties.py:131 src/properties.py:165
+msgid "Owner"
+msgstr "مالک"
 
-#: comix:10968 comix:10969
-msgid "_View"
-msgstr "_نما"
+#: src/properties.py:135
+msgid "Archive"
+msgstr "بایگانی"
 
-#: comix:10970 comix:10971
-msgid "_Go"
-msgstr "_رفتن"
+#: src/properties.py:169
+msgid "Image"
+msgstr "تصویر"
 
-#: comix:10972
-msgid "_Help"
-msgstr "را_هنما"
+#: src/thumbremover.py:22
+msgid "Thumbnail maintenance"
+msgstr ""
 
-#: comix:10973
-msgid "_Transform"
-msgstr "_تغییر شکل"
+#: src/thumbremover.py:24
+msgid "Cleanup"
+msgstr ""
 
-#: comix:10974
+#: src/thumbremover.py:36
+msgid "Cleanup thumbnails"
+msgstr ""
+
+#: src/thumbremover.py:46
+msgid ""
+"Thumbnails for files (such as image files and comic book archives) are "
+"stored in your home directory. Many different applications use and create "
+"these thumbnails, but sometimes thumbnails remain even though the original "
+"files have been removed - wasting space. This dialog can cleanup your stored "
+"thumbnails by removing orphaned and outdated thumbnails."
+msgstr ""
+
+#: src/thumbremover.py:58
+msgid "Thumbnail directory"
+msgstr ""
+
+#: src/thumbremover.py:65
+msgid "Total number of thumbnails"
+msgstr ""
+
+#: src/thumbremover.py:68 src/thumbremover.py:75
+msgid "Calculating..."
+msgstr ""
+
+#: src/thumbremover.py:72
+msgid "Total size of thumbnails"
+msgstr ""
+
+#: src/thumbremover.py:80
+msgid "Do you want to cleanup orphaned and outdated thumbnails now?"
+msgstr ""
+
+#: src/thumbremover.py:116
+msgid "Removing thumbnails"
+msgstr "در حال حذف مسطوره‌ها"
+
+#: src/thumbremover.py:135
+msgid "Number of removed thumbnails"
+msgstr ""
+
+#: src/thumbremover.py:142
+msgid "Total size of removed thumbnails"
+msgstr ""
+
+#: src/thumbremover.py:193
+#, python-format
+msgid "Removed thumbnail for '%s'"
+msgstr ""
+
+#: src/ui.py:34
+msgid "_Next page"
+msgstr "صفحهٔ _بعد"
+
+#: src/ui.py:36
+msgid "_Previous page"
+msgstr "صفحهٔ _قبل"
+
+#: src/ui.py:38
+msgid "_First page"
+msgstr "صفحهٔ _اول"
+
+#: src/ui.py:40
+msgid "_Last page"
+msgstr "صفحهٔ آ_خر"
+
+#: src/ui.py:42
+msgid "_Zoom in"
+msgstr "_زوم به جلو"
+
+#: src/ui.py:44
+msgid "Zoom _out"
+msgstr "زوم به _عقب"
+
+#: src/ui.py:46
+msgid "O_riginal size"
+msgstr ""
+
+#: src/ui.py:48
+msgid "_Close"
+msgstr "ب_ستن"
+
+#: src/ui.py:50
+msgid "_Quit"
+msgstr "_خروج"
+
+#: src/ui.py:52
 msgid "_Rotate 90 degrees CW"
 msgstr "_چرخاندن ۹۰ درجه‌ای در جهت ساعت"
 
-#: comix:10976
+#: src/ui.py:54
 msgid "Rotate 180 de_grees"
 msgstr "چرخاندن ۱۸۰ در_جه‌ای"
 
-#: comix:10978
+#: src/ui.py:56
 msgid "Rotat_e 90 degrees CCW"
 msgstr "چرخان_دن ۹۰ درجه‌ای در خلاف جهت ساعت"
 
-#: comix:10980
+#: src/ui.py:58
 msgid "Fli_p horizontally"
 msgstr "_پشت و رو کردن افقی"
 
-#: comix:10982
+#: src/ui.py:60
 msgid "Flip _vertically"
 msgstr "پشت و رو کردن _عمودی"
 
-#: comix:10985
+#: src/ui.py:62
+msgid "Manual _Zoom"
+msgstr "_زوم دستی"
+
+#: src/ui.py:63
+msgid "Open _recent"
+msgstr ""
+
+#: src/ui.py:64
+msgid "_Bookmarks"
+msgstr "نشان_ک‌ها"
+
+#: src/ui.py:65
+msgid "T_oolbars"
+msgstr ""
+
+#: src/ui.py:66
+msgid "_Edit"
+msgstr "_ویرایش"
+
+#: src/ui.py:67
+msgid "_File"
+msgstr "_پرونده"
+
+#: src/ui.py:68
+msgid "_View"
+msgstr "_نما"
+
+#: src/ui.py:69
+msgid "_Go"
+msgstr "_رفتن"
+
+#: src/ui.py:70
+msgid "_Help"
+msgstr "را_هنما"
+
+#: src/ui.py:71
+msgid "_Transform"
+msgstr "_تغییر شکل"
+
+#: src/ui.py:75
 msgid "_Fullscreen"
 msgstr "تمام‌_صفحه"
 
-#: comix:10987
+#: src/ui.py:77
 msgid "_Double page mode"
 msgstr "حالت _دو صفحه‌ای"
 
-#: comix:10989
+#: src/ui.py:79
 msgid "_Toolbar"
 msgstr "_نوار ابزار"
 
-#: comix:10991
+#: src/ui.py:81
 msgid "_Menubar"
 msgstr "نوار _منو"
 
-#: comix:10993
+#: src/ui.py:83
 msgid "St_atusbar"
 msgstr "نوار و_ضعیت"
 
-#: comix:10995
+#: src/ui.py:85
 msgid "S_crollbars"
 msgstr "نوارهای ل_غزش"
 
-#: comix:10997
+#: src/ui.py:87
 msgid "Th_umbnails"
 msgstr "مس_طوره‌ها"
 
-#: comix:10999
+#: src/ui.py:89
 msgid "H_ide all"
 msgstr "مخ_فی کردن همه"
 
-#: comix:11001
+#: src/ui.py:91
 msgid "_Manga mode"
 msgstr "حالت _ژاپنی"
 
-#: comix:11003
+#: src/ui.py:93
 msgid "_Keep transformation"
 msgstr "_نگهداشتن تغییر شکل‌ها"
 
-#: comix:11005
-msgid "Magnifying _lens"
-msgstr "_عدسی بزرگ‌نما"
+#: src/ui.py:95
+msgid "Run _slideshow"
+msgstr ""
 
-#: comix:11009
-msgid "Fit-to-_screen mode"
-msgstr "حالت منطبق با _صفحهٔ نمایش"
+#: src/ui.py:97
+msgid "Magnifying _glass"
+msgstr ""
 
-#: comix:11010
+#: src/ui.py:101
+msgid "_Best fit mode"
+msgstr ""
+
+#: src/ui.py:103
 msgid "Fit _width mode"
 msgstr "حالت منطبق با عر_ض صفحه"
 
-#: comix:11011
+#: src/ui.py:105
 msgid "Fit _height mode"
 msgstr "حالت منطبق با _ارتفاع صفحه"
 
-#: comix:11025
-msgid "Enter fullscreen mode automatically when Comix is started."
-msgstr "هنگام آغاز به کار کامیکس، به طور خودکار وارد حالت تمام‌صفحه شود."
-
-#: comix:11026
-msgid "Enter double page mode automatically when Comix is started."
-msgstr "هنگام آغاز به کار کامیکس، به طور خودکار وارد حالت دو صفحه‌ای شود."
-
-#: comix:11027
-msgid "Enter manual zoom mode automatically when Comix is started."
-msgstr "هنگام آغاز به کار کامیکس، به طور خودکار وارد حالت زوم دستی شود."
-
-#: comix:11028
-msgid "Enter fit-to-screen mode automatically when Comix is started."
-msgstr "هنگام آغاز به کار کامیکس، به طور خودکار وارد حالت منطبق با صفحهٔ نمایش شود."
-
-#: comix:11029
-msgid "Enter fit width mode automatically when Comix is started."
-msgstr "هنگام آغاز به کار کامیکس، به طور خودکار وارد حالت منطبق با عرض صفحه شود."
-
-#: comix:11030
-msgid "Enter fit height mode automatically when Comix is started."
-msgstr "هنگام آغاز به کار کامیکس، به طور خودکار وارد حالت منطبق با ارتفاع صفحه شود."
-
-#: comix:11031
-msgid "Also scale images to a size that is larger than their original size in fit-to-screen mode, fit width mode and fit height mode."
-msgstr "همچنین در حالت منطبق با صفحهٔ نمایش، منطبق با عرض و منطبق با ارتفاع، تصاویر بزرگ‌تر از اندازهٔ واقعی‌شان نمایش داده شوند."
-
-#: comix:11032
-msgid "Scale the images independently when in double page mode and fit-to-screen mode. The smaller of the two images will scale up to fill any extra space that is given."
+#: src/ui.py:107
+msgid "M_anual zoom mode"
 msgstr ""
-"در حالت دو صفحه‌ای و منطبق با صفحهٔ نمایش، تصاویر مستقلاً بزرگ شوند. "
-"تصویر کوچک‌تر بزرگ می‌شود تا فضای اضافی موجود را پر کند."
 
-#: comix:11033
-msgid "Automatically show any available comments when opening a new file."
-msgstr "هنگام باز شدن یک پروندهٔ جدید، توضیح‌های موجود به طور خودکار نشان داده شوند."
+#: src/ui.py:113
+msgid "_About"
+msgstr "_درباره"
 
-#: comix:11034
-msgid "Automatically hide scrollbars, menubar, toolbar, statusbar and thumbnails when in fullscreen mode."
-msgstr "در حالت تمام‌صفحه به طور خودکار نوار لغزش، نوار منو، نوار ابزار، نوار وضعیت و مسطوره‌ها مخفی شوند."
-
-#: comix:11035
-msgid "Cache the next page in the archive/directory to increase the perceived speed. This is generally recommended unless you are running low on RAM."
+#: src/ui.py:115
+msgid "_View comments..."
 msgstr ""
-"برای افزایش سرعت مشاهده، صفحهٔ بعدی در بایگانی/شاخه در حافظهٔ نهان ذخیره شود. "
-"استفاده از این گزینه معمولاً توصیه می‌شود مگر آن که حافظهٔ کامپیوترتان کم باشد."
 
-#: comix:11036
-msgid "Move the horizontal scrollbar instead of the vertical when using the scroll wheel at the top or the bottom of the page. The direction will be determined by whether you use manga mode or not."
+#: src/ui.py:117
+msgid "_Edit archive..."
 msgstr ""
-"هنگام استفاده از چرخ لغزش در بالا یا پایین صفحه، به جای نوار لغزش عمودی، نوار لغزش افقی حرکت کند. "
-"جهت حرکت بسته به این که شما از حالت ژاپنی استفاده کنید یا نه، تعیین می‌شود."
 
-#: comix:11037
-msgid "Flip pages when scrolling \"off the page\" with the scroll wheel, as well as with the arrow keys, even when not in fit-to-screen mode. It takes three \"steps\" with the scroll wheel or arrow keys to trigger this behaviour."
+#: src/ui.py:119
+msgid "_Open..."
+msgstr "_باز کردن..."
+
+#: src/ui.py:121
+msgid "_Properties"
 msgstr ""
-"هنگام «لغزش به خارج صفحه» با چرخ لغزش، همین‌طور کلیدهای جابه‌جایی در صفحه‌کلید، به صفحهٔ بعد یا قبل برود، "
-"حتی وقتی که در حالت منطبق با صفحهٔ نمایش نیستید. سه «مرحله» با چرخ لغزش یا کلیدهای جابه‌جایی لازم است تا  این حرکت فعال شود."
 
-#: comix:11038
-msgid "Save the position and the size of the window for the next time you start Comix."
-msgstr "موقعیت و اندازهٔ پنجره برای دفعهٔ بعدی که کامیکس را آغاز می‌کنید، ذخیره شود."
-
-#: comix:11039
-msgid "Automatically open the next archive in the directory when scrolling past the last page of the current archive, and automatically open the previous archive in the directory when scrolling past the first page of the current archive."
+#: src/ui.py:123
+msgid "_Enhance image..."
 msgstr ""
-"وقتی لغزش صفحهٔ آخر بایگانی فعلی تمام شد، بایگانی بعدی در شاخه به طور خودکار باز شود "
-"و وقتی از صفحهٔ اول بایگانی فعلی بالاتر رفتید، به طور خودکار بایگانی قبل از این شاخه باز شود."
 
-#: comix:11040
-msgid "Hide the cursor when in fullscreen mode."
-msgstr "در حالت تمام‌صفحه مکان‌نما مخفی شود."
-
-#: comix:11041 comix:11042 comix:11043 comix:11044
-msgid "Set the image scaling method. The best choice is often \"Tiles\", it is quite quick and produces almost as good results as \"Bilinear\" or \"Hyper\"."
+#: src/ui.py:126
+msgid "_Thumbnail maintenance..."
 msgstr ""
-"روش بزرگ‌نمایی تصویر را تنظیم کنید. بهترین انتخاب غالباً «تکه تکه» است، این گزینه کاملاً سریع است "
-"و  تقریباً به خوبی «دو خطی» و «دقیق» نتیجه می‌دهد."
 
-#: comix:11045
-msgid "Treat files with the following extensions as comment files. Extensions should be separated by whitespaces. They are not case sensitive."
+#: src/ui.py:128
+msgid "Pr_eferences"
+msgstr "تر_جیحات"
+
+#: src/ui.py:132
+msgid "_Library..."
 msgstr ""
-"با پرونده‌های دارای پسوندهای زیر مانند پرونده‌های توضیح رفتار شود. "
-"عبارات باید با فاصله جدا شده باشند. سیستم به بزرگی و کوچکی حروف حساس نیست."
 
-#: comix:11046
-msgid "Use smart scrolling with the space key. Pressing the space key normally scrolls straight down one window height unless at the bottom of the page where it flips pages instead. When this option is set Comix automatically tries to follow the reading flow of the comic book. When pressing the space key it will not only scroll down but will also scroll horizontally to the edge of the page (left or right depending on whether you use manga mode). In double page mode it will go to the edge of the first page if it is in view, otherwise it will go to the edge of the second page. Also, in double page mode with this option, Comix will not flip pages unless at the bottom of the second page. At the bottom of the first page it will instead go to the top of the second page."
-msgstr ""
-"از لغزش هوشمند با کلید فاصله استفاده شود. به طور معمول فشردن کلید فاصله طول یک صفحه را به طرف پایین می‌لغزاند، "
-"مگر در آخر صفحه که به صفحهٔ بعد می‌رود. وقتی این گزینه انتخاب شده کامیکس به طور خودکار تلاش می‌کند که روند خواندن کتاب کامیک را دنبال کند. با فشار دادن کلید فاصله، نه تنها صفحه به پایین می‌لغزد بلکه  به صورت افقی هم به لبهٔ صفحه (چپ یا راست بسته به استفادهٔ شما از حالت ژاپنی) می‌رود. در حالت دو صفحه‌ای اگر صفحهٔ اول در نما باشد، به لبهٔ صفحهٔ اول می‌رود. در غیر این صورت به لبهٔ صفحهٔ دوم می‌رود. همچنین با این گزینه در حالت دو صفحه‌ای، کامیکس به صفحهٔ بعد نمی‌رود مگر در آخر صفحهٔ دوم. در آخر صفحهٔ اول به اول صفحهٔ دوم می‌رود."
-
-#: comix:11047
-msgid "Always hide the thumbnail scrollbar."
-msgstr "همیشه نوار لغزش مسطوره‌ها مخفی شود."
-
-#: comix:11048
-msgid "Automatically open the last viewed page when Comix is started."
-msgstr "هنگام آغاز به کار کامیکس، آخرین صفحهٔ دیده‌شده به طور خودکار باز شود."
-
-#: comix:11049
-msgid "Automatically go to the same directory as last time when opening the \"Open\" dialog."
-msgstr "هنگام باز شدن محاورهٔ «باز کردن»، به طور خودکار به همان شاخه‌ای برود که آخرین بار در آن بود."
-
-#: comix:11050
-msgid "Automatically go to this directory when opening the \"Open\" dialog."
-msgstr "هنگام باز شدن محاورهٔ «باز کردن»، به طور خودکار به این شاخه برود."
-
-#: comix:11051
-msgid "Automatically restore these values the next time Comix is started."
-msgstr "دفعهٔ بعد که کامیکس شروع به کار کرد، این مقادیر به طور خودکار برگردانده شوند."
-
-#: comix:11052
-msgid "Show the page number in the upper left corner of each thumbnail."
-msgstr "شمارهٔ صفحه در گوشهٔ چپ و بالای تک‌تک مسطوره نشان داده شود."
-
-#: comix:11053
-msgid "Automatically adjust the contrast of the images so that the darkest pixel is completely black and the lightest pixel is completely white. This only works with images without an alpha channel."
-msgstr ""
-"کنتراست تصویر به صورت خودکار تنظیم شود طوری که تیره‌ترین نقطه کاملاً سیاه و روشن‌ترین نقطه کاملاً سفید باشد. "
-"این امکان فقط در مورد تصویرهای بدون کانال آلفا کار می‌کند."
-
-#: comix:11054
-msgid "The space key uses smart scrolling as if in double page mode even when in single page mode. This can be useful for comics with two scanned pages in each image. The pages are assumed to be of equal size"
-msgstr ""
-"مانند حالت دو صفحه‌ای، کلید فاصله در لغزش هوشمند استفاده می‌شود حتی در حالت یک صفحه‌ای. "
-"این گزینه می‌تواند برای کامیک‌هایی با دو صفحهٔ پویش‌شده در هر تصویر مفید باشد. انتظار می‌رود اندازهٔ صفحات برابر باشد."
-
-#: comix:11055
-msgid "Adjust the lens magnification factor."
-msgstr "ضریب بزرگ‌نمایی عدسی را تنظیم کنید."
-
-#: comix:11056
-msgid "Set the lens width and height in pixels. A larger lens will use more CPU resources than a small one."
-msgstr ""
-"عرض و طول عدسی را بر حسب نقطه وارد کنید. عدسی‌های بزرگ‌تر بیش از عدسی‌های کوچک منابع واحد پردازش مرکزی را مصرف می‌کنند."
-
-#: comix:11057
-msgid "Set the maximum update frequency for the magnification lens in milliseconds. Setting the value too low can cause the lens to lag behind when moving the mouse quickly. Setting the value too high can cause the lens to appear choppy."
-msgstr ""
-"حداکثر بسامد به‌روزرسانی برای بزرگ‌نمایی عدسی را به میلی‌ثانیه وارد کنید. "
-"وارد کردن مقادیر خیلی کم ممکن است در هنگام حرکت سریع موشی باعت تاخیر در عملکرد عدسی شود."
-"وارد کردن مقادیر خیلی زیاد ممکن است سبب شود عدسی مواج به نظر برسد."
-
-#: comix:11058
-msgid "Read and write thumbnails in the ~/.thumbnails directory as proposed by the freedesktop.org standard. With this preference set, Comix will use the thumbnails already stored there to speed up thumbnail loading. If there are no thumbnails, Comix will create them and save them there. This is a standard that many applications conform to, thumbnails created by other applications can be used by Comix and vice versa. If this preference is not set, Comix will create thumbnails on the fly every time a directory is opened."
-msgstr ""
-"مطابق با استاندارد freedesktop.org، مسطوره‌ها در شاخهٔ ‎~/.thumbnails خوانده و نوشته شوند. "
-"در صورت استفاده از این گزینه، کامیکس برای سرعت دادن به بار کردن مسطوره‌ها از مسطوره‌هایی که قبلاً ذخیره شده‌اند استفاده می‌کند. "
-"در صورتی که هیچ مسطوره‌ای آن جا نباشد، کامیکس آنها را ایجاد و در آن جا ذخیره می‌کند. "
-"این استانداردی است که خیلی از برنامه‌ها با آن همخوانی دارند، ممکن است کامیکس از مسطوره‌هایی که توسط برنامه‌های دیگر ایجاد شده "
-"استفاده کند و یا برعکس. اگر این گزینه خاموش باشد، هر وقت شاخه‌ای باز شد، کامیکس همان موقع مسطوره‌های آن را ایجاد می‌کند."
-
-#: comix:11059
-msgid "Also use stored thumbnails for images in archives in a similiar way. Due to restrictions in the freedesktop.org standard, these thumbnails will be stored in ~/.comix and will only be used by Comix. If this preference is not set, Comix will create thumbnails on the fly every time an archive is opened."
-msgstr ""
-"همچنین از مسطوره‌های ذخیره‌شده برای تصاویر داخل بایگانی‌ها به شکل مشابه استفاده شود. "
-"با توجه به محدودیت‌های استاندارد  freedesktop.org، این مسطوره‌ها در  ~/.comix ذخیره می‌شوند "
-"و فقط توسط کامیکس مورد استفاده قرار می‌گیرند. اگر این گزینه خاموش باشد، هر وقت یک بایگانی باز شود، "
-"کامیکس هم‌زمان مسطوره‌ها را برای آن ایجاد می‌کند."
-
-#: comix:11060
-msgid "Only display a single image in double page mode if the image consists of two pages. An image is assumed to consist of two pages if its width is greater than its height."
-msgstr ""
-"در حالت دو صفحه‌ای در صورتی که تصویر شامل دو صفحه باشد، فقط یک تصویر نمایش داده شود. "
-"اگر عرض تصویر بزرگ‌تر از طولش باشد، فرض می‌شود دو صفحه است."
-
-#: comix:11061
-msgid "Filter out archives with regular expressions."
-msgstr "بایگانی‌ها با عبارات باقاعده صافی شوند."
-
-#: comix:11062
-msgid "Apply filters on full paths rather than filenames."
-msgstr "صافی‌ها به جای نام پرونده‌ها روی مسیر کامل اعمال شود."
-
-#: comix:11063
-msgid "Store a list of the 10 last opened files that can be accessed through the menus."
-msgstr "فهرستی از ۱۰ پروندهٔ آخری که باز شده‌اند، ذخیره شود تا از طریق منو‌ها قابل دسترسی باشند."
-
-#: comix:11071
+#: src/ui.py:282
 msgid "First page"
 msgstr "صفحهٔ اول"
 
-#: comix:11072
+#: src/ui.py:284
 msgid "Previous page"
 msgstr "صفحهٔ قبل"
 
-#: comix:11073
+#: src/ui.py:285
 msgid "Next page"
 msgstr "صفحهٔ بعد"
 
-#: comix:11074
+#: src/ui.py:286
 msgid "Last page"
 msgstr "آخرین صفحه"
 
-#: comix:11075
-msgid "Go to page..."
-msgstr "رفتن به صفحهٔ..."
+#: src/ui.py:297
+msgid "Manga mode"
+msgstr "حالت ژاپنی"
+
+#: src/ui.py:298
+msgid "Magnifying glass"
+msgstr ""
+
+#~ msgid "No images in \"%s\""
+#~ msgstr "هیچ تصویری در «%s» نیست."
+
+#~ msgid "Default"
+#~ msgstr "پیش‌فرض"
+
+#~ msgid "Automatically adjust contrast"
+#~ msgstr "کنتراست به صورت خودکار تنظیم شود"
+
+#~ msgid "Fit-to-screen mode"
+#~ msgstr "حالت منطبق با صفحهٔ نمایش"
+
+#~ msgid "_Normal size"
+#~ msgstr "اندازهٔ _طبیعی"
+
+#~ msgid "_Toolbars"
+#~ msgstr "نوارهای _ابزار"
+
+#~ msgid "Fit-to-_screen mode"
+#~ msgstr "حالت منطبق با _صفحهٔ نمایش"
+
+#~ msgid "View _comments"
+#~ msgstr "نمایش _توضیحات"
+
+#~ msgid "Proper_ties"
+#~ msgstr "ویژ_گی‌ها"
+
+#~ msgid "Magnifying lens"
+#~ msgstr "عدسی بزرگ‌نما"
+
+#~ msgid "Apply filter on full path"
+#~ msgstr "صافی بر مسیر کامل اعمال شود"
+
+#~ msgid "Add archives to library."
+#~ msgstr "اضافه کردن بایگانی‌ها به کتاب‌خانه"
+
+#~ msgid "Remove selected archive from library."
+#~ msgstr "حذف بایگانی انتخاب‌شده از کتاب‌خانه"
+
+#~ msgid "Clean up"
+#~ msgstr "‍پاک‌سازی"
+
+#~ msgid "Remove orphaned or outdated library entries."
+#~ msgstr "حذف مدخل‌های کهنه یا یتیم از کتابخانه."
+
+#~ msgid "Close this window."
+#~ msgstr "بستن این پنجره"
+
+#~ msgid "Open selected archive."
+#~ msgstr "باز کردن بایگانی انتخاب‌شده"
+
+#~ msgid "All archives"
+#~ msgstr "همهٔ بایگانی‌ها"
+
+#~ msgid "JPEG image"
+#~ msgstr "تصویر JPEG"
+
+#~ msgid "PNG image"
+#~ msgstr "تصویر PNG"
+
+#~ msgid "GIF image"
+#~ msgstr "تصویر GIF"
+
+#~ msgid "TIFF image"
+#~ msgstr "تصویر TIFF"
+
+#~ msgid "BMP image"
+#~ msgstr "تصویر BMP"
+
+#~ msgid "ICO image"
+#~ msgstr "تصویر ICO"
+
+#~ msgid "XPM image"
+#~ msgstr "تصویر XPM"
+
+#~ msgid "XBM image"
+#~ msgstr "تصویر XBM"
+
+#~ msgid "tar archive"
+#~ msgstr "بایگانی tar"
+
+#~ msgid "Add archives recursively"
+#~ msgstr "بایگانی‌ها به صورت بازگشتی اضافه شوند"
+
+#~ msgid "Select folder"
+#~ msgstr "انتخاب پوشه"
+
+#~ msgid "Fullscreen as default"
+#~ msgstr "حالت تمام‌صفحه به صورت پیش‌فرض"
+
+#~ msgid "Double page mode as default"
+#~ msgstr "حالت دو صفحه‌ای به صورت پیش‌فرض"
+
+#~ msgid "Stretch small images"
+#~ msgstr "تصاویر کوچک به اندازهٔ کادر نمایش داده شوند"
+
+#~ msgid "Use smart scaling in double page mode"
+#~ msgstr "در حالت دو صفحه‌ای از تغییر اندازهٔ هوشمند استفاده شود"
+
+#~ msgid "Always view comments when opening a new file"
+#~ msgstr "هنگام باز شدن پرونده‌های جدید، همیشه توضیحات نمایش داده شوند"
+
+#~ msgid "Hide menubar, scrollbars etc. in fullscreen mode"
+#~ msgstr "در حالت تمام‌صفحه نوار منو، نوارهای لغزش و غیره مخفی شود"
+
+#~ msgid "Cache pages for faster forward flipping"
+#~ msgstr "برای جلو رفتن سریع‌تر، صفحات در حافظهٔ نهان ذخیره شوند"
+
+#~ msgid "Scroll wheel scrolls horizontally at top and bottom of page"
+#~ msgstr "چرخ لغزش موشی در بالا و پایین صفحه سبب لغزش افقی شود"
+
+#~ msgid "Flip page when scrolling off the top or bottom of page"
+#~ msgstr "هنگام لغزش وقتی به بالا یا پایین صفحه رسید، به صفحهٔ قبل یا بعد برود"
+
+#~ msgid "Hide thumbnail scrollbar"
+#~ msgstr "نوار لغزش مسطوره‌ها مخفی شود"
+
+#~ msgid "Space key uses smart scrolling"
+#~ msgstr "کلید فاصله برای لغزش هوشمند استفاده شود"
+
+#~ msgid "Save window position and size for future sessions"
+#~ msgstr "موقعیت و اندازهٔ پنجره برای نشست‌های بعدی ذخیره شود"
+
+#~ msgid "Go to the next archive in directory after last page"
+#~ msgstr "پس از آخرین صفحه بایگانی بعدی در شاخه باز شود"
+
+#~ msgid "Hide cursor in fullscreen mode"
+#~ msgstr "در حالت تمام‌صفحه، مکان‌نما مخفی شود"
+
+#~ msgid "Open last viewed file on start"
+#~ msgstr "هنگام آغاز برنامه آخرین پروندهٔ دیده‌شده باز شود"
+
+#~ msgid "Show page numbers on thumbnails"
+#~ msgstr "شمارهٔ صفحه روی مسطوره‌ها نشان داده شود"
+
+#~ msgid "Always use smart scrolling as if in double page mode"
+#~ msgstr "همیشه از لغزش هوشمند مانند حالت دو صفحه‌ای استفاده شود"
+
+#~ msgid "Use stored thumbnails for images in directories"
+#~ msgstr "برای تصاویر شاخه‌ها از مسطوره‌های ذخیره‌شده استفاده شود"
+
+#~ msgid "Use stored thumbnails for images in archives"
+#~ msgstr "برای تصاویر بایگانی‌ها از مسطوره‌های ذخیره‌شده استفاده شود"
+
+#~ msgid "Display only one page in double page mode if the image is wide"
+#~ msgstr "در حالت دو صفحه‌ای اگر تصویر بزرگ است، فقط یک صفحه نمایش داده شود"
+
+#~ msgid "Store recently opened files"
+#~ msgstr "پرونده‌های به‌تازگی بازشده ذخیره شوند"
+
+#~ msgid "Always go to this directory in the \"Open\" dialog:"
+#~ msgstr "محاورهٔ «باز کردن» همیشه به این شاخه برود:"
+
+#~ msgid "Always go to the latest directory in the \"Open\" dialog"
+#~ msgstr "محاورهٔ «باز کردن» همیشه به آخرین شاخهٔ بازشده برود"
+
+#~ msgid "Nearest (quickest, worst quality)"
+#~ msgstr "نزدیک‌ترین (سریع‌ترین، بدترین کیفیت)"
+
+#~ msgid "Tiles"
+#~ msgstr "تکه تکه"
+
+#~ msgid "Bilinear"
+#~ msgstr "دوخطی"
+
+#~ msgid "Hyper (slowest, best quality)"
+#~ msgstr "دقیق (آهسته‌ترین، بهترین کیفیت)"
+
+#~ msgid "Manual zoom mode as default"
+#~ msgstr "حالت زوم دستی به صورت پیش‌فرض"
+
+#~ msgid "Fit-to-screen mode as default"
+#~ msgstr "حالت منطبق با صفحهٔ نمایش به صورت پیش‌فرض"
+
+#~ msgid "Fit width mode as default"
+#~ msgstr "حالت منطبق با عرض  صفحه به صورت پیش‌فرض"
+
+#~ msgid "Fit height mode as default"
+#~ msgstr "حالت منطبق با ارتفاع صفحه به صورت پیش‌فرض"
+
+#~ msgid "Background colour:"
+#~ msgstr "رنگ پس‌زمینه:"
+
+#~ msgid "Background colour"
+#~ msgstr "رنگ پس‌زمینه"
+
+#~ msgid "Toolbar button labels:"
+#~ msgstr "برچسب دگمه‌های نوار ابزار:"
+
+#~ msgid "Icons only"
+#~ msgstr "فقط شمایل"
+
+#~ msgid "Text only"
+#~ msgstr "فقط متن"
+
+#~ msgid "Icons and text"
+#~ msgstr "شمایل و متن"
+
+#~ msgid "Slideshow delay:"
+#~ msgstr "تأخیر نمایش اسلایدی:"
+
+#~ msgid "Scaling quality"
+#~ msgstr "کیفیت تغییر اندازه"
+
+#~ msgid "Scaling"
+#~ msgstr "تغییر اندازه"
+
+#~ msgid "Treat files with the following extensions as comments:"
+#~ msgstr "با پرونده‌های دارای پسوندهای زیر مثل توضیحات رفتار شود:"
+
+#~ msgid "Space key scrolls"
+#~ msgstr "مقدار لغزش کلید فاصله:"
+
+#~ msgid "of"
+#~ msgstr "از"
+
+#~ msgid "Window size"
+#~ msgstr "اندازهٔ پنجره"
+
+#~ msgid "Page size"
+#~ msgstr "اندازهٔ صفحه"
+
+#~ msgid "Magnification factor:"
+#~ msgstr "ضریب بزرگ‌نمایی:"
+
+#~ msgid "Lens size (px):"
+#~ msgstr "اندازهٔ عدسی (نقطه):"
+
+#~ msgid "Update interval (milliseconds):"
+#~ msgstr "فاصلهٔ زمانی به‌روزرسانی (میلی‌ثانیه):"
+
+#~ msgid "Lens"
+#~ msgstr "عدسی"
+
+#~ msgid "Thumbnail sizes (px):"
+#~ msgstr "اندازهٔ مسطوره‌ها (نقطه):"
+
+#~ msgid "Library thumbnail sizes (px):"
+#~ msgstr "اندازهٔ مسطوره‌های کتاب‌خانه (نقطه):"
+
+#~ msgid "Adjust colour"
+#~ msgstr "تنظیم رنگ"
+
+#~ msgid "Save values for future sessions"
+#~ msgstr "مقادیر برای نشست‌های آینده ذخیره شود"
+
+#~ msgid "Go to page"
+#~ msgstr "رفتن به صفحهٔ"
+
+#~ msgid "Title"
+#~ msgstr "عنوان"
+
+#~ msgid "It reads ZIP, RAR and tar archives (also gzip or bzip2 compressed)"
+#~ msgstr ""
+#~ "این نرم‌افزار بایگانی‌های ZIP، RAR و tar (و همچنین پرونده‌هایی که با gzip یا "
+#~ "bzip2 فشرده شده‌اند) "
+
+#~ msgid "as well as plain image files."
+#~ msgstr "و همچنین پرونده‌های تصویری ساده را می‌خواند."
+
+#~ msgid "Developer and Swedish translation"
+#~ msgstr "برنامه‌سازی و ترجمهٔ سوئدی"
+
+#~ msgid "Manage thumbnails"
+#~ msgstr "مدیریت مسطوره‌ها"
+
+#~ msgid "Remove all stored thumbnails:"
+#~ msgstr "همهٔ مسطوره‌های ذخیره‌شده حذف شوند:"
+
+#~ msgid "Remove orphaned thumbnails:"
+#~ msgstr "مسطوره‌های یتیم‌شده حذف شوند:"
+
+#~ msgid "Directories"
+#~ msgstr "شاخه‌ها"
+
+#~ msgid "Archives"
+#~ msgstr "بایگانی‌ها"
+
+#~ msgid "Convert"
+#~ msgstr "تبدیل"
+
+#~ msgid "File type"
+#~ msgstr "نوع پرونده"
+
+#~ msgid "Extension"
+#~ msgstr "پسوند"
+
+#~ msgid "Zip archive"
+#~ msgstr "بایگانی ZIP"
+
+#~ msgid "Delete old archive/directory"
+#~ msgstr "بایگانی/شاخهٔ قدیمی حذف شود."
+
+#~ msgid "Permission denied"
+#~ msgstr "اجازه داده نشد"
+
+#~ msgid "Confirm operation"
+#~ msgstr "تأیید عملیات"
+
+#~ msgid "Permanently remove %s?"
+#~ msgstr "%s برای همیشه حذف شود؟"
+
+#~ msgid "Perform lossless JPEG operation on %s?"
+#~ msgstr "عملیات JPEG بی‌خسارت روی %s انجام شود؟"
+
+#~ msgid "Some images might be trimmed a bit during the operation."
+#~ msgstr "ممکن است در طول عملیات حاشیهٔ بعضی تصاویر کمی بریده شوند."
+
+#~ msgid "Permanently convert %s to greyscale?"
+#~ msgstr "%s برای همیشه به سایه‌خاکستری تبدیل شود؟"
+
+#~ msgid "Location:"
+#~ msgstr "مکان:"
+
+#~ msgid "Quantity:"
+#~ msgstr "کمیت:"
+
+#~ msgid "Total size:"
+#~ msgstr "اندازهٔ کلی:"
+
+#~ msgid "Removed:"
+#~ msgstr "حذف‌شده:"
+
+#~ msgid "Done!"
+#~ msgstr "انجام شد!"
+
+#~ msgid "pages"
+#~ msgstr "صفحه"
+
+#~ msgid "comment"
+#~ msgstr "توضیح"
+
+#~ msgid "comments"
+#~ msgstr "توضیح"
+
+#~ msgid "In library"
+#~ msgstr "در کتاب‌خانه"
+
+#~ msgid "Yes"
+#~ msgstr "بله"
+
+#~ msgid "No"
+#~ msgstr "نه"
+
+#~ msgid "Bookmarked"
+#~ msgstr "نشانک‌گذاری شده"
+
+#~ msgid "Yes, page"
+#~ msgstr "بله، صفحهٔ"
+
+#~ msgid "Mode"
+#~ msgstr "حالت"
+
+#~ msgid "Pixel count"
+#~ msgstr "تعداد نقاط"
+
+#~ msgid "Pixel sum"
+#~ msgstr "مجموع نقاط"
+
+#~ msgid "Extrema"
+#~ msgstr "بیشینه"
+
+#~ msgid "Mean"
+#~ msgstr "میانگین"
+
+#~ msgid "Median"
+#~ msgstr "میانه"
+
+#~ msgid "Standard deviation"
+#~ msgstr "انحراف معیار استاندارد"
+
+#~ msgid "Image 1"
+#~ msgstr "تصویر ۱"
+
+#~ msgid "Image 2"
+#~ msgstr "تصویر ۲"
+
+#~ msgid "Could not delete"
+#~ msgstr "قابل حذف نیست"
+
+#~ msgid "Please check your permissions."
+#~ msgstr "لطفاً اجازه‌هایتان را بررسی کنید."
+
+#~ msgid "Could not create"
+#~ msgstr "قابل ایجاد نیست"
+
+#~ msgid "Added:"
+#~ msgstr "اضافه شده:"
+
+#~ msgid "Adding library entries"
+#~ msgstr "در حال اضافه کردن مدخل‌های کتاب‌خانه"
+
+#~ msgid "Removing library entries"
+#~ msgstr "در حال حذف مدخل‌های کتاب‌خانه"
+
+#~ msgid "Extract page"
+#~ msgstr "استخراج صفحه"
+
+#~ msgid "page"
+#~ msgstr "صفحه"
+
+#~ msgid ""
+#~ "Could not find the unrar executable. Please install it if you wish to "
+#~ "open RAR archives."
+#~ msgstr ""
+#~ "پروندهٔ اجرایی بازکنندهٔ RAR پیدا نمی‌شود. اگر می‌خواهید بایگانی‌های RAR را "
+#~ "باز کنید، لطفاً آن را نصب کنید."
+
+#~ msgid "Could not open"
+#~ msgstr "قابل باز کردن نیست"
+
+#~ msgid "is not a file."
+#~ msgstr "پرونده نیست."
+
+#~ msgid "does not exist."
+#~ msgstr "وجود ندارد."
+
+#~ msgid "Filetype of"
+#~ msgstr "نوع پروندهٔ"
+
+#~ msgid "not recognized."
+#~ msgstr "شناخته‌نشده است."
+
+#~ msgid "Comment file"
+#~ msgstr "پروندهٔ توضیح"
+
+#~ msgid "Could not read"
+#~ msgstr "قابل خواندن نیست"
+
+#~ msgid "Comment"
+#~ msgstr "توضیح"
+
+#~ msgid "_Go to page..."
+#~ msgstr "_رفتن به صفحهٔ..."
+
+#~ msgid "Fit _width"
+#~ msgstr "منطبق با عر_ض"
+
+#~ msgid "Fit _height"
+#~ msgstr "منطبق به _طول"
+
+#~ msgid "_Best fit"
+#~ msgstr "_بهترین تطابق"
+
+#~ msgid "Clear bookmarks"
+#~ msgstr "پاک‌سازی نشانک‌ها"
+
+#~ msgid "_Manage thumbnails..."
+#~ msgstr "_مدیریت مسطوره‌ها..."
+
+#~ msgid "_Recent files"
+#~ msgstr "_پرونده‌های اخیر"
+
+#~ msgid "Clear recent files"
+#~ msgstr "پاک‌سازی فهرست پرونده‌های اخیر"
+
+#~ msgid "Open _library..."
+#~ msgstr "باز کردن _کتاب‌خانه..."
+
+#~ msgid "_Add to library"
+#~ msgstr "_اضافه کردن به کتاب‌خانه"
+
+#~ msgid "Con_vert..."
+#~ msgstr "تب_دیل..."
+
+#~ msgid "E_xtract image..."
+#~ msgstr "است_خراج تصویر..."
+
+#~ msgid "_Adjust colour..."
+#~ msgstr "_تنظیم رنگ..."
+
+#~ msgid "Delete image..."
+#~ msgstr "حذف تصویر..."
+
+#~ msgid "CW lossless JPEG rotation..."
+#~ msgstr "دوران JPEG بی‌خسارت در جهت ساعت..."
+
+#~ msgid "CCW lossless JPEG rotation..."
+#~ msgstr "دوران JPEG بی‌خسارت در خلاف جهت ساعت..."
+
+#~ msgid "Horizontal lossless JPEG flip..."
+#~ msgstr "پشت و رو کردن افقی JPEG بی‌خسارت..."
+
+#~ msgid "Vertical lossless JPEG flip..."
+#~ msgstr "پشت و رو کردن عمودی JPEG بی‌خسارت..."
+
+#~ msgid "Convert JPEG to greyscale..."
+#~ msgstr "تبدیل JPEG به سایه‌خاکستری..."
+
+#~ msgid "File o_perations"
+#~ msgstr "ع_ملیات پرونده"
+
+#~ msgid "Magnifying _lens"
+#~ msgstr "_عدسی بزرگ‌نما"
+
+#~ msgid "Enter fullscreen mode automatically when Comix is started."
+#~ msgstr "هنگام آغاز به کار کامیکس، به طور خودکار وارد حالت تمام‌صفحه شود."
+
+#~ msgid "Enter double page mode automatically when Comix is started."
+#~ msgstr "هنگام آغاز به کار کامیکس، به طور خودکار وارد حالت دو صفحه‌ای شود."
+
+#~ msgid "Enter manual zoom mode automatically when Comix is started."
+#~ msgstr "هنگام آغاز به کار کامیکس، به طور خودکار وارد حالت زوم دستی شود."
+
+#~ msgid "Enter fit-to-screen mode automatically when Comix is started."
+#~ msgstr ""
+#~ "هنگام آغاز به کار کامیکس، به طور خودکار وارد حالت منطبق با صفحهٔ نمایش شود."
+
+#~ msgid "Enter fit width mode automatically when Comix is started."
+#~ msgstr ""
+#~ "هنگام آغاز به کار کامیکس، به طور خودکار وارد حالت منطبق با عرض صفحه شود."
+
+#~ msgid "Enter fit height mode automatically when Comix is started."
+#~ msgstr ""
+#~ "هنگام آغاز به کار کامیکس، به طور خودکار وارد حالت منطبق با ارتفاع صفحه "
+#~ "شود."
+
+#~ msgid ""
+#~ "Also scale images to a size that is larger than their original size in "
+#~ "fit-to-screen mode, fit width mode and fit height mode."
+#~ msgstr ""
+#~ "همچنین در حالت منطبق با صفحهٔ نمایش، منطبق با عرض و منطبق با ارتفاع، "
+#~ "تصاویر بزرگ‌تر از اندازهٔ واقعی‌شان نمایش داده شوند."
+
+#~ msgid ""
+#~ "Scale the images independently when in double page mode and fit-to-screen "
+#~ "mode. The smaller of the two images will scale up to fill any extra space "
+#~ "that is given."
+#~ msgstr ""
+#~ "در حالت دو صفحه‌ای و منطبق با صفحهٔ نمایش، تصاویر مستقلاً بزرگ شوند. تصویر "
+#~ "کوچک‌تر بزرگ می‌شود تا فضای اضافی موجود را پر کند."
+
+#~ msgid "Automatically show any available comments when opening a new file."
+#~ msgstr ""
+#~ "هنگام باز شدن یک پروندهٔ جدید، توضیح‌های موجود به طور خودکار نشان داده شوند."
+
+#~ msgid ""
+#~ "Automatically hide scrollbars, menubar, toolbar, statusbar and thumbnails "
+#~ "when in fullscreen mode."
+#~ msgstr ""
+#~ "در حالت تمام‌صفحه به طور خودکار نوار لغزش، نوار منو، نوار ابزار، نوار "
+#~ "وضعیت و مسطوره‌ها مخفی شوند."
+
+#~ msgid ""
+#~ "Cache the next page in the archive/directory to increase the perceived "
+#~ "speed. This is generally recommended unless you are running low on RAM."
+#~ msgstr ""
+#~ "برای افزایش سرعت مشاهده، صفحهٔ بعدی در بایگانی/شاخه در حافظهٔ نهان ذخیره "
+#~ "شود. استفاده از این گزینه معمولاً توصیه می‌شود مگر آن که حافظهٔ کامپیوترتان "
+#~ "کم باشد."
+
+#~ msgid ""
+#~ "Move the horizontal scrollbar instead of the vertical when using the "
+#~ "scroll wheel at the top or the bottom of the page. The direction will be "
+#~ "determined by whether you use manga mode or not."
+#~ msgstr ""
+#~ "هنگام استفاده از چرخ لغزش در بالا یا پایین صفحه، به جای نوار لغزش عمودی، "
+#~ "نوار لغزش افقی حرکت کند. جهت حرکت بسته به این که شما از حالت ژاپنی "
+#~ "استفاده کنید یا نه، تعیین می‌شود."
+
+#~ msgid ""
+#~ "Flip pages when scrolling \"off the page\" with the scroll wheel, as well "
+#~ "as with the arrow keys, even when not in fit-to-screen mode. It takes "
+#~ "three \"steps\" with the scroll wheel or arrow keys to trigger this "
+#~ "behaviour."
+#~ msgstr ""
+#~ "هنگام «لغزش به خارج صفحه» با چرخ لغزش، همین‌طور کلیدهای جابه‌جایی در "
+#~ "صفحه‌کلید، به صفحهٔ بعد یا قبل برود، حتی وقتی که در حالت منطبق با صفحهٔ "
+#~ "نمایش نیستید. سه «مرحله» با چرخ لغزش یا کلیدهای جابه‌جایی لازم است تا  این "
+#~ "حرکت فعال شود."
+
+#~ msgid ""
+#~ "Save the position and the size of the window for the next time you start "
+#~ "Comix."
+#~ msgstr ""
+#~ "موقعیت و اندازهٔ پنجره برای دفعهٔ بعدی که کامیکس را آغاز می‌کنید، ذخیره شود."
+
+#~ msgid ""
+#~ "Automatically open the next archive in the directory when scrolling past "
+#~ "the last page of the current archive, and automatically open the previous "
+#~ "archive in the directory when scrolling past the first page of the "
+#~ "current archive."
+#~ msgstr ""
+#~ "وقتی لغزش صفحهٔ آخر بایگانی فعلی تمام شد، بایگانی بعدی در شاخه به طور "
+#~ "خودکار باز شود و وقتی از صفحهٔ اول بایگانی فعلی بالاتر رفتید، به طور "
+#~ "خودکار بایگانی قبل از این شاخه باز شود."
+
+#~ msgid "Hide the cursor when in fullscreen mode."
+#~ msgstr "در حالت تمام‌صفحه مکان‌نما مخفی شود."
+
+#~ msgid ""
+#~ "Set the image scaling method. The best choice is often \"Tiles\", it is "
+#~ "quite quick and produces almost as good results as \"Bilinear\" or \"Hyper"
+#~ "\"."
+#~ msgstr ""
+#~ "روش بزرگ‌نمایی تصویر را تنظیم کنید. بهترین انتخاب غالباً «تکه تکه» است، این "
+#~ "گزینه کاملاً سریع است و  تقریباً به خوبی «دو خطی» و «دقیق» نتیجه می‌دهد."
+
+#~ msgid ""
+#~ "Treat files with the following extensions as comment files. Extensions "
+#~ "should be separated by whitespaces. They are not case sensitive."
+#~ msgstr ""
+#~ "با پرونده‌های دارای پسوندهای زیر مانند پرونده‌های توضیح رفتار شود. عبارات "
+#~ "باید با فاصله جدا شده باشند. سیستم به بزرگی و کوچکی حروف حساس نیست."
+
+#~ msgid ""
+#~ "Use smart scrolling with the space key. Pressing the space key normally "
+#~ "scrolls straight down one window height unless at the bottom of the page "
+#~ "where it flips pages instead. When this option is set Comix automatically "
+#~ "tries to follow the reading flow of the comic book. When pressing the "
+#~ "space key it will not only scroll down but will also scroll horizontally "
+#~ "to the edge of the page (left or right depending on whether you use manga "
+#~ "mode). In double page mode it will go to the edge of the first page if it "
+#~ "is in view, otherwise it will go to the edge of the second page. Also, in "
+#~ "double page mode with this option, Comix will not flip pages unless at "
+#~ "the bottom of the second page. At the bottom of the first page it will "
+#~ "instead go to the top of the second page."
+#~ msgstr ""
+#~ "از لغزش هوشمند با کلید فاصله استفاده شود. به طور معمول فشردن کلید فاصله "
+#~ "طول یک صفحه را به طرف پایین می‌لغزاند، مگر در آخر صفحه که به صفحهٔ بعد "
+#~ "می‌رود. وقتی این گزینه انتخاب شده کامیکس به طور خودکار تلاش می‌کند که روند "
+#~ "خواندن کتاب کامیک را دنبال کند. با فشار دادن کلید فاصله، نه تنها صفحه به "
+#~ "پایین می‌لغزد بلکه  به صورت افقی هم به لبهٔ صفحه (چپ یا راست بسته به "
+#~ "استفادهٔ شما از حالت ژاپنی) می‌رود. در حالت دو صفحه‌ای اگر صفحهٔ اول در نما "
+#~ "باشد، به لبهٔ صفحهٔ اول می‌رود. در غیر این صورت به لبهٔ صفحهٔ دوم می‌رود. "
+#~ "همچنین با این گزینه در حالت دو صفحه‌ای، کامیکس به صفحهٔ بعد نمی‌رود مگر در "
+#~ "آخر صفحهٔ دوم. در آخر صفحهٔ اول به اول صفحهٔ دوم می‌رود."
+
+#~ msgid "Always hide the thumbnail scrollbar."
+#~ msgstr "همیشه نوار لغزش مسطوره‌ها مخفی شود."
+
+#~ msgid "Automatically open the last viewed page when Comix is started."
+#~ msgstr "هنگام آغاز به کار کامیکس، آخرین صفحهٔ دیده‌شده به طور خودکار باز شود."
+
+#~ msgid ""
+#~ "Automatically go to the same directory as last time when opening the "
+#~ "\"Open\" dialog."
+#~ msgstr ""
+#~ "هنگام باز شدن محاورهٔ «باز کردن»، به طور خودکار به همان شاخه‌ای برود که "
+#~ "آخرین بار در آن بود."
+
+#~ msgid "Automatically go to this directory when opening the \"Open\" dialog."
+#~ msgstr "هنگام باز شدن محاورهٔ «باز کردن»، به طور خودکار به این شاخه برود."
+
+#~ msgid "Automatically restore these values the next time Comix is started."
+#~ msgstr ""
+#~ "دفعهٔ بعد که کامیکس شروع به کار کرد، این مقادیر به طور خودکار برگردانده "
+#~ "شوند."
+
+#~ msgid "Show the page number in the upper left corner of each thumbnail."
+#~ msgstr "شمارهٔ صفحه در گوشهٔ چپ و بالای تک‌تک مسطوره نشان داده شود."
+
+#~ msgid ""
+#~ "Automatically adjust the contrast of the images so that the darkest pixel "
+#~ "is completely black and the lightest pixel is completely white. This only "
+#~ "works with images without an alpha channel."
+#~ msgstr ""
+#~ "کنتراست تصویر به صورت خودکار تنظیم شود طوری که تیره‌ترین نقطه کاملاً سیاه و "
+#~ "روشن‌ترین نقطه کاملاً سفید باشد. این امکان فقط در مورد تصویرهای بدون کانال "
+#~ "آلفا کار می‌کند."
+
+#~ msgid ""
+#~ "The space key uses smart scrolling as if in double page mode even when in "
+#~ "single page mode. This can be useful for comics with two scanned pages in "
+#~ "each image. The pages are assumed to be of equal size"
+#~ msgstr ""
+#~ "مانند حالت دو صفحه‌ای، کلید فاصله در لغزش هوشمند استفاده می‌شود حتی در حالت "
+#~ "یک صفحه‌ای. این گزینه می‌تواند برای کامیک‌هایی با دو صفحهٔ پویش‌شده در هر "
+#~ "تصویر مفید باشد. انتظار می‌رود اندازهٔ صفحات برابر باشد."
+
+#~ msgid "Adjust the lens magnification factor."
+#~ msgstr "ضریب بزرگ‌نمایی عدسی را تنظیم کنید."
+
+#~ msgid ""
+#~ "Set the lens width and height in pixels. A larger lens will use more CPU "
+#~ "resources than a small one."
+#~ msgstr ""
+#~ "عرض و طول عدسی را بر حسب نقطه وارد کنید. عدسی‌های بزرگ‌تر بیش از عدسی‌های "
+#~ "کوچک منابع واحد پردازش مرکزی را مصرف می‌کنند."
+
+#~ msgid ""
+#~ "Set the maximum update frequency for the magnification lens in "
+#~ "milliseconds. Setting the value too low can cause the lens to lag behind "
+#~ "when moving the mouse quickly. Setting the value too high can cause the "
+#~ "lens to appear choppy."
+#~ msgstr ""
+#~ "حداکثر بسامد به‌روزرسانی برای بزرگ‌نمایی عدسی را به میلی‌ثانیه وارد کنید. "
+#~ "وارد کردن مقادیر خیلی کم ممکن است در هنگام حرکت سریع موشی باعت تاخیر در "
+#~ "عملکرد عدسی شود.وارد کردن مقادیر خیلی زیاد ممکن است سبب شود عدسی مواج به "
+#~ "نظر برسد."
+
+#~ msgid ""
+#~ "Read and write thumbnails in the ~/.thumbnails directory as proposed by "
+#~ "the freedesktop.org standard. With this preference set, Comix will use "
+#~ "the thumbnails already stored there to speed up thumbnail loading. If "
+#~ "there are no thumbnails, Comix will create them and save them there. This "
+#~ "is a standard that many applications conform to, thumbnails created by "
+#~ "other applications can be used by Comix and vice versa. If this "
+#~ "preference is not set, Comix will create thumbnails on the fly every time "
+#~ "a directory is opened."
+#~ msgstr ""
+#~ "مطابق با استاندارد freedesktop.org، مسطوره‌ها در شاخهٔ ‎~/.thumbnails خوانده "
+#~ "و نوشته شوند. در صورت استفاده از این گزینه، کامیکس برای سرعت دادن به بار "
+#~ "کردن مسطوره‌ها از مسطوره‌هایی که قبلاً ذخیره شده‌اند استفاده می‌کند. در صورتی "
+#~ "که هیچ مسطوره‌ای آن جا نباشد، کامیکس آنها را ایجاد و در آن جا ذخیره می‌کند. "
+#~ "این استانداردی است که خیلی از برنامه‌ها با آن همخوانی دارند، ممکن است "
+#~ "کامیکس از مسطوره‌هایی که توسط برنامه‌های دیگر ایجاد شده استفاده کند و یا "
+#~ "برعکس. اگر این گزینه خاموش باشد، هر وقت شاخه‌ای باز شد، کامیکس همان موقع "
+#~ "مسطوره‌های آن را ایجاد می‌کند."
+
+#~ msgid ""
+#~ "Also use stored thumbnails for images in archives in a similiar way. Due "
+#~ "to restrictions in the freedesktop.org standard, these thumbnails will be "
+#~ "stored in ~/.comix and will only be used by Comix. If this preference is "
+#~ "not set, Comix will create thumbnails on the fly every time an archive is "
+#~ "opened."
+#~ msgstr ""
+#~ "همچنین از مسطوره‌های ذخیره‌شده برای تصاویر داخل بایگانی‌ها به شکل مشابه "
+#~ "استفاده شود. با توجه به محدودیت‌های استاندارد  freedesktop.org، این "
+#~ "مسطوره‌ها در  ~/.comix ذخیره می‌شوند و فقط توسط کامیکس مورد استفاده قرار "
+#~ "می‌گیرند. اگر این گزینه خاموش باشد، هر وقت یک بایگانی باز شود، کامیکس "
+#~ "هم‌زمان مسطوره‌ها را برای آن ایجاد می‌کند."
+
+#~ msgid ""
+#~ "Only display a single image in double page mode if the image consists of "
+#~ "two pages. An image is assumed to consist of two pages if its width is "
+#~ "greater than its height."
+#~ msgstr ""
+#~ "در حالت دو صفحه‌ای در صورتی که تصویر شامل دو صفحه باشد، فقط یک تصویر نمایش "
+#~ "داده شود. اگر عرض تصویر بزرگ‌تر از طولش باشد، فرض می‌شود دو صفحه است."
+
+#~ msgid "Filter out archives with regular expressions."
+#~ msgstr "بایگانی‌ها با عبارات باقاعده صافی شوند."
+
+#~ msgid "Apply filters on full paths rather than filenames."
+#~ msgstr "صافی‌ها به جای نام پرونده‌ها روی مسیر کامل اعمال شود."
+
+#~ msgid ""
+#~ "Store a list of the 10 last opened files that can be accessed through the "
+#~ "menus."
+#~ msgstr ""
+#~ "فهرستی از ۱۰ پروندهٔ آخری که باز شده‌اند، ذخیره شود تا از طریق منو‌ها قابل "
+#~ "دسترسی باشند."
+
+#~ msgid "Go to page..."
+#~ msgstr "رفتن به صفحهٔ..."
