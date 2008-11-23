@@ -21,190 +21,283 @@ msgstr ""
 "X-Poedit-Country: MOROCCO\n"
 "X-Poedit-SourceCharset: utf-8\n"
 
+#
+# File: src/about.py, line: 18
+# File: src/about.py, line: 67
 #: src/about.py:18 src/about.py:67
 msgid "About"
 msgstr "À propos"
 
+#
+# File: src/about.py, line: 55
 #: src/about.py:55
 msgid "Comix is an image viewer specifically designed to handle comic books."
 msgstr ""
 "Comix est un visionneur d'images, spécialisé dans la lecture des bandes "
 "dessinées."
 
+#
+# File: src/about.py, line: 57
 #: src/about.py:57
 msgid "It reads ZIP, RAR and tar archives, as well as plain image files."
 msgstr ""
 
+#
+# File: src/about.py, line: 59
 #: src/about.py:59
 msgid "Comix is licensed under the GNU General Public License."
 msgstr "Comix est distribué selon les termes de la GNU General Public License"
 
+#
+# File: src/about.py, line: 75
 #: src/about.py:75
 msgid "Developer"
 msgstr ""
 
+#
+# File: src/about.py, line: 77
 #: src/about.py:77
 msgid "Simplified Chinese translation"
 msgstr "Traduction en chinois simplifié"
 
+#
+# File: src/about.py, line: 78
 #: src/about.py:78
 msgid "Spanish translation"
 msgstr "Traduction en espagnol"
 
+#
+# File: src/about.py, line: 79
 #: src/about.py:79
 msgid "Brazilian Portuguese translation"
 msgstr "Traduction en portugais brésilien"
 
+#
+# File: src/about.py, line: 81
 #: src/about.py:81
 msgid "German translation and Nautilus thumbnailer"
 msgstr ""
 "Traduction en allemand et développement du générateur de vignettes pour "
 "Nautilus"
 
+#
+# File: src/about.py, line: 82
 #: src/about.py:82
 msgid "Italian translation"
 msgstr "Traduction en italien"
 
+#
+# File: src/about.py, line: 83
 #: src/about.py:83
 msgid "Dutch translation"
 msgstr "Traduction en néerlandais"
 
+#
+# File: src/about.py, line: 84
 #: src/about.py:84
 msgid "French translation"
 msgstr "Traduction en français"
 
+#
+# File: src/about.py, line: 85
 #: src/about.py:85
 msgid "Polish translation"
 msgstr "Traduction en polonais"
 
+#
+# File: src/about.py, line: 86
 #: src/about.py:86
 msgid "Greek translation"
 msgstr "Traduction en grec"
 
+#
+# File: src/about.py, line: 87
 #: src/about.py:87
 msgid "Catalan translation"
 msgstr "Traduction en Catalan"
 
+#
+# File: src/about.py, line: 88
 #: src/about.py:88
 msgid "Traditional Chinese translation"
 msgstr "Traduction en chinois traditionnel"
 
+#
+# File: src/about.py, line: 89
 #: src/about.py:89
 msgid "Japanese translation"
 msgstr ""
 
+#
+# File: src/about.py, line: 90
 #: src/about.py:90
 msgid "Hungarian translation"
 msgstr ""
 
+#
+# File: src/about.py, line: 91
 #: src/about.py:91
 msgid "Russian translation"
 msgstr ""
 
+#
+# File: src/about.py, line: 92
 #: src/about.py:92
 msgid "Croatian translation"
 msgstr ""
 
+#
+# File: src/about.py, line: 93
 #: src/about.py:93
 msgid "Korean translation"
 msgstr ""
 
+#
+# File: src/about.py, line: 94
 #: src/about.py:94
 msgid "Persian translation"
 msgstr ""
 
+#
+# File: src/about.py, line: 95
 #: src/about.py:95
 msgid "Indonesian translation"
 msgstr ""
 
+#
+# File: src/about.py, line: 96
 #: src/about.py:96
 msgid "Czech translation"
 msgstr ""
 
+#
+# File: src/about.py, line: 97
 #: src/about.py:97
 msgid "Icon design"
 msgstr ""
 
+#
+# File: src/about.py, line: 106
 #: src/about.py:106
 msgid "Credits"
 msgstr "Crédits"
 
+#
+# File: src/archive.py, line: 66
 #: src/archive.py:66
 msgid "Could not find RAR file extractor!"
 msgstr ""
 
+#
+# File: src/archive.py, line: 68
 #: src/archive.py:68
 msgid ""
 "You need either the <i>rar</i> or the <i>unrar</i> program installed in "
 "order to read RAR (.cbr) files."
 msgstr ""
 
+#
+# File: src/archive.py, line: 301
 #: src/archive.py:301
 msgid "ZIP archive"
 msgstr "Archive ZIP"
 
+#
+# File: src/archive.py, line: 302
 #: src/archive.py:302
 msgid "Tar archive"
 msgstr "Archive Tar"
 
+#
+# File: src/archive.py, line: 303
 #: src/archive.py:303
 msgid "Gzip compressed tar archive"
 msgstr "Archive tar compressée avec Gzip"
 
+#
+# File: src/archive.py, line: 304
 #: src/archive.py:304
 msgid "Bzip2 compressed tar archive"
 msgstr "Archive tar compressée avec Bzip2"
 
+#
+# File: src/archive.py, line: 305
 #: src/archive.py:305
 msgid "RAR archive"
 msgstr "Archive RAR"
 
+#
+# File: src/bookmark.py, line: 27
 #: src/bookmark.py:27
 msgid "_Add bookmark"
 msgstr "_Ajouter un signet"
 
+#
+# File: src/bookmark.py, line: 29
 #: src/bookmark.py:29
 msgid "_Edit bookmarks..."
 msgstr "_Éditer les signets..."
 
+#
+# File: src/bookmark.py, line: 31
 #: src/bookmark.py:31
 msgid "_Clear bookmarks..."
 msgstr ""
 
+#
+# File: src/bookmark.py, line: 77
 #: src/bookmark.py:77
 msgid "Clear all bookmarks?"
 msgstr ""
 
+#
+# File: src/bookmark.py, line: 79
 #: src/bookmark.py:79
 msgid ""
 "All stored bookmarks will be removed. Are you sure that you want to continue?"
 msgstr ""
 
+#
+# File: src/bookmark.py, line: 229
 #: src/bookmark.py:229
 msgid "Edit bookmarks"
 msgstr "Éditer les signets"
 
+#
+# File: src/bookmark.py, line: 255
+# File: src/edit.py, line: 267
 #: src/bookmark.py:255 src/edit.py:267
 msgid "Name"
 msgstr ""
 
+#
+# File: src/bookmark.py, line: 256
 #: src/bookmark.py:256
 msgid "Page"
 msgstr "Page"
 
+#
+# File: src/comment.py, line: 16
+# File: src/preferences.py, line: 288
 #: src/comment.py:16 src/preferences.py:288
 msgid "Comments"
 msgstr "Commentaires"
 
+#
+# File: src/comment.py, line: 53
 #: src/comment.py:53
 #, python-format
 msgid "Could not read %s"
 msgstr ""
 
+#
+# File: src/deprecated.py, line: 16
 #: src/deprecated.py:16
 msgid "There are deprecated files left on your computer."
 msgstr ""
 
+#
+# File: src/deprecated.py, line: 22
 #: src/deprecated.py:22
 msgid ""
 "Some old files (that were used for storing preferences, the library, "
@@ -214,223 +307,334 @@ msgid ""
 "to be removed for you now?"
 msgstr ""
 
+#
+# File: src/edit.py, line: 28
 #: src/edit.py:28
 msgid "Edit archive"
 msgstr ""
 
+#
+# File: src/edit.py, line: 36
 #: src/edit.py:36
 msgid "Import"
 msgstr ""
 
+#
+# File: src/edit.py, line: 50
 #: src/edit.py:50
 msgid "Images"
 msgstr ""
 
+#
+# File: src/edit.py, line: 51
 #: src/edit.py:51
 msgid "Other files"
 msgstr ""
 
+#
+# File: src/edit.py, line: 99
 #: src/edit.py:99
 msgid "The new archive could not be saved!"
 msgstr ""
 
+#
+# File: src/edit.py, line: 101
 #: src/edit.py:101
 msgid "The original files have not been removed."
 msgstr ""
 
+#
+# File: src/edit.py, line: 115
 #: src/edit.py:115
 msgid "Archives are stored as ZIP files."
 msgstr ""
 
+#
+# File: src/edit.py, line: 168
+# File: src/edit.py, line: 285
 #: src/edit.py:168 src/edit.py:285
 msgid "Remove from archive"
 msgstr ""
 
+#
+# File: src/edit.py, line: 255
 #: src/edit.py:255
 msgid ""
 "Please note that the only files that are automatically added to this list "
 "are those files in archives that Comix recognizes as comments."
 msgstr ""
 
+#
+# File: src/edit.py, line: 270
 #: src/edit.py:270
 msgid "Size"
 msgstr ""
 
+#
+# File: src/enhance.py, line: 51
 #: src/enhance.py:51
 msgid "Enhance image"
 msgstr ""
 
+#
+# File: src/enhance.py, line: 52
 #: src/enhance.py:52
 msgid "Defaults"
 msgstr ""
 
+#
+# File: src/enhance.py, line: 79
 #: src/enhance.py:79
 msgid "Brightness"
 msgstr "Luminosité"
 
+#
+# File: src/enhance.py, line: 90
 #: src/enhance.py:90
 msgid "Contrast"
 msgstr "Contraste"
 
+#
+# File: src/enhance.py, line: 101
 #: src/enhance.py:101
 msgid "Saturation"
 msgstr "Saturation"
 
+#
+# File: src/enhance.py, line: 112
 #: src/enhance.py:112
 msgid "Sharpness"
 msgstr "Netteté"
 
+#
+# File: src/enhance.py, line: 126
 #: src/enhance.py:126
 msgid "Automatically adjust contrast."
 msgstr ""
 
+#
+# File: src/enhance.py, line: 128
 #: src/enhance.py:128
 msgid ""
 "Automatically adjust contrast (both lightness and darkness), separately for "
 "each colour band."
 msgstr ""
 
+#
+# File: src/filechooser.py, line: 35
+# File: src/library.py, line: 489
 #: src/filechooser.py:35 src/library.py:489
 msgid "Open"
 msgstr "Ouvrir"
 
+#
+# File: src/filechooser.py, line: 39
 #: src/filechooser.py:39
 msgid "Save"
 msgstr ""
 
+#
+# File: src/filechooser.py, line: 75
 #: src/filechooser.py:75
 msgid "All files"
 msgstr "Tous les fichiers"
 
+#
+# File: src/filechooser.py, line: 78
 #: src/filechooser.py:78
 msgid "All Archives"
 msgstr ""
 
+#
+# File: src/filechooser.py, line: 82
 #: src/filechooser.py:82
 msgid "ZIP archives"
 msgstr ""
 
+#
+# File: src/filechooser.py, line: 84
 #: src/filechooser.py:84
 msgid "RAR archives"
 msgstr ""
 
+#
+# File: src/filechooser.py, line: 86
 #: src/filechooser.py:86
 msgid "Tar archives"
 msgstr ""
 
+#
+# File: src/filechooser.py, line: 125
 #: src/filechooser.py:125
 #, python-format
 msgid "A file named '%s' already exists. Do you want to replace it?"
 msgstr ""
 
+#
+# File: src/filechooser.py, line: 128
 #: src/filechooser.py:128
 msgid "Replacing it will overwrite its contents."
 msgstr ""
 
+#
+# File: src/filechooser.py, line: 171
+# File: src/filechooser.py, line: 249
 #: src/filechooser.py:171 src/filechooser.py:249
 msgid "All images"
 msgstr "Toutes les images"
 
+#
+# File: src/filechooser.py, line: 173
+# File: src/filechooser.py, line: 251
 #: src/filechooser.py:173 src/filechooser.py:251
 msgid "JPEG images"
 msgstr ""
 
+#
+# File: src/filechooser.py, line: 174
+# File: src/filechooser.py, line: 252
 #: src/filechooser.py:174 src/filechooser.py:252
 msgid "PNG images"
 msgstr ""
 
+#
+# File: src/filechooser.py, line: 195
 #: src/filechooser.py:195
 msgid "Automatically add the books to this collection"
 msgstr ""
 
+#
+# File: src/filehandler.py, line: 209
 #: src/filehandler.py:209
 #, python-format
 msgid "Could not open %s: Is a directory."
 msgstr ""
 
+#
+# File: src/filehandler.py, line: 213
 #: src/filehandler.py:213
 #, python-format
 msgid "Could not open %s: No such file."
 msgstr ""
 
+#
+# File: src/filehandler.py, line: 217
 #: src/filehandler.py:217
 #, python-format
 msgid "Could not open %s: Permission denied."
 msgstr ""
 
+#
+# File: src/filehandler.py, line: 222
 #: src/filehandler.py:222
 #, python-format
 msgid "Could not open %s: Unknown file type."
 msgstr ""
 
+#
+# File: src/filehandler.py, line: 285
 #: src/filehandler.py:285
 #, python-format
 msgid "No images in '%s'"
 msgstr ""
 
+#
+# File: src/filehandler.py, line: 411
 #: src/filehandler.py:411
 msgid "Unknown filetype"
 msgstr ""
 
+#
+# File: src/librarybackend.py, line: 272
+# File: src/librarybackend.py, line: 274
 #: src/librarybackend.py:272 src/librarybackend.py:274
 msgid "(Copy)"
 msgstr ""
 
+#
+# File: src/library.py, line: 38
 #: src/library.py:38
 msgid "Library"
 msgstr "Bibliothèque"
 
+#
+# File: src/library.py, line: 150
 #: src/library.py:150
 msgid "Rename..."
 msgstr ""
 
+#
+# File: src/library.py, line: 152
 #: src/library.py:152
 msgid "Duplicate collection"
 msgstr ""
 
+#
+# File: src/library.py, line: 154
 #: src/library.py:154
 msgid "Remove collection..."
 msgstr ""
 
+#
+# File: src/library.py, line: 202
 #: src/library.py:202
 msgid "All books"
 msgstr ""
 
+#
+# File: src/library.py, line: 231
 #: src/library.py:231
 msgid "Remove collection from the library?"
 msgstr ""
 
+#
+# File: src/library.py, line: 233
 #: src/library.py:233
 msgid ""
 "The selected collection will be removed from the library (but the books and "
 "subcollections in it will remain). Are you sure that you want to continue?"
 msgstr ""
 
+#
+# File: src/library.py, line: 251
 #: src/library.py:251
 msgid "Rename collection?"
 msgstr ""
 
+#
+# File: src/library.py, line: 253
 #: src/library.py:253
 msgid "Please enter a new name for the selected collection."
 msgstr ""
 
+#
+# File: src/library.py, line: 271
 #: src/library.py:271
 #, python-format
 msgid "Could not change the name to '%s'."
 msgstr ""
 
+#
+# File: src/library.py, line: 275
+# File: src/library.py, line: 881
 #: src/library.py:275 src/library.py:881
 msgid "A collection by that name already exists."
 msgstr ""
 
+#
+# File: src/library.py, line: 285
 #: src/library.py:285
 msgid "Could not duplicate collection."
 msgstr ""
 
+#
+# File: src/library.py, line: 382
 #: src/library.py:382
 msgid "Root"
 msgstr ""
 
+#
+# File: src/library.py, line: 386
 #: src/library.py:386
 #, python-format
 msgid ""
@@ -438,184 +642,269 @@ msgid ""
 "s'."
 msgstr ""
 
+#
+# File: src/library.py, line: 407
 #: src/library.py:407
 #, python-format
 msgid "Add books to '%s'."
 msgstr ""
 
+#
+# File: src/library.py, line: 411
 #: src/library.py:411
 #, python-format
 msgid ""
 "Move books from '%(source collection)s' to '%(destination collection)s'."
 msgstr ""
 
+#
+# File: src/library.py, line: 492
 #: src/library.py:492
 msgid "Remove from this collection"
 msgstr ""
 
+#
+# File: src/library.py, line: 495
 #: src/library.py:495
 msgid "Remove from the library..."
 msgstr ""
 
+#
+# File: src/library.py, line: 588
 #: src/library.py:588
 #, python-format
 msgid "Removed %(num)d book(s) from '%(collection)s'."
 msgstr ""
 
+#
+# File: src/library.py, line: 597
 #: src/library.py:597
 msgid "Remove books from the library?"
 msgstr ""
 
+#
+# File: src/library.py, line: 599
 #: src/library.py:599
 msgid ""
 "The selected books will be removed from the library (but the original files "
 "will be untouched). Are you sure that you want to continue?"
 msgstr ""
 
+#
+# File: src/library.py, line: 609
 #: src/library.py:609
 #, python-format
 msgid "Removed %d book(s) from the library."
 msgstr ""
 
+#
+# File: src/library.py, line: 769
 #: src/library.py:769
 msgid "Search"
 msgstr ""
 
+#
+# File: src/library.py, line: 774
 #: src/library.py:774
 msgid ""
 "Display only those books that have the specified text string in their full "
 "path. The search is not case sensitive."
 msgstr ""
 
+#
+# File: src/library.py, line: 776
 #: src/library.py:776
 msgid "Cover size"
 msgstr ""
 
+#
+# File: src/library.py, line: 789
 #: src/library.py:789
 msgid "Add books"
 msgstr ""
 
+#
+# File: src/library.py, line: 793
 #: src/library.py:793
 msgid "Add more books to the library."
 msgstr ""
 
+#
+# File: src/library.py, line: 795
 #: src/library.py:795
 msgid "Add collection"
 msgstr ""
 
+#
+# File: src/library.py, line: 800
 #: src/library.py:800
 msgid "Add a new empty collection."
 msgstr ""
 
+#
+# File: src/library.py, line: 806
 #: src/library.py:806
 msgid "Open the selected book."
 msgstr ""
 
+#
+# File: src/library.py, line: 832
+# File: src/properties.py, line: 113
 #: src/library.py:832 src/properties.py:113
 #, python-format
 msgid "%d pages"
 msgstr ""
 
+#
+# File: src/library.py, line: 854
 #: src/library.py:854
 msgid "Add new collection?"
 msgstr ""
 
+#
+# File: src/library.py, line: 856
 #: src/library.py:856
 msgid "Please enter a name for the new collection."
 msgstr ""
 
+#
+# File: src/library.py, line: 862
 #: src/library.py:862
 msgid "New collection"
 msgstr ""
 
+#
+# File: src/library.py, line: 876
 #: src/library.py:876
 #, python-format
 msgid "Could not add a new collection called '%s'."
 msgstr ""
 
+#
+# File: src/library.py, line: 910
 #: src/library.py:910
 msgid "Adding books"
 msgstr ""
 
+#
+# File: src/library.py, line: 930
 #: src/library.py:930
 msgid "Added books"
 msgstr ""
 
+#
+# File: src/library.py, line: 952
 #: src/library.py:952
 #, python-format
 msgid "Adding '%s'..."
 msgstr ""
 
+#
+# File: src/main.py, line: 666
 #: src/main.py:666
 msgid "SLIDESHOW"
 msgstr ""
 
+#
+# File: src/preferences.py, line: 78
 #: src/preferences.py:78
 msgid "Preferences"
 msgstr "Préférences"
 
+#
+# File: src/preferences.py, line: 93
 #: src/preferences.py:93
 msgid "Background"
 msgstr ""
 
+#
+# File: src/preferences.py, line: 95
 #: src/preferences.py:95
 msgid "Use this colour as background"
 msgstr ""
 
+#
+# File: src/preferences.py, line: 97
 #: src/preferences.py:97
 msgid "Always use this selected colour as the background colour."
 msgstr ""
 
+#
+# File: src/preferences.py, line: 102
 #: src/preferences.py:102
 msgid "Use dynamic background colour."
 msgstr ""
 
+#
+# File: src/preferences.py, line: 106
 #: src/preferences.py:106
 msgid "Automatically pick a background colour that fits the viewed image."
 msgstr ""
 
+#
+# File: src/preferences.py, line: 109
 #: src/preferences.py:109
 msgid "Thumbnails"
 msgstr "Vignettes"
 
+#
+# File: src/preferences.py, line: 110
 #: src/preferences.py:110
 msgid "Thumbnail size (in pixels)"
 msgstr ""
 
+#
+# File: src/preferences.py, line: 117
 #: src/preferences.py:117
 msgid "Show page numbers on thumbnails."
 msgstr ""
 
+#
+# File: src/preferences.py, line: 124
 #: src/preferences.py:124
 msgid "Magnifying Glass"
 msgstr ""
 
+#
+# File: src/preferences.py, line: 125
 #: src/preferences.py:125
 msgid "Magnifying glass size (in pixels)"
 msgstr ""
 
+#
+# File: src/preferences.py, line: 131
 #: src/preferences.py:131
 msgid ""
 "Set the size of the magnifying glass. It is a square with a side of this "
 "many pixels."
 msgstr ""
 
+#
+# File: src/preferences.py, line: 133
 #: src/preferences.py:133
 msgid "Magnification factor"
 msgstr ""
 
+#
+# File: src/preferences.py, line: 140
 #: src/preferences.py:140
 msgid "Set the magnification factor of the magnifying glass."
 msgstr ""
 
+#
+# File: src/preferences.py, line: 143
 #: src/preferences.py:143
 msgid "Image scaling"
 msgstr ""
 
+#
+# File: src/preferences.py, line: 144
 #: src/preferences.py:144
 msgid "Stretch small images."
 msgstr ""
 
+#
+# File: src/preferences.py, line: 148
 #: src/preferences.py:148
 msgid ""
 "Stretch images to a size that is larger than their original size if the "
@@ -623,32 +912,46 @@ msgid ""
 "scaled to be larger than their original size."
 msgstr ""
 
+#
+# File: src/preferences.py, line: 151
 #: src/preferences.py:151
 msgid "Transparency"
 msgstr ""
 
+#
+# File: src/preferences.py, line: 153
 #: src/preferences.py:153
 msgid "Use checkered background for transparent images."
 msgstr ""
 
+#
+# File: src/preferences.py, line: 159
 #: src/preferences.py:159
 msgid ""
 "Use a grey checkered background for transparent images. If this preference "
 "is unset, the background is plain white instead."
 msgstr ""
 
+#
+# File: src/preferences.py, line: 161
 #: src/preferences.py:161
 msgid "Appearance"
 msgstr ""
 
+#
+# File: src/preferences.py, line: 167
 #: src/preferences.py:167
 msgid "Scroll"
 msgstr "Défilement"
 
+#
+# File: src/preferences.py, line: 169
 #: src/preferences.py:169
 msgid "Use smart space key scrolling."
 msgstr ""
 
+#
+# File: src/preferences.py, line: 174
 #: src/preferences.py:174
 msgid ""
 "Use smart scrolling with the space key. Normally the space key scrolls only "
@@ -657,23 +960,34 @@ msgid ""
 "the comic book."
 msgstr ""
 
+#
+# File: src/preferences.py, line: 177
+# File: src/ui.py, line: 296
 #: src/preferences.py:177 src/ui.py:296
 msgid "Double page mode"
 msgstr "Mode pages doubles"
 
+#
+# File: src/preferences.py, line: 179
 #: src/preferences.py:179
 msgid "Flip two pages in double page mode."
 msgstr ""
 
+#
+# File: src/preferences.py, line: 184
 #: src/preferences.py:184
 msgid ""
 "Flip two pages, instead of one, each time we flip pages in double page mode."
 msgstr ""
 
+#
+# File: src/preferences.py, line: 187
 #: src/preferences.py:187
 msgid "Show only one wide image in double page mode."
 msgstr ""
 
+#
+# File: src/preferences.py, line: 193
 #: src/preferences.py:193
 msgid ""
 "Display only one image in double page mode, if the image's width exceeds its "
@@ -681,44 +995,62 @@ msgid ""
 "properly (i.e. alone) also in double page mode."
 msgstr ""
 
+#
+# File: src/preferences.py, line: 196
 #: src/preferences.py:196
 msgid "Files"
 msgstr ""
 
+#
+# File: src/preferences.py, line: 198
 #: src/preferences.py:198
 msgid "Automatically open the next archive."
 msgstr ""
 
+#
+# File: src/preferences.py, line: 203
 #: src/preferences.py:203
 msgid ""
 "Automatically open the next archive in the directory when flipping past the "
 "last page, or the previous archive when flipping past the first page."
 msgstr ""
 
+#
+# File: src/preferences.py, line: 206
 #: src/preferences.py:206
 msgid "Automatically open the last viewed file on startup."
 msgstr ""
 
+#
+# File: src/preferences.py, line: 211
 #: src/preferences.py:211
 msgid ""
 "Automatically open, on startup, the file that was open when Comix was last "
 "closed."
 msgstr ""
 
+#
+# File: src/preferences.py, line: 214
 #: src/preferences.py:214
 msgid "Store information about recently opened files."
 msgstr ""
 
+#
+# File: src/preferences.py, line: 219
 #: src/preferences.py:219
 msgid ""
 "Add information about all files opened from within Comix to the shared "
 "recent files list."
 msgstr ""
 
+#
+# File: src/preferences.py, line: 222
 #: src/preferences.py:222
 msgid "Store thumbnails for opened files."
 msgstr ""
 
+#
+# File: src/preferences.py, line: 227
 #: src/preferences.py:227
 msgid ""
 "Store thumbnails for opened files according to the freedesktop.org "
@@ -726,14 +1058,20 @@ msgid ""
 "as most file managers."
 msgstr ""
 
+#
+# File: src/preferences.py, line: 230
 #: src/preferences.py:230
 msgid "Cache"
 msgstr ""
 
+#
+# File: src/preferences.py, line: 231
 #: src/preferences.py:231
 msgid "Use a cache to speed up browsing."
 msgstr ""
 
+#
+# File: src/preferences.py, line: 235
 #: src/preferences.py:235
 msgid ""
 "Cache the images that are next to the currently viewed image in order to "
@@ -742,125 +1080,194 @@ msgid ""
 "on free RAM."
 msgstr ""
 
+#
+# File: src/preferences.py, line: 237
 #: src/preferences.py:237
 msgid "Behaviour"
 msgstr "Comportement"
 
+#
+# File: src/preferences.py, line: 243
 #: src/preferences.py:243
 msgid "Default modes"
 msgstr ""
 
+#
+# File: src/preferences.py, line: 245
 #: src/preferences.py:245
 msgid "Use double page mode by default."
 msgstr ""
 
+#
+# File: src/preferences.py, line: 250
 #: src/preferences.py:250
 msgid "Use fullscreen by default."
 msgstr ""
 
+#
+# File: src/preferences.py, line: 255
 #: src/preferences.py:255
 msgid "Use manga mode by default."
 msgstr ""
 
+#
+# File: src/preferences.py, line: 260
 #: src/preferences.py:260
 msgid "Default zoom mode"
 msgstr ""
 
+#
+# File: src/preferences.py, line: 262
+# File: src/ui.py, line: 288
 #: src/preferences.py:262 src/ui.py:288
 msgid "Best fit mode"
 msgstr ""
 
+#
+# File: src/preferences.py, line: 263
+# File: src/ui.py, line: 290
 #: src/preferences.py:263 src/ui.py:290
 msgid "Fit width mode"
 msgstr "Adapter la largeur"
 
+#
+# File: src/preferences.py, line: 264
+# File: src/ui.py, line: 292
 #: src/preferences.py:264 src/ui.py:292
 msgid "Fit height mode"
 msgstr "Adapter la hauteur"
 
+#
+# File: src/preferences.py, line: 265
+# File: src/ui.py, line: 294
 #: src/preferences.py:265 src/ui.py:294
 msgid "Manual zoom mode"
 msgstr "Mode z_oom manuel"
 
+#
+# File: src/preferences.py, line: 271
 #: src/preferences.py:271
 msgid "Fullscreen"
 msgstr ""
 
+#
+# File: src/preferences.py, line: 273
 #: src/preferences.py:273
 msgid "Automatically hide all toolbars in fullscreen."
 msgstr ""
 
+#
+# File: src/preferences.py, line: 279
 #: src/preferences.py:279
 msgid "Slideshow"
 msgstr "Diaporama"
 
+#
+# File: src/preferences.py, line: 280
 #: src/preferences.py:280
 msgid "Slideshow delay (in seconds)"
 msgstr ""
 
+#
+# File: src/preferences.py, line: 289
 #: src/preferences.py:289
 msgid "Comment extensions"
 msgstr ""
 
+#
+# File: src/preferences.py, line: 295
 #: src/preferences.py:295
 msgid ""
 "Treat all files found within archives, that have one of these file endings, "
 "as comments."
 msgstr ""
 
+#
+# File: src/preferences.py, line: 297
 #: src/preferences.py:297
 msgid "Display"
 msgstr "Affichage"
 
+#
+# File: src/properties.py, line: 89
 #: src/properties.py:89
 msgid "Properties"
 msgstr "Propriétés"
 
+#
+# File: src/properties.py, line: 114
 #: src/properties.py:114
 #, python-format
 msgid "%d comments"
 msgstr ""
 
+#
+# File: src/properties.py, line: 124
+# File: src/properties.py, line: 159
 #: src/properties.py:124 src/properties.py:159
 msgid "Location"
 msgstr "Emplacement"
 
+#
+# File: src/properties.py, line: 126
+# File: src/properties.py, line: 160
 #: src/properties.py:126 src/properties.py:160
 msgid "Accessed"
 msgstr "Accédé le"
 
+#
+# File: src/properties.py, line: 128
+# File: src/properties.py, line: 162
 #: src/properties.py:128 src/properties.py:162
 msgid "Modified"
 msgstr "Modifié le"
 
+#
+# File: src/properties.py, line: 130
+# File: src/properties.py, line: 164
 #: src/properties.py:130 src/properties.py:164
 msgid "Permissions"
 msgstr "Permissions"
 
+#
+# File: src/properties.py, line: 131
+# File: src/properties.py, line: 165
 #: src/properties.py:131 src/properties.py:165
 msgid "Owner"
 msgstr "Propriétaire"
 
+#
+# File: src/properties.py, line: 135
 #: src/properties.py:135
 msgid "Archive"
 msgstr "Archive"
 
+#
+# File: src/properties.py, line: 169
 #: src/properties.py:169
 msgid "Image"
 msgstr "Image"
 
+#
+# File: src/thumbremover.py, line: 22
 #: src/thumbremover.py:22
 msgid "Thumbnail maintenance"
 msgstr ""
 
+#
+# File: src/thumbremover.py, line: 24
 #: src/thumbremover.py:24
 msgid "Cleanup"
 msgstr ""
 
+#
+# File: src/thumbremover.py, line: 36
 #: src/thumbremover.py:36
 msgid "Cleanup thumbnails"
 msgstr ""
 
+#
+# File: src/thumbremover.py, line: 46
 #: src/thumbremover.py:46
 msgid ""
 "Thumbnails for files (such as image files and comic book archives) are "
@@ -870,683 +1277,946 @@ msgid ""
 "thumbnails by removing orphaned and outdated thumbnails."
 msgstr ""
 
+#
+# File: src/thumbremover.py, line: 58
 #: src/thumbremover.py:58
 msgid "Thumbnail directory"
 msgstr ""
 
+#
+# File: src/thumbremover.py, line: 65
 #: src/thumbremover.py:65
 msgid "Total number of thumbnails"
 msgstr ""
 
+#
+# File: src/thumbremover.py, line: 68
+# File: src/thumbremover.py, line: 75
 #: src/thumbremover.py:68 src/thumbremover.py:75
 msgid "Calculating..."
 msgstr ""
 
+#
+# File: src/thumbremover.py, line: 72
 #: src/thumbremover.py:72
 msgid "Total size of thumbnails"
 msgstr ""
 
+#
+# File: src/thumbremover.py, line: 80
 #: src/thumbremover.py:80
 msgid "Do you want to cleanup orphaned and outdated thumbnails now?"
 msgstr ""
 
+#
+# File: src/thumbremover.py, line: 116
 #: src/thumbremover.py:116
 msgid "Removing thumbnails"
 msgstr "Suppression des vignettes"
 
+#
+# File: src/thumbremover.py, line: 135
 #: src/thumbremover.py:135
 msgid "Number of removed thumbnails"
 msgstr ""
 
+#
+# File: src/thumbremover.py, line: 142
 #: src/thumbremover.py:142
 msgid "Total size of removed thumbnails"
 msgstr ""
 
+#
+# File: src/thumbremover.py, line: 193
 #: src/thumbremover.py:193
 #, python-format
 msgid "Removed thumbnail for '%s'"
 msgstr ""
 
+#
+# File: src/ui.py, line: 34
 #: src/ui.py:34
 msgid "_Next page"
 msgstr "Page _suivante"
 
+#
+# File: src/ui.py, line: 36
 #: src/ui.py:36
 msgid "_Previous page"
 msgstr "Page _précédente"
 
+#
+# File: src/ui.py, line: 38
 #: src/ui.py:38
 msgid "_First page"
 msgstr "P_remière page"
 
+#
+# File: src/ui.py, line: 40
 #: src/ui.py:40
 msgid "_Last page"
 msgstr "_Dernière page"
 
+#
+# File: src/ui.py, line: 42
 #: src/ui.py:42
 msgid "_Zoom in"
 msgstr "Zoom a_vant"
 
+#
+# File: src/ui.py, line: 44
 #: src/ui.py:44
 msgid "Zoom _out"
 msgstr "Zoom a_rrière"
 
+#
+# File: src/ui.py, line: 46
 #: src/ui.py:46
 msgid "O_riginal size"
 msgstr ""
 
+#
+# File: src/ui.py, line: 48
 #: src/ui.py:48
 msgid "_Close"
 msgstr "_Fermer"
 
+#
+# File: src/ui.py, line: 50
 #: src/ui.py:50
 msgid "_Quit"
 msgstr "_Quitter"
 
+#
+# File: src/ui.py, line: 52
 #: src/ui.py:52
 msgid "_Rotate 90 degrees CW"
 msgstr "_Rotation de 90 degrés sens horaire"
 
+#
+# File: src/ui.py, line: 54
 #: src/ui.py:54
 msgid "Rotate 180 de_grees"
 msgstr "Rotation de 180 de_grés"
 
+#
+# File: src/ui.py, line: 56
 #: src/ui.py:56
 msgid "Rotat_e 90 degrees CCW"
 msgstr "Rotation de 90 degrés sens anti-horair_e"
 
+#
+# File: src/ui.py, line: 58
 #: src/ui.py:58
 msgid "Fli_p horizontally"
 msgstr "Mirroir _horizontal"
 
+#
+# File: src/ui.py, line: 60
 #: src/ui.py:60
 msgid "Flip _vertically"
 msgstr "Mirroir _vertical"
 
+#
+# File: src/ui.py, line: 62
 #: src/ui.py:62
 msgid "Manual _Zoom"
 msgstr "_Zoom manuel"
 
+#
+# File: src/ui.py, line: 63
 #: src/ui.py:63
 msgid "Open _recent"
 msgstr ""
 
+#
+# File: src/ui.py, line: 64
 #: src/ui.py:64
 msgid "_Bookmarks"
 msgstr "_Signets"
 
+#
+# File: src/ui.py, line: 65
 #: src/ui.py:65
 msgid "T_oolbars"
 msgstr ""
 
+#
+# File: src/ui.py, line: 66
 #: src/ui.py:66
 msgid "_Edit"
 msgstr "_Édition"
 
+#
+# File: src/ui.py, line: 67
 #: src/ui.py:67
 msgid "_File"
 msgstr "_Fichier"
 
+#
+# File: src/ui.py, line: 68
 #: src/ui.py:68
 msgid "_View"
 msgstr "_Affichage"
 
+#
+# File: src/ui.py, line: 69
 #: src/ui.py:69
 msgid "_Go"
 msgstr "A_ller à"
 
+#
+# File: src/ui.py, line: 70
 #: src/ui.py:70
 msgid "_Help"
 msgstr "_Aide"
 
+#
+# File: src/ui.py, line: 71
 #: src/ui.py:71
 msgid "_Transform"
 msgstr "Tra_nsformer"
 
+#
+# File: src/ui.py, line: 75
 #: src/ui.py:75
 msgid "_Fullscreen"
 msgstr "_Plein écran"
 
+#
+# File: src/ui.py, line: 77
 #: src/ui.py:77
 msgid "_Double page mode"
 msgstr "Pages _doubles"
 
+#
+# File: src/ui.py, line: 79
 #: src/ui.py:79
 msgid "_Toolbar"
 msgstr "Barre d'_outils"
 
+#
+# File: src/ui.py, line: 81
 #: src/ui.py:81
 msgid "_Menubar"
 msgstr "Barre de _menus"
 
+#
+# File: src/ui.py, line: 83
 #: src/ui.py:83
 msgid "St_atusbar"
 msgstr "Barre d'_état"
 
+#
+# File: src/ui.py, line: 85
 #: src/ui.py:85
 msgid "S_crollbars"
 msgstr "Barres de _défilement"
 
+#
+# File: src/ui.py, line: 87
 #: src/ui.py:87
 msgid "Th_umbnails"
 msgstr "_Vignettes"
 
+#
+# File: src/ui.py, line: 89
 #: src/ui.py:89
 msgid "H_ide all"
 msgstr "Tout cac_her"
 
+#
+# File: src/ui.py, line: 91
 #: src/ui.py:91
 msgid "_Manga mode"
 msgstr "_Mode manga"
 
+#
+# File: src/ui.py, line: 93
 #: src/ui.py:93
 msgid "_Keep transformation"
 msgstr "Se souvenir de la _transformation"
 
+#
+# File: src/ui.py, line: 95
 #: src/ui.py:95
 msgid "Run _slideshow"
 msgstr ""
 
+#
+# File: src/ui.py, line: 97
 #: src/ui.py:97
 msgid "Magnifying _glass"
 msgstr ""
 
+#
+# File: src/ui.py, line: 101
 #: src/ui.py:101
 msgid "_Best fit mode"
 msgstr ""
 
+#
+# File: src/ui.py, line: 103
 #: src/ui.py:103
 msgid "Fit _width mode"
 msgstr "Adapter la _largeur"
 
+#
+# File: src/ui.py, line: 105
 #: src/ui.py:105
 msgid "Fit _height mode"
 msgstr "Adapter la _hauteur"
 
+#
+# File: src/ui.py, line: 107
 #: src/ui.py:107
 msgid "M_anual zoom mode"
 msgstr ""
 
+#
+# File: src/ui.py, line: 113
 #: src/ui.py:113
 msgid "_About"
 msgstr "À _propos"
 
+#
+# File: src/ui.py, line: 115
 #: src/ui.py:115
 msgid "_View comments..."
 msgstr ""
 
+#
+# File: src/ui.py, line: 117
 #: src/ui.py:117
 msgid "_Edit archive..."
 msgstr ""
 
+#
+# File: src/ui.py, line: 119
 #: src/ui.py:119
 msgid "_Open..."
 msgstr "_Ouvrir..."
 
+#
+# File: src/ui.py, line: 121
 #: src/ui.py:121
 msgid "_Properties"
 msgstr ""
 
+#
+# File: src/ui.py, line: 123
 #: src/ui.py:123
 msgid "_Enhance image..."
 msgstr ""
 
+#
+# File: src/ui.py, line: 126
 #: src/ui.py:126
 msgid "_Thumbnail maintenance..."
 msgstr ""
 
+#
+# File: src/ui.py, line: 128
 #: src/ui.py:128
 msgid "Pr_eferences"
 msgstr "Préfér_ences"
 
+#
+# File: src/ui.py, line: 132
 #: src/ui.py:132
 msgid "_Library..."
 msgstr ""
 
+#
+# File: src/ui.py, line: 282
 #: src/ui.py:282
 msgid "First page"
 msgstr "Première page"
 
+#
+# File: src/ui.py, line: 284
 #: src/ui.py:284
 msgid "Previous page"
 msgstr "Page _précédente"
 
+#
+# File: src/ui.py, line: 285
 #: src/ui.py:285
 msgid "Next page"
 msgstr "Page suivante"
 
+#
+# File: src/ui.py, line: 286
 #: src/ui.py:286
 msgid "Last page"
 msgstr "Dernière page"
 
+#
+# File: src/ui.py, line: 297
 #: src/ui.py:297
 msgid "Manga mode"
 msgstr "Mode manga"
 
+#
+# File: src/ui.py, line: 298
 #: src/ui.py:298
 msgid "Magnifying glass"
 msgstr ""
 
+#
 #~ msgid "No images in \"%s\""
 #~ msgstr "Aucune image dans \"%s\""
 
+#
 #~ msgid "Default"
 #~ msgstr "Par défaut"
 
+#
 #~ msgid "Automatically adjust contrast"
 #~ msgstr "Ajuster automatiquement le contraste"
 
+#
 #~ msgid "Fit-to-screen mode"
 #~ msgstr "Adapter à l'écran"
 
+#
 #~ msgid "_Normal size"
 #~ msgstr "Taille _normale"
 
+#
 #~ msgid "_Toolbars"
 #~ msgstr "_Boîte à outils"
 
+#
 #~ msgid "Fit-to-_screen mode"
 #~ msgstr "_Adapter à l'écran"
 
+#
 #~ msgid "View _comments"
 #~ msgstr "Voir les _commentaires"
 
+#
 #~ msgid "Proper_ties"
 #~ msgstr "Proprié_tés"
 
+#
 #~ msgid "Magnifying lens"
 #~ msgstr "Objectif grossissant"
 
+#
 #~ msgid "Apply filter on full path"
 #~ msgstr "Appliquer le filtre sur le chemin complet"
 
+#
 #~ msgid "Add archives to library."
 #~ msgstr "Ajouter les archives à la bibliothèque."
 
+#
 #~ msgid "Remove selected archive from library."
 #~ msgstr "Supprimer l'archive sélectionnée de la bibliothèque."
 
+#
 #~ msgid "Clean up"
 #~ msgstr "Nettoyer"
 
+#
 #~ msgid "Remove orphaned or outdated library entries."
 #~ msgstr "Supprimer les entrées orphelines ou expirées de la bibliothèque"
 
+#
 #~ msgid "Close this window."
 #~ msgstr "Fermer cette fenêtre."
 
+#
 #~ msgid "Open selected archive."
 #~ msgstr "Ouvrir l'archive sélectionnée."
 
+#
 #~ msgid "All archives"
 #~ msgstr "Toutes les archives"
 
+#
 #~ msgid "JPEG image"
 #~ msgstr "Image JPEG"
 
+#
 #~ msgid "PNG image"
 #~ msgstr "Image PNG"
 
+#
 #~ msgid "GIF image"
 #~ msgstr "Image GIF"
 
+#
 #~ msgid "TIFF image"
 #~ msgstr "Image TIFF"
 
+#
 #~ msgid "BMP image"
 #~ msgstr "Image BMP"
 
+#
 #~ msgid "ICO image"
 #~ msgstr "Image ICO"
 
+#
 #~ msgid "XPM image"
 #~ msgstr "Image XPM"
 
+#
 #~ msgid "XBM image"
 #~ msgstr "Image XBM"
 
+#
 #~ msgid "tar archive"
 #~ msgstr "Archive TAR"
 
+#
 #~ msgid "Add archives recursively"
 #~ msgstr "Ajouter les archives récursivement"
 
+#
 #~ msgid "Select folder"
 #~ msgstr "Sélectionnez un répertoire"
 
+#
 #~ msgid "Fullscreen as default"
 #~ msgstr "Mode plein écran par défaut"
 
+#
 #~ msgid "Double page mode as default"
 #~ msgstr "Mode pages doubles par défaut"
 
+#
 #~ msgid "Stretch small images"
 #~ msgstr "Adapter toutes les images"
 
+#
 #~ msgid "Use smart scaling in double page mode"
 #~ msgstr "Utiliser l'adaptation intelligente dans le mode pages doubles"
 
+#
 #~ msgid "Always view comments when opening a new file"
 #~ msgstr "Toujours voir les commentaires quand un nouveau fichier est ouvert"
 
+#
 #~ msgid "Hide menubar, scrollbars etc. in fullscreen mode"
 #~ msgstr ""
 #~ "Cacher le menu, les barres de défilement, etc. dans le mode plein écran"
 
+#
 #~ msgid "Cache pages for faster forward flipping"
 #~ msgstr "Mettre en cache les pages, pour plus de rapidité lors du changement"
 
+#
 #~ msgid "Scroll wheel scrolls horizontally at top and bottom of page"
 #~ msgstr ""
 #~ "La molette défile la page horizontalement, en haut et en bas de la page"
 
+#
 #~ msgid "Flip page when scrolling off the top or bottom of page"
 #~ msgstr ""
 #~ "Changer de page lorsque la barre de défilement arrive en haut ou en bas "
 #~ "de la page"
 
+#
 #~ msgid "Hide thumbnail scrollbar"
 #~ msgstr "Cacher la barre de défilement des vignettes"
 
+#
 #~ msgid "Space key uses smart scrolling"
 #~ msgstr "Utiliser la barre d'espacement pour le défilement intelligent"
 
+#
 #~ msgid "Save window position and size for future sessions"
 #~ msgstr ""
 #~ "Se souvenir de la position et la taille de la fenêtre, pour les futures "
 #~ "sessions"
 
+#
 #~ msgid "Go to the next archive in directory after last page"
 #~ msgstr ""
 #~ "Aller à l'archive suivante dans le répertoire, après la lecture de la "
 #~ "dernière page"
 
+#
 #~ msgid "Hide cursor in fullscreen mode"
 #~ msgstr "Cacher le curseur de la souris, dans le mode mode plein écran"
 
+#
 #~ msgid "Open last viewed file on start"
 #~ msgstr "Ouvrir le dernier fichier lu au démarrage"
 
+#
 #~ msgid "Show page numbers on thumbnails"
 #~ msgstr "Afficher le numéro de la page dans les vignettes"
 
+#
 #~ msgid "Always use smart scrolling as if in double page mode"
 #~ msgstr ""
 #~ "Toujours utiliser le défilement intelligent, comme si le mode pages "
 #~ "doubles était activé"
 
+#
 #~ msgid "Use stored thumbnails for images in directories"
 #~ msgstr "Utiliser les vignettes stockées dans le répertoire ~/.thumbnails"
 
+#
 #~ msgid "Use stored thumbnails for images in archives"
 #~ msgstr "Utiliser les vignettes stockées, pour les images dans l'archive"
 
+#
 #~ msgid "Display only one page in double page mode if the image is wide"
 #~ msgstr ""
 #~ "Afficher une seule page, dans le mode pages doubles, si l'image est trop "
 #~ "grande"
 
+#
 #~ msgid "Store recently opened files"
 #~ msgstr "Mémoriser les fichiers récemment ouverts"
 
+#
 #~ msgid "Always go to this directory in the \"Open\" dialog:"
 #~ msgstr ""
 #~ "Toujours se rendre à ce répertoire, dans la boîte de dialogue \"Ouvrir\":"
 
+#
 #~ msgid "Always go to the latest directory in the \"Open\" dialog"
 #~ msgstr ""
 #~ "Toujours se rendre au dernier répertoire choisi, dans boîte de dialogue "
 #~ "\"Ouvrir\""
 
+#
 #~ msgid "Nearest (quickest, worst quality)"
 #~ msgstr "Au plus près (plus rapide, qualité moins bonne)"
 
+#
 #~ msgid "Tiles"
 #~ msgstr "Tuiles"
 
+#
 #~ msgid "Bilinear"
 #~ msgstr "Bilinéaire"
 
+#
 #~ msgid "Hyper (slowest, best quality)"
 #~ msgstr "Hyper (meilleure qualité, lent)"
 
+#
 #~ msgid "Manual zoom mode as default"
 #~ msgstr "Zoom manuel par défaut"
 
+#
 #~ msgid "Fit-to-screen mode as default"
 #~ msgstr "Mode adapter à l'écran par défaut"
 
+#
 #~ msgid "Fit width mode as default"
 #~ msgstr "Mode adapter la largeur par défaut"
 
+#
 #~ msgid "Fit height mode as default"
 #~ msgstr "Mode adapter la hauteur par défaut"
 
+#
 #~ msgid "Background colour:"
 #~ msgstr "Couleur de fond :"
 
+#
 #~ msgid "Background colour"
 #~ msgstr "Couleur de fond"
 
+#
 #~ msgid "Toolbar button labels:"
 #~ msgstr "Étiquette des boutons de la barre d'outils:"
 
+#
 #~ msgid "Icons only"
 #~ msgstr "Icônes seulement"
 
+#
 #~ msgid "Text only"
 #~ msgstr "Textes seulement"
 
+#
 #~ msgid "Icons and text"
 #~ msgstr "Icônes et textes"
 
+#
 #~ msgid "Slideshow delay:"
 #~ msgstr "Délai du diaporama :"
 
+#
 #~ msgid "Scaling quality"
 #~ msgstr "Qualité de l'adaptation"
 
+#
 #~ msgid "Scaling"
 #~ msgstr "Adaptation"
 
+#
 #~ msgid "Treat files with the following extensions as comments:"
 #~ msgstr ""
 #~ "Traiter les fichiers avec ces extensions comme si c'était des "
 #~ "commentaires:"
 
+#
 #~ msgid "Space key scrolls"
 #~ msgstr "La touche espace défile"
 
+#
 #~ msgid "of"
 #~ msgstr "sur"
 
+#
 #~ msgid "Window size"
 #~ msgstr "Taille de la fenêtre"
 
+#
 #~ msgid "Page size"
 #~ msgstr "Taille de la page"
 
+#
 #~ msgid "Magnification factor:"
 #~ msgstr "Facteur d'agrandissement :"
 
+#
 #~ msgid "Lens size (px):"
 #~ msgstr "Taille de l'objectif (en pixels) :"
 
+#
 #~ msgid "Update interval (milliseconds):"
 #~ msgstr "Intervalle de la mise à jour (en millisecondes) :"
 
+#
 #~ msgid "Lens"
 #~ msgstr "Objectif grossissant"
 
+#
 #~ msgid "Thumbnail sizes (px):"
 #~ msgstr "Taille des vignettes (en pixels) :"
 
+#
 #~ msgid "Library thumbnail sizes (px):"
 #~ msgstr "Taille des vignettes de la bibliothèque (en pixels) :"
 
+#
 #~ msgid "Adjust colour"
 #~ msgstr "Ajuster la couleur"
 
+#
 #~ msgid "Save values for future sessions"
 #~ msgstr "Sauvegarder les valeurs, pour prochaines sessions"
 
+#
 #~ msgid "Go to page"
 #~ msgstr "Aller à la page"
 
+#
 #~ msgid "Title"
 #~ msgstr "Titre"
 
+#
 #~ msgid "It reads ZIP, RAR and tar archives (also gzip or bzip2 compressed)"
 #~ msgstr ""
 #~ "Il peut lire les archives ZIP, RAR et tar (même compressées avec gzip ou "
 #~ "bzip2)"
 
+#
 #~ msgid "as well as plain image files."
 #~ msgstr "aussi bien que des images simples."
 
+#
 #~ msgid "Developer and Swedish translation"
 #~ msgstr "Développement et traduction en suédois"
 
+#
 #~ msgid "Manage thumbnails"
 #~ msgstr "Gérer les vignettes"
 
+#
 #~ msgid "Remove all stored thumbnails:"
 #~ msgstr "Supprimer toutes les vignettes stockées :"
 
+#
 #~ msgid "Remove orphaned thumbnails:"
 #~ msgstr "Supprimer les vignettes orphelines :"
 
+#
 #~ msgid "Directories"
 #~ msgstr "Répertoires"
 
+#
 #~ msgid "Archives"
 #~ msgstr "Archives"
 
+#
 #~ msgid "Convert"
 #~ msgstr "Convertir"
 
+#
 #~ msgid "File type"
 #~ msgstr "Type de fichier"
 
+#
 #~ msgid "Extension"
 #~ msgstr "Extension"
 
+#
 #~ msgid "Zip archive"
 #~ msgstr "Archive Zip"
 
+#
 #~ msgid "Delete old archive/directory"
 #~ msgstr "Supprimer les anciens répertoires/archives"
 
+#
 #~ msgid "Permission denied"
 #~ msgstr "Permission non accordée"
 
+#
 #~ msgid "Confirm operation"
 #~ msgstr "Confirmation"
 
+#
 #~ msgid "Permanently remove %s?"
 #~ msgstr "Êtes-vous sûr de vouloir supprimer %s ?"
 
+#
 #~ msgid "Perform lossless JPEG operation on %s?"
 #~ msgstr "Effectuer l'opération JPEG sans perte sur le fichier %s ?"
 
+#
 #~ msgid "Some images might be trimmed a bit during the operation."
 #~ msgstr ""
 #~ "Les bords de certaines images pourraient êtres rognés, lors de cette "
 #~ "opération."
 
+#
 #~ msgid "Permanently convert %s to greyscale?"
 #~ msgstr "Convertir définitivement %s en niveaux de gris ?"
 
+#
 #~ msgid "Location:"
 #~ msgstr "Emplacement :"
 
+#
 #~ msgid "Quantity:"
 #~ msgstr "Quantité :"
 
+#
 #~ msgid "Total size:"
 #~ msgstr "Taille totale :"
 
+#
 #~ msgid "Removed:"
 #~ msgstr "Supprimé :"
 
+#
 #~ msgid "Done!"
 #~ msgstr "Fait !"
 
+#
 #~ msgid "pages"
 #~ msgstr "pages"
 
+#
 #~ msgid "comment"
 #~ msgstr "commentaire"
 
+#
 #~ msgid "comments"
 #~ msgstr "commentaires"
 
+#
 #~ msgid "In library"
 #~ msgstr "Dans la bibliothèque"
 
+#
 #~ msgid "Yes"
 #~ msgstr "Oui"
 
+#
 #~ msgid "No"
 #~ msgstr "Non"
 
+#
 #~ msgid "Bookmarked"
 #~ msgstr "Ajouté aux signets"
 
+#
 #~ msgid "Yes, page"
 #~ msgstr "Oui, page"
 
+#
 #~ msgid "Mode"
 #~ msgstr "Mode"
 
+#
 #~ msgid "Pixel count"
 #~ msgstr "Nombre de pixels"
 
+#
 #~ msgid "Pixel sum"
 #~ msgstr "Somme des pixels"
 
+#
 #~ msgid "Extrema"
 #~ msgstr "Extrêmes"
 
+#
 #~ msgid "Mean"
 #~ msgstr "Moyen"
 
+#
 #~ msgid "Median"
 #~ msgstr "Milieu"
 
+#
 #~ msgid "Standard deviation"
 #~ msgstr "Déviation standard"
 
+#
 #~ msgid "Image 1"
 #~ msgstr "Image 1"
 
+#
 #~ msgid "Image 2"
 #~ msgstr "Image 2"
 
+#
 #~ msgid "Could not delete"
 #~ msgstr "Ne peut supprimer"
 
+#
 #~ msgid "Please check your permissions."
 #~ msgstr "Vérifiez vos permissions."
 
+#
 #~ msgid "Could not create"
 #~ msgstr "Ne peut créer"
 
+#
 #~ msgid "Added:"
 #~ msgstr "Ajouté :"
 
+#
 #~ msgid "Adding library entries"
 #~ msgstr "Ajout des entrées de la bibliothèque"
 
+#
 #~ msgid "Removing library entries"
 #~ msgstr "Suppression des entrées de la bibliothèque"
 
+#
 #~ msgid "Extract page"
 #~ msgstr "Extraire la page"
 
+#
 #~ msgid "page"
 #~ msgstr "page"
 
+#
 #~ msgid ""
 #~ "Could not find the unrar executable. Please install it if you wish to "
 #~ "open RAR archives."
@@ -1554,111 +2224,147 @@ msgstr ""
 #~ "Le programme ne peut trouver l'exécutable unrar. Merci de l'installer, si "
 #~ "vous souhaitez ouvrir des archives RAR."
 
+#
 #~ msgid "Could not open"
 #~ msgstr "Ne peut ouvrir"
 
+#
 #~ msgid "is not a file."
 #~ msgstr "n'est pas un fichier."
 
+#
 #~ msgid "does not exist."
 #~ msgstr "n'existe pas."
 
+#
 #~ msgid "Filetype of"
 #~ msgstr "Le type de fichier de"
 
+#
 #~ msgid "not recognized."
 #~ msgstr "non reconnu."
 
+#
 #~ msgid "Comment file"
 #~ msgstr "Commentez ce fichier"
 
+#
 #~ msgid "Could not read"
 #~ msgstr "Ne peut lire"
 
+#
 #~ msgid "Comment"
 #~ msgstr "Commentaire"
 
+#
 #~ msgid "_Go to page..."
 #~ msgstr "_Aller à la page..."
 
+#
 #~ msgid "Fit _width"
 #~ msgstr "Adapter la _largeur"
 
+#
 #~ msgid "Fit _height"
 #~ msgstr "Adapter la _hauteur"
 
+#
 #~ msgid "_Best fit"
 #~ msgstr "_Meilleure adaptation"
 
+#
 #~ msgid "Clear bookmarks"
 #~ msgstr "Nettoyer"
 
+#
 #~ msgid "_Manage thumbnails..."
 #~ msgstr "_Gérer les vignettes..."
 
+#
 #~ msgid "_Recent files"
 #~ msgstr "Histo_rique"
 
+#
 #~ msgid "Clear recent files"
 #~ msgstr "Nettoyer"
 
+#
 #~ msgid "Open _library..."
 #~ msgstr "Ouvrir une bib_liothèque..."
 
+#
 #~ msgid "_Add to library"
 #~ msgstr "_Ajouter à la bibliothèque"
 
+#
 #~ msgid "Con_vert..."
 #~ msgstr "Con_vertir..."
 
+#
 #~ msgid "E_xtract image..."
 #~ msgstr "E_xtraire les images..."
 
+#
 #~ msgid "_Adjust colour..."
 #~ msgstr "_Ajuster la couleur..."
 
+#
 #~ msgid "Delete image..."
 #~ msgstr "Supprimer l'image..."
 
+#
 #~ msgid "CW lossless JPEG rotation..."
 #~ msgstr "Rotation du JPEG sans perte au sens horaire..."
 
+#
 #~ msgid "CCW lossless JPEG rotation..."
 #~ msgstr "Rotation du JPEG sans perte au sens anti-horaire..."
 
+#
 #~ msgid "Horizontal lossless JPEG flip..."
 #~ msgstr "Miroir horizontal du JPEG sans perte..."
 
+#
 #~ msgid "Vertical lossless JPEG flip..."
 #~ msgstr "Miroir vertical du JPEG sans perte..."
 
+#
 #~ msgid "Convert JPEG to greyscale..."
 #~ msgstr "Convertir le JPEG en niveau de gris..."
 
+#
 #~ msgid "File o_perations"
 #~ msgstr "O_pérations sur les fichiers"
 
+#
 #~ msgid "Magnifying _lens"
 #~ msgstr "Objectif grossiss_ant"
 
+#
 #~ msgid "Enter fullscreen mode automatically when Comix is started."
 #~ msgstr "Entrer dans le mode plein écran au démarrage."
 
+#
 #~ msgid "Enter double page mode automatically when Comix is started."
 #~ msgstr "Entrer dans le mode pages doubles au démarrage."
 
+#
 #~ msgid "Enter manual zoom mode automatically when Comix is started."
 #~ msgstr "Entrer dans le mode zoom manuel au démarrage."
 
+#
 #~ msgid "Enter fit-to-screen mode automatically when Comix is started."
 #~ msgstr "Entrer dans le mode adapter à l'écran au démarrage."
 
+#
 #~ msgid "Enter fit width mode automatically when Comix is started."
 #~ msgstr "Entrer dans le mode adapter la largeur au démarrage."
 
+#
 #~ msgid "Enter fit height mode automatically when Comix is started."
 #~ msgstr "Entrer dans le mode adapter la hauteur au démarrage."
 
+#
 #~ msgid ""
 #~ "Also scale images to a size that is larger than their original size in "
 #~ "fit-to-screen mode, fit width mode and fit height mode."
@@ -1667,6 +2373,7 @@ msgstr ""
 #~ "dans les modes : adapter à l'écran, adapter la largeur et adapter la "
 #~ "hauteur."
 
+#
 #~ msgid ""
 #~ "Scale the images independently when in double page mode and fit-to-screen "
 #~ "mode. The smaller of the two images will scale up to fill any extra space "
@@ -1676,11 +2383,13 @@ msgstr ""
 #~ "doubles\" et \"Adapter à l'écran\" sont activés. La plus petite des deux "
 #~ "image va être adaptée pour remplir l'espace supplémentaire."
 
+#
 #~ msgid "Automatically show any available comments when opening a new file."
 #~ msgstr ""
 #~ "Afficher automatiquement tous les commentaires disponibles, quand un "
 #~ "nouveau fichier est ouvert."
 
+#
 #~ msgid ""
 #~ "Automatically hide scrollbars, menubar, toolbar, statusbar and thumbnails "
 #~ "when in fullscreen mode."
@@ -1688,6 +2397,7 @@ msgstr ""
 #~ "Cacher automatiquement les barres de défilement, la barre du menu, la "
 #~ "barre d'état et celle des vignettes, quand le mode plein écran est activé."
 
+#
 #~ msgid ""
 #~ "Cache the next page in the archive/directory to increase the perceived "
 #~ "speed. This is generally recommended unless you are running low on RAM."
@@ -1696,6 +2406,7 @@ msgstr ""
 #~ "l'utilisateur. Cette option est recommandée, sauf si vous n'avez pas "
 #~ "beaucoup de mémoire vive."
 
+#
 #~ msgid ""
 #~ "Move the horizontal scrollbar instead of the vertical when using the "
 #~ "scroll wheel at the top or the bottom of the page. The direction will be "
@@ -1705,6 +2416,7 @@ msgstr ""
 #~ "quand la molette est utilisée en haut ou en bas de la page. La direction "
 #~ "sera déterminée si vous utiliser le mode manga ou non."
 
+#
 #~ msgid ""
 #~ "Save the position and the size of the window for the next time you start "
 #~ "Comix."
@@ -1712,6 +2424,7 @@ msgstr ""
 #~ "Se souvenir de la position et de la taille de la fenêtre, pour le "
 #~ "prochain lancement de Comix."
 
+#
 #~ msgid ""
 #~ "Automatically open the next archive in the directory when scrolling past "
 #~ "the last page of the current archive, and automatically open the previous "
@@ -1723,10 +2436,12 @@ msgstr ""
 #~ "précédente, lorsque vous lisez la première page, et que vous revenez en "
 #~ "arrière."
 
+#
 #~ msgid "Hide the cursor when in fullscreen mode."
 #~ msgstr ""
 #~ "Cacher le curseur de la souris, lorsque le mode plein écran est activé."
 
+#
 #~ msgid ""
 #~ "Set the image scaling method. The best choice is often \"Tiles\", it is "
 #~ "quite quick and produces almost as good results as \"Bilinear\" or \"Hyper"
@@ -1736,6 +2451,7 @@ msgstr ""
 #~ "est rapide, et produit un bon résultat, similaire à \"Bilinéaire\" ou "
 #~ "\"Hyper\"."
 
+#
 #~ msgid ""
 #~ "Treat files with the following extensions as comment files. Extensions "
 #~ "should be separated by whitespaces. They are not case sensitive."
@@ -1744,6 +2460,7 @@ msgstr ""
 #~ "extensions doivent êtres séparées par un espace. Attention, la casse doit "
 #~ "être respectée."
 
+#
 #~ msgid ""
 #~ "Use smart scrolling with the space key. Pressing the space key normally "
 #~ "scrolls straight down one window height unless at the bottom of the page "
@@ -1769,12 +2486,15 @@ msgstr ""
 #~ "vers la seconde page, une fois arrivé en bas, et ne passera aux deux "
 #~ "pages suivantes."
 
+#
 #~ msgid "Always hide the thumbnail scrollbar."
 #~ msgstr "Toujours cacher la barre de défilement des vignettes."
 
+#
 #~ msgid "Automatically open the last viewed page when Comix is started."
 #~ msgstr "Ouvrir automatiquement la dernière page vue, au démarrage de Comix."
 
+#
 #~ msgid ""
 #~ "Automatically go to the same directory as last time when opening the "
 #~ "\"Open\" dialog."
@@ -1782,19 +2502,23 @@ msgstr ""
 #~ "Aller automatiquement au même répertoire précédemment choisi, dans la "
 #~ "boîte de dialogue \"Ouvrir\"."
 
+#
 #~ msgid "Automatically go to this directory when opening the \"Open\" dialog."
 #~ msgstr ""
 #~ "Aller automatiquement à ce répertoire, quand la fenêtre \"Ouvrir\" est "
 #~ "ouverte."
 
+#
 #~ msgid "Automatically restore these values the next time Comix is started."
 #~ msgstr ""
 #~ "Restaurer automatiquement ces valeurs, au prochain lancement de Comix."
 
+#
 #~ msgid "Show the page number in the upper left corner of each thumbnail."
 #~ msgstr ""
 #~ "Afficher le numéro de la page, en haut à gauche de toutes les vignettes."
 
+#
 #~ msgid ""
 #~ "Automatically adjust the contrast of the images so that the darkest pixel "
 #~ "is completely black and the lightest pixel is completely white. This only "
@@ -1804,6 +2528,7 @@ msgstr ""
 #~ "sombres ou très clairs. Cette option ne marche qu'avec les images qui "
 #~ "n'ont pas de canal alpha."
 
+#
 #~ msgid ""
 #~ "The space key uses smart scrolling as if in double page mode even when in "
 #~ "single page mode. This can be useful for comics with two scanned pages in "
@@ -1814,9 +2539,11 @@ msgstr ""
 #~ "les bandes dessinées scannées de manière à afficher deux pages en même "
 #~ "temps. Les pages sont supposées avoir la même taille."
 
+#
 #~ msgid "Adjust the lens magnification factor."
 #~ msgstr "Ajuster le facteur de l'objectif grossissant."
 
+#
 #~ msgid ""
 #~ "Set the lens width and height in pixels. A larger lens will use more CPU "
 #~ "resources than a small one."
@@ -1825,6 +2552,7 @@ msgstr ""
 #~ "Il est important de noter qu'un objectif de grande taille utilisera "
 #~ "beaucoup plus les ressources de votre microprocesseur."
 
+#
 #~ msgid ""
 #~ "Set the maximum update frequency for the magnification lens in "
 #~ "milliseconds. Setting the value too low can cause the lens to lag behind "
@@ -1834,6 +2562,7 @@ msgstr ""
 #~ "Mettez la fréquence maximale (en milli-secondes), utilisée pour mettre à "
 #~ "jour l'objectif grossissant."
 
+#
 #~ msgid ""
 #~ "Read and write thumbnails in the ~/.thumbnails directory as proposed by "
 #~ "the freedesktop.org standard. With this preference set, Comix will use "
@@ -1853,6 +2582,7 @@ msgstr ""
 #~ "utilisées par Comix, et vice versa. Si cette option n'est pas activée, "
 #~ "Comix va créer une vignette à chaque fois qu'un répertoire sera ouvert."
 
+#
 #~ msgid ""
 #~ "Also use stored thumbnails for images in archives in a similiar way. Due "
 #~ "to restrictions in the freedesktop.org standard, these thumbnails will be "
@@ -1866,6 +2596,7 @@ msgstr ""
 #~ "seront utilisées que par Comix. Si cette option n'est pas activée, Comix "
 #~ "va créer les vignettes à chaque fois qu'une archive sera ouverte."
 
+#
 #~ msgid ""
 #~ "Only display a single image in double page mode if the image consists of "
 #~ "two pages. An image is assumed to consist of two pages if its width is "
@@ -1875,14 +2606,17 @@ msgstr ""
 #~ "contient deux pages. Une image est supposée avoir deux pages si la "
 #~ "largeur est supérieure à la hauteur."
 
+#
 #~ msgid "Filter out archives with regular expressions."
 #~ msgstr "Filtrer les archives avec une expression rationnelle."
 
+#
 #~ msgid "Apply filters on full paths rather than filenames."
 #~ msgstr ""
 #~ "Appliquer le filtre sur le chemin complet, au lieu de l'appliquer sur le "
 #~ "nom du fichier seulement."
 
+#
 #~ msgid ""
 #~ "Store a list of the 10 last opened files that can be accessed through the "
 #~ "menus."
@@ -1890,9 +2624,11 @@ msgstr ""
 #~ "Mettre dans l'historique les dix derniers fichiers ouverts, pour qu'ils "
 #~ "soient accessibles depuis les menus."
 
+#
 #~ msgid "Go to page..."
 #~ msgstr "Aller à la page..."
 
+#
 #~ msgid ""
 #~ "Flip pages when scrolling \"off the page\" with the scroll wheel, even "
 #~ "when not in fit-to-screen mode. It takes three \"steps\" with the scroll "
@@ -1902,27 +2638,35 @@ msgstr ""
 #~ "de la page. Il faut tourner la molette trois fois pour que ce changement "
 #~ "se fasse."
 
+#
 #~ msgid "No viewable files in"
 #~ msgstr "Fichiers non accessibles en lecture dans"
 
+#
 #~ msgid "No images in"
 #~ msgstr "Aucune image dans"
 
+#
 #~ msgid "Save saturation and contrast for future sessions"
 #~ msgstr "Se souvenir du niveau de saturation et de contraste"
 
+#
 #~ msgid "Saturation (default 1.0):"
 #~ msgstr "Saturation (par défaut 1.0):"
 
+#
 #~ msgid "Contrast (default 1.0):"
 #~ msgstr "Contraste (par défaut 1.0):"
 
+#
 #~ msgid "Clear"
 #~ msgstr "Nettoyer"
 
+#
 #~ msgid "Advanced"
 #~ msgstr "Avancé"
 
+#
 #~ msgid ""
 #~ "Automatically restore the saturation and contrast values the next time "
 #~ "Comix is started."
@@ -1930,21 +2674,27 @@ msgstr ""
 #~ "Restaurer automatiquement les valeurs de saturation et de contraste au "
 #~ "démarrage de Comix."
 
+#
 #~ msgid "Permanently remove"
 #~ msgstr "Voulez-vous supprimer définitivement"
 
+#
 #~ msgid "Perform lossless JPEG rotation on"
 #~ msgstr "Effectuer une rotation JPEG lossless dans"
 
+#
 #~ msgid "_Zoom"
 #~ msgstr "_Zoom"
 
+#
 #~ msgid "Stretch small images in fit-to-screen mode"
 #~ msgstr "Étirer les petites images dans le mode adapter à l'écran"
 
+#
 #~ msgid "Manga mode (read right-to-left etc.)"
 #~ msgstr "Mode Manga (lire de droite à gauche, etc.)"
 
+#
 #~ msgid ""
 #~ "Also scale images to a size that is larger than their original size in "
 #~ "fit-to-screen mode."
@@ -1952,6 +2702,7 @@ msgstr ""
 #~ "Étirer les images à une taille supérieure à l'originale, dans le mode "
 #~ "adapter à l'écran."
 
+#
 #~ msgid ""
 #~ "View comics in manga mode. This means that the pages will be aligned "
 #~ "right-to-left in double page mode and that the scrollbars will behave "

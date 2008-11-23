@@ -15,1109 +15,1766 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: pygettext.py 1.5\n"
 
-#: src/about.py:18
-#: src/about.py:67
+#
+# File: src/about.py, line: 18
+# File: src/about.py, line: 67
+#: src/about.py:18 src/about.py:67
 msgid "About"
 msgstr "Om"
 
+#
+# File: src/about.py, line: 55
 #: src/about.py:55
 msgid "Comix is an image viewer specifically designed to handle comic books."
 msgstr "Comix är en bildvisare som är särskilt designad för att visa serier."
 
+#
+# File: src/about.py, line: 57
 #: src/about.py:57
 msgid "It reads ZIP, RAR and tar archives, as well as plain image files."
 msgstr "Den läser ZIP-, RAR- och tar-arkiv, samt vanliga bildfiler."
 
+#
+# File: src/about.py, line: 59
 #: src/about.py:59
 msgid "Comix is licensed under the GNU General Public License."
 msgstr "Comix är licensierat under GNU General Public License."
 
+#
+# File: src/about.py, line: 75
 #: src/about.py:75
 msgid "Developer"
 msgstr "Utvecklare"
 
+#
+# File: src/about.py, line: 77
 #: src/about.py:77
 msgid "Simplified Chinese translation"
 msgstr "Förenklad kinesisk översättning"
 
+#
+# File: src/about.py, line: 78
 #: src/about.py:78
 msgid "Spanish translation"
 msgstr "Spansk översättning"
 
+#
+# File: src/about.py, line: 79
 #: src/about.py:79
 msgid "Brazilian Portuguese translation"
 msgstr "Brasiliansk-portugisisk översättning"
 
+#
+# File: src/about.py, line: 81
 #: src/about.py:81
 msgid "German translation and Nautilus thumbnailer"
 msgstr "Tysk översättning och miniatyrbildsskapare för Nautilus"
 
+#
+# File: src/about.py, line: 82
 #: src/about.py:82
 msgid "Italian translation"
 msgstr "Italiensk översättning"
 
+#
+# File: src/about.py, line: 83
 #: src/about.py:83
 msgid "Dutch translation"
 msgstr "Nederländsk översättning"
 
+#
+# File: src/about.py, line: 84
 #: src/about.py:84
 msgid "French translation"
 msgstr "Fransk översättning"
 
+#
+# File: src/about.py, line: 85
 #: src/about.py:85
 msgid "Polish translation"
 msgstr "Polsk översättning"
 
+#
+# File: src/about.py, line: 86
 #: src/about.py:86
 msgid "Greek translation"
 msgstr "Grekisk översättning"
 
+#
+# File: src/about.py, line: 87
 #: src/about.py:87
 msgid "Catalan translation"
 msgstr "Katalansk översättning"
 
+#
+# File: src/about.py, line: 88
 #: src/about.py:88
 msgid "Traditional Chinese translation"
 msgstr "Traditionell kinesisk översättning"
 
+#
+# File: src/about.py, line: 89
 #: src/about.py:89
 msgid "Japanese translation"
 msgstr "Japansk översättning"
 
+#
+# File: src/about.py, line: 90
 #: src/about.py:90
 msgid "Hungarian translation"
 msgstr "Ungersk översättning"
 
+#
+# File: src/about.py, line: 91
 #: src/about.py:91
 msgid "Russian translation"
 msgstr "Rysk översättning"
 
+#
+# File: src/about.py, line: 92
 #: src/about.py:92
 msgid "Croatian translation"
 msgstr "Kroatisk översättning"
 
+#
+# File: src/about.py, line: 93
 #: src/about.py:93
 msgid "Korean translation"
 msgstr "Koreansk översättning"
 
+#
+# File: src/about.py, line: 94
 #: src/about.py:94
 msgid "Persian translation"
 msgstr "Persisk översättning"
 
+#
+# File: src/about.py, line: 95
 #: src/about.py:95
 msgid "Indonesian translation"
 msgstr "Indonesisk översättning"
 
+#
+# File: src/about.py, line: 96
 #: src/about.py:96
 msgid "Czech translation"
 msgstr "Tjeckisk översättning"
 
+#
+# File: src/about.py, line: 97
 #: src/about.py:97
 msgid "Icon design"
 msgstr "Ikondesign"
 
+#
+# File: src/about.py, line: 106
 #: src/about.py:106
 msgid "Credits"
 msgstr "Tack"
 
+#
+# File: src/archive.py, line: 66
 #: src/archive.py:66
 msgid "Could not find RAR file extractor!"
 msgstr "Kunde inte hitta RAR-filsuppackare!"
 
+#
+# File: src/archive.py, line: 68
 #: src/archive.py:68
-msgid "You need either the <i>rar</i> or the <i>unrar</i> program installed in order to read RAR (.cbr) files."
-msgstr "Du behöver antingen programmet <i>rar</i> eller <i>unrar</i> installerat för att kunna läsa RAR-filer (.cbr)."
+msgid ""
+"You need either the <i>rar</i> or the <i>unrar</i> program installed in "
+"order to read RAR (.cbr) files."
+msgstr ""
+"Du behöver antingen programmet <i>rar</i> eller <i>unrar</i> installerat för "
+"att kunna läsa RAR-filer (.cbr)."
 
+#
+# File: src/archive.py, line: 301
 #: src/archive.py:301
 msgid "ZIP archive"
 msgstr "ZIP-arkiv"
 
+#
+# File: src/archive.py, line: 302
 #: src/archive.py:302
 msgid "Tar archive"
 msgstr "Tar-arkiv"
 
+#
+# File: src/archive.py, line: 303
 #: src/archive.py:303
 msgid "Gzip compressed tar archive"
 msgstr "Gzip-komprimerat tar-arkiv"
 
+#
+# File: src/archive.py, line: 304
 #: src/archive.py:304
 msgid "Bzip2 compressed tar archive"
 msgstr "Bzip2-komprimerat tar-arkiv"
 
+#
+# File: src/archive.py, line: 305
 #: src/archive.py:305
 msgid "RAR archive"
 msgstr "RAR-arkiv"
 
+#
+# File: src/bookmark.py, line: 27
 #: src/bookmark.py:27
 msgid "_Add bookmark"
 msgstr "_Lägg till bokmärke"
 
+#
+# File: src/bookmark.py, line: 29
 #: src/bookmark.py:29
 msgid "_Edit bookmarks..."
 msgstr "R_edigera bokmärken..."
 
+#
+# File: src/bookmark.py, line: 31
 #: src/bookmark.py:31
 msgid "_Clear bookmarks..."
 msgstr "_Töm bokmärken..."
 
+#
+# File: src/bookmark.py, line: 77
 #: src/bookmark.py:77
 msgid "Clear all bookmarks?"
 msgstr "Töm alla bokmärken?"
 
+#
+# File: src/bookmark.py, line: 79
 #: src/bookmark.py:79
-msgid "All stored bookmarks will be removed. Are you sure that you want to continue?"
-msgstr "Alla lagrade bokmärken kommer att tas bort. Är du säker på att du vill fortsätta?"
+msgid ""
+"All stored bookmarks will be removed. Are you sure that you want to continue?"
+msgstr ""
+"Alla lagrade bokmärken kommer att tas bort. Är du säker på att du vill "
+"fortsätta?"
 
+#
+# File: src/bookmark.py, line: 229
 #: src/bookmark.py:229
 msgid "Edit bookmarks"
 msgstr "Redigera bokmärken"
 
-#: src/bookmark.py:255
-#: src/edit.py:267
+#
+# File: src/bookmark.py, line: 255
+# File: src/edit.py, line: 267
+#: src/bookmark.py:255 src/edit.py:267
 msgid "Name"
 msgstr "Namn"
 
+#
+# File: src/bookmark.py, line: 256
 #: src/bookmark.py:256
 msgid "Page"
 msgstr "Sida"
 
-#: src/comment.py:16
-#: src/preferences.py:288
+#
+# File: src/comment.py, line: 16
+# File: src/preferences.py, line: 288
+#: src/comment.py:16 src/preferences.py:288
 msgid "Comments"
 msgstr "Kommentarer"
 
+#
+# File: src/comment.py, line: 53
 #: src/comment.py:53
 #, python-format
 msgid "Could not read %s"
 msgstr "Kunde inte läsa %s"
 
+#
+# File: src/deprecated.py, line: 16
 #: src/deprecated.py:16
 msgid "There are deprecated files left on your computer."
 msgstr "Det finns utdaterade filer kvarlämnade på din dator."
 
+#
+# File: src/deprecated.py, line: 22
 #: src/deprecated.py:22
-msgid "Some old files (that were used for storing preferences, the library, bookmarks etc. for older versions of Comix) were found on your computer. If you do not plan on using the older versions of Comix again, you should remove these files in order to save some disk space. Do you want these files to be removed for you now?"
-msgstr "Några gamla filer (som användes för att lagra inställningar, biblioteket, bokmärken etc. för äldre versioner av Comix) har hittats på din dator. Om du inte planerar att använda de äldre versionerna av Comix igen, så bör du ta bort dessa filer för att spara diskutrymme. Vill du att dessa filer tas bort åt dig nu?"
+msgid ""
+"Some old files (that were used for storing preferences, the library, "
+"bookmarks etc. for older versions of Comix) were found on your computer. If "
+"you do not plan on using the older versions of Comix again, you should "
+"remove these files in order to save some disk space. Do you want these files "
+"to be removed for you now?"
+msgstr ""
+"Några gamla filer (som användes för att lagra inställningar, biblioteket, "
+"bokmärken etc. för äldre versioner av Comix) har hittats på din dator. Om du "
+"inte planerar att använda de äldre versionerna av Comix igen, så bör du ta "
+"bort dessa filer för att spara diskutrymme. Vill du att dessa filer tas bort "
+"åt dig nu?"
 
+#
+# File: src/edit.py, line: 28
 #: src/edit.py:28
 msgid "Edit archive"
 msgstr "Redigera arkiv"
 
+#
+# File: src/edit.py, line: 36
 #: src/edit.py:36
 msgid "Import"
 msgstr "Importera"
 
+#
+# File: src/edit.py, line: 50
 #: src/edit.py:50
 msgid "Images"
 msgstr "Bilder"
 
+#
+# File: src/edit.py, line: 51
 #: src/edit.py:51
 msgid "Other files"
 msgstr "Andra filer"
 
+#
+# File: src/edit.py, line: 99
 #: src/edit.py:99
 msgid "The new archive could not be saved!"
 msgstr "Det nya arkivet kunde inte sparas!"
 
+#
+# File: src/edit.py, line: 101
 #: src/edit.py:101
 msgid "The original files have not been removed."
 msgstr "Originalfilerna har inte tagits bort."
 
+#
+# File: src/edit.py, line: 115
 #: src/edit.py:115
 msgid "Archives are stored as ZIP files."
 msgstr "Arkiven sparas i ZIP-format."
 
-#: src/edit.py:168
-#: src/edit.py:285
+#
+# File: src/edit.py, line: 168
+# File: src/edit.py, line: 285
+#: src/edit.py:168 src/edit.py:285
 msgid "Remove from archive"
 msgstr "Ta bort från arkiv"
 
+#
+# File: src/edit.py, line: 255
 #: src/edit.py:255
-msgid "Please note that the only files that are automatically added to this list are those files in archives that Comix recognizes as comments."
-msgstr "Notera att de enda filer som automatiskt läggs till i denna lista är de filer i arkiv som Comix känner igen som kommentarer."
+msgid ""
+"Please note that the only files that are automatically added to this list "
+"are those files in archives that Comix recognizes as comments."
+msgstr ""
+"Notera att de enda filer som automatiskt läggs till i denna lista är de "
+"filer i arkiv som Comix känner igen som kommentarer."
 
+#
+# File: src/edit.py, line: 270
 #: src/edit.py:270
 msgid "Size"
 msgstr "Storlek"
 
+#
+# File: src/enhance.py, line: 51
 #: src/enhance.py:51
 msgid "Enhance image"
 msgstr "Förbättra bild"
 
+#
+# File: src/enhance.py, line: 52
 #: src/enhance.py:52
 msgid "Defaults"
 msgstr "Återställ"
 
+#
+# File: src/enhance.py, line: 79
 #: src/enhance.py:79
 msgid "Brightness"
 msgstr "Ljusstyrka"
 
+#
+# File: src/enhance.py, line: 90
 #: src/enhance.py:90
 msgid "Contrast"
 msgstr "Kontrast"
 
+#
+# File: src/enhance.py, line: 101
 #: src/enhance.py:101
 msgid "Saturation"
 msgstr "Färgmättnad"
 
+#
+# File: src/enhance.py, line: 112
 #: src/enhance.py:112
 msgid "Sharpness"
 msgstr "Skärpa"
 
+#
+# File: src/enhance.py, line: 126
 #: src/enhance.py:126
 msgid "Automatically adjust contrast."
 msgstr "Justera kontrast automatiskt."
 
+#
+# File: src/enhance.py, line: 128
 #: src/enhance.py:128
-msgid "Automatically adjust contrast (both lightness and darkness), separately for each colour band."
-msgstr "Justera kontrast automatiskt (både ljushet och mörkhet), separat för varje färgkomponent."
+msgid ""
+"Automatically adjust contrast (both lightness and darkness), separately for "
+"each colour band."
+msgstr ""
+"Justera kontrast automatiskt (både ljushet och mörkhet), separat för varje "
+"färgkomponent."
 
-#: src/filechooser.py:35
-#: src/library.py:489
+#
+# File: src/filechooser.py, line: 35
+# File: src/library.py, line: 489
+#: src/filechooser.py:35 src/library.py:489
 msgid "Open"
 msgstr "Öppna"
 
+#
+# File: src/filechooser.py, line: 39
 #: src/filechooser.py:39
 msgid "Save"
 msgstr "Spara"
 
+#
+# File: src/filechooser.py, line: 75
 #: src/filechooser.py:75
 msgid "All files"
 msgstr "Alla filer"
 
+#
+# File: src/filechooser.py, line: 78
 #: src/filechooser.py:78
 msgid "All Archives"
 msgstr "Alla arkiv"
 
+#
+# File: src/filechooser.py, line: 82
 #: src/filechooser.py:82
 msgid "ZIP archives"
 msgstr "ZIP-arkiv"
 
+#
+# File: src/filechooser.py, line: 84
 #: src/filechooser.py:84
 msgid "RAR archives"
 msgstr "RAR-arkiv"
 
+#
+# File: src/filechooser.py, line: 86
 #: src/filechooser.py:86
 msgid "Tar archives"
 msgstr "Tar-arkiv"
 
+#
+# File: src/filechooser.py, line: 125
 #: src/filechooser.py:125
 #, python-format
 msgid "A file named '%s' already exists. Do you want to replace it?"
 msgstr "En fil med namnet '%s' finns redan. Vill du ersätta den?"
 
+#
+# File: src/filechooser.py, line: 128
 #: src/filechooser.py:128
 msgid "Replacing it will overwrite its contents."
 msgstr "Ersätts filen så kommer dess innehåll att skrivas över."
 
-#: src/filechooser.py:171
-#: src/filechooser.py:249
+#
+# File: src/filechooser.py, line: 171
+# File: src/filechooser.py, line: 249
+#: src/filechooser.py:171 src/filechooser.py:249
 msgid "All images"
 msgstr "Alla bildfiler"
 
-#: src/filechooser.py:173
-#: src/filechooser.py:251
+#
+# File: src/filechooser.py, line: 173
+# File: src/filechooser.py, line: 251
+#: src/filechooser.py:173 src/filechooser.py:251
 msgid "JPEG images"
 msgstr "JPEG-bilder"
 
-#: src/filechooser.py:174
-#: src/filechooser.py:252
+#
+# File: src/filechooser.py, line: 174
+# File: src/filechooser.py, line: 252
+#: src/filechooser.py:174 src/filechooser.py:252
 msgid "PNG images"
 msgstr "PNG-bilder"
 
+#
+# File: src/filechooser.py, line: 195
 #: src/filechooser.py:195
 msgid "Automatically add the books to this collection"
 msgstr "Lägg automatiskt till böckerna till denna samling"
 
+#
+# File: src/filehandler.py, line: 209
 #: src/filehandler.py:209
 #, python-format
 msgid "Could not open %s: Is a directory."
 msgstr "Kunde inte öppna %s: Är en katalog."
 
+#
+# File: src/filehandler.py, line: 213
 #: src/filehandler.py:213
 #, python-format
 msgid "Could not open %s: No such file."
 msgstr "Kunde inte öppna %s: Filen finns inte."
 
+#
+# File: src/filehandler.py, line: 217
 #: src/filehandler.py:217
 #, python-format
 msgid "Could not open %s: Permission denied."
 msgstr "Kunde inte öppna %s: Otillräckliga rättigheter."
 
+#
+# File: src/filehandler.py, line: 222
 #: src/filehandler.py:222
 #, python-format
 msgid "Could not open %s: Unknown file type."
 msgstr "Kunde inte öppna %s: Okänd filtyp."
 
+#
+# File: src/filehandler.py, line: 285
 #: src/filehandler.py:285
 #, python-format
 msgid "No images in '%s'"
 msgstr "Inga bilder i '%s'."
 
+#
+# File: src/filehandler.py, line: 411
 #: src/filehandler.py:411
 msgid "Unknown filetype"
 msgstr "Okänd filtyp"
 
-#: src/librarybackend.py:272
-#: src/librarybackend.py:274
+#
+# File: src/librarybackend.py, line: 272
+# File: src/librarybackend.py, line: 274
+#: src/librarybackend.py:272 src/librarybackend.py:274
 msgid "(Copy)"
 msgstr "(Kopia)"
 
+#
+# File: src/library.py, line: 38
 #: src/library.py:38
 msgid "Library"
 msgstr "Bibliotek"
 
+#
+# File: src/library.py, line: 150
 #: src/library.py:150
 msgid "Rename..."
 msgstr "Döp om..."
 
+#
+# File: src/library.py, line: 152
 #: src/library.py:152
 msgid "Duplicate collection"
 msgstr "Duplicera samling"
 
+#
+# File: src/library.py, line: 154
 #: src/library.py:154
 msgid "Remove collection..."
 msgstr "Ta bort samling..."
 
+#
+# File: src/library.py, line: 202
 #: src/library.py:202
 msgid "All books"
 msgstr "Alla böcker"
 
+#
+# File: src/library.py, line: 231
 #: src/library.py:231
 msgid "Remove collection from the library?"
 msgstr "Ta bort samling från biblioteket?"
 
+#
+# File: src/library.py, line: 233
 #: src/library.py:233
-msgid "The selected collection will be removed from the library (but the books and subcollections in it will remain). Are you sure that you want to continue?"
-msgstr "Den markerade samlingen kommer att tas bort från biblioteket (men böckerna och undersamlingarna i den kommer att vara kvar). Är du säker på att du vill fortsätta?"
+msgid ""
+"The selected collection will be removed from the library (but the books and "
+"subcollections in it will remain). Are you sure that you want to continue?"
+msgstr ""
+"Den markerade samlingen kommer att tas bort från biblioteket (men böckerna "
+"och undersamlingarna i den kommer att vara kvar). Är du säker på att du vill "
+"fortsätta?"
 
+#
+# File: src/library.py, line: 251
 #: src/library.py:251
 msgid "Rename collection?"
 msgstr "Döp om samling?"
 
+#
+# File: src/library.py, line: 253
 #: src/library.py:253
 msgid "Please enter a new name for the selected collection."
 msgstr "Ange ett nytt namn för den markerade samlingen."
 
+#
+# File: src/library.py, line: 271
 #: src/library.py:271
 #, python-format
 msgid "Could not change the name to '%s'."
 msgstr "Kunde inte ändra namnet till '%s'."
 
-#: src/library.py:275
-#: src/library.py:881
+#
+# File: src/library.py, line: 275
+# File: src/library.py, line: 881
+#: src/library.py:275 src/library.py:881
 msgid "A collection by that name already exists."
 msgstr "En samling med det namnet finns redan."
 
+#
+# File: src/library.py, line: 285
 #: src/library.py:285
 msgid "Could not duplicate collection."
 msgstr "Kunde inte duplicera samling."
 
+#
+# File: src/library.py, line: 382
 #: src/library.py:382
 msgid "Root"
 msgstr "Rot"
 
+#
+# File: src/library.py, line: 386
 #: src/library.py:386
 #, python-format
-msgid "Put the collection '%(subcollection)s' in the collection '%(supercollection)s'."
+msgid ""
+"Put the collection '%(subcollection)s' in the collection '%(supercollection)"
+"s'."
 msgstr "Lägg samlingen '%(subcollection)s' i samlingen '%(supercollection)s'."
 
+#
+# File: src/library.py, line: 407
 #: src/library.py:407
 #, python-format
 msgid "Add books to '%s'."
 msgstr "Lägg till böcker i '%s'."
 
+#
+# File: src/library.py, line: 411
 #: src/library.py:411
 #, python-format
-msgid "Move books from '%(source collection)s' to '%(destination collection)s'."
-msgstr "Flytta böcker från '%(source collection)s' till '%(destination collection)s'."
+msgid ""
+"Move books from '%(source collection)s' to '%(destination collection)s'."
+msgstr ""
+"Flytta böcker från '%(source collection)s' till '%(destination collection)s'."
 
+#
+# File: src/library.py, line: 492
 #: src/library.py:492
 msgid "Remove from this collection"
 msgstr "Ta bort från den här samlingen"
 
+#
+# File: src/library.py, line: 495
 #: src/library.py:495
 msgid "Remove from the library..."
 msgstr "Ta bort från biblioteket..."
 
+#
+# File: src/library.py, line: 588
 #: src/library.py:588
 #, python-format
 msgid "Removed %(num)d book(s) from '%(collection)s'."
 msgstr "Tog bort %(num)d antal böcker från '%(collection)s'."
 
+#
+# File: src/library.py, line: 597
 #: src/library.py:597
 msgid "Remove books from the library?"
 msgstr "Ta bort böcker från biblioteket?"
 
+#
+# File: src/library.py, line: 599
 #: src/library.py:599
-msgid "The selected books will be removed from the library (but the original files will be untouched). Are you sure that you want to continue?"
-msgstr "De markerade böckerna kommer att tas bort från biblioteket (men originalfilerna kommer att förbli orörda). Är du säker på att du vill fortsätta?"
+msgid ""
+"The selected books will be removed from the library (but the original files "
+"will be untouched). Are you sure that you want to continue?"
+msgstr ""
+"De markerade böckerna kommer att tas bort från biblioteket (men "
+"originalfilerna kommer att förbli orörda). Är du säker på att du vill "
+"fortsätta?"
 
+#
+# File: src/library.py, line: 609
 #: src/library.py:609
 #, python-format
 msgid "Removed %d book(s) from the library."
 msgstr "Tog bort %d antal böcker från biblioteket."
 
+#
+# File: src/library.py, line: 769
 #: src/library.py:769
 msgid "Search"
 msgstr "Sök"
 
+#
+# File: src/library.py, line: 774
 #: src/library.py:774
-msgid "Display only those books that have the specified text string in their full path. The search is not case sensitive."
-msgstr "Visa endast de böcker där den angivna textsträngen förekommer i deras sökväg. Sökningen är oberoende av gemener och versaler."
+msgid ""
+"Display only those books that have the specified text string in their full "
+"path. The search is not case sensitive."
+msgstr ""
+"Visa endast de böcker där den angivna textsträngen förekommer i deras "
+"sökväg. Sökningen är oberoende av gemener och versaler."
 
+#
+# File: src/library.py, line: 776
 #: src/library.py:776
 msgid "Cover size"
 msgstr "Omslagsstorlek"
 
+#
+# File: src/library.py, line: 789
 #: src/library.py:789
 msgid "Add books"
 msgstr "Lägg till böcker"
 
+#
+# File: src/library.py, line: 793
 #: src/library.py:793
 msgid "Add more books to the library."
 msgstr "Lägg till fler böcker till biblioteket."
 
+#
+# File: src/library.py, line: 795
 #: src/library.py:795
 msgid "Add collection"
 msgstr "Lägg till samling"
 
+#
+# File: src/library.py, line: 800
 #: src/library.py:800
 msgid "Add a new empty collection."
 msgstr "Lägg till en ny tom samling."
 
+#
+# File: src/library.py, line: 806
 #: src/library.py:806
 msgid "Open the selected book."
 msgstr "Öppna den markerade boken."
 
-#: src/library.py:832
-#: src/properties.py:113
+#
+# File: src/library.py, line: 832
+# File: src/properties.py, line: 113
+#: src/library.py:832 src/properties.py:113
 #, python-format
 msgid "%d pages"
 msgstr "%d sidor"
 
+#
+# File: src/library.py, line: 854
 #: src/library.py:854
 msgid "Add new collection?"
 msgstr "Lägg till ny samling?"
 
+#
+# File: src/library.py, line: 856
 #: src/library.py:856
 msgid "Please enter a name for the new collection."
 msgstr "Ange ett namn åt den nya samlingen."
 
+#
+# File: src/library.py, line: 862
 #: src/library.py:862
 msgid "New collection"
 msgstr "Ny samling"
 
+#
+# File: src/library.py, line: 876
 #: src/library.py:876
 #, python-format
 msgid "Could not add a new collection called '%s'."
 msgstr "Kunde inte lägga till en ny samling med namnet '%s'."
 
+#
+# File: src/library.py, line: 910
 #: src/library.py:910
 msgid "Adding books"
 msgstr "Lägger till böcker"
 
+#
+# File: src/library.py, line: 930
 #: src/library.py:930
 msgid "Added books"
 msgstr "Tillagda böcker"
 
+#
+# File: src/library.py, line: 952
 #: src/library.py:952
 #, python-format
 msgid "Adding '%s'..."
 msgstr "Lägger till '%s'..."
 
+#
+# File: src/main.py, line: 666
 #: src/main.py:666
 msgid "SLIDESHOW"
 msgstr "BILDSPEL"
 
+#
+# File: src/preferences.py, line: 78
 #: src/preferences.py:78
 msgid "Preferences"
 msgstr "Inställningar"
 
+#
+# File: src/preferences.py, line: 93
 #: src/preferences.py:93
 msgid "Background"
 msgstr "Bakgrundsfärg"
 
+#
+# File: src/preferences.py, line: 95
 #: src/preferences.py:95
 msgid "Use this colour as background"
 msgstr "Använd denna färg som bakgrundsfärg"
 
+#
+# File: src/preferences.py, line: 97
 #: src/preferences.py:97
 msgid "Always use this selected colour as the background colour."
 msgstr "Använd alltid denna valda färg som bakgrundsfärg."
 
+#
+# File: src/preferences.py, line: 102
 #: src/preferences.py:102
 msgid "Use dynamic background colour."
 msgstr "Använd dynamisk bakgrundsfärg."
 
+#
+# File: src/preferences.py, line: 106
 #: src/preferences.py:106
 msgid "Automatically pick a background colour that fits the viewed image."
 msgstr "Välj automatiskt en bakgrundsfärg som passar den visade bilden."
 
+#
+# File: src/preferences.py, line: 109
 #: src/preferences.py:109
 msgid "Thumbnails"
 msgstr "Miniatyrbilder"
 
+#
+# File: src/preferences.py, line: 110
 #: src/preferences.py:110
 msgid "Thumbnail size (in pixels)"
 msgstr "Miniatyrbildsstorlek (i pixlar)"
 
+#
+# File: src/preferences.py, line: 117
 #: src/preferences.py:117
 msgid "Show page numbers on thumbnails."
 msgstr "Visa sidonummer på miniatyrbilder."
 
+#
+# File: src/preferences.py, line: 124
 #: src/preferences.py:124
 msgid "Magnifying Glass"
 msgstr "Förstoringsglas"
 
+#
+# File: src/preferences.py, line: 125
 #: src/preferences.py:125
 msgid "Magnifying glass size (in pixels)"
 msgstr "Förstoringsglasstorlek (i pixlar)"
 
+#
+# File: src/preferences.py, line: 131
 #: src/preferences.py:131
-msgid "Set the size of the magnifying glass. It is a square with a side of this many pixels."
-msgstr "Ställ in storleken på förstoringsglaset. Det är en kvadrat vars sida är så här många pixlar bred."
+msgid ""
+"Set the size of the magnifying glass. It is a square with a side of this "
+"many pixels."
+msgstr ""
+"Ställ in storleken på förstoringsglaset. Det är en kvadrat vars sida är så "
+"här många pixlar bred."
 
+#
+# File: src/preferences.py, line: 133
 #: src/preferences.py:133
 msgid "Magnification factor"
 msgstr "Förstoringsfaktor"
 
+#
+# File: src/preferences.py, line: 140
 #: src/preferences.py:140
 msgid "Set the magnification factor of the magnifying glass."
 msgstr "Ställ in förstoringsfaktorn för förstoringsglaset."
 
+#
+# File: src/preferences.py, line: 143
 #: src/preferences.py:143
 msgid "Image scaling"
 msgstr "Bildskalning"
 
+#
+# File: src/preferences.py, line: 144
 #: src/preferences.py:144
 msgid "Stretch small images."
 msgstr "Dra ut små bilder."
 
+#
+# File: src/preferences.py, line: 148
 #: src/preferences.py:148
-msgid "Stretch images to a size that is larger than their original size if the current zoom mode requests it. If this preference is unset, images are never scaled to be larger than their original size."
-msgstr "Dra ut bilder till en storlek som är större än deras originalstorlek om zoomningsläget kräver det. Om denna inställning är avaktiverad så blir bilder aldrig skalade till en storlek som övergår deras originalstorlek."
+msgid ""
+"Stretch images to a size that is larger than their original size if the "
+"current zoom mode requests it. If this preference is unset, images are never "
+"scaled to be larger than their original size."
+msgstr ""
+"Dra ut bilder till en storlek som är större än deras originalstorlek om "
+"zoomningsläget kräver det. Om denna inställning är avaktiverad så blir "
+"bilder aldrig skalade till en storlek som övergår deras originalstorlek."
 
+#
+# File: src/preferences.py, line: 151
 #: src/preferences.py:151
 msgid "Transparency"
 msgstr "Transparens"
 
+#
+# File: src/preferences.py, line: 153
 #: src/preferences.py:153
 msgid "Use checkered background for transparent images."
 msgstr "Använd rutig bakgrund för transparenta bilder."
 
+#
+# File: src/preferences.py, line: 159
 #: src/preferences.py:159
-msgid "Use a grey checkered background for transparent images. If this preference is unset, the background is plain white instead."
-msgstr "Använd en grårutig bakgrund till transparenta bilder. Om den här inställningen är avaktiverad så används en helvit bakgrund istället."
+msgid ""
+"Use a grey checkered background for transparent images. If this preference "
+"is unset, the background is plain white instead."
+msgstr ""
+"Använd en grårutig bakgrund till transparenta bilder. Om den här "
+"inställningen är avaktiverad så används en helvit bakgrund istället."
 
+#
+# File: src/preferences.py, line: 161
 #: src/preferences.py:161
 msgid "Appearance"
 msgstr "Utseende"
 
+#
+# File: src/preferences.py, line: 167
 #: src/preferences.py:167
 msgid "Scroll"
 msgstr "Scrollning"
 
+#
+# File: src/preferences.py, line: 169
 #: src/preferences.py:169
 msgid "Use smart space key scrolling."
 msgstr "Använd smart scrollning med mellanslagstangenten."
 
+#
+# File: src/preferences.py, line: 174
 #: src/preferences.py:174
-msgid "Use smart scrolling with the space key. Normally the space key scrolls only right down (or up when shift is pressed), but with this preference set it also scrolls sideways and so tries to follow the natural reading order of the comic book."
-msgstr "Använd smart scrollning med mellanslagstangenten. Normalt så scrollar mellanslagstangenten bara rakt ner (eller upp om shift är intryckt), men med den här inställningen aktiverad så scrollar den också i sidled och försöker på så vis att följa den naturliga läsriktningen av serieboken."
+msgid ""
+"Use smart scrolling with the space key. Normally the space key scrolls only "
+"right down (or up when shift is pressed), but with this preference set it "
+"also scrolls sideways and so tries to follow the natural reading order of "
+"the comic book."
+msgstr ""
+"Använd smart scrollning med mellanslagstangenten. Normalt så scrollar "
+"mellanslagstangenten bara rakt ner (eller upp om shift är intryckt), men med "
+"den här inställningen aktiverad så scrollar den också i sidled och försöker "
+"på så vis att följa den naturliga läsriktningen av serieboken."
 
-#: src/preferences.py:177
-#: src/ui.py:296
+#
+# File: src/preferences.py, line: 177
+# File: src/ui.py, line: 296
+#: src/preferences.py:177 src/ui.py:296
 msgid "Double page mode"
 msgstr "Dubbelsidesläge"
 
+#
+# File: src/preferences.py, line: 179
 #: src/preferences.py:179
 msgid "Flip two pages in double page mode."
 msgstr "Bläddra två sidor i dubbelsidesläge."
 
+#
+# File: src/preferences.py, line: 184
 #: src/preferences.py:184
-msgid "Flip two pages, instead of one, each time we flip pages in double page mode."
-msgstr "Bläddra två sidor, istället för en, varje gång vi byter sida i dubbelsidesläge."
+msgid ""
+"Flip two pages, instead of one, each time we flip pages in double page mode."
+msgstr ""
+"Bläddra två sidor, istället för en, varje gång vi byter sida i "
+"dubbelsidesläge."
 
+#
+# File: src/preferences.py, line: 187
 #: src/preferences.py:187
 msgid "Show only one wide image in double page mode."
 msgstr "Visa endast en bred bild i dubbelsidesläge."
 
+#
+# File: src/preferences.py, line: 193
 #: src/preferences.py:193
-msgid "Display only one image in double page mode, if the image's width exceeds its height. The result of this is that scans that span two pages are displayed properly (i.e. alone) also in double page mode."
-msgstr "Visa endast en bild i dubbelsidesläge, om bildens bredd överstiger dess höjd. Effekten av detta är att en scan som innehåller två sidor visas ensam också i dubbelsidesläge."
+msgid ""
+"Display only one image in double page mode, if the image's width exceeds its "
+"height. The result of this is that scans that span two pages are displayed "
+"properly (i.e. alone) also in double page mode."
+msgstr ""
+"Visa endast en bild i dubbelsidesläge, om bildens bredd överstiger dess "
+"höjd. Effekten av detta är att en scan som innehåller två sidor visas ensam "
+"också i dubbelsidesläge."
 
+#
+# File: src/preferences.py, line: 196
 #: src/preferences.py:196
 msgid "Files"
 msgstr "Filer"
 
+#
+# File: src/preferences.py, line: 198
 #: src/preferences.py:198
 msgid "Automatically open the next archive."
 msgstr "Öppna automatiskt nästa arkiv."
 
+#
+# File: src/preferences.py, line: 203
 #: src/preferences.py:203
-msgid "Automatically open the next archive in the directory when flipping past the last page, or the previous archive when flipping past the first page."
-msgstr "Öppna automatiskt nästa arkiv i katalogen när vi bläddrar förbi den sista sidan, eller det föregående arkivet när vi bläddrar förbi den första sidan."
+msgid ""
+"Automatically open the next archive in the directory when flipping past the "
+"last page, or the previous archive when flipping past the first page."
+msgstr ""
+"Öppna automatiskt nästa arkiv i katalogen när vi bläddrar förbi den sista "
+"sidan, eller det föregående arkivet när vi bläddrar förbi den första sidan."
 
+#
+# File: src/preferences.py, line: 206
 #: src/preferences.py:206
 msgid "Automatically open the last viewed file on startup."
 msgstr "Öppna automatiskt den senast lästa filen vid uppstart."
 
+#
+# File: src/preferences.py, line: 211
 #: src/preferences.py:211
-msgid "Automatically open, on startup, the file that was open when Comix was last closed."
-msgstr "Öppna automatiskt, vid uppstart, den fil som var öppnad när Comix avslutades senast."
+msgid ""
+"Automatically open, on startup, the file that was open when Comix was last "
+"closed."
+msgstr ""
+"Öppna automatiskt, vid uppstart, den fil som var öppnad när Comix avslutades "
+"senast."
 
+#
+# File: src/preferences.py, line: 214
 #: src/preferences.py:214
 msgid "Store information about recently opened files."
 msgstr "Lagra information om de senast öppnade filerna."
 
+#
+# File: src/preferences.py, line: 219
 #: src/preferences.py:219
-msgid "Add information about all files opened from within Comix to the shared recent files list."
-msgstr "Lägg till information om alla filer som öppnas inifrån Comix till den delade listan med senast öppnade filer."
+msgid ""
+"Add information about all files opened from within Comix to the shared "
+"recent files list."
+msgstr ""
+"Lägg till information om alla filer som öppnas inifrån Comix till den delade "
+"listan med senast öppnade filer."
 
+#
+# File: src/preferences.py, line: 222
 #: src/preferences.py:222
 msgid "Store thumbnails for opened files."
 msgstr "Lagra miniatyrbilder för öppnade filer."
 
+#
+# File: src/preferences.py, line: 227
 #: src/preferences.py:227
-msgid "Store thumbnails for opened files according to the freedesktop.org specification. These thumbnails are shared by many other applications, such as most file managers."
-msgstr "Lagra miniatyrbilder för filer som öppnas, i enlighet med freedesktop.org-specifikationen. Dessa miniatyrbilder delas av många andra program, exempelvis de flesta filhanterare."
+msgid ""
+"Store thumbnails for opened files according to the freedesktop.org "
+"specification. These thumbnails are shared by many other applications, such "
+"as most file managers."
+msgstr ""
+"Lagra miniatyrbilder för filer som öppnas, i enlighet med freedesktop.org-"
+"specifikationen. Dessa miniatyrbilder delas av många andra program, "
+"exempelvis de flesta filhanterare."
 
+#
+# File: src/preferences.py, line: 230
 #: src/preferences.py:230
 msgid "Cache"
 msgstr "Cache"
 
+#
+# File: src/preferences.py, line: 231
 #: src/preferences.py:231
 msgid "Use a cache to speed up browsing."
 msgstr "Använd en cache för att snabba upp bläddring."
 
+#
+# File: src/preferences.py, line: 235
 #: src/preferences.py:235
-msgid "Cache the images that are next to the currently viewed image in order to speed up browsing. Since the speed improvements are quite big, it is recommended that you have this preference set, unless you are running short on free RAM."
-msgstr "Använd en cache till att lagra bilderna intill den visade bilden, för att snabba upp bläddring. Eftersom hastighetsförbättringen är relativt stor så rekommenderas du att ha den här inställningen aktiverad, om du inte har ont om ledigt RAM-minne."
+msgid ""
+"Cache the images that are next to the currently viewed image in order to "
+"speed up browsing. Since the speed improvements are quite big, it is "
+"recommended that you have this preference set, unless you are running short "
+"on free RAM."
+msgstr ""
+"Använd en cache till att lagra bilderna intill den visade bilden, för att "
+"snabba upp bläddring. Eftersom hastighetsförbättringen är relativt stor så "
+"rekommenderas du att ha den här inställningen aktiverad, om du inte har ont "
+"om ledigt RAM-minne."
 
+#
+# File: src/preferences.py, line: 237
 #: src/preferences.py:237
 msgid "Behaviour"
 msgstr "Beteende"
 
+#
+# File: src/preferences.py, line: 243
 #: src/preferences.py:243
 msgid "Default modes"
 msgstr "Standardlägen"
 
+#
+# File: src/preferences.py, line: 245
 #: src/preferences.py:245
 msgid "Use double page mode by default."
 msgstr "Använd dubbelsidesläge som standard."
 
+#
+# File: src/preferences.py, line: 250
 #: src/preferences.py:250
 msgid "Use fullscreen by default."
 msgstr "Använd helskärm som standard."
 
+#
+# File: src/preferences.py, line: 255
 #: src/preferences.py:255
 msgid "Use manga mode by default."
 msgstr "Använd mangaläge som standard."
 
+#
+# File: src/preferences.py, line: 260
 #: src/preferences.py:260
 msgid "Default zoom mode"
 msgstr "Standardzoomläge"
 
-#: src/preferences.py:262
-#: src/ui.py:288
+#
+# File: src/preferences.py, line: 262
+# File: src/ui.py, line: 288
+#: src/preferences.py:262 src/ui.py:288
 msgid "Best fit mode"
 msgstr "Bästa anpassningsläge"
 
-#: src/preferences.py:263
-#: src/ui.py:290
+#
+# File: src/preferences.py, line: 263
+# File: src/ui.py, line: 290
+#: src/preferences.py:263 src/ui.py:290
 msgid "Fit width mode"
 msgstr "Breddanpassningsläge"
 
-#: src/preferences.py:264
-#: src/ui.py:292
+#
+# File: src/preferences.py, line: 264
+# File: src/ui.py, line: 292
+#: src/preferences.py:264 src/ui.py:292
 msgid "Fit height mode"
 msgstr "Höjdanpassningsläge"
 
-#: src/preferences.py:265
-#: src/ui.py:294
+#
+# File: src/preferences.py, line: 265
+# File: src/ui.py, line: 294
+#: src/preferences.py:265 src/ui.py:294
 msgid "Manual zoom mode"
 msgstr "Manuellt zoomläge"
 
+#
+# File: src/preferences.py, line: 271
 #: src/preferences.py:271
 msgid "Fullscreen"
 msgstr "Helskärm"
 
+#
+# File: src/preferences.py, line: 273
 #: src/preferences.py:273
 msgid "Automatically hide all toolbars in fullscreen."
 msgstr "Göm automatiskt alla verktygsrader i helskärmsläge."
 
+#
+# File: src/preferences.py, line: 279
 #: src/preferences.py:279
 msgid "Slideshow"
 msgstr "Bildspel"
 
+#
+# File: src/preferences.py, line: 280
 #: src/preferences.py:280
 msgid "Slideshow delay (in seconds)"
 msgstr "Bildspelsfördröjning (i sekunder)"
 
+#
+# File: src/preferences.py, line: 289
 #: src/preferences.py:289
 msgid "Comment extensions"
 msgstr "Kommentarsfiländelser"
 
+#
+# File: src/preferences.py, line: 295
 #: src/preferences.py:295
-msgid "Treat all files found within archives, that have one of these file endings, as comments."
-msgstr "Behandla alla filer funna i arkiv, som har en av dessa filändelser, som kommentarer."
+msgid ""
+"Treat all files found within archives, that have one of these file endings, "
+"as comments."
+msgstr ""
+"Behandla alla filer funna i arkiv, som har en av dessa filändelser, som "
+"kommentarer."
 
+#
+# File: src/preferences.py, line: 297
 #: src/preferences.py:297
 msgid "Display"
 msgstr "Visning"
 
+#
+# File: src/properties.py, line: 89
 #: src/properties.py:89
 msgid "Properties"
 msgstr "Egenskaper"
 
+#
+# File: src/properties.py, line: 114
 #: src/properties.py:114
 #, python-format
 msgid "%d comments"
 msgstr "%d kommentarer"
 
-#: src/properties.py:124
-#: src/properties.py:159
+#
+# File: src/properties.py, line: 124
+# File: src/properties.py, line: 159
+#: src/properties.py:124 src/properties.py:159
 msgid "Location"
 msgstr "Plats"
 
-#: src/properties.py:126
-#: src/properties.py:160
+#
+# File: src/properties.py, line: 126
+# File: src/properties.py, line: 160
+#: src/properties.py:126 src/properties.py:160
 msgid "Accessed"
 msgstr "Åtkomsttid"
 
-#: src/properties.py:128
-#: src/properties.py:162
+#
+# File: src/properties.py, line: 128
+# File: src/properties.py, line: 162
+#: src/properties.py:128 src/properties.py:162
 msgid "Modified"
 msgstr "Modifieringstid"
 
-#: src/properties.py:130
-#: src/properties.py:164
+#
+# File: src/properties.py, line: 130
+# File: src/properties.py, line: 164
+#: src/properties.py:130 src/properties.py:164
 msgid "Permissions"
 msgstr "Rättigheter"
 
-#: src/properties.py:131
-#: src/properties.py:165
+#
+# File: src/properties.py, line: 131
+# File: src/properties.py, line: 165
+#: src/properties.py:131 src/properties.py:165
 msgid "Owner"
 msgstr "Ägare"
 
+#
+# File: src/properties.py, line: 135
 #: src/properties.py:135
 msgid "Archive"
 msgstr "Arkiv"
 
+#
+# File: src/properties.py, line: 169
 #: src/properties.py:169
 msgid "Image"
 msgstr "Bild"
 
+#
+# File: src/thumbremover.py, line: 22
 #: src/thumbremover.py:22
 msgid "Thumbnail maintenance"
 msgstr "Miniatyrbildsunderhåll"
 
+#
+# File: src/thumbremover.py, line: 24
 #: src/thumbremover.py:24
 msgid "Cleanup"
 msgstr "Rensa ut"
 
+#
+# File: src/thumbremover.py, line: 36
 #: src/thumbremover.py:36
 msgid "Cleanup thumbnails"
 msgstr "Rensa ut miniatyrbilder"
 
+#
+# File: src/thumbremover.py, line: 46
 #: src/thumbremover.py:46
-msgid "Thumbnails for files (such as image files and comic book archives) are stored in your home directory. Many different applications use and create these thumbnails, but sometimes thumbnails remain even though the original files have been removed - wasting space. This dialog can cleanup your stored thumbnails by removing orphaned and outdated thumbnails."
-msgstr "Miniatyrbilder för filer (såsom bildfiler och serieboksarkiv) lagras i din hemkatalog. Många olika program använder och skapar dessa miniatyrbilder, men ibland blir de kvarlämnade trots att originalfilerna har blivit raderade, och ödslar plats. Det här dialogfönstret kan rensa ut dina lagrade miniatyrbilder genom att ta bort kvarglömda och utdaterade miniatyrbilder."
+msgid ""
+"Thumbnails for files (such as image files and comic book archives) are "
+"stored in your home directory. Many different applications use and create "
+"these thumbnails, but sometimes thumbnails remain even though the original "
+"files have been removed - wasting space. This dialog can cleanup your stored "
+"thumbnails by removing orphaned and outdated thumbnails."
+msgstr ""
+"Miniatyrbilder för filer (såsom bildfiler och serieboksarkiv) lagras i din "
+"hemkatalog. Många olika program använder och skapar dessa miniatyrbilder, "
+"men ibland blir de kvarlämnade trots att originalfilerna har blivit "
+"raderade, och ödslar plats. Det här dialogfönstret kan rensa ut dina lagrade "
+"miniatyrbilder genom att ta bort kvarglömda och utdaterade miniatyrbilder."
 
+#
+# File: src/thumbremover.py, line: 58
 #: src/thumbremover.py:58
 msgid "Thumbnail directory"
 msgstr "Miniatyrbildskatalog"
 
+#
+# File: src/thumbremover.py, line: 65
 #: src/thumbremover.py:65
 msgid "Total number of thumbnails"
 msgstr "Totalt antal miniatyrbilder"
 
-#: src/thumbremover.py:68
-#: src/thumbremover.py:75
+#
+# File: src/thumbremover.py, line: 68
+# File: src/thumbremover.py, line: 75
+#: src/thumbremover.py:68 src/thumbremover.py:75
 msgid "Calculating..."
 msgstr "Beräknar..."
 
+#
+# File: src/thumbremover.py, line: 72
 #: src/thumbremover.py:72
 msgid "Total size of thumbnails"
 msgstr "Total storlek på miniatyrbilder"
 
+#
+# File: src/thumbremover.py, line: 80
 #: src/thumbremover.py:80
 msgid "Do you want to cleanup orphaned and outdated thumbnails now?"
 msgstr "Vill du rensa ut kvarglömda och utdaterade miniatyrbilder nu?"
 
+#
+# File: src/thumbremover.py, line: 116
 #: src/thumbremover.py:116
 msgid "Removing thumbnails"
 msgstr "Raderar miniatyrbilder"
 
+#
+# File: src/thumbremover.py, line: 135
 #: src/thumbremover.py:135
 msgid "Number of removed thumbnails"
 msgstr "Antal borttagna miniatyrbilder"
 
+#
+# File: src/thumbremover.py, line: 142
 #: src/thumbremover.py:142
 msgid "Total size of removed thumbnails"
 msgstr "Total storlek på borttagna miniatyrbilder"
 
+#
+# File: src/thumbremover.py, line: 193
 #: src/thumbremover.py:193
 #, python-format
 msgid "Removed thumbnail for '%s'"
 msgstr "Tog bort miniatyrbild för '%s'"
 
+#
+# File: src/ui.py, line: 34
 #: src/ui.py:34
 msgid "_Next page"
 msgstr "_Nästa sida"
 
+#
+# File: src/ui.py, line: 36
 #: src/ui.py:36
 msgid "_Previous page"
 msgstr "F_öregående sida"
 
+#
+# File: src/ui.py, line: 38
 #: src/ui.py:38
 msgid "_First page"
 msgstr "_Första sidan"
 
+#
+# File: src/ui.py, line: 40
 #: src/ui.py:40
 msgid "_Last page"
 msgstr "_Sista sidan"
 
+#
+# File: src/ui.py, line: 42
 #: src/ui.py:42
 msgid "_Zoom in"
 msgstr "_Zooma in"
 
+#
+# File: src/ui.py, line: 44
 #: src/ui.py:44
 msgid "Zoom _out"
 msgstr "Zooma _ut"
 
+#
+# File: src/ui.py, line: 46
 #: src/ui.py:46
 msgid "O_riginal size"
 msgstr "O_riginalstorlek"
 
+#
+# File: src/ui.py, line: 48
 #: src/ui.py:48
 msgid "_Close"
 msgstr "_Stäng"
 
+#
+# File: src/ui.py, line: 50
 #: src/ui.py:50
 msgid "_Quit"
 msgstr "_Avsluta"
 
+#
+# File: src/ui.py, line: 52
 #: src/ui.py:52
 msgid "_Rotate 90 degrees CW"
 msgstr "_Rotera 90 grader medsols"
 
+#
+# File: src/ui.py, line: 54
 #: src/ui.py:54
 msgid "Rotate 180 de_grees"
 msgstr "Rotera 180 _grader"
 
+#
+# File: src/ui.py, line: 56
 #: src/ui.py:56
 msgid "Rotat_e 90 degrees CCW"
 msgstr "Rot_era 90 grader motsols"
 
+#
+# File: src/ui.py, line: 58
 #: src/ui.py:58
 msgid "Fli_p horizontally"
 msgstr "S_pegelvänd horisontellt"
 
+#
+# File: src/ui.py, line: 60
 #: src/ui.py:60
 msgid "Flip _vertically"
 msgstr "Spegelvänd _vertikalt"
 
+#
+# File: src/ui.py, line: 62
 #: src/ui.py:62
 msgid "Manual _Zoom"
 msgstr "Manuell _zoom"
 
+#
+# File: src/ui.py, line: 63
 #: src/ui.py:63
 msgid "Open _recent"
 msgstr "Öppna _senaste"
 
+#
+# File: src/ui.py, line: 64
 #: src/ui.py:64
 msgid "_Bookmarks"
 msgstr "_Bokmärken"
 
+#
+# File: src/ui.py, line: 65
 #: src/ui.py:65
 msgid "T_oolbars"
 msgstr "_Verktygsrader"
 
+#
+# File: src/ui.py, line: 66
 #: src/ui.py:66
 msgid "_Edit"
 msgstr "_Redigera"
 
+#
+# File: src/ui.py, line: 67
 #: src/ui.py:67
 msgid "_File"
 msgstr "_Arkiv"
 
+#
+# File: src/ui.py, line: 68
 #: src/ui.py:68
 msgid "_View"
 msgstr "_Visa"
 
+#
+# File: src/ui.py, line: 69
 #: src/ui.py:69
 msgid "_Go"
 msgstr "_Gå"
 
+#
+# File: src/ui.py, line: 70
 #: src/ui.py:70
 msgid "_Help"
 msgstr "_Hjälp"
 
+#
+# File: src/ui.py, line: 71
 #: src/ui.py:71
 msgid "_Transform"
 msgstr "_Transformera"
 
+#
+# File: src/ui.py, line: 75
 #: src/ui.py:75
 msgid "_Fullscreen"
 msgstr "_Helskärmsläge"
 
+#
+# File: src/ui.py, line: 77
 #: src/ui.py:77
 msgid "_Double page mode"
 msgstr "_Dubbelsidesläge"
 
+#
+# File: src/ui.py, line: 79
 #: src/ui.py:79
 msgid "_Toolbar"
 msgstr "_Verktygsrad"
 
+#
+# File: src/ui.py, line: 81
 #: src/ui.py:81
 msgid "_Menubar"
 msgstr "_Menyrad"
 
+#
+# File: src/ui.py, line: 83
 #: src/ui.py:83
 msgid "St_atusbar"
 msgstr "St_atusrad"
 
+#
+# File: src/ui.py, line: 85
 #: src/ui.py:85
 msgid "S_crollbars"
 msgstr "_Rullningslister"
 
+#
+# File: src/ui.py, line: 87
 #: src/ui.py:87
 msgid "Th_umbnails"
 msgstr "Miniat_yrbilder"
 
+#
+# File: src/ui.py, line: 89
 #: src/ui.py:89
 msgid "H_ide all"
 msgstr "_Göm alla"
 
+#
+# File: src/ui.py, line: 91
 #: src/ui.py:91
 msgid "_Manga mode"
 msgstr "_Mangaläge"
 
+#
+# File: src/ui.py, line: 93
 #: src/ui.py:93
 msgid "_Keep transformation"
 msgstr "Behåll transf_ormation"
 
+#
+# File: src/ui.py, line: 95
 #: src/ui.py:95
 msgid "Run _slideshow"
 msgstr "Kör _bildspel"
 
+#
+# File: src/ui.py, line: 97
 #: src/ui.py:97
 msgid "Magnifying _glass"
 msgstr "Förstorings_glas"
 
+#
+# File: src/ui.py, line: 101
 #: src/ui.py:101
 msgid "_Best fit mode"
 msgstr "_Bästa anpassningsläge"
 
+#
+# File: src/ui.py, line: 103
 #: src/ui.py:103
 msgid "Fit _width mode"
 msgstr "Br_eddanpassningsläge"
 
+#
+# File: src/ui.py, line: 105
 #: src/ui.py:105
 msgid "Fit _height mode"
 msgstr "H_öjdanpassningsläge"
 
+#
+# File: src/ui.py, line: 107
 #: src/ui.py:107
 msgid "M_anual zoom mode"
 msgstr "M_anuellt zoomläge"
 
+#
+# File: src/ui.py, line: 113
 #: src/ui.py:113
 msgid "_About"
 msgstr "_Om"
 
+#
+# File: src/ui.py, line: 115
 #: src/ui.py:115
 msgid "_View comments..."
 msgstr "Visa _kommentarer..."
 
+#
+# File: src/ui.py, line: 117
 #: src/ui.py:117
 msgid "_Edit archive..."
 msgstr "R_edigera arkiv..."
 
+#
+# File: src/ui.py, line: 119
 #: src/ui.py:119
 msgid "_Open..."
 msgstr "_Öppna..."
 
+#
+# File: src/ui.py, line: 121
 #: src/ui.py:121
 msgid "_Properties"
 msgstr "_Egenskaper"
 
+#
+# File: src/ui.py, line: 123
 #: src/ui.py:123
 msgid "_Enhance image..."
 msgstr "Fö_rbättra bild..."
 
+#
+# File: src/ui.py, line: 126
 #: src/ui.py:126
 msgid "_Thumbnail maintenance..."
 msgstr "Minia_tyrsbildsunderhåll..."
 
+#
+# File: src/ui.py, line: 128
 #: src/ui.py:128
 msgid "Pr_eferences"
 msgstr "Inst_ällningar"
 
+#
+# File: src/ui.py, line: 132
 #: src/ui.py:132
 msgid "_Library..."
 msgstr "Bib_liotek..."
 
+#
+# File: src/ui.py, line: 282
 #: src/ui.py:282
 msgid "First page"
 msgstr "Första sidan"
 
+#
+# File: src/ui.py, line: 284
 #: src/ui.py:284
 msgid "Previous page"
 msgstr "Föregående sida"
 
+#
+# File: src/ui.py, line: 285
 #: src/ui.py:285
 msgid "Next page"
 msgstr "Nästa sida"
 
+#
+# File: src/ui.py, line: 286
 #: src/ui.py:286
 msgid "Last page"
 msgstr "Sista sidan"
 
+#
+# File: src/ui.py, line: 297
 #: src/ui.py:297
 msgid "Manga mode"
 msgstr "Mangaläge"
 
+#
+# File: src/ui.py, line: 298
 #: src/ui.py:298
 msgid "Magnifying glass"
 msgstr "Förstoringsglas"
 
+#
 #~ msgid "Could not open %s: Unsupported file type."
 #~ msgstr "Kunde inte öppna %s: Icke-stödd filtyp."
+
+#
 #~ msgid "%s: Is a directory."
 #~ msgstr "%s: Är en katalog."
+
+#
 #~ msgid "%s: No such file."
 #~ msgstr "%s: Filen finns inte."
+
+#
 #~ msgid "%s: Permission denied."
 #~ msgstr "%s: Otillräckliga rättigheter."
+
+#
 #~ msgid "%s: Unsupported file type."
 #~ msgstr "%s: Icke-stödd filtyp."
+
+#
 #~ msgid "A file named \"%s\" already exists. Do you want to replace it?"
 #~ msgstr "En fil vid namn \"%s\" finns redan. Vill du ersätta den?"
+
+#
 #~ msgid "No images in \"%s\""
 #~ msgstr "Inga bilder i \"%s\""
+
+#
 #~ msgid "Could not change the name to \"%s\"."
 #~ msgstr "Kunde inte ändra namnet till \"%s\"."
+
+#
 #~ msgid ""
 #~ "Put the collection \"%(subcollection)s\" in the collection \"%"
 #~ "(supercollection)s\"."
 #~ msgstr ""
 #~ "Lägg samlingen \"%(subcollection)s\" i samlingen \"%(supercollection)s\"."
+
+#
 #~ msgid "Add books to \"%s\"."
 #~ msgstr "Lägg till böcker till \"%s\"."
+
+#
 #~ msgid ""
 #~ "Move books from \"%(source collection)s\" to \"%(destination collection)s"
 #~ "\"."
 #~ msgstr ""
 #~ "Flytta böcker från \"%(source collection)s\" till \"%(destination "
 #~ "collection)s\"."
+
+#
 #~ msgid "Removed %(num)d book(s) from \"%(collection)s\"."
 #~ msgstr "Tog bort %(num)d böcker från \"%(collection)s\"."
+
+#
 #~ msgid "Could not add a new collection called \"%s\"."
 #~ msgstr "Kunde inte lägga till en ny samling med namn \"%s\"."
+
+#
 #~ msgid "Adding \"%s\"..."
 #~ msgstr "Lägger till \"%s\"..."
+
+#
 #~ msgid ""
 #~ "Use \"smart scrolling\" with the space key. Normally the space key "
 #~ "scrolls only right down (or up when shift is pressed), but with this "
@@ -1128,45 +1785,73 @@ msgstr "Förstoringsglas"
 #~ "mellanslagstangenten bara rakt ner (eller upp om shift är intryckt), men "
 #~ "med den här inställningen aktiverad så scrollar den också i sidled och "
 #~ "försöker på så vis att följa den naturliga läsordningen i serieboken."
+
+#
 #~ msgid "Removed thumbnail for \"%s\""
 #~ msgstr "Tog bort miniatyrbild för \"%s\""
+
+#
 #~ msgid "Use a cache to speed up reading."
 #~ msgstr "Använd en cache för att snabba upp bläddring."
+
+#
 #~ msgid "tar archives"
 #~ msgstr "tar-arkiv"
+
+#
 #~ msgid "Clear bookmarks..."
 #~ msgstr "Töm bokmärken..."
+
+#
 #~ msgid "Default"
 #~ msgstr "Återställ"
+
+#
 #~ msgid "Automatically adjust contrast"
 #~ msgstr "Anpassa kontrast automatiskt"
+
+#
 #~ msgid "Remove from library..."
 #~ msgstr "Ta bort från biblioteket..."
+
+#
 #~ msgid ""
 #~ "Display only those books that have the specified text string in their "
 #~ "full path. The matching is not case sensitive."
 #~ msgstr ""
 #~ "Visa endast de böcker som har den inmatade textsträngen någonstans i sin "
 #~ "fulla sökväg. Sökningen är oberoende av gemener och versaler."
+
+#
 #~ msgid ""
 #~ "Automatically pick a background colour that fits the currently viewed "
 #~ "image."
 #~ msgstr "Välj automatiskt en bakgrundsfärg som passar den visade bilden."
+
+#
 #~ msgid "Set the magnification level of the magnifying glass."
 #~ msgstr "Ställ in förstoringsfaktorn för förstoringsglaset."
+
+#
 #~ msgid "Use smart space-button scrolling."
 #~ msgstr "Använd smart scrollning med mellanslagstangenten."
+
+#
 #~ msgid ""
 #~ "Display only one image in double page mode, if an image's width exceeds "
 #~ "its height. This results in that scans that span two pages are displayed "
 #~ "properly (i.e. alone) in double page mode."
 #~ msgstr "Visa endast en bild i dubbelsidesläge, om "
+
+#
 #~ msgid ""
 #~ "Automatically open, on start-up, whatever file was open when Comix was "
 #~ "last closed."
 #~ msgstr ""
 #~ "Öppna automatiskt, vid uppstart, den fil som var öppen när Comix senast "
 #~ "avslutades."
+
+#
 #~ msgid ""
 #~ "Cache the images that are next to the currently viewed image in order to "
 #~ "speed up reading. Since the speed improvements are quite big, it is "
@@ -1177,20 +1862,36 @@ msgstr "Förstoringsglas"
 #~ "för att snabba upp bläddring. Eftersom hastighetsförbättringarna är "
 #~ "relativt stora, så är det rekommenderat att du har den här inställingen "
 #~ "aktiverad, om du inte får slut på ledigt RAM-minne."
+
+#
 #~ msgid "Fit-to-screen mode"
 #~ msgstr "Skärmanpassningsläge"
+
+#
 #~ msgid "Removing outdated thumbnails"
 #~ msgstr "Tar bort utdaterade miniatyrbilder"
+
+#
 #~ msgid "_Normal size"
 #~ msgstr "_Normal storlek"
+
+#
 #~ msgid "_Toolbars"
 #~ msgstr "_Verktygsrader"
+
+#
 #~ msgid "Fit-to-_screen mode"
 #~ msgstr "Skärmanpa_ssningsläge"
+
+#
 #~ msgid "View _comments"
 #~ msgstr "Visa _kommentarer"
+
+#
 #~ msgid "Proper_ties"
 #~ msgstr "_Egenskaper"
+
+#
 #~ msgid ""
 #~ "When in double page mode, if an image's width exceeds its height, display "
 #~ "only one image. This results in that scans that span two pages are "
@@ -1198,6 +1899,8 @@ msgstr "Förstoringsglas"
 #~ msgstr ""
 #~ "I dubbelsidesläge, om en bilds bredd överstiger dess höjd, visa endast en "
 #~ "bild."
+
+#
 #~ msgid ""
 #~ "Some old files (that were used for storing preferences, the library, "
 #~ "bookmarks, etc. for older versions of Comix) were found on your computer. "
@@ -1207,22 +1910,36 @@ msgstr "Förstoringsglas"
 #~ msgstr ""
 #~ "Några gamla filer (som användes för att lagra inställningar, biblioteket, "
 #~ "bokmärken etc. "
+
+#
 #~ msgid "%s: Target is a directory."
 #~ msgstr "%s: Målet är en katalog"
+
+#
 #~ msgid "Move book(s) from \"%s\" to \"%s\"."
 #~ msgstr "Flytta böcker från "
+
+#
 #~ msgid "Removed %d book(s) from \"%s\"."
 #~ msgstr "Tog bort %d antal böcker från \"%s\"."
+
+#
 #~ msgid "Remove book(s) from the library?"
 #~ msgstr "Ta bort böcker från "
+
+#
 #~ msgid ""
 #~ "The selected books will be removed from the library (but the comic book "
 #~ "files will be untouched). Are you sure that you want to continue?"
 #~ msgstr "De markerade böckerna kommer att tas bort från biblioteket (men "
+
+#
 #~ msgid ""
 #~ "Display only those books that have the specified string in their full "
 #~ "path. The matching is not case sensitive."
 #~ msgstr "Visa bara de böcker som har den inmatade textsträngen "
+
+#
 #~ msgid ""
 #~ "Stretch images to a size that is larger than their original size if the "
 #~ "current zoom mode requests it. Normally, images are never scaled to be "
@@ -1231,339 +1948,663 @@ msgstr "Förstoringsglas"
 #~ "Dra ut bilder till en storlek som är större än deras originalstorlek om "
 #~ "det gällande zoomningsläget kräver det. Normalt så skalas bilder aldrig "
 #~ "om till en storlek som är större än deras originalstorlek."
+
+#
 #~ msgid ""
 #~ "Treat all files found within archives, and that have one of these file "
 #~ "endings, as comments."
 #~ msgstr ""
 #~ "Behandla alla filer som hittas i arkiv, och som har en av dessa "
 #~ "filändelser, som kommentarer."
+
+#
 #~ msgid "Magnifying lens"
 #~ msgstr "Förstoringsglas"
+
+#
 #~ msgid "Apply filter on full path"
 #~ msgstr "Lägg filter på hela sökvägen"
+
+#
 #~ msgid "Add archives to library."
 #~ msgstr "Lägg till arkiv i biblioteket."
+
+#
 #~ msgid "Remove selected archive from library."
 #~ msgstr "Ta bort det markerade arkivet från biblioteket."
+
+#
 #~ msgid "Clean up"
 #~ msgstr "Städa upp"
+
+#
 #~ msgid "Remove orphaned or outdated library entries."
 #~ msgstr "Ta bort föräldralösa eller utdaterade arkiv från biblioteket."
+
+#
 #~ msgid "Close this window."
 #~ msgstr "Stäng det här fönstret."
+
+#
 #~ msgid "Open selected archive."
 #~ msgstr "Öppna det markerade arkivet."
+
+#
 #~ msgid "All archives"
 #~ msgstr "Alla arkiv"
+
+#
 #~ msgid "JPEG image"
 #~ msgstr "JPEG-bild"
+
+#
 #~ msgid "PNG image"
 #~ msgstr "PNG-bild"
+
+#
 #~ msgid "GIF image"
 #~ msgstr "GIF-bild"
+
+#
 #~ msgid "TIFF image"
 #~ msgstr "TIFF-bild"
+
+#
 #~ msgid "BMP image"
 #~ msgstr "BMP-bild"
+
+#
 #~ msgid "ICO image"
 #~ msgstr "ICO-bild"
+
+#
 #~ msgid "XPM image"
 #~ msgstr "XPM-bild"
+
+#
 #~ msgid "XBM image"
 #~ msgstr "XBM-bild"
+
+#
 #~ msgid "tar archive"
 #~ msgstr "tar-arkiv"
+
+#
 #~ msgid "Add archives recursively"
 #~ msgstr "Lägg till arkiv rekursivt"
+
+#
 #~ msgid "Select folder"
 #~ msgstr "Välj katalog"
+
+#
 #~ msgid "Fullscreen as default"
 #~ msgstr "Helskärmsläge som standard"
+
+#
 #~ msgid "Double page mode as default"
 #~ msgstr "Dubbelsidesläge som standard"
+
+#
 #~ msgid "Stretch small images"
 #~ msgstr "Förstora små bilder"
+
+#
 #~ msgid "Use smart scaling in double page mode"
 #~ msgstr "Använd smart skalning i dubbelsidesläge"
+
+#
 #~ msgid "Always view comments when opening a new file"
 #~ msgstr "Visa alltid kommentarer när en ny fil öppnas"
+
+#
 #~ msgid "Hide menubar, scrollbars etc. in fullscreen mode"
 #~ msgstr "Göm menyrad, rullningslister etc. i helskärmsläge"
+
+#
 #~ msgid "Cache pages for faster forward flipping"
 #~ msgstr "Cacha bilder för snabbare sidbläddring"
+
+#
 #~ msgid "Scroll wheel scrolls horizontally at top and bottom of page"
 #~ msgstr ""
 #~ "Scrollhjulet scrollar horisontellt vid början och vid slutet av sidan"
+
+#
 #~ msgid "Flip page when scrolling off the top or bottom of page"
 #~ msgstr ""
 #~ "Byt sida när scrollhjulet scrollar förbi början eller slutet av sidan"
+
+#
 #~ msgid "Hide thumbnail scrollbar"
 #~ msgstr "Göm miniatyrbildernas rullningslist"
+
+#
 #~ msgid "Space key uses smart scrolling"
 #~ msgstr "Använd smart scrollning med blankstegstangenten"
+
+#
 #~ msgid "Save window position and size for future sessions"
 #~ msgstr "Spara fönstrets position och storlek till framtida programkörningar"
+
+#
 #~ msgid "Go to the next archive in directory after last page"
 #~ msgstr "Gå till nästa arkiv i katalogen efter sista sidan"
+
+#
 #~ msgid "Hide cursor in fullscreen mode"
 #~ msgstr "Göm muspekaren i helskärmsläge"
+
+#
 #~ msgid "Open last viewed file on start"
 #~ msgstr "Öppna den senast använda filen vid uppstart"
+
+#
 #~ msgid "Show page numbers on thumbnails"
 #~ msgstr "Visa sidnummer på miniatyrbilderna"
+
+#
 #~ msgid "Always use smart scrolling as if in double page mode"
 #~ msgstr "Använd alltid smart scrollning som om det vore i dubbelsidesläge"
+
+#
 #~ msgid "Use stored thumbnails for images in directories"
 #~ msgstr "Använd lagrade miniatyrbilder för bilder i kataloger"
+
+#
 #~ msgid "Use stored thumbnails for images in archives"
 #~ msgstr "Använd lagrade miniatyrbilder för bilder i arkiv"
+
+#
 #~ msgid "Display only one page in double page mode if the image is wide"
 #~ msgstr "Visa bara en bild i dubbelsidesläge om bilden är bred"
+
+#
 #~ msgid "Store recently opened files"
 #~ msgstr "Spara senast öppnade filer"
+
+#
 #~ msgid "Always go to this directory in the \"Open\" dialog:"
 #~ msgstr "Gå alltid till den här katalogen i \"Öppna\"-dialogen:"
+
+#
 #~ msgid "Always go to the latest directory in the \"Open\" dialog"
 #~ msgstr "Gå alltid till den senaste katalogen i \"Öppna\"-dialogen"
+
+#
 #~ msgid "Nearest (quickest, worst quality)"
 #~ msgstr "Närmast (snabbast, sämst kvalitet)"
+
+#
 #~ msgid "Tiles"
 #~ msgstr "Brickor"
+
+#
 #~ msgid "Bilinear"
 #~ msgstr "Bilinjär"
+
+#
 #~ msgid "Hyper (slowest, best quality)"
 #~ msgstr "Hyper (långsammast, bäst kvalitet)"
+
+#
 #~ msgid "Manual zoom mode as default"
 #~ msgstr "Manuellt zoomningsläge som standard"
+
+#
 #~ msgid "Fit-to-screen mode as default"
 #~ msgstr "Skärmanpassningsläge som standard"
+
+#
 #~ msgid "Fit width mode as default"
 #~ msgstr "Breddanpassningsläge som standard"
+
+#
 #~ msgid "Fit height mode as default"
 #~ msgstr "Höjdanpassningsläge som standard"
+
+#
 #~ msgid "Background colour:"
 #~ msgstr "Bakgrundsfärg:"
+
+#
 #~ msgid "Background colour"
 #~ msgstr "Bakgrundsfärg"
+
+#
 #~ msgid "Toolbar button labels:"
 #~ msgstr "Verktygsradens knapputseende:"
+
+#
 #~ msgid "Icons only"
 #~ msgstr "Endast ikoner"
+
+#
 #~ msgid "Text only"
 #~ msgstr "Endast text"
+
+#
 #~ msgid "Icons and text"
 #~ msgstr "Både ikoner och text"
+
+#
 #~ msgid "Slideshow delay:"
 #~ msgstr "Bildspelsfördröjning:"
+
+#
 #~ msgid "Scaling quality"
 #~ msgstr "Bildskalningskvalitet"
+
+#
 #~ msgid "Scaling"
 #~ msgstr "Bildskalning"
+
+#
 #~ msgid "Treat files with the following extensions as comments:"
 #~ msgstr "Behandla filer med följande filändelser som kommentarer:"
+
+#
 #~ msgid "Space key scrolls"
 #~ msgstr "Mellanslagstangenten scrollar"
+
+#
 #~ msgid "of"
 #~ msgstr "av"
+
+#
 #~ msgid "Window size"
 #~ msgstr "Fönsterstorleken"
+
+#
 #~ msgid "Page size"
 #~ msgstr "Sidstorleken"
+
+#
 #~ msgid "Magnification factor:"
 #~ msgstr "Förstoringsfaktor:"
+
+#
 #~ msgid "Lens size (px):"
 #~ msgstr "Linsstorlek (px):"
+
+#
 #~ msgid "Update interval (milliseconds):"
 #~ msgstr "Uppdateringsintervall (millesekunder):"
+
+#
 #~ msgid "Lens"
 #~ msgstr "Lins"
+
+#
 #~ msgid "Thumbnail sizes (px):"
 #~ msgstr "Miniatyrbildsstorlek (px):"
+
+#
 #~ msgid "Library thumbnail sizes (px):"
 #~ msgstr "Miniatyrbildsstorlek för biblioteket (px):"
+
+#
 #~ msgid "Adjust colour"
 #~ msgstr "Justera färg"
+
+#
 #~ msgid "Save values for future sessions"
 #~ msgstr "Spara värden för framtida programkörningar"
+
+#
 #~ msgid "Go to page"
 #~ msgstr "Gå till sida"
+
+#
 #~ msgid "Title"
 #~ msgstr "Titel"
+
+#
 #~ msgid "It reads ZIP, RAR and tar archives (also gzip or bzip2 compressed)"
 #~ msgstr ""
 #~ "Den läser ZIP-, RAR- och tar-arkiv (även gzip- eller bzip2-komprimerade)"
+
+#
 #~ msgid "as well as plain image files."
 #~ msgstr "såväl som vanliga bildfiler."
+
+#
 #~ msgid "Developer and Swedish translation"
 #~ msgstr "Utvecklare och svensk översättning"
+
+#
 #~ msgid "Manage thumbnails"
 #~ msgstr "Miniatyrbildsunderhåll"
+
+#
 #~ msgid "Remove all stored thumbnails:"
 #~ msgstr "Radera alla lagrade miniatyrbilder:"
+
+#
 #~ msgid "Remove orphaned thumbnails:"
 #~ msgstr "Radera föräldralösa miniatyrbilder:"
+
+#
 #~ msgid "Directories"
 #~ msgstr "Kataloger"
+
+#
 #~ msgid "Archives"
 #~ msgstr "Arkiv"
+
+#
 #~ msgid "Convert"
 #~ msgstr "Konvertera"
+
+#
 #~ msgid "File type"
 #~ msgstr "Filtyp"
+
+#
 #~ msgid "Extension"
 #~ msgstr "Filändelse"
+
+#
 #~ msgid "Zip archive"
 #~ msgstr "Zip-arkiv"
+
+#
 #~ msgid "Delete old archive/directory"
 #~ msgstr "Radera gammal arkiv/katalog"
+
+#
 #~ msgid "Permission denied"
 #~ msgstr "Rättigheter nekade"
+
+#
 #~ msgid "Confirm operation"
 #~ msgstr "Bekräfta operation"
+
+#
 #~ msgid "Permanently remove %s?"
 #~ msgstr "Radera %s permanent?"
+
+#
 #~ msgid "Perform lossless JPEG operation on %s?"
 #~ msgstr "Utför ickedestruktiv JPEG-operation på %s?"
+
+#
 #~ msgid "Some images might be trimmed a bit during the operation."
 #~ msgstr "En del bilder kan bli klippta en aning under operationen."
+
+#
 #~ msgid "Permanently convert %s to greyscale?"
 #~ msgstr "Konvertera %s till gråskala permanent?"
+
+#
 #~ msgid "Location:"
 #~ msgstr "Plats:"
+
+#
 #~ msgid "Quantity:"
 #~ msgstr "Antal:"
+
+#
 #~ msgid "Total size:"
 #~ msgstr "Total storlek:"
+
+#
 #~ msgid "Removed:"
 #~ msgstr "Raderade:"
+
+#
 #~ msgid "Done!"
 #~ msgstr "Klart!"
+
+#
 #~ msgid "pages"
 #~ msgstr "sidor"
+
+#
 #~ msgid "comment"
 #~ msgstr "kommentar"
+
+#
 #~ msgid "comments"
 #~ msgstr "kommentarer"
+
+#
 #~ msgid "In library"
 #~ msgstr "I bibliotek"
+
+#
 #~ msgid "Yes"
 #~ msgstr "Ja"
+
+#
 #~ msgid "No"
 #~ msgstr "Nej"
+
+#
 #~ msgid "Bookmarked"
 #~ msgstr "Bokmärke"
+
+#
 #~ msgid "Yes, page"
 #~ msgstr "Ja, sida"
+
+#
 #~ msgid "Mode"
 #~ msgstr "Typ"
+
+#
 #~ msgid "Pixel count"
 #~ msgstr "Pixelantal"
+
+#
 #~ msgid "Pixel sum"
 #~ msgstr "Pixelsumma"
+
+#
 #~ msgid "Extrema"
 #~ msgstr "Extremvärden"
+
+#
 #~ msgid "Mean"
 #~ msgstr "Medel"
+
+#
 #~ msgid "Median"
 #~ msgstr "Median"
+
+#
 #~ msgid "Standard deviation"
 #~ msgstr "Standardavvikelse"
+
+#
 #~ msgid "Image 1"
 #~ msgstr "Bild 1"
+
+#
 #~ msgid "Image 2"
 #~ msgstr "Bild 2"
+
+#
 #~ msgid "Could not delete"
 #~ msgstr "Kunde inte radera"
+
+#
 #~ msgid "Please check your permissions."
 #~ msgstr "Kontrollera dina rättigheter."
+
+#
 #~ msgid "Could not create"
 #~ msgstr "Kunde inte skapa"
+
+#
 #~ msgid "Added:"
 #~ msgstr "Tillagda:"
+
+#
 #~ msgid "Adding library entries"
 #~ msgstr "Lägger till i biblioteket"
+
+#
 #~ msgid "Removing library entries"
 #~ msgstr "Tar bort från biblioteket"
+
+#
 #~ msgid "Extract page"
 #~ msgstr "Extrahera sida"
+
+#
 #~ msgid "page"
 #~ msgstr "sida"
+
+#
 #~ msgid ""
 #~ "Could not find the unrar executable. Please install it if you wish to "
 #~ "open RAR archives."
 #~ msgstr ""
 #~ "Kunde inte hitta filen unrar. Du måste installera unrar om du vill kunna "
 #~ "öppna RAR-arkiv."
+
+#
 #~ msgid "Could not open"
 #~ msgstr "Kunde inte öppna"
+
+#
 #~ msgid "is not a file."
 #~ msgstr "är inte en fil."
+
+#
 #~ msgid "does not exist."
 #~ msgstr "existerar inte."
+
+#
 #~ msgid "Filetype of"
 #~ msgstr "Filtypen av"
+
+#
 #~ msgid "not recognized."
 #~ msgstr "kändes inte igen."
+
+#
 #~ msgid "Comment file"
 #~ msgstr "Kommentarsfil"
+
+#
 #~ msgid "Could not read"
 #~ msgstr "Kunde inte läsa"
+
+#
 #~ msgid "Comment"
 #~ msgstr "Kommentar"
+
+#
 #~ msgid "_Go to page..."
 #~ msgstr "_Gå till sida..."
+
+#
 #~ msgid "Fit _width"
 #~ msgstr "Passa _bredd"
+
+#
 #~ msgid "Fit _height"
 #~ msgstr "Passa _höjd"
+
+#
 #~ msgid "_Best fit"
 #~ msgstr "_Bäst anpassning"
+
+#
 #~ msgid "Clear bookmarks"
 #~ msgstr "Rensa bokmärken"
+
+#
 #~ msgid "_Manage thumbnails..."
 #~ msgstr "_Miniatyrbildsunderhåll..."
+
+#
 #~ msgid "_Recent files"
 #~ msgstr "Senaste file_r"
+
+#
 #~ msgid "Clear recent files"
 #~ msgstr "Rensa senaste filer"
+
+#
 #~ msgid "Open _library..."
 #~ msgstr "Öppna bib_lioteket..."
+
+#
 #~ msgid "_Add to library"
 #~ msgstr "L_ägg till i bibliotek"
+
+#
 #~ msgid "Con_vert..."
 #~ msgstr "Kon_vertera..."
+
+#
 #~ msgid "E_xtract image..."
 #~ msgstr "Extrahera bild..."
+
+#
 #~ msgid "_Adjust colour..."
 #~ msgstr "Justera _färg..."
+
+#
 #~ msgid "Delete image..."
 #~ msgstr "Radera bild..."
+
+#
 #~ msgid "CW lossless JPEG rotation..."
 #~ msgstr "Medsols ickedestruktiv JPEG-rotation..."
+
+#
 #~ msgid "CCW lossless JPEG rotation..."
 #~ msgstr "Motsols ickedestruktiv JPEG-rotation..."
+
+#
 #~ msgid "Horizontal lossless JPEG flip..."
 #~ msgstr "Horisontal ickedestruktiv JPEG-spegelvändning..."
+
+#
 #~ msgid "Vertical lossless JPEG flip..."
 #~ msgstr "Vertikal ickedestruktiv JPEG-spegelvändning..."
+
+#
 #~ msgid "Convert JPEG to greyscale..."
 #~ msgstr "Konvertera JPEG till gråskala..."
+
+#
 #~ msgid "File o_perations"
 #~ msgstr "Filo_perationer"
+
+#
 #~ msgid "Magnifying _lens"
 #~ msgstr "Förstoringsg_las"
+
+#
 #~ msgid "Enter fullscreen mode automatically when Comix is started."
 #~ msgstr "Gå automatiskt in i helskärmsläge när Comix startas."
+
+#
 #~ msgid "Enter double page mode automatically when Comix is started."
 #~ msgstr "Gå automatiskt in i dubbelsidesläge när Comix startas."
+
+#
 #~ msgid "Enter manual zoom mode automatically when Comix is started."
 #~ msgstr "Gå automatiskt in i manuellt zoomningsläge när Comix startas."
+
+#
 #~ msgid "Enter fit-to-screen mode automatically when Comix is started."
 #~ msgstr "Gå automatiskt in i skärmanpassningsläge när Comix startas."
+
+#
 #~ msgid "Enter fit width mode automatically when Comix is started."
 #~ msgstr "Gå automatiskt in i breddanpassningsläge när Comix startas."
+
+#
 #~ msgid "Enter fit height mode automatically when Comix is started."
 #~ msgstr "Gå automatiskt in i höjdanpassningsläge när Comix startas."
+
+#
 #~ msgid ""
 #~ "Also scale images to a size that is larger than their original size in "
 #~ "fit-to-screen mode, fit width mode and fit height mode."
@@ -1571,6 +2612,8 @@ msgstr "Förstoringsglas"
 #~ "Skala också om bilder till storlekar som är större än deras "
 #~ "originalstorlek i skärmanpassningsläge, breddanpassningsläge och "
 #~ "höjdanpassningsläge."
+
+#
 #~ msgid ""
 #~ "Scale the images independently when in double page mode and fit-to-screen "
 #~ "mode. The smaller of the two images will scale up to fill any extra space "
@@ -1579,14 +2622,20 @@ msgstr "Förstoringsglas"
 #~ "Skala bilderna oberoende av varandra i dubbelsidesläge och "
 #~ "skärmanpassningsläge. Den mindre av de två bilderna skalas upp för att "
 #~ "fylla eventuell oanvänd yta som ges."
+
+#
 #~ msgid "Automatically show any available comments when opening a new file."
 #~ msgstr "Visa eventuella kommentarer automatiskt när en ny fil öppnas."
+
+#
 #~ msgid ""
 #~ "Automatically hide scrollbars, menubar, toolbar, statusbar and thumbnails "
 #~ "when in fullscreen mode."
 #~ msgstr ""
 #~ "Göm automatiskt rullningslister, verktygsrad, statusrad och menyrad i "
 #~ "helskärmsläge."
+
+#
 #~ msgid ""
 #~ "Cache the next page in the archive/directory to increase the perceived "
 #~ "speed. This is generally recommended unless you are running low on RAM."
@@ -1594,6 +2643,8 @@ msgstr "Förstoringsglas"
 #~ "Cacha nästa sida i arkivet/katalogen för att öka den upplevda "
 #~ "hastigheten. Det är vanligtvis rekommenderat om du inte har ont om RAM-"
 #~ "minne."
+
+#
 #~ msgid ""
 #~ "Move the horizontal scrollbar instead of the vertical when using the "
 #~ "scroll wheel at the top or the bottom of the page. The direction will be "
@@ -1602,11 +2653,15 @@ msgstr "Förstoringsglas"
 #~ "Flytta den horisontella rullningslisten istället för den vertikala med "
 #~ "scrollhjulet när du är längst upp eller längst ner på sidan. Riktningen "
 #~ "varierar beroende på om du använder manga-läge eller ej."
+
+#
 #~ msgid ""
 #~ "Save the position and the size of the window for the next time you start "
 #~ "Comix."
 #~ msgstr ""
 #~ "Spara fönstrets position och storlek till nästa gång du startar Comix."
+
+#
 #~ msgid ""
 #~ "Automatically open the next archive in the directory when scrolling past "
 #~ "the last page of the current archive, and automatically open the previous "
@@ -1617,8 +2672,12 @@ msgstr "Förstoringsglas"
 #~ "sidan i det nuvarande arkivet och öppna automatiskt det föregående "
 #~ "arkivet i katalogen när du bläddrar förbi den första sidan i det "
 #~ "nuvarande arkivet."
+
+#
 #~ msgid "Hide the cursor when in fullscreen mode."
 #~ msgstr "Göm muspekaren när du är i helskärmsläge."
+
+#
 #~ msgid ""
 #~ "Set the image scaling method. The best choice is often \"Tiles\", it is "
 #~ "quite quick and produces almost as good results as \"Bilinear\" or \"Hyper"
@@ -1627,12 +2686,16 @@ msgstr "Förstoringsglas"
 #~ "Välj bildskalningsmetod. \"Brickor\" är oftast det bästa valet, det är "
 #~ "relativt snabbt och producerar nästan lika bra resultat som \"Bilinjär\" "
 #~ "eller \"Hyper\"."
+
+#
 #~ msgid ""
 #~ "Treat files with the following extensions as comment files. Extensions "
 #~ "should be separated by whitespaces. They are not case sensitive."
 #~ msgstr ""
 #~ "Behandla filer med följande filändelser som kommentarsfiler. "
 #~ "Filändelserna ska vara separerade med blanksteg. De är inte kastkänsliga."
+
+#
 #~ msgid ""
 #~ "Use smart scrolling with the space key. Pressing the space key normally "
 #~ "scrolls straight down one window height unless at the bottom of the page "
@@ -1657,23 +2720,37 @@ msgstr "Förstoringsglas"
 #~ "andra sidan. I dubbelsidesläge så bläddrar Comix heller inte till en ny "
 #~ "sida om man inte är längst ner på den andra sidan. Från längst ner på den "
 #~ "första sidan går den istället längst upp på den andra sidan."
+
+#
 #~ msgid "Always hide the thumbnail scrollbar."
 #~ msgstr "Göm alltid miniatyrbildernas rullningslist."
+
+#
 #~ msgid "Automatically open the last viewed page when Comix is started."
 #~ msgstr "Gå automatiskt till den senast lästa sidan när Comix startas."
+
+#
 #~ msgid ""
 #~ "Automatically go to the same directory as last time when opening the "
 #~ "\"Open\" dialog."
 #~ msgstr ""
 #~ "Gå automatiskt till samma katalog som senast när \"Öppna\"-dialogen "
 #~ "öppnas."
+
+#
 #~ msgid "Automatically go to this directory when opening the \"Open\" dialog."
 #~ msgstr ""
 #~ "Gå automatiskt till den här katalogen när \"Öppna\"-dialogen öppnas."
+
+#
 #~ msgid "Automatically restore these values the next time Comix is started."
 #~ msgstr "Återställ dessa värden automatiskt när Comix startas."
+
+#
 #~ msgid "Show the page number in the upper left corner of each thumbnail."
 #~ msgstr "Visa sidnummer i övre vänstra hörnet på varje miniatyrbild."
+
+#
 #~ msgid ""
 #~ "Automatically adjust the contrast of the images so that the darkest pixel "
 #~ "is completely black and the lightest pixel is completely white. This only "
@@ -1682,6 +2759,8 @@ msgstr "Förstoringsglas"
 #~ "Anpassa automatiskt kontrasten på bilderna så att den mörkaste pixeln är "
 #~ "helt svart och den ljusaste pixeln är helt vit. Det här fungerar endast "
 #~ "på bilder utan alpha-kanal (ej transparenta)."
+
+#
 #~ msgid ""
 #~ "The space key uses smart scrolling as if in double page mode even when in "
 #~ "single page mode. This can be useful for comics with two scanned pages in "
@@ -1690,14 +2769,20 @@ msgstr "Förstoringsglas"
 #~ "Blankstegstangenten använder alltid smart scrollning som om det vore i "
 #~ "dubbelsidesläge. Det kan vara användbart för serier som har två sidor "
 #~ "inskannade på varje bild. Sidorna antas vara av samma storlek."
+
+#
 #~ msgid "Adjust the lens magnification factor."
 #~ msgstr "Justera linsens förstoringsfaktor."
+
+#
 #~ msgid ""
 #~ "Set the lens width and height in pixels. A larger lens will use more CPU "
 #~ "resources than a small one."
 #~ msgstr ""
 #~ "Sätt förstoringsglasets storlek i pixlar. En stor lins använder mer "
 #~ "processorresurser än en liten."
+
+#
 #~ msgid ""
 #~ "Set the maximum update frequency for the magnification lens in "
 #~ "milliseconds. Setting the value too low can cause the lens to lag behind "
@@ -1707,6 +2792,8 @@ msgstr "Förstoringsglas"
 #~ "Välj den maximala uppdateringsfrekvensen för linsen i millisekunder. Ett "
 #~ "för lågt värde kan få linsen att släpa efter när musen förflyttas "
 #~ "hastigt. Ett för högt värde kan få linsen att verka hackig."
+
+#
 #~ msgid ""
 #~ "Read and write thumbnails in the ~/.thumbnails directory as proposed by "
 #~ "the freedesktop.org standard. With this preference set, Comix will use "
@@ -1726,6 +2813,8 @@ msgstr "Förstoringsglas"
 #~ "användas av Comix och vice versa. Om den här inställningen inte är "
 #~ "aktiverad så skapar Comix miniatyrbilder eftersom varje gång en katalog "
 #~ "öppnas."
+
+#
 #~ msgid ""
 #~ "Also use stored thumbnails for images in archives in a similiar way. Due "
 #~ "to restrictions in the freedesktop.org standard, these thumbnails will be "
@@ -1738,6 +2827,8 @@ msgstr "Förstoringsglas"
 #~ "kommer dessa att lagras i \"~/.comix\"-katalogen och enbart användas av "
 #~ "Comix. Om den här inställningen inte är aktiverad så skapar Comix "
 #~ "miniatyrbilder eftersom varje gång ett arkiv öppnas."
+
+#
 #~ msgid ""
 #~ "Only display a single image in double page mode if the image consists of "
 #~ "two pages. An image is assumed to consist of two pages if its width is "
@@ -1746,17 +2837,27 @@ msgstr "Förstoringsglas"
 #~ "Visa bara en enskild bild i dubbelsidesläge om bilden består av två "
 #~ "sidor. En bild antas bestå av två sidor om den är bredare än vad den är "
 #~ "hög."
+
+#
 #~ msgid "Filter out archives with regular expressions."
 #~ msgstr "Filtrera ut arkiv med reguljära uttryck."
+
+#
 #~ msgid "Apply filters on full paths rather than filenames."
 #~ msgstr "Lägg filter på hela sökvägar istället för på filnamn."
+
+#
 #~ msgid ""
 #~ "Store a list of the 10 last opened files that can be accessed through the "
 #~ "menus."
 #~ msgstr ""
 #~ "Spara en lista med de tio senast öppnade filerna som kan nås via menyerna."
+
+#
 #~ msgid "Go to page..."
 #~ msgstr "Gå till sida..."
+
+#
 #~ msgid ""
 #~ "Flip pages when scrolling \"off the page\" with the scroll wheel, even "
 #~ "when not in fit-to-screen mode. It takes three \"steps\" with the scroll "
@@ -1765,36 +2866,64 @@ msgstr "Förstoringsglas"
 #~ "Byt sida om du scrollar \"av sidan\" med scrollhjulet, även när du inte "
 #~ "är i skärmanpassningsläge. Det tar tre \"steg\" med scrollhjulet för att "
 #~ "aktivera bläddringen."
+
+#
 #~ msgid "No viewable files in"
 #~ msgstr "Inga visningsbara filer"
+
+#
 #~ msgid "No images in"
 #~ msgstr "Inga bilder i"
+
+#
 #~ msgid "Save saturation and contrast for future sessions"
 #~ msgstr "Spara färgmättnad och kontrast till framtida programkörningar"
+
+#
 #~ msgid "Saturation (default 1.0):"
 #~ msgstr "Färgmättnad (standard 1.0):"
+
+#
 #~ msgid "Contrast (default 1.0):"
 #~ msgstr "Kontrast (standard 1.0):"
+
+#
 #~ msgid "Clear"
 #~ msgstr "Radera"
+
+#
 #~ msgid "Advanced"
 #~ msgstr "Avancerat"
+
+#
 #~ msgid ""
 #~ "Automatically restore the saturation and contrast values the next time "
 #~ "Comix is started."
 #~ msgstr ""
 #~ "Återställ automatiskt samma värden på färgmättnad och kontrast när Comix "
 #~ "öppnas."
+
+#
 #~ msgid "Permanently remove"
 #~ msgstr "Permanent radera"
+
+#
 #~ msgid "Perform lossless JPEG rotation on"
 #~ msgstr "Verkställ ickedestruktiv JPEG-rotation på"
+
+#
 #~ msgid "Some images might be trimmed a bit during the rotation."
 #~ msgstr "En del bilder kan bli klippta en aning under rotationen."
+
+#
 #~ msgid "_Zoom"
 #~ msgstr "_Zoom"
+
+#
 #~ msgid "Manga mode (read right-to-left etc.)"
 #~ msgstr "Manga-läge (läs från höger till vänster etc.)"
+
+#
 #~ msgid ""
 #~ "View comics in manga mode. This means that the pages will be aligned "
 #~ "right-to-left in double page mode and that the scrollbars will behave "
@@ -1803,80 +2932,143 @@ msgstr "Förstoringsglas"
 #~ "Visa serier i manga-läge. Det innebär att sidorna visas från höger till "
 #~ "vänster i dubbelsidesläge och att rullningslisternas beteende anpassas "
 #~ "för att vara mer bekvämligt för läsning från höger till vänster."
+
+#
 #~ msgid "Stretch small images in fit-to-screen mode"
 #~ msgstr "Dra ut små bilder i skärmanpassningsläge"
+
+#
 #~ msgid ""
 #~ "Also scale images to a size that is larger than their original size in "
 #~ "fit-to-screen mode."
 #~ msgstr ""
 #~ "Skala också om bilder så att de blir större än deras originalstorlek i "
 #~ "skärmanpassningsläge."
+
+#
 #~ msgid "Select new archive type:"
 #~ msgstr "Välj ny arkivtyp:"
+
+#
 #~ msgid "New filename:"
 #~ msgstr "Nytt filnamn:"
+
+#
 #~ msgid "Overwrite"
 #~ msgstr "Skriv över"
+
+#
 #~ msgid "Invalid filename"
 #~ msgstr "Ogiltigt filnamn"
+
+#
 #~ msgid "File exists"
 #~ msgstr "Fil existerar"
+
+#
 #~ msgid ""
 #~ "already exists.\n"
 #~ "Overwrite?"
 #~ msgstr ""
 #~ "existerar redan.\n"
 #~ "Skriv över?"
+
+#
 #~ msgid ""
 #~ "is not a valid filename.\n"
 #~ "File was not created."
 #~ msgstr ""
 #~ "är inte ett giltigt filnamn.\n"
 #~ "Filen skapades inte."
+
+#
 #~ msgid "German translation"
 #~ msgstr "Tysk översättning"
+
+#
 #~ msgid "Archive size:"
 #~ msgstr "Arkivstorlek:"
+
+#
 #~ msgid "Archive type:"
 #~ msgstr "Arkivtyp:"
+
+#
 #~ msgid "Page:"
 #~ msgstr "Sida:"
+
+#
 #~ msgid "Name:"
 #~ msgstr "Namn:"
+
+#
 #~ msgid "Image #1 name:"
 #~ msgstr "Bild #1 namn:"
+
+#
 #~ msgid "Image #2 name:"
 #~ msgstr "Bild #2 namn:"
+
+#
 #~ msgid "Image #1 size:"
 #~ msgstr "Bild #1 storlek:"
+
+#
 #~ msgid "Image #1 type:"
 #~ msgstr "Bild #1 typ:"
+
+#
 #~ msgid "Image #2 size:"
 #~ msgstr "Bild #2 storlek:"
+
+#
 #~ msgid "Image #2 type:"
 #~ msgstr "Bild #2 typ:"
+
+#
 #~ msgid "Image #1 resolution:"
 #~ msgstr "Bild #1 upplösning:"
+
+#
 #~ msgid "Image #1 scaling:"
 #~ msgstr "Bild #1 skalning:"
+
+#
 #~ msgid "Image #2 resolution:"
 #~ msgstr "Bild #2 upplösning:"
+
+#
 #~ msgid "Image #2 scaling:"
 #~ msgstr "Bild #2 skalning:"
+
+#
 #~ msgid "Image size:"
 #~ msgstr "Bildstorlek:"
+
+#
 #~ msgid "Image type:"
 #~ msgstr "Bildtyp:"
+
+#
 #~ msgid "Resolution:"
 #~ msgstr "Upplösning:"
+
+#
 #~ msgid "Scaling:"
 #~ msgstr "Skalning:"
+
+#
 #~ msgid "and"
 #~ msgstr "och"
+
+#
 #~ msgid "rotated 90 degrees"
 #~ msgstr "roterad 90 grader"
+
+#
 #~ msgid "Could not load"
 #~ msgstr "Kunde inte ladda"
+
+#
 #~ msgid "and/or"
 #~ msgstr "och/eller"
-
