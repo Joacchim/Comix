@@ -1,9 +1,15 @@
-Comix 4.0
+Comix 4.0.0
     
-    - Various cleanup. Thanks to Maciej Katafiasz.
-    
-    - Going to the previous page now puts you at the bottom of that page
-    instead of at the top. Thanks to Dawid Plocki.
+    - Comix has been completely rewritten from scratch. On the surface things
+    look quite a bit like they used to, but the internal workings are 
+    entirely new. There are too many changes for them all to be mentioned
+    here, but a couple of highlights are a much more functional library and a
+    new archive editing dialog. The work on this new version of Comix has
+    been going on in rather sporadic phases for almost two years, and during
+    that time I have received help from lots of different people. Now, I must
+    admit, I can no longer remember them all. So instead of trying to list as
+    many as I can here, I will instead simply say thank you to everyone who
+    have contributed fixes, patches, suggestions or encouraging words.
 
 Comix 3.6.5
     
