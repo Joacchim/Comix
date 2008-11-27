@@ -11,7 +11,7 @@ msgstr ""
 "Project-Id-Version: comix.HEAD\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2008-11-22 02:42+0100\n"
-"PO-Revision-Date: 2008-11-23 22:56-0300\n"
+"PO-Revision-Date: 2008-11-26 23:22-0300\n"
 "Last-Translator: Manuel Quiñones <manuel.por.aca@gmail.com>\n"
 "Language-Team: Spanish <traductores@es.gnome.org>\n"
 "MIME-Version: 1.0\n"
@@ -1061,7 +1061,7 @@ msgstr "Usar el modo a doble página por defecto."
 # File: src/preferences.py, line: 250
 #: src/preferences.py:250
 msgid "Use fullscreen by default."
-msgstr "Uar pantalla completa por defecto."
+msgstr "Usar pantalla completa por defecto."
 
 #
 # File: src/preferences.py, line: 255
