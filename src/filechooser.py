@@ -86,8 +86,9 @@ class _ComicFileChooserDialog(gtk.Dialog):
         self.add_filter(_('Tar archives'),
             ('application/x-tar', 'application/x-gzip',
             'application/x-bzip2', 'application/x-cbt'))
-
-        self.filechooser.set_current_folder(prefs['path of last browsed'])
+        
+        if os.path.isdir(prefs['path of last browsed']):
+            self.filechooser.set_current_folder(prefs['path of last browsed'])
         self.show_all()
 
     def add_filter(self, name, mimes):
