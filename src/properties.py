@@ -72,14 +72,19 @@ class _Page(gtk.VBox):
         """Set the information below the main info box to the values in the
         sequence <info>. Each entry in info should be a tuple (desc, value).
         """
+        hbox = gtk.HBox(False, 10)
+        self.pack_start(hbox, False, False)
+        left_box = gtk.VBox(True, 8)
+        right_box = gtk.VBox(True, 8)
+        hbox.pack_start(left_box, False, False)
+        hbox.pack_start(right_box, False, False)
         for desc, value in info:
-            label = gtk.Label('%s:  %s' % (desc, value))
-            attrlist = pango.AttrList()
-            attrlist.insert(pango.AttrWeight(pango.WEIGHT_BOLD, 0,
-                len(desc) + 1))
-            label.set_attributes(attrlist)
-            label.set_alignment(0, 0.5)
-            self.pack_start(label, False, False)
+            desc_label = labels.BoldLabel('%s:' % desc)
+            desc_label.set_alignment(1.0, 1.0)
+            left_box.pack_start(desc_label, True, True)
+            value_label = gtk.Label(value)
+            value_label.set_alignment(0, 1.0)
+            right_box.pack_start(value_label, True, True)
 
 
 class _PropertiesDialog(gtk.Dialog):
