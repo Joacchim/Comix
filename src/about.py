@@ -8,6 +8,7 @@ import gtk
 import pango
 
 import constants
+import labels
 
 _dialog = None
 
@@ -69,17 +70,24 @@ class _AboutDialog(gtk.Dialog):
         # ----------------------------------------------------------------
         # Credits tab.
         # ----------------------------------------------------------------
-        box = gtk.VBox(False, 5)
-        box.set_border_width(5)
+        scrolled = gtk.ScrolledWindow()
+        scrolled.set_policy(gtk.POLICY_NEVER, gtk.POLICY_AUTOMATIC)
+        hbox = gtk.HBox(False, 5)
+        hbox.set_border_width(5)
+        scrolled.add_with_viewport(hbox)
+        left_box = gtk.VBox(True, 8)
+        right_box = gtk.VBox(True, 8)
+        hbox.pack_start(left_box, False, False)
+        hbox.pack_start(right_box, False, False)
         for nice_person, description in (
           ('Pontus Ekberg', _('Developer')),
-          ('Emfox Zhou &amp; Xie Yanbo',
-          _('Simplified Chinese translation')),
+          ('Emfox Zhou', _('Simplified Chinese translation')),
+          ('Xie Yanbo', _('Simplified Chinese translation')),
           ('Manuel Quiñones', _('Spanish translation')),
           ('Marcelo Góes', _('Brazilian Portuguese translation')),
-          ('Christoph Wolk',
-          _('German translation and Nautilus thumbnailer')),
-          ('Raimondo Giammanco &amp; GhePeU', _('Italian translation')),
+          ('Christoph Wolk', _('German translation and Nautilus thumbnailer')),
+          ('Raimondo Giammanco', _('Italian translation')),
+          ('GhePeU', _('Italian translation')),
           ('Arthur Nieuwland', _('Dutch translation')),
           ('Achraf Cherti', _('French translation')),
           ('Kamil Leduchowski', _('Polish translation')),
@@ -95,15 +103,13 @@ class _AboutDialog(gtk.Dialog):
           ('Andhika Padmawan', _('Indonesian translation')),
           ('Jan Nekvasil', _('Czech translation')),
           ('Victor Castillejo', _('Icon design'))):
-            label = gtk.Label()
-            label.set_text('%s:   %s' % (nice_person, description))
-            attrlist = pango.AttrList()
-            attrlist.insert(pango.AttrWeight(pango.WEIGHT_BOLD, 0,
-                len(nice_person) + 1))
-            label.set_attributes(attrlist)
-            box.pack_start(label, False, False, 0)
-            label.set_alignment(0, 0.5)
-        notebook.insert_page(box, gtk.Label(_('Credits')))
+            name_label = labels.BoldLabel('%s:' % nice_person)
+            name_label.set_alignment(1.0, 1.0)
+            left_box.pack_start(name_label, True, True)
+            desc_label = gtk.Label(description)
+            desc_label.set_alignment(0, 1.0)
+            right_box.pack_start(desc_label, True, True)
+        notebook.insert_page(scrolled, gtk.Label(_('Credits')))
         self.show_all()
 
 
