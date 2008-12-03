@@ -2,5 +2,5 @@
 
 import os
 
-VERSION = '4.0.0-rc1'
+VERSION = '4.0.0'
 COMIX_DIR = os.path.join(os.getenv('HOME', ''), '.comix')
