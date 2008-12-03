@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2008-11-22 02:42+0100\n"
-"PO-Revision-Date: 2008-07-05 13:16+0900\n"
+"PO-Revision-Date: 2008-12-03 23:30+0900\n"
 "Last-Translator: Lv5doraki <kmk1290@gmail.com>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -16,7 +16,8 @@ msgstr ""
 #
 # File: src/about.py, line: 18
 # File: src/about.py, line: 67
-#: src/about.py:18 src/about.py:67
+#: src/about.py:18
+#: src/about.py:67
 msgid "About"
 msgstr "Comix에 대하여"
 
@@ -30,7 +31,7 @@ msgstr "Comix는 만화책을 취급하기 위해서 디자인 된 만화책 뷰
 # File: src/about.py, line: 57
 #: src/about.py:57
 msgid "It reads ZIP, RAR and tar archives, as well as plain image files."
-msgstr ""
+msgstr "ZIP, RAR 그리고 tar 압축파일과 일반 이미지 파일을 읽습니다."
 
 #
 # File: src/about.py, line: 59
@@ -42,7 +43,7 @@ msgstr "Comix는 GPL로 라이센스 되고 있습니다."
 # File: src/about.py, line: 75
 #: src/about.py:75
 msgid "Developer"
-msgstr ""
+msgstr "개발자"
 
 #
 # File: src/about.py, line: 77
@@ -132,57 +133,55 @@ msgstr "러시아어 번역"
 # File: src/about.py, line: 92
 #: src/about.py:92
 msgid "Croatian translation"
-msgstr ""
+msgstr "크로아티아어 번역"
 
 #
 # File: src/about.py, line: 93
 #: src/about.py:93
 msgid "Korean translation"
-msgstr ""
+msgstr "한국어 번역"
 
 #
 # File: src/about.py, line: 94
 #: src/about.py:94
 msgid "Persian translation"
-msgstr ""
+msgstr "이슬란어 번역"
 
 #
 # File: src/about.py, line: 95
 #: src/about.py:95
 msgid "Indonesian translation"
-msgstr ""
+msgstr "인도네시아어 번역"
 
 #
 # File: src/about.py, line: 96
 #: src/about.py:96
 msgid "Czech translation"
-msgstr ""
+msgstr "체코어 번역"
 
 #
 # File: src/about.py, line: 97
 #: src/about.py:97
 msgid "Icon design"
-msgstr ""
+msgstr "아이콘 디자인"
 
 #
 # File: src/about.py, line: 106
 #: src/about.py:106
 msgid "Credits"
-msgstr "Credits"
+msgstr "도움 주신 분"
 
 #
 # File: src/archive.py, line: 66
 #: src/archive.py:66
 msgid "Could not find RAR file extractor!"
-msgstr ""
+msgstr "RAR 압축파일 풀기를 찾을 수 없습니다."
 
 #
 # File: src/archive.py, line: 68
 #: src/archive.py:68
-msgid ""
-"You need either the <i>rar</i> or the <i>unrar</i> program installed in "
-"order to read RAR (.cbr) files."
-msgstr ""
+msgid "You need either the <i>rar</i> or the <i>unrar</i> program installed in order to read RAR (.cbr) files."
+msgstr "RAR (.cbr) 파일을 여려면, RAR 혹은 UnRAR 프로그램이 필요합니다."
 
 #
 # File: src/archive.py, line: 301
@@ -230,20 +229,19 @@ msgstr "북마크 편집(_E)"
 # File: src/bookmark.py, line: 31
 #: src/bookmark.py:31
 msgid "_Clear bookmarks..."
-msgstr ""
+msgstr "북마크 지우기(_C)"
 
 #
 # File: src/bookmark.py, line: 77
 #: src/bookmark.py:77
 msgid "Clear all bookmarks?"
-msgstr ""
+msgstr "모든 북마크를 지울까요?"
 
 #
 # File: src/bookmark.py, line: 79
 #: src/bookmark.py:79
-msgid ""
-"All stored bookmarks will be removed. Are you sure that you want to continue?"
-msgstr ""
+msgid "All stored bookmarks will be removed. Are you sure that you want to continue?"
+msgstr "모든 저장된 북마크를 제거합니다. 계속하시겠습니까?"
 
 #
 # File: src/bookmark.py, line: 229
@@ -254,9 +252,10 @@ msgstr "북마크 편집"
 #
 # File: src/bookmark.py, line: 255
 # File: src/edit.py, line: 267
-#: src/bookmark.py:255 src/edit.py:267
+#: src/bookmark.py:255
+#: src/edit.py:267
 msgid "Name"
-msgstr ""
+msgstr "이름"
 
 #
 # File: src/bookmark.py, line: 256
@@ -267,7 +266,8 @@ msgstr "페이지"
 #
 # File: src/comment.py, line: 16
 # File: src/preferences.py, line: 288
-#: src/comment.py:16 src/preferences.py:288
+#: src/comment.py:16
+#: src/preferences.py:288
 msgid "Comments"
 msgstr "주석"
 
@@ -276,99 +276,93 @@ msgstr "주석"
 #: src/comment.py:53
 #, python-format
 msgid "Could not read %s"
-msgstr ""
+msgstr "읽을 수 없습니다. %s"
 
 #
 # File: src/deprecated.py, line: 16
 #: src/deprecated.py:16
 msgid "There are deprecated files left on your computer."
-msgstr ""
+msgstr "이미 사용하지 않는 파일이 컴퓨터에 남아있습니다."
 
 #
 # File: src/deprecated.py, line: 22
 #: src/deprecated.py:22
-msgid ""
-"Some old files (that were used for storing preferences, the library, "
-"bookmarks etc. for older versions of Comix) were found on your computer. If "
-"you do not plan on using the older versions of Comix again, you should "
-"remove these files in order to save some disk space. Do you want these files "
-"to be removed for you now?"
-msgstr ""
+msgid "Some old files (that were used for storing preferences, the library, bookmarks etc. for older versions of Comix) were found on your computer. If you do not plan on using the older versions of Comix again, you should remove these files in order to save some disk space. Do you want these files to be removed for you now?"
+msgstr "예전 버젼의 Comix 에서 사용하던 자료( 라이브러리, 북마크 등 )이 남아 있습니다. 하드디스크 공간의 절약을 위해, 이 자료들을 삭제하는것을 추천합니다. 지금 삭제하시겟습니까?"
 
 #
 # File: src/edit.py, line: 28
 #: src/edit.py:28
 msgid "Edit archive"
-msgstr ""
+msgstr "압축파일 수정"
 
 #
 # File: src/edit.py, line: 36
 #: src/edit.py:36
 msgid "Import"
-msgstr ""
+msgstr "불러오기"
 
 #
 # File: src/edit.py, line: 50
 #: src/edit.py:50
 msgid "Images"
-msgstr ""
+msgstr "이미지"
 
 #
 # File: src/edit.py, line: 51
 #: src/edit.py:51
 msgid "Other files"
-msgstr ""
+msgstr "기타 파일"
 
 #
 # File: src/edit.py, line: 99
 #: src/edit.py:99
 msgid "The new archive could not be saved!"
-msgstr ""
+msgstr "새 압축파일을 저장할 수 없습니다."
 
 #
 # File: src/edit.py, line: 101
 #: src/edit.py:101
 msgid "The original files have not been removed."
-msgstr ""
+msgstr "원본 파일이 제거되지 않았습니다."
 
 #
 # File: src/edit.py, line: 115
 #: src/edit.py:115
 msgid "Archives are stored as ZIP files."
-msgstr ""
+msgstr "ZIP 압축파일로 저장되어있습니다."
 
 #
 # File: src/edit.py, line: 168
 # File: src/edit.py, line: 285
-#: src/edit.py:168 src/edit.py:285
+#: src/edit.py:168
+#: src/edit.py:285
 msgid "Remove from archive"
-msgstr ""
+msgstr "압축파일에서 제거"
 
 #
 # File: src/edit.py, line: 255
 #: src/edit.py:255
-msgid ""
-"Please note that the only files that are automatically added to this list "
-"are those files in archives that Comix recognizes as comments."
-msgstr ""
+msgid "Please note that the only files that are automatically added to this list are those files in archives that Comix recognizes as comments."
+msgstr "참고: Comix 가 주석으로 분류한 자료들은 이 목록에 자동적으로 추가됩니다."
 
 #
 # File: src/edit.py, line: 270
 #: src/edit.py:270
 msgid "Size"
-msgstr ""
+msgstr "크기"
 
 #
 # File: src/enhance.py, line: 51
 #: src/enhance.py:51
 msgid "Enhance image"
-msgstr ""
+msgstr "이미지 향상"
 
 #
 # File: src/enhance.py, line: 52
 #: src/enhance.py:52
 msgid "Defaults"
-msgstr ""
+msgstr "기본값"
 
 #
 # File: src/enhance.py, line: 79
@@ -398,20 +392,19 @@ msgstr "선명함"
 # File: src/enhance.py, line: 126
 #: src/enhance.py:126
 msgid "Automatically adjust contrast."
-msgstr ""
+msgstr "자동으로 명암을 조정합니다."
 
 #
 # File: src/enhance.py, line: 128
 #: src/enhance.py:128
-msgid ""
-"Automatically adjust contrast (both lightness and darkness), separately for "
-"each colour band."
-msgstr ""
+msgid "Automatically adjust contrast (both lightness and darkness), separately for each colour band."
+msgstr "자동으로 명암을 조절합니다"
 
 #
 # File: src/filechooser.py, line: 35
 # File: src/library.py, line: 489
-#: src/filechooser.py:35 src/library.py:489
+#: src/filechooser.py:35
+#: src/library.py:489
 msgid "Open"
 msgstr "열기"
 
@@ -419,7 +412,7 @@ msgstr "열기"
 # File: src/filechooser.py, line: 39
 #: src/filechooser.py:39
 msgid "Save"
-msgstr ""
+msgstr "저장"
 
 #
 # File: src/filechooser.py, line: 75
@@ -431,113 +424,117 @@ msgstr "모든 파일"
 # File: src/filechooser.py, line: 78
 #: src/filechooser.py:78
 msgid "All Archives"
-msgstr ""
+msgstr "모든 압축파일"
 
 #
 # File: src/filechooser.py, line: 82
 #: src/filechooser.py:82
 msgid "ZIP archives"
-msgstr ""
+msgstr "ZIP 압축파일"
 
 #
 # File: src/filechooser.py, line: 84
 #: src/filechooser.py:84
 msgid "RAR archives"
-msgstr ""
+msgstr "RAR 압축파일"
 
 #
 # File: src/filechooser.py, line: 86
 #: src/filechooser.py:86
 msgid "Tar archives"
-msgstr ""
+msgstr "Tar 압축파일"
 
 #
 # File: src/filechooser.py, line: 125
 #: src/filechooser.py:125
 #, python-format
 msgid "A file named '%s' already exists. Do you want to replace it?"
-msgstr ""
+msgstr "'%s' 파일이 이미 있습니다. 덮어씌우시겟습니까?"
 
 #
 # File: src/filechooser.py, line: 128
 #: src/filechooser.py:128
 msgid "Replacing it will overwrite its contents."
-msgstr ""
+msgstr "내용을 덮어 쓰게됩니다."
 
 #
 # File: src/filechooser.py, line: 171
 # File: src/filechooser.py, line: 249
-#: src/filechooser.py:171 src/filechooser.py:249
+#: src/filechooser.py:171
+#: src/filechooser.py:249
 msgid "All images"
 msgstr "모든 이미지"
 
 #
 # File: src/filechooser.py, line: 173
 # File: src/filechooser.py, line: 251
-#: src/filechooser.py:173 src/filechooser.py:251
+#: src/filechooser.py:173
+#: src/filechooser.py:251
 msgid "JPEG images"
-msgstr ""
+msgstr "JPEG 이미지"
 
 #
 # File: src/filechooser.py, line: 174
 # File: src/filechooser.py, line: 252
-#: src/filechooser.py:174 src/filechooser.py:252
+#: src/filechooser.py:174
+#: src/filechooser.py:252
 msgid "PNG images"
-msgstr ""
+msgstr "PNG 이미지"
 
 #
 # File: src/filechooser.py, line: 195
 #: src/filechooser.py:195
 msgid "Automatically add the books to this collection"
-msgstr ""
+msgstr "모음집에 자동으로 만화책을 추가"
 
 #
 # File: src/filehandler.py, line: 209
 #: src/filehandler.py:209
 #, python-format
 msgid "Could not open %s: Is a directory."
-msgstr ""
+msgstr "디렉토리를 열 수 없습니다. %s"
 
 #
 # File: src/filehandler.py, line: 213
 #: src/filehandler.py:213
 #, python-format
 msgid "Could not open %s: No such file."
-msgstr ""
+msgstr "파일을 열 수 없습니다. %s"
 
 #
 # File: src/filehandler.py, line: 217
 #: src/filehandler.py:217
 #, python-format
 msgid "Could not open %s: Permission denied."
-msgstr ""
+msgstr "퍼미션 거부. %s"
 
 #
 # File: src/filehandler.py, line: 222
 #: src/filehandler.py:222
 #, python-format
 msgid "Could not open %s: Unknown file type."
-msgstr ""
+msgstr "알 수없는 파일 형식. %s"
 
 #
 # File: src/filehandler.py, line: 285
 #: src/filehandler.py:285
 #, python-format
 msgid "No images in '%s'"
-msgstr ""
+msgstr "이미지가 없습니다. %s"
 
 #
 # File: src/filehandler.py, line: 411
 #: src/filehandler.py:411
 msgid "Unknown filetype"
-msgstr ""
+msgstr "알 수 없는 파일 형식"
 
 #
 # File: src/librarybackend.py, line: 272
 # File: src/librarybackend.py, line: 274
-#: src/librarybackend.py:272 src/librarybackend.py:274
+#: src/librarybackend.py:272
+#: src/librarybackend.py:274
 msgid "(Copy)"
-msgstr ""
+msgstr "(Copy)"
 
 #
 # File: src/library.py, line: 38
@@ -549,249 +546,242 @@ msgstr "라이브러리"
 # File: src/library.py, line: 150
 #: src/library.py:150
 msgid "Rename..."
-msgstr ""
+msgstr "이름바꾸기"
 
 #
 # File: src/library.py, line: 152
 #: src/library.py:152
 msgid "Duplicate collection"
-msgstr ""
+msgstr "모음집사본"
 
 #
 # File: src/library.py, line: 154
 #: src/library.py:154
 msgid "Remove collection..."
-msgstr ""
+msgstr "모음집 제거"
 
 #
 # File: src/library.py, line: 202
 #: src/library.py:202
 msgid "All books"
-msgstr ""
+msgstr "모든 만화책"
 
 #
 # File: src/library.py, line: 231
 #: src/library.py:231
 msgid "Remove collection from the library?"
-msgstr ""
+msgstr "라이브러리로부터 모음집을 제거"
 
 #
 # File: src/library.py, line: 233
 #: src/library.py:233
-msgid ""
-"The selected collection will be removed from the library (but the books and "
-"subcollections in it will remain). Are you sure that you want to continue?"
-msgstr ""
+msgid "The selected collection will be removed from the library (but the books and subcollections in it will remain). Are you sure that you want to continue?"
+msgstr "선택된 모음집들을 라이브러리에서 삭제합니다 ( 그러나 만화책과 하위모음집은 지워지지 않습니다. ) 계속 진행하시겟습니까?"
 
 #
 # File: src/library.py, line: 251
 #: src/library.py:251
 msgid "Rename collection?"
-msgstr ""
+msgstr "모음집 이름바꾸기"
 
 #
 # File: src/library.py, line: 253
 #: src/library.py:253
 msgid "Please enter a new name for the selected collection."
-msgstr ""
+msgstr "선택된 모음집에 대한 새 이름을 입력하시기 바랍니다."
 
 #
 # File: src/library.py, line: 271
 #: src/library.py:271
 #, python-format
 msgid "Could not change the name to '%s'."
-msgstr ""
+msgstr "이름을 변경하지 못했습니다. '%s'."
 
 #
 # File: src/library.py, line: 275
 # File: src/library.py, line: 881
-#: src/library.py:275 src/library.py:881
+#: src/library.py:275
+#: src/library.py:881
 msgid "A collection by that name already exists."
-msgstr ""
+msgstr "같은 이름의 모음집이 존재합니다."
 
 #
 # File: src/library.py, line: 285
 #: src/library.py:285
 msgid "Could not duplicate collection."
-msgstr ""
+msgstr "모음집 사본을 못했습니다."
 
 #
 # File: src/library.py, line: 382
 #: src/library.py:382
 msgid "Root"
-msgstr ""
+msgstr "관리자"
 
 #
 # File: src/library.py, line: 386
 #: src/library.py:386
 #, python-format
-msgid ""
-"Put the collection '%(subcollection)s' in the collection '%(supercollection)"
-"s'."
-msgstr ""
+msgid "Put the collection '%(subcollection)s' in the collection '%(supercollection)s'."
+msgstr "'%(subcollection)s' 모음집을 '%(supercollection)s' 모음집에 넣기."
 
 #
 # File: src/library.py, line: 407
 #: src/library.py:407
 #, python-format
 msgid "Add books to '%s'."
-msgstr ""
+msgstr "만화책 추가 '%s'."
 
 #
 # File: src/library.py, line: 411
 #: src/library.py:411
 #, python-format
-msgid ""
-"Move books from '%(source collection)s' to '%(destination collection)s'."
-msgstr ""
+msgid "Move books from '%(source collection)s' to '%(destination collection)s'."
+msgstr "'%(source collection)s' 에서 '%(destination collection)s' 으로 만화책 이동."
 
 #
 # File: src/library.py, line: 492
 #: src/library.py:492
 msgid "Remove from this collection"
-msgstr ""
+msgstr "모음집을 제거"
 
 #
 # File: src/library.py, line: 495
 #: src/library.py:495
 msgid "Remove from the library..."
-msgstr ""
+msgstr "라이브러리에서 제거"
 
 #
 # File: src/library.py, line: 588
 #: src/library.py:588
 #, python-format
 msgid "Removed %(num)d book(s) from '%(collection)s'."
-msgstr ""
+msgstr "'%(collection)s' 에서 %(num)d  만화책 제거."
 
 #
 # File: src/library.py, line: 597
 #: src/library.py:597
 msgid "Remove books from the library?"
-msgstr ""
+msgstr "라이브러리에서 만화책 제거"
 
 #
 # File: src/library.py, line: 599
 #: src/library.py:599
-msgid ""
-"The selected books will be removed from the library (but the original files "
-"will be untouched). Are you sure that you want to continue?"
-msgstr ""
+msgid "The selected books will be removed from the library (but the original files will be untouched). Are you sure that you want to continue?"
+msgstr "선택한 만화책은 라이브러리에서 (원본 파일은 보존) 제거됩니다. 계속하시겠습니까?"
 
 #
 # File: src/library.py, line: 609
 #: src/library.py:609
 #, python-format
 msgid "Removed %d book(s) from the library."
-msgstr ""
+msgstr "라이브러리에서 %d 만화책을 제거"
 
 #
 # File: src/library.py, line: 769
 #: src/library.py:769
 msgid "Search"
-msgstr ""
+msgstr "검색"
 
 #
 # File: src/library.py, line: 774
 #: src/library.py:774
-msgid ""
-"Display only those books that have the specified text string in their full "
-"path. The search is not case sensitive."
-msgstr ""
+msgid "Display only those books that have the specified text string in their full path. The search is not case sensitive."
+msgstr "전체 경로에 지정된 문자열이 만화책을 표시합니다. 검색은 대소문자를 구분하지 않습니다."
 
 #
 # File: src/library.py, line: 776
 #: src/library.py:776
 msgid "Cover size"
-msgstr ""
+msgstr "표지 크기"
 
 #
 # File: src/library.py, line: 789
 #: src/library.py:789
 msgid "Add books"
-msgstr ""
+msgstr "만화책 추가"
 
 #
 # File: src/library.py, line: 793
 #: src/library.py:793
 msgid "Add more books to the library."
-msgstr ""
+msgstr "라이브러리에 더 많은 만화책 추가"
 
 #
 # File: src/library.py, line: 795
 #: src/library.py:795
 msgid "Add collection"
-msgstr ""
+msgstr "모음집 추가"
 
 #
 # File: src/library.py, line: 800
 #: src/library.py:800
 msgid "Add a new empty collection."
-msgstr ""
+msgstr "비어있는 새 모음집 추가"
 
 #
 # File: src/library.py, line: 806
 #: src/library.py:806
 msgid "Open the selected book."
-msgstr ""
+msgstr "선택한 만화책 열기"
 
 #
 # File: src/library.py, line: 832
 # File: src/properties.py, line: 113
-#: src/library.py:832 src/properties.py:113
+#: src/library.py:832
+#: src/properties.py:113
 #, python-format
 msgid "%d pages"
-msgstr ""
+msgstr "%d 페이지"
 
 #
 # File: src/library.py, line: 854
 #: src/library.py:854
 msgid "Add new collection?"
-msgstr ""
+msgstr "새 모음집을 추가합니까?"
 
 #
 # File: src/library.py, line: 856
 #: src/library.py:856
 msgid "Please enter a name for the new collection."
-msgstr ""
+msgstr "새 모음집의 이름을 입력해주세요."
 
 #
 # File: src/library.py, line: 862
 #: src/library.py:862
 msgid "New collection"
-msgstr ""
+msgstr "새 모음집"
 
 #
 # File: src/library.py, line: 876
 #: src/library.py:876
 #, python-format
 msgid "Could not add a new collection called '%s'."
-msgstr ""
+msgstr "새 모음집을 추가하지 못했습니다. '%s'."
 
 #
 # File: src/library.py, line: 910
 #: src/library.py:910
 msgid "Adding books"
-msgstr ""
+msgstr "만화책 추가"
 
 #
 # File: src/library.py, line: 930
 #: src/library.py:930
 msgid "Added books"
-msgstr ""
+msgstr "만화책 추가"
 
 #
 # File: src/library.py, line: 952
 #: src/library.py:952
 #, python-format
 msgid "Adding '%s'..."
-msgstr ""
+msgstr "추가 '%s'..."
 
 #
 # File: src/main.py, line: 666
 #: src/main.py:666
 msgid "SLIDESHOW"
-msgstr ""
+msgstr "슬라이드쇼"
 
 #
 # File: src/preferences.py, line: 78
@@ -803,31 +793,31 @@ msgstr "환경설정"
 # File: src/preferences.py, line: 93
 #: src/preferences.py:93
 msgid "Background"
-msgstr ""
+msgstr "배경색"
 
 #
 # File: src/preferences.py, line: 95
 #: src/preferences.py:95
 msgid "Use this colour as background"
-msgstr ""
+msgstr "이 색을 사용하여 배경으로"
 
 #
 # File: src/preferences.py, line: 97
 #: src/preferences.py:97
 msgid "Always use this selected colour as the background colour."
-msgstr ""
+msgstr "항상 배경색을 선택한 색으로 사용합니다."
 
 #
 # File: src/preferences.py, line: 102
 #: src/preferences.py:102
 msgid "Use dynamic background colour."
-msgstr ""
+msgstr "동적인 배경색 사용"
 
 #
 # File: src/preferences.py, line: 106
 #: src/preferences.py:106
 msgid "Automatically pick a background colour that fits the viewed image."
-msgstr ""
+msgstr "자동으로 그 이미지에 맞는 배경색을 선텍"
 
 #
 # File: src/preferences.py, line: 109
@@ -839,92 +829,85 @@ msgstr "미리보기"
 # File: src/preferences.py, line: 110
 #: src/preferences.py:110
 msgid "Thumbnail size (in pixels)"
-msgstr ""
+msgstr "미리보기 크기(픽셀)"
 
 #
 # File: src/preferences.py, line: 117
 #: src/preferences.py:117
 msgid "Show page numbers on thumbnails."
-msgstr ""
+msgstr "미리보기의 페이지 번호 보기"
 
 #
 # File: src/preferences.py, line: 124
 #: src/preferences.py:124
 msgid "Magnifying Glass"
-msgstr ""
+msgstr "돋보기"
 
 #
 # File: src/preferences.py, line: 125
 #: src/preferences.py:125
 msgid "Magnifying glass size (in pixels)"
-msgstr ""
+msgstr "돋보기 크기(픽셀)"
 
 #
 # File: src/preferences.py, line: 131
 #: src/preferences.py:131
-msgid ""
-"Set the size of the magnifying glass. It is a square with a side of this "
-"many pixels."
-msgstr ""
+msgid "Set the size of the magnifying glass. It is a square with a side of this many pixels."
+msgstr "돋보기의 크기를 설정합니다."
 
 #
 # File: src/preferences.py, line: 133
 #: src/preferences.py:133
 msgid "Magnification factor"
-msgstr ""
+msgstr "확대 인수"
 
 #
 # File: src/preferences.py, line: 140
 #: src/preferences.py:140
 msgid "Set the magnification factor of the magnifying glass."
-msgstr ""
+msgstr "돋보기의 확대 인수를 설정합니다."
 
 #
 # File: src/preferences.py, line: 143
 #: src/preferences.py:143
 msgid "Image scaling"
-msgstr ""
+msgstr "이미지 스케일링"
 
 #
 # File: src/preferences.py, line: 144
 #: src/preferences.py:144
 msgid "Stretch small images."
-msgstr ""
+msgstr "작은 이미지 확대"
 
 #
 # File: src/preferences.py, line: 148
 #: src/preferences.py:148
-msgid ""
-"Stretch images to a size that is larger than their original size if the "
-"current zoom mode requests it. If this preference is unset, images are never "
-"scaled to be larger than their original size."
-msgstr ""
+msgid "Stretch images to a size that is larger than their original size if the current zoom mode requests it. If this preference is unset, images are never scaled to be larger than their original size."
+msgstr "이 설정을 사용하면 화면 크기에 맞게 확대/축소 됩니다."
 
 #
 # File: src/preferences.py, line: 151
 #: src/preferences.py:151
 msgid "Transparency"
-msgstr ""
+msgstr "투명도"
 
 #
 # File: src/preferences.py, line: 153
 #: src/preferences.py:153
 msgid "Use checkered background for transparent images."
-msgstr ""
+msgstr "체크된 이미지를 투명 배경그림으로 사용합니다."
 
 #
 # File: src/preferences.py, line: 159
 #: src/preferences.py:159
-msgid ""
-"Use a grey checkered background for transparent images. If this preference "
-"is unset, the background is plain white instead."
-msgstr ""
+msgid "Use a grey checkered background for transparent images. If this preference is unset, the background is plain white instead."
+msgstr "회색 체크된 이미지를 투영그림으로 사용합니다. 체크하지 않을 경우 기본바탕(흰색)을 적용합니다."
 
 #
 # File: src/preferences.py, line: 161
 #: src/preferences.py:161
 msgid "Appearance"
-msgstr ""
+msgstr "보기"
 
 #
 # File: src/preferences.py, line: 167
@@ -936,137 +919,117 @@ msgstr "스크롤"
 # File: src/preferences.py, line: 169
 #: src/preferences.py:169
 msgid "Use smart space key scrolling."
-msgstr ""
+msgstr "스페이스 키를 사용하여 스크롤합니다"
 
 #
 # File: src/preferences.py, line: 174
 #: src/preferences.py:174
-msgid ""
-"Use smart scrolling with the space key. Normally the space key scrolls only "
-"right down (or up when shift is pressed), but with this preference set it "
-"also scrolls sideways and so tries to follow the natural reading order of "
-"the comic book."
-msgstr ""
+msgid "Use smart scrolling with the space key. Normally the space key scrolls only right down (or up when shift is pressed), but with this preference set it also scrolls sideways and so tries to follow the natural reading order of the comic book."
+msgstr "스페이스바를 이용하여, 스마트 스크롤 기능을 사용하십시오. 보통 스페이스바는 아래쪽(쉬프트가 눌려있으면 위쪽)으로 스크롤 하지만, 스마트 스크롤은 책의 내용이나 순서를 변경하지 않고 좌우로 스크롤 하여 더 쉽게 읽을수 있도록 도와줍니다. "
 
 #
 # File: src/preferences.py, line: 177
 # File: src/ui.py, line: 296
-#: src/preferences.py:177 src/ui.py:296
+#: src/preferences.py:177
+#: src/ui.py:296
 msgid "Double page mode"
-msgstr "좌우 페이지 보기"
+msgstr "양면 보기"
 
 #
 # File: src/preferences.py, line: 179
 #: src/preferences.py:179
 msgid "Flip two pages in double page mode."
-msgstr ""
+msgstr "2 페이지 넘기면 양면 보기로 전환"
 
 #
 # File: src/preferences.py, line: 184
 #: src/preferences.py:184
-msgid ""
-"Flip two pages, instead of one, each time we flip pages in double page mode."
-msgstr ""
+msgid "Flip two pages, instead of one, each time we flip pages in double page mode."
+msgstr " 페이지를 동시에 두번 넘기면 양면 보기로 전환됩니다."
 
 #
 # File: src/preferences.py, line: 187
 #: src/preferences.py:187
 msgid "Show only one wide image in double page mode."
-msgstr ""
+msgstr "양면 보기에서 넓은 이미지 보기"
 
 #
 # File: src/preferences.py, line: 193
 #: src/preferences.py:193
-msgid ""
-"Display only one image in double page mode, if the image's width exceeds its "
-"height. The result of this is that scans that span two pages are displayed "
-"properly (i.e. alone) also in double page mode."
-msgstr ""
+msgid "Display only one image in double page mode, if the image's width exceeds its height. The result of this is that scans that span two pages are displayed properly (i.e. alone) also in double page mode."
+msgstr "양면 보기에서 이미지의 가로크기가 너무 클 경우엔 크기를 맞추기 위하여 하나의 이미지만 보여집니다."
 
 #
 # File: src/preferences.py, line: 196
 #: src/preferences.py:196
 msgid "Files"
-msgstr ""
+msgstr "파일"
 
 #
 # File: src/preferences.py, line: 198
 #: src/preferences.py:198
 msgid "Automatically open the next archive."
-msgstr ""
+msgstr "자동으로 다음 압축파일 열기"
 
 #
 # File: src/preferences.py, line: 203
 #: src/preferences.py:203
-msgid ""
-"Automatically open the next archive in the directory when flipping past the "
-"last page, or the previous archive when flipping past the first page."
-msgstr ""
+msgid "Automatically open the next archive in the directory when flipping past the last page, or the previous archive when flipping past the first page."
+msgstr " 마지막 페이지에서 페이지 넘기기를 할경우, 자동적으로 같은 디렉토리에 있는 다음 압축파일을 불러옵니다."
 
 #
 # File: src/preferences.py, line: 206
 #: src/preferences.py:206
 msgid "Automatically open the last viewed file on startup."
-msgstr ""
+msgstr "자동으로 프로그램 시작할때 마지막 파일 열기"
 
 #
 # File: src/preferences.py, line: 211
 #: src/preferences.py:211
-msgid ""
-"Automatically open, on startup, the file that was open when Comix was last "
-"closed."
-msgstr ""
+msgid "Automatically open, on startup, the file that was open when Comix was last closed."
+msgstr "Comix로 열었던 마지막 파일을 자동으로 열어봅니다."
 
 #
 # File: src/preferences.py, line: 214
 #: src/preferences.py:214
 msgid "Store information about recently opened files."
-msgstr ""
+msgstr "최근 열어본 압축파일에 대한 정보를 표시합니다."
 
 #
 # File: src/preferences.py, line: 219
 #: src/preferences.py:219
-msgid ""
-"Add information about all files opened from within Comix to the shared "
-"recent files list."
-msgstr ""
+msgid "Add information about all files opened from within Comix to the shared recent files list."
+msgstr "Comix 의 최근 공유 목록에 설명을 추가합니다. 혹은 설명을 추가하십시오."
 
 #
 # File: src/preferences.py, line: 222
 #: src/preferences.py:222
 msgid "Store thumbnails for opened files."
-msgstr ""
+msgstr "열어본 파일의 미리보기를 보관"
 
 #
 # File: src/preferences.py, line: 227
 #: src/preferences.py:227
-msgid ""
-"Store thumbnails for opened files according to the freedesktop.org "
-"specification. These thumbnails are shared by many other applications, such "
-"as most file managers."
-msgstr ""
+msgid "Store thumbnails for opened files according to the freedesktop.org specification. These thumbnails are shared by many other applications, such as most file managers."
+msgstr "열려진 파일의 썸네일을 freedesktop.org 에서 지정한 바에 따라 저장하여, 다른 사용자들과 썸네일을 공유하게 됩니다."
 
 #
 # File: src/preferences.py, line: 230
 #: src/preferences.py:230
 msgid "Cache"
-msgstr ""
+msgstr "캐시"
 
 #
 # File: src/preferences.py, line: 231
 #: src/preferences.py:231
 msgid "Use a cache to speed up browsing."
-msgstr ""
+msgstr "캐시를 사용하여 탐색속도를 높입니다."
 
 #
 # File: src/preferences.py, line: 235
 #: src/preferences.py:235
-msgid ""
-"Cache the images that are next to the currently viewed image in order to "
-"speed up browsing. Since the speed improvements are quite big, it is "
-"recommended that you have this preference set, unless you are running short "
-"on free RAM."
-msgstr ""
+msgid "Cache the images that are next to the currently viewed image in order to speed up browsing. Since the speed improvements are quite big, it is recommended that you have this preference set, unless you are running short on free RAM."
+msgstr "브라우징 속도를 높이기 위해, 다음 페이지의 썸네일을 캐시로 저장합니다. 이 기능 속도와 관련된 것이기에, RAM 공간이 부족한 사용자는 직접 설정하는것을 권장합니다."
 
 #
 # File: src/preferences.py, line: 237
@@ -1078,57 +1041,61 @@ msgstr "일반"
 # File: src/preferences.py, line: 243
 #: src/preferences.py:243
 msgid "Default modes"
-msgstr ""
+msgstr "기본 보기"
 
 #
 # File: src/preferences.py, line: 245
 #: src/preferences.py:245
 msgid "Use double page mode by default."
-msgstr ""
+msgstr "양면 보기를 기본으로 사용"
 
 #
 # File: src/preferences.py, line: 250
 #: src/preferences.py:250
 msgid "Use fullscreen by default."
-msgstr ""
+msgstr "전체화면을 기본으로 사용"
 
 #
 # File: src/preferences.py, line: 255
 #: src/preferences.py:255
 msgid "Use manga mode by default."
-msgstr ""
+msgstr "만화 페이지순 보기를 기본으로 사용"
 
 #
 # File: src/preferences.py, line: 260
 #: src/preferences.py:260
 msgid "Default zoom mode"
-msgstr ""
+msgstr "기본 줌 모드"
 
 #
 # File: src/preferences.py, line: 262
 # File: src/ui.py, line: 288
-#: src/preferences.py:262 src/ui.py:288
+#: src/preferences.py:262
+#: src/ui.py:288
 msgid "Best fit mode"
-msgstr ""
+msgstr "최적 보기"
 
 #
 # File: src/preferences.py, line: 263
 # File: src/ui.py, line: 290
-#: src/preferences.py:263 src/ui.py:290
+#: src/preferences.py:263
+#: src/ui.py:290
 msgid "Fit width mode"
 msgstr "가로 폭 맞춤"
 
 #
 # File: src/preferences.py, line: 264
 # File: src/ui.py, line: 292
-#: src/preferences.py:264 src/ui.py:292
+#: src/preferences.py:264
+#: src/ui.py:292
 msgid "Fit height mode"
 msgstr "세로 폭 맞춤"
 
 #
 # File: src/preferences.py, line: 265
 # File: src/ui.py, line: 294
-#: src/preferences.py:265 src/ui.py:294
+#: src/preferences.py:265
+#: src/ui.py:294
 msgid "Manual zoom mode"
 msgstr "수동 줌 조절"
 
@@ -1136,13 +1103,13 @@ msgstr "수동 줌 조절"
 # File: src/preferences.py, line: 271
 #: src/preferences.py:271
 msgid "Fullscreen"
-msgstr ""
+msgstr "전체화면"
 
 #
 # File: src/preferences.py, line: 273
 #: src/preferences.py:273
 msgid "Automatically hide all toolbars in fullscreen."
-msgstr ""
+msgstr "전체화면 상태에서 도구모음 숨김"
 
 #
 # File: src/preferences.py, line: 279
@@ -1154,21 +1121,19 @@ msgstr "슬라이드쇼"
 # File: src/preferences.py, line: 280
 #: src/preferences.py:280
 msgid "Slideshow delay (in seconds)"
-msgstr ""
+msgstr "슬라이드쇼 지연시간(초)"
 
 #
 # File: src/preferences.py, line: 289
 #: src/preferences.py:289
 msgid "Comment extensions"
-msgstr ""
+msgstr "주석 확장"
 
 #
 # File: src/preferences.py, line: 295
 #: src/preferences.py:295
-msgid ""
-"Treat all files found within archives, that have one of these file endings, "
-"as comments."
-msgstr ""
+msgid "Treat all files found within archives, that have one of these file endings, as comments."
+msgstr "목록중에 이와 같은 확장자 형식을 가진 파일을 주석으로 인식합니다."
 
 #
 # File: src/preferences.py, line: 297
@@ -1187,40 +1152,45 @@ msgstr "등록정보"
 #: src/properties.py:114
 #, python-format
 msgid "%d comments"
-msgstr ""
+msgstr "%d 주석"
 
 #
 # File: src/properties.py, line: 124
 # File: src/properties.py, line: 159
-#: src/properties.py:124 src/properties.py:159
+#: src/properties.py:124
+#: src/properties.py:159
 msgid "Location"
 msgstr "위치"
 
 #
 # File: src/properties.py, line: 126
 # File: src/properties.py, line: 160
-#: src/properties.py:126 src/properties.py:160
+#: src/properties.py:126
+#: src/properties.py:160
 msgid "Accessed"
 msgstr "마지막 접근"
 
 #
 # File: src/properties.py, line: 128
 # File: src/properties.py, line: 162
-#: src/properties.py:128 src/properties.py:162
+#: src/properties.py:128
+#: src/properties.py:162
 msgid "Modified"
 msgstr "마지막 수정"
 
 #
 # File: src/properties.py, line: 130
 # File: src/properties.py, line: 164
-#: src/properties.py:130 src/properties.py:164
+#: src/properties.py:130
+#: src/properties.py:164
 msgid "Permissions"
 msgstr "퍼미션"
 
 #
 # File: src/properties.py, line: 131
 # File: src/properties.py, line: 165
-#: src/properties.py:131 src/properties.py:165
+#: src/properties.py:131
+#: src/properties.py:165
 msgid "Owner"
 msgstr "소유자"
 
@@ -1240,61 +1210,57 @@ msgstr "이미지"
 # File: src/thumbremover.py, line: 22
 #: src/thumbremover.py:22
 msgid "Thumbnail maintenance"
-msgstr ""
+msgstr "미리보기 관리"
 
 #
 # File: src/thumbremover.py, line: 24
 #: src/thumbremover.py:24
 msgid "Cleanup"
-msgstr ""
+msgstr "지우기"
 
 #
 # File: src/thumbremover.py, line: 36
 #: src/thumbremover.py:36
 msgid "Cleanup thumbnails"
-msgstr ""
+msgstr "미리보기 지우기"
 
 #
 # File: src/thumbremover.py, line: 46
 #: src/thumbremover.py:46
-msgid ""
-"Thumbnails for files (such as image files and comic book archives) are "
-"stored in your home directory. Many different applications use and create "
-"these thumbnails, but sometimes thumbnails remain even though the original "
-"files have been removed - wasting space. This dialog can cleanup your stored "
-"thumbnails by removing orphaned and outdated thumbnails."
-msgstr ""
+msgid "Thumbnails for files (such as image files and comic book archives) are stored in your home directory. Many different applications use and create these thumbnails, but sometimes thumbnails remain even though the original files have been removed - wasting space. This dialog can cleanup your stored thumbnails by removing orphaned and outdated thumbnails."
+msgstr "디렉토리에 썸네일이 저장됩니다. 많은 브라우져에서 썸네일을 사용하지만, 가끔씩 원본 파일을 삭제하여도 썸네일이 삭제되지 않는 브라우져가 있습니다. 이는 하드디스크 공간의 낭비이며, 이 창은 이미 저장된 썸네일이나, 기한이 지난 썸네일을 정리하고 삭제하여 하드디스크 공간을 절약할수 있도록 도와줍니다."
 
 #
 # File: src/thumbremover.py, line: 58
 #: src/thumbremover.py:58
 msgid "Thumbnail directory"
-msgstr ""
+msgstr "미리보기 디렉토리"
 
 #
 # File: src/thumbremover.py, line: 65
 #: src/thumbremover.py:65
 msgid "Total number of thumbnails"
-msgstr ""
+msgstr "미리보기 합계"
 
 #
 # File: src/thumbremover.py, line: 68
 # File: src/thumbremover.py, line: 75
-#: src/thumbremover.py:68 src/thumbremover.py:75
+#: src/thumbremover.py:68
+#: src/thumbremover.py:75
 msgid "Calculating..."
-msgstr ""
+msgstr "계산 중..."
 
 #
 # File: src/thumbremover.py, line: 72
 #: src/thumbremover.py:72
 msgid "Total size of thumbnails"
-msgstr ""
+msgstr "미리보기 총 크기"
 
 #
 # File: src/thumbremover.py, line: 80
 #: src/thumbremover.py:80
 msgid "Do you want to cleanup orphaned and outdated thumbnails now?"
-msgstr ""
+msgstr "오래된 미리보기를 정리합니다."
 
 #
 # File: src/thumbremover.py, line: 116
@@ -1306,20 +1272,20 @@ msgstr "미리보기 제거"
 # File: src/thumbremover.py, line: 135
 #: src/thumbremover.py:135
 msgid "Number of removed thumbnails"
-msgstr ""
+msgstr "미리보기 번호 제거"
 
 #
 # File: src/thumbremover.py, line: 142
 #: src/thumbremover.py:142
 msgid "Total size of removed thumbnails"
-msgstr ""
+msgstr "미리보기 총 크기 제거"
 
 #
 # File: src/thumbremover.py, line: 193
 #: src/thumbremover.py:193
 #, python-format
 msgid "Removed thumbnail for '%s'"
-msgstr ""
+msgstr "미리보기 제거 '%s'"
 
 #
 # File: src/ui.py, line: 34
@@ -1361,7 +1327,7 @@ msgstr "축소(_O)"
 # File: src/ui.py, line: 46
 #: src/ui.py:46
 msgid "O_riginal size"
-msgstr ""
+msgstr "원본 크기(_R)"
 
 #
 # File: src/ui.py, line: 48
@@ -1415,7 +1381,7 @@ msgstr "수동 줌 조절(_Z)"
 # File: src/ui.py, line: 63
 #: src/ui.py:63
 msgid "Open _recent"
-msgstr ""
+msgstr "최근 문서 열기(_R)"
 
 #
 # File: src/ui.py, line: 64
@@ -1427,7 +1393,7 @@ msgstr "북마크(_B)"
 # File: src/ui.py, line: 65
 #: src/ui.py:65
 msgid "T_oolbars"
-msgstr ""
+msgstr "도구모음(_O)"
 
 #
 # File: src/ui.py, line: 66
@@ -1481,7 +1447,7 @@ msgstr "좌우 페이지 보기(_D)"
 # File: src/ui.py, line: 79
 #: src/ui.py:79
 msgid "_Toolbar"
-msgstr "툴바(_T)"
+msgstr "도구모음(_T)"
 
 #
 # File: src/ui.py, line: 81
@@ -1529,19 +1495,19 @@ msgstr "회전 상태 유지(_K)"
 # File: src/ui.py, line: 95
 #: src/ui.py:95
 msgid "Run _slideshow"
-msgstr ""
+msgstr "슬라이드쇼 실행(_S)"
 
 #
 # File: src/ui.py, line: 97
 #: src/ui.py:97
 msgid "Magnifying _glass"
-msgstr ""
+msgstr "돋보기(_G)"
 
 #
 # File: src/ui.py, line: 101
 #: src/ui.py:101
 msgid "_Best fit mode"
-msgstr ""
+msgstr "최적 보기(_B)"
 
 #
 # File: src/ui.py, line: 103
@@ -1559,7 +1525,7 @@ msgstr "세로폭 맞춤(_H)"
 # File: src/ui.py, line: 107
 #: src/ui.py:107
 msgid "M_anual zoom mode"
-msgstr ""
+msgstr "수동 줌 조절(_A)"
 
 #
 # File: src/ui.py, line: 113
@@ -1571,13 +1537,13 @@ msgstr "Comix에 대하여(_A)"
 # File: src/ui.py, line: 115
 #: src/ui.py:115
 msgid "_View comments..."
-msgstr ""
+msgstr "주석 보기(_V)"
 
 #
 # File: src/ui.py, line: 117
 #: src/ui.py:117
 msgid "_Edit archive..."
-msgstr ""
+msgstr "압축파일 보기(_E)"
 
 #
 # File: src/ui.py, line: 119
@@ -1589,19 +1555,19 @@ msgstr "열기(_O)"
 # File: src/ui.py, line: 121
 #: src/ui.py:121
 msgid "_Properties"
-msgstr ""
+msgstr "속성(_P)"
 
 #
 # File: src/ui.py, line: 123
 #: src/ui.py:123
 msgid "_Enhance image..."
-msgstr ""
+msgstr "이미지 향상"
 
 #
 # File: src/ui.py, line: 126
 #: src/ui.py:126
 msgid "_Thumbnail maintenance..."
-msgstr ""
+msgstr "미리보기 관리(_T)"
 
 #
 # File: src/ui.py, line: 128
@@ -1613,7 +1579,7 @@ msgstr "설정(_E)"
 # File: src/ui.py, line: 132
 #: src/ui.py:132
 msgid "_Library..."
-msgstr ""
+msgstr "라이브러리(_L)"
 
 #
 # File: src/ui.py, line: 282
@@ -1649,927 +1615,5 @@ msgstr "만화 페이지순 보기"
 # File: src/ui.py, line: 298
 #: src/ui.py:298
 msgid "Magnifying glass"
-msgstr ""
+msgstr "돋보기"
 
-#
-#~ msgid "No images in \"%s\""
-#~ msgstr "\"%s\"에 이미지가 없습니다."
-
-#
-#~ msgid "Default"
-#~ msgstr "기본값"
-
-#
-#~ msgid "Automatically adjust contrast"
-#~ msgstr "대비 자동조정"
-
-#
-#~ msgid "Fit-to-screen mode"
-#~ msgstr "화면에 맞춤"
-
-#
-#~ msgid "_Normal size"
-#~ msgstr "보통 크기(_N)"
-
-#
-#~ msgid "_Toolbars"
-#~ msgstr "툴바(_T)"
-
-#
-#~ msgid "Fit-to-_screen mode"
-#~ msgstr "화면에 맞춤(_S)"
-
-#
-#~ msgid "View _comments"
-#~ msgstr "주석 보기(_C)"
-
-#
-#~ msgid "Proper_ties"
-#~ msgstr "등록정보(_T)"
-
-#
-#~ msgid "Magnifying lens"
-#~ msgstr "렌즈 확대"
-
-#
-#~ msgid "Apply filter on full path"
-#~ msgstr "모든 경로명에 필터 적용"
-
-#
-#~ msgid "Add archives to library."
-#~ msgstr "압축파일을 라이브러리에 추가"
-
-#
-#~ msgid "Remove selected archive from library."
-#~ msgstr "선택한 압축파일을 라이브러리에서 삭제"
-
-#
-#~ msgid "Clean up"
-#~ msgstr "지우기"
-
-#
-#~ msgid "Remove orphaned or outdated library entries."
-#~ msgstr "오래된 라이브러리 항목 삭제"
-
-#
-#~ msgid "Close this window."
-#~ msgstr "현재 창 닫기"
-
-#
-#~ msgid "Open selected archive."
-#~ msgstr "선택된 압축파일 열기"
-
-#
-#~ msgid "All archives"
-#~ msgstr "모든 압축파일"
-
-#
-#~ msgid "JPEG image"
-#~ msgstr "JPEG 이미지"
-
-#
-#~ msgid "PNG image"
-#~ msgstr "PNG 이미지"
-
-#
-#~ msgid "GIF image"
-#~ msgstr "GIF 이미지"
-
-#
-#~ msgid "TIFF image"
-#~ msgstr "TIFF 이미지"
-
-#
-#~ msgid "BMP image"
-#~ msgstr "BMP 이미지"
-
-#
-#~ msgid "ICO image"
-#~ msgstr "ICO 이미지"
-
-#
-#~ msgid "XPM image"
-#~ msgstr "XPM 이미지"
-
-#
-#~ msgid "XBM image"
-#~ msgstr "XBM 이미지"
-
-#
-#~ msgid "tar archive"
-#~ msgstr "tar 압축파일"
-
-#
-#~ msgid "Add archives recursively"
-#~ msgstr "추가 압축파일 복구"
-
-#
-#~ msgid "Select folder"
-#~ msgstr "폴더 선택"
-
-#
-#~ msgid "Fullscreen as default"
-#~ msgstr "전체화면을 기본값으로 적용"
-
-#
-#~ msgid "Double page mode as default"
-#~ msgstr "좌우 페이지 보기를 기본값으로 적용"
-
-#
-#~ msgid "Stretch small images"
-#~ msgstr "작은 이미지 확대"
-
-#
-#~ msgid "Use smart scaling in double page mode"
-#~ msgstr "좌우 페이지 보기에 스마트 스케일링 사용"
-
-#
-#~ msgid "Always view comments when opening a new file"
-#~ msgstr "새로운 파일을 열 때 항상 코멘트를 보기"
-
-#
-#~ msgid "Hide menubar, scrollbars etc. in fullscreen mode"
-#~ msgstr "전체화면 모드에서 도구모음, 스크롤바 숨김"
-
-#
-#~ msgid "Cache pages for faster forward flipping"
-#~ msgstr "다음 페이지 이미지를 캐쉬"
-
-#
-#~ msgid "Scroll wheel scrolls horizontally at top and bottom of page"
-#~ msgstr "페이지의 맨 위와 아래에서 좌우 스크롤한다"
-
-#
-#~ msgid "Flip page when scrolling off the top or bottom of page"
-#~ msgstr "페이지의 맨 위나 아래에 왔을 때 페이지를 이동"
-
-#
-#~ msgid "Hide thumbnail scrollbar"
-#~ msgstr "미리보기 스크롤 바를 숨김"
-
-#
-#~ msgid "Space key uses smart scrolling"
-#~ msgstr "스페이스 키로 스마트 스크롤을 실행"
-
-#
-#~ msgid "Save window position and size for future sessions"
-#~ msgstr "윈도우의 위치와 크기를 기록"
-
-#
-#~ msgid "Go to the next archive in directory after last page"
-#~ msgstr "마지막 페이지에서 같은 디렉토리의 다음 압축파일을 열기"
-
-#
-#~ msgid "Hide cursor in fullscreen mode"
-#~ msgstr "전체화면에서 마우스 커서를 숨김"
-
-#
-#~ msgid "Open last viewed file on start"
-#~ msgstr "시작시 마지막에 본 파일을 표시"
-
-#
-#~ msgid "Show page numbers on thumbnails"
-#~ msgstr "페이지번호를 미리보기에 표시"
-
-#
-#~ msgid "Always use smart scrolling as if in double page mode"
-#~ msgstr "좌우 페이지 표시에서 항상 스마트 스크롤을 실시"
-
-#
-#~ msgid "Use stored thumbnails for images in directories"
-#~ msgstr "디렉토리내의 이미지에 미리 기록된 미리보기를 사용"
-
-#
-#~ msgid "Use stored thumbnails for images in archives"
-#~ msgstr "압축파일내의 이미지에 미리 기록된 미리보기를 사용"
-
-#
-#~ msgid "Display only one page in double page mode if the image is wide"
-#~ msgstr "좌우 페이지 보기로 이미지 폭이 클 때 1장만 보이기"
-
-#
-#~ msgid "Store recently opened files"
-#~ msgstr "최근 열린 파일을 기록"
-
-#
-#~ msgid "Always go to this directory in the \"Open\" dialog:"
-#~ msgstr "항상 해당 디렉토리로 \"열기 \"대화 상자 실행"
-
-#
-#~ msgid "Always go to the latest directory in the \"Open\" dialog"
-#~ msgstr "항상 마지막에 열린 디렉토리로  \"열기 \"대화 상자 실행"
-
-#
-#~ msgid "Nearest (quickest, worst quality)"
-#~ msgstr "가장 가까운 보정 (최고 속도, 최저화질)"
-
-#
-#~ msgid "Tiles"
-#~ msgstr "타일 보정"
-
-#
-#~ msgid "Bilinear"
-#~ msgstr "쌍일차 보정"
-
-#
-#~ msgid "Hyper (slowest, best quality)"
-#~ msgstr "하이퍼 보정 (최저 속도, 최고 화질)"
-
-#
-#~ msgid "Manual zoom mode as default"
-#~ msgstr "수동 줌 조절을 기본값으로 적용"
-
-#
-#~ msgid "Fit-to-screen mode as default"
-#~ msgstr "화면에 맞춤을 기본값으로 적용"
-
-#
-#~ msgid "Fit width mode as default"
-#~ msgstr "가로 폭 맞춤을 기본값으로 적용"
-
-#
-#~ msgid "Fit height mode as default"
-#~ msgstr "세로 폭 맞춤을 기본값으로 적용"
-
-#
-#~ msgid "Background colour:"
-#~ msgstr "배경색 :"
-
-#
-#~ msgid "Background colour"
-#~ msgstr "배경색"
-
-#
-#~ msgid "Toolbar button labels:"
-#~ msgstr "툴바 버튼 이름 :"
-
-#
-#~ msgid "Icons only"
-#~ msgstr "아이콘"
-
-#
-#~ msgid "Text only"
-#~ msgstr "텍스트"
-
-#
-#~ msgid "Icons and text"
-#~ msgstr "아이콘과 텍스트"
-
-#
-#~ msgid "Slideshow delay:"
-#~ msgstr "슬라이드쇼 지연시간 :"
-
-#
-#~ msgid "Scaling quality"
-#~ msgstr "스케일링 품질"
-
-#
-#~ msgid "Scaling"
-#~ msgstr "스케일링"
-
-#
-#~ msgid "Treat files with the following extensions as comments:"
-#~ msgstr "다음 확장자를 가지는 파일은 주석 취급："
-
-#
-#~ msgid "Space key scrolls"
-#~ msgstr "스페이스 키로 스크롤："
-
-#
-#~ msgid "of"
-#~ msgstr "of"
-
-#
-#~ msgid "Window size"
-#~ msgstr "창 크기"
-
-#
-#~ msgid "Page size"
-#~ msgstr "페이지 크기"
-
-#
-#~ msgid "Magnification factor:"
-#~ msgstr "확대율 : "
-
-#
-#~ msgid "Lens size (px):"
-#~ msgstr "렌즈 크기（픽셀）："
-
-#
-#~ msgid "Update interval (milliseconds):"
-#~ msgstr "갱신간격（ms）："
-
-#
-#~ msgid "Lens"
-#~ msgstr "렌즈"
-
-#
-#~ msgid "Thumbnail sizes (px):"
-#~ msgstr "미리보기 크기 (픽셀) : "
-
-#
-#~ msgid "Library thumbnail sizes (px):"
-#~ msgstr "라이브러리 미리보기 크기（픽셀）："
-
-#
-#~ msgid "Adjust colour"
-#~ msgstr "색 조정"
-
-#
-#~ msgid "Save values for future sessions"
-#~ msgstr "다음의 세션 값을 저장"
-
-#
-#~ msgid "Go to page"
-#~ msgstr "페이지 이동"
-
-#
-#~ msgid "Title"
-#~ msgstr "제목"
-
-#
-#~ msgid "It reads ZIP, RAR and tar archives (also gzip or bzip2 compressed)"
-#~ msgstr ""
-#~ "보통 이미지파일 뿐만 아니라 ZIP, RAR, tar 압축파일을 읽을 수 있습니다."
-
-#
-#~ msgid "as well as plain image files."
-#~ msgstr " (gzip나 bzip2로 압축되어 있어도 읽을 수 있습니다)."
-
-#
-#~ msgid "Developer and Swedish translation"
-#~ msgstr "개발자 및 스웨덴어 번역"
-
-#
-#~ msgid "Manage thumbnails"
-#~ msgstr "미리보기 편집"
-
-#
-#~ msgid "Remove all stored thumbnails:"
-#~ msgstr "저장된 모든 미리보기 삭제"
-
-#
-#~ msgid "Remove orphaned thumbnails:"
-#~ msgstr "오래된 미리보기 삭제"
-
-#
-#~ msgid "Directories"
-#~ msgstr "디렉토리"
-
-#
-#~ msgid "Archives"
-#~ msgstr "압축파일"
-
-#
-#~ msgid "Convert"
-#~ msgstr "변환"
-
-#
-#~ msgid "File type"
-#~ msgstr "파일 종류"
-
-#
-#~ msgid "Extension"
-#~ msgstr "확장자"
-
-#
-#~ msgid "Zip archive"
-#~ msgstr "Zip압축파일"
-
-#
-#~ msgid "Delete old archive/directory"
-#~ msgstr "오래된 압축파일/디렉토리 삭제"
-
-#
-#~ msgid "Permission denied"
-#~ msgstr "퍼미션이 거부되었습니다"
-
-#
-#~ msgid "Confirm operation"
-#~ msgstr "확인 작업"
-
-#
-#~ msgid "Permanently remove %s?"
-#~ msgstr "완전히 %s를 삭제합니까?"
-
-#
-#~ msgid "Perform lossless JPEG operation on %s?"
-#~ msgstr "%s에 무손실 JPEG 작업을 실행합니까?"
-
-#
-#~ msgid "Some images might be trimmed a bit during the operation."
-#~ msgstr "일부 이미지 작업을 수행하는 동안 약간 손실 될 수도 있습니다."
-
-#
-#~ msgid "Permanently convert %s to greyscale?"
-#~ msgstr "%s를 그레이스케일로 변환 합니까?"
-
-#
-#~ msgid "Location:"
-#~ msgstr "위치 : "
-
-#
-#~ msgid "Quantity:"
-#~ msgstr "파일수 : "
-
-#
-#~ msgid "Total size:"
-#~ msgstr "총 크기 :"
-
-#
-#~ msgid "Removed:"
-#~ msgstr "삭제되었습니다："
-
-#
-#~ msgid "Done!"
-#~ msgstr "완료되었습니다."
-
-#
-#~ msgid "pages"
-#~ msgstr "페이지"
-
-#
-#~ msgid "comment"
-#~ msgstr "주석"
-
-#
-#~ msgid "comments"
-#~ msgstr "주석"
-
-#
-#~ msgid "In library"
-#~ msgstr "라이브러리"
-
-#
-#~ msgid "Yes"
-#~ msgstr "예"
-
-#
-#~ msgid "No"
-#~ msgstr "아니요"
-
-#
-#~ msgid "Bookmarked"
-#~ msgstr "북마크"
-
-#
-#~ msgid "Yes, page"
-#~ msgstr "예, 페이지"
-
-#
-#~ msgid "Mode"
-#~ msgstr "모드"
-
-#
-#~ msgid "Pixel count"
-#~ msgstr "픽셀 수"
-
-#
-#~ msgid "Pixel sum"
-#~ msgstr "픽셀 합계"
-
-#
-#~ msgid "Extrema"
-#~ msgstr "범위"
-
-#
-#~ msgid "Mean"
-#~ msgstr "평균"
-
-#
-#~ msgid "Median"
-#~ msgstr "중간"
-
-#
-#~ msgid "Standard deviation"
-#~ msgstr "표준 편차"
-
-#
-#~ msgid "Image 1"
-#~ msgstr "이미지1"
-
-#
-#~ msgid "Image 2"
-#~ msgstr "이미지2"
-
-#
-#~ msgid "Could not delete"
-#~ msgstr "삭제 할 수 없습니다."
-
-#
-#~ msgid "Please check your permissions."
-#~ msgstr "퍼미션을 확인해 주세요"
-
-#
-#~ msgid "Could not create"
-#~ msgstr "생성 할 수 없습니다."
-
-#
-#~ msgid "Added:"
-#~ msgstr "추가 :"
-
-#
-#~ msgid "Adding library entries"
-#~ msgstr "라이브러리 항목을 추가"
-
-#
-#~ msgid "Removing library entries"
-#~ msgstr "라이브러리 항목 삭제"
-
-#
-#~ msgid "Extract page"
-#~ msgstr "페이지 내보내기"
-
-#
-#~ msgid "page"
-#~ msgstr "페이지"
-
-#
-#~ msgid ""
-#~ "Could not find the unrar executable. Please install it if you wish to "
-#~ "open RAR archives."
-#~ msgstr ""
-#~ "unrar가 없습니다.RAR 압축파일을 열고 싶을 때는 unrar를 설치 해 주세요."
-
-#
-#~ msgid "Could not open"
-#~ msgstr "열리지 않습니다."
-
-#
-#~ msgid "is not a file."
-#~ msgstr "(은)는 파일이 아닙니다"
-
-#
-#~ msgid "does not exist."
-#~ msgstr "(은)는 존재하지 않습니다"
-
-#
-#~ msgid "Filetype of"
-#~ msgstr "다음 파일종류"
-
-#
-#~ msgid "not recognized."
-#~ msgstr "(은)는 인식 할 수 없습니다"
-
-#
-#~ msgid "Comment file"
-#~ msgstr "파일에 주석을 추가"
-
-#
-#~ msgid "Could not read"
-#~ msgstr "읽기 실패"
-
-#
-#~ msgid "Comment"
-#~ msgstr "주석"
-
-#
-#~ msgid "_Go to page..."
-#~ msgstr "페이지 이동(_G)"
-
-#
-#~ msgid "Fit _width"
-#~ msgstr "가로폭 맞춤(_W)"
-
-#
-#~ msgid "Fit _height"
-#~ msgstr "세로폭 맞춤(_H)"
-
-#
-#~ msgid "_Best fit"
-#~ msgstr "최적 맞춤(_B)"
-
-#
-#~ msgid "Clear bookmarks"
-#~ msgstr "북마크 지우기"
-
-#
-#~ msgid "_Manage thumbnails..."
-#~ msgstr "미리보기 편집(_M)"
-
-#
-#~ msgid "_Recent files"
-#~ msgstr "최근 파일(_R)"
-
-#
-#~ msgid "Clear recent files"
-#~ msgstr "최근 파일 지우기"
-
-#
-#~ msgid "Open _library..."
-#~ msgstr "라이브러리 열기(_l)"
-
-#
-#~ msgid "_Add to library"
-#~ msgstr "라이브러리에 추가(_A)"
-
-#
-#~ msgid "Con_vert..."
-#~ msgstr "이미지나 압축파일을 변환(_V)"
-
-#
-#~ msgid "E_xtract image..."
-#~ msgstr "이미지 내보내기(_X)"
-
-#
-#~ msgid "_Adjust colour..."
-#~ msgstr "색상 조절(_A)"
-
-#
-#~ msgid "Delete image..."
-#~ msgstr "이미지 삭제"
-
-#
-#~ msgid "CW lossless JPEG rotation..."
-#~ msgstr "무손실 JPEG 이미지 회전(오른쪽)"
-
-#
-#~ msgid "CCW lossless JPEG rotation..."
-#~ msgstr "무손실 JPEG 이미지 회전(왼쪽)"
-
-#
-#~ msgid "Horizontal lossless JPEG flip..."
-#~ msgstr "무손실 JPEG 이미지 뒤집기(좌우)"
-
-#
-#~ msgid "Vertical lossless JPEG flip..."
-#~ msgstr "무손실 JPEG 이미지 뒤집기(상하)"
-
-#
-#~ msgid "Convert JPEG to greyscale..."
-#~ msgstr "JPEG파일을 그레이스케일로 변환"
-
-#
-#~ msgid "File o_perations"
-#~ msgstr "파일 조작(_P)"
-
-#
-#~ msgid "Magnifying _lens"
-#~ msgstr "렌즈 확대(_l)"
-
-#
-#~ msgid "Enter fullscreen mode automatically when Comix is started."
-#~ msgstr "시작시에 자동으로 전체화면으로 보기"
-
-#
-#~ msgid "Enter double page mode automatically when Comix is started."
-#~ msgstr "시작시에 자동으로 좌우 페이지로 보기"
-
-#
-#~ msgid "Enter manual zoom mode automatically when Comix is started."
-#~ msgstr "시작시에 자동으로 수동 줌으로 보기"
-
-#
-#~ msgid "Enter fit-to-screen mode automatically when Comix is started."
-#~ msgstr "시작시에 자동으로 화면에 맞춤으로 보기"
-
-#
-#~ msgid "Enter fit width mode automatically when Comix is started."
-#~ msgstr "시작시에 자동으로 가로폭 맞춤으로 보기"
-
-#
-#~ msgid "Enter fit height mode automatically when Comix is started."
-#~ msgstr "시작시에 자동으로 세로폭 맞춤으로 보기"
-
-#
-#~ msgid ""
-#~ "Also scale images to a size that is larger than their original size in "
-#~ "fit-to-screen mode, fit width mode and fit height mode."
-#~ msgstr ""
-#~ "화면, 또는 가로폭, 세로폭에 이미지를 맞추는 것으로, 원본 크기가 작은 경우"
-#~ "는 확대시킨다"
-
-#
-#~ msgid ""
-#~ "Scale the images independently when in double page mode and fit-to-screen "
-#~ "mode. The smaller of the two images will scale up to fill any extra space "
-#~ "that is given."
-#~ msgstr "좌우 페이지 보기나 화면에 맞출 때, 이미지를 따로 따로 스케일 한다."
-
-#
-#~ msgid "Automatically show any available comments when opening a new file."
-#~ msgstr "새로운 파일을 열 때, 주석이 있으면 자동적으로 표시한다"
-
-#
-#~ msgid ""
-#~ "Automatically hide scrollbars, menubar, toolbar, statusbar and thumbnails "
-#~ "when in fullscreen mode."
-#~ msgstr ""
-#~ "전체화면 보기때에 스크롤, 메뉴, 툴, 상태, 미리보기의 모든 바를 숨긴다"
-
-#
-#~ msgid ""
-#~ "Cache the next page in the archive/directory to increase the perceived "
-#~ "speed. This is generally recommended unless you are running low on RAM."
-#~ msgstr ""
-#~ "속도를 올리기 위해 압축파일이나 디렉토리의 다음의 페이지를 캐쉬한다. RAM"
-#~ "의 성능이 낮지 않은 한 추천 합니다."
-
-#
-#~ msgid ""
-#~ "Move the horizontal scrollbar instead of the vertical when using the "
-#~ "scroll wheel at the top or the bottom of the page. The direction will be "
-#~ "determined by whether you use manga mode or not."
-#~ msgstr ""
-#~ "페이지의 맨 위나 아래에 왔을 때 좌우 방향의 스크롤 바를 움직인다. 움직일 "
-#~ "방향은 만화 표시가 되어 있는가로 판단됩니다."
-
-#
-#~ msgid ""
-#~ "Save the position and the size of the window for the next time you start "
-#~ "Comix."
-#~ msgstr "다음 번 윈도우를 같은 위치, 같은 크기로 시작한다"
-
-#
-#~ msgid ""
-#~ "Automatically open the next archive in the directory when scrolling past "
-#~ "the last page of the current archive, and automatically open the previous "
-#~ "archive in the directory when scrolling past the first page of the "
-#~ "current archive."
-#~ msgstr ""
-#~ "현재의 압축파일의 마지막 페이지로 스크롤이 맨 밑까지 움직였을 때, 같은 디"
-#~ "렉토리에 있는 다음의 압축파일을 자동적으로 연다(최초의 페이지때도 마찬가"
-#~ "지)."
-
-#
-#~ msgid "Hide the cursor when in fullscreen mode."
-#~ msgstr "전체화면 보기때 마우스 커서를 숨긴다"
-
-#
-#~ msgid ""
-#~ "Set the image scaling method. The best choice is often \"Tiles\", it is "
-#~ "quite quick and produces almost as good results as \"Bilinear\" or \"Hyper"
-#~ "\"."
-#~ msgstr ""
-#~ "이미지의 스켈링법을 설정한다.대체로의 경우, 최선인 것은 타일 보정입니다.이"
-#~ "것은 불러오기가 빠르고, 쌍일차 보정이나 하이퍼 보정과 동일한 정도의 화질"
-#~ "이 나옵니다."
-
-#
-#~ msgid ""
-#~ "Treat files with the following extensions as comment files. Extensions "
-#~ "should be separated by whitespaces. They are not case sensitive."
-#~ msgstr ""
-#~ "다음의 확장자를 가지는 파일을 주석으로서 취급한다. 확장자는 공백으로 구분"
-#~ "해야합니다. 대문자 소문자를 구별하지 않습니다."
-
-#
-#~ msgid ""
-#~ "Use smart scrolling with the space key. Pressing the space key normally "
-#~ "scrolls straight down one window height unless at the bottom of the page "
-#~ "where it flips pages instead. When this option is set Comix automatically "
-#~ "tries to follow the reading flow of the comic book. When pressing the "
-#~ "space key it will not only scroll down but will also scroll horizontally "
-#~ "to the edge of the page (left or right depending on whether you use manga "
-#~ "mode). In double page mode it will go to the edge of the first page if it "
-#~ "is in view, otherwise it will go to the edge of the second page. Also, in "
-#~ "double page mode with this option, Comix will not flip pages unless at "
-#~ "the bottom of the second page. At the bottom of the first page it will "
-#~ "instead go to the top of the second page."
-#~ msgstr ""
-#~ "스페이스 키로 스마트 스크롤을 이용한다.\n"
-#~ "통상 스페이스 키를 누르면, 스크롤이 아래에서 설정된 양씩 아래에 움직여, 페"
-#~ "이지의 맨 밑에 오면 페이지를 이동합니다.\n"
-#~ "이 설정을 실시하면, Comix는 책을 읽는 흐름을 자동적으로 쫓으려고 합니다.스"
-#~ "페이스 키를 누르면, 상하 방향의 스크롤 뿐만이 아니라, 좌우 방향의 스크롤"
-#~ "도 실시합니다.좌우 페이지 보기때는, 먼저 처음의 페이지의 구석까지 이동해, "
-#~ "다음에 2 페이지눈의 페이지의 구석까지 이동합니다.2 페이지의 제일 구석으로 "
-#~ "이동할 때까지는 페이지를 플립 하지 않습니다.1 페이지의 구석에 왔을 때는, "
-#~ "다음에 2 페이지의 맨 위로 이동합니다."
-
-#
-#~ msgid "Always hide the thumbnail scrollbar."
-#~ msgstr "미리보기의 스크롤 바를 항상 숨긴다"
-
-#
-#~ msgid "Automatically open the last viewed page when Comix is started."
-#~ msgstr "시작시에 자동으로 마지막 이미지 열기"
-
-#
-#~ msgid ""
-#~ "Automatically go to the same directory as last time when opening the "
-#~ "\"Open\" dialog."
-#~ msgstr "\"열기\"를 선택했을 시 자동적으로 마지막에 열린 디렉토리를 선택한다"
-
-#
-#~ msgid "Automatically go to this directory when opening the \"Open\" dialog."
-#~ msgstr "\"열기\"를 선택했을 시 자동적으로 다음의 디렉토리를 선택한다："
-
-#
-#~ msgid "Automatically restore these values the next time Comix is started."
-#~ msgstr "다음 시작시에 설정값을 자동적으로 불러 들인다"
-
-#
-#~ msgid "Show the page number in the upper left corner of each thumbnail."
-#~ msgstr "미리보기의 좌측상단에 페이지번호를 표시한다"
-
-#
-#~ msgid ""
-#~ "Automatically adjust the contrast of the images so that the darkest pixel "
-#~ "is completely black and the lightest pixel is completely white. This only "
-#~ "works with images without an alpha channel."
-#~ msgstr ""
-#~ "가장 어두운 픽셀이 검정, 밝은 픽셀이 흰색이 되도록, 자동적으로 대비를 조정"
-#~ "한다. 이미지에 알파 채널이 없을 때에 유효가 됩니다."
-
-#
-#~ msgid ""
-#~ "The space key uses smart scrolling as if in double page mode even when in "
-#~ "single page mode. This can be useful for comics with two scanned pages in "
-#~ "each image. The pages are assumed to be of equal size"
-#~ msgstr ""
-#~ "단독 페이지 표시때도 좌우 페이지 보기 같이 스페이스 키로 스마트스크롤을 실"
-#~ "시한다. 1장의 이미지안에 2매 스캔 한 페이지가 있는 만화를 볼 때에 편리합니"
-#~ "다.2개의 페이지는 같은 사이즈로서 다루어집니다."
-
-#
-#~ msgid "Adjust the lens magnification factor."
-#~ msgstr "렌즈의 확대율을 설정한다"
-
-#
-#~ msgid ""
-#~ "Set the lens width and height in pixels. A larger lens will use more CPU "
-#~ "resources than a small one."
-#~ msgstr ""
-#~ "렌즈의 가로폭과 세로폭을 픽셀로 설정한다.렌즈를 크게 하면 보다 많이 CPU를 "
-#~ "사용합니다."
-
-#
-#~ msgid ""
-#~ "Set the maximum update frequency for the magnification lens in "
-#~ "milliseconds. Setting the value too low can cause the lens to lag behind "
-#~ "when moving the mouse quickly. Setting the value too high can cause the "
-#~ "lens to appear choppy."
-#~ msgstr ""
-#~ "렌즈 표시를 갱신하는 빈도를 설정한다.빈도가 너무 낮으면, 마우스가 빨리 움"
-#~ "직일 때에 렌즈와의 차이가 생깁니다.반대로 너무 높으면 렌즈가 흔들려 보입니"
-#~ "다."
-
-#
-#~ msgid ""
-#~ "Read and write thumbnails in the ~/.thumbnails directory as proposed by "
-#~ "the freedesktop.org standard. With this preference set, Comix will use "
-#~ "the thumbnails already stored there to speed up thumbnail loading. If "
-#~ "there are no thumbnails, Comix will create them and save them there. This "
-#~ "is a standard that many applications conform to, thumbnails created by "
-#~ "other applications can be used by Comix and vice versa. If this "
-#~ "preference is not set, Comix will create thumbnails on the fly every time "
-#~ "a directory is opened."
-#~ msgstr ""
-#~ "freedesktop.org의 규격에 따라, 미리보기를\"/.thumbnails\" 이하에 기록한"
-#~ "다. 이 때, comix는 이미 저장된 이미지를 사용하여 로딩 속도를 높입니다. 미"
-#~ "리보기가 없을 때는 이것을 작성해 기록합니다. \n"
-#~ " 이것은 많은 어플리케이션이 따라서 있는 방법으로, 다른 어플리케이션으로 작"
-#~ "성된 미리보기는 Comix로 이용 할 수 있어 또 그 역도 할 수 있습니다. \n"
-#~ "이 설정을 실시하지 않을 때, Comix는 디렉토리를 열 때마다 미리보기를 작성합"
-#~ "니다."
-
-#
-#~ msgid ""
-#~ "Also use stored thumbnails for images in archives in a similiar way. Due "
-#~ "to restrictions in the freedesktop.org standard, these thumbnails will be "
-#~ "stored in ~/.comix and will only be used by Comix. If this preference is "
-#~ "not set, Comix will create thumbnails on the fly every time an archive is "
-#~ "opened."
-#~ msgstr ""
-#~ "압축파일내의 이미지에 대해서도, 똑같이 기록된 미리보기를 이용한다. "
-#~ "freedesktop.org의 규격에 의한 제한 때문에, 이 미리보기는 \"/.comix\" 이하"
-#~ "에 기록되어 Comix 밖에 이용 할 수 없습니다. 이 설정을 실시하지 않을 때는, "
-#~ "Comix는 압축파일이 열릴 때마다 미리보기를 작성합니다."
-
-#
-#~ msgid ""
-#~ "Only display a single image in double page mode if the image consists of "
-#~ "two pages. An image is assumed to consist of two pages if its width is "
-#~ "greater than its height."
-#~ msgstr ""
-#~ "하나의 이미지만을 표시하는 이미지를 좌우 페이지 모드로 구성되어 두 개의 페"
-#~ "이지 보여줍니다. 가로폭이 세로폭보다 클 때는 2 페이지로부터 된다고 판단됩"
-#~ "니다."
-
-#
-#~ msgid "Filter out archives with regular expressions."
-#~ msgstr "다음의 정규 표현으로 압축파일을 필터링 한다"
-
-#
-#~ msgid "Apply filters on full paths rather than filenames."
-#~ msgstr "필터를 파일명이 아니고 경로명에 적용한다"
-
-#
-#~ msgid ""
-#~ "Store a list of the 10 last opened files that can be accessed through the "
-#~ "menus."
-#~ msgstr "접근 한 파일중 마지막 10개를 기록한다"
-
-#
-#~ msgid "Go to page..."
-#~ msgstr "페이지 이동"
-
-#
-#~ msgid ""
-#~ "Flip pages when scrolling \"off the page\" with the scroll wheel, even "
-#~ "when not in fit-to-screen mode. It takes three \"steps\" with the scroll "
-#~ "wheel to trigger this behaviour."
-#~ msgstr ""
-#~ "スクリーンに合わせる表示でないときも、スクロールがページの外に出た時はペー"
-#~ "ジを移動する。「３回」スクロールを動かせばページを移動します。"
