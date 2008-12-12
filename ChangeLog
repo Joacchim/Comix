@@ -7,6 +7,9 @@ Comix 4.0.1
     - Russian translation updated by Артем Смирнов.
     
     - Simplified Chinese translation updated by Xie Yanbo.
+    
+    - Re-added the "flip pages when scrolling off the page" preference
+    from previous Comix versions. Thanks to Mamoru Tasaka.
 
 Comix 4.0.0
     
