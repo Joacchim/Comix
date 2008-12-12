@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2008-11-22 02:42+0100\n"
-"PO-Revision-Date: 2007-01-31 23:30+0900\n"
+"PO-Revision-Date: 2008-12-13 01:34+0900\n"
 "Last-Translator: Mamoru Tasaka <mtasaka@ioa.s.u-tokyo.ac.jp>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -16,7 +16,8 @@ msgstr ""
 #
 # File: src/about.py, line: 18
 # File: src/about.py, line: 67
-#: src/about.py:19 src/about.py:68
+#: src/about.py:19
+#: src/about.py:68
 msgid "About"
 msgstr "Comixについて"
 
@@ -30,8 +31,7 @@ msgstr "Comixは特にコミックを扱うためにデザインされた画像�
 # File: src/about.py, line: 57
 #: src/about.py:58
 msgid "It reads ZIP, RAR and tar archives, as well as plain image files."
-msgstr ""
-"ZIP, RAR, tar形式の書庫ファイルや、普通の画像ファイルを読むことが出来ます。"
+msgstr "ZIP, RAR, tar形式の書庫ファイルや、普通の画像ファイルを読むことが出来ます。"
 
 #
 # File: src/about.py, line: 59
@@ -47,7 +47,8 @@ msgstr "開発者"
 
 #
 # File: src/about.py, line: 77
-#: src/about.py:84 src/about.py:85
+#: src/about.py:84
+#: src/about.py:85
 msgid "Simplified Chinese translation"
 msgstr "簡体中国語への翻訳"
 
@@ -71,7 +72,8 @@ msgstr "ドイツ語への翻訳とNautilusのサムネイル作成"
 
 #
 # File: src/about.py, line: 82
-#: src/about.py:89 src/about.py:90
+#: src/about.py:89
+#: src/about.py:90
 msgid "Italian translation"
 msgstr "イタリア語への翻訳"
 
@@ -89,7 +91,8 @@ msgstr "フランス語への翻訳"
 
 #
 # File: src/about.py, line: 85
-#: src/about.py:93 src/about.py:94
+#: src/about.py:93
+#: src/about.py:94
 msgid "Polish translation"
 msgstr "ポーランド語への翻訳"
 
@@ -180,12 +183,8 @@ msgstr "RAR書庫ファイルを展開するプログラムが見つかりませ
 #
 # File: src/archive.py, line: 68
 #: src/archive.py:68
-msgid ""
-"You need either the <i>rar</i> or the <i>unrar</i> program installed in "
-"order to read RAR (.cbr) files."
-msgstr ""
-"RAR(.cbr)書庫ファイルを読むには、<i>rar<i> もしくは <i>unrar</i>プログラムが"
-"必要です。"
+msgid "You need either the <i>rar</i> or the <i>unrar</i> program installed in order to read RAR (.cbr) files."
+msgstr "RAR(.cbr)書庫ファイルを読むには、<i>rar<i> もしくは <i>unrar</i>プログラムが必要です。"
 
 #
 # File: src/archive.py, line: 301
@@ -244,8 +243,7 @@ msgstr "全てのブックマークをクリアしますか？"
 #
 # File: src/bookmark.py, line: 79
 #: src/bookmark.py:79
-msgid ""
-"All stored bookmarks will be removed. Are you sure that you want to continue?"
+msgid "All stored bookmarks will be removed. Are you sure that you want to continue?"
 msgstr "保存されている全ブックマークが消去されます。よろしいですか？"
 
 #
@@ -257,7 +255,8 @@ msgstr "ブックマークを編集"
 #
 # File: src/bookmark.py, line: 255
 # File: src/edit.py, line: 267
-#: src/bookmark.py:255 src/edit.py:267
+#: src/bookmark.py:255
+#: src/edit.py:267
 msgid "Name"
 msgstr "名前"
 
@@ -270,7 +269,8 @@ msgstr "ページ"
 #
 # File: src/comment.py, line: 16
 # File: src/preferences.py, line: 288
-#: src/comment.py:16 src/preferences.py:298
+#: src/comment.py:16
+#: src/preferences.py:298
 msgid "Comments"
 msgstr "コメント"
 
@@ -290,17 +290,8 @@ msgstr "コンピュータ上にもう使われないファイルがあります
 #
 # File: src/deprecated.py, line: 22
 #: src/deprecated.py:22
-msgid ""
-"Some old files (that were used for storing preferences, the library, "
-"bookmarks etc. for older versions of Comix) were found on your computer. If "
-"you do not plan on using the older versions of Comix again, you should "
-"remove these files in order to save some disk space. Do you want these files "
-"to be removed for you now?"
-msgstr ""
-"コンピュータ上に以前のバージョンのComixでしか使われない、設定やライブラリ、"
-"ブックマーク用のファイルがあります。もしもう以前のバージョンのComixを使う予定"
-"が無ければ、ディスクの容量を減らすためにこれらのファイルを削除することをおす"
-"すめします。これらのファイルを削除しますか？"
+msgid "Some old files (that were used for storing preferences, the library, bookmarks etc. for older versions of Comix) were found on your computer. If you do not plan on using the older versions of Comix again, you should remove these files in order to save some disk space. Do you want these files to be removed for you now?"
+msgstr "コンピュータ上に以前のバージョンのComixでしか使われない、設定やライブラリ、ブックマーク用のファイルがあります。もしもう以前のバージョンのComixを使う予定が無ければ、ディスクの容量を減らすためにこれらのファイルを削除することをおすすめします。これらのファイルを削除しますか？"
 
 #
 # File: src/edit.py, line: 28
@@ -347,19 +338,16 @@ msgstr "書庫ファイルはZIP形式で保存されます。"
 #
 # File: src/edit.py, line: 168
 # File: src/edit.py, line: 285
-#: src/edit.py:168 src/edit.py:285
+#: src/edit.py:168
+#: src/edit.py:285
 msgid "Remove from archive"
 msgstr "書庫ファイルの中から削除"
 
 #
 # File: src/edit.py, line: 255
 #: src/edit.py:255
-msgid ""
-"Please note that the only files that are automatically added to this list "
-"are those files in archives that Comix recognizes as comments."
-msgstr ""
-"注意：Comixがコメントファイルだと認識する書庫ファイル内のファイルのみが、自動"
-"的にこのリストに追加されます。"
+msgid "Please note that the only files that are automatically added to this list are those files in archives that Comix recognizes as comments."
+msgstr "注意：Comixがコメントファイルだと認識する書庫ファイル内のファイルのみが、自動的にこのリストに追加されます。"
 
 #
 # File: src/edit.py, line: 270
@@ -412,15 +400,14 @@ msgstr "コントラストを自動調節する"
 #
 # File: src/enhance.py, line: 128
 #: src/enhance.py:128
-msgid ""
-"Automatically adjust contrast (both lightness and darkness), separately for "
-"each colour band."
+msgid "Automatically adjust contrast (both lightness and darkness), separately for each colour band."
 msgstr "各々のカラーバンド毎にコントラスト（明度と暗度）を自動調節します。"
 
 #
 # File: src/filechooser.py, line: 35
 # File: src/library.py, line: 489
-#: src/filechooser.py:35 src/library.py:489
+#: src/filechooser.py:35
+#: src/library.py:489
 msgid "Open"
 msgstr "開く"
 
@@ -471,26 +458,29 @@ msgstr "'%s'という名前のファイルは既に存在します。上書き�
 # File: src/filechooser.py, line: 128
 #: src/filechooser.py:129
 msgid "Replacing it will overwrite its contents."
-msgstr "上書きすると内容が変更されます。"
+msgstr "上書きすると元のファイルの内容が失われます。"
 
 #
 # File: src/filechooser.py, line: 171
 # File: src/filechooser.py, line: 249
-#: src/filechooser.py:172 src/filechooser.py:250
+#: src/filechooser.py:172
+#: src/filechooser.py:250
 msgid "All images"
 msgstr "全ての画像"
 
 #
 # File: src/filechooser.py, line: 173
 # File: src/filechooser.py, line: 251
-#: src/filechooser.py:174 src/filechooser.py:252
+#: src/filechooser.py:174
+#: src/filechooser.py:252
 msgid "JPEG images"
 msgstr "JPEG画像"
 
 #
 # File: src/filechooser.py, line: 174
 # File: src/filechooser.py, line: 252
-#: src/filechooser.py:175 src/filechooser.py:253
+#: src/filechooser.py:175
+#: src/filechooser.py:253
 msgid "PNG images"
 msgstr "PNG画像"
 
@@ -544,7 +534,8 @@ msgstr "ファイル形式が分かりません"
 #
 # File: src/librarybackend.py, line: 272
 # File: src/librarybackend.py, line: 274
-#: src/librarybackend.py:272 src/librarybackend.py:274
+#: src/librarybackend.py:272
+#: src/librarybackend.py:274
 msgid "(Copy)"
 msgstr "(コピー)"
 
@@ -587,12 +578,8 @@ msgstr "コレクションをライブラリから削除しますか？"
 #
 # File: src/library.py, line: 233
 #: src/library.py:233
-msgid ""
-"The selected collection will be removed from the library (but the books and "
-"subcollections in it will remain). Are you sure that you want to continue?"
-msgstr ""
-"選択されたコレクションがライブラリから削除されます（コレクションの中の本とサ"
-"ブコレクションは削除されません）。よろしいですか？"
+msgid "The selected collection will be removed from the library (but the books and subcollections in it will remain). Are you sure that you want to continue?"
+msgstr "選択されたコレクションがライブラリから削除されます（コレクションの中の本とサブコレクションは削除されません）。よろしいですか？"
 
 #
 # File: src/library.py, line: 251
@@ -616,7 +603,8 @@ msgstr "'%s'の名前を変更出来ませんでした。"
 #
 # File: src/library.py, line: 275
 # File: src/library.py, line: 881
-#: src/library.py:275 src/library.py:881
+#: src/library.py:275
+#: src/library.py:881
 msgid "A collection by that name already exists."
 msgstr "その名前のコレクションは既に存在します。"
 
@@ -636,12 +624,8 @@ msgstr "ルート"
 # File: src/library.py, line: 386
 #: src/library.py:386
 #, python-format
-msgid ""
-"Put the collection '%(subcollection)s' in the collection '%(supercollection)"
-"s'."
-msgstr ""
-"コレクション '%(subcollection)s' をコレクション '%(supercollection)s' の中に"
-"入れる"
+msgid "Put the collection '%(subcollection)s' in the collection '%(supercollection)s'."
+msgstr "コレクション '%(subcollection)s' をコレクション '%(supercollection)s' の中に入れる"
 
 #
 # File: src/library.py, line: 407
@@ -654,11 +638,8 @@ msgstr "本を'%s'に加える"
 # File: src/library.py, line: 411
 #: src/library.py:411
 #, python-format
-msgid ""
-"Move books from '%(source collection)s' to '%(destination collection)s'."
-msgstr ""
-"本をコレクション'%(source collection)s'から'%(destination collection)s'に移動"
-"させる"
+msgid "Move books from '%(source collection)s' to '%(destination collection)s'."
+msgstr "本をコレクション'%(source collection)s'から'%(destination collection)s'に移動させる"
 
 #
 # File: src/library.py, line: 492
@@ -688,12 +669,8 @@ msgstr "ライブラリから本を削除しますか？"
 #
 # File: src/library.py, line: 599
 #: src/library.py:599
-msgid ""
-"The selected books will be removed from the library (but the original files "
-"will be untouched). Are you sure that you want to continue?"
-msgstr ""
-"選択された本はライブラリから削除されます（元のファイルは変更されません）。よ"
-"ろしいですか？"
+msgid "The selected books will be removed from the library (but the original files will be untouched). Are you sure that you want to continue?"
+msgstr "選択された本はライブラリから削除されます（元のファイルは変更されません）。よろしいですか？"
 
 #
 # File: src/library.py, line: 609
@@ -711,12 +688,8 @@ msgstr "検索"
 #
 # File: src/library.py, line: 774
 #: src/library.py:774
-msgid ""
-"Display only those books that have the specified text string in their full "
-"path. The search is not case sensitive."
-msgstr ""
-"フルパス名に次の文字列が含まれている本のみを表示します。検索では大文字小文字"
-"を区別しません。"
+msgid "Display only those books that have the specified text string in their full path. The search is not case sensitive."
+msgstr "フルパス名に次の文字列が含まれている本のみを表示します。検索では大文字小文字を区別しません。"
 
 #
 # File: src/library.py, line: 776
@@ -757,7 +730,8 @@ msgstr "選択した本を開く"
 #
 # File: src/library.py, line: 832
 # File: src/properties.py, line: 113
-#: src/library.py:832 src/properties.py:118
+#: src/library.py:832
+#: src/properties.py:118
 #, python-format
 msgid "%d pages"
 msgstr "%d ページ"
@@ -881,12 +855,8 @@ msgstr "拡大するサイズ（ピクセル数）"
 #
 # File: src/preferences.py, line: 131
 #: src/preferences.py:132
-msgid ""
-"Set the size of the magnifying glass. It is a square with a side of this "
-"many pixels."
-msgstr ""
-"レンズが拡大する範囲のサイズを設定します。一辺がこのピクセル数の正方形状の範"
-"囲が拡大されます。"
+msgid "Set the size of the magnifying glass. It is a square with a side of this many pixels."
+msgstr "レンズが拡大する範囲のサイズを設定します。一辺がこのピクセル数の正方形状の範囲が拡大されます。"
 
 #
 # File: src/preferences.py, line: 133
@@ -915,14 +885,8 @@ msgstr "小さい画像を拡大する"
 #
 # File: src/preferences.py, line: 148
 #: src/preferences.py:149
-msgid ""
-"Stretch images to a size that is larger than their original size if the "
-"current zoom mode requests it. If this preference is unset, images are never "
-"scaled to be larger than their original size."
-msgstr ""
-"使用しているズームモードに応じて、元のサイズ以上に画像を拡大することを許可し"
-"ます。この項目が設定されていない場合、画像は元のサイズ以上には拡大されませ"
-"ん。"
+msgid "Stretch images to a size that is larger than their original size if the current zoom mode requests it. If this preference is unset, images are never scaled to be larger than their original size."
+msgstr "使用しているズームモードに応じて、元のサイズ以上に画像を拡大することを許可します。この項目が設定されていない場合、画像は元のサイズ以上には拡大されません。"
 
 #
 # File: src/preferences.py, line: 151
@@ -939,12 +903,8 @@ msgstr "透過画像の背景に格子状の模様を用いる"
 #
 # File: src/preferences.py, line: 159
 #: src/preferences.py:160
-msgid ""
-"Use a grey checkered background for transparent images. If this preference "
-"is unset, the background is plain white instead."
-msgstr ""
-"透過画像の背景にグレーの格子状の模様を用います。この項目が設定されていない場"
-"合は、単色の白が使われます。"
+msgid "Use a grey checkered background for transparent images. If this preference is unset, the background is plain white instead."
+msgstr "透過画像の背景にグレーの格子状の模様を用います。この項目が設定されていない場合は、単色の白が使われます。"
 
 #
 # File: src/preferences.py, line: 161
@@ -967,32 +927,22 @@ msgstr "スペースキーで「スマートスクロール」を行う"
 #
 # File: src/preferences.py, line: 174
 #: src/preferences.py:175
-msgid ""
-"Use smart scrolling with the space key. Normally the space key scrolls only "
-"right down (or up when shift is pressed), but with this preference set it "
-"also scrolls sideways and so tries to follow the natural reading order of "
-"the comic book."
-msgstr ""
-"スペースキーで「スマートスクロール」を行います。通常スペースキーを押すと画像"
-"は下に（SHIFTキーが押されている時は上に）スクロールされるだけですが、この設定"
-"がされていると画像は左右にもスクロールされ、コミックを読む自然な流れに従おう"
-"とします。"
+msgid "Use smart scrolling with the space key. Normally the space key scrolls only right down (or up when shift is pressed), but with this preference set it also scrolls sideways and so tries to follow the natural reading order of the comic book."
+msgstr "スペースキーで「スマートスクロール」を行います。通常スペースキーを押すと画像は下に（SHIFTキーが押されている時は上に）スクロールされるだけですが、この設定がされていると画像は左右にもスクロールされ、コミックを読む自然な流れに従おうとします。"
 
 #: src/preferences.py:179
 msgid "Flip pages when scrolling off the edges of the page."
-msgstr ""
+msgstr "スクロールがページの端を越えた時、ページを送る"
 
 #: src/preferences.py:184
-msgid ""
-"Flip pages when scrolling \"off the page\" with the scroll wheel or with the "
-"arrow keys. It takes three consecutive \"steps\" with the scroll wheel or "
-"the arrow keys for the pages to be flipped."
-msgstr ""
+msgid "Flip pages when scrolling \"off the page\" with the scroll wheel or with the arrow keys. It takes three consecutive \"steps\" with the scroll wheel or the arrow keys for the pages to be flipped."
+msgstr "マウスやカーソルキーでのスクロールで、ページの端を3回連続して越えた時に次のページを表示します。"
 
 #
 # File: src/preferences.py, line: 177
 # File: src/ui.py, line: 296
-#: src/preferences.py:187 src/ui.py:296
+#: src/preferences.py:187
+#: src/ui.py:296
 msgid "Double page mode"
 msgstr "見開き表示"
 
@@ -1005,8 +955,7 @@ msgstr "見開き表示の時、２ページずつページを送る"
 #
 # File: src/preferences.py, line: 184
 #: src/preferences.py:194
-msgid ""
-"Flip two pages, instead of one, each time we flip pages in double page mode."
+msgid "Flip two pages, instead of one, each time we flip pages in double page mode."
 msgstr "見開き表示の時、1ページずつではなく、2ページずつ表示を進めます。"
 
 #
@@ -1018,14 +967,8 @@ msgstr "見開き表示の時、幅が広い画像の時は１枚だけ表示す
 #
 # File: src/preferences.py, line: 193
 #: src/preferences.py:203
-msgid ""
-"Display only one image in double page mode, if the image's width exceeds its "
-"height. The result of this is that scans that span two pages are displayed "
-"properly (i.e. alone) also in double page mode."
-msgstr ""
-"画像の高さより幅が大きい時は、見開き表示の時でも１枚だけ画像を表示します。２"
-"ページにわたる範囲をスキャンした画像は、見開き表示の時も適切に（つまりその画"
-"像だけ）表示されます。"
+msgid "Display only one image in double page mode, if the image's width exceeds its height. The result of this is that scans that span two pages are displayed properly (i.e. alone) also in double page mode."
+msgstr "画像の高さより幅が大きい時は、見開き表示の時でも１枚だけ画像を表示します。２ページにわたる範囲をスキャンした画像は、見開き表示の時も適切に（つまりその画像だけ）表示されます。"
 
 #
 # File: src/preferences.py, line: 196
@@ -1042,13 +985,8 @@ msgstr "次の書庫ファイルを自動的に開く"
 #
 # File: src/preferences.py, line: 203
 #: src/preferences.py:213
-msgid ""
-"Automatically open the next archive in the directory when flipping past the "
-"last page, or the previous archive when flipping past the first page."
-msgstr ""
-"書庫ファイルの最後のページの次に進もうとした時、同じディレクトリ内の次の書庫"
-"ページを、また最初のページの前に進もうとした時、前の書庫ページを自動的に開き"
-"ます。"
+msgid "Automatically open the next archive in the directory when flipping past the last page, or the previous archive when flipping past the first page."
+msgstr "書庫ファイルの最後のページの次に進もうとした時、同じディレクトリ内の次の書庫ページを、また最初のページの前に進もうとした時、前の書庫ページを自動的に開きます。"
 
 #
 # File: src/preferences.py, line: 206
@@ -1059,11 +997,8 @@ msgstr "最後に見たファイルを起動時に自動で開く"
 #
 # File: src/preferences.py, line: 211
 #: src/preferences.py:221
-msgid ""
-"Automatically open, on startup, the file that was open when Comix was last "
-"closed."
-msgstr ""
-"Comixが最後に終了した時に開いていたファイルを、起動時に自動的に開きます。"
+msgid "Automatically open, on startup, the file that was open when Comix was last closed."
+msgstr "Comixが最後に終了した時に開いていたファイルを、起動時に自動的に開きます。"
 
 #
 # File: src/preferences.py, line: 214
@@ -1074,11 +1009,8 @@ msgstr "最近開いたファイルの情報を保存する"
 #
 # File: src/preferences.py, line: 219
 #: src/preferences.py:229
-msgid ""
-"Add information about all files opened from within Comix to the shared "
-"recent files list."
-msgstr ""
-"Comixが開いた全ファイルの情報を、最近開いたファイルの共有リストに追加します。"
+msgid "Add information about all files opened from within Comix to the shared recent files list."
+msgstr "Comixが開いた全ファイルの情報を、最近開いたファイルの共有リストに追加します。"
 
 #
 # File: src/preferences.py, line: 222
@@ -1089,14 +1021,8 @@ msgstr "開いたファイルのサムネイルを保存する"
 #
 # File: src/preferences.py, line: 227
 #: src/preferences.py:237
-msgid ""
-"Store thumbnails for opened files according to the freedesktop.org "
-"specification. These thumbnails are shared by many other applications, such "
-"as most file managers."
-msgstr ""
-"開いたファイルのサムネイルをfreedesktop.orgの規格に従って保存します。これらの"
-"サムネイルは、ほとんどのファイルマネージャー等の多くのアプリケーションが共有"
-"して使うことが出来ます。"
+msgid "Store thumbnails for opened files according to the freedesktop.org specification. These thumbnails are shared by many other applications, such as most file managers."
+msgstr "開いたファイルのサムネイルをfreedesktop.orgの規格に従って保存します。これらのサムネイルは、ほとんどのファイルマネージャー等、多くのアプリケーションが共有して使うことが出来ます。"
 
 #
 # File: src/preferences.py, line: 230
@@ -1113,14 +1039,8 @@ msgstr "キャッシュを使って表示を早くする"
 #
 # File: src/preferences.py, line: 235
 #: src/preferences.py:245
-msgid ""
-"Cache the images that are next to the currently viewed image in order to "
-"speed up browsing. Since the speed improvements are quite big, it is "
-"recommended that you have this preference set, unless you are running short "
-"on free RAM."
-msgstr ""
-"現在表示している次の画像をキャッシュして表示を早くします。表示速度の改良によ"
-"る効果は大きいので、RAMの空きが少ない場合を除いてはこの設定をおすすめします。"
+msgid "Cache the images that are next to the currently viewed image in order to speed up browsing. Since the speed improvements are quite big, it is recommended that you have this preference set, unless you are running short on free RAM."
+msgstr "現在表示している次の画像をキャッシュして表示を早くします。表示速度の改良による効果は大きいので、RAMの空きが少ない場合を除いてはこの設定をおすすめします。"
 
 #
 # File: src/preferences.py, line: 237
@@ -1161,28 +1081,32 @@ msgstr "デフォルトのズームモード"
 #
 # File: src/preferences.py, line: 262
 # File: src/ui.py, line: 288
-#: src/preferences.py:272 src/ui.py:288
+#: src/preferences.py:272
+#: src/ui.py:288
 msgid "Best fit mode"
 msgstr "ベストフィットモードにする"
 
 #
 # File: src/preferences.py, line: 263
 # File: src/ui.py, line: 290
-#: src/preferences.py:273 src/ui.py:290
+#: src/preferences.py:273
+#: src/ui.py:290
 msgid "Fit width mode"
 msgstr "横幅を合わせる"
 
 #
 # File: src/preferences.py, line: 264
 # File: src/ui.py, line: 292
-#: src/preferences.py:274 src/ui.py:292
+#: src/preferences.py:274
+#: src/ui.py:292
 msgid "Fit height mode"
 msgstr "縦幅を合わせる"
 
 #
 # File: src/preferences.py, line: 265
 # File: src/ui.py, line: 294
-#: src/preferences.py:275 src/ui.py:294
+#: src/preferences.py:275
+#: src/ui.py:294
 msgid "Manual zoom mode"
 msgstr "手動でズームを調整"
 
@@ -1219,12 +1143,8 @@ msgstr "コメントファイルの拡張子"
 #
 # File: src/preferences.py, line: 295
 #: src/preferences.py:305
-msgid ""
-"Treat all files found within archives, that have one of these file endings, "
-"as comments."
-msgstr ""
-"書庫ファイルの中にある、これらの拡張子を持つファイルを全てコメントとして扱い"
-"ます。"
+msgid "Treat all files found within archives, that have one of these file endings, as comments."
+msgstr "書庫ファイルの中にある、これらの拡張子を持つファイルを全てコメントとして扱います。"
 
 #
 # File: src/preferences.py, line: 297
@@ -1248,35 +1168,40 @@ msgstr "%d個のコメント"
 #
 # File: src/properties.py, line: 124
 # File: src/properties.py, line: 159
-#: src/properties.py:129 src/properties.py:164
+#: src/properties.py:129
+#: src/properties.py:164
 msgid "Location"
 msgstr "場所"
 
 #
 # File: src/properties.py, line: 126
 # File: src/properties.py, line: 160
-#: src/properties.py:131 src/properties.py:165
+#: src/properties.py:131
+#: src/properties.py:165
 msgid "Accessed"
 msgstr "最終アクセス時"
 
 #
 # File: src/properties.py, line: 128
 # File: src/properties.py, line: 162
-#: src/properties.py:133 src/properties.py:167
+#: src/properties.py:133
+#: src/properties.py:167
 msgid "Modified"
 msgstr "最終修正時"
 
 #
 # File: src/properties.py, line: 130
 # File: src/properties.py, line: 164
-#: src/properties.py:135 src/properties.py:169
+#: src/properties.py:135
+#: src/properties.py:169
 msgid "Permissions"
 msgstr "パーミッション"
 
 #
 # File: src/properties.py, line: 131
 # File: src/properties.py, line: 165
-#: src/properties.py:136 src/properties.py:170
+#: src/properties.py:136
+#: src/properties.py:170
 msgid "Owner"
 msgstr "所有者"
 
@@ -1313,18 +1238,8 @@ msgstr "サムネイルをクリーンアップ"
 #
 # File: src/thumbremover.py, line: 46
 #: src/thumbremover.py:46
-msgid ""
-"Thumbnails for files (such as image files and comic book archives) are "
-"stored in your home directory. Many different applications use and create "
-"these thumbnails, but sometimes thumbnails remain even though the original "
-"files have been removed - wasting space. This dialog can cleanup your stored "
-"thumbnails by removing orphaned and outdated thumbnails."
-msgstr ""
-"画像ファイルや本の書庫ファイル等のファイルのサムネイルが、ホームディレクトリ"
-"以下に見つかりました。サムネイルは他のアプリケーションによっても作成され利用"
-"されますが、元のファイルが削除された後でもサムネイルが削除されずにディスクの"
-"無駄遣いになっていることがあります。このダイアログでは、古くて使われていない"
-"サムネイルをクリーンアップすることが出来ます。"
+msgid "Thumbnails for files (such as image files and comic book archives) are stored in your home directory. Many different applications use and create these thumbnails, but sometimes thumbnails remain even though the original files have been removed - wasting space. This dialog can cleanup your stored thumbnails by removing orphaned and outdated thumbnails."
+msgstr "画像ファイルや本の書庫ファイル等のファイルのサムネイルが、ホームディレクトリ以下に見つかりました。サムネイルは他のアプリケーションによっても作成され利用されますが、元のファイルが削除された後でもサムネイルが削除されずにディスクの無駄遣いになっていることがあります。このダイアログでは、古くて使われていないサムネイルをクリーンアップすることが出来ます。"
 
 #
 # File: src/thumbremover.py, line: 58
@@ -1341,7 +1256,8 @@ msgstr "全サムネイル数"
 #
 # File: src/thumbremover.py, line: 68
 # File: src/thumbremover.py, line: 75
-#: src/thumbremover.py:68 src/thumbremover.py:75
+#: src/thumbremover.py:68
+#: src/thumbremover.py:75
 msgid "Calculating..."
 msgstr "計算中..."
 
@@ -1361,7 +1277,7 @@ msgstr "古くて使われていないサムネイルをクリーンアップし
 # File: src/thumbremover.py, line: 116
 #: src/thumbremover.py:116
 msgid "Removing thumbnails"
-msgstr "サムネイルを削除"
+msgstr "サムネイルを削除中"
 
 #
 # File: src/thumbremover.py, line: 135
@@ -1712,924 +1628,3 @@ msgstr "マンガのページ順に表示"
 msgid "Magnifying glass"
 msgstr "拡大"
 
-#
-#~ msgid "No images in \"%s\""
-#~ msgstr "\"%s\"には画像がありません"
-
-#
-#~ msgid "Default"
-#~ msgstr "デフォルト"
-
-#
-#~ msgid "Automatically adjust contrast"
-#~ msgstr "コントラストを自動で調整"
-
-#
-#~ msgid "Fit-to-screen mode"
-#~ msgstr "スクリーンに合わせる"
-
-#
-#~ msgid "_Normal size"
-#~ msgstr "通常のサイズ(_N)"
-
-#
-#~ msgid "_Toolbars"
-#~ msgstr "ツールバー(_T)"
-
-#
-#~ msgid "Fit-to-_screen mode"
-#~ msgstr "スクリーンに合わせる(_s)"
-
-#
-#~ msgid "View _comments"
-#~ msgstr "コメントを表示(_c)"
-
-#
-#~ msgid "Proper_ties"
-#~ msgstr "プロパティ(_t)"
-
-#
-#~ msgid "Magnifying lens"
-#~ msgstr "レンズで拡大"
-
-#
-#~ msgid "Apply filter on full path"
-#~ msgstr "全パス名にフィルターを適用"
-
-#
-#~ msgid "Add archives to library."
-#~ msgstr "書庫をライブラリに追加"
-
-#
-#~ msgid "Remove selected archive from library."
-#~ msgstr "選択した書庫をライブラリから削除"
-
-#
-#~ msgid "Clean up"
-#~ msgstr "クリーンアップ"
-
-#
-#~ msgid "Remove orphaned or outdated library entries."
-#~ msgstr "古いライブラリの項目を削除"
-
-#
-#~ msgid "Close this window."
-#~ msgstr "このウィンドウを閉じる"
-
-#
-#~ msgid "Open selected archive."
-#~ msgstr "選択した書庫を開く"
-
-#
-#~ msgid "All archives"
-#~ msgstr "全ての書庫"
-
-#
-#~ msgid "JPEG image"
-#~ msgstr "JPEG画像"
-
-#
-#~ msgid "PNG image"
-#~ msgstr "PNG画像"
-
-#
-#~ msgid "GIF image"
-#~ msgstr "GIF画像"
-
-#
-#~ msgid "TIFF image"
-#~ msgstr "TIFF画像"
-
-#
-#~ msgid "BMP image"
-#~ msgstr "BMP画像"
-
-#
-#~ msgid "ICO image"
-#~ msgstr "ICO画像"
-
-#
-#~ msgid "XPM image"
-#~ msgstr "XPM画像"
-
-#
-#~ msgid "XBM image"
-#~ msgstr "XBM画像"
-
-#
-#~ msgid "tar archive"
-#~ msgstr "tar書庫"
-
-#
-#~ msgid "Add archives recursively"
-#~ msgstr "再帰的に書庫を追加"
-
-#
-#~ msgid "Select folder"
-#~ msgstr "フォルダを選択"
-
-#
-#~ msgid "Fullscreen as default"
-#~ msgstr "デフォルトで全画面表示"
-
-#
-#~ msgid "Double page mode as default"
-#~ msgstr "デフォルトで見開き表示"
-
-#
-#~ msgid "Stretch small images"
-#~ msgstr "小さい画像を拡大"
-
-#
-#~ msgid "Use smart scaling in double page mode"
-#~ msgstr "見開き表示の時スマート・スケーリングを用いる"
-
-#
-#~ msgid "Always view comments when opening a new file"
-#~ msgstr "新しいファイルを開く時常にコメントを表示"
-
-#
-#~ msgid "Hide menubar, scrollbars etc. in fullscreen mode"
-#~ msgstr "全画面表示の時メニューバーやサムネイルバーなどを隠す"
-
-#
-#~ msgid "Cache pages for faster forward flipping"
-#~ msgstr "次のページの画像をキャッシュする"
-
-#
-#~ msgid "Scroll wheel scrolls horizontally at top and bottom of page"
-#~ msgstr "ページの一番上と下で左右にスクロールする"
-
-#
-#~ msgid "Flip page when scrolling off the top or bottom of page"
-#~ msgstr "ページの一番上や下に来た時ページを移動する"
-
-#
-#~ msgid "Hide thumbnail scrollbar"
-#~ msgstr "サムネイルのスクロールバーを隠す"
-
-#
-#~ msgid "Space key uses smart scrolling"
-#~ msgstr "スペースキーでスマート・スクロールを行う"
-
-#
-#~ msgid "Save window position and size for future sessions"
-#~ msgstr "ウィンドウの位置と大きさを記録する"
-
-#
-#~ msgid "Go to the next archive in directory after last page"
-#~ msgstr "最後のページの次に、同じディレクトリの次の書庫を開く"
-
-#
-#~ msgid "Hide cursor in fullscreen mode"
-#~ msgstr "全画面表示の時カーソルを隠す"
-
-#
-#~ msgid "Open last viewed file on start"
-#~ msgstr "起動時に前回最後に見たファイルを表示する"
-
-#
-#~ msgid "Show page numbers on thumbnails"
-#~ msgstr "ページ数をサムネイルに表示する"
-
-#
-#~ msgid "Always use smart scrolling as if in double page mode"
-#~ msgstr "見開き表示の時のように常にスマート・スクロールを行う"
-
-#
-#~ msgid "Use stored thumbnails for images in directories"
-#~ msgstr "ディレクトリ内の画像に対して、予め記録されたサムネイルを用いる"
-
-#
-#~ msgid "Use stored thumbnails for images in archives"
-#~ msgstr "書庫内の画像に対して、予め記録されたサムネイルを用いる"
-
-#
-#~ msgid "Display only one page in double page mode if the image is wide"
-#~ msgstr "見開き表示で画像の幅が大きい時１枚だけ表示する"
-
-#
-#~ msgid "Store recently opened files"
-#~ msgstr "最近開いたファイルを記録する"
-
-#
-#~ msgid "Always go to this directory in the \"Open\" dialog:"
-#~ msgstr "「開く」を選択した時以下のディレクトリを開く："
-
-#
-#~ msgid "Always go to the latest directory in the \"Open\" dialog"
-#~ msgstr "「開く」を選択した時一番最後に開いたディレクトリを開く"
-
-#
-#~ msgid "Nearest (quickest, worst quality)"
-#~ msgstr "最近傍補間（表示は最速で画質は最悪）"
-
-#
-#~ msgid "Tiles"
-#~ msgstr "タイル補間"
-
-#
-#~ msgid "Bilinear"
-#~ msgstr "双一次補間"
-
-#
-#~ msgid "Hyper (slowest, best quality)"
-#~ msgstr "ハイパー補間（表示は最も遅く画質は最良）"
-
-#
-#~ msgid "Manual zoom mode as default"
-#~ msgstr "デフォルトで、手動でズームを設定する表示にする"
-
-#
-#~ msgid "Fit-to-screen mode as default"
-#~ msgstr "デフォルトでスクリーンに合わせる表示にする"
-
-#
-#~ msgid "Fit width mode as default"
-#~ msgstr "デフォルトで横幅を合わせる表示にする"
-
-#
-#~ msgid "Fit height mode as default"
-#~ msgstr "デフォルトで縦幅を合わせる表示にする"
-
-#
-#~ msgid "Background colour:"
-#~ msgstr "背景色："
-
-#
-#~ msgid "Background colour"
-#~ msgstr "背景色"
-
-#
-#~ msgid "Toolbar button labels:"
-#~ msgstr "ツールバーのボタンのラベル："
-
-#
-#~ msgid "Icons only"
-#~ msgstr "アイコンのみ"
-
-#
-#~ msgid "Text only"
-#~ msgstr "テキストのみ"
-
-#
-#~ msgid "Icons and text"
-#~ msgstr "アイコンとテキスト"
-
-#
-#~ msgid "Slideshow delay:"
-#~ msgstr "スライドショーの間隔："
-
-#
-#~ msgid "Scaling quality"
-#~ msgstr "スケーリングの種類"
-
-#
-#~ msgid "Scaling"
-#~ msgstr "スケーリング"
-
-#
-#~ msgid "Treat files with the following extensions as comments:"
-#~ msgstr "次の拡張子を持つファイルはコメントとして扱う："
-
-#
-#~ msgid "Space key scrolls"
-#~ msgstr "スペースキーでのスクロール量："
-
-#
-#~ msgid "of"
-#~ msgstr "of"
-
-#
-#~ msgid "Window size"
-#~ msgstr "ウィンドウの大きさ"
-
-#
-#~ msgid "Page size"
-#~ msgstr "ページの大きさ"
-
-#
-#~ msgid "Magnification factor:"
-#~ msgstr "拡大率："
-
-#
-#~ msgid "Lens size (px):"
-#~ msgstr "レンズの大きさ（ピクセル）："
-
-#
-#~ msgid "Update interval (milliseconds):"
-#~ msgstr "更新間隔（ミリ秒）："
-
-#
-#~ msgid "Lens"
-#~ msgstr "レンズ"
-
-#
-#~ msgid "Thumbnail sizes (px):"
-#~ msgstr "サムネイルの大きさ（ピクセル）："
-
-#
-#~ msgid "Library thumbnail sizes (px):"
-#~ msgstr "ライブラリのサムネイルの大きさ（ピクセル）："
-
-#
-#~ msgid "Adjust colour"
-#~ msgstr "色の調整"
-
-#
-#~ msgid "Save values for future sessions"
-#~ msgstr "次のセッションのために値を記録する"
-
-#
-#~ msgid "Go to page"
-#~ msgstr "ページを指定して移動"
-
-#
-#~ msgid "Title"
-#~ msgstr "タイトル"
-
-#
-#~ msgid "It reads ZIP, RAR and tar archives (also gzip or bzip2 compressed)"
-#~ msgstr ""
-#~ "ZIPやRAR、tar書庫を扱えます\n"
-#~ "（gzipやbzip2で圧縮されていても扱えます）。"
-
-#
-#~ msgid "as well as plain image files."
-#~ msgstr "又同様に通常の画像ファイルも扱えます。"
-
-#
-#~ msgid "Developer and Swedish translation"
-#~ msgstr "開発者、及びスウェーデン語への翻訳"
-
-#
-#~ msgid "Manage thumbnails"
-#~ msgstr "サムネイルを編集"
-
-#
-#~ msgid "Remove all stored thumbnails:"
-#~ msgstr "記録された全サムネイルを削除："
-
-#
-#~ msgid "Remove orphaned thumbnails:"
-#~ msgstr "古いサムネイルを削除："
-
-#
-#~ msgid "Directories"
-#~ msgstr "ディレクトリ"
-
-#
-#~ msgid "Archives"
-#~ msgstr "書庫"
-
-#
-#~ msgid "Convert"
-#~ msgstr "変換"
-
-#
-#~ msgid "File type"
-#~ msgstr "ファイルの種類"
-
-#
-#~ msgid "Extension"
-#~ msgstr "拡張子"
-
-#
-#~ msgid "Zip archive"
-#~ msgstr "Zip書庫"
-
-#
-#~ msgid "Delete old archive/directory"
-#~ msgstr "古い書庫やディレクトリを削除"
-
-#
-#~ msgid "Permission denied"
-#~ msgstr "パーミッションが拒否されました"
-
-#
-#~ msgid "Confirm operation"
-#~ msgstr "操作の確認"
-
-#
-#~ msgid "Permanently remove %s?"
-#~ msgstr "永久に%sを削除しますか？"
-
-#
-#~ msgid "Perform lossless JPEG operation on %s?"
-#~ msgstr "無損失のJPEG画像の操作を%sに行いますか？"
-
-#
-#~ msgid "Some images might be trimmed a bit during the operation."
-#~ msgstr "画像によっては画像操作の時トリミングされる事があります"
-
-#
-#~ msgid "Permanently convert %s to greyscale?"
-#~ msgstr "永久に%sをgreyscaleにしますか？"
-
-#
-#~ msgid "Location:"
-#~ msgstr "場所："
-
-#
-#~ msgid "Quantity:"
-#~ msgstr "ファイル数："
-
-#
-#~ msgid "Total size:"
-#~ msgstr "合計サイズ："
-
-#
-#~ msgid "Removed:"
-#~ msgstr "削除されました："
-
-#
-#~ msgid "Done!"
-#~ msgstr "完了しました"
-
-#
-#~ msgid "pages"
-#~ msgstr "ページ"
-
-#
-#~ msgid "comment"
-#~ msgstr "コメント"
-
-#
-#~ msgid "comments"
-#~ msgstr "コメント"
-
-#
-#~ msgid "In library"
-#~ msgstr "ライブラリに"
-
-#
-#~ msgid "Yes"
-#~ msgstr "あります"
-
-#
-#~ msgid "No"
-#~ msgstr "ありません"
-
-#
-#~ msgid "Bookmarked"
-#~ msgstr "ブックマークに"
-
-#
-#~ msgid "Yes, page"
-#~ msgstr "あります、 ページ"
-
-#
-#~ msgid "Mode"
-#~ msgstr "モード"
-
-#
-#~ msgid "Pixel count"
-#~ msgstr "ピクセル数"
-
-#
-#~ msgid "Pixel sum"
-#~ msgstr "ピクセル数総和"
-
-#
-#~ msgid "Extrema"
-#~ msgstr "範囲"
-
-#
-#~ msgid "Mean"
-#~ msgstr "平均"
-
-#
-#~ msgid "Median"
-#~ msgstr "メディアン"
-
-#
-#~ msgid "Standard deviation"
-#~ msgstr "標準偏差"
-
-#
-#~ msgid "Image 1"
-#~ msgstr "画像1"
-
-#
-#~ msgid "Image 2"
-#~ msgstr "画像2"
-
-#
-#~ msgid "Could not delete"
-#~ msgstr "削除出来ませんでした"
-
-#
-#~ msgid "Please check your permissions."
-#~ msgstr "パーミッションを確認してください"
-
-#
-#~ msgid "Could not create"
-#~ msgstr "作成出来ませんでした"
-
-#
-#~ msgid "Added:"
-#~ msgstr "追加しました:"
-
-#
-#~ msgid "Adding library entries"
-#~ msgstr "ライブラリの項目を追加"
-
-#
-#~ msgid "Removing library entries"
-#~ msgstr "ライブラリの項目を削除"
-
-#
-#~ msgid "Extract page"
-#~ msgstr "ページを抽出"
-
-#
-#~ msgid "page"
-#~ msgstr "ページ"
-
-#
-#~ msgid ""
-#~ "Could not find the unrar executable. Please install it if you wish to "
-#~ "open RAR archives."
-#~ msgstr "unrarがありません。RAR書庫を開きたい時はインストールしてください。"
-
-#
-#~ msgid "Could not open"
-#~ msgstr "開けません"
-
-#
-#~ msgid "is not a file."
-#~ msgstr "はファイルではありません"
-
-#
-#~ msgid "does not exist."
-#~ msgstr "は存在しません"
-
-#
-#~ msgid "Filetype of"
-#~ msgstr "次のファイルの種類"
-
-#
-#~ msgid "not recognized."
-#~ msgstr "は認識出来ません"
-
-#
-#~ msgid "Comment file"
-#~ msgstr "ファイルにコメントを加える"
-
-#
-#~ msgid "Could not read"
-#~ msgstr "読み込めません"
-
-#
-#~ msgid "Comment"
-#~ msgstr "コメント"
-
-#
-#~ msgid "_Go to page..."
-#~ msgstr "ページを指定して移動...(_G)"
-
-#
-#~ msgid "Fit _width"
-#~ msgstr "横幅を合わせる(_w)"
-
-#
-#~ msgid "Fit _height"
-#~ msgstr "縦幅を合わせる(_h)"
-
-#
-#~ msgid "_Best fit"
-#~ msgstr "ベストフィット(_B)"
-
-#
-#~ msgid "Clear bookmarks"
-#~ msgstr "ブックマークを削除"
-
-#
-#~ msgid "_Manage thumbnails..."
-#~ msgstr "サムネイルを編集(_M)"
-
-#
-#~ msgid "_Recent files"
-#~ msgstr "最近開いたファイル(_R)"
-
-#
-#~ msgid "Clear recent files"
-#~ msgstr "最近開いたファイルをクリア"
-
-#
-#~ msgid "Open _library..."
-#~ msgstr "ライブラリを開く(_l)"
-
-#
-#~ msgid "_Add to library"
-#~ msgstr "ライブラリに追加(_A)"
-
-#
-#~ msgid "Con_vert..."
-#~ msgstr "画像や書庫を変換...(_v)"
-
-#
-#~ msgid "E_xtract image..."
-#~ msgstr "画像を抽出(_x)"
-
-#
-#~ msgid "_Adjust colour..."
-#~ msgstr "色の調整(_A)"
-
-#
-#~ msgid "Delete image..."
-#~ msgstr "画像を削除"
-
-#
-#~ msgid "CW lossless JPEG rotation..."
-#~ msgstr "無損失のJPEG画像の回転（右回り）..."
-
-#
-#~ msgid "CCW lossless JPEG rotation..."
-#~ msgstr "無損失のJPEG画像の回転（左回り）..."
-
-#
-#~ msgid "Horizontal lossless JPEG flip..."
-#~ msgstr "無損失のJPEG画像の左右のフリップ..."
-
-#
-#~ msgid "Vertical lossless JPEG flip..."
-#~ msgstr "無損失のJPEG画像の上下のフリップ..."
-
-#
-#~ msgid "Convert JPEG to greyscale..."
-#~ msgstr "JPEGファイルをgreyscaleに変換..."
-
-#
-#~ msgid "File o_perations"
-#~ msgstr "ファイル操作(_p)"
-
-#
-#~ msgid "Magnifying _lens"
-#~ msgstr "レンズで拡大(_l)"
-
-#
-#~ msgid "Enter fullscreen mode automatically when Comix is started."
-#~ msgstr "起動時に自動で全画面表示にする"
-
-#
-#~ msgid "Enter double page mode automatically when Comix is started."
-#~ msgstr "起動時に自動で見開き表示にする"
-
-#
-#~ msgid "Enter manual zoom mode automatically when Comix is started."
-#~ msgstr "起動時に自動で、手動でズームを設定する表示にする"
-
-#
-#~ msgid "Enter fit-to-screen mode automatically when Comix is started."
-#~ msgstr "起動時に自動で画像をスクリーンに合わせる表示にする"
-
-#
-#~ msgid "Enter fit width mode automatically when Comix is started."
-#~ msgstr "起動時に自動で横幅を合わせる表示にする"
-
-#
-#~ msgid "Enter fit height mode automatically when Comix is started."
-#~ msgstr "起動時に自動で縦幅を合わせる表示にする"
-
-#
-#~ msgid ""
-#~ "Also scale images to a size that is larger than their original size in "
-#~ "fit-to-screen mode, fit width mode and fit height mode."
-#~ msgstr ""
-#~ "スクリーン、又は横幅、縦幅に画像を合わせる表示で、元画像の方が小さい場合は"
-#~ "拡大させる"
-
-#
-#~ msgid ""
-#~ "Scale the images independently when in double page mode and fit-to-screen "
-#~ "mode. The smaller of the two images will scale up to fill any extra space "
-#~ "that is given."
-#~ msgstr ""
-#~ "見開き表示やスクリーンに合わせる表示の時、画像を別々にスケールする。小さい"
-#~ "方の画像は一つの隙間が埋まるまで拡大されます。"
-
-#
-#~ msgid "Automatically show any available comments when opening a new file."
-#~ msgstr "新しいファイルを開く時、コメントがあれば自動的に表示する"
-
-#
-#~ msgid ""
-#~ "Automatically hide scrollbars, menubar, toolbar, statusbar and thumbnails "
-#~ "when in fullscreen mode."
-#~ msgstr ""
-#~ "全画面表示の時にスクロール、メニュー、ツール、ステータス、サムネイルの全"
-#~ "バーを隠す"
-
-#
-#~ msgid ""
-#~ "Cache the next page in the archive/directory to increase the perceived "
-#~ "speed. This is generally recommended unless you are running low on RAM."
-#~ msgstr ""
-#~ "スピードを上げるため書庫やディレクトリの次のページをキャッシュする。RAMの"
-#~ "性能が低くない限り推奨します。"
-
-#
-#~ msgid ""
-#~ "Move the horizontal scrollbar instead of the vertical when using the "
-#~ "scroll wheel at the top or the bottom of the page. The direction will be "
-#~ "determined by whether you use manga mode or not."
-#~ msgstr ""
-#~ "ページの一番上や下に来た時左右方向のスクロールバーを動かす。動かす方向はマ"
-#~ "ンガ表示になっているかで判断されます。"
-
-#
-#~ msgid ""
-#~ "Save the position and the size of the window for the next time you start "
-#~ "Comix."
-#~ msgstr "次回ウィンドウを同じ位置、同じ大きさで起動する"
-
-#
-#~ msgid ""
-#~ "Automatically open the next archive in the directory when scrolling past "
-#~ "the last page of the current archive, and automatically open the previous "
-#~ "archive in the directory when scrolling past the first page of the "
-#~ "current archive."
-#~ msgstr ""
-#~ "現在の書庫の最後のページでスクロールが一番下まで動いた時、同じディレクトリ"
-#~ "にある次の書庫を自動的に開く（最初のページの時も同様）。"
-
-#
-#~ msgid "Hide the cursor when in fullscreen mode."
-#~ msgstr "全画面表示の時カーソルを隠す"
-
-#
-#~ msgid ""
-#~ "Set the image scaling method. The best choice is often \"Tiles\", it is "
-#~ "quite quick and produces almost as good results as \"Bilinear\" or \"Hyper"
-#~ "\"."
-#~ msgstr ""
-#~ "画像のスケーリング法を設定する。大抵の場合、最良なのはタイル補間です。これ"
-#~ "は描画が早く、双一次補間やハイパー補間と同程度の画質が出ます。"
-
-#
-#~ msgid ""
-#~ "Treat files with the following extensions as comment files. Extensions "
-#~ "should be separated by whitespaces. They are not case sensitive."
-#~ msgstr ""
-#~ "次の拡張子を持つファイルをコメントとして扱う。拡張子はホワイトスペースで区"
-#~ "切られている必要があります。大文字小文字を区別しません。"
-
-#
-#~ msgid ""
-#~ "Use smart scrolling with the space key. Pressing the space key normally "
-#~ "scrolls straight down one window height unless at the bottom of the page "
-#~ "where it flips pages instead. When this option is set Comix automatically "
-#~ "tries to follow the reading flow of the comic book. When pressing the "
-#~ "space key it will not only scroll down but will also scroll horizontally "
-#~ "to the edge of the page (left or right depending on whether you use manga "
-#~ "mode). In double page mode it will go to the edge of the first page if it "
-#~ "is in view, otherwise it will go to the edge of the second page. Also, in "
-#~ "double page mode with this option, Comix will not flip pages unless at "
-#~ "the bottom of the second page. At the bottom of the first page it will "
-#~ "instead go to the top of the second page."
-#~ msgstr ""
-#~ "スペースキーでスマート・スクロールを用いる。\n"
-#~ "通常スペースキーを押すと、スクロールが下で設定された量ずつ下に動き、ページ"
-#~ "の一番下に来るとページを移動します。\n"
-#~ "この設定を行うと、Comixは本を読む流れを自動的に追おうとします。スペース"
-#~ "キーを押すと、上下方向のスクロールだけでなく、左右方向のスクロールも行いま"
-#~ "す（どちらに動くかは、マンガ表示になっているかに依ります）。見開き表示の時"
-#~ "は、先ず初めのページの端まで移動し、次に２ページ目のページの端まで移動しま"
-#~ "す。２ページ目の一番端に移動するまではページをフリップしません。１ページ目"
-#~ "の端に来た時は、次に２ページの一番上に移動します。"
-
-#
-#~ msgid "Always hide the thumbnail scrollbar."
-#~ msgstr "サムネイルのスクロールバーを常に隠す"
-
-#
-#~ msgid "Automatically open the last viewed page when Comix is started."
-#~ msgstr "起動時に自動で最後に見た画像を開く"
-
-#
-#~ msgid ""
-#~ "Automatically go to the same directory as last time when opening the "
-#~ "\"Open\" dialog."
-#~ msgstr "「開く」を選んだ時自動的に最後に開いたディレクトリを選択する"
-
-#
-#~ msgid "Automatically go to this directory when opening the \"Open\" dialog."
-#~ msgstr "「開く」を選んだ時自動的に次のディレクトリを選択する："
-
-#
-#~ msgid "Automatically restore these values the next time Comix is started."
-#~ msgstr "次の起動時にこれらの値を自動的に呼び込む"
-
-#
-#~ msgid "Show the page number in the upper left corner of each thumbnail."
-#~ msgstr "サムネイルの左上にページを表示する"
-
-#
-#~ msgid ""
-#~ "Automatically adjust the contrast of the images so that the darkest pixel "
-#~ "is completely black and the lightest pixel is completely white. This only "
-#~ "works with images without an alpha channel."
-#~ msgstr ""
-#~ "最も暗いピクセルが黒、明るいピクセルが白になるよう、自動的にコントラストを"
-#~ "調整する。画像にアルファ・チャンネルがないときに有効となります。"
-
-#
-#~ msgid ""
-#~ "The space key uses smart scrolling as if in double page mode even when in "
-#~ "single page mode. This can be useful for comics with two scanned pages in "
-#~ "each image. The pages are assumed to be of equal size"
-#~ msgstr ""
-#~ "単独ページ表示の時も見開き表示同様に、スペースキーでスマート・スクロールを"
-#~ "行う。１つの画像の中に２枚スキャンしたページがあるマンガを見る時に便利で"
-#~ "す。２つのページは同じサイズとして扱われます。"
-
-#
-#~ msgid "Adjust the lens magnification factor."
-#~ msgstr "レンズの拡大率を設定する"
-
-#
-#~ msgid ""
-#~ "Set the lens width and height in pixels. A larger lens will use more CPU "
-#~ "resources than a small one."
-#~ msgstr ""
-#~ "レンズの横幅と縦幅をピクセルで設定する。レンズを大きくするとよりCPUを消費"
-#~ "します。"
-
-#
-#~ msgid ""
-#~ "Set the maximum update frequency for the magnification lens in "
-#~ "milliseconds. Setting the value too low can cause the lens to lag behind "
-#~ "when moving the mouse quickly. Setting the value too high can cause the "
-#~ "lens to appear choppy."
-#~ msgstr ""
-#~ "レンズ表示を更新する頻度を設定する。頻度が低過ぎると、マウスが早く動く時に"
-#~ "レンズとのラグが生じます。逆に高過ぎるとレンズがぶれて見えます。"
-
-#
-#~ msgid ""
-#~ "Read and write thumbnails in the ~/.thumbnails directory as proposed by "
-#~ "the freedesktop.org standard. With this preference set, Comix will use "
-#~ "the thumbnails already stored there to speed up thumbnail loading. If "
-#~ "there are no thumbnails, Comix will create them and save them there. This "
-#~ "is a standard that many applications conform to, thumbnails created by "
-#~ "other applications can be used by Comix and vice versa. If this "
-#~ "preference is not set, Comix will create thumbnails on the fly every time "
-#~ "a directory is opened."
-#~ msgstr ""
-#~ "freedesktop.orgの規格に従い、サムネイルを~/.thumbnails以下に記録する。この"
-#~ "時、Comixは記録されたサムネイルを利用する事で呼び込みが早くなります。サム"
-#~ "ネイルがないときはこれを作成して記録します。\n"
-#~ "これは多くのアプリケーションが従っている方法で、他のアプリケーションで作成"
-#~ "されたサムネイルはComixで利用出来、又その逆も出来ます。\n"
-#~ "この設定を行わない時、Comixはディレクトリを開く度にサムネイルを作成しま"
-#~ "す。"
-
-#
-#~ msgid ""
-#~ "Also use stored thumbnails for images in archives in a similiar way. Due "
-#~ "to restrictions in the freedesktop.org standard, these thumbnails will be "
-#~ "stored in ~/.comix and will only be used by Comix. If this preference is "
-#~ "not set, Comix will create thumbnails on the fly every time an archive is "
-#~ "opened."
-#~ msgstr ""
-#~ "書庫内の画像に対しても、同様に記録されたサムネイルを用いる。freedesktop."
-#~ "orgの規格による制限の為、このサムネイルは~/.comix以下に記録され、Comixにし"
-#~ "か利用出来ません。この設定を行わない時は、Comixは書庫が開かれる度にサムネ"
-#~ "イルを作成します。"
-
-#
-#~ msgid ""
-#~ "Only display a single image in double page mode if the image consists of "
-#~ "two pages. An image is assumed to consist of two pages if its width is "
-#~ "greater than its height."
-#~ msgstr ""
-#~ "見開き表示で、２ページからなる画像がある時は１枚だけ表示する。横幅が縦幅よ"
-#~ "り大きいときは２ページからなると判断されます。"
-
-#
-#~ msgid "Filter out archives with regular expressions."
-#~ msgstr "次の正規表現で書庫をフィルターアウトする"
-
-#
-#~ msgid "Apply filters on full paths rather than filenames."
-#~ msgstr "フィルターをファイル名でなく全パス名に適用する"
-
-#
-#~ msgid ""
-#~ "Store a list of the 10 last opened files that can be accessed through the "
-#~ "menus."
-#~ msgstr "アクセスしたファイルの内最後の10個を記録する"
-
-#
-#~ msgid "Go to page..."
-#~ msgstr "ページを指定して移動..."
-
-#
-#~ msgid ""
-#~ "Flip pages when scrolling \"off the page\" with the scroll wheel, even "
-#~ "when not in fit-to-screen mode. It takes three \"steps\" with the scroll "
-#~ "wheel to trigger this behaviour."
-#~ msgstr ""
-#~ "スクリーンに合わせる表示でないときも、スクロールがページの外に出た時はペー"
-#~ "ジを移動する。「３回」スクロールを動かせばページを移動します。"
