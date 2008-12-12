@@ -44,7 +44,7 @@ class MainWindow(gtk.Window):
         self.width = None
         self.height = None
 
-        self._manual_zoom = 100         # In percent of original image size
+        self._manual_zoom = 100 # In percent of original image size
         self._waiting_for_redraw = False
 
         self.file_handler = filehandler.FileHandler(self)

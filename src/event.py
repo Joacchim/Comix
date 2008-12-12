@@ -22,6 +22,7 @@ class EventHandler:
         self._last_pointer_pos_y = 0
         self._pressed_pointer_pos_x = 0
         self._pressed_pointer_pos_y = 0
+        self._extra_scroll_events = 0 # For scrolling "off the page".
 
     def resize_event(self, widget, event):
         """Handle events from resizing and moving the main window."""
@@ -96,22 +97,22 @@ class EventHandler:
         # ----------------------------------------------------------------
         elif event.keyval in (gtk.keysyms.Down, gtk.keysyms.KP_Down):
             if not self._window.zoom_mode == preferences.ZOOM_MODE_BEST:
-                self._window.scroll(0, 50)
+                self._scroll_with_flipping(0, 50)
             else:
                 self._window.next_page()
         elif event.keyval in (gtk.keysyms.Up, gtk.keysyms.KP_Up):
             if not self._window.zoom_mode == preferences.ZOOM_MODE_BEST:
-                self._window.scroll(0, -50)
+                self._scroll_with_flipping(0, -50)
             else:
                 self._window.previous_page()
         elif event.keyval in (gtk.keysyms.Right, gtk.keysyms.KP_Right):
             if not self._window.zoom_mode == preferences.ZOOM_MODE_BEST:
-                self._window.scroll(50, 0)
+                self._scroll_with_flipping(50, 0)
             else:
                 self._window.next_page()
         elif event.keyval in (gtk.keysyms.Left, gtk.keysyms.KP_Left):
             if not self._window.zoom_mode == preferences.ZOOM_MODE_BEST:
-                self._window.scroll(-50, 0)
+                self._scroll_with_flipping(-50, 0)
             else:
                 self._window.previous_page()
 
@@ -224,21 +225,21 @@ class EventHandler:
                 self._window.previous_page()
             elif self._window.zoom_mode == preferences.ZOOM_MODE_HEIGHT:
                 if self._window.is_manga_mode:
-                    self._window.scroll(70, 0)
+                    self._scroll_with_flipping(70, 0)
                 else:
-                    self._window.scroll(-70, 0)
+                    self._scroll_with_flipping(-70, 0)
             else:
-                self._window.scroll(0, -70)
+                self._scroll_with_flipping(0, -70)
         elif event.direction == gtk.gdk.SCROLL_DOWN:
             if self._window.zoom_mode == preferences.ZOOM_MODE_BEST:
                 self._window.next_page()
             elif self._window.zoom_mode == preferences.ZOOM_MODE_HEIGHT:
                 if self._window.is_manga_mode:
-                    self._window.scroll(-70, 0)
+                    self._scroll_with_flipping(-70, 0)
                 else:
-                    self._window.scroll(70, 0)
+                    self._scroll_with_flipping(70, 0)
             else:
-                self._window.scroll(0, 70)
+                self._scroll_with_flipping(0, 70)
         elif event.direction == gtk.gdk.SCROLL_RIGHT:
             self._window.next_page()
         elif event.direction == gtk.gdk.SCROLL_LEFT:
@@ -301,6 +302,29 @@ class EventHandler:
             uri = uri[5:]
         path = urllib.url2pathname(uri)
         self._window.file_handler.open_file(path)
+
+    def _scroll_with_flipping(self, x, y):
+        """Handle scrolling with the scroll wheel or the arow keys, for which
+        the pages might be flipped depending on the preferences.
+        """
+        if self._window.scroll(x, y) or not prefs['flip with wheel']:
+            self._extra_scroll_events = 0
+            return
+        if y > 0 or (self._window.is_manga_mode and x < 0) or (
+          not self._window.is_manga_mode and x > 0):
+            forwards_scroll = True
+        else:
+            forwards_scroll = False
+        if forwards_scroll:
+            self._extra_scroll_events = max(1, self._extra_scroll_events + 1)
+            if self._extra_scroll_events >= 3:
+                self._extra_scroll_events = 0
+                self._window.next_page()
+        else:
+            self._extra_scroll_events = min(-1, self._extra_scroll_events - 1)
+            if self._extra_scroll_events <= -3:
+                self._extra_scroll_events = 0
+                self._window.previous_page()
 
 
 def _get_latest_event_of_same_type(event):

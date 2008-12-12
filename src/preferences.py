@@ -38,6 +38,7 @@ prefs = {
     'create thumbnails': True,
     'slideshow delay': 3000,
     'smart space scroll': True,
+    'flip with wheel': False,
     'smart bg': False,
     'store recent file info': True,
     'hide all': False,
@@ -173,6 +174,15 @@ class _PreferencesDialog(gtk.Dialog):
         smart_space_button.set_tooltip_text(
             _('Use smart scrolling with the space key. Normally the space key scrolls only right down (or up when shift is pressed), but with this preference set it also scrolls sideways and so tries to follow the natural reading order of the comic book.'))
         page.add_row(smart_space_button)
+
+        flip_with_wheel_button = gtk.CheckButton(
+            _('Flip pages when scrolling off the edges of the page.'))
+        flip_with_wheel_button.set_active(prefs['flip with wheel'])
+        flip_with_wheel_button.connect('toggled', self._check_button_cb,
+            'flip with wheel')
+        flip_with_wheel_button.set_tooltip_text(
+            _('Flip pages when scrolling "off the page" with the scroll wheel or with the arrow keys. It takes three consecutive "steps" with the scroll wheel or the arrow keys for the pages to be flipped.'))
+        page.add_row(flip_with_wheel_button)
 
         page.new_section(_('Double page mode'))
         step_length_button = gtk.CheckButton(
