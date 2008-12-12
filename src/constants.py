@@ -2,5 +2,8 @@
 
 import os
 
+import portability
+
 VERSION = '4.0.1'
-COMIX_DIR = os.path.join(os.getenv('HOME', ''), '.comix')
+HOME_DIR = portability.get_home_directory()
+COMIX_DIR = portability.get_comix_directory()

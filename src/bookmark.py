@@ -7,6 +7,7 @@ import gtk
 import gobject
 
 import constants
+import constants
 
 _pickle_path = os.path.join(constants.COMIX_DIR, 'bookmarks.pickle')
 
@@ -156,7 +157,7 @@ class _BookmarksStore:
         self._bookmarks = []
         if os.path.isfile(_pickle_path):
             try:
-                fd = open(_pickle_path)
+                fd = open(_pickle_path, 'rb')
                 version = cPickle.load(fd)
                 packs = cPickle.load(fd)
                 for pack in packs:
@@ -214,7 +215,7 @@ class _BookmarksStore:
 
     def write_bookmarks_file(self):
         """Store relevant bookmark info in the comix directory."""
-        fd = open(_pickle_path, 'w')
+        fd = open(_pickle_path, 'wb')
         cPickle.dump(constants.VERSION, fd, cPickle.HIGHEST_PROTOCOL)
         packs = [bookmark.pack() for bookmark in self._bookmarks]
         cPickle.dump(packs, fd, cPickle.HIGHEST_PROTOCOL)

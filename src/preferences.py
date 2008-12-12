@@ -44,7 +44,7 @@ prefs = {
     'hide all': False,
     'hide all in fullscreen': True,
     'stored hide all values': (True, True, True, True, True),
-    'path of last browsed': os.getenv('HOME'),
+    'path of last browsed': constants.HOME_DIR,
     'show menubar': True,
     'show scrollbar': True,
     'show statusbar': True,
@@ -461,7 +461,7 @@ def read_preferences_file():
     if os.path.isfile(_config_path):
         config = None
         try:
-            config = open(_config_path)
+            config = open(_config_path, 'rb')
             version = cPickle.load(config)
             old_prefs = cPickle.load(config)
             config.close()
@@ -478,7 +478,7 @@ def read_preferences_file():
 
 def write_preferences_file():
     """Write preference data to disk."""
-    config = open(_config_path, 'w')
+    config = open(_config_path, 'wb')
     cPickle.dump(constants.VERSION, config, cPickle.HIGHEST_PROTOCOL)
     cPickle.dump(prefs, config, cPickle.HIGHEST_PROTOCOL)
     config.close()

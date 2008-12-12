@@ -40,7 +40,7 @@ def check_for_deprecated_files(window):
     should be removed.
     """
     deprecated = (
-        os.path.join(os.path.join(os.getenv('HOME', ''), '.comixrc')),
+        os.path.join(constants.HOME_DIR, '.comixrc'),
         os.path.join(constants.COMIX_DIR, 'archive_thumbnails'),
         os.path.join(constants.COMIX_DIR, 'bookmarks'),
         os.path.join(constants.COMIX_DIR, 'bookmarks_data'),

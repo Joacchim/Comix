@@ -10,9 +10,10 @@ import pango
 import Image
 
 import labels
+import constants
 
 _dialog = None
-_thumb_base = os.path.join(os.getenv('HOME'), '.thumbnails')
+_thumb_base = os.path.join(constants.HOME_DIR, '.thumbnails')
 
 
 class _ThumbnailMaintenanceDialog(gtk.Dialog):

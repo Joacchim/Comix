@@ -10,6 +10,9 @@ Comix 4.0.1
     
     - Re-added the "flip pages when scrolling off the page" preference
     from previous Comix versions. Thanks to Mamoru Tasaka.
+    
+    - Added a portability module for handling home directories in a more 
+    portable way. Thanks to Oddegamra. 
 
 Comix 4.0.0
     

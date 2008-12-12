@@ -21,7 +21,7 @@ import archive
 import constants
 import filehandler
 
-_thumbdir = os.path.join(os.getenv('HOME'), '.thumbnails/normal')
+_thumbdir = os.path.join(constants.HOME_DIR, '.thumbnails/normal')
 
 
 def get_thumbnail(path, create=True, dst_dir=_thumbdir):

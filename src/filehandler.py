@@ -340,7 +340,7 @@ class FileHandler:
         """
         self._wait_on_comment(num)
         try:
-            fd = open(self._comment_files[num - 1])
+            fd = open(self._comment_files[num - 1], 'rb')
             text = fd.read()
             fd.close()
         except Exception:
