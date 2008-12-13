@@ -5,23 +5,23 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: comix 4.0.0\n"
+"Project-Id-Version: comix 4.0.1\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2008-11-22 02:42+0100\n"
-"PO-Revision-Date: 2008-12-10 01:29+0100\n"
+"PO-Revision-Date: 2008-12-13 18:00+0100\n"
 "Last-Translator: Adrian C. <anrxc@sysphere.org>\n"
 "Language-Team: Croatian\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: pygettext.py 1.5\n"
-"Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%"
-"10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
+"Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
 
 #
 # File: src/about.py, line: 18
 # File: src/about.py, line: 67
-#: src/about.py:19 src/about.py:68
+#: src/about.py:19
+#: src/about.py:68
 msgid "About"
 msgstr "O programu"
 
@@ -51,7 +51,8 @@ msgstr "Razvojni Programer"
 
 #
 # File: src/about.py, line: 77
-#: src/about.py:84 src/about.py:85
+#: src/about.py:84
+#: src/about.py:85
 msgid "Simplified Chinese translation"
 msgstr "Pojednostavljeni kineski prijevod"
 
@@ -75,7 +76,8 @@ msgstr "Njemački prijevod i Nautilus-ov program za prikazivanje sličica"
 
 #
 # File: src/about.py, line: 82
-#: src/about.py:89 src/about.py:90
+#: src/about.py:89
+#: src/about.py:90
 msgid "Italian translation"
 msgstr "Talijanski prijevod"
 
@@ -93,7 +95,8 @@ msgstr "Francuski prijevod"
 
 #
 # File: src/about.py, line: 85
-#: src/about.py:93 src/about.py:94
+#: src/about.py:93
+#: src/about.py:94
 msgid "Polish translation"
 msgstr "Poljski prijevod"
 
@@ -184,12 +187,8 @@ msgstr "RAR program nije pronađen!"
 #
 # File: src/archive.py, line: 68
 #: src/archive.py:68
-msgid ""
-"You need either the <i>rar</i> or the <i>unrar</i> program installed in "
-"order to read RAR (.cbr) files."
-msgstr ""
-"Za čitanje RAR (.cbr) datoteka potreban je <i>rar</i> ili <i>unrar</i> "
-"program."
+msgid "You need either the <i>rar</i> or the <i>unrar</i> program installed in order to read RAR (.cbr) files."
+msgstr "Za čitanje RAR (.cbr) datoteka potreban je <i>rar</i> ili <i>unrar</i> program."
 
 #
 # File: src/archive.py, line: 301
@@ -248,8 +247,7 @@ msgstr "Očisti sve oznake?"
 #
 # File: src/bookmark.py, line: 79
 #: src/bookmark.py:79
-msgid ""
-"All stored bookmarks will be removed. Are you sure that you want to continue?"
+msgid "All stored bookmarks will be removed. Are you sure that you want to continue?"
 msgstr "Sve spremljene oznake će biti uklonjene. Sigurno želite nastaviti?"
 
 #
@@ -261,7 +259,8 @@ msgstr "Uredi oznake"
 #
 # File: src/bookmark.py, line: 255
 # File: src/edit.py, line: 267
-#: src/bookmark.py:255 src/edit.py:267
+#: src/bookmark.py:255
+#: src/edit.py:267
 msgid "Name"
 msgstr "Ime"
 
@@ -274,7 +273,8 @@ msgstr "Stranica"
 #
 # File: src/comment.py, line: 16
 # File: src/preferences.py, line: 288
-#: src/comment.py:16 src/preferences.py:298
+#: src/comment.py:16
+#: src/preferences.py:298
 msgid "Comments"
 msgstr "Komentari"
 
@@ -294,18 +294,8 @@ msgstr "Pronađene su zastarjele datoteke na vašem računalu."
 #
 # File: src/deprecated.py, line: 22
 #: src/deprecated.py:22
-msgid ""
-"Some old files (that were used for storing preferences, the library, "
-"bookmarks etc. for older versions of Comix) were found on your computer. If "
-"you do not plan on using the older versions of Comix again, you should "
-"remove these files in order to save some disk space. Do you want these files "
-"to be removed for you now?"
-msgstr ""
-"Neke stare datoteke (koje su korištene za spremanje postavki, biblioteke, "
-"oznaka itd. u starijim Comix inačicama) su pronađene na vašem računalu. "
-"Ukoliko više ne planirate koristiti starije Comix inačice, trebali bi "
-"obrisati te datoteke da sačuvate prostor na disku. Želite li da se te "
-"datoteke uklone za vas sada?"
+msgid "Some old files (that were used for storing preferences, the library, bookmarks etc. for older versions of Comix) were found on your computer. If you do not plan on using the older versions of Comix again, you should remove these files in order to save some disk space. Do you want these files to be removed for you now?"
+msgstr "Neke stare datoteke (koje su korištene za spremanje postavki, biblioteke, oznaka itd. u starijim Comix inačicama) su pronađene na vašem računalu. Ukoliko više ne planirate koristiti starije Comix inačice, trebali bi obrisati te datoteke da sačuvate prostor na disku. Želite li da se te datoteke uklone za vas sada?"
 
 #
 # File: src/edit.py, line: 28
@@ -352,19 +342,16 @@ msgstr "Arhive se spremaju kao ZIP datoteke."
 #
 # File: src/edit.py, line: 168
 # File: src/edit.py, line: 285
-#: src/edit.py:168 src/edit.py:285
+#: src/edit.py:168
+#: src/edit.py:285
 msgid "Remove from archive"
 msgstr "Ukloni iz arhive"
 
 #
 # File: src/edit.py, line: 255
 #: src/edit.py:255
-msgid ""
-"Please note that the only files that are automatically added to this list "
-"are those files in archives that Comix recognizes as comments."
-msgstr ""
-"Imajte na umu da su jedine datoteke koje se automatski dodaju na listu one "
-"datoteke u arhivama koje Comix prepozna kao komentare."
+msgid "Please note that the only files that are automatically added to this list are those files in archives that Comix recognizes as comments."
+msgstr "Imajte na umu da su jedine datoteke koje se automatski dodaju na listu one datoteke u arhivama koje Comix prepozna kao komentare."
 
 #
 # File: src/edit.py, line: 270
@@ -417,17 +404,14 @@ msgstr "Automatski prilagodi kontrast."
 #
 # File: src/enhance.py, line: 128
 #: src/enhance.py:128
-msgid ""
-"Automatically adjust contrast (both lightness and darkness), separately for "
-"each colour band."
-msgstr ""
-"Automatski prilagodi kontrast (osvjetljenje i crninu), posebno za svaki skup "
-"boja."
+msgid "Automatically adjust contrast (both lightness and darkness), separately for each colour band."
+msgstr "Automatski prilagodi kontrast (osvjetljenje i crninu), posebno za svaki skup boja."
 
 #
 # File: src/filechooser.py, line: 35
 # File: src/library.py, line: 489
-#: src/filechooser.py:35 src/library.py:489
+#: src/filechooser.py:35
+#: src/library.py:489
 msgid "Open"
 msgstr "Otvori"
 
@@ -483,21 +467,24 @@ msgstr "Zamjenom će sadržaj biti prepisan."
 #
 # File: src/filechooser.py, line: 171
 # File: src/filechooser.py, line: 249
-#: src/filechooser.py:172 src/filechooser.py:250
+#: src/filechooser.py:172
+#: src/filechooser.py:250
 msgid "All images"
 msgstr "Sve slike"
 
 #
 # File: src/filechooser.py, line: 173
 # File: src/filechooser.py, line: 251
-#: src/filechooser.py:174 src/filechooser.py:252
+#: src/filechooser.py:174
+#: src/filechooser.py:252
 msgid "JPEG images"
 msgstr "JPEG slike"
 
 #
 # File: src/filechooser.py, line: 174
 # File: src/filechooser.py, line: 252
-#: src/filechooser.py:175 src/filechooser.py:253
+#: src/filechooser.py:175
+#: src/filechooser.py:253
 msgid "PNG images"
 msgstr "PNG slike"
 
@@ -551,7 +538,8 @@ msgstr "Nepoznat tip datoteke"
 #
 # File: src/librarybackend.py, line: 272
 # File: src/librarybackend.py, line: 274
-#: src/librarybackend.py:272 src/librarybackend.py:274
+#: src/librarybackend.py:272
+#: src/librarybackend.py:274
 msgid "(Copy)"
 msgstr "(Kopiranje)"
 
@@ -594,12 +582,8 @@ msgstr "Obriši kolekciju iz biblioteke?"
 #
 # File: src/library.py, line: 233
 #: src/library.py:233
-msgid ""
-"The selected collection will be removed from the library (but the books and "
-"subcollections in it will remain). Are you sure that you want to continue?"
-msgstr ""
-"Označena kolekcija će biti obrisana iz biblioteke (ali knjige i pod-"
-"kolekcije će ostati). Sigurni ste da želite nastaviti?"
+msgid "The selected collection will be removed from the library (but the books and subcollections in it will remain). Are you sure that you want to continue?"
+msgstr "Označena kolekcija će biti obrisana iz biblioteke (ali knjige i pod-kolekcije će ostati). Sigurni ste da želite nastaviti?"
 
 #
 # File: src/library.py, line: 251
@@ -623,7 +607,8 @@ msgstr "Nemoguće promijeniti ime u '%s'."
 #
 # File: src/library.py, line: 275
 # File: src/library.py, line: 881
-#: src/library.py:275 src/library.py:881
+#: src/library.py:275
+#: src/library.py:881
 msgid "A collection by that name already exists."
 msgstr "Kolekcija s tim imenom već postoji."
 
@@ -643,9 +628,7 @@ msgstr "Korijen"
 # File: src/library.py, line: 386
 #: src/library.py:386
 #, python-format
-msgid ""
-"Put the collection '%(subcollection)s' in the collection '%(supercollection)"
-"s'."
+msgid "Put the collection '%(subcollection)s' in the collection '%(supercollection)s'."
 msgstr "Stavi kolekciju '%(subcollection)s' u kolekciju '%(supercollection)s'."
 
 #
@@ -659,10 +642,8 @@ msgstr "Dodaj knjige u '%s'."
 # File: src/library.py, line: 411
 #: src/library.py:411
 #, python-format
-msgid ""
-"Move books from '%(source collection)s' to '%(destination collection)s'."
-msgstr ""
-"Premjesti knjige iz '%(source collection)s' u '%(destination collection)s'."
+msgid "Move books from '%(source collection)s' to '%(destination collection)s'."
+msgstr "Premjesti knjige iz '%(source collection)s' u '%(destination collection)s'."
 
 #
 # File: src/library.py, line: 492
@@ -692,12 +673,8 @@ msgstr "Obrisati knjige iz biblioteke?"
 #
 # File: src/library.py, line: 599
 #: src/library.py:599
-msgid ""
-"The selected books will be removed from the library (but the original files "
-"will be untouched). Are you sure that you want to continue?"
-msgstr ""
-"Označene knjige će biti obrisane iz biblioteke (ali originali će ostati "
-"nepromijenjeni). Sigurni ste da želite nastaviti?"
+msgid "The selected books will be removed from the library (but the original files will be untouched). Are you sure that you want to continue?"
+msgstr "Označene knjige će biti obrisane iz biblioteke (ali originali će ostati nepromijenjeni). Sigurni ste da želite nastaviti?"
 
 #
 # File: src/library.py, line: 609
@@ -715,12 +692,8 @@ msgstr "Pretraga"
 #
 # File: src/library.py, line: 774
 #: src/library.py:774
-msgid ""
-"Display only those books that have the specified text string in their full "
-"path. The search is not case sensitive."
-msgstr ""
-"Prikaži samo one knjige koje imaju naznačeni tekst u njihovoj punoj putanji. "
-"Pretraga nije osjetljiva na velika i mala slova."
+msgid "Display only those books that have the specified text string in their full path. The search is not case sensitive."
+msgstr "Prikaži samo one knjige koje imaju naznačeni tekst u njihovoj punoj putanji. Pretraga nije osjetljiva na velika i mala slova."
 
 #
 # File: src/library.py, line: 776
@@ -761,7 +734,8 @@ msgstr "Otvori označenu knjigu."
 #
 # File: src/library.py, line: 832
 # File: src/properties.py, line: 113
-#: src/library.py:832 src/properties.py:118
+#: src/library.py:832
+#: src/properties.py:118
 #, python-format
 msgid "%d pages"
 msgstr "%d stranica"
@@ -885,12 +859,8 @@ msgstr "Veličina povećala (u pikselima)"
 #
 # File: src/preferences.py, line: 131
 #: src/preferences.py:132
-msgid ""
-"Set the size of the magnifying glass. It is a square with a side of this "
-"many pixels."
-msgstr ""
-"Postavi veličinu povećala. To je pravokutnik stranica veličine ovoliko "
-"piksela."
+msgid "Set the size of the magnifying glass. It is a square with a side of this many pixels."
+msgstr "Postavi veličinu povećala. To je pravokutnik stranica veličine ovoliko piksela."
 
 #
 # File: src/preferences.py, line: 133
@@ -919,14 +889,8 @@ msgstr "Rastegni male slike."
 #
 # File: src/preferences.py, line: 148
 #: src/preferences.py:149
-msgid ""
-"Stretch images to a size that is larger than their original size if the "
-"current zoom mode requests it. If this preference is unset, images are never "
-"scaled to be larger than their original size."
-msgstr ""
-"Rastezanje slike na veličinu veću od izvorne ako to trenutna postavka "
-"uvećanja zahtjeva. Ukoliko nije postavljeno slike se nikad ne skaliraju na "
-"veličinu veću od izvorne."
+msgid "Stretch images to a size that is larger than their original size if the current zoom mode requests it. If this preference is unset, images are never scaled to be larger than their original size."
+msgstr "Rastezanje slike na veličinu veću od izvorne ako to trenutna postavka uvećanja zahtjeva. Ukoliko nije postavljeno slike se nikad ne skaliraju na veličinu veću od izvorne."
 
 #
 # File: src/preferences.py, line: 151
@@ -943,12 +907,8 @@ msgstr "Koristi kvadratnu pozadinu za transparentne slike."
 #
 # File: src/preferences.py, line: 159
 #: src/preferences.py:160
-msgid ""
-"Use a grey checkered background for transparent images. If this preference "
-"is unset, the background is plain white instead."
-msgstr ""
-"Koristi sivu kvadratnu pozadinu za transparentne slike. Ukoliko nije "
-"postavljeno pozadina će biti čisto bijela."
+msgid "Use a grey checkered background for transparent images. If this preference is unset, the background is plain white instead."
+msgstr "Koristi sivu kvadratnu pozadinu za transparentne slike. Ukoliko nije postavljeno pozadina će biti čisto bijela."
 
 #
 # File: src/preferences.py, line: 161
@@ -971,32 +931,22 @@ msgstr "Koristi pametno pomicanje space tipkom."
 #
 # File: src/preferences.py, line: 174
 #: src/preferences.py:175
-msgid ""
-"Use smart scrolling with the space key. Normally the space key scrolls only "
-"right down (or up when shift is pressed), but with this preference set it "
-"also scrolls sideways and so tries to follow the natural reading order of "
-"the comic book."
-msgstr ""
-"Koristi pametno pomicanje space tipkom. Obično space tipka pomiče samo ravno "
-"dolje (ili gore u kombinaciji sa shift tipkom), ali sa ovom postavkom "
-"uključenom također pomiče bočno i tako pokušava pratiti prirodni red čitanja "
-"stripa."
+msgid "Use smart scrolling with the space key. Normally the space key scrolls only right down (or up when shift is pressed), but with this preference set it also scrolls sideways and so tries to follow the natural reading order of the comic book."
+msgstr "Koristi pametno pomicanje space tipkom. Obično space tipka pomiče samo ravno dolje (ili gore u kombinaciji sa shift tipkom), ali sa ovom postavkom uključenom također pomiče bočno i tako pokušava pratiti prirodni red čitanja stripa."
 
 #: src/preferences.py:179
 msgid "Flip pages when scrolling off the edges of the page."
-msgstr ""
+msgstr "Okreni stranicu kod pomicanja preko ruba stranice."
 
 #: src/preferences.py:184
-msgid ""
-"Flip pages when scrolling \"off the page\" with the scroll wheel or with the "
-"arrow keys. It takes three consecutive \"steps\" with the scroll wheel or "
-"the arrow keys for the pages to be flipped."
-msgstr ""
+msgid "Flip pages when scrolling \"off the page\" with the scroll wheel or with the arrow keys. It takes three consecutive \"steps\" with the scroll wheel or the arrow keys for the pages to be flipped."
+msgstr "Okreni stranicu kod pomicanja \"preko ruba stranice\" sa kotačićem miša ili strelicama. Potrebna su tri uzastopna \"koraka\" sa kotačićem ili strelicama da bi se stranica okrenula."
 
 #
 # File: src/preferences.py, line: 177
 # File: src/ui.py, line: 296
-#: src/preferences.py:187 src/ui.py:296
+#: src/preferences.py:187
+#: src/ui.py:296
 msgid "Double page mode"
 msgstr "Prikaz dvostrukih stranica"
 
@@ -1009,11 +959,8 @@ msgstr "Okreni dvije stranice kod prikaza dvostrukih stranica."
 #
 # File: src/preferences.py, line: 184
 #: src/preferences.py:194
-msgid ""
-"Flip two pages, instead of one, each time we flip pages in double page mode."
-msgstr ""
-"Okreni dvije stranice, umjesto jedne, svaki put kad okrenemo stranicu kod "
-"prikaza dvostrukih stranica."
+msgid "Flip two pages, instead of one, each time we flip pages in double page mode."
+msgstr "Okreni dvije stranice, umjesto jedne, svaki put kad okrenemo stranicu kod prikaza dvostrukih stranica."
 
 #
 # File: src/preferences.py, line: 187
@@ -1024,14 +971,8 @@ msgstr "Prikaži samo jednu široku sliku kod prikaza dvostrukih stranica."
 #
 # File: src/preferences.py, line: 193
 #: src/preferences.py:203
-msgid ""
-"Display only one image in double page mode, if the image's width exceeds its "
-"height. The result of this is that scans that span two pages are displayed "
-"properly (i.e. alone) also in double page mode."
-msgstr ""
-"Prikaži samo jednu sliku, kod prikaza dvostrukih stranica, ako širina slike "
-"nadilazi veličinu. Rezultat je ispravno prikazivanje stripova skeniranih po "
-"dvije stranice, kod prikaza dvostrukih stranica."
+msgid "Display only one image in double page mode, if the image's width exceeds its height. The result of this is that scans that span two pages are displayed properly (i.e. alone) also in double page mode."
+msgstr "Prikaži samo jednu sliku, kod prikaza dvostrukih stranica, ako širina slike nadilazi veličinu. Rezultat je ispravno prikazivanje stripova skeniranih po dvije stranice, kod prikaza dvostrukih stranica."
 
 #
 # File: src/preferences.py, line: 196
@@ -1048,12 +989,8 @@ msgstr "Automatski otvori sljedeću arhivu."
 #
 # File: src/preferences.py, line: 203
 #: src/preferences.py:213
-msgid ""
-"Automatically open the next archive in the directory when flipping past the "
-"last page, or the previous archive when flipping past the first page."
-msgstr ""
-"Automatski otvori sljedeću arhivu u direktoriju kod okretanja zadnje "
-"stranice, ili prošlu arhivu kod okretanja prve stranice."
+msgid "Automatically open the next archive in the directory when flipping past the last page, or the previous archive when flipping past the first page."
+msgstr "Automatski otvori sljedeću arhivu u direktoriju kod okretanja zadnje stranice, ili prošlu arhivu kod okretanja prve stranice."
 
 #
 # File: src/preferences.py, line: 206
@@ -1064,12 +1001,8 @@ msgstr "Kod pokretanja automatski otvori zadnje prikazanu stranicu."
 #
 # File: src/preferences.py, line: 211
 #: src/preferences.py:221
-msgid ""
-"Automatically open, on startup, the file that was open when Comix was last "
-"closed."
-msgstr ""
-"Kod pokretanja automatski otvori datoteku koja je bila otvorena u trenutku "
-"gašenja."
+msgid "Automatically open, on startup, the file that was open when Comix was last closed."
+msgstr "Kod pokretanja automatski otvori datoteku koja je bila otvorena u trenutku gašenja."
 
 #
 # File: src/preferences.py, line: 214
@@ -1080,12 +1013,8 @@ msgstr "Spremaj informacije o nedavno otvorenim datotekama."
 #
 # File: src/preferences.py, line: 219
 #: src/preferences.py:229
-msgid ""
-"Add information about all files opened from within Comix to the shared "
-"recent files list."
-msgstr ""
-"Dodaj informacije o datotekama otvorenim iz Comix na dijeljeni popis nedavno "
-"otvorenih datoteka."
+msgid "Add information about all files opened from within Comix to the shared recent files list."
+msgstr "Dodaj informacije o datotekama otvorenim iz Comix na dijeljeni popis nedavno otvorenih datoteka."
 
 #
 # File: src/preferences.py, line: 222
@@ -1096,14 +1025,8 @@ msgstr "Spremaj sličice za otvorene datoteke."
 #
 # File: src/preferences.py, line: 227
 #: src/preferences.py:237
-msgid ""
-"Store thumbnails for opened files according to the freedesktop.org "
-"specification. These thumbnails are shared by many other applications, such "
-"as most file managers."
-msgstr ""
-"Spremaj sličice za otvorene datoteke prema freedesktop.org specifikaciji. "
-"Ove sličice se dijele između mnogo aplikacija, kao npr. većine upravitelja "
-"datotekama."
+msgid "Store thumbnails for opened files according to the freedesktop.org specification. These thumbnails are shared by many other applications, such as most file managers."
+msgstr "Spremaj sličice za otvorene datoteke prema freedesktop.org specifikaciji. Ove sličice se dijele između mnogo aplikacija, kao npr. većine upravitelja datotekama."
 
 #
 # File: src/preferences.py, line: 230
@@ -1120,15 +1043,8 @@ msgstr "Koristi međuspremnik da bi ubrzao pregledavanje."
 #
 # File: src/preferences.py, line: 235
 #: src/preferences.py:245
-msgid ""
-"Cache the images that are next to the currently viewed image in order to "
-"speed up browsing. Since the speed improvements are quite big, it is "
-"recommended that you have this preference set, unless you are running short "
-"on free RAM."
-msgstr ""
-"Spremaj slike (koje su blizu trenutno prikazanoj) u međuspremnik da bi "
-"ubrzao pregledavanje. Kako su ubrzanja prilično velika preporučeno je "
-"označiti ovu postavku, ako vam ne nedostaje slobodne radne memorije."
+msgid "Cache the images that are next to the currently viewed image in order to speed up browsing. Since the speed improvements are quite big, it is recommended that you have this preference set, unless you are running short on free RAM."
+msgstr "Spremaj slike (koje su blizu trenutno prikazanoj) u međuspremnik da bi ubrzao pregledavanje. Kako su ubrzanja prilično velika preporučeno je označiti ovu postavku, ako vam ne nedostaje slobodne radne memorije."
 
 #
 # File: src/preferences.py, line: 237
@@ -1169,28 +1085,32 @@ msgstr "Predefinirana metoda uvećanja"
 #
 # File: src/preferences.py, line: 262
 # File: src/ui.py, line: 288
-#: src/preferences.py:272 src/ui.py:288
+#: src/preferences.py:272
+#: src/ui.py:288
 msgid "Best fit mode"
 msgstr "Najbolje pristajanje"
 
 #
 # File: src/preferences.py, line: 263
 # File: src/ui.py, line: 290
-#: src/preferences.py:273 src/ui.py:290
+#: src/preferences.py:273
+#: src/ui.py:290
 msgid "Fit width mode"
 msgstr "Prilagodi širini"
 
 #
 # File: src/preferences.py, line: 264
 # File: src/ui.py, line: 292
-#: src/preferences.py:274 src/ui.py:292
+#: src/preferences.py:274
+#: src/ui.py:292
 msgid "Fit height mode"
 msgstr "Prilagodi visini"
 
 #
 # File: src/preferences.py, line: 265
 # File: src/ui.py, line: 294
-#: src/preferences.py:275 src/ui.py:294
+#: src/preferences.py:275
+#: src/ui.py:294
 msgid "Manual zoom mode"
 msgstr "Ručno uvećanje"
 
@@ -1227,12 +1147,8 @@ msgstr "Ekstenzije komentara"
 #
 # File: src/preferences.py, line: 295
 #: src/preferences.py:305
-msgid ""
-"Treat all files found within archives, that have one of these file endings, "
-"as comments."
-msgstr ""
-"Tretiraj sve datoteke unutar arhiva, koje imaju jednu od ovih ekstenzija, "
-"kao komentare."
+msgid "Treat all files found within archives, that have one of these file endings, as comments."
+msgstr "Tretiraj sve datoteke unutar arhiva, koje imaju jednu od ovih ekstenzija, kao komentare."
 
 #
 # File: src/preferences.py, line: 297
@@ -1256,35 +1172,40 @@ msgstr "%d komentara"
 #
 # File: src/properties.py, line: 124
 # File: src/properties.py, line: 159
-#: src/properties.py:129 src/properties.py:164
+#: src/properties.py:129
+#: src/properties.py:164
 msgid "Location"
 msgstr "Lokacija"
 
 #
 # File: src/properties.py, line: 126
 # File: src/properties.py, line: 160
-#: src/properties.py:131 src/properties.py:165
+#: src/properties.py:131
+#: src/properties.py:165
 msgid "Accessed"
 msgstr "Pristupljeno"
 
 #
 # File: src/properties.py, line: 128
 # File: src/properties.py, line: 162
-#: src/properties.py:133 src/properties.py:167
+#: src/properties.py:133
+#: src/properties.py:167
 msgid "Modified"
 msgstr "Mijenjano"
 
 #
 # File: src/properties.py, line: 130
 # File: src/properties.py, line: 164
-#: src/properties.py:135 src/properties.py:169
+#: src/properties.py:135
+#: src/properties.py:169
 msgid "Permissions"
 msgstr "Dozvole"
 
 #
 # File: src/properties.py, line: 131
 # File: src/properties.py, line: 165
-#: src/properties.py:136 src/properties.py:170
+#: src/properties.py:136
+#: src/properties.py:170
 msgid "Owner"
 msgstr "Vlasnik"
 
@@ -1321,18 +1242,8 @@ msgstr "Očisti sličice"
 #
 # File: src/thumbremover.py, line: 46
 #: src/thumbremover.py:46
-msgid ""
-"Thumbnails for files (such as image files and comic book archives) are "
-"stored in your home directory. Many different applications use and create "
-"these thumbnails, but sometimes thumbnails remain even though the original "
-"files have been removed - wasting space. This dialog can cleanup your stored "
-"thumbnails by removing orphaned and outdated thumbnails."
-msgstr ""
-"Sličice datoteka (kao slika i arhiva sa stripovima) se spremaju u vašu "
-"osobnu mapu. Mnogo različitih aplikacija koristi i stvara ove sličice, ali "
-"ponekad sličice zaostanu iako su izvorne datoteke obrisane - troše prostor "
-"na disku. Ovaj dijalog može očistiti vaše spremljene sličice brišući te i "
-"zastarjele sličice."
+msgid "Thumbnails for files (such as image files and comic book archives) are stored in your home directory. Many different applications use and create these thumbnails, but sometimes thumbnails remain even though the original files have been removed - wasting space. This dialog can cleanup your stored thumbnails by removing orphaned and outdated thumbnails."
+msgstr "Sličice datoteka (kao slika i arhiva sa stripovima) se spremaju u vašu osobnu mapu. Mnogo različitih aplikacija koristi i stvara ove sličice, ali ponekad sličice zaostanu iako su izvorne datoteke obrisane - troše prostor na disku. Ovaj dijalog može očistiti vaše spremljene sličice brišući te i zastarjele sličice."
 
 #
 # File: src/thumbremover.py, line: 58
@@ -1349,7 +1260,8 @@ msgstr "Ukupni broj sličica"
 #
 # File: src/thumbremover.py, line: 68
 # File: src/thumbremover.py, line: 75
-#: src/thumbremover.py:68 src/thumbremover.py:75
+#: src/thumbremover.py:68
+#: src/thumbremover.py:75
 msgid "Calculating..."
 msgstr "Izračunavanje..."
 
@@ -1719,3 +1631,4 @@ msgstr "Manga prikaz"
 #: src/ui.py:298
 msgid "Magnifying glass"
 msgstr "Povećalo"
+
