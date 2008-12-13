@@ -158,6 +158,7 @@ class MainWindow(gtk.Window):
 
         self._main_layout.set_events(gtk.gdk.BUTTON1_MOTION_MASK |
                                      gtk.gdk.BUTTON2_MOTION_MASK |
+                                     gtk.gdk.BUTTON_PRESS_MASK |
                                      gtk.gdk.BUTTON_RELEASE_MASK |
                                      gtk.gdk.POINTER_MOTION_MASK)
         self._main_layout.drag_dest_set(gtk.DEST_DEFAULT_ALL,
