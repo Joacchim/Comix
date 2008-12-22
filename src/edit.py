@@ -85,7 +85,8 @@ class _EditArchiveDialog(gtk.Dialog):
         except:
             fail = True
         if not fail:
-            packer = archive.Packer(image_files, other_files, tmp_path)
+            packer = archive.Packer(image_files, other_files, tmp_path,
+                os.path.splitext(os.path.basename(archive_path))[0])
             packer.pack()
             packing_success = packer.wait()
             if packing_success:

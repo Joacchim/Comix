@@ -200,19 +200,23 @@ class Packer:
     task than ZIP archives are (yes, really).
     """
     
-    def __init__(self, image_files, other_files, archive_path):
+    def __init__(self, image_files, other_files, archive_path, base_name):
         """Setup a Packer object to create a ZIP archive at <archive_path>.
         All files pointed to by paths in the sequences <image_files> and
-        <other_files> will be included in the archive. The files in
-        <image_files> will be renamed so that the lexical ordering of their
-        filenames match that of their order in the list. The files in
-        <other_files> will be included as they are, assuming their filenames
-        does not clash with other filenames in the archive. All files are
-        placed in the archive root.
+        <other_files> will be included in the archive when packed.
+        
+        The files in <image_files> will be renamed on the form
+        "NN - <base_name>.ext", so that the lexical ordering of their
+        filenames match that of their order in the list.
+        
+        The files in <other_files> will be included as they are,
+        assuming their filenames does not clash with other filenames in
+        the archive. All files are placed in the archive root.
         """
         self._image_files = image_files
         self._other_files = other_files
         self._archive_path = archive_path
+        self._base_name = base_name
         self._pack_thread = None
         self._packing_successful = False
 
@@ -237,8 +241,8 @@ class Packer:
             print '! Could not create archive', self._archive_path
             return
         used_names = []
-        name = os.path.splitext(os.path.basename(self._archive_path))[0]
-        pattern = '%%0%dd - %s%%s' % (len(str(len(self._image_files))), name)
+        pattern = '%%0%dd - %s%%s' % (len(str(len(self._image_files))),
+            self._base_name)
         for i, path in enumerate(self._image_files):
             filename = pattern % (i + 1, os.path.splitext(path)[1])
             try:
