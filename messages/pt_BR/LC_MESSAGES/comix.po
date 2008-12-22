@@ -279,7 +279,6 @@ msgid "Save"
 msgstr "Salvar"
 
 #: src/filechooser.py:75
-#, fuzzy
 msgid "All files"
 msgstr "Todos os arquivos avulsos"
 
