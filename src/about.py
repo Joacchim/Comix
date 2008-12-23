@@ -95,6 +95,7 @@ class _AboutDialog(gtk.Dialog):
           ('Paul Chatzidimitriou', _('Greek translation')),
           ('Carles Escrig', _('Catalan translation')),
           ('Hsin-Lin Cheng', _('Traditional Chinese translation')),
+          ('Wayne Su', _('Traditional Chinese translation')),
           ('Mamoru Tasaka', _('Japanese translation')),
           ('Ernő Drabik', _('Hungarian translation')),
           ('Artyom Smirnov', _('Russian translation')),
