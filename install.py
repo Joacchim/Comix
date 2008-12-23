@@ -28,10 +28,11 @@ source_dir = os.path.dirname(os.path.realpath(__file__))
 install_dir = '/usr/local/'
 install_mime = True
 
-TRANSLATIONS = ('cs', 'es', 'hr', 'id', 'ja', 'ko', 'pl', 'ru', 'sv', 'zh_CN')
+TRANSLATIONS = ('cs', 'es', 'hr', 'id', 'ja', 'ko', 'pl', 'pt_BR', 'ru', 'sv',
+    'zh_CN', 'zh_TW')
 
 # These translations have not yet been updated for Comix 4:
-#'zh_TW', 'pt_BR', 'de', 'it', 'nl', 'fr', 'el', 'ca', 'hu', 'fa'
+# 'de', 'it', 'nl', 'fr', 'el', 'ca', 'hu', 'fa'
 
 # Files to be installed, as (source file, destination directory)
 FILES = (('src/about.py', 'share/comix/src'),
