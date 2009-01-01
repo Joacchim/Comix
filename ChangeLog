@@ -4,6 +4,8 @@ Comix 4.0.2
     
     - Traditional Chinese translation updated by Wayne Su.
     
+    - Catalan translation updated by Carles Escrig Royo.
+    
     - Internal filenames in archives created by the archive editing dialog
     no longer contain temporary filename cruft.
 
