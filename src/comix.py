@@ -2,7 +2,7 @@
 
 """Comix - GTK Comic Book Viewer
 
-Copyright (C) 2005-2008 Pontus Ekberg
+Copyright (C) 2005-2009 Pontus Ekberg
 <herrekberg@users.sourceforge.net>
 """
 
@@ -26,6 +26,8 @@ import sys
 import gettext
 
 import deprecated
+import filehandler
+import locale
 import main
 import icons
 import preferences
@@ -81,7 +83,17 @@ if __name__ == '__main__':
     icons.load_icons()
     window = main.MainWindow()
     if len(sys.argv) >= 2:
-        window.file_handler.open_file(os.path.abspath(sys.argv[1]))
+        param_path = os.path.abspath(sys.argv[1])
+        if os.path.isdir(param_path):
+            dir_files = os.listdir(param_path)
+            dir_files.sort(locale.strcoll)
+            for filename in dir_files:
+                full_path = os.path.join(param_path, filename)
+                if filehandler.is_image_file(full_path):
+                    window.file_handler.open_file(full_path)
+                    break
+        else:
+            window.file_handler.open_file(param_path)
     elif preferences.prefs['auto load last file']:
         window.file_handler.open_file(preferences.prefs['path to last file'],
             preferences.prefs['page of last file'])
