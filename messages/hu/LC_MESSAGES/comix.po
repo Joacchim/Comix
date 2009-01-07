@@ -1,2628 +1,1090 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: Comix 3.6.1\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-11-22 02:42+0100\n"
-"PO-Revision-Date: 2007-02-28 20:53+0100\n"
+"Project-Id-Version: Comix 4.0.2\n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: 2009-01-06 22:47+0100\n"
 "Last-Translator: Ernő Drabik <drerno@gmail.com>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Poedit-Language: Hungarian\n"
-"X-Poedit-Country: HUNGARY\n"
 
-#
-# File: src/about.py, line: 18
-# File: src/about.py, line: 67
-#: src/about.py:19 src/about.py:68
+#: src/about.py:19
+#: src/about.py:68
 msgid "About"
 msgstr "Névjegy"
 
-#
-# File: src/about.py, line: 55
 #: src/about.py:56
 msgid "Comix is an image viewer specifically designed to handle comic books."
-msgstr ""
-"A Comix egy képnézegető alkalmazás, melyet kimondottan a képregények "
-"megjelenítéséhez terveztek."
+msgstr "A Comix egy képnézegető alkalmazás, melyet kimondottan a képregények megjelenítéséhez terveztek."
 
-#
-# File: src/about.py, line: 57
 #: src/about.py:58
 msgid "It reads ZIP, RAR and tar archives, as well as plain image files."
-msgstr ""
+msgstr "A program a szokásos képfájlok mellett megnyitja a ZIP, RAR és tar arhívumokat is."
 
-#
-# File: src/about.py, line: 59
 #: src/about.py:60
 msgid "Comix is licensed under the GNU General Public License."
-msgstr ""
-"A Comix a GNU General Public License (GNU Általános Nyilvános Licenc) "
-"alapján kerül terjesztésre."
+msgstr "A Comix a GNU General Public License (GNU Általános Nyilvános Licenc) alapján kerül terjesztésre."
 
-#
-# File: src/about.py, line: 75
 #: src/about.py:83
 msgid "Developer"
-msgstr ""
+msgstr "Fejlesztő"
 
-#
-# File: src/about.py, line: 77
-#: src/about.py:84 src/about.py:85
+#: src/about.py:84
+#: src/about.py:85
 msgid "Simplified Chinese translation"
 msgstr "Egyszerűsített kínai fordítás"
 
-#
-# File: src/about.py, line: 78
 #: src/about.py:86
 msgid "Spanish translation"
 msgstr "Spanyol fordítás"
 
-#
-# File: src/about.py, line: 79
 #: src/about.py:87
 msgid "Brazilian Portuguese translation"
 msgstr "Brazíliai portugál fordítás"
 
-#
-# File: src/about.py, line: 81
 #: src/about.py:88
 msgid "German translation and Nautilus thumbnailer"
 msgstr "Német fordítás, Nautilus bélyegkép modul"
 
-#
-# File: src/about.py, line: 82
-#: src/about.py:89 src/about.py:90
+#: src/about.py:89
+#: src/about.py:90
 msgid "Italian translation"
 msgstr "Olasz fordítás"
 
-#
-# File: src/about.py, line: 83
 #: src/about.py:91
 msgid "Dutch translation"
 msgstr "Holland fordítás"
 
-#
-# File: src/about.py, line: 84
 #: src/about.py:92
 msgid "French translation"
 msgstr "Francia fordítás"
 
-#
-# File: src/about.py, line: 85
-#: src/about.py:93 src/about.py:94
+#: src/about.py:93
+#: src/about.py:94
 msgid "Polish translation"
 msgstr "Lengyel fordítás"
 
-#
-# File: src/about.py, line: 86
 #: src/about.py:95
 msgid "Greek translation"
 msgstr "Görög fordítás"
 
-#
-# File: src/about.py, line: 87
 #: src/about.py:96
 msgid "Catalan translation"
 msgstr "Katalán fordítás"
 
-#
-# File: src/about.py, line: 88
 #: src/about.py:97
 msgid "Traditional Chinese translation"
 msgstr "Hagyományos kínai fordítás"
 
-#
-# File: src/about.py, line: 89
 #: src/about.py:98
 msgid "Japanese translation"
-msgstr ""
+msgstr "Japán fordítás"
 
-#
-# File: src/about.py, line: 90
 #: src/about.py:99
 msgid "Hungarian translation"
-msgstr ""
+msgstr "Magyar fordítás"
 
-#
-# File: src/about.py, line: 91
 #: src/about.py:100
 msgid "Russian translation"
-msgstr ""
+msgstr "Orosz fordítás"
 
-#
-# File: src/about.py, line: 92
 #: src/about.py:101
 msgid "Croatian translation"
-msgstr ""
+msgstr "Horvát fordítás"
 
-#
-# File: src/about.py, line: 93
 #: src/about.py:102
 msgid "Korean translation"
-msgstr ""
+msgstr "Koreai fordítás"
 
-#
-# File: src/about.py, line: 94
 #: src/about.py:103
 msgid "Persian translation"
-msgstr ""
+msgstr "Perzsa fordítás"
 
-#
-# File: src/about.py, line: 95
 #: src/about.py:104
 msgid "Indonesian translation"
-msgstr ""
+msgstr "Indonéz fordítás"
 
-#
-# File: src/about.py, line: 96
 #: src/about.py:105
 msgid "Czech translation"
-msgstr ""
+msgstr "Cseh fordítás"
 
-#
-# File: src/about.py, line: 97
 #: src/about.py:106
 msgid "Icon design"
-msgstr ""
+msgstr "Ikonok kivitelezése"
 
-#
-# File: src/about.py, line: 106
 #: src/about.py:113
 msgid "Credits"
 msgstr "Közreműködők"
 
-#
-# File: src/archive.py, line: 66
 #: src/archive.py:66
 msgid "Could not find RAR file extractor!"
-msgstr ""
+msgstr "Nem található a RAR fájlokat kicsomagoló alkalmazás!"
 
-#
-# File: src/archive.py, line: 68
 #: src/archive.py:68
-msgid ""
-"You need either the <i>rar</i> or the <i>unrar</i> program installed in "
-"order to read RAR (.cbr) files."
-msgstr ""
+msgid "You need either the <i>rar</i> or the <i>unrar</i> program installed in order to read RAR (.cbr) files."
+msgstr "A RAR (.cbr) fájlok megnyitásához a <i>rar</i>, vagy az <i>unrar</i> alkalmazást telepítenie kell."
 
-#
-# File: src/archive.py, line: 301
 #: src/archive.py:301
 msgid "ZIP archive"
 msgstr "Zip archívum"
 
-#
-# File: src/archive.py, line: 302
 #: src/archive.py:302
 msgid "Tar archive"
 msgstr "Tar archívum"
 
-#
-# File: src/archive.py, line: 303
 #: src/archive.py:303
 msgid "Gzip compressed tar archive"
 msgstr "tar archívum (gzip-pel tömörített)"
 
-#
-# File: src/archive.py, line: 304
 #: src/archive.py:304
 msgid "Bzip2 compressed tar archive"
 msgstr "tar archívum (bzip2-vel tömörített)"
 
-#
-# File: src/archive.py, line: 305
 #: src/archive.py:305
 msgid "RAR archive"
 msgstr "RAR archívum"
 
-#
-# File: src/bookmark.py, line: 27
 #: src/bookmark.py:27
 msgid "_Add bookmark"
 msgstr "Könyvjelző hozzá_adása"
 
-#
-# File: src/bookmark.py, line: 29
 #: src/bookmark.py:29
 msgid "_Edit bookmarks..."
-msgstr "A könyvjelzők sz_erkesztése"
+msgstr "Könyvjelzők sz_erkesztése..."
 
-#
-# File: src/bookmark.py, line: 31
 #: src/bookmark.py:31
 msgid "_Clear bookmarks..."
-msgstr ""
+msgstr "Könyvjelzők _törlése..."
 
-#
-# File: src/bookmark.py, line: 77
 #: src/bookmark.py:77
 msgid "Clear all bookmarks?"
-msgstr ""
+msgstr "Törli az összes könyvjelzőt?"
 
-#
-# File: src/bookmark.py, line: 79
 #: src/bookmark.py:79
-msgid ""
-"All stored bookmarks will be removed. Are you sure that you want to continue?"
-msgstr ""
+msgid "All stored bookmarks will be removed. Are you sure that you want to continue?"
+msgstr "Az összes eltárolt könyvjelző eltávolítására készül. Biztosan folytatja?"
 
-#
-# File: src/bookmark.py, line: 229
 #: src/bookmark.py:229
 msgid "Edit bookmarks"
 msgstr "Könyvjelzők szerkesztése"
 
-#
-# File: src/bookmark.py, line: 255
-# File: src/edit.py, line: 267
-#: src/bookmark.py:255 src/edit.py:267
+#: src/bookmark.py:255
+#: src/edit.py:267
 msgid "Name"
-msgstr ""
+msgstr "Név"
 
-#
-# File: src/bookmark.py, line: 256
 #: src/bookmark.py:256
 msgid "Page"
 msgstr "Oldal"
 
-#
-# File: src/comment.py, line: 16
-# File: src/preferences.py, line: 288
-#: src/comment.py:16 src/preferences.py:298
+#: src/comment.py:16
+#: src/preferences.py:298
 msgid "Comments"
 msgstr "Megjegyzések"
 
-#
-# File: src/comment.py, line: 53
 #: src/comment.py:53
 #, python-format
 msgid "Could not read %s"
-msgstr ""
+msgstr "Nem olvasható a(z) %s"
 
-#
-# File: src/deprecated.py, line: 16
 #: src/deprecated.py:16
 msgid "There are deprecated files left on your computer."
-msgstr ""
+msgstr "Érvénytelenített fájlok találhatók a számítógépén."
 
-#
-# File: src/deprecated.py, line: 22
 #: src/deprecated.py:22
-msgid ""
-"Some old files (that were used for storing preferences, the library, "
-"bookmarks etc. for older versions of Comix) were found on your computer. If "
-"you do not plan on using the older versions of Comix again, you should "
-"remove these files in order to save some disk space. Do you want these files "
-"to be removed for you now?"
-msgstr ""
+msgid "Some old files (that were used for storing preferences, the library, bookmarks etc. for older versions of Comix) were found on your computer. If you do not plan on using the older versions of Comix again, you should remove these files in order to save some disk space. Do you want these files to be removed for you now?"
+msgstr "Néhány régi fájl (amiket a régebbi Comix verziók használtak  beállítások, könyvtárak könyvjelzők, stb. tárolására) található a számítógépén. Ha már nem fog régebbi Comix verziókat használni, akkor tanácsos ezeket eltávolítani helymegtakarítás miatt. Szeretné eltávolítani őket most?"
 
-#
-# File: src/edit.py, line: 28
 #: src/edit.py:28
 msgid "Edit archive"
-msgstr ""
+msgstr "Archívum szerkesztése"
 
-#
-# File: src/edit.py, line: 36
 #: src/edit.py:36
 msgid "Import"
-msgstr ""
+msgstr "Importálás"
 
-#
-# File: src/edit.py, line: 50
 #: src/edit.py:50
 msgid "Images"
-msgstr ""
+msgstr "Képek"
 
-#
-# File: src/edit.py, line: 51
 #: src/edit.py:51
 msgid "Other files"
-msgstr ""
+msgstr "Egyéb állományok"
 
-#
-# File: src/edit.py, line: 99
 #: src/edit.py:99
 msgid "The new archive could not be saved!"
-msgstr ""
+msgstr "Nem lehet elmenteni az új arhívumot!"
 
-#
-# File: src/edit.py, line: 101
 #: src/edit.py:101
 msgid "The original files have not been removed."
-msgstr ""
+msgstr "Az eredeti fájlok megmaradtak."
 
-#
-# File: src/edit.py, line: 115
 #: src/edit.py:115
 msgid "Archives are stored as ZIP files."
-msgstr ""
+msgstr "Az arhívumok ZIP állományként lesznek tárolva."
 
-#
-# File: src/edit.py, line: 168
-# File: src/edit.py, line: 285
-#: src/edit.py:168 src/edit.py:285
+#: src/edit.py:168
+#: src/edit.py:285
 msgid "Remove from archive"
-msgstr ""
+msgstr "Törlés a gyűjteményből."
 
-#
-# File: src/edit.py, line: 255
 #: src/edit.py:255
-msgid ""
-"Please note that the only files that are automatically added to this list "
-"are those files in archives that Comix recognizes as comments."
-msgstr ""
+msgid "Please note that the only files that are automatically added to this list are those files in archives that Comix recognizes as comments."
+msgstr "Vegye figyelembe, hogy itt csak azon arhívumbeli fájlok jelennek meg automatikusan, melyeket a Comix megjegyzésfájlként ismer fel."
 
-#
-# File: src/edit.py, line: 270
 #: src/edit.py:270
 msgid "Size"
-msgstr ""
+msgstr "Méret"
 
-#
-# File: src/enhance.py, line: 51
 #: src/enhance.py:51
 msgid "Enhance image"
-msgstr ""
+msgstr "Kép kiemelése"
 
-#
-# File: src/enhance.py, line: 52
 #: src/enhance.py:52
 msgid "Defaults"
-msgstr ""
+msgstr "Alapértelmezések"
 
-#
-# File: src/enhance.py, line: 79
 #: src/enhance.py:79
 msgid "Brightness"
 msgstr "Fényerő"
 
-#
-# File: src/enhance.py, line: 90
 #: src/enhance.py:90
 msgid "Contrast"
 msgstr "Kontraszt"
 
-#
-# File: src/enhance.py, line: 101
 #: src/enhance.py:101
 msgid "Saturation"
 msgstr "Telítettség"
 
-#
-# File: src/enhance.py, line: 112
 #: src/enhance.py:112
 msgid "Sharpness"
 msgstr "Élesség"
 
-#
-# File: src/enhance.py, line: 126
 #: src/enhance.py:126
 msgid "Automatically adjust contrast."
-msgstr ""
+msgstr "Kontraszt automatikus beállítása."
 
-#
-# File: src/enhance.py, line: 128
 #: src/enhance.py:128
-msgid ""
-"Automatically adjust contrast (both lightness and darkness), separately for "
-"each colour band."
-msgstr ""
+msgid "Automatically adjust contrast (both lightness and darkness), separately for each colour band."
+msgstr "A kontraszt automatikus beállítása (mind a világosságot és a  sötétséget is) minden egyes színsávhoz."
 
-#
-# File: src/filechooser.py, line: 35
-# File: src/library.py, line: 489
-#: src/filechooser.py:35 src/library.py:489
+#: src/filechooser.py:35
+#: src/library.py:489
 msgid "Open"
 msgstr "Megnyitás"
 
-#
-# File: src/filechooser.py, line: 39
 #: src/filechooser.py:39
 msgid "Save"
-msgstr ""
+msgstr "Mentés"
 
-#
-# File: src/filechooser.py, line: 75
 #: src/filechooser.py:75
 msgid "All files"
 msgstr "Minden fájl"
 
-#
-# File: src/filechooser.py, line: 78
 #: src/filechooser.py:78
 msgid "All Archives"
-msgstr ""
+msgstr "Minden archívum"
 
-#
-# File: src/filechooser.py, line: 82
 #: src/filechooser.py:82
 msgid "ZIP archives"
-msgstr ""
+msgstr "ZIP archívumok"
 
-#
-# File: src/filechooser.py, line: 84
 #: src/filechooser.py:84
 msgid "RAR archives"
-msgstr ""
+msgstr "RAR archívumok"
 
-#
-# File: src/filechooser.py, line: 86
 #: src/filechooser.py:86
 msgid "Tar archives"
-msgstr ""
+msgstr "Tar archívumok"
 
-#
-# File: src/filechooser.py, line: 125
 #: src/filechooser.py:126
 #, python-format
 msgid "A file named '%s' already exists. Do you want to replace it?"
-msgstr ""
+msgstr "A megadott nevű állomány már létezik: '%s'. Akarja a cserét?"
 
-#
-# File: src/filechooser.py, line: 128
 #: src/filechooser.py:129
 msgid "Replacing it will overwrite its contents."
-msgstr ""
+msgstr "A csere felülírja az eredeti tartalmat."
 
-#
-# File: src/filechooser.py, line: 171
-# File: src/filechooser.py, line: 249
-#: src/filechooser.py:172 src/filechooser.py:250
+#: src/filechooser.py:172
+#: src/filechooser.py:250
 msgid "All images"
 msgstr "Minden kép"
 
-#
-# File: src/filechooser.py, line: 173
-# File: src/filechooser.py, line: 251
-#: src/filechooser.py:174 src/filechooser.py:252
+#: src/filechooser.py:174
+#: src/filechooser.py:252
 msgid "JPEG images"
-msgstr ""
+msgstr "JPEG képek"
 
-#
-# File: src/filechooser.py, line: 174
-# File: src/filechooser.py, line: 252
-#: src/filechooser.py:175 src/filechooser.py:253
+#: src/filechooser.py:175
+#: src/filechooser.py:253
 msgid "PNG images"
-msgstr ""
+msgstr "PNG képek"
 
-#
-# File: src/filechooser.py, line: 195
 #: src/filechooser.py:196
 msgid "Automatically add the books to this collection"
-msgstr ""
+msgstr "A könyveket automatikusan adja hozzá az aktuális gyűjteményhez."
 
-#
-# File: src/filehandler.py, line: 209
 #: src/filehandler.py:209
 #, python-format
 msgid "Could not open %s: Is a directory."
-msgstr ""
+msgstr "%s-t nem lehet megnyitni: Ez egy könyvtár."
 
-#
-# File: src/filehandler.py, line: 213
 #: src/filehandler.py:213
 #, python-format
 msgid "Could not open %s: No such file."
-msgstr ""
+msgstr "%s-t nem lehet megnyitni: Nincs ilyen fájl."
 
-#
-# File: src/filehandler.py, line: 217
 #: src/filehandler.py:217
 #, python-format
 msgid "Could not open %s: Permission denied."
-msgstr ""
+msgstr "%s-t nem lehet megnyitni: Hozzáférés megtagadva."
 
-#
-# File: src/filehandler.py, line: 222
 #: src/filehandler.py:222
 #, python-format
 msgid "Could not open %s: Unknown file type."
-msgstr ""
+msgstr "%s-t nem lehet megnyitni: Ismeretlen fájltípus."
 
-#
-# File: src/filehandler.py, line: 285
 #: src/filehandler.py:285
 #, python-format
 msgid "No images in '%s'"
-msgstr ""
+msgstr "Nincsenek képek a következő helyen: '%s'"
 
-#
-# File: src/filehandler.py, line: 411
 #: src/filehandler.py:411
 msgid "Unknown filetype"
-msgstr ""
+msgstr "Ismeretlen fájltípus"
 
-#
-# File: src/librarybackend.py, line: 272
-# File: src/librarybackend.py, line: 274
-#: src/librarybackend.py:272 src/librarybackend.py:274
+#: src/librarybackend.py:272
+#: src/librarybackend.py:274
 msgid "(Copy)"
-msgstr ""
+msgstr "(Másolás)"
 
-#
-# File: src/library.py, line: 38
 #: src/library.py:38
 msgid "Library"
-msgstr "Gyűjtemény"
+msgstr "Könyvtár"
 
-#
-# File: src/library.py, line: 150
 #: src/library.py:150
 msgid "Rename..."
-msgstr ""
+msgstr "Átnevezés..."
 
-#
-# File: src/library.py, line: 152
 #: src/library.py:152
 msgid "Duplicate collection"
-msgstr ""
+msgstr "Gyűjtemény duplikálása"
 
-#
-# File: src/library.py, line: 154
 #: src/library.py:154
 msgid "Remove collection..."
-msgstr ""
+msgstr "Gyűjtemény eltávolítása..."
 
-#
-# File: src/library.py, line: 202
 #: src/library.py:202
 msgid "All books"
-msgstr ""
+msgstr "Minden könyv"
 
-#
-# File: src/library.py, line: 231
 #: src/library.py:231
 msgid "Remove collection from the library?"
-msgstr ""
+msgstr "Törli a gyűjteményt a könyvtárból?"
 
-#
-# File: src/library.py, line: 233
 #: src/library.py:233
-msgid ""
-"The selected collection will be removed from the library (but the books and "
-"subcollections in it will remain). Are you sure that you want to continue?"
-msgstr ""
+msgid "The selected collection will be removed from the library (but the books and subcollections in it will remain). Are you sure that you want to continue?"
+msgstr "A kiválasztott gyűjtemény kikerül a könyvtárból (de a benne lévő könyvek és algyűjtemények megmaradnak). Biztosan folytatja?"
 
-#
-# File: src/library.py, line: 251
 #: src/library.py:251
 msgid "Rename collection?"
-msgstr ""
+msgstr "Átnevezi a gyűjteményt?"
 
-#
-# File: src/library.py, line: 253
 #: src/library.py:253
 msgid "Please enter a new name for the selected collection."
-msgstr ""
+msgstr "Adja meg a kiválasztott gyűjtemény új nevét."
 
-#
-# File: src/library.py, line: 271
 #: src/library.py:271
 #, python-format
 msgid "Could not change the name to '%s'."
-msgstr ""
+msgstr "A nevet nem lehet megváltoztatni a következőre: '%s'."
 
-#
-# File: src/library.py, line: 275
-# File: src/library.py, line: 881
-#: src/library.py:275 src/library.py:881
+#: src/library.py:275
+#: src/library.py:881
 msgid "A collection by that name already exists."
-msgstr ""
+msgstr "A megadott nevű gyűjtemény már létezik."
 
-#
-# File: src/library.py, line: 285
 #: src/library.py:285
 msgid "Could not duplicate collection."
-msgstr ""
+msgstr "A gyűjteményt nem lehet duplikálni."
 
-#
-# File: src/library.py, line: 382
 #: src/library.py:382
 msgid "Root"
-msgstr ""
+msgstr "Alapkönyvtár"
 
-#
-# File: src/library.py, line: 386
 #: src/library.py:386
 #, python-format
-msgid ""
-"Put the collection '%(subcollection)s' in the collection '%(supercollection)"
-"s'."
-msgstr ""
+msgid "Put the collection '%(subcollection)s' in the collection '%(supercollection)s'."
+msgstr "A '%(subcollection)s' gyűjtemény áthelyezése a következőbe: '%(supercollection)s'."
 
-#
-# File: src/library.py, line: 407
 #: src/library.py:407
 #, python-format
 msgid "Add books to '%s'."
-msgstr ""
+msgstr "Könyvek hozzáadása a következőhöz: '%s'."
 
-#
-# File: src/library.py, line: 411
 #: src/library.py:411
 #, python-format
-msgid ""
-"Move books from '%(source collection)s' to '%(destination collection)s'."
-msgstr ""
+msgid "Move books from '%(source collection)s' to '%(destination collection)s'."
+msgstr "Könyvek mozgatása innen: '%(source collection)s' ide: '%(destination collection)s'."
 
-#
-# File: src/library.py, line: 492
 #: src/library.py:492
 msgid "Remove from this collection"
-msgstr ""
+msgstr "Eltávolítás az aktuális gyűjteményből."
 
-#
-# File: src/library.py, line: 495
 #: src/library.py:495
 msgid "Remove from the library..."
-msgstr ""
+msgstr "Eltávolítás a könyvtárból."
 
-#
-# File: src/library.py, line: 588
 #: src/library.py:588
 #, python-format
 msgid "Removed %(num)d book(s) from '%(collection)s'."
-msgstr ""
+msgstr "Removed %(num)d book(s) from '%(collection)s'."
 
-#
-# File: src/library.py, line: 597
 #: src/library.py:597
 msgid "Remove books from the library?"
-msgstr ""
+msgstr "Eltávolítja a könyveket a könyvtárból?"
 
-#
-# File: src/library.py, line: 599
 #: src/library.py:599
-msgid ""
-"The selected books will be removed from the library (but the original files "
-"will be untouched). Are you sure that you want to continue?"
-msgstr ""
+msgid "The selected books will be removed from the library (but the original files will be untouched). Are you sure that you want to continue?"
+msgstr "A kiválasztott könyvek a könyvtárból eltávolításra kerülnek (az eredeti fájlok természetesen a helyükön maradnak). Biztosan folytatja?"
 
-#
-# File: src/library.py, line: 609
 #: src/library.py:609
 #, python-format
 msgid "Removed %d book(s) from the library."
-msgstr ""
+msgstr "A könyvtárból eltávolítva a következő(k): %d."
 
-#
-# File: src/library.py, line: 769
 #: src/library.py:769
 msgid "Search"
-msgstr ""
+msgstr "Keresés"
 
-#
-# File: src/library.py, line: 774
 #: src/library.py:774
-msgid ""
-"Display only those books that have the specified text string in their full "
-"path. The search is not case sensitive."
-msgstr ""
+msgid "Display only those books that have the specified text string in their full path. The search is not case sensitive."
+msgstr "Csak azokat a könyveket jeleníti meg, melyek a teljes elérési útvonalukban tartalmazzák a megadott szövegrészt. A keresés nem kisbetű/nagybetű érzékeny."
 
-#
-# File: src/library.py, line: 776
 #: src/library.py:776
 msgid "Cover size"
-msgstr ""
+msgstr "Borító mérete"
 
-#
-# File: src/library.py, line: 789
 #: src/library.py:789
 msgid "Add books"
-msgstr ""
+msgstr "Könyvek hozzáadása"
 
-#
-# File: src/library.py, line: 793
 #: src/library.py:793
 msgid "Add more books to the library."
-msgstr ""
+msgstr "Több könyv hozzáadása a könyvtárhoz."
 
-#
-# File: src/library.py, line: 795
 #: src/library.py:795
 msgid "Add collection"
-msgstr ""
+msgstr "Gyűjtemény hozzáadása"
 
-#
-# File: src/library.py, line: 800
 #: src/library.py:800
 msgid "Add a new empty collection."
-msgstr ""
+msgstr "Új, üres gyűjtemény hozzáadása."
 
-#
-# File: src/library.py, line: 806
 #: src/library.py:806
 msgid "Open the selected book."
-msgstr ""
+msgstr "A kiválasztott könyv megnyitása."
 
-#
-# File: src/library.py, line: 832
-# File: src/properties.py, line: 113
-#: src/library.py:832 src/properties.py:118
+#: src/library.py:832
+#: src/properties.py:118
 #, python-format
 msgid "%d pages"
-msgstr ""
+msgstr "%d lapok"
 
-#
-# File: src/library.py, line: 854
 #: src/library.py:854
 msgid "Add new collection?"
-msgstr ""
+msgstr "Új gyűjtemény hozzáadása?"
 
-#
-# File: src/library.py, line: 856
 #: src/library.py:856
 msgid "Please enter a name for the new collection."
-msgstr ""
+msgstr "Adja meg az új gyűjtemény nevét."
 
-#
-# File: src/library.py, line: 862
 #: src/library.py:862
 msgid "New collection"
-msgstr ""
+msgstr "Új gyűjtemény."
 
-#
-# File: src/library.py, line: 876
 #: src/library.py:876
 #, python-format
 msgid "Could not add a new collection called '%s'."
-msgstr ""
+msgstr "Nem lehetett hozzáadni a '%s' nevű gyűjteményt."
 
-#
-# File: src/library.py, line: 910
 #: src/library.py:910
 msgid "Adding books"
-msgstr ""
+msgstr "Könyvek hozzáadása"
 
-#
-# File: src/library.py, line: 930
 #: src/library.py:930
 msgid "Added books"
-msgstr ""
+msgstr "Hozzáadott könyvek"
 
-#
-# File: src/library.py, line: 952
 #: src/library.py:952
 #, python-format
 msgid "Adding '%s'..."
-msgstr ""
+msgstr "Hozzáadás '%s'..."
 
-#
-# File: src/main.py, line: 666
 #: src/main.py:666
 msgid "SLIDESHOW"
-msgstr ""
+msgstr "Diavetítés"
 
-#
-# File: src/preferences.py, line: 78
 #: src/preferences.py:79
 msgid "Preferences"
 msgstr "Beállítások"
 
-#
-# File: src/preferences.py, line: 93
 #: src/preferences.py:94
 msgid "Background"
-msgstr ""
+msgstr "Háttér"
 
-#
-# File: src/preferences.py, line: 95
 #: src/preferences.py:96
 msgid "Use this colour as background"
-msgstr ""
+msgstr "A következő szín legyen a háttérszín"
 
-#
-# File: src/preferences.py, line: 97
 #: src/preferences.py:98
 msgid "Always use this selected colour as the background colour."
-msgstr ""
+msgstr "Mindig a kiválasztott szín legyen a háttérszín."
 
-#
-# File: src/preferences.py, line: 102
 #: src/preferences.py:103
 msgid "Use dynamic background colour."
-msgstr ""
+msgstr "Változó háttérszín használata"
 
-#
-# File: src/preferences.py, line: 106
 #: src/preferences.py:107
 msgid "Automatically pick a background colour that fits the viewed image."
-msgstr ""
+msgstr "A program magától válasszon egy háttérszínt, ami az aktuális képhez illik."
 
-#
-# File: src/preferences.py, line: 109
 #: src/preferences.py:110
 msgid "Thumbnails"
 msgstr "Bélyegképek"
 
-#
-# File: src/preferences.py, line: 110
 #: src/preferences.py:111
 msgid "Thumbnail size (in pixels)"
-msgstr ""
+msgstr "Bélyegkép mérete (pixelben megadva)"
 
-#
-# File: src/preferences.py, line: 117
 #: src/preferences.py:118
 msgid "Show page numbers on thumbnails."
-msgstr ""
+msgstr "A lapok sorszáma legyen rajta a bélyegképen."
 
-#
-# File: src/preferences.py, line: 124
 #: src/preferences.py:125
 msgid "Magnifying Glass"
-msgstr ""
+msgstr "Nagyító"
 
-#
-# File: src/preferences.py, line: 125
 #: src/preferences.py:126
 msgid "Magnifying glass size (in pixels)"
-msgstr ""
+msgstr "Nagyító mérete (pixelben)"
 
-#
-# File: src/preferences.py, line: 131
 #: src/preferences.py:132
-msgid ""
-"Set the size of the magnifying glass. It is a square with a side of this "
-"many pixels."
-msgstr ""
+msgid "Set the size of the magnifying glass. It is a square with a side of this many pixels."
+msgstr "A nagyító lencse méreteinek megadása. Ez egy négyzet, aminek az oldalai megadott pixelszámúak."
 
-#
-# File: src/preferences.py, line: 133
 #: src/preferences.py:134
 msgid "Magnification factor"
-msgstr ""
+msgstr "Nagyítási tényező"
 
-#
-# File: src/preferences.py, line: 140
 #: src/preferences.py:141
 msgid "Set the magnification factor of the magnifying glass."
-msgstr ""
+msgstr "A nagyító nagyítási tényezőjének beállítása."
 
-#
-# File: src/preferences.py, line: 143
 #: src/preferences.py:144
 msgid "Image scaling"
-msgstr ""
+msgstr "Kép méretezése"
 
-#
-# File: src/preferences.py, line: 144
 #: src/preferences.py:145
 msgid "Stretch small images."
-msgstr ""
+msgstr "Kisméretű képek kinyújtása."
 
-#
-# File: src/preferences.py, line: 148
 #: src/preferences.py:149
-msgid ""
-"Stretch images to a size that is larger than their original size if the "
-"current zoom mode requests it. If this preference is unset, images are never "
-"scaled to be larger than their original size."
-msgstr ""
+msgid "Stretch images to a size that is larger than their original size if the current zoom mode requests it. If this preference is unset, images are never scaled to be larger than their original size."
+msgstr "Ha az aktuális nagyítási mód igényli, akkor a program nyújtsa ki az eredetinél nagyobb méretűre a képeket. Amennyiben ez az opció nincs kiválasztva, akkor a képek ez eredeti nagyságuknál nem fognak nagyobbra nyúlni."
 
-#
-# File: src/preferences.py, line: 151
 #: src/preferences.py:152
 msgid "Transparency"
-msgstr ""
+msgstr "Átlátszóság"
 
-#
-# File: src/preferences.py, line: 153
 #: src/preferences.py:154
 msgid "Use checkered background for transparent images."
-msgstr ""
+msgstr "Az átlátszó képek háttere tarka legyen."
 
-#
-# File: src/preferences.py, line: 159
 #: src/preferences.py:160
-msgid ""
-"Use a grey checkered background for transparent images. If this preference "
-"is unset, the background is plain white instead."
-msgstr ""
+msgid "Use a grey checkered background for transparent images. If this preference is unset, the background is plain white instead."
+msgstr "Az átlátszó képek háttere tarka legyen (szürke). Ha ez a beállítás nem aktív, akkor a háttérszín teljesen fehér lesz."
 
-#
-# File: src/preferences.py, line: 161
 #: src/preferences.py:162
 msgid "Appearance"
-msgstr ""
+msgstr "Megjelenés"
 
-#
-# File: src/preferences.py, line: 167
 #: src/preferences.py:168
 msgid "Scroll"
 msgstr "Gördítés"
 
-#
-# File: src/preferences.py, line: 169
 #: src/preferences.py:170
 msgid "Use smart space key scrolling."
-msgstr ""
+msgstr "A szóköz billentyű intelligens gördítést végez."
 
-#
-# File: src/preferences.py, line: 174
 #: src/preferences.py:175
-msgid ""
-"Use smart scrolling with the space key. Normally the space key scrolls only "
-"right down (or up when shift is pressed), but with this preference set it "
-"also scrolls sideways and so tries to follow the natural reading order of "
-"the comic book."
-msgstr ""
+msgid "Use smart scrolling with the space key. Normally the space key scrolls only right down (or up when shift is pressed), but with this preference set it also scrolls sideways and so tries to follow the natural reading order of the comic book."
+msgstr "Intelligens gördítés használata a szóköz billentyűvel. Alapértelmezés szerint a szóköz csak lefelé gördít (vagy a váltó/shift gombot lenyomva felfelé), de ezt a beállítást használva oldalirányba is gördíti a képet, megpróbálva a képregényes könyv természetes olvasási sorrendjét követni."
 
 #: src/preferences.py:179
 msgid "Flip pages when scrolling off the edges of the page."
-msgstr ""
+msgstr "Lapozás a lap alján vagy tetején történő kigördítéskor."
 
 #: src/preferences.py:184
-msgid ""
-"Flip pages when scrolling \"off the page\" with the scroll wheel or with the "
-"arrow keys. It takes three consecutive \"steps\" with the scroll wheel or "
-"the arrow keys for the pages to be flipped."
-msgstr ""
+msgid "Flip pages when scrolling \"off the page\" with the scroll wheel or with the arrow keys. It takes three consecutive \"steps\" with the scroll wheel or the arrow keys for the pages to be flipped."
+msgstr "Az egérgörgővel, vagy a nyílbillentyűkkel a lapról való \"átgördítéskor\" lapozás fog történni. Három egymást követő \"lépés - gördítés\" szükséges ehhez."
 
-#
-# File: src/preferences.py, line: 177
-# File: src/ui.py, line: 296
-#: src/preferences.py:187 src/ui.py:296
+#: src/preferences.py:187
+#: src/ui.py:296
 msgid "Double page mode"
-msgstr "Kétlapos mód"
+msgstr "Dupla lapos mód"
 
-#
-# File: src/preferences.py, line: 179
 #: src/preferences.py:189
 msgid "Flip two pages in double page mode."
-msgstr ""
+msgstr "Dupla lapos megjelenítési módban két oldal lapozása."
 
-#
-# File: src/preferences.py, line: 184
 #: src/preferences.py:194
-msgid ""
-"Flip two pages, instead of one, each time we flip pages in double page mode."
-msgstr ""
+msgid "Flip two pages, instead of one, each time we flip pages in double page mode."
+msgstr "Két lapot lapozzon a program egy helyett, amikor a dupla lapos megjelenítési mód az aktív."
 
-#
-# File: src/preferences.py, line: 187
 #: src/preferences.py:197
 msgid "Show only one wide image in double page mode."
-msgstr ""
+msgstr "Csak a széles kép megjelenítése dupla lapos módban."
 
-#
-# File: src/preferences.py, line: 193
 #: src/preferences.py:203
-msgid ""
-"Display only one image in double page mode, if the image's width exceeds its "
-"height. The result of this is that scans that span two pages are displayed "
-"properly (i.e. alone) also in double page mode."
-msgstr ""
+msgid "Display only one image in double page mode, if the image's width exceeds its height. The result of this is that scans that span two pages are displayed properly (i.e. alone) also in double page mode."
+msgstr "A dupla lapos megjelenítési módban csak egy képet jelenít meg a program akkor, ha a kép szélessége eléri a magasságát. Tehát ha egy kép két lapból tevődik össze, akkor még dupla lapos módban is csak a széles kép lesz egyedül megjelenítve."
 
-#
-# File: src/preferences.py, line: 196
 #: src/preferences.py:206
 msgid "Files"
-msgstr ""
+msgstr "Fájlok"
 
-#
-# File: src/preferences.py, line: 198
 #: src/preferences.py:208
 msgid "Automatically open the next archive."
-msgstr ""
+msgstr "A következő arhívum automatikus megnyitása."
 
-#
-# File: src/preferences.py, line: 203
 #: src/preferences.py:213
-msgid ""
-"Automatically open the next archive in the directory when flipping past the "
-"last page, or the previous archive when flipping past the first page."
-msgstr ""
+msgid "Automatically open the next archive in the directory when flipping past the last page, or the previous archive when flipping past the first page."
+msgstr "Automatikusan megnyitja a következő arhívumot, ha az aktuális utolsó lapját elhagyjuk, illetve az előzőt, ha az első kép elé lépünk."
 
-#
-# File: src/preferences.py, line: 206
 #: src/preferences.py:216
 msgid "Automatically open the last viewed file on startup."
-msgstr ""
+msgstr "Programindításkor az utoljára megjelenített állomány betöltése."
 
-#
-# File: src/preferences.py, line: 211
 #: src/preferences.py:221
-msgid ""
-"Automatically open, on startup, the file that was open when Comix was last "
-"closed."
-msgstr ""
+msgid "Automatically open, on startup, the file that was open when Comix was last closed."
+msgstr "A program automatikusan nyissa meg induláskor a Comix bezárásakor megjelenített állományt."
 
-#
-# File: src/preferences.py, line: 214
 #: src/preferences.py:224
 msgid "Store information about recently opened files."
-msgstr ""
+msgstr "Az aktuálisan megnyitott állományok adatainak tárolása."
 
-#
-# File: src/preferences.py, line: 219
 #: src/preferences.py:229
-msgid ""
-"Add information about all files opened from within Comix to the shared "
-"recent files list."
-msgstr ""
+msgid "Add information about all files opened from within Comix to the shared recent files list."
+msgstr "A program a Comix-ban megnyitott állományok adatát hozzáadja majd a megosztott, utoljára használt fájlok listájához."
 
-#
-# File: src/preferences.py, line: 222
 #: src/preferences.py:232
 msgid "Store thumbnails for opened files."
-msgstr ""
+msgstr "A megnyitott fájlok bélyegképeinek eltárolása."
 
-#
-# File: src/preferences.py, line: 227
 #: src/preferences.py:237
-msgid ""
-"Store thumbnails for opened files according to the freedesktop.org "
-"specification. These thumbnails are shared by many other applications, such "
-"as most file managers."
-msgstr ""
+msgid "Store thumbnails for opened files according to the freedesktop.org specification. These thumbnails are shared by many other applications, such as most file managers."
+msgstr "A megnyitott fájlok bélyegképei legyenek eltárolva a freedesktop.org előírásainak megfelelően. Ezen bélyegképeket más alkalmazások, például a legtöbb fájlkezelő is használhatja majd."
 
-#
-# File: src/preferences.py, line: 230
 #: src/preferences.py:240
 msgid "Cache"
-msgstr ""
+msgstr "Gyorsítótár"
 
-#
-# File: src/preferences.py, line: 231
 #: src/preferences.py:241
 msgid "Use a cache to speed up browsing."
-msgstr ""
+msgstr "A program használjon gyorsítótárat a gyorsabb böngészés eléréséhez."
 
-#
-# File: src/preferences.py, line: 235
 #: src/preferences.py:245
-msgid ""
-"Cache the images that are next to the currently viewed image in order to "
-"speed up browsing. Since the speed improvements are quite big, it is "
-"recommended that you have this preference set, unless you are running short "
-"on free RAM."
-msgstr ""
+msgid "Cache the images that are next to the currently viewed image in order to speed up browsing. Since the speed improvements are quite big, it is recommended that you have this preference set, unless you are running short on free RAM."
+msgstr "A Comix a gyorsabb böngészés eléréséhez az aktuálisan megjelenített kép melletti fájlokat gyorstárazza. Ajánlott ezt az opciót bekapcsolni, mivel nagy sebességjavuláshoz vezet, kivéve ha kevés a memória."
 
-#
-# File: src/preferences.py, line: 237
 #: src/preferences.py:247
 msgid "Behaviour"
 msgstr "Viselkedés"
 
-#
-# File: src/preferences.py, line: 243
 #: src/preferences.py:253
 msgid "Default modes"
-msgstr ""
+msgstr "Alapértelmezett módok"
 
-#
-# File: src/preferences.py, line: 245
 #: src/preferences.py:255
 msgid "Use double page mode by default."
-msgstr ""
+msgstr "A kétlapos megjelenítési mód legyen az alapértelmezett."
 
-#
-# File: src/preferences.py, line: 250
 #: src/preferences.py:260
 msgid "Use fullscreen by default."
-msgstr ""
+msgstr "A teljes képernyős megjelenítési mód legyen az alapértelmezett."
 
-#
-# File: src/preferences.py, line: 255
 #: src/preferences.py:265
 msgid "Use manga mode by default."
-msgstr ""
+msgstr "A manga mód legyen az alapértelmezett."
 
-#
-# File: src/preferences.py, line: 260
 #: src/preferences.py:270
 msgid "Default zoom mode"
-msgstr ""
+msgstr "Alapértelmezett nagyítási mód"
 
-#
-# File: src/preferences.py, line: 262
-# File: src/ui.py, line: 288
-#: src/preferences.py:272 src/ui.py:288
+#: src/preferences.py:272
+#: src/ui.py:288
 msgid "Best fit mode"
-msgstr ""
+msgstr "Legjobb illeszkedés"
 
-#
-# File: src/preferences.py, line: 263
-# File: src/ui.py, line: 290
-#: src/preferences.py:273 src/ui.py:290
+#: src/preferences.py:273
+#: src/ui.py:290
 msgid "Fit width mode"
-msgstr "Szélességhez"
+msgstr "Szélességhez igazítás"
 
-#
-# File: src/preferences.py, line: 264
-# File: src/ui.py, line: 292
-#: src/preferences.py:274 src/ui.py:292
+#: src/preferences.py:274
+#: src/ui.py:292
 msgid "Fit height mode"
-msgstr "Magassághoz"
+msgstr "Magassághoz igazítás"
 
-#
-# File: src/preferences.py, line: 265
-# File: src/ui.py, line: 294
-#: src/preferences.py:275 src/ui.py:294
+#: src/preferences.py:275
+#: src/ui.py:294
 msgid "Manual zoom mode"
 msgstr "Kézi nagyítás"
 
-#
-# File: src/preferences.py, line: 271
 #: src/preferences.py:281
 msgid "Fullscreen"
-msgstr ""
+msgstr "Teljes képernyő"
 
-#
-# File: src/preferences.py, line: 273
 #: src/preferences.py:283
 msgid "Automatically hide all toolbars in fullscreen."
-msgstr ""
+msgstr "Teljes képernyős módban az összes eszköztár automatikusan legyen elrejtve."
 
-#
-# File: src/preferences.py, line: 279
 #: src/preferences.py:289
 msgid "Slideshow"
 msgstr "Diavetítés"
 
-#
-# File: src/preferences.py, line: 280
 #: src/preferences.py:290
 msgid "Slideshow delay (in seconds)"
-msgstr ""
+msgstr "Diavetítés késleltetése (másodpercben megadva)"
 
-#
-# File: src/preferences.py, line: 289
 #: src/preferences.py:299
 msgid "Comment extensions"
-msgstr ""
+msgstr "Megjegyzésfájlok kiterjesztése"
 
-#
-# File: src/preferences.py, line: 295
 #: src/preferences.py:305
-msgid ""
-"Treat all files found within archives, that have one of these file endings, "
-"as comments."
-msgstr ""
+msgid "Treat all files found within archives, that have one of these file endings, as comments."
+msgstr "Az itt megadott kiterjesztésű állományokat az arhívumokban megjegyzésfájlként kezeli majd a program."
 
-#
-# File: src/preferences.py, line: 297
 #: src/preferences.py:307
 msgid "Display"
 msgstr "Képernyő"
 
-#
-# File: src/properties.py, line: 89
 #: src/properties.py:94
 msgid "Properties"
 msgstr "Tulajdonságok"
 
-#
-# File: src/properties.py, line: 114
 #: src/properties.py:119
 #, python-format
 msgid "%d comments"
-msgstr ""
+msgstr "Megjegyzések: %d"
 
-#
-# File: src/properties.py, line: 124
-# File: src/properties.py, line: 159
-#: src/properties.py:129 src/properties.py:164
+#: src/properties.py:129
+#: src/properties.py:164
 msgid "Location"
 msgstr "Hely"
 
-#
-# File: src/properties.py, line: 126
-# File: src/properties.py, line: 160
-#: src/properties.py:131 src/properties.py:165
+#: src/properties.py:131
+#: src/properties.py:165
 msgid "Accessed"
 msgstr "Utolsó elérés"
 
-#
-# File: src/properties.py, line: 128
-# File: src/properties.py, line: 162
-#: src/properties.py:133 src/properties.py:167
+#: src/properties.py:133
+#: src/properties.py:167
 msgid "Modified"
 msgstr "Módosítva"
 
-#
-# File: src/properties.py, line: 130
-# File: src/properties.py, line: 164
-#: src/properties.py:135 src/properties.py:169
+#: src/properties.py:135
+#: src/properties.py:169
 msgid "Permissions"
 msgstr "Jogosultságok"
 
-#
-# File: src/properties.py, line: 131
-# File: src/properties.py, line: 165
-#: src/properties.py:136 src/properties.py:170
+#: src/properties.py:136
+#: src/properties.py:170
 msgid "Owner"
 msgstr "Tulajdonos"
 
-#
-# File: src/properties.py, line: 135
 #: src/properties.py:140
 msgid "Archive"
 msgstr "Archívum"
 
-#
-# File: src/properties.py, line: 169
 #: src/properties.py:174
 msgid "Image"
 msgstr "Kép"
 
-#
-# File: src/thumbremover.py, line: 22
 #: src/thumbremover.py:22
 msgid "Thumbnail maintenance"
-msgstr ""
+msgstr "Bélyegképek karbantartása"
 
-#
-# File: src/thumbremover.py, line: 24
 #: src/thumbremover.py:24
 msgid "Cleanup"
-msgstr ""
+msgstr "Tisztítás"
 
-#
-# File: src/thumbremover.py, line: 36
 #: src/thumbremover.py:36
 msgid "Cleanup thumbnails"
-msgstr ""
+msgstr "Bélyegképek törlése"
 
-#
-# File: src/thumbremover.py, line: 46
 #: src/thumbremover.py:46
-msgid ""
-"Thumbnails for files (such as image files and comic book archives) are "
-"stored in your home directory. Many different applications use and create "
-"these thumbnails, but sometimes thumbnails remain even though the original "
-"files have been removed - wasting space. This dialog can cleanup your stored "
-"thumbnails by removing orphaned and outdated thumbnails."
-msgstr ""
+msgid "Thumbnails for files (such as image files and comic book archives) are stored in your home directory. Many different applications use and create these thumbnails, but sometimes thumbnails remain even though the original files have been removed - wasting space. This dialog can cleanup your stored thumbnails by removing orphaned and outdated thumbnails."
+msgstr "A fájlok bélyegképei (például képek és képregény könyv arhívumok) a felhasználói könyvtárban tárolódnak. Több különböző alkalmazás használja és hoz létre ilyen bélyegképeket, de ezek néha még az eredeti fájl törlése után is megmaradnak helypazarló módon. Ez a párbeszédablak segít az efféle árva és elavult bélyegképek törlésében."
 
-#
-# File: src/thumbremover.py, line: 58
 #: src/thumbremover.py:58
 msgid "Thumbnail directory"
-msgstr ""
+msgstr "Bélyegképek könyvtára"
 
-#
-# File: src/thumbremover.py, line: 65
 #: src/thumbremover.py:65
 msgid "Total number of thumbnails"
-msgstr ""
+msgstr "Bélyegképek száma"
 
-#
-# File: src/thumbremover.py, line: 68
-# File: src/thumbremover.py, line: 75
-#: src/thumbremover.py:68 src/thumbremover.py:75
+#: src/thumbremover.py:68
+#: src/thumbremover.py:75
 msgid "Calculating..."
-msgstr ""
+msgstr "Számolás..."
 
-#
-# File: src/thumbremover.py, line: 72
 #: src/thumbremover.py:72
 msgid "Total size of thumbnails"
-msgstr ""
+msgstr "Bélyegképek mérete"
 
-#
-# File: src/thumbremover.py, line: 80
 #: src/thumbremover.py:80
 msgid "Do you want to cleanup orphaned and outdated thumbnails now?"
-msgstr ""
+msgstr "Szeretné eltávolítani az árva és elavult bélyegképeket?"
 
-#
-# File: src/thumbremover.py, line: 116
 #: src/thumbremover.py:116
 msgid "Removing thumbnails"
 msgstr "Bélyegképek eltávolítása"
 
-#
-# File: src/thumbremover.py, line: 135
 #: src/thumbremover.py:135
 msgid "Number of removed thumbnails"
-msgstr ""
+msgstr "Eltávolított bélyegképek száma"
 
-#
-# File: src/thumbremover.py, line: 142
 #: src/thumbremover.py:142
 msgid "Total size of removed thumbnails"
-msgstr ""
+msgstr "Az eltávolított bélyegképek mérete"
 
-#
-# File: src/thumbremover.py, line: 193
 #: src/thumbremover.py:193
 #, python-format
 msgid "Removed thumbnail for '%s'"
-msgstr ""
+msgstr "'%s' - eltávolított bélyegképek"
 
-#
-# File: src/ui.py, line: 34
 #: src/ui.py:34
 msgid "_Next page"
 msgstr "_Következő oldal"
 
-#
-# File: src/ui.py, line: 36
 #: src/ui.py:36
 msgid "_Previous page"
 msgstr "Előző _oldal"
 
-#
-# File: src/ui.py, line: 38
 #: src/ui.py:38
 msgid "_First page"
 msgstr "_Első oldal"
 
-#
-# File: src/ui.py, line: 40
 #: src/ui.py:40
 msgid "_Last page"
 msgstr "_Utolsó oldal"
 
-#
-# File: src/ui.py, line: 42
 #: src/ui.py:42
 msgid "_Zoom in"
 msgstr "_Nagyítás"
 
-#
-# File: src/ui.py, line: 44
 #: src/ui.py:44
 msgid "Zoom _out"
 msgstr "_Kicsinyítés"
 
-#
-# File: src/ui.py, line: 46
 #: src/ui.py:46
 msgid "O_riginal size"
-msgstr ""
+msgstr "E_redei méret"
 
-#
-# File: src/ui.py, line: 48
 #: src/ui.py:48
 msgid "_Close"
 msgstr "_Bezárás"
 
-#
-# File: src/ui.py, line: 50
 #: src/ui.py:50
 msgid "_Quit"
 msgstr "_Kilépés"
 
-#
-# File: src/ui.py, line: 52
 #: src/ui.py:52
 msgid "_Rotate 90 degrees CW"
 msgstr "A kép elfo_rgatása 90 fokkal"
 
-#
-# File: src/ui.py, line: 54
 #: src/ui.py:54
 msgid "Rotate 180 de_grees"
 msgstr "A kép e_lforgatása 180 fokkal"
 
-#
-# File: src/ui.py, line: 56
 #: src/ui.py:56
 msgid "Rotat_e 90 degrees CCW"
 msgstr "A kép _elforgatása -90 fokkal"
 
-#
-# File: src/ui.py, line: 58
 #: src/ui.py:58
 msgid "Fli_p horizontally"
 msgstr "Tükrözés _vízszintesen"
 
-#
-# File: src/ui.py, line: 60
 #: src/ui.py:60
 msgid "Flip _vertically"
 msgstr "Tükrözés _függőlegesen"
 
-#
-# File: src/ui.py, line: 62
 #: src/ui.py:62
 msgid "Manual _Zoom"
 msgstr "_Kézi nagyítás"
 
-#
-# File: src/ui.py, line: 63
 #: src/ui.py:63
 msgid "Open _recent"
-msgstr ""
+msgstr "_Legutóbbi fájlok"
 
-#
-# File: src/ui.py, line: 64
 #: src/ui.py:64
 msgid "_Bookmarks"
 msgstr "_Könyvjelzők"
 
-#
-# File: src/ui.py, line: 65
 #: src/ui.py:65
 msgid "T_oolbars"
-msgstr ""
+msgstr "_Eszköztárak"
 
-#
-# File: src/ui.py, line: 66
 #: src/ui.py:66
 msgid "_Edit"
 msgstr "S_zerkesztés"
 
-#
-# File: src/ui.py, line: 67
 #: src/ui.py:67
 msgid "_File"
 msgstr "_Fájl"
 
-#
-# File: src/ui.py, line: 68
 #: src/ui.py:68
 msgid "_View"
 msgstr "_Nézet"
 
-#
-# File: src/ui.py, line: 69
 #: src/ui.py:69
 msgid "_Go"
 msgstr "_Ugrás"
 
-#
-# File: src/ui.py, line: 70
 #: src/ui.py:70
 msgid "_Help"
 msgstr "_Súgó"
 
-#
-# File: src/ui.py, line: 71
 #: src/ui.py:71
 msgid "_Transform"
 msgstr "Áta_lakítás"
 
-#
-# File: src/ui.py, line: 75
 #: src/ui.py:75
 msgid "_Fullscreen"
 msgstr "_Teljes képernyő"
 
-#
-# File: src/ui.py, line: 77
 #: src/ui.py:77
 msgid "_Double page mode"
 msgstr "_Dupla lapos mód"
 
-#
-# File: src/ui.py, line: 79
 #: src/ui.py:79
 msgid "_Toolbar"
 msgstr "_Eszköztár"
 
-#
-# File: src/ui.py, line: 81
 #: src/ui.py:81
 msgid "_Menubar"
 msgstr "_Menüsor"
 
-#
-# File: src/ui.py, line: 83
 #: src/ui.py:83
 msgid "St_atusbar"
-msgstr "Álla_potsor"
+msgstr "Állap_otsor"
 
-#
-# File: src/ui.py, line: 85
 #: src/ui.py:85
 msgid "S_crollbars"
 msgstr "Gö_rdítősávok"
 
-#
-# File: src/ui.py, line: 87
 #: src/ui.py:87
 msgid "Th_umbnails"
 msgstr "_Bélyegképek"
 
-#
-# File: src/ui.py, line: 89
 #: src/ui.py:89
 msgid "H_ide all"
 msgstr "M_inden elrejtve"
 
-#
-# File: src/ui.py, line: 91
 #: src/ui.py:91
 msgid "_Manga mode"
 msgstr "_Manga mód"
 
-#
-# File: src/ui.py, line: 93
 #: src/ui.py:93
 msgid "_Keep transformation"
 msgstr "Á_talakítás megtartása"
 
-#
-# File: src/ui.py, line: 95
 #: src/ui.py:95
 msgid "Run _slideshow"
-msgstr ""
+msgstr "Diavetítés _indítása"
 
-#
-# File: src/ui.py, line: 97
 #: src/ui.py:97
 msgid "Magnifying _glass"
-msgstr ""
+msgstr "N_agyító"
 
-#
-# File: src/ui.py, line: 101
 #: src/ui.py:101
 msgid "_Best fit mode"
-msgstr ""
+msgstr "_Legjobb illeszkedés"
 
-#
-# File: src/ui.py, line: 103
 #: src/ui.py:103
 msgid "Fit _width mode"
-msgstr "Széle_sséghez igazítás"
+msgstr "_Szélességhez igazítás"
 
-#
-# File: src/ui.py, line: 105
 #: src/ui.py:105
 msgid "Fit _height mode"
-msgstr "Ma_gassághoz igazítás"
+msgstr "Magasság_hoz igazítás"
 
-#
-# File: src/ui.py, line: 107
 #: src/ui.py:107
 msgid "M_anual zoom mode"
-msgstr ""
+msgstr "Ké_zi nagyítás"
 
-#
-# File: src/ui.py, line: 113
 #: src/ui.py:113
 msgid "_About"
 msgstr "_Névjegy"
 
-#
-# File: src/ui.py, line: 115
 #: src/ui.py:115
 msgid "_View comments..."
-msgstr ""
+msgstr "Megjegy_zések megtekintése"
 
-#
-# File: src/ui.py, line: 117
 #: src/ui.py:117
 msgid "_Edit archive..."
-msgstr ""
+msgstr "_Arhívum szerkesztése..."
 
-#
-# File: src/ui.py, line: 119
 #: src/ui.py:119
 msgid "_Open..."
 msgstr "_Megnyitás..."
 
-#
-# File: src/ui.py, line: 121
 #: src/ui.py:121
 msgid "_Properties"
-msgstr ""
+msgstr "_Tulajdonságok"
 
-#
-# File: src/ui.py, line: 123
 #: src/ui.py:123
 msgid "_Enhance image..."
-msgstr ""
+msgstr "Kép k_iemelése"
 
-#
-# File: src/ui.py, line: 126
 #: src/ui.py:126
 msgid "_Thumbnail maintenance..."
-msgstr ""
+msgstr "Bélyegképek kar_bantartása"
 
-#
-# File: src/ui.py, line: 128
 #: src/ui.py:128
 msgid "Pr_eferences"
 msgstr "B_eállítások"
 
-#
-# File: src/ui.py, line: 132
 #: src/ui.py:132
 msgid "_Library..."
-msgstr ""
+msgstr "_Gyűjtemény"
 
-#
-# File: src/ui.py, line: 282
 #: src/ui.py:282
 msgid "First page"
 msgstr "Első oldal"
 
-#
-# File: src/ui.py, line: 284
 #: src/ui.py:284
 msgid "Previous page"
 msgstr "Előző oldal"
 
-#
-# File: src/ui.py, line: 285
 #: src/ui.py:285
 msgid "Next page"
 msgstr "Következő oldal"
 
-#
-# File: src/ui.py, line: 286
 #: src/ui.py:286
 msgid "Last page"
 msgstr "Utolsó oldal"
 
-#
-# File: src/ui.py, line: 297
 #: src/ui.py:297
 msgid "Manga mode"
 msgstr "Manga mód"
 
-#
-# File: src/ui.py, line: 298
 #: src/ui.py:298
 msgid "Magnifying glass"
-msgstr ""
+msgstr "Nagyító"
 
-#
-#~ msgid "No images in \"%s\""
-#~ msgstr "Nincsenek képek:  \"%s\""
-
-#
-#~ msgid "Default"
-#~ msgstr "Alapértelmezett"
-
-#
-#~ msgid "Automatically adjust contrast"
-#~ msgstr "Kontraszt automatikus beállítása"
-
-#
-#~ msgid "Fit-to-screen mode"
-#~ msgstr "Képernyőhöz"
-
-#
-#~ msgid "_Normal size"
-#~ msgstr "N_ormál méret"
-
-#
-#~ msgid "_Toolbars"
-#~ msgstr "_Eszköztárak"
-
-#
-#~ msgid "Fit-to-_screen mode"
-#~ msgstr "Ké_pernyőmérethez igazítás"
-
-#
-#~ msgid "View _comments"
-#~ msgstr "Megjegy_zések megtekintése"
-
-#
-#~ msgid "Proper_ties"
-#~ msgstr "_Tulajdonságok"
-
-#
-#~ msgid "Magnifying lens"
-#~ msgstr "Nagyítólencse"
-
-#
-#~ msgid "Apply filter on full path"
-#~ msgstr "A szűrő alkamazása a teljes elérési útvonalon"
-
-#
-#~ msgid "Add archives to library."
-#~ msgstr "Arhívumok hozzáadása a gyűjteményhez."
-
-#
-#~ msgid "Remove selected archive from library."
-#~ msgstr "A kiválasztott arhívum törlése a gyűjteményből."
-
-#
-#~ msgid "Clean up"
-#~ msgstr "Karbantartás"
-
-#
-#~ msgid "Remove orphaned or outdated library entries."
-#~ msgstr ""
-#~ "Árva (már nem megtalálható) vagy elavult könyvtárbejegyzések eltávolítása."
-
-#
-#~ msgid "Close this window."
-#~ msgstr "Az aktuális ablak bezárása."
-
-#
-#~ msgid "Open selected archive."
-#~ msgstr "A kijelölt archívum megnyitása."
-
-#
-#~ msgid "All archives"
-#~ msgstr "Minden archívum"
-
-#
-#~ msgid "JPEG image"
-#~ msgstr "JPEG kép"
-
-#
-#~ msgid "PNG image"
-#~ msgstr "PNG kép"
-
-#
-#~ msgid "GIF image"
-#~ msgstr "GIF kép"
-
-#
-#~ msgid "TIFF image"
-#~ msgstr "TIFF kép"
-
-#
-#~ msgid "BMP image"
-#~ msgstr "BMP kép"
-
-#
-#~ msgid "ICO image"
-#~ msgstr "ICO kép"
-
-#
-#~ msgid "XPM image"
-#~ msgstr "XPM kép"
-
-#
-#~ msgid "XBM image"
-#~ msgstr "XBM kép"
-
-#
-#~ msgid "tar archive"
-#~ msgstr "tar archívum"
-
-#
-#~ msgid "Add archives recursively"
-#~ msgstr "Arhívumok rekurzív hozzáadása"
-
-#
-#~ msgid "Select folder"
-#~ msgstr "Könyvtár kiválasztása"
-
-#
-#~ msgid "Fullscreen as default"
-#~ msgstr "Teljes képernyős megjelenítés legyen az alapértelmezett"
-
-#
-#~ msgid "Double page mode as default"
-#~ msgstr "A kétlapos mód legyen az alapértelmezett"
-
-#
-#~ msgid "Stretch small images"
-#~ msgstr "Kisméretű képek kinyújtása"
-
-#
-#~ msgid "Use smart scaling in double page mode"
-#~ msgstr "Intelligens méretezés használata kétlapos megjelenítési módban"
-
-#
-#~ msgid "Always view comments when opening a new file"
-#~ msgstr "Megjegyzések megjelenítése mindig új fájl megnyitásakor"
-
-#
-#~ msgid "Hide menubar, scrollbars etc. in fullscreen mode"
-#~ msgstr "Menüsor, gördítősávok, stb. elrejtése teljes képernyős módban"
-
-#
-#~ msgid "Cache pages for faster forward flipping"
-#~ msgstr "Lapok gyorstárba tétele a gyorsabb előre lapozáshoz"
-
-#
-#~ msgid "Scroll wheel scrolls horizontally at top and bottom of page"
-#~ msgstr ""
-#~ "Az egérgörgő kerék vízszintesen mozgassa a képet a lap alsó, felső részén"
-
-#
-#~ msgid "Flip page when scrolling off the top or bottom of page"
-#~ msgstr "Lapozás a lap alján vagy tetején történő kigördítéskor"
-
-#
-#~ msgid "Hide thumbnail scrollbar"
-#~ msgstr "Bélyegképek gördítősávjának az elrejtése"
-
-#
-#~ msgid "Space key uses smart scrolling"
-#~ msgstr "A szóköz billentyű intelligens gördítést végez"
-
-#
-#~ msgid "Save window position and size for future sessions"
-#~ msgstr "Az ablakpozíciók és méretek mentése a további munkafolyamatokhoz"
-
-#
-#~ msgid "Go to the next archive in directory after last page"
-#~ msgstr ""
-#~ "Az utolsó lap megjelenítése után a következő arhívum kerüljön megnyitásra"
-
-#
-#~ msgid "Hide cursor in fullscreen mode"
-#~ msgstr "A kurzor elrejtése teljes képernyős módban"
-
-#
-#~ msgid "Open last viewed file on start"
-#~ msgstr "Az utoljára megtekintett kép legyen megnyitva a program indításakor"
-
-#
-#~ msgid "Show page numbers on thumbnails"
-#~ msgstr "A lapszámok legyenek rajta a bélyegképen"
-
-#
-#~ msgid "Always use smart scrolling as if in double page mode"
-#~ msgstr ""
-#~ "Dupla lapos módban mindig legyen bekapcsolva az intelligens gördítés"
-
-#
-#~ msgid "Use stored thumbnails for images in directories"
-#~ msgstr "A képekhez készített bélyegképek könyvtárakban történő tárolása"
-
-#
-#~ msgid "Use stored thumbnails for images in archives"
-#~ msgstr "A képekhez készített bélyegképek arhívumokban történő tárolása"
-
-#
-#~ msgid "Display only one page in double page mode if the image is wide"
-#~ msgstr "A kétlapos módban is csak egy képet jelenjen meg, ha az széles"
-
-#
-#~ msgid "Store recently opened files"
-#~ msgstr "A legutóbb használt fájlok tárolása"
-
-#
-#~ msgid "Always go to this directory in the \"Open\" dialog:"
-#~ msgstr ""
-#~ "A \"Megnyitás\" párbeszédablak kiválasztásakor mindig a megadott könyvtár "
-#~ "jelenjen meg."
-
-#
-#~ msgid "Always go to the latest directory in the \"Open\" dialog"
-#~ msgstr ""
-#~ "A \"Megnyitás\" párbeszédablak kiválasztásakor mindig legutoljára "
-#~ "használt könyvtár jelenjen meg."
-
-#
-#~ msgid "Nearest (quickest, worst quality)"
-#~ msgstr "Nearest (leggyorsabb, legrosszabb minőség)"
-
-#
-#~ msgid "Tiles"
-#~ msgstr "Tiles"
-
-#
-#~ msgid "Bilinear"
-#~ msgstr "Bilineáris"
-
-#
-#~ msgid "Hyper (slowest, best quality)"
-#~ msgstr "Hyper (leglassabb, legjobb minőségű)"
-
-#
-#~ msgid "Manual zoom mode as default"
-#~ msgstr "A kézi nagyítási mód legyen az alapértelmezett"
-
-#
-#~ msgid "Fit-to-screen mode as default"
-#~ msgstr "A képernyőmérethez igazított mód legyen az alapértelmezett"
-
-#
-#~ msgid "Fit width mode as default"
-#~ msgstr "A szélességhez igazított mód legyen az alapértelmezett"
-
-#
-#~ msgid "Fit height mode as default"
-#~ msgstr "A magassághoz igazított mód legyen az alapértelmezett"
-
-#
-#~ msgid "Background colour:"
-#~ msgstr "Háttérszín:"
-
-#
-#~ msgid "Background colour"
-#~ msgstr "Háttérszín"
-
-#
-#~ msgid "Toolbar button labels:"
-#~ msgstr "Eszköztár gombok címkéi:"
-
-#
-#~ msgid "Icons only"
-#~ msgstr "Csak ikonok"
-
-#
-#~ msgid "Text only"
-#~ msgstr "Csak szöveg"
-
-#
-#~ msgid "Icons and text"
-#~ msgstr "Szöveg és ikonok"
-
-#
-#~ msgid "Slideshow delay:"
-#~ msgstr "Diavetítés késletetési ideje:"
-
-#
-#~ msgid "Scaling quality"
-#~ msgstr "Méretezés minősége"
-
-#
-#~ msgid "Scaling"
-#~ msgstr "Méretezés"
-
-#
-#~ msgid "Treat files with the following extensions as comments:"
-#~ msgstr "A megadott kiterjesztések megjegyzést tartalmazó állományok:"
-
-#
-#~ msgid "Space key scrolls"
-#~ msgstr "A szóköz billentyű gördítése"
-
-#
-#~ msgid "of"
-#~ msgstr " "
-
-#
-#~ msgid "Window size"
-#~ msgstr "az ablakméretnek"
-
-#
-#~ msgid "Page size"
-#~ msgstr "a lapméretnek"
-
-#
-#~ msgid "Magnification factor:"
-#~ msgstr "Nagyítási tényező:"
-
-#
-#~ msgid "Lens size (px):"
-#~ msgstr "Lencse mérete (pixelben):"
-
-#
-#~ msgid "Update interval (milliseconds):"
-#~ msgstr "Frissítési időköz (ezredmásodpercben):"
-
-#
-#~ msgid "Lens"
-#~ msgstr "Lencse"
-
-#
-#~ msgid "Thumbnail sizes (px):"
-#~ msgstr "Bélyegképek mérete (pixelben)"
-
-#
-#~ msgid "Library thumbnail sizes (px):"
-#~ msgstr "A gyűjtemény bélyegkép mérete (pixelben):"
-
-#
-#~ msgid "Adjust colour"
-#~ msgstr "Színek beállítása"
-
-#
-#~ msgid "Save values for future sessions"
-#~ msgstr "Az értékek elmentése a további munkafolyamatokhoz"
-
-#
-#~ msgid "Go to page"
-#~ msgstr "Ugrás a megadott oldalra"
-
-#
-#~ msgid "Title"
-#~ msgstr "Cím"
-
-#
-#~ msgid "It reads ZIP, RAR and tar archives (also gzip or bzip2 compressed)"
-#~ msgstr ""
-#~ "Az alkalmazás meg tudja nyitni a ZIP, RAR és tar arhívumban lévő képeket "
-
-#
-#~ msgid "as well as plain image files."
-#~ msgstr "(a gzip és bzip2 tömörítettet is) csakúgy, mint a sima képfájlokat."
-
-#
-#~ msgid "Developer and Swedish translation"
-#~ msgstr "Fejlesztő, svéd fordítás"
-
-#
-#~ msgid "Manage thumbnails"
-#~ msgstr "Bélyegképek kezelése"
-
-#
-#~ msgid "Remove all stored thumbnails:"
-#~ msgstr "Az összes eltárolt bélyegkép törlése:"
-
-#
-#~ msgid "Remove orphaned thumbnails:"
-#~ msgstr "Árva (már nem megtalálható) bélyegképek eltávolítása:"
-
-#
-#~ msgid "Directories"
-#~ msgstr "Könyvtárak"
-
-#
-#~ msgid "Archives"
-#~ msgstr "Archívumok"
-
-#
-#~ msgid "Convert"
-#~ msgstr "Konvertálás"
-
-#
-#~ msgid "File type"
-#~ msgstr "Fájltípus"
-
-#
-#~ msgid "Extension"
-#~ msgstr "Kiterjesztés"
-
-#
-#~ msgid "Zip archive"
-#~ msgstr "Zip archívum"
-
-#
-#~ msgid "Delete old archive/directory"
-#~ msgstr "Régi arhívum/könyvtár törlése"
-
-#
-#~ msgid "Permission denied"
-#~ msgstr "Hozzáférés megtagadva"
-
-#
-#~ msgid "Confirm operation"
-#~ msgstr "Művelet jóváhagyása"
-
-#
-#~ msgid "Permanently remove %s?"
-#~ msgstr "Végleges eltávolítás: %s?"
-
-#
-#~ msgid "Perform lossless JPEG operation on %s?"
-#~ msgstr "Veszteségmentes JPEG műveletek végrehajtása: %s?"
-
-#
-#~ msgid "Some images might be trimmed a bit during the operation."
-#~ msgstr ""
-#~ "A művelet végrehajtásakor néhány kép szegélye egy kicsit csonkulhat."
-
-#
-#~ msgid "Permanently convert %s to greyscale?"
-#~ msgstr "Végleges szürkeárnyalatossá konvertálás: %s?"
-
-#
-#~ msgid "Location:"
-#~ msgstr "Hely:"
-
-#
-#~ msgid "Quantity:"
-#~ msgstr "Darabszám:"
-
-#
-#~ msgid "Total size:"
-#~ msgstr "Teljes méret:"
-
-#
-#~ msgid "Removed:"
-#~ msgstr "Eltávolítva:"
-
-#
-#~ msgid "Done!"
-#~ msgstr "Kész!"
-
-#
-#~ msgid "pages"
-#~ msgstr "lapok"
-
-#
-#~ msgid "comment"
-#~ msgstr "megjegyzés"
-
-#
-#~ msgid "comments"
-#~ msgstr "megjegyzések"
-
-#
-#~ msgid "In library"
-#~ msgstr "Gyűjteményben van"
-
-#
-#~ msgid "Yes"
-#~ msgstr "Igen"
-
-#
-#~ msgid "No"
-#~ msgstr "Nem"
-
-#
-#~ msgid "Bookmarked"
-#~ msgstr "Könyjelző"
-
-#
-#~ msgid "Yes, page"
-#~ msgstr "Igen, oldal"
-
-#
-#~ msgid "Mode"
-#~ msgstr "Mód"
-
-#
-#~ msgid "Pixel count"
-#~ msgstr "Pixelek száma"
-
-#
-#~ msgid "Pixel sum"
-#~ msgstr "Pixelek összesen"
-
-#
-#~ msgid "Extrema"
-#~ msgstr "Szélsőérték"
-
-#
-#~ msgid "Mean"
-#~ msgstr "Középérték"
-
-#
-#~ msgid "Median"
-#~ msgstr "Medián"
-
-#
-#~ msgid "Standard deviation"
-#~ msgstr "Standard szórás"
-
-#
-#~ msgid "Image 1"
-#~ msgstr "Kép 1"
-
-#
-#~ msgid "Image 2"
-#~ msgstr "Kép 2"
-
-#
-#~ msgid "Could not delete"
-#~ msgstr "Nem törölhető"
-
-#
-#~ msgid "Please check your permissions."
-#~ msgstr "Ellenőrizze a jogosultságait"
-
-#
-#~ msgid "Could not create"
-#~ msgstr "Nem sikerült a létrehozás"
-
-#
-#~ msgid "Added:"
-#~ msgstr "Hozzáadva:"
-
-#
-#~ msgid "Adding library entries"
-#~ msgstr "Gyűjjtemény bejegyzések hozzáadása"
-
-#
-#~ msgid "Removing library entries"
-#~ msgstr "Gyűjtemény bejegyzések eltávolítása"
-
-#
-#~ msgid "Extract page"
-#~ msgstr "Kép kicsomagolása"
-
-#
-#~ msgid "page"
-#~ msgstr "oldal"
-
-#
-#~ msgid ""
-#~ "Could not find the unrar executable. Please install it if you wish to "
-#~ "open RAR archives."
-#~ msgstr ""
-#~ "Az unrar parancsfájl nem található. Kérem telepítse, ha meg szeretné "
-#~ "nyitni a RAR arhívumokat."
-
-#
-#~ msgid "Could not open"
-#~ msgstr "Nem nyitható meg"
-
-#
-#~ msgid "is not a file."
-#~ msgstr "nem fájl."
-
-#
-#~ msgid "does not exist."
-#~ msgstr "nem létezik"
-
-#
-#~ msgid "Filetype of"
-#~ msgstr "Fájltípus"
-
-#
-#~ msgid "not recognized."
-#~ msgstr " nem felismerhető."
-
-#
-#~ msgid "Comment file"
-#~ msgstr "Megjegyzés fűzése a fájlhoz"
-
-#
-#~ msgid "Could not read"
-#~ msgstr "Nem olvasható"
-
-#
-#~ msgid "Comment"
-#~ msgstr "Megjegyzés"
-
-#
-#~ msgid "_Go to page..."
-#~ msgstr "U_grás a megadott oldalra"
-
-#
-#~ msgid "Fit _width"
-#~ msgstr "S_zélességhez igazítás"
-
-#
-#~ msgid "Fit _height"
-#~ msgstr "Ho_sszúsághoz igazítás"
-
-#
-#~ msgid "_Best fit"
-#~ msgstr "Legjobb _illeszkedés"
-
-#
-#~ msgid "Clear bookmarks"
-#~ msgstr "A könyvjelzők törlése"
-
-#
-#~ msgid "_Manage thumbnails..."
-#~ msgstr "_Bélyegképek kezelése..."
-
-#
-#~ msgid "_Recent files"
-#~ msgstr "_Legutóbbi fájlok"
-
-#
-#~ msgid "Clear recent files"
-#~ msgstr "Legutóbbi fájlok listájának törlése"
-
-#
-#~ msgid "Open _library..."
-#~ msgstr "_Gyűjtemény megnyitása..."
-
-#
-#~ msgid "_Add to library"
-#~ msgstr "Ho_zzáadás a gyűjteményhez"
-
-#
-#~ msgid "Con_vert..."
-#~ msgstr "K_onvertálás..."
-
-#
-#~ msgid "E_xtract image..."
-#~ msgstr "Kép ki_csomagolása..."
-
-#
-#~ msgid "_Adjust colour..."
-#~ msgstr "Színek _beállítása..."
-
-#
-#~ msgid "Delete image..."
-#~ msgstr "Kép törlése..."
-
-#
-#~ msgid "CW lossless JPEG rotation..."
-#~ msgstr "CW veszteségmentes JPEG forgatás"
-
-#
-#~ msgid "CCW lossless JPEG rotation..."
-#~ msgstr "CCW veszteségmentes JPEG forgatás"
-
-#
-#~ msgid "Horizontal lossless JPEG flip..."
-#~ msgstr "Veszteségmentes JPEG tükrözés vízszintesen..."
-
-#
-#~ msgid "Vertical lossless JPEG flip..."
-#~ msgstr "Veszteségmentes JPEG tükrözés függőlegesen..."
-
-#
-#~ msgid "Convert JPEG to greyscale..."
-#~ msgstr "JPEG konvertálása szürkeárnyalatossá"
-
-#
-#~ msgid "File o_perations"
-#~ msgstr "Fá_jlműveletek"
-
-#
-#~ msgid "Magnifying _lens"
-#~ msgstr "N_agyító"
-
-#
-#~ msgid "Enter fullscreen mode automatically when Comix is started."
-#~ msgstr "A Comix teljes képernyős módban induljon."
-
-#
-#~ msgid "Enter double page mode automatically when Comix is started."
-#~ msgstr "A Comix kétlapos módban induljon."
-
-#
-#~ msgid "Enter manual zoom mode automatically when Comix is started."
-#~ msgstr "A Comix kézi nagyítási módban induljon."
-
-#
-#~ msgid "Enter fit-to-screen mode automatically when Comix is started."
-#~ msgstr "A Comix képernyőmérethez igazított módban induljon."
-
-#
-#~ msgid "Enter fit width mode automatically when Comix is started."
-#~ msgstr "A Comix szélességhez igazított módban induljon."
-
-#
-#~ msgid "Enter fit height mode automatically when Comix is started."
-#~ msgstr "A Comix magassághoz igazított módban induljon."
-
-#
-#~ msgid ""
-#~ "Also scale images to a size that is larger than their original size in "
-#~ "fit-to-screen mode, fit width mode and fit height mode."
-#~ msgstr ""
-#~ "A képernyőmérethez, a szélességhez és magassághoz igazításos módban "
-#~ "kinyújtja (arányosítja) a képet, még ha az nagyobb is, mint az eredeti "
-#~ "méret."
-
-#
-#~ msgid ""
-#~ "Scale the images independently when in double page mode and fit-to-screen "
-#~ "mode. The smaller of the two images will scale up to fill any extra space "
-#~ "that is given."
-#~ msgstr ""
-#~ "Dupla lapos és képernyőmérethez igazításos módban a képeket a program "
-#~ "önállóan úgy méretezi, hogy a kisebbik képet kinyújtja annyira, hogy a "
-#~ "rendelkezésre álló üres helyet kitöltse."
-
-#
-#~ msgid "Automatically show any available comments when opening a new file."
-#~ msgstr ""
-#~ "Új állomány megnyitásakor automatikusan jelenjen meg bármilyen "
-#~ "rendelkezésre álló megjegyzés."
-
-#
-#~ msgid ""
-#~ "Automatically hide scrollbars, menubar, toolbar, statusbar and thumbnails "
-#~ "when in fullscreen mode."
-#~ msgstr ""
-#~ "A gördítősávok, menüsor, eszköztár, státuszsor és a bélyegképek "
-#~ "automatikusan rejtve legyenek teljes képernyős módban."
-
-#
-#~ msgid ""
-#~ "Cache the next page in the archive/directory to increase the perceived "
-#~ "speed. This is generally recommended unless you are running low on RAM."
-#~ msgstr ""
-#~ "Az arhívum/könyvtár következő lapját/képét gyorsítótárazza a program a "
-#~ "nagyobb sebesség elérése miatt. Ez egy ajánlott beállítás, kivéve ha "
-#~ "kevés a rendelkezésre álló memória."
-
-#
-#~ msgid ""
-#~ "Move the horizontal scrollbar instead of the vertical when using the "
-#~ "scroll wheel at the top or the bottom of the page. The direction will be "
-#~ "determined by whether you use manga mode or not."
-#~ msgstr ""
-#~ "Az egérgörgő kerék lap alján/tetején történő tekerése a vízszintes "
-#~ "gördítősávot mozgassa a függőleges helyett. Az irányt a manga mód "
-#~ "bekapcsolása/kikapcsolása szabja meg."
-
-#
-#~ msgid ""
-#~ "Save the position and the size of the window for the next time you start "
-#~ "Comix."
-#~ msgstr ""
-#~ "A Comix következő indításához jegyezze meg az ablak méretét és a "
-#~ "helyzetét."
-
-#
-#~ msgid ""
-#~ "Automatically open the next archive in the directory when scrolling past "
-#~ "the last page of the current archive, and automatically open the previous "
-#~ "archive in the directory when scrolling past the first page of the "
-#~ "current archive."
-#~ msgstr ""
-#~ "Automatikusan megnyitja a következő arhívumot, ha az aktuális utolsó "
-#~ "lapját elhagyjuk, illetve az előzőt, ha az első kép elé lépünk."
-
-#
-#~ msgid "Hide the cursor when in fullscreen mode."
-#~ msgstr "Az egérmutató elrejtése teljes képernyős módban."
-
-#
-#~ msgid ""
-#~ "Set the image scaling method. The best choice is often \"Tiles\", it is "
-#~ "quite quick and produces almost as good results as \"Bilinear\" or \"Hyper"
-#~ "\"."
-#~ msgstr ""
-#~ "A kép méretezési módjának beállítása. Legtöbbször a \"Tiles\" mód a "
-#~ "legjobb választás. Gyors és majdnem a  \"Bilinear\" vagy a  \"Hyper\" "
-#~ "módhoz hasonló a végeredmény."
-
-#
-#~ msgid ""
-#~ "Treat files with the following extensions as comment files. Extensions "
-#~ "should be separated by whitespaces. They are not case sensitive."
-#~ msgstr ""
-#~ "A megadott kiterjesztéseket a program megjegyzés fájlként kezeli. "
-#~ "Egymástól szóközzel kell elválasztani őket. Az értelmezés nem kis-, "
-#~ "nagybetű érzékeny."
-
-#
-#~ msgid ""
-#~ "Use smart scrolling with the space key. Pressing the space key normally "
-#~ "scrolls straight down one window height unless at the bottom of the page "
-#~ "where it flips pages instead. When this option is set Comix automatically "
-#~ "tries to follow the reading flow of the comic book. When pressing the "
-#~ "space key it will not only scroll down but will also scroll horizontally "
-#~ "to the edge of the page (left or right depending on whether you use manga "
-#~ "mode). In double page mode it will go to the edge of the first page if it "
-#~ "is in view, otherwise it will go to the edge of the second page. Also, in "
-#~ "double page mode with this option, Comix will not flip pages unless at "
-#~ "the bottom of the second page. At the bottom of the first page it will "
-#~ "instead go to the top of the second page."
-#~ msgstr ""
-#~ "A szóköz billentyű intelligens gördítést végez majd. A billentyű "
-#~ "lenyomása alapesetben egy ablakméretnyit gördít lefelé, kivéve a lap "
-#~ "alján, ahol is a következő oldalra lapoz. Ezt a beállítást kijelölve a "
-#~ "Comix automatikusan megpróbálja a képregény olvasási irányát követni. A "
-#~ "billentyűt lenyomva nemcsak lefelé gördíti a képet, de vízszintesen is az "
-#~ "oldal széle felé (balra, vagy jobbra attól függően be van-e kapcsolva a "
-#~ "manga mód). Dupla lapos módban - ha ez a nézet él - az első lap széle "
-#~ "felé, máskülönben a második lap széle felé halad. Ezen túl a dupla lapos "
-#~ "módban a Comix nem lapoz a következő oldalra, hacsak nem a második lap "
-#~ "alján áll. Az első lap alján lapozás helyett a második tetejére mozog "
-#~ "majd."
-
-#
-#~ msgid "Always hide the thumbnail scrollbar."
-#~ msgstr "A függőleges gördítősáv legyen mindig elrejtve."
-
-#
-#~ msgid "Automatically open the last viewed page when Comix is started."
-#~ msgstr ""
-#~ "A Comix indításakor automatikusan a legutoljára megnyitott oldal jelenik "
-#~ "meg."
-
-#
-#~ msgid ""
-#~ "Automatically go to the same directory as last time when opening the "
-#~ "\"Open\" dialog."
-#~ msgstr ""
-#~ "A \"Megnyitás\" párbeszédablak kiválasztásakor automatikusan mindig a "
-#~ "legutoljára megnyitott könyvtár tartalma jelenjen meg."
-
-#
-#~ msgid "Automatically go to this directory when opening the \"Open\" dialog."
-#~ msgstr ""
-#~ "A \"Megnyitás\" párbeszédablak kiválasztásakor automatikusan mindig a "
-#~ "kiválaszott könyvtár tartalma jelenjen meg."
-
-#
-#~ msgid "Automatically restore these values the next time Comix is started."
-#~ msgstr "A Comix következő indításakor ezek a beállítások lesznek használva."
-
-#
-#~ msgid "Show the page number in the upper left corner of each thumbnail."
-#~ msgstr ""
-#~ "Az oldalszámok a bélyegképek bal felső részénél lesznek majd láthatók."
-
-#
-#~ msgid ""
-#~ "Automatically adjust the contrast of the images so that the darkest pixel "
-#~ "is completely black and the lightest pixel is completely white. This only "
-#~ "works with images without an alpha channel."
-#~ msgstr ""
-#~ "A kontraszt automatikusan úgy lesz beállítva, hogy a legsötétebb pixel "
-#~ "teljesen fekete, a legvilágosabb pedig teljesen fehér legyen. Ez csak "
-#~ "alfacsatorna nélküli képeknél használható."
-
-#
-#~ msgid ""
-#~ "The space key uses smart scrolling as if in double page mode even when in "
-#~ "single page mode. This can be useful for comics with two scanned pages in "
-#~ "each image. The pages are assumed to be of equal size"
-#~ msgstr ""
-#~ "A szóköz billentyű intelligens gördítést használ majd, mint a dupla lapos "
-#~ "módban, még akkor is, ha az egylapos mód az aktív. Ez a beállítás akkor "
-#~ "hasznos, ha a egy képen két szkennelt képregény lap van. A lapokat a "
-#~ "program egyenlő méretűnek feltételezi."
-
-#
-#~ msgid "Adjust the lens magnification factor."
-#~ msgstr "A lencse nagyítási szorzója."
-
-#
-#~ msgid ""
-#~ "Set the lens width and height in pixels. A larger lens will use more CPU "
-#~ "resources than a small one."
-#~ msgstr ""
-#~ "A lencse szélességének és magasságának megadása pixelben. A nagyobb "
-#~ "méretű lencse több CPU erőforrást használ fel."
-
-#
-#~ msgid ""
-#~ "Set the maximum update frequency for the magnification lens in "
-#~ "milliseconds. Setting the value too low can cause the lens to lag behind "
-#~ "when moving the mouse quickly. Setting the value too high can cause the "
-#~ "lens to appear choppy."
-#~ msgstr ""
-#~ "A nagyítólencse legnagyobb frissítési frekvenciájának beállítása "
-#~ "ezredmásodpercben megadva. Amennyiben túl kicsi az érték, akkor a lencse "
-#~ "megjelenített képe gyors egérmozgáskor késhet, akadozhat. Túl magas érték "
-#~ "esetén pedig fodrozódó hatás lehetséges."
-
-#
-#~ msgid ""
-#~ "Read and write thumbnails in the ~/.thumbnails directory as proposed by "
-#~ "the freedesktop.org standard. With this preference set, Comix will use "
-#~ "the thumbnails already stored there to speed up thumbnail loading. If "
-#~ "there are no thumbnails, Comix will create them and save them there. This "
-#~ "is a standard that many applications conform to, thumbnails created by "
-#~ "other applications can be used by Comix and vice versa. If this "
-#~ "preference is not set, Comix will create thumbnails on the fly every time "
-#~ "a directory is opened."
-#~ msgstr ""
-#~ "A bélyegképeket a freedesktop.org szabvány szerint a ~/.thumbnails "
-#~ "könyvtárban kezeli (írja/olvassa) a program. Ha aktív ez a beállítás, "
-#~ "akkor a Comix a már ott eltárolt bélyegképeket használja a gyorsabb "
-#~ "indexkép betöltéshez. Amennyiben a könyvtár üres, akkor a Comix ott fogja "
-#~ "létrehozza és elmenteni az indexképeket. Ezt a szabványos módszert sok "
-#~ "alkalmazás használja és ezek képesek az egymás által létrehozott "
-#~ "bélyegképeket használni. Abban az esetben, ha ez a beállítás nem aktív, "
-#~ "akkor a Comix az indexeket az adott könyvtár megnyitásakor fogja "
-#~ "legenerálni minden egyes alkalommal."
-
-#
-#~ msgid ""
-#~ "Also use stored thumbnails for images in archives in a similiar way. Due "
-#~ "to restrictions in the freedesktop.org standard, these thumbnails will be "
-#~ "stored in ~/.comix and will only be used by Comix. If this preference is "
-#~ "not set, Comix will create thumbnails on the fly every time an archive is "
-#~ "opened."
-#~ msgstr ""
-#~ "A képekhez készített bélyegképeket arhívumokban tárolja majd a program. A "
-#~ "freedesktop.org féle szabvány megkötéseinek megfelelően ezen indexek a ~/."
-#~ "comix könyvtárban lesznek majd és csak a Comix fogja azokat használni. "
-#~ "Abban az esetben, ha ez a beállítás nem aktív, akkor a Comix az indexeket "
-#~ "az adott arhívum megnyitásakor fogja legenerálni minden egyes alkalommal."
-
-#
-#~ msgid ""
-#~ "Only display a single image in double page mode if the image consists of "
-#~ "two pages. An image is assumed to consist of two pages if its width is "
-#~ "greater than its height."
-#~ msgstr ""
-#~ "A kétlapos megjelenítési módban ha egy kép két lapból áll, akkor egyként "
-#~ "jeleníti meg a program. Akkor beszélünk két lapból álló képről, ha a "
-#~ "szélességük nagyobb a magasságuknál."
-
-#
-#~ msgid "Filter out archives with regular expressions."
-#~ msgstr "Arhívumok kiszűrése reguláris kifejezésekkel."
-
-#
-#~ msgid "Apply filters on full paths rather than filenames."
-#~ msgstr ""
-#~ "A szűrők a teljes elérési útvonalra vonatkozzanak, ne a fájlnevekre."
-
-#
-#~ msgid ""
-#~ "Store a list of the 10 last opened files that can be accessed through the "
-#~ "menus."
-#~ msgstr ""
-#~ "Az utolsó 10 megnyitott állomány listája elérhető lesz a Fájl menüben."
-
-#
-#~ msgid "Go to page..."
-#~ msgstr "Ugrás a megadott oldalra..."
-
-#
-#~ msgid ""
-#~ "Flip pages when scrolling \"off the page\" with the scroll wheel, even "
-#~ "when not in fit-to-screen mode. It takes three \"steps\" with the scroll "
-#~ "wheel to trigger this behaviour."
-#~ msgstr ""
-#~ "Lapozás történjen, ha az egérgörgő kerék \"kigördítné\" a lapot, még "
-#~ "akkor is, ha nem a képernyőmérethez igazításos mód az aktív. Három "
-#~ "\"gördítés\" szükséges a váltáshoz."

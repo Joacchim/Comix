@@ -1,3 +1,10 @@
+Comix 4.0.3
+    
+    - Hungarian translation updated by Ernő Drabik.
+    
+    - Fixed a bug that caused drag-n-drop actions from KDE applications to
+    not work properly.
+
 Comix 4.0.2
 
     - Brazilian Portuguese translation updated by Marcelo Góes.
