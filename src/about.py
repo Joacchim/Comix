@@ -59,7 +59,7 @@ class _AboutDialog(gtk.Dialog):
         '\n\n' +
         _('Comix is licensed under the GNU General Public License.') +
         '\n\n' +
-        '<small>Copyright © 2005-2008 Pontus Ekberg\n\n' +
+        '<small>Copyright © 2005-2009 Pontus Ekberg\n\n' +
         'herrekberg@users.sourceforge.net\n' +
         'http://comix.sourceforge.net</small>\n')
         box.pack_start(label, True, True, 0)
