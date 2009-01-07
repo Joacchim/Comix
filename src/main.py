@@ -162,8 +162,8 @@ class MainWindow(gtk.Window):
                                      gtk.gdk.BUTTON_RELEASE_MASK |
                                      gtk.gdk.POINTER_MOTION_MASK)
         self._main_layout.drag_dest_set(gtk.DEST_DEFAULT_ALL,
-                                        [('text/uri-list', 0, 0)],
-                                        gtk.gdk.ACTION_COPY)
+            [('text/uri-list', 0, 0)],
+            gtk.gdk.ACTION_COPY | gtk.gdk.ACTION_MOVE)
 
         self.connect('delete_event', self.terminate_program)
         self.connect('key_press_event', self._event_handler.key_press_event)

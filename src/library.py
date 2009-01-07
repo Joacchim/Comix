@@ -468,7 +468,8 @@ class _BookArea(gtk.ScrolledWindow):
             [('book', gtk.TARGET_SAME_APP, _DRAG_BOOK_ID)],
             gtk.gdk.ACTION_MOVE)
         self._iconview.drag_dest_set(gtk.DEST_DEFAULT_ALL,
-            [('text/uri-list', 0, _DRAG_EXTERNAL_ID)], gtk.gdk.ACTION_COPY)
+            [('text/uri-list', 0, _DRAG_EXTERNAL_ID)],
+            gtk.gdk.ACTION_COPY | gtk.gdk.ACTION_MOVE)
         self._iconview.set_selection_mode(gtk.SELECTION_MULTIPLE)
         self.add(self._iconview)
 
