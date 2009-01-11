@@ -96,7 +96,12 @@ class MagnifyingGlass:
         padding_y = max(0, (area_y - image_size[1]) // 2)
         x -= padding_x
         y -= padding_y
-        if prefs['rotation'] in [90, 270]:
+        rotation = prefs['rotation']
+        if prefs['auto rotate from exif']:
+            rotation += image.get_implied_rotation(source_pixbuf)
+            rotation = rotation % 360
+
+        if rotation in [90, 270]:
             scale = float(source_pixbuf.get_height()) / image_size[0]
         else:
             scale = float(source_pixbuf.get_width()) / image_size[0]
@@ -110,20 +115,20 @@ class MagnifyingGlass:
         dest_x = max(0, int(math.ceil((width / 2 - x) * source_mag)))
         dest_y = max(0, int(math.ceil((height / 2 - y) * source_mag)))
 
-        if prefs['rotation'] == 90:
+        if rotation == 90:
             x, y = y, source_pixbuf.get_height() - x
-        elif prefs['rotation'] == 180:
+        elif rotation == 180:
             x = source_pixbuf.get_width() - x
             y = source_pixbuf.get_height() - y
-        elif prefs['rotation'] == 270:
+        elif rotation == 270:
             x, y = source_pixbuf.get_width() - y, x
         if prefs['horizontal flip']:
-            if prefs['rotation'] in (90, 270):
+            if rotation in (90, 270):
                 y = source_pixbuf.get_height() - y
             else:
                 x = source_pixbuf.get_width() - x
         if prefs['vertical flip']:
-            if prefs['rotation'] in (90, 270):
+            if rotation in (90, 270):
                 x = source_pixbuf.get_width() - x
             else:
                 y = source_pixbuf.get_height() - y
@@ -148,13 +153,13 @@ class MagnifyingGlass:
             int(math.ceil(source_mag * subpixbuf.get_height())),
             gtk.gdk.INTERP_TILES)
 
-        if prefs['rotation'] == 90:
+        if rotation == 90:
             subpixbuf = subpixbuf.rotate_simple(
                 gtk.gdk.PIXBUF_ROTATE_CLOCKWISE)
-        elif prefs['rotation'] == 180:
+        elif rotation == 180:
             subpixbuf = subpixbuf.rotate_simple(
                 gtk.gdk.PIXBUF_ROTATE_UPSIDEDOWN)
-        elif prefs['rotation'] == 270:
+        elif rotation == 270:
             subpixbuf = subpixbuf.rotate_simple(
                 gtk.gdk.PIXBUF_ROTATE_COUNTERCLOCKWISE)
         if prefs['horizontal flip']:

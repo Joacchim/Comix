@@ -162,8 +162,9 @@ class MainWindow(gtk.Window):
                                      gtk.gdk.BUTTON_RELEASE_MASK |
                                      gtk.gdk.POINTER_MOTION_MASK)
         self._main_layout.drag_dest_set(gtk.DEST_DEFAULT_ALL,
-            [('text/uri-list', 0, 0)],
-            gtk.gdk.ACTION_COPY | gtk.gdk.ACTION_MOVE)
+                                        [('text/uri-list', 0, 0)],
+                                        gtk.gdk.ACTION_COPY |
+                                        gtk.gdk.ACTION_MOVE)
 
         self.connect('delete_event', self.terminate_program)
         self.connect('key_press_event', self._event_handler.key_press_event)
@@ -266,15 +267,20 @@ class MainWindow(gtk.Window):
             unscaled_x = pixbuf.get_width()
             unscaled_y = pixbuf.get_height()
 
+            rotation = prefs['rotation']
+            if prefs['auto rotate from exif']:
+                rotation += image.get_implied_rotation(pixbuf)
+                rotation = rotation % 360
+
             if self.zoom_mode == preferences.ZOOM_MODE_MANUAL:
                 scale_width = int(self._manual_zoom * unscaled_x / 100)
                 scale_height = int(self._manual_zoom * unscaled_y / 100)
-                if prefs['rotation'] in (90, 270):
+                if rotation in (90, 270):
                     scale_width, scale_height = scale_height, scale_width
                 scale_up = True
             
             pixbuf = image.fit_in_rectangle(pixbuf, scale_width, scale_height,
-                scale_up=scale_up, rotation=prefs['rotation'])
+                scale_up=scale_up, rotation=rotation)
             if prefs['horizontal flip']:
                 pixbuf = pixbuf.flip(horizontal=True)
             if prefs['vertical flip']:
@@ -286,7 +292,7 @@ class MainWindow(gtk.Window):
             x_padding = (area_width - pixbuf.get_width()) / 2
             y_padding = (area_height - pixbuf.get_height()) / 2
             
-            if prefs['rotation'] in (90, 270):
+            if rotation in (90, 270):
                 scale_percent = 100.0 * pixbuf.get_width() / unscaled_y
             else:
                 scale_percent = 100.0 * pixbuf.get_width() / unscaled_x
@@ -297,9 +303,9 @@ class MainWindow(gtk.Window):
                 scale_percent))
         
         if prefs['smart bg']:
-            bg = image.get_most_common_edge_colour(
+            bg_colour = image.get_most_common_edge_colour(
                 self.left_image.get_pixbuf())
-            self.set_bg_colour(bg)
+            self.set_bg_colour(bg_colour)
 
         self._image_box.window.freeze_updates()
         self._main_layout.move(self._image_box, max(0, x_padding),

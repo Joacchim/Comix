@@ -51,6 +51,7 @@ prefs = {
     'show toolbar': True,
     'show thumbnails': True,
     'rotation': 0,
+    'auto rotate from exif': True,
     'vertical flip': False,
     'horizontal flip': False,
     'keep transformation': False,

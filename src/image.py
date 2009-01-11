@@ -70,7 +70,8 @@ def fit_in_rectangle(src, width, height, scale_up=False, rotation=0):
     return src
 
 
-def fit_2_in_rectangle(src1, src2, width, height, scale_up=False, rotation=0):
+def fit_2_in_rectangle(src1, src2, width, height, scale_up=False,
+  rotation1=0, rotation2=0):
     """Scale two pixbufs so that they fit together (side-by-side) into a
     rectangle with dimensions <width> x <height>. If one pixbuf does not
     use all of its allotted space, the other one is given it, so that the
@@ -93,8 +94,9 @@ def fit_2_in_rectangle(src1, src2, width, height, scale_up=False, rotation=0):
     src1_height = src1.get_height()
     src2_width = src2.get_width()
     src2_height = src2.get_height()
-    if rotation in (90, 270):
+    if rotation1 in (90, 270):
         src1_width, src1_height = src1_height, src1_width
+    if rotation2 in (90, 270):
         src2_width, src2_height = src2_height, src2_width
 
     total_width = src1_width + src2_width
@@ -110,9 +112,9 @@ def fit_2_in_rectangle(src1, src2, width, height, scale_up=False, rotation=0):
         alloc_width_src1 += alloc_width_src2 - needed_width_src2
 
     return (fit_in_rectangle(src1, int(alloc_width_src1), height,
-                             scale_up, rotation),
+                             scale_up, rotation1),
             fit_in_rectangle(src2, int(alloc_width_src2), height,
-                             scale_up, rotation))
+                             scale_up, rotation2))
 
 
 def add_border(pixbuf, thickness, colour=0x000000FF):
@@ -199,3 +201,21 @@ def enhance(pixbuf, brightness=1.0, contrast=1.0, saturation=1.0,
     if sharpness != 1.0:
         im = ImageEnhance.Sharpness(im).enhance(sharpness)
     return pil_to_pixbuf(im)
+
+
+def get_implied_rotation(pixbuf):
+    """Return the implied rotation of the pixbuf, as given by the pixbuf's
+    orientation option (the value of which is based on EXIF data etc.).
+
+    The implied rotation is the angle (in degrees) that the raw pixbuf should
+    be rotated in order to be displayed "correctly". E.g. a photograph taken
+    by a camera that is held sideways might store this fact in its EXIF data,       and the pixbuf loader will set the orientation option correspondingly.
+    """
+    orientation = pixbuf.get_option('orientation')
+    if orientation == '3':
+        return 180
+    elif orientation == '6':
+        return 90
+    elif orientation == '8':
+        return 270
+    return 0

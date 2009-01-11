@@ -9,6 +9,7 @@ import gtk
 import pango
 import Image
 
+import encoding
 import labels
 import constants
 
@@ -59,7 +60,7 @@ class _ThumbnailMaintenanceDialog(gtk.Dialog):
         label = labels.BoldLabel('%s:' % _('Thumbnail directory'))
         label.set_alignment(1.0, 1.0)
         left_box.pack_start(label, True, True)
-        label = gtk.Label('%s' % _thumb_base)
+        label = gtk.Label('%s' % encoding.to_unicode(_thumb_base))
         label.set_alignment(0, 1.0)
         right_box.pack_start(label, True, True)
 
@@ -192,7 +193,7 @@ class _ThumbnailRemover(gtk.Dialog):
                     number_label.set_text('%d' % removed_thumbs)
                     size_label.set_text('%.1f MiB' % (size_thumbs / 1048576.0))
                     removing_label.set_text(_("Removed thumbnail for '%s'") %
-                        orig_path)
+                        encoding.to_unicode(orig_path))
                 if iteration % 50 == 0:
                     bar.set_fraction(iteration / self._total_thumbs)
                 while gtk.events_pending():
