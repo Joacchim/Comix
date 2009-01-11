@@ -12,6 +12,7 @@ except ImportError:
 
 import archive
 import constants
+import encoding
 import thumbnail
 
 _db_path = os.path.join(constants.COMIX_DIR, 'library.db')
@@ -103,7 +104,7 @@ class LibraryBackend:
         name = cur.fetchone()
         if name is None:
             return None
-        return unicode(name)
+        return encoding.to_unicode(name)
 
     def get_book_pages(self, book):
         """Return the number of pages in <book>, or None if <book> isn't

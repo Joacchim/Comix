@@ -363,9 +363,11 @@ class FileHandler:
         suitable for printing.
         """
         if self.archive_type is not None:
-            return os.path.basename(self._base_path)
-        return os.path.join(os.path.basename(self._base_path),
-            os.path.basename(self._image_files[self._current_image_index]))
+            name = os.path.basename(self._base_path)
+        else:
+            name = os.path.join(os.path.basename(self._base_path),
+                os.path.basename(self._image_files[self._current_image_index]))
+        return encoding.to_unicode(name)
 
     def get_path_to_page(self, page=None):
         """Return the full path to the image file for <page>, or the current

@@ -4,6 +4,8 @@ Comix 4.0.3
     
     - Fixed a bug that caused drag-n-drop actions from KDE applications to
     not work properly.
+    
+    - Fixed some bugs that caused problems with non-UTF-8 filename encodings.
 
 Comix 4.0.2
 

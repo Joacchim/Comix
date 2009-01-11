@@ -950,7 +950,8 @@ class _AddBooksProgressDialog(gtk.Dialog):
             if library.backend.add_book(path, collection):
                 total_added += 1
                 number_label.set_text('%d' % total_added)
-            added_label.set_text(_("Adding '%s'...") % path)
+            added_label.set_text(_("Adding '%s'...") %
+                encoding.to_unicode(path))
             bar.set_fraction((i + 1) / total_paths)
             while gtk.events_pending():
                 gtk.main_iteration(False)

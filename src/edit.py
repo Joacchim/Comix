@@ -9,6 +9,7 @@ import pango
 
 import archive
 import cursor
+import encoding
 import filechooser
 import filehandler
 import image
@@ -178,7 +179,8 @@ class _ImageArea(gtk.ScrolledWindow):
                 page, 67, 100, create=False)
             thumb = image.add_border(thumb, 1, 0x555555FF)
             path = self._edit_dialog.file_handler.get_path_to_page(page)
-            self._liststore.append([thumb, os.path.basename(path), path])
+            self._liststore.append([thumb,
+                encoding.to_unicode(os.path.basename(path)), path])
             if page % 10 == 0:
                 while gtk.events_pending():
                     gtk.main_iteration(False)

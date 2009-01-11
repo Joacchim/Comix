@@ -5,6 +5,7 @@ import os
 import gtk
 import pango
 
+import encoding
 import image
 import labels
 from preferences import prefs
@@ -149,7 +150,8 @@ class _ComicFileChooserDialog(gtk.Dialog):
             else:
                 pixbuf = image.add_border(pixbuf, 1)
                 self._preview_image.set_from_pixbuf(pixbuf)
-                self._namelabel.set_text(os.path.basename(path))
+                self._namelabel.set_text(encoding.to_unicode(
+                    os.path.basename(path)))
                 self._sizelabel.set_text(
                     '%.1f KiB' % (os.stat(path).st_size / 1024.0))
         else:
