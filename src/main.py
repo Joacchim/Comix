@@ -198,13 +198,13 @@ class MainWindow(gtk.Window):
             return False
         area_width, area_height = self.get_visible_area_size()
         if self.zoom_mode == preferences.ZOOM_MODE_HEIGHT:
-            scale_width = -1
+            scaled_width = -1
         else:
-            scale_width = area_width
+            scaled_width = area_width
         if self.zoom_mode == preferences.ZOOM_MODE_WIDTH:
-            scale_height = -1
+            scaled_height = -1
         else:
-            scale_height = area_height
+            scaled_height = area_height
         scale_up = prefs['stretch']
         self.is_virtual_double_page = \
             self.file_handler.get_virtual_double_page()
@@ -218,18 +218,35 @@ class MainWindow(gtk.Window):
             right_unscaled_x = right_pixbuf.get_width()
             right_unscaled_y = right_pixbuf.get_height()
 
+            left_rotation = prefs['rotation']
+            right_rotation = prefs['rotation']
+            if prefs['auto rotate from exif']:
+                left_rotation += image.get_implied_rotation(left_pixbuf)
+                left_rotation = left_rotation % 360
+                right_rotation += image.get_implied_rotation(right_pixbuf)
+                right_rotation = right_rotation % 360
+
             if self.zoom_mode == preferences.ZOOM_MODE_MANUAL:
-                scale_width = int(self._manual_zoom *
-                    (left_unscaled_x + right_unscaled_x) / 100)
-                scale_height = int(self._manual_zoom *
-                    (left_unscaled_y + right_unscaled_y) / 100)
-                if prefs['rotation'] in (90, 270):
-                    scale_width, scale_height = scale_height, scale_width
+                if left_rotation in (90, 270):
+                    total_width = left_unscaled_x
+                    total_height = left_unscaled_y
+                else:
+                    total_width = left_unscaled_y
+                    total_height = left_unscaled_x
+                if right_rotation in (90, 270):
+                    total_width += right_unscaled_x
+                    total_height += right_unscaled_y
+                else:
+                    total_width += right_unscaled_y
+                    total_height += right_unscaled_x
+                scaled_width = int(self._manual_zoom * total_width / 100)
+                scaled_height = int(self._manual_zoom * total_height / 100)
                 scale_up = True
 
             left_pixbuf, right_pixbuf = image.fit_2_in_rectangle(
-                left_pixbuf, right_pixbuf, scale_width, scale_height,
-                scale_up=scale_up, rotation=prefs['rotation'])
+                left_pixbuf, right_pixbuf, scaled_width, scaled_height,
+                scale_up=scale_up, rotation1=left_rotation,
+                rotation2=right_rotation)
             if prefs['horizontal flip']:
                 left_pixbuf = left_pixbuf.flip(horizontal=True)
                 right_pixbuf = right_pixbuf.flip(horizontal=True)
@@ -246,14 +263,16 @@ class MainWindow(gtk.Window):
             y_padding = (area_height - max(left_pixbuf.get_height(),
                 right_pixbuf.get_height())) / 2
             
-            if prefs['rotation'] in (90, 270):
+            if left_rotation in (90, 270):
                 left_scale_percent = (100.0 * left_pixbuf.get_width() /
                     left_unscaled_y)
-                right_scale_percent = (100.0 * right_pixbuf.get_width() /
-                    right_unscaled_y)
             else:
                 left_scale_percent = (100.0 * left_pixbuf.get_width() /
                     left_unscaled_x)
+            if right_rotation in (90, 270):
+                right_scale_percent = (100.0 * right_pixbuf.get_width() /
+                    right_unscaled_y)
+            else:
                 right_scale_percent = (100.0 * right_pixbuf.get_width() /
                     right_unscaled_x)
             self.statusbar.set_page_number(
@@ -273,14 +292,14 @@ class MainWindow(gtk.Window):
                 rotation = rotation % 360
 
             if self.zoom_mode == preferences.ZOOM_MODE_MANUAL:
-                scale_width = int(self._manual_zoom * unscaled_x / 100)
-                scale_height = int(self._manual_zoom * unscaled_y / 100)
+                scaled_width = int(self._manual_zoom * unscaled_x / 100)
+                scaled_height = int(self._manual_zoom * unscaled_y / 100)
                 if rotation in (90, 270):
-                    scale_width, scale_height = scale_height, scale_width
+                    scaled_width, scaled_height = scaled_height, scaled_width
                 scale_up = True
             
-            pixbuf = image.fit_in_rectangle(pixbuf, scale_width, scale_height,
-                scale_up=scale_up, rotation=rotation)
+            pixbuf = image.fit_in_rectangle(pixbuf, scaled_width,
+                scaled_height, scale_up=scale_up, rotation=rotation)
             if prefs['horizontal flip']:
                 pixbuf = pixbuf.flip(horizontal=True)
             if prefs['vertical flip']:
@@ -316,10 +335,11 @@ class MainWindow(gtk.Window):
         else:
             self.right_image.hide()
         self._main_layout.set_size(*self._image_box.size_request())
-        if scroll and at_bottom:
-            self.scroll_to_fixed(horiz='endsecond', vert='bottom')
-        elif scroll:
-            self.scroll_to_fixed(horiz='startfirst', vert='top')
+        if scroll:
+            if at_bottom:
+                self.scroll_to_fixed(horiz='endsecond', vert='bottom')
+            else:
+                self.scroll_to_fixed(horiz='startfirst', vert='top')
         self._image_box.window.thaw_updates()
 
         self.statusbar.set_filename(

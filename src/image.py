@@ -73,9 +73,13 @@ def fit_in_rectangle(src, width, height, scale_up=False, rotation=0):
 def fit_2_in_rectangle(src1, src2, width, height, scale_up=False,
   rotation1=0, rotation2=0):
     """Scale two pixbufs so that they fit together (side-by-side) into a
-    rectangle with dimensions <width> x <height>. If one pixbuf does not
-    use all of its allotted space, the other one is given it, so that the
-    pixbufs are not necessarily scaled to the same percentage.
+    rectangle with dimensions <width> x <height>, with a 2 px gap.
+    If one pixbuf does not use all of its allotted space, the other one
+    is given it, so that the pixbufs are not necessarily scaled to the
+    same percentage.
+
+    The pixbufs are rotated according to the angles in <rotation1> and
+    <rotation2> before they are scaled.
 
     See fit_in_rectangle() for more info on the parameters.
     """

@@ -305,6 +305,16 @@ class _PreferencesDialog(gtk.Dialog):
         extensions_entry.set_tooltip_text(
             _('Treat all files found within archives, that have one of these file endings, as comments.'))
         page.add_row(label, extensions_entry)
+
+        page.new_section(_('Rotation'))
+        auto_rotate_button = gtk.CheckButton(
+            _('Automatically rotate images according to the EXIF data.'))
+        auto_rotate_button.set_active(prefs['auto rotate from exif'])
+        auto_rotate_button.connect('toggled', self._check_button_cb,
+            'auto rotate from exif')
+        auto_rotate_button.set_tooltip_text(
+            _('Automatically rotate images when an orientation is specified in the image meta data, such as in an EXIF tag.'))
+        page.add_row(auto_rotate_button)
         notebook.append_page(page, gtk.Label(_('Display')))
         self.show_all()
 
@@ -317,7 +327,7 @@ class _PreferencesDialog(gtk.Dialog):
             else:
                 self._window.draw_image(scroll=False)
         elif preference in ('stretch', 'checkered bg for transparent images',
-          'no double page for wide images'):
+          'no double page for wide images', 'auto rotate from exif'):
             self._window.draw_image(scroll=False)
         elif (preference == 'hide all in fullscreen' and
           self._window.is_fullscreen):
