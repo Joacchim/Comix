@@ -653,7 +653,7 @@ msgstr "Mover libros desde la colección '%(source collection)s' hacia la colecc
 # File: src/library.py, line: 492
 #: src/library.py:492
 msgid "Remove from this collection"
-msgstr "Eliminar esta colección"
+msgstr "Eliminar de esta colección"
 
 #
 # File: src/library.py, line: 495
