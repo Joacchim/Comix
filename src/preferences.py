@@ -44,7 +44,7 @@ prefs = {
     'hide all': False,
     'hide all in fullscreen': True,
     'stored hide all values': (True, True, True, True, True),
-    'path of last browsed': constants.HOME_DIR,
+    'path of last browsed in filechooser': constants.HOME_DIR,
     'show menubar': True,
     'show scrollbar': True,
     'show statusbar': True,

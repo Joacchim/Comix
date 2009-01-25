@@ -29,6 +29,8 @@ class _ComicFileChooserDialog(gtk.Dialog):
     called once the filechooser has done its job and selected some files.
     If the dialog was closed or Cancel was pressed, <paths> is the empty list.
     """
+    
+    _last_activated_file = None
 
     def __init__(self, action=gtk.FILE_CHOOSER_ACTION_OPEN):
         self._action = action
@@ -88,8 +90,13 @@ class _ComicFileChooserDialog(gtk.Dialog):
             ('application/x-tar', 'application/x-gzip',
             'application/x-bzip2', 'application/x-cbt'))
         
-        if os.path.isdir(prefs['path of last browsed']):
-            self.filechooser.set_current_folder(prefs['path of last browsed'])
+        if self.__class__._last_activated_file is not None and os.path.isfile(
+            self.__class__._last_activated_file):
+                self.filechooser.set_filename(
+                    self.__class__._last_activated_file)
+        elif os.path.isdir(prefs['path of last browsed in filechooser']):
+            self.filechooser.set_current_folder(
+                prefs['path of last browsed in filechooser'])
         self.show_all()
 
     def add_filter(self, name, mimes):
@@ -133,8 +140,9 @@ class _ComicFileChooserDialog(gtk.Dialog):
                 if response != gtk.RESPONSE_OK:
                     self.emit_stop_by_name('response')
                     return
-            prefs['path of last browsed'] = \
+            prefs['path of last browsed in filechooser'] = \
                 self.filechooser.get_current_folder()
+            self.__class__._last_activated_file = paths[0]
             self.files_chosen(paths)
         else:
             self.files_chosen([])
