@@ -16,8 +16,7 @@ msgstr ""
 #
 # File: src/about.py, line: 18
 # File: src/about.py, line: 67
-#: src/about.py:19
-#: src/about.py:68
+#: src/about.py:19 src/about.py:68
 msgid "About"
 msgstr "Comixについて"
 
@@ -31,7 +30,8 @@ msgstr "Comixは特にコミックを扱うためにデザインされた画像�
 # File: src/about.py, line: 57
 #: src/about.py:58
 msgid "It reads ZIP, RAR and tar archives, as well as plain image files."
-msgstr "ZIP, RAR, tar形式の書庫ファイルや、普通の画像ファイルを読むことが出来ます。"
+msgstr ""
+"ZIP, RAR, tar形式の書庫ファイルや、普通の画像ファイルを読むことが出来ます。"
 
 #
 # File: src/about.py, line: 59
@@ -47,8 +47,7 @@ msgstr "開発者"
 
 #
 # File: src/about.py, line: 77
-#: src/about.py:84
-#: src/about.py:85
+#: src/about.py:84 src/about.py:85
 msgid "Simplified Chinese translation"
 msgstr "簡体中国語への翻訳"
 
@@ -72,8 +71,7 @@ msgstr "ドイツ語への翻訳とNautilusのサムネイル作成"
 
 #
 # File: src/about.py, line: 82
-#: src/about.py:89
-#: src/about.py:90
+#: src/about.py:89 src/about.py:90
 msgid "Italian translation"
 msgstr "イタリア語への翻訳"
 
@@ -91,8 +89,7 @@ msgstr "フランス語への翻訳"
 
 #
 # File: src/about.py, line: 85
-#: src/about.py:93
-#: src/about.py:94
+#: src/about.py:93 src/about.py:94
 msgid "Polish translation"
 msgstr "ポーランド語への翻訳"
 
@@ -110,67 +107,67 @@ msgstr "カタロニア語への翻訳"
 
 #
 # File: src/about.py, line: 88
-#: src/about.py:97
+#: src/about.py:97 src/about.py:98
 msgid "Traditional Chinese translation"
 msgstr "正體中国語への翻訳"
 
 #
 # File: src/about.py, line: 89
-#: src/about.py:98
+#: src/about.py:99
 msgid "Japanese translation"
 msgstr "日本語への翻訳"
 
 #
 # File: src/about.py, line: 90
-#: src/about.py:99
+#: src/about.py:100
 msgid "Hungarian translation"
 msgstr "ハンガリー語への翻訳"
 
 #
 # File: src/about.py, line: 91
-#: src/about.py:100
+#: src/about.py:101
 msgid "Russian translation"
 msgstr "ロシア語への翻訳"
 
 #
 # File: src/about.py, line: 92
-#: src/about.py:101
+#: src/about.py:102
 msgid "Croatian translation"
 msgstr "クロアチア語への翻訳"
 
 #
 # File: src/about.py, line: 93
-#: src/about.py:102
+#: src/about.py:103
 msgid "Korean translation"
 msgstr "朝鮮語への翻訳"
 
 #
 # File: src/about.py, line: 94
-#: src/about.py:103
+#: src/about.py:104
 msgid "Persian translation"
 msgstr "ペルシャ語への翻訳"
 
 #
 # File: src/about.py, line: 95
-#: src/about.py:104
+#: src/about.py:105
 msgid "Indonesian translation"
 msgstr "インドネシア語への翻訳"
 
 #
 # File: src/about.py, line: 96
-#: src/about.py:105
+#: src/about.py:106
 msgid "Czech translation"
 msgstr "チェコ語への翻訳"
 
 #
 # File: src/about.py, line: 97
-#: src/about.py:106
+#: src/about.py:107
 msgid "Icon design"
 msgstr "アイコンのデザイン"
 
 #
 # File: src/about.py, line: 106
-#: src/about.py:113
+#: src/about.py:114
 msgid "Credits"
 msgstr "クレジット"
 
@@ -183,94 +180,97 @@ msgstr "RAR書庫ファイルを展開するプログラムが見つかりませ
 #
 # File: src/archive.py, line: 68
 #: src/archive.py:68
-msgid "You need either the <i>rar</i> or the <i>unrar</i> program installed in order to read RAR (.cbr) files."
-msgstr "RAR(.cbr)書庫ファイルを読むには、<i>rar<i> もしくは <i>unrar</i>プログラムが必要です。"
+msgid ""
+"You need either the <i>rar</i> or the <i>unrar</i> program installed in "
+"order to read RAR (.cbr) files."
+msgstr ""
+"RAR(.cbr)書庫ファイルを読むには、<i>rar<i> もしくは <i>unrar</i>プログラムが"
+"必要です。"
 
 #
 # File: src/archive.py, line: 301
-#: src/archive.py:301
+#: src/archive.py:305
 msgid "ZIP archive"
 msgstr "ZIP書庫ファイル"
 
 #
 # File: src/archive.py, line: 302
-#: src/archive.py:302
+#: src/archive.py:306
 msgid "Tar archive"
 msgstr "Tar書庫ファイル"
 
 #
 # File: src/archive.py, line: 303
-#: src/archive.py:303
+#: src/archive.py:307
 msgid "Gzip compressed tar archive"
 msgstr "GzipされたTar書庫ファイル"
 
 #
 # File: src/archive.py, line: 304
-#: src/archive.py:304
+#: src/archive.py:308
 msgid "Bzip2 compressed tar archive"
 msgstr "Bzip2されたTar書庫ファイル"
 
 #
 # File: src/archive.py, line: 305
-#: src/archive.py:305
+#: src/archive.py:309
 msgid "RAR archive"
 msgstr "RAR書庫ファイル"
 
 #
 # File: src/bookmark.py, line: 27
-#: src/bookmark.py:27
+#: src/bookmark.py:28
 msgid "_Add bookmark"
 msgstr "ブックマークに追加(_A)"
 
 #
 # File: src/bookmark.py, line: 29
-#: src/bookmark.py:29
+#: src/bookmark.py:30
 msgid "_Edit bookmarks..."
 msgstr "ブックマークの編集(_E)..."
 
 #
 # File: src/bookmark.py, line: 31
-#: src/bookmark.py:31
+#: src/bookmark.py:32
 msgid "_Clear bookmarks..."
 msgstr "ブックマークをクリア(_C)..."
 
 #
 # File: src/bookmark.py, line: 77
-#: src/bookmark.py:77
+#: src/bookmark.py:78
 msgid "Clear all bookmarks?"
 msgstr "全てのブックマークをクリアしますか？"
 
 #
 # File: src/bookmark.py, line: 79
-#: src/bookmark.py:79
-msgid "All stored bookmarks will be removed. Are you sure that you want to continue?"
+#: src/bookmark.py:80
+msgid ""
+"All stored bookmarks will be removed. Are you sure that you want to continue?"
 msgstr "保存されている全ブックマークが消去されます。よろしいですか？"
 
 #
 # File: src/bookmark.py, line: 229
-#: src/bookmark.py:229
+#: src/bookmark.py:230
 msgid "Edit bookmarks"
 msgstr "ブックマークを編集"
 
 #
 # File: src/bookmark.py, line: 255
 # File: src/edit.py, line: 267
-#: src/bookmark.py:255
-#: src/edit.py:267
+#: src/bookmark.py:256 src/edit.py:270
 msgid "Name"
 msgstr "名前"
 
 #
 # File: src/bookmark.py, line: 256
-#: src/bookmark.py:256
+#: src/bookmark.py:257
 msgid "Page"
 msgstr "ページ"
 
 #
 # File: src/comment.py, line: 16
 # File: src/preferences.py, line: 288
-#: src/comment.py:16
-#: src/preferences.py:298
+#: src/comment.py:16 src/preferences.py:299
 msgid "Comments"
 msgstr "コメント"
 
@@ -290,68 +290,80 @@ msgstr "コンピュータ上にもう使われないファイルがあります
 #
 # File: src/deprecated.py, line: 22
 #: src/deprecated.py:22
-msgid "Some old files (that were used for storing preferences, the library, bookmarks etc. for older versions of Comix) were found on your computer. If you do not plan on using the older versions of Comix again, you should remove these files in order to save some disk space. Do you want these files to be removed for you now?"
-msgstr "コンピュータ上に以前のバージョンのComixでしか使われない、設定やライブラリ、ブックマーク用のファイルがあります。もしもう以前のバージョンのComixを使う予定が無ければ、ディスクの容量を減らすためにこれらのファイルを削除することをおすすめします。これらのファイルを削除しますか？"
+msgid ""
+"Some old files (that were used for storing preferences, the library, "
+"bookmarks etc. for older versions of Comix) were found on your computer. If "
+"you do not plan on using the older versions of Comix again, you should "
+"remove these files in order to save some disk space. Do you want these files "
+"to be removed for you now?"
+msgstr ""
+"コンピュータ上に以前のバージョンのComixでしか使われない、設定やライブラリ、"
+"ブックマーク用のファイルがあります。もしもう以前のバージョンのComixを使う予定"
+"が無ければ、ディスクの容量を減らすためにこれらのファイルを削除することをおす"
+"すめします。これらのファイルを削除しますか？"
 
 #
 # File: src/edit.py, line: 28
-#: src/edit.py:28
+#: src/edit.py:29
 msgid "Edit archive"
 msgstr "書庫ファイルを編集"
 
 #
 # File: src/edit.py, line: 36
-#: src/edit.py:36
+#: src/edit.py:37
 msgid "Import"
 msgstr "インポート"
 
 #
 # File: src/edit.py, line: 50
-#: src/edit.py:50
+#: src/edit.py:51
 msgid "Images"
 msgstr "画像"
 
 #
 # File: src/edit.py, line: 51
-#: src/edit.py:51
+#: src/edit.py:52
 msgid "Other files"
 msgstr "その他のファイル"
 
 #
 # File: src/edit.py, line: 99
-#: src/edit.py:99
+#: src/edit.py:101
 msgid "The new archive could not be saved!"
 msgstr "新しい書庫ファイルが保存出来ませんでした。"
 
 #
 # File: src/edit.py, line: 101
-#: src/edit.py:101
+#: src/edit.py:103
 msgid "The original files have not been removed."
 msgstr "元のファイルは削除されません。"
 
 #
 # File: src/edit.py, line: 115
-#: src/edit.py:115
+#: src/edit.py:117
 msgid "Archives are stored as ZIP files."
 msgstr "書庫ファイルはZIP形式で保存されます。"
 
 #
 # File: src/edit.py, line: 168
 # File: src/edit.py, line: 285
-#: src/edit.py:168
-#: src/edit.py:285
+#: src/edit.py:170 src/edit.py:288
 msgid "Remove from archive"
 msgstr "書庫ファイルの中から削除"
 
 #
 # File: src/edit.py, line: 255
-#: src/edit.py:255
-msgid "Please note that the only files that are automatically added to this list are those files in archives that Comix recognizes as comments."
-msgstr "注意：Comixがコメントファイルだと認識する書庫ファイル内のファイルのみが、自動的にこのリストに追加されます。"
+#: src/edit.py:258
+msgid ""
+"Please note that the only files that are automatically added to this list "
+"are those files in archives that Comix recognizes as comments."
+msgstr ""
+"注意：Comixがコメントファイルだと認識する書庫ファイル内のファイルのみが、自動"
+"的にこのリストに追加されます。"
 
 #
 # File: src/edit.py, line: 270
-#: src/edit.py:270
+#: src/edit.py:273
 msgid "Size"
 msgstr "サイズ"
 
@@ -400,93 +412,91 @@ msgstr "コントラストを自動調節する"
 #
 # File: src/enhance.py, line: 128
 #: src/enhance.py:128
-msgid "Automatically adjust contrast (both lightness and darkness), separately for each colour band."
+msgid ""
+"Automatically adjust contrast (both lightness and darkness), separately for "
+"each colour band."
 msgstr "各々のカラーバンド毎にコントラスト（明度と暗度）を自動調節します。"
 
 #
 # File: src/filechooser.py, line: 35
 # File: src/library.py, line: 489
-#: src/filechooser.py:35
-#: src/library.py:489
+#: src/filechooser.py:38 src/library.py:490
 msgid "Open"
 msgstr "開く"
 
 #
 # File: src/filechooser.py, line: 39
-#: src/filechooser.py:39
+#: src/filechooser.py:42
 msgid "Save"
 msgstr "保存"
 
 #
 # File: src/filechooser.py, line: 75
-#: src/filechooser.py:75
+#: src/filechooser.py:78
 msgid "All files"
 msgstr "全てのファイル"
 
 #
 # File: src/filechooser.py, line: 78
-#: src/filechooser.py:78
+#: src/filechooser.py:81
 msgid "All Archives"
 msgstr "全ての書庫ファイル"
 
 #
 # File: src/filechooser.py, line: 82
-#: src/filechooser.py:82
+#: src/filechooser.py:85
 msgid "ZIP archives"
 msgstr "ZIP書庫ファイル"
 
 #
 # File: src/filechooser.py, line: 84
-#: src/filechooser.py:84
+#: src/filechooser.py:87
 msgid "RAR archives"
 msgstr "RAR書庫ファイル"
 
 #
 # File: src/filechooser.py, line: 86
-#: src/filechooser.py:86
+#: src/filechooser.py:89
 msgid "Tar archives"
 msgstr "Tar書庫ファイル"
 
 #
 # File: src/filechooser.py, line: 125
-#: src/filechooser.py:126
+#: src/filechooser.py:134
 #, python-format
 msgid "A file named '%s' already exists. Do you want to replace it?"
 msgstr "'%s'という名前のファイルは既に存在します。上書きしますか？"
 
 #
 # File: src/filechooser.py, line: 128
-#: src/filechooser.py:129
+#: src/filechooser.py:137
 msgid "Replacing it will overwrite its contents."
 msgstr "上書きすると元のファイルの内容が失われます。"
 
 #
 # File: src/filechooser.py, line: 171
 # File: src/filechooser.py, line: 249
-#: src/filechooser.py:172
-#: src/filechooser.py:250
+#: src/filechooser.py:182 src/filechooser.py:260
 msgid "All images"
 msgstr "全ての画像"
 
 #
 # File: src/filechooser.py, line: 173
 # File: src/filechooser.py, line: 251
-#: src/filechooser.py:174
-#: src/filechooser.py:252
+#: src/filechooser.py:184 src/filechooser.py:262
 msgid "JPEG images"
 msgstr "JPEG画像"
 
 #
 # File: src/filechooser.py, line: 174
 # File: src/filechooser.py, line: 252
-#: src/filechooser.py:175
-#: src/filechooser.py:253
+#: src/filechooser.py:185 src/filechooser.py:263
 msgid "PNG images"
 msgstr "PNG画像"
 
 #
 # File: src/filechooser.py, line: 195
-#: src/filechooser.py:196
+#: src/filechooser.py:206
 msgid "Automatically add the books to this collection"
 msgstr "本を自動的にこのコレクションに追加する"
 
@@ -527,15 +537,14 @@ msgstr "'%s'の中には画像がありません"
 
 #
 # File: src/filehandler.py, line: 411
-#: src/filehandler.py:411
+#: src/filehandler.py:413
 msgid "Unknown filetype"
 msgstr "ファイル形式が分かりません"
 
 #
 # File: src/librarybackend.py, line: 272
 # File: src/librarybackend.py, line: 274
-#: src/librarybackend.py:272
-#: src/librarybackend.py:274
+#: src/librarybackend.py:273 src/librarybackend.py:275
 msgid "(Copy)"
 msgstr "(コピー)"
 
@@ -578,8 +587,12 @@ msgstr "コレクションをライブラリから削除しますか？"
 #
 # File: src/library.py, line: 233
 #: src/library.py:233
-msgid "The selected collection will be removed from the library (but the books and subcollections in it will remain). Are you sure that you want to continue?"
-msgstr "選択されたコレクションがライブラリから削除されます（コレクションの中の本とサブコレクションは削除されません）。よろしいですか？"
+msgid ""
+"The selected collection will be removed from the library (but the books and "
+"subcollections in it will remain). Are you sure that you want to continue?"
+msgstr ""
+"選択されたコレクションがライブラリから削除されます（コレクションの中の本とサ"
+"ブコレクションは削除されません）。よろしいですか？"
 
 #
 # File: src/library.py, line: 251
@@ -603,8 +616,7 @@ msgstr "'%s'の名前を変更出来ませんでした。"
 #
 # File: src/library.py, line: 275
 # File: src/library.py, line: 881
-#: src/library.py:275
-#: src/library.py:881
+#: src/library.py:275 src/library.py:882
 msgid "A collection by that name already exists."
 msgstr "その名前のコレクションは既に存在します。"
 
@@ -624,8 +636,12 @@ msgstr "ルート"
 # File: src/library.py, line: 386
 #: src/library.py:386
 #, python-format
-msgid "Put the collection '%(subcollection)s' in the collection '%(supercollection)s'."
-msgstr "コレクション '%(subcollection)s' をコレクション '%(supercollection)s' の中に入れる"
+msgid ""
+"Put the collection '%(subcollection)s' in the collection '%(supercollection)"
+"s'."
+msgstr ""
+"コレクション '%(subcollection)s' をコレクション '%(supercollection)s' の中に"
+"入れる"
 
 #
 # File: src/library.py, line: 407
@@ -638,517 +654,597 @@ msgstr "本を'%s'に加える"
 # File: src/library.py, line: 411
 #: src/library.py:411
 #, python-format
-msgid "Move books from '%(source collection)s' to '%(destination collection)s'."
-msgstr "本をコレクション'%(source collection)s'から'%(destination collection)s'に移動させる"
+msgid ""
+"Move books from '%(source collection)s' to '%(destination collection)s'."
+msgstr ""
+"本をコレクション'%(source collection)s'から'%(destination collection)s'に移動"
+"させる"
 
 #
 # File: src/library.py, line: 492
-#: src/library.py:492
+#: src/library.py:493
 msgid "Remove from this collection"
 msgstr "このコレクションから削除"
 
 #
 # File: src/library.py, line: 495
-#: src/library.py:495
+#: src/library.py:496
 msgid "Remove from the library..."
 msgstr "ライブラリから削除..."
 
 #
 # File: src/library.py, line: 588
-#: src/library.py:588
+#: src/library.py:589
 #, python-format
 msgid "Removed %(num)d book(s) from '%(collection)s'."
 msgstr "%(num)d 個の本が '%(collection)s'から削除されました。"
 
 #
 # File: src/library.py, line: 597
-#: src/library.py:597
+#: src/library.py:598
 msgid "Remove books from the library?"
 msgstr "ライブラリから本を削除しますか？"
 
 #
 # File: src/library.py, line: 599
-#: src/library.py:599
-msgid "The selected books will be removed from the library (but the original files will be untouched). Are you sure that you want to continue?"
-msgstr "選択された本はライブラリから削除されます（元のファイルは変更されません）。よろしいですか？"
+#: src/library.py:600
+msgid ""
+"The selected books will be removed from the library (but the original files "
+"will be untouched). Are you sure that you want to continue?"
+msgstr ""
+"選択された本はライブラリから削除されます（元のファイルは変更されません）。よ"
+"ろしいですか？"
 
 #
 # File: src/library.py, line: 609
-#: src/library.py:609
+#: src/library.py:610
 #, python-format
 msgid "Removed %d book(s) from the library."
 msgstr "%d 個の本がライブラリから削除されました。"
 
 #
 # File: src/library.py, line: 769
-#: src/library.py:769
+#: src/library.py:770
 msgid "Search"
 msgstr "検索"
 
 #
 # File: src/library.py, line: 774
-#: src/library.py:774
-msgid "Display only those books that have the specified text string in their full path. The search is not case sensitive."
-msgstr "フルパス名に次の文字列が含まれている本のみを表示します。検索では大文字小文字を区別しません。"
+#: src/library.py:775
+msgid ""
+"Display only those books that have the specified text string in their full "
+"path. The search is not case sensitive."
+msgstr ""
+"フルパス名に次の文字列が含まれている本のみを表示します。検索では大文字小文字"
+"を区別しません。"
 
 #
 # File: src/library.py, line: 776
-#: src/library.py:776
+#: src/library.py:777
 msgid "Cover size"
 msgstr "カバーのサイズ"
 
 #
 # File: src/library.py, line: 789
-#: src/library.py:789
+#: src/library.py:790
 msgid "Add books"
 msgstr "本を追加"
 
 #
 # File: src/library.py, line: 793
-#: src/library.py:793
+#: src/library.py:794
 msgid "Add more books to the library."
 msgstr "ライブラリに本を追加する"
 
 #
 # File: src/library.py, line: 795
-#: src/library.py:795
+#: src/library.py:796
 msgid "Add collection"
 msgstr "コレクションを追加する"
 
 #
 # File: src/library.py, line: 800
-#: src/library.py:800
+#: src/library.py:801
 msgid "Add a new empty collection."
 msgstr "空のコレクションを新規作成する"
 
 #
 # File: src/library.py, line: 806
-#: src/library.py:806
+#: src/library.py:807
 msgid "Open the selected book."
 msgstr "選択した本を開く"
 
 #
 # File: src/library.py, line: 832
 # File: src/properties.py, line: 113
-#: src/library.py:832
-#: src/properties.py:118
+#: src/library.py:833 src/properties.py:118
 #, python-format
 msgid "%d pages"
 msgstr "%d ページ"
 
 #
 # File: src/library.py, line: 854
-#: src/library.py:854
+#: src/library.py:855
 msgid "Add new collection?"
 msgstr "新しいコレクションを追加しますか？"
 
 #
 # File: src/library.py, line: 856
-#: src/library.py:856
+#: src/library.py:857
 msgid "Please enter a name for the new collection."
 msgstr "新しいコレクションの名前を入力してください。"
 
 #
 # File: src/library.py, line: 862
-#: src/library.py:862
+#: src/library.py:863
 msgid "New collection"
 msgstr "新しいコレクション"
 
 #
 # File: src/library.py, line: 876
-#: src/library.py:876
+#: src/library.py:877
 #, python-format
 msgid "Could not add a new collection called '%s'."
 msgstr "'%s'という名前の新しいコレクションを追加出来ませんでした。"
 
 #
 # File: src/library.py, line: 910
-#: src/library.py:910
+#: src/library.py:911
 msgid "Adding books"
 msgstr "本を追加中"
 
 #
 # File: src/library.py, line: 930
-#: src/library.py:930
+#: src/library.py:931
 msgid "Added books"
 msgstr "本を追加しました"
 
 #
 # File: src/library.py, line: 952
-#: src/library.py:952
+#: src/library.py:953
 #, python-format
 msgid "Adding '%s'..."
 msgstr "'%s'を追加中..."
 
 #
 # File: src/main.py, line: 666
-#: src/main.py:666
+#: src/main.py:699
 msgid "SLIDESHOW"
 msgstr "スライドショー"
 
 #
 # File: src/preferences.py, line: 78
-#: src/preferences.py:79
+#: src/preferences.py:80
 msgid "Preferences"
 msgstr "設定"
 
 #
 # File: src/preferences.py, line: 93
-#: src/preferences.py:94
+#: src/preferences.py:95
 msgid "Background"
 msgstr "背景"
 
 #
 # File: src/preferences.py, line: 95
-#: src/preferences.py:96
+#: src/preferences.py:97
 msgid "Use this colour as background"
 msgstr "この色を背景に用いる"
 
 #
 # File: src/preferences.py, line: 97
-#: src/preferences.py:98
+#: src/preferences.py:99
 msgid "Always use this selected colour as the background colour."
 msgstr "選択された色を常に背景色に用います。"
 
 #
 # File: src/preferences.py, line: 102
-#: src/preferences.py:103
+#: src/preferences.py:104
 msgid "Use dynamic background colour."
 msgstr "背景色を自動選択する"
 
 #
 # File: src/preferences.py, line: 106
-#: src/preferences.py:107
+#: src/preferences.py:108
 msgid "Automatically pick a background colour that fits the viewed image."
 msgstr "画像に合う背景色を自動的に表示します。"
 
 #
 # File: src/preferences.py, line: 109
-#: src/preferences.py:110
+#: src/preferences.py:111
 msgid "Thumbnails"
 msgstr "サムネイル"
 
 #
 # File: src/preferences.py, line: 110
-#: src/preferences.py:111
+#: src/preferences.py:112
 msgid "Thumbnail size (in pixels)"
 msgstr "サムネイルのサイズ（ピクセル数）"
 
 #
 # File: src/preferences.py, line: 117
-#: src/preferences.py:118
+#: src/preferences.py:119
 msgid "Show page numbers on thumbnails."
 msgstr "サムネイルの上にページ数を表示する"
 
 #
 # File: src/preferences.py, line: 124
-#: src/preferences.py:125
+#: src/preferences.py:126
 msgid "Magnifying Glass"
 msgstr "レンズの拡大"
 
 #
 # File: src/preferences.py, line: 125
-#: src/preferences.py:126
+#: src/preferences.py:127
 msgid "Magnifying glass size (in pixels)"
 msgstr "拡大するサイズ（ピクセル数）"
 
 #
 # File: src/preferences.py, line: 131
-#: src/preferences.py:132
-msgid "Set the size of the magnifying glass. It is a square with a side of this many pixels."
-msgstr "レンズが拡大する範囲のサイズを設定します。一辺がこのピクセル数の正方形状の範囲が拡大されます。"
+#: src/preferences.py:133
+msgid ""
+"Set the size of the magnifying glass. It is a square with a side of this "
+"many pixels."
+msgstr ""
+"レンズが拡大する範囲のサイズを設定します。一辺がこのピクセル数の正方形状の範"
+"囲が拡大されます。"
 
 #
 # File: src/preferences.py, line: 133
-#: src/preferences.py:134
+#: src/preferences.py:135
 msgid "Magnification factor"
 msgstr "拡大率"
 
 #
 # File: src/preferences.py, line: 140
-#: src/preferences.py:141
+#: src/preferences.py:142
 msgid "Set the magnification factor of the magnifying glass."
 msgstr "レンズの拡大率を設定します。"
 
 #
 # File: src/preferences.py, line: 143
-#: src/preferences.py:144
+#: src/preferences.py:145
 msgid "Image scaling"
 msgstr "画像のスケーリング"
 
 #
 # File: src/preferences.py, line: 144
-#: src/preferences.py:145
+#: src/preferences.py:146
 msgid "Stretch small images."
 msgstr "小さい画像を拡大する"
 
 #
 # File: src/preferences.py, line: 148
-#: src/preferences.py:149
-msgid "Stretch images to a size that is larger than their original size if the current zoom mode requests it. If this preference is unset, images are never scaled to be larger than their original size."
-msgstr "使用しているズームモードに応じて、元のサイズ以上に画像を拡大することを許可します。この項目が設定されていない場合、画像は元のサイズ以上には拡大されません。"
+#: src/preferences.py:150
+msgid ""
+"Stretch images to a size that is larger than their original size if the "
+"current zoom mode requests it. If this preference is unset, images are never "
+"scaled to be larger than their original size."
+msgstr ""
+"使用しているズームモードに応じて、元のサイズ以上に画像を拡大することを許可し"
+"ます。この項目が設定されていない場合、画像は元のサイズ以上には拡大されませ"
+"ん。"
 
 #
 # File: src/preferences.py, line: 151
-#: src/preferences.py:152
+#: src/preferences.py:153
 msgid "Transparency"
 msgstr "透過画像"
 
 #
 # File: src/preferences.py, line: 153
-#: src/preferences.py:154
+#: src/preferences.py:155
 msgid "Use checkered background for transparent images."
 msgstr "透過画像の背景に格子状の模様を用いる"
 
 #
 # File: src/preferences.py, line: 159
-#: src/preferences.py:160
-msgid "Use a grey checkered background for transparent images. If this preference is unset, the background is plain white instead."
-msgstr "透過画像の背景にグレーの格子状の模様を用います。この項目が設定されていない場合は、単色の白が使われます。"
+#: src/preferences.py:161
+msgid ""
+"Use a grey checkered background for transparent images. If this preference "
+"is unset, the background is plain white instead."
+msgstr ""
+"透過画像の背景にグレーの格子状の模様を用います。この項目が設定されていない場"
+"合は、単色の白が使われます。"
 
 #
 # File: src/preferences.py, line: 161
-#: src/preferences.py:162
+#: src/preferences.py:163
 msgid "Appearance"
 msgstr "外見"
 
 #
 # File: src/preferences.py, line: 167
-#: src/preferences.py:168
+#: src/preferences.py:169
 msgid "Scroll"
 msgstr "スクロール"
 
 #
 # File: src/preferences.py, line: 169
-#: src/preferences.py:170
+#: src/preferences.py:171
 msgid "Use smart space key scrolling."
 msgstr "スペースキーで「スマートスクロール」を行う"
 
 #
 # File: src/preferences.py, line: 174
-#: src/preferences.py:175
-msgid "Use smart scrolling with the space key. Normally the space key scrolls only right down (or up when shift is pressed), but with this preference set it also scrolls sideways and so tries to follow the natural reading order of the comic book."
-msgstr "スペースキーで「スマートスクロール」を行います。通常スペースキーを押すと画像は下に（SHIFTキーが押されている時は上に）スクロールされるだけですが、この設定がされていると画像は左右にもスクロールされ、コミックを読む自然な流れに従おうとします。"
+#: src/preferences.py:176
+msgid ""
+"Use smart scrolling with the space key. Normally the space key scrolls only "
+"right down (or up when shift is pressed), but with this preference set it "
+"also scrolls sideways and so tries to follow the natural reading order of "
+"the comic book."
+msgstr ""
+"スペースキーで「スマートスクロール」を行います。通常スペースキーを押すと画像"
+"は下に（SHIFTキーが押されている時は上に）スクロールされるだけですが、この設定"
+"がされていると画像は左右にもスクロールされ、コミックを読む自然な流れに従おう"
+"とします。"
 
-#: src/preferences.py:179
+#: src/preferences.py:180
 msgid "Flip pages when scrolling off the edges of the page."
 msgstr "スクロールがページの端を越えた時、ページを送る"
 
-#: src/preferences.py:184
-msgid "Flip pages when scrolling \"off the page\" with the scroll wheel or with the arrow keys. It takes three consecutive \"steps\" with the scroll wheel or the arrow keys for the pages to be flipped."
-msgstr "マウスやカーソルキーでのスクロールで、ページの端を3回連続して越えた時に次のページを表示します。"
+#: src/preferences.py:185
+msgid ""
+"Flip pages when scrolling \"off the page\" with the scroll wheel or with the "
+"arrow keys. It takes three consecutive \"steps\" with the scroll wheel or "
+"the arrow keys for the pages to be flipped."
+msgstr ""
+"マウスやカーソルキーでのスクロールで、ページの端を3回連続して越えた時に次の"
+"ページを表示します。"
 
 #
 # File: src/preferences.py, line: 177
 # File: src/ui.py, line: 296
-#: src/preferences.py:187
-#: src/ui.py:296
+#: src/preferences.py:188 src/ui.py:298
 msgid "Double page mode"
 msgstr "見開き表示"
 
 #
 # File: src/preferences.py, line: 179
-#: src/preferences.py:189
+#: src/preferences.py:190
 msgid "Flip two pages in double page mode."
 msgstr "見開き表示の時、２ページずつページを送る"
 
 #
 # File: src/preferences.py, line: 184
-#: src/preferences.py:194
-msgid "Flip two pages, instead of one, each time we flip pages in double page mode."
+#: src/preferences.py:195
+msgid ""
+"Flip two pages, instead of one, each time we flip pages in double page mode."
 msgstr "見開き表示の時、1ページずつではなく、2ページずつ表示を進めます。"
 
 #
 # File: src/preferences.py, line: 187
-#: src/preferences.py:197
+#: src/preferences.py:198
 msgid "Show only one wide image in double page mode."
 msgstr "見開き表示の時、幅が広い画像の時は１枚だけ表示する"
 
 #
 # File: src/preferences.py, line: 193
-#: src/preferences.py:203
-msgid "Display only one image in double page mode, if the image's width exceeds its height. The result of this is that scans that span two pages are displayed properly (i.e. alone) also in double page mode."
-msgstr "画像の高さより幅が大きい時は、見開き表示の時でも１枚だけ画像を表示します。２ページにわたる範囲をスキャンした画像は、見開き表示の時も適切に（つまりその画像だけ）表示されます。"
+#: src/preferences.py:204
+msgid ""
+"Display only one image in double page mode, if the image's width exceeds its "
+"height. The result of this is that scans that span two pages are displayed "
+"properly (i.e. alone) also in double page mode."
+msgstr ""
+"画像の高さより幅が大きい時は、見開き表示の時でも１枚だけ画像を表示します。２"
+"ページにわたる範囲をスキャンした画像は、見開き表示の時も適切に（つまりその画"
+"像だけ）表示されます。"
 
 #
 # File: src/preferences.py, line: 196
-#: src/preferences.py:206
+#: src/preferences.py:207
 msgid "Files"
 msgstr "ファイル"
 
 #
 # File: src/preferences.py, line: 198
-#: src/preferences.py:208
+#: src/preferences.py:209
 msgid "Automatically open the next archive."
 msgstr "次の書庫ファイルを自動的に開く"
 
 #
 # File: src/preferences.py, line: 203
-#: src/preferences.py:213
-msgid "Automatically open the next archive in the directory when flipping past the last page, or the previous archive when flipping past the first page."
-msgstr "書庫ファイルの最後のページの次に進もうとした時、同じディレクトリ内の次の書庫ページを、また最初のページの前に進もうとした時、前の書庫ページを自動的に開きます。"
+#: src/preferences.py:214
+msgid ""
+"Automatically open the next archive in the directory when flipping past the "
+"last page, or the previous archive when flipping past the first page."
+msgstr ""
+"書庫ファイルの最後のページの次に進もうとした時、同じディレクトリ内の次の書庫"
+"ページを、また最初のページの前に進もうとした時、前の書庫ページを自動的に開き"
+"ます。"
 
 #
 # File: src/preferences.py, line: 206
-#: src/preferences.py:216
+#: src/preferences.py:217
 msgid "Automatically open the last viewed file on startup."
 msgstr "最後に見たファイルを起動時に自動で開く"
 
 #
 # File: src/preferences.py, line: 211
-#: src/preferences.py:221
-msgid "Automatically open, on startup, the file that was open when Comix was last closed."
-msgstr "Comixが最後に終了した時に開いていたファイルを、起動時に自動的に開きます。"
+#: src/preferences.py:222
+msgid ""
+"Automatically open, on startup, the file that was open when Comix was last "
+"closed."
+msgstr ""
+"Comixが最後に終了した時に開いていたファイルを、起動時に自動的に開きます。"
 
 #
 # File: src/preferences.py, line: 214
-#: src/preferences.py:224
+#: src/preferences.py:225
 msgid "Store information about recently opened files."
 msgstr "最近開いたファイルの情報を保存する"
 
 #
 # File: src/preferences.py, line: 219
-#: src/preferences.py:229
-msgid "Add information about all files opened from within Comix to the shared recent files list."
-msgstr "Comixが開いた全ファイルの情報を、最近開いたファイルの共有リストに追加します。"
+#: src/preferences.py:230
+msgid ""
+"Add information about all files opened from within Comix to the shared "
+"recent files list."
+msgstr ""
+"Comixが開いた全ファイルの情報を、最近開いたファイルの共有リストに追加します。"
 
 #
 # File: src/preferences.py, line: 222
-#: src/preferences.py:232
+#: src/preferences.py:233
 msgid "Store thumbnails for opened files."
 msgstr "開いたファイルのサムネイルを保存する"
 
 #
 # File: src/preferences.py, line: 227
-#: src/preferences.py:237
-msgid "Store thumbnails for opened files according to the freedesktop.org specification. These thumbnails are shared by many other applications, such as most file managers."
-msgstr "開いたファイルのサムネイルをfreedesktop.orgの規格に従って保存します。これらのサムネイルは、ほとんどのファイルマネージャー等、多くのアプリケーションが共有して使うことが出来ます。"
+#: src/preferences.py:238
+msgid ""
+"Store thumbnails for opened files according to the freedesktop.org "
+"specification. These thumbnails are shared by many other applications, such "
+"as most file managers."
+msgstr ""
+"開いたファイルのサムネイルをfreedesktop.orgの規格に従って保存します。これらの"
+"サムネイルは、ほとんどのファイルマネージャー等、多くのアプリケーションが共有"
+"して使うことが出来ます。"
 
 #
 # File: src/preferences.py, line: 230
-#: src/preferences.py:240
+#: src/preferences.py:241
 msgid "Cache"
 msgstr "キャッシュ"
 
 #
 # File: src/preferences.py, line: 231
-#: src/preferences.py:241
+#: src/preferences.py:242
 msgid "Use a cache to speed up browsing."
 msgstr "キャッシュを使って表示を早くする"
 
 #
 # File: src/preferences.py, line: 235
-#: src/preferences.py:245
-msgid "Cache the images that are next to the currently viewed image in order to speed up browsing. Since the speed improvements are quite big, it is recommended that you have this preference set, unless you are running short on free RAM."
-msgstr "現在表示している次の画像をキャッシュして表示を早くします。表示速度の改良による効果は大きいので、RAMの空きが少ない場合を除いてはこの設定をおすすめします。"
+#: src/preferences.py:246
+msgid ""
+"Cache the images that are next to the currently viewed image in order to "
+"speed up browsing. Since the speed improvements are quite big, it is "
+"recommended that you have this preference set, unless you are running short "
+"on free RAM."
+msgstr ""
+"現在表示している次の画像をキャッシュして表示を早くします。表示速度の改良によ"
+"る効果は大きいので、RAMの空きが少ない場合を除いてはこの設定をおすすめします。"
 
 #
 # File: src/preferences.py, line: 237
-#: src/preferences.py:247
+#: src/preferences.py:248
 msgid "Behaviour"
 msgstr "一般"
 
 #
 # File: src/preferences.py, line: 243
-#: src/preferences.py:253
+#: src/preferences.py:254
 msgid "Default modes"
 msgstr "デフォルトのモード"
 
 #
 # File: src/preferences.py, line: 245
-#: src/preferences.py:255
+#: src/preferences.py:256
 msgid "Use double page mode by default."
 msgstr "見開き表示にする"
 
 #
 # File: src/preferences.py, line: 250
-#: src/preferences.py:260
+#: src/preferences.py:261
 msgid "Use fullscreen by default."
 msgstr "全画面表示にする"
 
 #
 # File: src/preferences.py, line: 255
-#: src/preferences.py:265
+#: src/preferences.py:266
 msgid "Use manga mode by default."
 msgstr "マンガのページ順に表示する"
 
 #
 # File: src/preferences.py, line: 260
-#: src/preferences.py:270
+#: src/preferences.py:271
 msgid "Default zoom mode"
 msgstr "デフォルトのズームモード"
 
 #
 # File: src/preferences.py, line: 262
 # File: src/ui.py, line: 288
-#: src/preferences.py:272
-#: src/ui.py:288
+#: src/preferences.py:273 src/ui.py:290
 msgid "Best fit mode"
 msgstr "ベストフィットモードにする"
 
 #
 # File: src/preferences.py, line: 263
 # File: src/ui.py, line: 290
-#: src/preferences.py:273
-#: src/ui.py:290
+#: src/preferences.py:274 src/ui.py:292
 msgid "Fit width mode"
 msgstr "横幅を合わせる"
 
 #
 # File: src/preferences.py, line: 264
 # File: src/ui.py, line: 292
-#: src/preferences.py:274
-#: src/ui.py:292
+#: src/preferences.py:275 src/ui.py:294
 msgid "Fit height mode"
 msgstr "縦幅を合わせる"
 
 #
 # File: src/preferences.py, line: 265
 # File: src/ui.py, line: 294
-#: src/preferences.py:275
-#: src/ui.py:294
+#: src/preferences.py:276 src/ui.py:296
 msgid "Manual zoom mode"
 msgstr "手動でズームを調整"
 
 #
 # File: src/preferences.py, line: 271
-#: src/preferences.py:281
+#: src/preferences.py:282
 msgid "Fullscreen"
 msgstr "全画面表示"
 
 #
 # File: src/preferences.py, line: 273
-#: src/preferences.py:283
+#: src/preferences.py:284
 msgid "Automatically hide all toolbars in fullscreen."
 msgstr "全画面表示の時全てのツールバーを隠す"
 
 #
 # File: src/preferences.py, line: 279
-#: src/preferences.py:289
+#: src/preferences.py:290
 msgid "Slideshow"
 msgstr "スライドショー"
 
 #
 # File: src/preferences.py, line: 280
-#: src/preferences.py:290
+#: src/preferences.py:291
 msgid "Slideshow delay (in seconds)"
 msgstr "スライドショーの間隔（秒単位）"
 
 #
 # File: src/preferences.py, line: 289
-#: src/preferences.py:299
+#: src/preferences.py:300
 msgid "Comment extensions"
 msgstr "コメントファイルの拡張子"
 
 #
 # File: src/preferences.py, line: 295
-#: src/preferences.py:305
-msgid "Treat all files found within archives, that have one of these file endings, as comments."
-msgstr "書庫ファイルの中にある、これらの拡張子を持つファイルを全てコメントとして扱います。"
+#: src/preferences.py:306
+msgid ""
+"Treat all files found within archives, that have one of these file endings, "
+"as comments."
+msgstr ""
+"書庫ファイルの中にある、これらの拡張子を持つファイルを全てコメントとして扱い"
+"ます。"
+
+#: src/preferences.py:309
+msgid "Rotation"
+msgstr ""
+
+#: src/preferences.py:311
+msgid "Automatically rotate images according to their metadata."
+msgstr ""
+
+#: src/preferences.py:316
+msgid ""
+"Automatically rotate images when an orientation is specified in the image "
+"metadata, such as in an Exif tag."
+msgstr ""
 
 #
 # File: src/preferences.py, line: 297
-#: src/preferences.py:307
+#: src/preferences.py:318
 msgid "Display"
 msgstr "表示"
 
@@ -1168,40 +1264,35 @@ msgstr "%d個のコメント"
 #
 # File: src/properties.py, line: 124
 # File: src/properties.py, line: 159
-#: src/properties.py:129
-#: src/properties.py:164
+#: src/properties.py:129 src/properties.py:164
 msgid "Location"
 msgstr "場所"
 
 #
 # File: src/properties.py, line: 126
 # File: src/properties.py, line: 160
-#: src/properties.py:131
-#: src/properties.py:165
+#: src/properties.py:131 src/properties.py:165
 msgid "Accessed"
 msgstr "最終アクセス時"
 
 #
 # File: src/properties.py, line: 128
 # File: src/properties.py, line: 162
-#: src/properties.py:133
-#: src/properties.py:167
+#: src/properties.py:133 src/properties.py:167
 msgid "Modified"
 msgstr "最終修正時"
 
 #
 # File: src/properties.py, line: 130
 # File: src/properties.py, line: 164
-#: src/properties.py:135
-#: src/properties.py:169
+#: src/properties.py:135 src/properties.py:169
 msgid "Permissions"
 msgstr "パーミッション"
 
 #
 # File: src/properties.py, line: 131
 # File: src/properties.py, line: 165
-#: src/properties.py:136
-#: src/properties.py:170
+#: src/properties.py:136 src/properties.py:170
 msgid "Owner"
 msgstr "所有者"
 
@@ -1219,81 +1310,90 @@ msgstr "画像"
 
 #
 # File: src/thumbremover.py, line: 22
-#: src/thumbremover.py:22
+#: src/thumbremover.py:24
 msgid "Thumbnail maintenance"
 msgstr "サムネイルの管理"
 
 #
 # File: src/thumbremover.py, line: 24
-#: src/thumbremover.py:24
+#: src/thumbremover.py:26
 msgid "Cleanup"
 msgstr "クリーンアップ"
 
 #
 # File: src/thumbremover.py, line: 36
-#: src/thumbremover.py:36
+#: src/thumbremover.py:38
 msgid "Cleanup thumbnails"
 msgstr "サムネイルをクリーンアップ"
 
 #
 # File: src/thumbremover.py, line: 46
-#: src/thumbremover.py:46
-msgid "Thumbnails for files (such as image files and comic book archives) are stored in your home directory. Many different applications use and create these thumbnails, but sometimes thumbnails remain even though the original files have been removed - wasting space. This dialog can cleanup your stored thumbnails by removing orphaned and outdated thumbnails."
-msgstr "画像ファイルや本の書庫ファイル等のファイルのサムネイルが、ホームディレクトリ以下に見つかりました。サムネイルは他のアプリケーションによっても作成され利用されますが、元のファイルが削除された後でもサムネイルが削除されずにディスクの無駄遣いになっていることがあります。このダイアログでは、古くて使われていないサムネイルをクリーンアップすることが出来ます。"
+#: src/thumbremover.py:48
+msgid ""
+"Thumbnails for files (such as image files and comic book archives) are "
+"stored in your home directory. Many different applications use and create "
+"these thumbnails, but sometimes thumbnails remain even though the original "
+"files have been removed - wasting space. This dialog can cleanup your stored "
+"thumbnails by removing orphaned and outdated thumbnails."
+msgstr ""
+"画像ファイルや本の書庫ファイル等のファイルのサムネイルが、ホームディレクトリ"
+"以下に見つかりました。サムネイルは他のアプリケーションによっても作成され利用"
+"されますが、元のファイルが削除された後でもサムネイルが削除されずにディスクの"
+"無駄遣いになっていることがあります。このダイアログでは、古くて使われていない"
+"サムネイルをクリーンアップすることが出来ます。"
 
 #
 # File: src/thumbremover.py, line: 58
-#: src/thumbremover.py:58
+#: src/thumbremover.py:60
 msgid "Thumbnail directory"
 msgstr "サムネイルのディレクトリ"
 
 #
 # File: src/thumbremover.py, line: 65
-#: src/thumbremover.py:65
+#: src/thumbremover.py:67
 msgid "Total number of thumbnails"
 msgstr "全サムネイル数"
 
 #
 # File: src/thumbremover.py, line: 68
 # File: src/thumbremover.py, line: 75
-#: src/thumbremover.py:68
-#: src/thumbremover.py:75
+#: src/thumbremover.py:70 src/thumbremover.py:77
 msgid "Calculating..."
 msgstr "計算中..."
 
 #
 # File: src/thumbremover.py, line: 72
-#: src/thumbremover.py:72
+#: src/thumbremover.py:74
 msgid "Total size of thumbnails"
 msgstr "全サムネイルのサイズ"
 
 #
 # File: src/thumbremover.py, line: 80
-#: src/thumbremover.py:80
+#: src/thumbremover.py:82
 msgid "Do you want to cleanup orphaned and outdated thumbnails now?"
 msgstr "古くて使われていないサムネイルをクリーンアップしますか？"
 
 #
 # File: src/thumbremover.py, line: 116
-#: src/thumbremover.py:116
+#: src/thumbremover.py:118
 msgid "Removing thumbnails"
 msgstr "サムネイルを削除中"
 
 #
 # File: src/thumbremover.py, line: 135
-#: src/thumbremover.py:135
+#: src/thumbremover.py:137
 msgid "Number of removed thumbnails"
 msgstr "削除されたサムネイル数"
 
 #
 # File: src/thumbremover.py, line: 142
-#: src/thumbremover.py:142
+#: src/thumbremover.py:144
 msgid "Total size of removed thumbnails"
 msgstr "削除されたサムネイルの合計サイズ"
 
 #
 # File: src/thumbremover.py, line: 193
-#: src/thumbremover.py:193
+#: src/thumbremover.py:195
 #, python-format
 msgid "Removed thumbnail for '%s'"
 msgstr "'%s'のサムネイルを削除しました"
@@ -1516,115 +1616,114 @@ msgstr "拡大する(_g)"
 
 #
 # File: src/ui.py, line: 101
-#: src/ui.py:101
+#: src/ui.py:103
 msgid "_Best fit mode"
 msgstr "ベストフィットモードにする(_B)"
 
 #
 # File: src/ui.py, line: 103
-#: src/ui.py:103
+#: src/ui.py:105
 msgid "Fit _width mode"
 msgstr "横幅を合わせる(_w)"
 
 #
 # File: src/ui.py, line: 105
-#: src/ui.py:105
+#: src/ui.py:107
 msgid "Fit _height mode"
 msgstr "縦幅を合わせる(_h)"
 
 #
 # File: src/ui.py, line: 107
-#: src/ui.py:107
+#: src/ui.py:109
 msgid "M_anual zoom mode"
 msgstr "手動でズームを調整する(_a)"
 
 #
 # File: src/ui.py, line: 113
-#: src/ui.py:113
+#: src/ui.py:115
 msgid "_About"
 msgstr "Comixについて(_A)"
 
 #
 # File: src/ui.py, line: 115
-#: src/ui.py:115
+#: src/ui.py:117
 msgid "_View comments..."
 msgstr "コメントを表示(_V)..."
 
 #
 # File: src/ui.py, line: 117
-#: src/ui.py:117
+#: src/ui.py:119
 msgid "_Edit archive..."
 msgstr "書庫ファイルを編集(_E)..."
 
 #
 # File: src/ui.py, line: 119
-#: src/ui.py:119
+#: src/ui.py:121
 msgid "_Open..."
 msgstr "開く(_O)..."
 
 #
 # File: src/ui.py, line: 121
-#: src/ui.py:121
+#: src/ui.py:123
 msgid "_Properties"
 msgstr "プロパティ(_P)"
 
 #
 # File: src/ui.py, line: 123
-#: src/ui.py:123
+#: src/ui.py:125
 msgid "_Enhance image..."
 msgstr "画像の調整(_E)..."
 
 #
 # File: src/ui.py, line: 126
-#: src/ui.py:126
+#: src/ui.py:128
 msgid "_Thumbnail maintenance..."
 msgstr "サムネイルの管理(_T)..."
 
 #
 # File: src/ui.py, line: 128
-#: src/ui.py:128
+#: src/ui.py:130
 msgid "Pr_eferences"
 msgstr "設定(_e)"
 
 #
 # File: src/ui.py, line: 132
-#: src/ui.py:132
+#: src/ui.py:134
 msgid "_Library..."
 msgstr "ライブラリ(_L)..."
 
 #
 # File: src/ui.py, line: 282
-#: src/ui.py:282
+#: src/ui.py:284
 msgid "First page"
 msgstr "最初のページ"
 
 #
 # File: src/ui.py, line: 284
-#: src/ui.py:284
+#: src/ui.py:286
 msgid "Previous page"
 msgstr "前のページ"
 
 #
 # File: src/ui.py, line: 285
-#: src/ui.py:285
+#: src/ui.py:287
 msgid "Next page"
 msgstr "次のページ"
 
 #
 # File: src/ui.py, line: 286
-#: src/ui.py:286
+#: src/ui.py:288
 msgid "Last page"
 msgstr "最後のページ"
 
 #
 # File: src/ui.py, line: 297
-#: src/ui.py:297
+#: src/ui.py:299
 msgid "Manga mode"
 msgstr "マンガのページ順に表示"
 
 #
 # File: src/ui.py, line: 298
-#: src/ui.py:298
+#: src/ui.py:300
 msgid "Magnifying glass"
 msgstr "拡大"
-

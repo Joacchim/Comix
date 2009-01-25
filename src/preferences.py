@@ -308,12 +308,12 @@ class _PreferencesDialog(gtk.Dialog):
 
         page.new_section(_('Rotation'))
         auto_rotate_button = gtk.CheckButton(
-            _('Automatically rotate images according to the EXIF data.'))
+            _('Automatically rotate images according to their metadata.'))
         auto_rotate_button.set_active(prefs['auto rotate from exif'])
         auto_rotate_button.connect('toggled', self._check_button_cb,
             'auto rotate from exif')
         auto_rotate_button.set_tooltip_text(
-            _('Automatically rotate images when an orientation is specified in the image meta data, such as in an EXIF tag.'))
+            _('Automatically rotate images when an orientation is specified in the image metadata, such as in an Exif tag.'))
         page.add_row(auto_rotate_button)
         notebook.append_page(page, gtk.Label(_('Display')))
         self.show_all()
