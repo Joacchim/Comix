@@ -124,6 +124,12 @@ class MainWindow(gtk.Window):
         elif prefs['default zoom mode'] == preferences.ZOOM_MODE_HEIGHT:
             self.actiongroup.get_action('fit_height_mode').activate()
         elif prefs['default zoom mode'] == preferences.ZOOM_MODE_MANUAL:
+            # This little ugly hack is to get the activate call on
+            # 'fit_manual_mode' to actually create an event (and callback).
+            # Since manual mode is the default selected radio button action
+            # it won't send an event if we activate it when it is already
+            # the selected one.
+            self.actiongroup.get_action('best_fit_mode').activate()
             self.actiongroup.get_action('fit_manual_mode').activate()
         if prefs['show toolbar']:
             prefs['show toolbar'] = False

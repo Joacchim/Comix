@@ -96,7 +96,9 @@ class MainUI(gtk.UIManager):
                 '<Control>S', None, window.slideshow.toggle),
             ('lens', 'comix-lens', _('Magnifying _glass'),
                 'g', None, window.glass.toggle)])
-
+        
+        # Note: Don't change the default value for the radio buttons unless
+        # also fixing the code for setting the correct one on start-up.
         self._actiongroup.add_radio_actions([
             ('best_fit_mode', 'comix-fitbest', _('_Best fit mode'),
                 'b', None, preferences.ZOOM_MODE_BEST),
@@ -314,7 +316,6 @@ class MainUI(gtk.UIManager):
                    'last_page')
         comment = ('comments',)
         general_sensitive = False
-        archive_sensitive = False
         comment_sensitive = False
 
         if self._window.file_handler.file_loaded:
