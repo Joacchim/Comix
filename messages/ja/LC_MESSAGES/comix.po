@@ -358,7 +358,7 @@ msgid ""
 "Please note that the only files that are automatically added to this list "
 "are those files in archives that Comix recognizes as comments."
 msgstr ""
-"注意：Comixがコメントファイルだと認識する書庫ファイル内のファイルのみが、自動"
+"注意：Comixがコメントファイルだと認識する書庫ファイル内のファイルだけが、自動"
 "的にこのリストに追加されます。"
 
 #
@@ -988,7 +988,7 @@ msgid ""
 "arrow keys. It takes three consecutive \"steps\" with the scroll wheel or "
 "the arrow keys for the pages to be flipped."
 msgstr ""
-"マウスやカーソルキーでのスクロールで、ページの端を3回連続して越えた時に次の"
+"マウスやカーソルキーでのスクロールで、ページの端に3回連続して触れた時に次の"
 "ページを表示します。"
 
 #
@@ -1049,7 +1049,7 @@ msgid ""
 "last page, or the previous archive when flipping past the first page."
 msgstr ""
 "書庫ファイルの最後のページの次に進もうとした時、同じディレクトリ内の次の書庫"
-"ページを、また最初のページの前に進もうとした時、前の書庫ページを自動的に開き"
+"ファイルを、また最初のページの前に進もうとした時、前の書庫ファイルを自動的に開き"
 "ます。"
 
 #
@@ -1230,17 +1230,18 @@ msgstr ""
 
 #: src/preferences.py:309
 msgid "Rotation"
-msgstr ""
+msgstr "回転"
 
 #: src/preferences.py:311
 msgid "Automatically rotate images according to their metadata."
-msgstr ""
+msgstr "メタデータに従い画像を自動的に回転する"
 
 #: src/preferences.py:316
 msgid ""
 "Automatically rotate images when an orientation is specified in the image "
 "metadata, such as in an Exif tag."
-msgstr ""
+msgstr "Exifタグのようなメタデータに画像の回転方向が示されている時は、"
+"自動的に画像を回転します。"
 
 #
 # File: src/preferences.py, line: 297
