@@ -90,6 +90,7 @@ class _AboutDialog(gtk.Dialog):
           ('GhePeU', _('Italian translation')),
           ('Arthur Nieuwland', _('Dutch translation')),
           ('Achraf Cherti', _('French translation')),
+          ('Benoît H.', _('French translation')),
           ('Kamil Leduchowski', _('Polish translation')),
           ('Darek Jakoniuk', _('Polish translation')),
           ('Paul Chatzidimitriou', _('Greek translation')),
