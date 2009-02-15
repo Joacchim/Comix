@@ -125,6 +125,8 @@ class _ComicFileChooserDialog(gtk.Dialog):
                 self.filechooser.set_current_folder(paths[0])
                 self.emit_stop_by_name('response')
                 return
+            if not paths:
+                return
             # FileChooser.set_do_overwrite_confirmation() doesn't seem to
             # work on our custom dialog, so we use a simple alternative.
             if (self._action == gtk.FILE_CHOOSER_ACTION_SAVE
@@ -192,12 +194,14 @@ class _MainFileChooserDialog(_ComicFileChooserDialog):
             pass
 
     def files_chosen(self, paths):
-        _close_main_filechooser_dialog()
         if paths:
             current_filter_index = self.filechooser.list_filters().index(
                 self.filechooser.get_filter())
             prefs['last filter in main filechooser'] = current_filter_index
+            _close_main_filechooser_dialog()
             self._window.file_handler.open_file(paths[0])
+        else:
+            _close_main_filechooser_dialog()
     
 class _LibraryFileChooserDialog(_ComicFileChooserDialog):
     
