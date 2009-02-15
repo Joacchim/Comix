@@ -184,11 +184,20 @@ class _MainFileChooserDialog(_ComicFileChooserDialog):
         self.add_filter(_('JPEG images'), ('image/jpeg',))
         self.add_filter(_('PNG images'), ('image/png',))
 
+        filters = self.filechooser.list_filters()
+        try:
+            self.filechooser.set_filter(filters[
+                prefs['last filter in main filechooser']])
+        except:
+            pass
+
     def files_chosen(self, paths):
         _close_main_filechooser_dialog()
         if paths:
+            current_filter_index = self.filechooser.list_filters().index(
+                self.filechooser.get_filter())
+            prefs['last filter in main filechooser'] = current_filter_index
             self._window.file_handler.open_file(paths[0])
-
     
 class _LibraryFileChooserDialog(_ComicFileChooserDialog):
     
@@ -217,6 +226,13 @@ class _LibraryFileChooserDialog(_ComicFileChooserDialog):
         collection_box.pack_start(self._comboentry, True, True)
         collection_box.show_all()
         self.filechooser.set_extra_widget(collection_box)
+
+        filters = self.filechooser.list_filters()
+        try:
+            self.filechooser.set_filter(filters[
+                prefs['last filter in library filechooser']])
+        except:
+            pass
     
     def _set_collection_name(self, *args):
         """Set the text in the ComboBoxEntry to the name of the current
@@ -235,6 +251,9 @@ class _LibraryFileChooserDialog(_ComicFileChooserDialog):
             else:
                 prefs['auto add books into collections'] = False
                 collection_name = None
+            current_filter_index = self.filechooser.list_filters().index(
+                self.filechooser.get_filter())
+            prefs['last filter in library filechooser'] = current_filter_index
             close_library_filechooser_dialog()
             self._library.add_books(paths, collection_name)
         else:
