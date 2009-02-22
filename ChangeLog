@@ -21,7 +21,7 @@ Comix 4.0.3
     display the library on startup.
     
     - Comix preferences and data now reside in the $XDG_CONFIG_HOME and
-    $XDG_DATA_HOME directories instead of on ~/.comix/.
+    $XDG_DATA_HOME directories instead of in ~/.comix/.
     
     - Some minor interface enhancements.
 
