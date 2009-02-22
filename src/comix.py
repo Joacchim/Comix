@@ -26,6 +26,7 @@ import sys
 import gettext
 import getopt
 
+import constants
 import deprecated
 import filehandler
 import locale
@@ -112,7 +113,12 @@ def run():
             fullscreen = True
         elif opt in ('-l', '--library'):
             show_library = True
-    
+
+    if not os.path.exists(constants.DATA_DIR):
+        os.makedirs(constants.DATA_DIR, 0700)
+    if not os.path.exists(constants.CONFIG_DIR):
+        os.makedirs(constants.CONFIG_DIR, 0700)
+    deprecated.move_files_to_xdg_dirs()
     preferences.read_preferences_file()
     icons.load_icons()
     

@@ -20,6 +20,9 @@ Comix 4.0.3
     - Added command-line arguments to start Comix in fullscreen mode and to
     display the library on startup.
     
+    - Comix preferences and data now reside in the $XDG_CONFIG_HOME and
+    $XDG_DATA_HOME directories instead of on ~/.comix/.
+    
     - Some minor interface enhancements.
 
 Comix 4.0.2

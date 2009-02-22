@@ -67,7 +67,7 @@ prefs = {
     'lib window width': gtk.gdk.screen_get_default().get_width() * 3 // 4
 }
 
-_config_path = os.path.join(constants.COMIX_DIR, 'preferences.pickle')
+_config_path = os.path.join(constants.CONFIG_DIR, 'preferences.pickle')
 _dialog = None
 
 

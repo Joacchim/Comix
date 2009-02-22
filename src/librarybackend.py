@@ -15,8 +15,8 @@ import constants
 import encoding
 import thumbnail
 
-_db_path = os.path.join(constants.COMIX_DIR, 'library.db')
-_cover_dir = os.path.join(constants.COMIX_DIR, 'library_covers')
+_db_path = os.path.join(constants.DATA_DIR, 'library.db')
+_cover_dir = os.path.join(constants.DATA_DIR, 'library_covers')
 
 
 class LibraryBackend:
@@ -26,8 +26,6 @@ class LibraryBackend:
     """
 
     def __init__(self):
-        if not os.path.exists(constants.COMIX_DIR):
-            os.mkdir(constants.COMIX_DIR)
         
         def row_factory(cursor, row):
             """Return rows as sequences only when they have more than

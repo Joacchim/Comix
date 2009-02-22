@@ -189,7 +189,7 @@ class MainWindow(gtk.Window):
 
         self.ui_manager.set_sensitivities()
         self.show()
-        if open_path:
+        if open_path is not None:
             self.file_handler.open_file(open_path, open_page)
         if show_library:
             self.actiongroup.get_action('library').activate()
@@ -769,8 +769,6 @@ class MainWindow(gtk.Window):
             prefs['path to last file'] = ''
             prefs['page of last file'] = 1
         self.file_handler.cleanup()
-        if not os.path.exists(constants.COMIX_DIR):
-            os.mkdir(constants.COMIX_DIR)
         preferences.write_preferences_file()
         self.ui_manager.bookmarks.write_bookmarks_file()
         # This hack is to avoid Python issue #1856.

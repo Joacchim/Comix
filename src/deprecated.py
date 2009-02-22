@@ -34,6 +34,26 @@ class _CleanerDialog(gtk.MessageDialog):
         self.destroy()
 
 
+def move_files_to_xdg_dirs():
+    """Move config and data files from the old Comix directory (~/.comix/)
+    to the XDG config and data directories.
+    """
+    old_dir = os.path.join(constants.HOME_DIR, '.comix')
+    to_be_moved = (
+        ('preferences.pickle', constants.CONFIG_DIR),
+        ('bookmarks.pickle', constants.DATA_DIR),
+        ('library.db', constants.DATA_DIR),
+        ('library_covers', constants.DATA_DIR))
+    for name, new_dir in to_be_moved:
+        if os.path.exists(os.path.join(old_dir, name)) and not os.path.exists(
+                os.path.join(new_dir, name)):
+            try:
+                os.rename(os.path.join(old_dir, name),
+                    os.path.join(new_dir, name))
+            except Exception:
+                pass
+
+
 def check_for_deprecated_files(window):
     """Check for a number of deprecated files created by older versions of
     Comix. If any are found, we ask the user through a dilaog if they
@@ -41,15 +61,7 @@ def check_for_deprecated_files(window):
     """
     deprecated = (
         os.path.join(constants.HOME_DIR, '.comixrc'),
-        os.path.join(constants.COMIX_DIR, 'archive_thumbnails'),
-        os.path.join(constants.COMIX_DIR, 'bookmarks'),
-        os.path.join(constants.COMIX_DIR, 'bookmarks_data'),
-        os.path.join(constants.COMIX_DIR, 'comixrc'),
-        os.path.join(constants.COMIX_DIR, 'library'),
-        os.path.join(constants.COMIX_DIR, 'menu_thumbnails'),
-        os.path.join(constants.COMIX_DIR, 'preferences_data'),
-        os.path.join(constants.COMIX_DIR, 'recent_files'),
-        os.path.join(constants.COMIX_DIR, 'recent_files_data'))
+        os.path.join(constants.HOME_DIR, '.comix'))
     found = []
     for path in deprecated:
         if os.path.exists(path):
