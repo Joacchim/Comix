@@ -30,7 +30,8 @@ class MainWindow(gtk.Window):
     program when closed.
     """
 
-    def __init__(self):
+    def __init__(self, fullscreen=False, show_library=False, open_path=None,
+            open_page=1):
         gtk.Window.__init__(self, gtk.WINDOW_TOPLEVEL)
 
         # ----------------------------------------------------------------
@@ -113,7 +114,7 @@ class MainWindow(gtk.Window):
 
         if prefs['default double page']:
             self.actiongroup.get_action('double_page').activate()
-        if prefs['default fullscreen']:
+        if prefs['default fullscreen'] or fullscreen:
             self.actiongroup.get_action('fullscreen').activate()
         if prefs['default manga mode']:
             self.actiongroup.get_action('manga_mode').activate()
@@ -188,6 +189,10 @@ class MainWindow(gtk.Window):
 
         self.ui_manager.set_sensitivities()
         self.show()
+        if open_path:
+            self.file_handler.open_file(open_path, open_page)
+        if show_library:
+            self.actiongroup.get_action('library').activate()
 
     def draw_image(self, at_bottom=False, scroll=True):
         """Draw the current page(s) and update the titlebar and statusbar.

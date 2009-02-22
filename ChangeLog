@@ -7,8 +7,6 @@ Comix 4.0.3
     - Added a feature to automatically rotate images according to their
     EXIF tags.
     
-    - Comix now accepts directories as command-line arguments.
-    
     - Fixed a bug that caused drag-n-drop actions from KDE applications to
     not work properly.
     
@@ -16,6 +14,11 @@ Comix 4.0.3
     
     - Fixed a bug that caused the manual zoom mode to not work as expected
     when set as the default mode.
+    
+    - Comix now accepts directories as command-line arguments.
+    
+    - Added command-line arguments to start Comix in fullscreen mode and to
+    display the library on startup.
     
     - Some minor interface enhancements.
 

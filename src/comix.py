@@ -24,6 +24,7 @@ Copyright (C) 2005-2009 Pontus Ekberg
 import os
 import sys
 import gettext
+import getopt
 
 import deprecated
 import filehandler
@@ -32,7 +33,7 @@ import main
 import icons
 import preferences
 
-# Check for PyGTK and PIL dependencies.
+#Check for PyGTK and PIL dependencies.
 try:
     import pygtk
     pygtk.require('2.0')
@@ -40,7 +41,8 @@ try:
     assert gtk.gtk_version >= (2, 12, 0)
     assert gtk.pygtk_version >= (2, 12, 0)
 except AssertionError:
-    print "You don't have the required versions of GTK+ and/or PyGTK installed."
+    print "You don't have the required versions of GTK+ and/or PyGTK",
+    print 'installed.'
     print 'Installed GTK+ version is: %s' % (
         '.'.join([str(n) for n in gtk.gtk_version]))
     print 'Required GTK+ version is: 2.12.0 or higher\n'
@@ -57,20 +59,34 @@ try:
     import Image
     assert Image.VERSION >= '1.1.5'
 except AssertionError:
-    print "You don't have the required version of the Python Imaging Library"
-    print '(PIL) installed.'
+    print "You don't have the required version of the Python Imaging",
+    print 'Library (PIL) installed.'
     print 'Installed PIL version is: %s' % Image.VERSION
     print 'Required PIL version is: 1.1.5 or higher'
     sys.exit(1)
 except ImportError:
     print 'Python Imaging Library (PIL) 1.1.5 or higher is required.'
-    print 'No version of the Python Imaging Library was found on your system.'
+    print 'No version of the Python Imaging Library was found on your',
+    print 'system.'
     sys.exit(1)
 
 
-if __name__ == '__main__':
-    # Use gettext translations as found in the source dir, otherwise
-    # based on the install path.
+def print_help():
+    """Print the command-line help text and exit."""
+    print 'Usage:'
+    print '  comix [OPTION...] [PATH]'
+    print '\nView images and comic book archives.\n'
+    print 'Options:'
+    print '  -h, --help              Show this help and exit.'
+    print '  -f, --fullscreen        Start the application in fullscreen mode.'
+    print '  -l, --library           Show the library on startup.'
+    sys.exit(1)
+
+
+def run():
+    """Run the program."""
+    # Use gettext translations as found in the source dir, otherwise based on
+    # the install path.
     exec_path = os.path.abspath(sys.argv[0])
     base_dir = os.path.dirname(os.path.dirname(exec_path))
     if os.path.isdir(os.path.join(base_dir, 'messages')):
@@ -79,26 +95,51 @@ if __name__ == '__main__':
     else:
         gettext.install('comix', os.path.join(base_dir, 'share/locale'),
             unicode=True)
+
+    fullscreen = False
+    show_library = False
+    open_path = None
+    open_page = 1
+    try:
+        opts, args = getopt.gnu_getopt(sys.argv[1:], 'fhl',
+            ['fullscreen', 'help', 'library'])
+    except getopt.GetoptError:
+        print_help()
+    for opt, value in opts:
+        if opt in ('-h', '--help'):
+            print_help()
+        elif opt in ('-f', '--fullscreen'):
+            fullscreen = True
+        elif opt in ('-l', '--library'):
+            show_library = True
+    
     preferences.read_preferences_file()
     icons.load_icons()
-    window = main.MainWindow()
-    if len(sys.argv) >= 2:
-        param_path = os.path.abspath(sys.argv[1])
+    
+    if len(args) >= 1:
+        param_path = os.path.abspath(args[0])
         if os.path.isdir(param_path):
             dir_files = os.listdir(param_path)
             dir_files.sort(locale.strcoll)
             for filename in dir_files:
                 full_path = os.path.join(param_path, filename)
                 if filehandler.is_image_file(full_path):
-                    window.file_handler.open_file(full_path)
+                    open_path = full_path
                     break
         else:
-            window.file_handler.open_file(param_path)
+            open_path = param_path
     elif preferences.prefs['auto load last file']:
-        window.file_handler.open_file(preferences.prefs['path to last file'],
-            preferences.prefs['page of last file'])
+        open_path = preferences.prefs['path to last file']
+        open_page = preferences.prefs['page of last file']
+    
+    window = main.MainWindow(fullscreen=fullscreen, show_library=show_library,
+        open_path=open_path, open_page=open_page)
     deprecated.check_for_deprecated_files(window)
     try:
         gtk.main()
     except KeyboardInterrupt: # Will not always work because of threading.
         window.terminate_program()
+
+
+if __name__ == '__main__':
+    run()
