@@ -195,9 +195,12 @@ class _MainFileChooserDialog(_ComicFileChooserDialog):
 
     def files_chosen(self, paths):
         if paths:
-            current_filter_index = self.filechooser.list_filters().index(
-                self.filechooser.get_filter())
-            prefs['last filter in main filechooser'] = current_filter_index
+            try: # For some reason this fails sometimes (GTK+ bug?)
+                filter_index = self.filechooser.list_filters().index(
+                    self.filechooser.get_filter())
+                prefs['last filter in main filechooser'] = filter_index
+            except:
+                pass
             _close_main_filechooser_dialog()
             self._window.file_handler.open_file(paths[0])
         else:
@@ -235,7 +238,7 @@ class _LibraryFileChooserDialog(_ComicFileChooserDialog):
         try:
             self.filechooser.set_filter(filters[
                 prefs['last filter in library filechooser']])
-        except:
+        except Exception:
             self.filechooser.set_filter(filters[1])
     
     def _set_collection_name(self, *args):
@@ -255,9 +258,12 @@ class _LibraryFileChooserDialog(_ComicFileChooserDialog):
             else:
                 prefs['auto add books into collections'] = False
                 collection_name = None
-            current_filter_index = self.filechooser.list_filters().index(
-                self.filechooser.get_filter())
-            prefs['last filter in library filechooser'] = current_filter_index
+            try: # For some reason this fails sometimes (GTK+ bug?)
+                filter_index = self.filechooser.list_filters().index(
+                    self.filechooser.get_filter())
+                prefs['last filter in library filechooser'] = filter_index
+            except Exception:
+                pass
             close_library_filechooser_dialog()
             self._library.add_books(paths, collection_name)
         else:
