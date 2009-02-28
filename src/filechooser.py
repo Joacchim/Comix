@@ -191,7 +191,7 @@ class _MainFileChooserDialog(_ComicFileChooserDialog):
             self.filechooser.set_filter(filters[
                 prefs['last filter in main filechooser']])
         except:
-            pass
+            self.filechooser.set_filter(filters[0])
 
     def files_chosen(self, paths):
         if paths:
@@ -236,7 +236,7 @@ class _LibraryFileChooserDialog(_ComicFileChooserDialog):
             self.filechooser.set_filter(filters[
                 prefs['last filter in library filechooser']])
         except:
-            pass
+            self.filechooser.set_filter(filters[1])
     
     def _set_collection_name(self, *args):
         """Set the text in the ComboBoxEntry to the name of the current
