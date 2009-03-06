@@ -26,14 +26,6 @@ import sys
 import gettext
 import getopt
 
-import constants
-import deprecated
-import filehandler
-import locale
-import main
-import icons
-import preferences
-
 #Check for PyGTK and PIL dependencies.
 try:
     import pygtk
@@ -70,6 +62,14 @@ except ImportError:
     print 'No version of the Python Imaging Library was found on your',
     print 'system.'
     sys.exit(1)
+
+import constants
+import deprecated
+import filehandler
+import locale
+import main
+import icons
+import preferences
 
 
 def print_help():
