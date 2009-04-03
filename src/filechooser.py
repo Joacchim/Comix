@@ -191,6 +191,12 @@ class _MainFileChooserDialog(_ComicFileChooserDialog):
 
         filters = self.filechooser.list_filters()
         try:
+            # When setting this to the first filter ("All files"), this
+            # fails on some GTK+ versions and sets the filter to "blank".
+            # The effect is the same though (i.e. display all files), and
+            # there is no solution that I know of, so we'll have to live
+            # with it. It only happens the second time a dialog is created
+            # though, which is very strange.
             self.filechooser.set_filter(filters[
                 prefs['last filter in main filechooser']])
         except:
@@ -239,6 +245,12 @@ class _LibraryFileChooserDialog(_ComicFileChooserDialog):
 
         filters = self.filechooser.list_filters()
         try:
+            # When setting this to the first filter ("All files"), this
+            # fails on some GTK+ versions and sets the filter to "blank".
+            # The effect is the same though (i.e. display all files), and
+            # there is no solution that I know of, so we'll have to live
+            # with it. It only happens the second time a dialog is created
+            # though, which is very strange.
             self.filechooser.set_filter(filters[
                 prefs['last filter in library filechooser']])
         except Exception:
