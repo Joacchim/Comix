@@ -173,8 +173,8 @@ class Extractor:
                     print '! Non-local tar member:', name, '\n'
             elif self._type == RAR:
                 if _rar_exec is not None:
-                    proc = process.Process([_rar_exec, 'x', '-p-', '-o-',
-                        '-inul', '--', self._src, name, self._dst])
+                    proc = process.Process([_rar_exec, 'x', '-kb', '-p-',
+                        '-o-', '-inul', '--', self._src, name, self._dst])
                     proc.spawn()
                     proc.wait()
                 else:
@@ -276,6 +276,7 @@ class Packer:
         zfile.close()
         self._packing_successful = True
 
+
 def archive_mime_type(path):
     """Return the archive type of <path> or None for non-archives."""
     try:
@@ -324,6 +325,7 @@ def get_archive_info(path):
     num_pages = len(filter(image_re.search, files))
     size = os.stat(path).st_size
     return (mime, num_pages, size)
+
 
 def _get_rar_exec():
     """Return the name of the RAR file extractor executable, or None if
