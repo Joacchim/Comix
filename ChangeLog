@@ -1,3 +1,13 @@
+Comix 4.0.4
+    
+    - Applied a workaround for a bug that caused the "Open" dialog to crash
+    when trying to open a file when the file-type filter had been reset to
+    blank. This bug seems to only appear on some systems, possibly depending
+    on the installed GTK+ version.
+    
+    - Fixed a bug that caused the error message for unfulfilled dependencies
+    to not be printed properly.
+
 Comix 4.0.3
     
     - Hungarian translation updated by Ernő Drabik.
