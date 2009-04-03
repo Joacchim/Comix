@@ -90,13 +90,16 @@ class _ComicFileChooserDialog(gtk.Dialog):
             ('application/x-tar', 'application/x-gzip',
             'application/x-bzip2', 'application/x-cbt'))
         
-        if self.__class__._last_activated_file is not None and os.path.isfile(
-            self.__class__._last_activated_file):
+        try:
+            if (self.__class__._last_activated_file is not None
+                    and os.path.isfile(self.__class__._last_activated_file)):
                 self.filechooser.set_filename(
                     self.__class__._last_activated_file)
-        elif os.path.isdir(prefs['path of last browsed in filechooser']):
-            self.filechooser.set_current_folder(
-                prefs['path of last browsed in filechooser'])
+            elif os.path.isdir(prefs['path of last browsed in filechooser']):
+                self.filechooser.set_current_folder(
+                    prefs['path of last browsed in filechooser'])
+        except Exception: # E.g. broken prefs values.
+            pass
         self.show_all()
 
     def add_filter(self, name, mimes):
