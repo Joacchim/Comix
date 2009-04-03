@@ -1,12 +1,16 @@
 Comix 4.0.4
     
     - Applied a workaround for a bug that caused the "Open" dialog to crash
-    when trying to open a file when the file-type filter had been reset to
-    blank. This bug seems to only appear on some systems, possibly depending
+    when trying to open a file when the file type filter had been reset to
+    blank. This bug seems to only appear on some systems, probably depending
     on the installed GTK+ version.
     
     - Fixed a bug that caused the error message for unfulfilled dependencies
     to not be printed properly.
+    
+    - The rar/unrar program is now invoked in such a way as to keep broken
+    or incomplete files extracted from RAR archives, since Comix might be
+    able to display parts of these files anyway.
 
 Comix 4.0.3
     
