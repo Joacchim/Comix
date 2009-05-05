@@ -20,8 +20,7 @@ msgstr ""
 "X-Poedit-Country: TAIWAN\n"
 "X-Poedit-SourceCharset: utf-8\n"
 
-#: src/about.py:19
-#: src/about.py:68
+#: src/about.py:19 src/about.py:68
 msgid "About"
 msgstr "關於"
 
@@ -31,7 +30,8 @@ msgstr "Comix 是一個特別設計來觀看漫畫書的圖片檢視器。"
 
 #: src/about.py:58
 msgid "It reads ZIP, RAR and tar archives, as well as plain image files."
-msgstr "可以讀取圖片檔，又能讀取 ZIP、RAR、tar 壓縮檔 (含以 gzip、bzip2 壓縮的)。"
+msgstr ""
+"可以讀取圖片檔，又能讀取 ZIP、RAR、tar 壓縮檔 (含以 gzip、bzip2 壓縮的)。"
 
 #: src/about.py:60
 msgid "Comix is licensed under the GNU General Public License."
@@ -41,8 +41,7 @@ msgstr "Comix 係採用 GNU 通用公共授權條款。"
 msgid "Developer"
 msgstr "開發者"
 
-#: src/about.py:84
-#: src/about.py:85
+#: src/about.py:84 src/about.py:85
 msgid "Simplified Chinese translation"
 msgstr "簡體中文翻譯"
 
@@ -58,8 +57,7 @@ msgstr "巴西葡萄牙語翻譯"
 msgid "German translation and Nautilus thumbnailer"
 msgstr "德語翻譯與 Nautilus 縮圖功能作者"
 
-#: src/about.py:89
-#: src/about.py:90
+#: src/about.py:89 src/about.py:90
 msgid "Italian translation"
 msgstr "義大利語翻譯"
 
@@ -67,65 +65,67 @@ msgstr "義大利語翻譯"
 msgid "Dutch translation"
 msgstr "荷蘭語翻譯"
 
-#: src/about.py:92
+#: src/about.py:92 src/about.py:93
 msgid "French translation"
 msgstr "法語翻譯"
 
-#: src/about.py:93
-#: src/about.py:94
+#: src/about.py:94 src/about.py:95
 msgid "Polish translation"
 msgstr "波蘭語翻譯"
 
-#: src/about.py:95
+#: src/about.py:96
 msgid "Greek translation"
 msgstr "希臘語翻譯"
 
-#: src/about.py:96
+#: src/about.py:97
 msgid "Catalan translation"
 msgstr "加泰羅尼亞語翻譯"
 
-#: src/about.py:97
-#: src/about.py:98
+#: src/about.py:98 src/about.py:99
 msgid "Traditional Chinese translation"
 msgstr "正體中文翻譯"
 
-#: src/about.py:99
+#: src/about.py:100
 msgid "Japanese translation"
 msgstr "日語翻譯"
 
-#: src/about.py:100
+#: src/about.py:101
 msgid "Hungarian translation"
 msgstr "匈牙利語翻譯"
 
-#: src/about.py:101
+#: src/about.py:102
 msgid "Russian translation"
 msgstr "俄語翻譯"
 
-#: src/about.py:102
+#: src/about.py:103
 msgid "Croatian translation"
 msgstr "克羅埃西亞語翻譯"
 
-#: src/about.py:103
+#: src/about.py:104
 msgid "Korean translation"
 msgstr "韓語翻譯"
 
-#: src/about.py:104
+#: src/about.py:105
 msgid "Persian translation"
 msgstr "波斯語翻譯"
 
-#: src/about.py:105
+#: src/about.py:106
 msgid "Indonesian translation"
 msgstr "印尼語翻譯"
 
-#: src/about.py:106
+#: src/about.py:107
 msgid "Czech translation"
 msgstr "捷克語翻譯"
 
-#: src/about.py:107
+#: src/about.py:108
+msgid "Ukrainian translation"
+msgstr ""
+
+#: src/about.py:109
 msgid "Icon design"
 msgstr "圖示設計"
 
-#: src/about.py:114
+#: src/about.py:116
 msgid "Credits"
 msgstr "致謝"
 
@@ -134,26 +134,28 @@ msgid "Could not find RAR file extractor!"
 msgstr "無法找到 RAR 檔解壓縮程式！"
 
 #: src/archive.py:68
-msgid "You need either the <i>rar</i> or the <i>unrar</i> program installed in order to read RAR (.cbr) files."
+msgid ""
+"You need either the <i>rar</i> or the <i>unrar</i> program installed in "
+"order to read RAR (.cbr) files."
 msgstr "您需要安裝 <i>rar</i> 或 <i>unrar</i> 程式，才能讀取 RAR (.cbr) 檔。"
 
-#: src/archive.py:305
+#: src/archive.py:306
 msgid "ZIP archive"
 msgstr "ZIP 壓縮檔"
 
-#: src/archive.py:306
+#: src/archive.py:307
 msgid "Tar archive"
 msgstr "TAR 壓縮檔"
 
-#: src/archive.py:307
+#: src/archive.py:308
 msgid "Gzip compressed tar archive"
 msgstr "以 GZIP 壓縮的 tar 壓縮檔"
 
-#: src/archive.py:308
+#: src/archive.py:309
 msgid "Bzip2 compressed tar archive"
 msgstr "以 BZIP2 壓縮的 tar 壓縮檔"
 
-#: src/archive.py:309
+#: src/archive.py:310
 msgid "RAR archive"
 msgstr "RAR 壓縮檔"
 
@@ -174,15 +176,15 @@ msgid "Clear all bookmarks?"
 msgstr "要清除所有書籤嗎？"
 
 #: src/bookmark.py:80
-msgid "All stored bookmarks will be removed. Are you sure that you want to continue?"
+msgid ""
+"All stored bookmarks will be removed. Are you sure that you want to continue?"
 msgstr "所有保存的書籤都會被移除，您確定要這樣做嗎？"
 
 #: src/bookmark.py:230
 msgid "Edit bookmarks"
 msgstr "編輯書籤"
 
-#: src/bookmark.py:256
-#: src/edit.py:270
+#: src/bookmark.py:256 src/edit.py:270
 msgid "Name"
 msgstr "名稱"
 
@@ -190,8 +192,7 @@ msgstr "名稱"
 msgid "Page"
 msgstr "頁次"
 
-#: src/comment.py:16
-#: src/preferences.py:299
+#: src/comment.py:16 src/preferences.py:301
 msgid "Comments"
 msgstr "註解"
 
@@ -205,8 +206,15 @@ msgid "There are deprecated files left on your computer."
 msgstr "您的電腦中有一些已不再使用的檔案。"
 
 #: src/deprecated.py:22
-msgid "Some old files (that were used for storing preferences, the library, bookmarks etc. for older versions of Comix) were found on your computer. If you do not plan on using the older versions of Comix again, you should remove these files in order to save some disk space. Do you want these files to be removed for you now?"
-msgstr "在您的電腦中有一些檔案，是舊版本 Comix 的設定檔、收藏庫、書籤等。如果您以後不會再使用舊版 Comix，可以刪除它們以節省磁碟空間。您想要現在就刪除這些檔案嗎？"
+msgid ""
+"Some old files (that were used for storing preferences, the library, "
+"bookmarks etc. for older versions of Comix) were found on your computer. If "
+"you do not plan on using the older versions of Comix again, you should "
+"remove these files in order to save some disk space. Do you want these files "
+"to be removed for you now?"
+msgstr ""
+"在您的電腦中有一些檔案，是舊版本 Comix 的設定檔、收藏庫、書籤等。如果您以後不"
+"會再使用舊版 Comix，可以刪除它們以節省磁碟空間。您想要現在就刪除這些檔案嗎？"
 
 #: src/edit.py:29
 msgid "Edit archive"
@@ -236,14 +244,16 @@ msgstr "原始檔案未被移除。"
 msgid "Archives are stored as ZIP files."
 msgstr "已儲存 ZIP 壓縮檔。"
 
-#: src/edit.py:170
-#: src/edit.py:288
+#: src/edit.py:170 src/edit.py:288
 msgid "Remove from archive"
 msgstr "從壓縮檔移除"
 
 #: src/edit.py:258
-msgid "Please note that the only files that are automatically added to this list are those files in archives that Comix recognizes as comments."
-msgstr "請注意：只有壓縮檔內被 Comix 認為是註解的檔案，才會被自動加入這個清單。"
+msgid ""
+"Please note that the only files that are automatically added to this list "
+"are those files in archives that Comix recognizes as comments."
+msgstr ""
+"請注意：只有壓縮檔內被 Comix 認為是註解的檔案，才會被自動加入這個清單。"
 
 #: src/edit.py:273
 msgid "Size"
@@ -278,11 +288,12 @@ msgid "Automatically adjust contrast."
 msgstr "自動調整對比。"
 
 #: src/enhance.py:128
-msgid "Automatically adjust contrast (both lightness and darkness), separately for each colour band."
+msgid ""
+"Automatically adjust contrast (both lightness and darkness), separately for "
+"each colour band."
 msgstr "分別為每個色帶自動調整明亮度對比。"
 
-#: src/filechooser.py:38
-#: src/library.py:490
+#: src/filechooser.py:38 src/library.py:490
 msgid "Open"
 msgstr "開啟"
 
@@ -310,31 +321,28 @@ msgstr "RAR 壓縮檔"
 msgid "Tar archives"
 msgstr "TAR 壓縮檔"
 
-#: src/filechooser.py:134
+#: src/filechooser.py:139
 #, python-format
 msgid "A file named '%s' already exists. Do you want to replace it?"
 msgstr "檔案 %s 已存在，您要替換掉它嗎？"
 
-#: src/filechooser.py:137
+#: src/filechooser.py:142
 msgid "Replacing it will overwrite its contents."
 msgstr "替換後將會覆蓋掉原有內容。"
 
-#: src/filechooser.py:182
-#: src/filechooser.py:260
+#: src/filechooser.py:187 src/filechooser.py:304
 msgid "All images"
 msgstr "所有圖片"
 
-#: src/filechooser.py:184
-#: src/filechooser.py:262
+#: src/filechooser.py:189 src/filechooser.py:306
 msgid "JPEG images"
 msgstr "JPEG 圖片"
 
-#: src/filechooser.py:185
-#: src/filechooser.py:263
+#: src/filechooser.py:190 src/filechooser.py:307
 msgid "PNG images"
 msgstr "PNG 圖片"
 
-#: src/filechooser.py:206
+#: src/filechooser.py:231
 msgid "Automatically add the books to this collection"
 msgstr "自動將此書籍加入收藏"
 
@@ -367,8 +375,7 @@ msgstr "%s 內沒有圖片"
 msgid "Unknown filetype"
 msgstr "不明的檔案類型"
 
-#: src/librarybackend.py:273
-#: src/librarybackend.py:275
+#: src/librarybackend.py:271 src/librarybackend.py:273
 msgid "(Copy)"
 msgstr "(複製)"
 
@@ -397,7 +404,9 @@ msgid "Remove collection from the library?"
 msgstr "要從收藏庫中移除收藏嗎？"
 
 #: src/library.py:233
-msgid "The selected collection will be removed from the library (but the books and subcollections in it will remain). Are you sure that you want to continue?"
+msgid ""
+"The selected collection will be removed from the library (but the books and "
+"subcollections in it will remain). Are you sure that you want to continue?"
 msgstr "這些收藏將從收藏庫中移除，但書籍與子收藏仍會留著。您確定要繼續嗎？"
 
 #: src/library.py:251
@@ -413,8 +422,7 @@ msgstr "請輸入此收藏的新名稱。"
 msgid "Could not change the name to '%s'."
 msgstr "無法變更名稱為「%s」。"
 
-#: src/library.py:275
-#: src/library.py:882
+#: src/library.py:275 src/library.py:882
 msgid "A collection by that name already exists."
 msgstr "已有相同名稱的收藏。"
 
@@ -428,7 +436,9 @@ msgstr "Root"
 
 #: src/library.py:386
 #, python-format
-msgid "Put the collection '%(subcollection)s' in the collection '%(supercollection)s'."
+msgid ""
+"Put the collection '%(subcollection)s' in the collection '%(supercollection)"
+"s'."
 msgstr "將收藏 %(subcollection)s 放到 %(supercollection)s 。"
 
 #: src/library.py:407
@@ -438,7 +448,8 @@ msgstr "將書籍加入 %s。"
 
 #: src/library.py:411
 #, python-format
-msgid "Move books from '%(source collection)s' to '%(destination collection)s'."
+msgid ""
+"Move books from '%(source collection)s' to '%(destination collection)s'."
 msgstr "將書籍從 %(source collection)s 移到 %(destination collection)s 。"
 
 #: src/library.py:493
@@ -459,7 +470,9 @@ msgid "Remove books from the library?"
 msgstr "從此收藏庫移除書籍？"
 
 #: src/library.py:600
-msgid "The selected books will be removed from the library (but the original files will be untouched). Are you sure that you want to continue?"
+msgid ""
+"The selected books will be removed from the library (but the original files "
+"will be untouched). Are you sure that you want to continue?"
 msgstr "這些書籍將從收藏庫中移除，但原始檔案不會受影響。您確定要繼續嗎？"
 
 #: src/library.py:610
@@ -472,7 +485,9 @@ msgid "Search"
 msgstr "搜尋"
 
 #: src/library.py:775
-msgid "Display only those books that have the specified text string in their full path. The search is not case sensitive."
+msgid ""
+"Display only those books that have the specified text string in their full "
+"path. The search is not case sensitive."
 msgstr "只顯示完整路徑中有指定關鍵字的書籍，搜尋時不區分大小寫。"
 
 #: src/library.py:777
@@ -499,8 +514,7 @@ msgstr "加入新的空白收藏。"
 msgid "Open the selected book."
 msgstr "開啟選取的書籍。"
 
-#: src/library.py:833
-#: src/properties.py:118
+#: src/library.py:833 src/properties.py:118
 #, python-format
 msgid "%d pages"
 msgstr "%d 頁"
@@ -535,264 +549,304 @@ msgstr "已新增書籍"
 msgid "Adding '%s'..."
 msgstr "正在新增 %s ..."
 
-#: src/main.py:699
+#: src/main.py:704
 msgid "SLIDESHOW"
 msgstr "投影片放映"
 
-#: src/preferences.py:80
+#: src/preferences.py:82
 msgid "Preferences"
 msgstr "偏好設定"
 
-#: src/preferences.py:95
+#: src/preferences.py:97
 msgid "Background"
 msgstr "背景"
 
-#: src/preferences.py:97
+#: src/preferences.py:99
 msgid "Use this colour as background"
 msgstr "使用此顏色當背景"
 
-#: src/preferences.py:99
+#: src/preferences.py:101
 msgid "Always use this selected colour as the background colour."
 msgstr "使用選取的顏色當背景顏色。"
 
-#: src/preferences.py:104
+#: src/preferences.py:106
 msgid "Use dynamic background colour."
 msgstr "使用動態背景顏色。"
 
-#: src/preferences.py:108
+#: src/preferences.py:110
 msgid "Automatically pick a background colour that fits the viewed image."
 msgstr "自動挑選適合觀看中圖片的背景顏色。"
 
-#: src/preferences.py:111
+#: src/preferences.py:113
 msgid "Thumbnails"
 msgstr "縮圖"
 
-#: src/preferences.py:112
+#: src/preferences.py:114
 msgid "Thumbnail size (in pixels)"
 msgstr "縮圖大小 (像素)"
 
-#: src/preferences.py:119
+#: src/preferences.py:121
 msgid "Show page numbers on thumbnails."
 msgstr "在縮圖上顯示頁碼。"
 
-#: src/preferences.py:126
+#: src/preferences.py:128
 msgid "Magnifying Glass"
 msgstr "放大鏡"
 
-#: src/preferences.py:127
+#: src/preferences.py:129
 msgid "Magnifying glass size (in pixels)"
 msgstr "放大鏡大小 (像素)"
 
-#: src/preferences.py:133
-msgid "Set the size of the magnifying glass. It is a square with a side of this many pixels."
+#: src/preferences.py:135
+msgid ""
+"Set the size of the magnifying glass. It is a square with a side of this "
+"many pixels."
 msgstr "設定放大鏡的大小，請填入正方形的單邊長。"
 
-#: src/preferences.py:135
+#: src/preferences.py:137
 msgid "Magnification factor"
 msgstr "放大倍率"
 
-#: src/preferences.py:142
+#: src/preferences.py:144
 msgid "Set the magnification factor of the magnifying glass."
 msgstr "設定放大鏡的放大倍率。"
 
-#: src/preferences.py:145
+#: src/preferences.py:147
 msgid "Image scaling"
 msgstr "圖片縮放"
 
-#: src/preferences.py:146
+#: src/preferences.py:148
 msgid "Stretch small images."
 msgstr "伸展較小圖片。"
 
-#: src/preferences.py:150
-msgid "Stretch images to a size that is larger than their original size if the current zoom mode requests it. If this preference is unset, images are never scaled to be larger than their original size."
+#: src/preferences.py:152
+msgid ""
+"Stretch images to a size that is larger than their original size if the "
+"current zoom mode requests it. If this preference is unset, images are never "
+"scaled to be larger than their original size."
 msgstr "配合目前的縮放模式，將圖片伸展放大到設定的大小。"
 
-#: src/preferences.py:153
+#: src/preferences.py:155
 msgid "Transparency"
 msgstr "透明度"
 
-#: src/preferences.py:155
+#: src/preferences.py:157
 msgid "Use checkered background for transparent images."
 msgstr "透明色圖片使用方格背景。"
 
-#: src/preferences.py:161
-msgid "Use a grey checkered background for transparent images. If this preference is unset, the background is plain white instead."
+#: src/preferences.py:163
+msgid ""
+"Use a grey checkered background for transparent images. If this preference "
+"is unset, the background is plain white instead."
 msgstr "透明色圖片使用灰色方格背景。如果未設定此項目，則將使用白色背景。"
 
-#: src/preferences.py:163
+#: src/preferences.py:165
 msgid "Appearance"
 msgstr "外觀"
 
-#: src/preferences.py:169
+#: src/preferences.py:171
 msgid "Scroll"
 msgstr "捲動"
 
-#: src/preferences.py:171
+#: src/preferences.py:173
 msgid "Use smart space key scrolling."
 msgstr "使用智慧型空白鍵捲動。"
 
-#: src/preferences.py:176
-msgid "Use smart scrolling with the space key. Normally the space key scrolls only right down (or up when shift is pressed), but with this preference set it also scrolls sideways and so tries to follow the natural reading order of the comic book."
-msgstr "使用智慧型的空白鍵捲動。通常按下空白鍵時只會向下捲動 (若按住 shift 時則是下上捲動)，但設定此項目後，也會側向捲動，以儘量配合一般的漫畫書閱讀順序。"
+#: src/preferences.py:178
+msgid ""
+"Use smart scrolling with the space key. Normally the space key scrolls only "
+"right down (or up when shift is pressed), but with this preference set it "
+"also scrolls sideways and so tries to follow the natural reading order of "
+"the comic book."
+msgstr ""
+"使用智慧型的空白鍵捲動。通常按下空白鍵時只會向下捲動 (若按住 shift 時則是下上"
+"捲動)，但設定此項目後，也會側向捲動，以儘量配合一般的漫畫書閱讀順序。"
 
-#: src/preferences.py:180
+#: src/preferences.py:182
 msgid "Flip pages when scrolling off the edges of the page."
 msgstr "當捲動到頁面的頂端或底部時翻頁"
 
-#: src/preferences.py:185
-msgid "Flip pages when scrolling \"off the page\" with the scroll wheel or with the arrow keys. It takes three consecutive \"steps\" with the scroll wheel or the arrow keys for the pages to be flipped."
-msgstr "以滾輪或方向鍵捲動到「超出本頁」時翻頁。要翻頁時，需要連續滾動滑鼠滾輪或按方向鍵「三次」。"
+#: src/preferences.py:187
+msgid ""
+"Flip pages when scrolling \"off the page\" with the scroll wheel or with the "
+"arrow keys. It takes three consecutive \"steps\" with the scroll wheel or "
+"the arrow keys for the pages to be flipped."
+msgstr ""
+"以滾輪或方向鍵捲動到「超出本頁」時翻頁。要翻頁時，需要連續滾動滑鼠滾輪或按方"
+"向鍵「三次」。"
 
-#: src/preferences.py:188
-#: src/ui.py:298
+#: src/preferences.py:190 src/ui.py:298
 msgid "Double page mode"
 msgstr "雙頁模式"
 
-#: src/preferences.py:190
+#: src/preferences.py:192
 msgid "Flip two pages in double page mode."
 msgstr "雙頁模式時一次翻兩頁。"
 
-#: src/preferences.py:195
-msgid "Flip two pages, instead of one, each time we flip pages in double page mode."
+#: src/preferences.py:197
+msgid ""
+"Flip two pages, instead of one, each time we flip pages in double page mode."
 msgstr "雙頁模式時一次翻兩頁，而不是只翻一頁。"
 
-#: src/preferences.py:198
+#: src/preferences.py:200
 msgid "Show only one wide image in double page mode."
 msgstr "雙頁模式時只顯示單張的寬幅圖片。"
 
-#: src/preferences.py:204
-msgid "Display only one image in double page mode, if the image's width exceeds its height. The result of this is that scans that span two pages are displayed properly (i.e. alone) also in double page mode."
+#: src/preferences.py:206
+msgid ""
+"Display only one image in double page mode, if the image's width exceeds its "
+"height. The result of this is that scans that span two pages are displayed "
+"properly (i.e. alone) also in double page mode."
 msgstr "如果圖片寬度大於高度，則在雙頁模式時仍只顯示單張圖片。"
 
-#: src/preferences.py:207
+#: src/preferences.py:209
 msgid "Files"
 msgstr "檔案"
 
-#: src/preferences.py:209
+#: src/preferences.py:211
 msgid "Automatically open the next archive."
 msgstr "自動開啟下一個壓縮檔。"
 
-#: src/preferences.py:214
-msgid "Automatically open the next archive in the directory when flipping past the last page, or the previous archive when flipping past the first page."
-msgstr "當在目前壓縮檔翻頁離開最後一頁時，自動開啟目錄中的下一個壓縮檔；當翻頁跳出第一頁時，則自動開啟上一個壓縮檔。"
+#: src/preferences.py:216
+msgid ""
+"Automatically open the next archive in the directory when flipping past the "
+"last page, or the previous archive when flipping past the first page."
+msgstr ""
+"當在目前壓縮檔翻頁離開最後一頁時，自動開啟目錄中的下一個壓縮檔；當翻頁跳出第"
+"一頁時，則自動開啟上一個壓縮檔。"
 
-#: src/preferences.py:217
+#: src/preferences.py:219
 msgid "Automatically open the last viewed file on startup."
 msgstr "啟動時自動開啟最後檢視的檔案。"
 
-#: src/preferences.py:222
-msgid "Automatically open, on startup, the file that was open when Comix was last closed."
+#: src/preferences.py:224
+msgid ""
+"Automatically open, on startup, the file that was open when Comix was last "
+"closed."
 msgstr "當 Comix 啟動時，自動開啟上次最後開啟過的檔案。"
 
-#: src/preferences.py:225
+#: src/preferences.py:227
 msgid "Store information about recently opened files."
 msgstr "儲存最近開啟過的檔案資訊。"
 
-#: src/preferences.py:230
-msgid "Add information about all files opened from within Comix to the shared recent files list."
+#: src/preferences.py:232
+msgid ""
+"Add information about all files opened from within Comix to the shared "
+"recent files list."
 msgstr "將 Comix 開啟過的檔案資訊加入共享的「最近存取文件」清單中。"
 
-#: src/preferences.py:233
+#: src/preferences.py:235
 msgid "Store thumbnails for opened files."
 msgstr "替開啟過的檔案儲存縮圖。"
 
-#: src/preferences.py:238
-msgid "Store thumbnails for opened files according to the freedesktop.org specification. These thumbnails are shared by many other applications, such as most file managers."
-msgstr "依據 freedesktop.org 的標準，替開啟過的檔案儲存縮圖。這些縮圖也可由檔案管理程式等其他各種應用程式分享共用。"
+#: src/preferences.py:240
+msgid ""
+"Store thumbnails for opened files according to the freedesktop.org "
+"specification. These thumbnails are shared by many other applications, such "
+"as most file managers."
+msgstr ""
+"依據 freedesktop.org 的標準，替開啟過的檔案儲存縮圖。這些縮圖也可由檔案管理程"
+"式等其他各種應用程式分享共用。"
 
-#: src/preferences.py:241
+#: src/preferences.py:243
 msgid "Cache"
 msgstr "快取"
 
-#: src/preferences.py:242
+#: src/preferences.py:244
 msgid "Use a cache to speed up browsing."
 msgstr "使用快取以加速瀏覽。"
 
-#: src/preferences.py:246
-msgid "Cache the images that are next to the currently viewed image in order to speed up browsing. Since the speed improvements are quite big, it is recommended that you have this preference set, unless you are running short on free RAM."
-msgstr "替下一張圖片建立快取以增加瀏覽速度。由於效果非常優異，除非是在記憶體較不足的系統上，不然建議您啟用此功能。"
-
 #: src/preferences.py:248
+msgid ""
+"Cache the images that are next to the currently viewed image in order to "
+"speed up browsing. Since the speed improvements are quite big, it is "
+"recommended that you have this preference set, unless you are running short "
+"on free RAM."
+msgstr ""
+"替下一張圖片建立快取以增加瀏覽速度。由於效果非常優異，除非是在記憶體較不足的"
+"系統上，不然建議您啟用此功能。"
+
+#: src/preferences.py:250
 msgid "Behaviour"
 msgstr "行為"
 
-#: src/preferences.py:254
+#: src/preferences.py:256
 msgid "Default modes"
 msgstr "預設模式"
 
-#: src/preferences.py:256
+#: src/preferences.py:258
 msgid "Use double page mode by default."
 msgstr "預設使用雙頁模式。"
 
-#: src/preferences.py:261
+#: src/preferences.py:263
 msgid "Use fullscreen by default."
 msgstr "預設使用全螢幕。"
 
-#: src/preferences.py:266
+#: src/preferences.py:268
 msgid "Use manga mode by default."
 msgstr "預設使用漫畫模式。"
 
-#: src/preferences.py:271
+#: src/preferences.py:273
 msgid "Default zoom mode"
 msgstr "預設縮放模式"
 
-#: src/preferences.py:273
-#: src/ui.py:290
+#: src/preferences.py:275 src/ui.py:290
 msgid "Best fit mode"
 msgstr "最佳大小模式"
 
-#: src/preferences.py:274
-#: src/ui.py:292
+#: src/preferences.py:276 src/ui.py:292
 msgid "Fit width mode"
 msgstr "符合寬度模式"
 
-#: src/preferences.py:275
-#: src/ui.py:294
+#: src/preferences.py:277 src/ui.py:294
 msgid "Fit height mode"
 msgstr "符合高度模式"
 
-#: src/preferences.py:276
-#: src/ui.py:296
+#: src/preferences.py:278 src/ui.py:296
 msgid "Manual zoom mode"
 msgstr "手動縮放模式"
 
-#: src/preferences.py:282
+#: src/preferences.py:284
 msgid "Fullscreen"
 msgstr "全螢幕"
 
-#: src/preferences.py:284
+#: src/preferences.py:286
 msgid "Automatically hide all toolbars in fullscreen."
 msgstr "全螢幕時自動隱藏所有工具列。"
 
-#: src/preferences.py:290
+#: src/preferences.py:292
 msgid "Slideshow"
 msgstr "投影片放映"
 
-#: src/preferences.py:291
+#: src/preferences.py:293
 msgid "Slideshow delay (in seconds)"
 msgstr "投影片放映延遲 (秒)"
 
-#: src/preferences.py:300
+#: src/preferences.py:302
 msgid "Comment extensions"
 msgstr "註解的副檔名"
 
-#: src/preferences.py:306
-msgid "Treat all files found within archives, that have one of these file endings, as comments."
+#: src/preferences.py:308
+msgid ""
+"Treat all files found within archives, that have one of these file endings, "
+"as comments."
 msgstr "壓縮檔內檔名結尾相符的檔案，將被認定為註解。"
 
-#: src/preferences.py:309
+#: src/preferences.py:311
 msgid "Rotation"
 msgstr "旋轉"
 
-#: src/preferences.py:311
+#: src/preferences.py:313
 msgid "Automatically rotate images according to their metadata."
 msgstr "根據內建資料自動旋轉圖片。"
 
-#: src/preferences.py:316
-msgid "Automatically rotate images when an orientation is specified in the image metadata, such as in an Exif tag."
+#: src/preferences.py:318
+msgid ""
+"Automatically rotate images when an orientation is specified in the image "
+"metadata, such as in an Exif tag."
 msgstr "當圖片內建的資料 (如 EXTIF) 中有指定方向時，自動旋轉圖片。"
 
-#: src/preferences.py:318
+#: src/preferences.py:320
 msgid "Display"
 msgstr "顯示"
 
@@ -805,28 +859,23 @@ msgstr "屬性"
 msgid "%d comments"
 msgstr "%d 個註解"
 
-#: src/properties.py:129
-#: src/properties.py:164
+#: src/properties.py:129 src/properties.py:164
 msgid "Location"
 msgstr "位置"
 
-#: src/properties.py:131
-#: src/properties.py:165
+#: src/properties.py:131 src/properties.py:165
 msgid "Accessed"
 msgstr "存取時間"
 
-#: src/properties.py:133
-#: src/properties.py:167
+#: src/properties.py:133 src/properties.py:167
 msgid "Modified"
 msgstr "修改時間"
 
-#: src/properties.py:135
-#: src/properties.py:169
+#: src/properties.py:135 src/properties.py:169
 msgid "Permissions"
 msgstr "權限"
 
-#: src/properties.py:136
-#: src/properties.py:170
+#: src/properties.py:136 src/properties.py:170
 msgid "Owner"
 msgstr "擁有者"
 
@@ -851,8 +900,16 @@ msgid "Cleanup thumbnails"
 msgstr "清理縮圖"
 
 #: src/thumbremover.py:48
-msgid "Thumbnails for files (such as image files and comic book archives) are stored in your home directory. Many different applications use and create these thumbnails, but sometimes thumbnails remain even though the original files have been removed - wasting space. This dialog can cleanup your stored thumbnails by removing orphaned and outdated thumbnails."
-msgstr "各種應用程式儲存了許多圖片檔、壓縮檔的縮圖在您的個人目錄中，但很可能縮圖還在而原始檔案已經被移除了，因而浪費許多空間。這個項目可以清理、移除失效與過期的縮圖。"
+msgid ""
+"Thumbnails for files (such as image files and comic book archives) are "
+"stored in your home directory. Many different applications use and create "
+"these thumbnails, but sometimes thumbnails remain even though the original "
+"files have been removed - wasting space. This dialog can cleanup your stored "
+"thumbnails by removing orphaned and outdated thumbnails."
+msgstr ""
+"各種應用程式儲存了許多圖片檔、壓縮檔的縮圖在您的個人目錄中，但很可能縮圖還在"
+"而原始檔案已經被移除了，因而浪費許多空間。這個項目可以清理、移除失效與過期的"
+"縮圖。"
 
 #: src/thumbremover.py:60
 msgid "Thumbnail directory"
@@ -862,8 +919,7 @@ msgstr "縮圖目錄"
 msgid "Total number of thumbnails"
 msgstr "縮圖總數"
 
-#: src/thumbremover.py:70
-#: src/thumbremover.py:77
+#: src/thumbremover.py:70 src/thumbremover.py:77
 msgid "Calculating..."
 msgstr "計算中..."
 
@@ -1111,4 +1167,3 @@ msgstr "漫畫模式"
 #: src/ui.py:300
 msgid "Magnifying glass"
 msgstr "放大鏡"
-

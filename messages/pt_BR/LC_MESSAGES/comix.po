@@ -55,63 +55,67 @@ msgstr "Tradução para italiano"
 msgid "Dutch translation"
 msgstr "Tradução para holandês"
 
-#: src/about.py:92
+#: src/about.py:92 src/about.py:93
 msgid "French translation"
 msgstr "Tradução para francês"
 
-#: src/about.py:93 src/about.py:94
+#: src/about.py:94 src/about.py:95
 msgid "Polish translation"
 msgstr "Tradução para polonês"
 
-#: src/about.py:95
+#: src/about.py:96
 msgid "Greek translation"
 msgstr "Tradução para grego"
 
-#: src/about.py:96
+#: src/about.py:97
 msgid "Catalan translation"
 msgstr "Tradução para catalão"
 
-#: src/about.py:97 src/about.py:98
+#: src/about.py:98 src/about.py:99
 msgid "Traditional Chinese translation"
 msgstr "Tradução para chinês tradicional"
 
-#: src/about.py:99
+#: src/about.py:100
 msgid "Japanese translation"
 msgstr "Tradução para japonês"
 
-#: src/about.py:100
+#: src/about.py:101
 msgid "Hungarian translation"
 msgstr "Tradução para húngaro"
 
-#: src/about.py:101
+#: src/about.py:102
 msgid "Russian translation"
 msgstr "Tradução para russo"
 
-#: src/about.py:102
+#: src/about.py:103
 msgid "Croatian translation"
 msgstr "Tradução para croata"
 
-#: src/about.py:103
+#: src/about.py:104
 msgid "Korean translation"
 msgstr "Tradução para coreano"
 
-#: src/about.py:104
+#: src/about.py:105
 msgid "Persian translation"
 msgstr "Tradução para persa"
 
-#: src/about.py:105
+#: src/about.py:106
 msgid "Indonesian translation"
 msgstr "Tradução para língua indonésia"
 
-#: src/about.py:106
+#: src/about.py:107
 msgid "Czech translation"
 msgstr "Tradução para checo"
 
-#: src/about.py:107
+#: src/about.py:108
+msgid "Ukrainian translation"
+msgstr ""
+
+#: src/about.py:109
 msgid "Icon design"
 msgstr "Desenho dos ícones"
 
-#: src/about.py:114
+#: src/about.py:116
 msgid "Credits"
 msgstr "Créditos"
 
@@ -127,23 +131,23 @@ msgstr ""
 "Você precisa do programa <i>rar</i> ou <i>unrar</i> instalado para poder ler "
 "arquivos RAR (.cbr)."
 
-#: src/archive.py:305
+#: src/archive.py:306
 msgid "ZIP archive"
 msgstr "Arquivo ZIP"
 
-#: src/archive.py:306
+#: src/archive.py:307
 msgid "Tar archive"
 msgstr "Arquivo tar"
 
-#: src/archive.py:307
+#: src/archive.py:308
 msgid "Gzip compressed tar archive"
 msgstr "Arquivo tar comprimido com gzip"
 
-#: src/archive.py:308
+#: src/archive.py:309
 msgid "Bzip2 compressed tar archive"
 msgstr "Arquivo tar comprimido com bzip2"
 
-#: src/archive.py:309
+#: src/archive.py:310
 msgid "RAR archive"
 msgstr "Arquivo RAR"
 
@@ -182,7 +186,7 @@ msgstr "Nome"
 msgid "Page"
 msgstr "Página"
 
-#: src/comment.py:16 src/preferences.py:299
+#: src/comment.py:16 src/preferences.py:301
 msgid "Comments"
 msgstr "Comentários"
 
@@ -317,28 +321,28 @@ msgstr "Arquivos RAR"
 msgid "Tar archives"
 msgstr "Arquivos tar"
 
-#: src/filechooser.py:134
+#: src/filechooser.py:139
 #, python-format
 msgid "A file named '%s' already exists. Do you want to replace it?"
 msgstr "Um arquivo com o nome '%s' já existe. Deseja substituí-lo?"
 
-#: src/filechooser.py:137
+#: src/filechooser.py:142
 msgid "Replacing it will overwrite its contents."
 msgstr "A substituição sobreescreverá seu conteúdo."
 
-#: src/filechooser.py:182 src/filechooser.py:260
+#: src/filechooser.py:187 src/filechooser.py:304
 msgid "All images"
 msgstr "Todas as imagens"
 
-#: src/filechooser.py:184 src/filechooser.py:262
+#: src/filechooser.py:189 src/filechooser.py:306
 msgid "JPEG images"
 msgstr "Imagens JPEG"
 
-#: src/filechooser.py:185 src/filechooser.py:263
+#: src/filechooser.py:190 src/filechooser.py:307
 msgid "PNG images"
 msgstr "Imagens PNG"
 
-#: src/filechooser.py:206
+#: src/filechooser.py:231
 msgid "Automatically add the books to this collection"
 msgstr "Adicionar livros a esta coleção automaticamente"
 
@@ -371,7 +375,7 @@ msgstr "Não há imagens em '%s'"
 msgid "Unknown filetype"
 msgstr "Tipo de arquivo desconhecido"
 
-#: src/librarybackend.py:273 src/librarybackend.py:275
+#: src/librarybackend.py:271 src/librarybackend.py:273
 msgid "(Copy)"
 msgstr "(Cópia)"
 
@@ -553,57 +557,57 @@ msgstr "Livros adicionados"
 msgid "Adding '%s'..."
 msgstr "Adicionando '%s'..."
 
-#: src/main.py:699
+#: src/main.py:704
 msgid "SLIDESHOW"
 msgstr "Apresentação de slides"
 
-#: src/preferences.py:80
+#: src/preferences.py:82
 msgid "Preferences"
 msgstr "Preferências"
 
-#: src/preferences.py:95
+#: src/preferences.py:97
 msgid "Background"
 msgstr "Tela de fundo"
 
-#: src/preferences.py:97
+#: src/preferences.py:99
 msgid "Use this colour as background"
 msgstr "Usar essa cor na tela de fundo"
 
-#: src/preferences.py:99
+#: src/preferences.py:101
 msgid "Always use this selected colour as the background colour."
 msgstr "Sempre usar essa cor como cor de fundo."
 
-#: src/preferences.py:104
+#: src/preferences.py:106
 msgid "Use dynamic background colour."
 msgstr "Usar cor de fundo dinâmica."
 
-#: src/preferences.py:108
+#: src/preferences.py:110
 msgid "Automatically pick a background colour that fits the viewed image."
 msgstr ""
 "Escolher uma cor de fundo compatível com a imagem visualizada "
 "automaticamente."
 
-#: src/preferences.py:111
+#: src/preferences.py:113
 msgid "Thumbnails"
 msgstr "Miniaturas"
 
-#: src/preferences.py:112
+#: src/preferences.py:114
 msgid "Thumbnail size (in pixels)"
 msgstr "Tamanho da miniatura (em pixels)"
 
-#: src/preferences.py:119
+#: src/preferences.py:121
 msgid "Show page numbers on thumbnails."
 msgstr "Mostrar números de página nas miniaturas."
 
-#: src/preferences.py:126
+#: src/preferences.py:128
 msgid "Magnifying Glass"
 msgstr "Lente de aumento"
 
-#: src/preferences.py:127
+#: src/preferences.py:129
 msgid "Magnifying glass size (in pixels)"
 msgstr "Tamanho da lente de aumento (em pixels)"
 
-#: src/preferences.py:133
+#: src/preferences.py:135
 msgid ""
 "Set the size of the magnifying glass. It is a square with a side of this "
 "many pixels."
@@ -611,23 +615,23 @@ msgstr ""
 "Ajustar o tamanho da lente de aumento. É um quadrado com esse tamanho de "
 "pixels."
 
-#: src/preferences.py:135
+#: src/preferences.py:137
 msgid "Magnification factor"
 msgstr "Fator de aumento"
 
-#: src/preferences.py:142
+#: src/preferences.py:144
 msgid "Set the magnification factor of the magnifying glass."
 msgstr "Ajustar o fator de aumento da lente de aumento."
 
-#: src/preferences.py:145
+#: src/preferences.py:147
 msgid "Image scaling"
 msgstr "Escala da imagem"
 
-#: src/preferences.py:146
+#: src/preferences.py:148
 msgid "Stretch small images."
 msgstr "Esticar imagens pequenas."
 
-#: src/preferences.py:150
+#: src/preferences.py:152
 msgid ""
 "Stretch images to a size that is larger than their original size if the "
 "current zoom mode requests it. If this preference is unset, images are never "
@@ -637,15 +641,15 @@ msgstr ""
 "modo de zoom atual pedir. Se esta preferência não estiver marcada, as "
 "imagens nunca serão vistas maior que seu tamanho original."
 
-#: src/preferences.py:153
+#: src/preferences.py:155
 msgid "Transparency"
 msgstr "Transparência"
 
-#: src/preferences.py:155
+#: src/preferences.py:157
 msgid "Use checkered background for transparent images."
 msgstr "Usar fundo quadriculado para imagens transparentes."
 
-#: src/preferences.py:161
+#: src/preferences.py:163
 msgid ""
 "Use a grey checkered background for transparent images. If this preference "
 "is unset, the background is plain white instead."
@@ -653,19 +657,19 @@ msgstr ""
 "Usar fundo quadriculado cinza para imagens transparentes. Se esta "
 "preferência não estiver marcada, o fundo usado é branco."
 
-#: src/preferences.py:163
+#: src/preferences.py:165
 msgid "Appearance"
 msgstr "Aparência"
 
-#: src/preferences.py:169
+#: src/preferences.py:171
 msgid "Scroll"
 msgstr "Rolagem"
 
-#: src/preferences.py:171
+#: src/preferences.py:173
 msgid "Use smart space key scrolling."
 msgstr "Usar rolagem inteligente com tecla de espaço."
 
-#: src/preferences.py:176
+#: src/preferences.py:178
 msgid ""
 "Use smart scrolling with the space key. Normally the space key scrolls only "
 "right down (or up when shift is pressed), but with this preference set it "
@@ -677,11 +681,11 @@ msgstr ""
 "esta perferência também rola para os lados e tenta seguir a ordem natural de "
 "leitura de uma história em quadrinhos."
 
-#: src/preferences.py:180
+#: src/preferences.py:182
 msgid "Flip pages when scrolling off the edges of the page."
 msgstr "Virar páginas quando rolar para fora da borda da página."
 
-#: src/preferences.py:185
+#: src/preferences.py:187
 msgid ""
 "Flip pages when scrolling \"off the page\" with the scroll wheel or with the "
 "arrow keys. It takes three consecutive \"steps\" with the scroll wheel or "
@@ -691,26 +695,26 @@ msgstr ""
 "ou teclas de seta. São necessários três \"passos\" consecutivos com a roda "
 "de rolagem ou teclas de seta para que as páginas sejam viradas."
 
-#: src/preferences.py:188 src/ui.py:298
+#: src/preferences.py:190 src/ui.py:298
 msgid "Double page mode"
 msgstr "Modo de página dupla"
 
-#: src/preferences.py:190
+#: src/preferences.py:192
 msgid "Flip two pages in double page mode."
 msgstr "Virar duas páginas em modo de página dupla."
 
-#: src/preferences.py:195
+#: src/preferences.py:197
 msgid ""
 "Flip two pages, instead of one, each time we flip pages in double page mode."
 msgstr ""
 "Virar duas páginas, ao invés de uma, cada vez que virar página em modo de "
 "página dupla."
 
-#: src/preferences.py:198
+#: src/preferences.py:200
 msgid "Show only one wide image in double page mode."
 msgstr "Mostrar só uma imagem larga em modo de página dupl.a"
 
-#: src/preferences.py:204
+#: src/preferences.py:206
 msgid ""
 "Display only one image in double page mode, if the image's width exceeds its "
 "height. The result of this is that scans that span two pages are displayed "
@@ -720,15 +724,15 @@ msgstr ""
 "sua altura. O resultado disto é que scans que passem de duas páginas são "
 "mostrados adequadamente (isto é, sozinhos) também em modo de página dupla."
 
-#: src/preferences.py:207
+#: src/preferences.py:209
 msgid "Files"
 msgstr "Arquivos"
 
-#: src/preferences.py:209
+#: src/preferences.py:211
 msgid "Automatically open the next archive."
 msgstr "Abrir o próximo arquivo automaticamente."
 
-#: src/preferences.py:214
+#: src/preferences.py:216
 msgid ""
 "Automatically open the next archive in the directory when flipping past the "
 "last page, or the previous archive when flipping past the first page."
@@ -736,11 +740,11 @@ msgstr ""
 "Abre o próximo arquivo do diretório automaticamente quando virar após a "
 "última página, ou o arquivo anterior quando virar antes da primeira página."
 
-#: src/preferences.py:217
+#: src/preferences.py:219
 msgid "Automatically open the last viewed file on startup."
 msgstr "Abrir o último arquivo visto automaticamente quando abrir."
 
-#: src/preferences.py:222
+#: src/preferences.py:224
 msgid ""
 "Automatically open, on startup, the file that was open when Comix was last "
 "closed."
@@ -748,11 +752,11 @@ msgstr ""
 "Abre, quando inicia, o arquivo que estava aberto quando o Comix foi fechado "
 "da última vez."
 
-#: src/preferences.py:225
+#: src/preferences.py:227
 msgid "Store information about recently opened files."
 msgstr "Guarda informações sobre arquivos abertos recentemente."
 
-#: src/preferences.py:230
+#: src/preferences.py:232
 msgid ""
 "Add information about all files opened from within Comix to the shared "
 "recent files list."
@@ -760,11 +764,11 @@ msgstr ""
 "Adicionar informações sobre todos os arquivos abertos dentro do Comix para a "
 "lista de arquivos compartilhados recentes."
 
-#: src/preferences.py:233
+#: src/preferences.py:235
 msgid "Store thumbnails for opened files."
 msgstr "Guardar miniaturas para arquivos abertos."
 
-#: src/preferences.py:238
+#: src/preferences.py:240
 msgid ""
 "Store thumbnails for opened files according to the freedesktop.org "
 "specification. These thumbnails are shared by many other applications, such "
@@ -774,15 +778,15 @@ msgstr ""
 "freedesktop.org. Essas miniaturas são compartilhadas por vários outros "
 "aplicativos, como a maior parte dos gerenciadores de arquivos."
 
-#: src/preferences.py:241
+#: src/preferences.py:243
 msgid "Cache"
 msgstr "Cache"
 
-#: src/preferences.py:242
+#: src/preferences.py:244
 msgid "Use a cache to speed up browsing."
 msgstr "Usar um cache para aumentar velocidade de navegação."
 
-#: src/preferences.py:246
+#: src/preferences.py:248
 msgid ""
 "Cache the images that are next to the currently viewed image in order to "
 "speed up browsing. Since the speed improvements are quite big, it is "
@@ -794,67 +798,67 @@ msgstr ""
 "recomendável ter esta preferência marcada, a menos que você esteja com pouca "
 "memória RAM."
 
-#: src/preferences.py:248
+#: src/preferences.py:250
 msgid "Behaviour"
 msgstr "Comportamento"
 
-#: src/preferences.py:254
+#: src/preferences.py:256
 msgid "Default modes"
 msgstr "Modos padrão"
 
-#: src/preferences.py:256
+#: src/preferences.py:258
 msgid "Use double page mode by default."
 msgstr "Usar página dupla por padrão."
 
-#: src/preferences.py:261
+#: src/preferences.py:263
 msgid "Use fullscreen by default."
 msgstr "Usar tela cheia por padrão."
 
-#: src/preferences.py:266
+#: src/preferences.py:268
 msgid "Use manga mode by default."
 msgstr "Usar modo mangá por padrão."
 
-#: src/preferences.py:271
+#: src/preferences.py:273
 msgid "Default zoom mode"
 msgstr "Modo de zoom padrão"
 
-#: src/preferences.py:273 src/ui.py:290
+#: src/preferences.py:275 src/ui.py:290
 msgid "Best fit mode"
 msgstr "Modo de melhor encaixe"
 
-#: src/preferences.py:274 src/ui.py:292
+#: src/preferences.py:276 src/ui.py:292
 msgid "Fit width mode"
 msgstr "Modo ajustar largura"
 
-#: src/preferences.py:275 src/ui.py:294
+#: src/preferences.py:277 src/ui.py:294
 msgid "Fit height mode"
 msgstr "Modo ajustar altura"
 
-#: src/preferences.py:276 src/ui.py:296
+#: src/preferences.py:278 src/ui.py:296
 msgid "Manual zoom mode"
 msgstr "Modo de zoom manual"
 
-#: src/preferences.py:282
+#: src/preferences.py:284
 msgid "Fullscreen"
 msgstr "Tela cheia"
 
-#: src/preferences.py:284
+#: src/preferences.py:286
 msgid "Automatically hide all toolbars in fullscreen."
 msgstr "Esconder todas as barras de ferramenta por padrão em tela cheia."
 
-#: src/preferences.py:290
+#: src/preferences.py:292
 msgid "Slideshow"
 msgstr "Apresentação de slides"
 
-#: src/preferences.py:291
+#: src/preferences.py:293
 msgid "Slideshow delay (in seconds)"
 msgstr "Espera da apresentação de slides (em segundos)"
 
-#: src/preferences.py:300
+#: src/preferences.py:302
 msgid "Comment extensions"
 msgstr "Comentar extensões"
 
-#: src/preferences.py:306
+#: src/preferences.py:308
 msgid ""
 "Treat all files found within archives, that have one of these file endings, "
 "as comments."
@@ -862,21 +866,21 @@ msgstr ""
 "Tratar todos os arquivos avulsos dentro de arquivos, incluindo os que tem "
 "terminação de arquivo, como comentários."
 
-#: src/preferences.py:309
+#: src/preferences.py:311
 msgid "Rotation"
 msgstr ""
 
-#: src/preferences.py:311
+#: src/preferences.py:313
 msgid "Automatically rotate images according to their metadata."
 msgstr ""
 
-#: src/preferences.py:316
+#: src/preferences.py:318
 msgid ""
 "Automatically rotate images when an orientation is specified in the image "
 "metadata, such as in an Exif tag."
 msgstr ""
 
-#: src/preferences.py:318
+#: src/preferences.py:320
 msgid "Display"
 msgstr "Tela"
 

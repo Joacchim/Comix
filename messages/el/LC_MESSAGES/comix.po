@@ -86,91 +86,95 @@ msgstr "Ολλανδική μετάφραση"
 
 #
 # File: src/about.py, line: 84
-#: src/about.py:92
+#: src/about.py:92 src/about.py:93
 msgid "French translation"
 msgstr "Γαλλική μετάφραση"
 
 #
 # File: src/about.py, line: 85
-#: src/about.py:93 src/about.py:94
+#: src/about.py:94 src/about.py:95
 msgid "Polish translation"
 msgstr "Πολωνική μετάφραση"
 
 #
 # File: src/about.py, line: 86
-#: src/about.py:95
+#: src/about.py:96
 msgid "Greek translation"
 msgstr "Ελληνική μετάφραση"
 
 #
 # File: src/about.py, line: 87
-#: src/about.py:96
+#: src/about.py:97
 msgid "Catalan translation"
 msgstr "Καταλανική μετάφραση"
 
 #
 # File: src/about.py, line: 88
-#: src/about.py:97 src/about.py:98
+#: src/about.py:98 src/about.py:99
 msgid "Traditional Chinese translation"
 msgstr "Παραδοσιακή Κινέζικη μετάφραση"
 
 #
 # File: src/about.py, line: 89
-#: src/about.py:99
+#: src/about.py:100
 msgid "Japanese translation"
 msgstr ""
 
 #
 # File: src/about.py, line: 90
-#: src/about.py:100
+#: src/about.py:101
 msgid "Hungarian translation"
 msgstr ""
 
 #
 # File: src/about.py, line: 91
-#: src/about.py:101
+#: src/about.py:102
 msgid "Russian translation"
 msgstr ""
 
 #
 # File: src/about.py, line: 92
-#: src/about.py:102
+#: src/about.py:103
 msgid "Croatian translation"
 msgstr ""
 
 #
 # File: src/about.py, line: 93
-#: src/about.py:103
+#: src/about.py:104
 msgid "Korean translation"
 msgstr ""
 
 #
 # File: src/about.py, line: 94
-#: src/about.py:104
+#: src/about.py:105
 msgid "Persian translation"
 msgstr ""
 
 #
 # File: src/about.py, line: 95
-#: src/about.py:105
+#: src/about.py:106
 msgid "Indonesian translation"
 msgstr ""
 
 #
 # File: src/about.py, line: 96
-#: src/about.py:106
+#: src/about.py:107
 msgid "Czech translation"
+msgstr ""
+
+#: src/about.py:108
+msgid "Ukrainian translation"
 msgstr ""
 
 #
 # File: src/about.py, line: 97
-#: src/about.py:107
+#: src/about.py:109
 msgid "Icon design"
 msgstr ""
 
 #
 # File: src/about.py, line: 106
-#: src/about.py:114
+#: src/about.py:116
 msgid "Credits"
 msgstr "Συνεργάτες"
 
@@ -190,31 +194,31 @@ msgstr ""
 
 #
 # File: src/archive.py, line: 301
-#: src/archive.py:305
+#: src/archive.py:306
 msgid "ZIP archive"
 msgstr "Αρχείο ZIP"
 
 #
 # File: src/archive.py, line: 302
-#: src/archive.py:306
+#: src/archive.py:307
 msgid "Tar archive"
 msgstr "Αρχείο tar"
 
 #
 # File: src/archive.py, line: 303
-#: src/archive.py:307
+#: src/archive.py:308
 msgid "Gzip compressed tar archive"
 msgstr "Συμπιεσμένο αρχείο tar gzip"
 
 #
 # File: src/archive.py, line: 304
-#: src/archive.py:308
+#: src/archive.py:309
 msgid "Bzip2 compressed tar archive"
 msgstr "Συμπιεσμένο αρχείο tar bzip2"
 
 #
 # File: src/archive.py, line: 305
-#: src/archive.py:309
+#: src/archive.py:310
 msgid "RAR archive"
 msgstr "Αρχείο RAR"
 
@@ -271,7 +275,7 @@ msgstr "Σελίδα"
 #
 # File: src/comment.py, line: 16
 # File: src/preferences.py, line: 288
-#: src/comment.py:16 src/preferences.py:299
+#: src/comment.py:16 src/preferences.py:301
 msgid "Comments"
 msgstr "Σχόλια"
 
@@ -457,41 +461,41 @@ msgstr ""
 
 #
 # File: src/filechooser.py, line: 125
-#: src/filechooser.py:134
+#: src/filechooser.py:139
 #, python-format
 msgid "A file named '%s' already exists. Do you want to replace it?"
 msgstr ""
 
 #
 # File: src/filechooser.py, line: 128
-#: src/filechooser.py:137
+#: src/filechooser.py:142
 msgid "Replacing it will overwrite its contents."
 msgstr ""
 
 #
 # File: src/filechooser.py, line: 171
 # File: src/filechooser.py, line: 249
-#: src/filechooser.py:182 src/filechooser.py:260
+#: src/filechooser.py:187 src/filechooser.py:304
 msgid "All images"
 msgstr "Όλες οι εικόνες"
 
 #
 # File: src/filechooser.py, line: 173
 # File: src/filechooser.py, line: 251
-#: src/filechooser.py:184 src/filechooser.py:262
+#: src/filechooser.py:189 src/filechooser.py:306
 msgid "JPEG images"
 msgstr ""
 
 #
 # File: src/filechooser.py, line: 174
 # File: src/filechooser.py, line: 252
-#: src/filechooser.py:185 src/filechooser.py:263
+#: src/filechooser.py:190 src/filechooser.py:307
 msgid "PNG images"
 msgstr ""
 
 #
 # File: src/filechooser.py, line: 195
-#: src/filechooser.py:206
+#: src/filechooser.py:231
 msgid "Automatically add the books to this collection"
 msgstr ""
 
@@ -539,7 +543,7 @@ msgstr ""
 #
 # File: src/librarybackend.py, line: 272
 # File: src/librarybackend.py, line: 274
-#: src/librarybackend.py:273 src/librarybackend.py:275
+#: src/librarybackend.py:271 src/librarybackend.py:273
 msgid "(Copy)"
 msgstr ""
 
@@ -793,79 +797,79 @@ msgstr ""
 
 #
 # File: src/main.py, line: 666
-#: src/main.py:699
+#: src/main.py:704
 msgid "SLIDESHOW"
 msgstr ""
 
 #
 # File: src/preferences.py, line: 78
-#: src/preferences.py:80
+#: src/preferences.py:82
 msgid "Preferences"
 msgstr "Προτιμήσεις"
 
 #
 # File: src/preferences.py, line: 93
-#: src/preferences.py:95
+#: src/preferences.py:97
 msgid "Background"
 msgstr ""
 
 #
 # File: src/preferences.py, line: 95
-#: src/preferences.py:97
+#: src/preferences.py:99
 msgid "Use this colour as background"
 msgstr ""
 
 #
 # File: src/preferences.py, line: 97
-#: src/preferences.py:99
+#: src/preferences.py:101
 msgid "Always use this selected colour as the background colour."
 msgstr ""
 
 #
 # File: src/preferences.py, line: 102
-#: src/preferences.py:104
+#: src/preferences.py:106
 msgid "Use dynamic background colour."
 msgstr ""
 
 #
 # File: src/preferences.py, line: 106
-#: src/preferences.py:108
+#: src/preferences.py:110
 msgid "Automatically pick a background colour that fits the viewed image."
 msgstr ""
 
 #
 # File: src/preferences.py, line: 109
-#: src/preferences.py:111
+#: src/preferences.py:113
 msgid "Thumbnails"
 msgstr "Προεπισκοπήσεις"
 
 #
 # File: src/preferences.py, line: 110
-#: src/preferences.py:112
+#: src/preferences.py:114
 msgid "Thumbnail size (in pixels)"
 msgstr ""
 
 #
 # File: src/preferences.py, line: 117
-#: src/preferences.py:119
+#: src/preferences.py:121
 msgid "Show page numbers on thumbnails."
 msgstr ""
 
 #
 # File: src/preferences.py, line: 124
-#: src/preferences.py:126
+#: src/preferences.py:128
 msgid "Magnifying Glass"
 msgstr ""
 
 #
 # File: src/preferences.py, line: 125
-#: src/preferences.py:127
+#: src/preferences.py:129
 msgid "Magnifying glass size (in pixels)"
 msgstr ""
 
 #
 # File: src/preferences.py, line: 131
-#: src/preferences.py:133
+#: src/preferences.py:135
 msgid ""
 "Set the size of the magnifying glass. It is a square with a side of this "
 "many pixels."
@@ -873,31 +877,31 @@ msgstr ""
 
 #
 # File: src/preferences.py, line: 133
-#: src/preferences.py:135
+#: src/preferences.py:137
 msgid "Magnification factor"
 msgstr ""
 
 #
 # File: src/preferences.py, line: 140
-#: src/preferences.py:142
+#: src/preferences.py:144
 msgid "Set the magnification factor of the magnifying glass."
 msgstr ""
 
 #
 # File: src/preferences.py, line: 143
-#: src/preferences.py:145
+#: src/preferences.py:147
 msgid "Image scaling"
 msgstr ""
 
 #
 # File: src/preferences.py, line: 144
-#: src/preferences.py:146
+#: src/preferences.py:148
 msgid "Stretch small images."
 msgstr ""
 
 #
 # File: src/preferences.py, line: 148
-#: src/preferences.py:150
+#: src/preferences.py:152
 msgid ""
 "Stretch images to a size that is larger than their original size if the "
 "current zoom mode requests it. If this preference is unset, images are never "
@@ -906,19 +910,19 @@ msgstr ""
 
 #
 # File: src/preferences.py, line: 151
-#: src/preferences.py:153
+#: src/preferences.py:155
 msgid "Transparency"
 msgstr ""
 
 #
 # File: src/preferences.py, line: 153
-#: src/preferences.py:155
+#: src/preferences.py:157
 msgid "Use checkered background for transparent images."
 msgstr ""
 
 #
 # File: src/preferences.py, line: 159
-#: src/preferences.py:161
+#: src/preferences.py:163
 msgid ""
 "Use a grey checkered background for transparent images. If this preference "
 "is unset, the background is plain white instead."
@@ -926,25 +930,25 @@ msgstr ""
 
 #
 # File: src/preferences.py, line: 161
-#: src/preferences.py:163
+#: src/preferences.py:165
 msgid "Appearance"
 msgstr ""
 
 #
 # File: src/preferences.py, line: 167
-#: src/preferences.py:169
+#: src/preferences.py:171
 msgid "Scroll"
 msgstr "Κύλιση"
 
 #
 # File: src/preferences.py, line: 169
-#: src/preferences.py:171
+#: src/preferences.py:173
 msgid "Use smart space key scrolling."
 msgstr ""
 
 #
 # File: src/preferences.py, line: 174
-#: src/preferences.py:176
+#: src/preferences.py:178
 msgid ""
 "Use smart scrolling with the space key. Normally the space key scrolls only "
 "right down (or up when shift is pressed), but with this preference set it "
@@ -952,11 +956,11 @@ msgid ""
 "the comic book."
 msgstr ""
 
-#: src/preferences.py:180
+#: src/preferences.py:182
 msgid "Flip pages when scrolling off the edges of the page."
 msgstr ""
 
-#: src/preferences.py:185
+#: src/preferences.py:187
 msgid ""
 "Flip pages when scrolling \"off the page\" with the scroll wheel or with the "
 "arrow keys. It takes three consecutive \"steps\" with the scroll wheel or "
@@ -966,32 +970,32 @@ msgstr ""
 #
 # File: src/preferences.py, line: 177
 # File: src/ui.py, line: 296
-#: src/preferences.py:188 src/ui.py:298
+#: src/preferences.py:190 src/ui.py:298
 msgid "Double page mode"
 msgstr "Προβολή διπλής σελίδας"
 
 #
 # File: src/preferences.py, line: 179
-#: src/preferences.py:190
+#: src/preferences.py:192
 msgid "Flip two pages in double page mode."
 msgstr ""
 
 #
 # File: src/preferences.py, line: 184
-#: src/preferences.py:195
+#: src/preferences.py:197
 msgid ""
 "Flip two pages, instead of one, each time we flip pages in double page mode."
 msgstr ""
 
 #
 # File: src/preferences.py, line: 187
-#: src/preferences.py:198
+#: src/preferences.py:200
 msgid "Show only one wide image in double page mode."
 msgstr ""
 
 #
 # File: src/preferences.py, line: 193
-#: src/preferences.py:204
+#: src/preferences.py:206
 msgid ""
 "Display only one image in double page mode, if the image's width exceeds its "
 "height. The result of this is that scans that span two pages are displayed "
@@ -1000,19 +1004,19 @@ msgstr ""
 
 #
 # File: src/preferences.py, line: 196
-#: src/preferences.py:207
+#: src/preferences.py:209
 msgid "Files"
 msgstr ""
 
 #
 # File: src/preferences.py, line: 198
-#: src/preferences.py:209
+#: src/preferences.py:211
 msgid "Automatically open the next archive."
 msgstr ""
 
 #
 # File: src/preferences.py, line: 203
-#: src/preferences.py:214
+#: src/preferences.py:216
 msgid ""
 "Automatically open the next archive in the directory when flipping past the "
 "last page, or the previous archive when flipping past the first page."
@@ -1020,13 +1024,13 @@ msgstr ""
 
 #
 # File: src/preferences.py, line: 206
-#: src/preferences.py:217
+#: src/preferences.py:219
 msgid "Automatically open the last viewed file on startup."
 msgstr ""
 
 #
 # File: src/preferences.py, line: 211
-#: src/preferences.py:222
+#: src/preferences.py:224
 msgid ""
 "Automatically open, on startup, the file that was open when Comix was last "
 "closed."
@@ -1034,13 +1038,13 @@ msgstr ""
 
 #
 # File: src/preferences.py, line: 214
-#: src/preferences.py:225
+#: src/preferences.py:227
 msgid "Store information about recently opened files."
 msgstr ""
 
 #
 # File: src/preferences.py, line: 219
-#: src/preferences.py:230
+#: src/preferences.py:232
 msgid ""
 "Add information about all files opened from within Comix to the shared "
 "recent files list."
@@ -1048,13 +1052,13 @@ msgstr ""
 
 #
 # File: src/preferences.py, line: 222
-#: src/preferences.py:233
+#: src/preferences.py:235
 msgid "Store thumbnails for opened files."
 msgstr ""
 
 #
 # File: src/preferences.py, line: 227
-#: src/preferences.py:238
+#: src/preferences.py:240
 msgid ""
 "Store thumbnails for opened files according to the freedesktop.org "
 "specification. These thumbnails are shared by many other applications, such "
@@ -1063,19 +1067,19 @@ msgstr ""
 
 #
 # File: src/preferences.py, line: 230
-#: src/preferences.py:241
+#: src/preferences.py:243
 msgid "Cache"
 msgstr ""
 
 #
 # File: src/preferences.py, line: 231
-#: src/preferences.py:242
+#: src/preferences.py:244
 msgid "Use a cache to speed up browsing."
 msgstr ""
 
 #
 # File: src/preferences.py, line: 235
-#: src/preferences.py:246
+#: src/preferences.py:248
 msgid ""
 "Cache the images that are next to the currently viewed image in order to "
 "speed up browsing. Since the speed improvements are quite big, it is "
@@ -1085,115 +1089,115 @@ msgstr ""
 
 #
 # File: src/preferences.py, line: 237
-#: src/preferences.py:248
+#: src/preferences.py:250
 msgid "Behaviour"
 msgstr "Συμπεριφορά"
 
 #
 # File: src/preferences.py, line: 243
-#: src/preferences.py:254
+#: src/preferences.py:256
 msgid "Default modes"
 msgstr ""
 
 #
 # File: src/preferences.py, line: 245
-#: src/preferences.py:256
+#: src/preferences.py:258
 msgid "Use double page mode by default."
 msgstr ""
 
 #
 # File: src/preferences.py, line: 250
-#: src/preferences.py:261
+#: src/preferences.py:263
 msgid "Use fullscreen by default."
 msgstr ""
 
 #
 # File: src/preferences.py, line: 255
-#: src/preferences.py:266
+#: src/preferences.py:268
 msgid "Use manga mode by default."
 msgstr ""
 
 #
 # File: src/preferences.py, line: 260
-#: src/preferences.py:271
+#: src/preferences.py:273
 msgid "Default zoom mode"
 msgstr ""
 
 #
 # File: src/preferences.py, line: 262
 # File: src/ui.py, line: 288
-#: src/preferences.py:273 src/ui.py:290
+#: src/preferences.py:275 src/ui.py:290
 msgid "Best fit mode"
 msgstr ""
 
 #
 # File: src/preferences.py, line: 263
 # File: src/ui.py, line: 290
-#: src/preferences.py:274 src/ui.py:292
+#: src/preferences.py:276 src/ui.py:292
 msgid "Fit width mode"
 msgstr "Προσαρμοζμένη κατά πλάτος προβολή"
 
 #
 # File: src/preferences.py, line: 264
 # File: src/ui.py, line: 292
-#: src/preferences.py:275 src/ui.py:294
+#: src/preferences.py:277 src/ui.py:294
 msgid "Fit height mode"
 msgstr "Προσαρμοζμένη κατά ύψος προβολή"
 
 #
 # File: src/preferences.py, line: 265
 # File: src/ui.py, line: 294
-#: src/preferences.py:276 src/ui.py:296
+#: src/preferences.py:278 src/ui.py:296
 msgid "Manual zoom mode"
 msgstr "Χειροκίνητη προβολή ζουμ"
 
 #
 # File: src/preferences.py, line: 271
-#: src/preferences.py:282
+#: src/preferences.py:284
 msgid "Fullscreen"
 msgstr ""
 
 #
 # File: src/preferences.py, line: 273
-#: src/preferences.py:284
+#: src/preferences.py:286
 msgid "Automatically hide all toolbars in fullscreen."
 msgstr ""
 
 #
 # File: src/preferences.py, line: 279
-#: src/preferences.py:290
+#: src/preferences.py:292
 msgid "Slideshow"
 msgstr "Προβολή εναλλαγής εικόνων"
 
 #
 # File: src/preferences.py, line: 280
-#: src/preferences.py:291
+#: src/preferences.py:293
 msgid "Slideshow delay (in seconds)"
 msgstr ""
 
 #
 # File: src/preferences.py, line: 289
-#: src/preferences.py:300
+#: src/preferences.py:302
 msgid "Comment extensions"
 msgstr ""
 
 #
 # File: src/preferences.py, line: 295
-#: src/preferences.py:306
+#: src/preferences.py:308
 msgid ""
 "Treat all files found within archives, that have one of these file endings, "
 "as comments."
 msgstr ""
 
-#: src/preferences.py:309
+#: src/preferences.py:311
 msgid "Rotation"
 msgstr ""
 
-#: src/preferences.py:311
+#: src/preferences.py:313
 msgid "Automatically rotate images according to their metadata."
 msgstr ""
 
-#: src/preferences.py:316
+#: src/preferences.py:318
 msgid ""
 "Automatically rotate images when an orientation is specified in the image "
 "metadata, such as in an Exif tag."
@@ -1201,7 +1205,7 @@ msgstr ""
 
 #
 # File: src/preferences.py, line: 297
-#: src/preferences.py:318
+#: src/preferences.py:320
 msgid "Display"
 msgstr "Εμφάνιση"
 

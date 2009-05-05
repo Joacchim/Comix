@@ -105,6 +105,7 @@ class _AboutDialog(gtk.Dialog):
           ('Maryam Sanaat', _('Persian translation')),
           ('Andhika Padmawan', _('Indonesian translation')),
           ('Jan Nekvasil', _('Czech translation')),
+          ('Олександр Заяц', _('Ukrainian translation')),
           ('Victor Castillejo', _('Icon design'))):
             name_label = labels.BoldLabel('%s:' % nice_person)
             name_label.set_alignment(1.0, 1.0)
