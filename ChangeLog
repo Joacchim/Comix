@@ -3,6 +3,10 @@ Comix 4.0.5
     - Added a Ukrainian translation by Олександр Заяц.
     
     - Added a Galician translation by Roxerio Roxo Carrillo.
+    
+    - Fixed a bug that caused the wrong background colour to be used with the
+    dynamic background colour preference on some systems. Thanks to Nathaniel
+    Moseley.
 
 Comix 4.0.4
     
