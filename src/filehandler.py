@@ -358,17 +358,6 @@ class FileHandler:
         exts = '|'.join(prefs['comment extensions'])
         self._comment_re = re.compile(r'\.(%s)\s*$' % exts, re.I)
 
-    def get_pretty_current_filename(self):
-        """Return a string with the name of the currently viewed file that is
-        suitable for printing.
-        """
-        if self.archive_type is not None:
-            name = os.path.basename(self._base_path)
-        else:
-            name = os.path.join(os.path.basename(self._base_path),
-                os.path.basename(self._image_files[self._current_image_index]))
-        return encoding.to_unicode(name)
-
     def get_path_to_page(self, page=None):
         """Return the full path to the image file for <page>, or the current
         page if <page> is None.
@@ -390,7 +379,38 @@ class FileHandler:
         """
         if self.archive_type is not None:
             return self.get_path_to_base()
-        return self._image_files[self._current_image_index]
+        return self.get_path_to_page()
+
+    def get_page_filename(self, page=None, double=False):
+        """Return the filename of the <page>, or the filename of the
+        currently viewed page if <page> is None. If <double> is True, return
+        a tuple (p, p') where p is the filename of <page> (or the current
+        page) and p' is the filename of the page after.
+        """
+        if page is None:
+            page = self._current_image_index + 1
+        if double:
+            first = os.path.basename(self.get_path_to_page(page))
+            second = os.path.basename(self.get_path_to_page(page + 1))
+            return first, second
+        return os.path.basename(self.get_path_to_page(page))
+
+    def get_base_filename(self):
+        """Return the filename of the current base (archive filename or
+        directory name).
+        """
+        return os.path.basename(self.get_path_to_base())
+
+    def get_pretty_current_filename(self):
+        """Return a string with the name of the currently viewed file that is
+        suitable for printing.
+        """
+        if self.archive_type is not None:
+            name = os.path.basename(self._base_path)
+        else:
+            name = os.path.join(os.path.basename(self._base_path),
+                os.path.basename(self._image_files[self._current_image_index]))
+        return encoding.to_unicode(name)
 
     def get_size(self, page=None):
         """Return a tuple (width, height) with the size of <page>. If <page>

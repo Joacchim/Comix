@@ -292,6 +292,11 @@ class MainWindow(gtk.Window):
             self.statusbar.set_resolution(
                 (left_unscaled_x, left_unscaled_y, left_scale_percent),
                 (right_unscaled_x, right_unscaled_y, right_scale_percent))
+            left_filename, right_filename = \
+                self.file_handler.get_page_filename(double=True)
+            if self.is_manga_mode:
+                left_filename, right_filename = right_filename, left_filename
+            self.statusbar.set_filename(left_filename + ', ' + right_filename)
         else:
             pixbuf = self.file_handler.get_pixbufs(single=True)
             unscaled_x = pixbuf.get_width()
@@ -331,6 +336,7 @@ class MainWindow(gtk.Window):
                 self.file_handler.get_number_of_pages())
             self.statusbar.set_resolution((unscaled_x, unscaled_y,
                 scale_percent))
+            self.statusbar.set_filename(self.file_handler.get_page_filename())
         
         if prefs['smart bg']:
             bg_colour = image.get_most_common_edge_colour(
@@ -353,8 +359,7 @@ class MainWindow(gtk.Window):
                 self.scroll_to_fixed(horiz='startfirst', vert='top')
         self._image_box.window.thaw_updates()
 
-        self.statusbar.set_filename(
-            self.file_handler.get_pretty_current_filename())
+        self.statusbar.set_root(self.file_handler.get_base_filename())
         self.statusbar.update()
         self.update_title()
         while gtk.events_pending():

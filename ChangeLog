@@ -9,6 +9,9 @@ Comix 4.0.5
     Moseley.
     
     - Added support for BMP images in archives. Thanks to Nathaniel Moseley.
+    
+    - The status bar now displays the filename of the viewed image files also
+    in archives.
 
 Comix 4.0.4
     

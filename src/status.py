@@ -12,6 +12,7 @@ class Statusbar(gtk.Statusbar):
         self.set_has_resize_grip(True)
         self._page_info = ''
         self._resolution = ''
+        self._root = ''
         self._filename = ''
 
     def set_message(self, message):
@@ -39,6 +40,11 @@ class Statusbar(gtk.Statusbar):
         if right_dimensions is not None:
             self._resolution += ', %dx%d (%.1f%%)' % right_dimensions
 
+    
+    def set_root(self, root):
+        """Set the name of the root (directory or archive)."""
+        self._root = encoding.to_unicode(root)
+
     def set_filename(self, filename):
         """Update the filename."""
         self._filename = encoding.to_unicode(filename)
@@ -46,5 +52,5 @@ class Statusbar(gtk.Statusbar):
     def update(self):
         """Set the statusbar to display the current state."""
         self.pop(0)
-        self.push(0, ' %s      |      %s      |      %s' %
-            (self._page_info, self._resolution, self._filename))
+        self.push(0, ' %s      |      %s      |      %s      |      %s' %
+            (self._page_info, self._resolution, self._root, self._filename))
