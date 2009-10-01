@@ -83,6 +83,7 @@ class MainWindow(gtk.Window):
         self.toolbar.set_focus_child(
             self.ui_manager.get_widget('/Tool/expander'))
         self.toolbar.set_style(gtk.TOOLBAR_ICONS)
+        self.toolbar.set_icon_size(gtk.ICON_SIZE_LARGE_TOOLBAR)
 
         self._image_box.add(self.left_image)
         self._image_box.add(self.right_image)

@@ -160,42 +160,52 @@ class _ThumbnailRemover(gtk.Dialog):
 
         iteration = 0.0
         removed_thumbs = 0
-        size_thumbs = 0
+        thumbs_size = 0
         for subdir in ('normal', 'large'):
             dir_path = os.path.join(_thumb_base, subdir)
-            if not os.path.isdir(dir_path):
+            if not os.path.isdir(dir_path) or not os.access(dir_path, os.X_OK):
                 continue
             for entry in os.listdir(dir_path):
                 if self._destroy:
                     return
                 iteration += 1
                 entry_path = os.path.join(dir_path, entry)
-                if not os.path.isfile(entry_path):
+                if not os.path.isfile(entry_path) or not os.access(entry_path,
+                  os.W_OK | os.R_OK):
                     continue
-                broken = False
                 try:
-                    stats = os.stat(entry_path)
-                    info = Image.open(entry_path).info
-                    orig_path = _uri_to_path(info['Thumb::URI'])
-                    thumb_mtime = int(info['Thumb::MTime'])
-                    src_mtime = os.stat(orig_path).st_mtime
+                    im_info = Image.open(entry_path).info
+                    thumb_mtime = int(im_info['Thumb::MTime'])
+                    src_path = _uri_to_path(im_info['Thumb::URI'])
+                    broken = False
                 except Exception:
+                    src_path = '?'
                     broken = True
-                # Thumb is orphaned or outdated
-                if (broken or not os.path.isfile(orig_path) or
+                else:
+                    try:
+                        src_mtime = os.stat(src_path).st_mtime
+                    except Exception:
+                        src_mtime = None
+                # Thumb is orphaned, outdated or invalid.
+                if (broken or not os.path.isfile(src_path) or
                   src_mtime != thumb_mtime):
+                    size = os.stat(entry_path).st_size
                     try:
                         os.remove(entry_path)
                     except Exception:
                         continue
                     removed_thumbs += 1
-                    size_thumbs += stats.st_size
+                    thumbs_size += size
                     number_label.set_text('%d' % removed_thumbs)
-                    size_label.set_text('%.1f MiB' % (size_thumbs / 1048576.0))
+                    size_label.set_text('%.1f MiB' % (thumbs_size / 1048576.0))
+                    if broken:
+                        src_path = '?'
+                    else:
+                        src_path = encoding.to_unicode(src_path)
                     removing_label.set_text(_("Removed thumbnail for '%s'") %
-                        encoding.to_unicode(orig_path))
+                        src_path)
                 if iteration % 50 == 0:
-                    bar.set_fraction(iteration / self._total_thumbs)
+                    bar.set_fraction(min(1, iteration / self._total_thumbs))
                 while gtk.events_pending():
                     gtk.main_iteration(False)
 

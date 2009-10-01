@@ -4,14 +4,16 @@ Comix 4.0.5
     
     - Added a Galician translation by Roxerio Roxo Carrillo.
     
-    - Fixed a bug that caused the wrong background colour to be used with the
-    dynamic background colour preference on some systems. Thanks to Nathaniel
-    Moseley.
-    
     - Added support for BMP images in archives. Thanks to Nathaniel Moseley.
     
     - The status bar now displays the filename of the viewed image files also
     in archives.
+    
+    - Fixed a bug that caused the wrong background colour to be used with the
+    dynamic background colour preference on some systems. Thanks to Nathaniel
+    Moseley.
+    
+    - Fixed a bug that could cause the thumbnail maintenance dialog to crash.
 
 Comix 4.0.4
     
