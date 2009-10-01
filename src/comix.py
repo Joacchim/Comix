@@ -33,6 +33,8 @@ try:
     import gtk
     assert gtk.gtk_version >= (2, 12, 0)
     assert gtk.pygtk_version >= (2, 12, 0)
+    import gobject
+    gobject.threads_init()
 except AssertionError:
     print "You don't have the required versions of GTK+ and/or PyGTK",
     print 'installed.'

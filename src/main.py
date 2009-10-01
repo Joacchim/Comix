@@ -240,17 +240,18 @@ class MainWindow(gtk.Window):
 
             if self.zoom_mode == preferences.ZOOM_MODE_MANUAL:
                 if left_rotation in (90, 270):
-                    total_width = left_unscaled_x
-                    total_height = left_unscaled_y
-                else:
                     total_width = left_unscaled_y
                     total_height = left_unscaled_x
-                if right_rotation in (90, 270):
-                    total_width += right_unscaled_x
-                    total_height += right_unscaled_y
                 else:
+                    total_width = left_unscaled_x
+                    total_height = left_unscaled_y
+                if right_rotation in (90, 270):
                     total_width += right_unscaled_y
                     total_height += right_unscaled_x
+                else:
+                    total_width += right_unscaled_x
+                    total_height += right_unscaled_y
+                total_width += 2 # For the 2 px gap between images. 
                 scaled_width = int(self._manual_zoom * total_width / 100)
                 scaled_height = int(self._manual_zoom * total_height / 100)
                 scale_up = True
