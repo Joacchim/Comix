@@ -710,7 +710,7 @@ class MainWindow(gtk.Window):
         """
         self._main_layout.modify_bg(gtk.STATE_NORMAL,
             gtk.gdk.colormap_get_system().alloc_color(gtk.gdk.Color(
-            *colour), False, True))
+            colour[0], colour[1], colour[2]), False, True))
 
     def _display_active_widgets(self):
         """Hide and/or show main window widgets depending on the current
