@@ -28,8 +28,8 @@ source_dir = os.path.dirname(os.path.realpath(__file__))
 install_dir = '/usr/local/'
 install_mime = True
 
-TRANSLATIONS = ('ca', 'cs', 'es', 'fr', 'hr', 'hu', 'id', 'ja', 'ko', 'pl',
-    'pt_BR', 'ru', 'sv', 'uk', 'zh_CN', 'zh_TW')
+TRANSLATIONS = ('ca', 'cs', 'es', 'fr', 'gl', 'hr', 'hu', 'id', 'ja', 'ko',
+    'pl', 'pt_BR', 'ru', 'sv', 'uk', 'zh_CN', 'zh_TW')
 
 # These translations have not yet been updated for Comix 4:
 # 'de', 'it', 'nl', 'el', 'fa'
