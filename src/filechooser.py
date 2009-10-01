@@ -188,6 +188,9 @@ class _MainFileChooserDialog(_ComicFileChooserDialog):
         self.filechooser.add_filter(ffilter)
         self.add_filter(_('JPEG images'), ('image/jpeg',))
         self.add_filter(_('PNG images'), ('image/png',))
+        self.add_filter(_('GIF images'), ('image/gif',))
+        self.add_filter(_('TIFF images'), ('image/tiff',))
+        self.add_filter(_('BMP images'), ('image/bmp',))
 
         filters = self.filechooser.list_filters()
         try:
@@ -305,6 +308,9 @@ class StandAloneFileChooserDialog(_ComicFileChooserDialog):
         self.filechooser.add_filter(ffilter)
         self.add_filter(_('JPEG images'), ('image/jpeg',))
         self.add_filter(_('PNG images'), ('image/png',))
+        self.add_filter(_('GIF images'), ('image/gif',))
+        self.add_filter(_('TIFF images'), ('image/tiff',))
+        self.add_filter(_('BMP images'), ('image/bmp',))
 
     def get_paths(self):
         """Return the selected paths. To be called after run() has returned

@@ -47,7 +47,7 @@ class FileHandler:
         self._name_table = {}
         self._extractor = archive.Extractor()
         self._condition = None
-        self._image_re = re.compile(r'\.(jpg|jpeg|png|gif|tif|tiff)\s*$', re.I)
+        self._image_re = re.compile(r'\.(jpg|jpeg|png|gif|tif|tiff|bmp)\s*$', re.I)
         self.update_comment_extensions()
 
     def _get_pixbuf(self, index):

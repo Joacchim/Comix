@@ -314,7 +314,7 @@ def get_archive_info(path):
     """Return a tuple (mime, num_pages, size) with info about the archive
     at <path>, or None if <path> doesn't point to a supported archive.
     """
-    image_re = re.compile(r'\.(jpg|jpeg|png|gif|tif|tiff)\s*$', re.I)
+    image_re = re.compile(r'\.(jpg|jpeg|png|gif|tif|tiff|bmp)\s*$', re.I)
     extractor = Extractor()
     extractor.setup(path, None)
     mime = extractor.get_mime_type()

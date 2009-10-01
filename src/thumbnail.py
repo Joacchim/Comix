@@ -179,7 +179,7 @@ def _guess_cover(files):
     cover of an archive using some simple heuristics.
     """
     filehandler.alphanumeric_sort(files)
-    ext_re = re.compile(r'\.(jpg|jpeg|png|gif|tif|tiff)\s*$', re.I)
+    ext_re = re.compile(r'\.(jpg|jpeg|png|gif|tif|tiff|bmp)\s*$', re.I)
     front_re = re.compile('(cover|front)', re.I)
     images = filter(ext_re.search, files)
     candidates = filter(front_re.search, images)
