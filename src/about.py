@@ -86,6 +86,7 @@ class _AboutDialog(gtk.Dialog):
           ('Manuel Quiñones', _('Spanish translation')),
           ('Marcelo Góes', _('Brazilian Portuguese translation')),
           ('Christoph Wolk', _('German translation and Nautilus thumbnailer')),
+          ('Chris Leick', _('German translation')),
           ('Raimondo Giammanco', _('Italian translation')),
           ('GhePeU', _('Italian translation')),
           ('Arthur Nieuwland', _('Dutch translation')),
@@ -106,6 +107,7 @@ class _AboutDialog(gtk.Dialog):
           ('Andhika Padmawan', _('Indonesian translation')),
           ('Jan Nekvasil', _('Czech translation')),
           ('Олександр Заяц', _('Ukrainian translation')),
+          ('Roxerio Roxo Carrillo', _('Galician translation')),
           ('Victor Castillejo', _('Icon design'))):
             name_label = labels.BoldLabel('%s:' % nice_person)
             name_label.set_alignment(1.0, 1.0)

@@ -173,8 +173,7 @@ class _BookmarksStore:
         """Create a bookmark and add it to the store and the menu."""
         bookmark = _Bookmark(self._file_handler, name, path, page, numpages,
             archive_type)
-        self._bookmarks.append(bookmark)
-        self._menu.add_bookmark(bookmark)
+        self.add_bookmark(bookmark)
 
     def add_bookmark(self, bookmark):
         """Add the <bookmark> to the store and the menu."""

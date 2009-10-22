@@ -4,6 +4,8 @@ Comix 4.0.5
     
     - Added a Galician translation by Roxerio Roxo Carrillo.
     
+    - The German translation updated for Comix 4 by Chris Leick.
+    
     - Added support for BMP images in archives. Thanks to Nathaniel Moseley.
     
     - The status bar now displays the filename of the viewed image files also
