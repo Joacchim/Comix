@@ -89,11 +89,15 @@ class Extractor:
         """
         return self._files[:]
 
-    def set_files(self, files):
+    def set_files(self, files, extracted=False):
         """Set the files that the extractor should extract from the archive in
         the order of extraction. Normally one would get the list of all files
         in the archive using get_files(), then filter and/or permute this
         list before sending it back using set_files().
+
+        The second parameter, extracted allows a trick for the subarchive
+        managing : setting files as extracted, in order to avoid any blocking
+        wait on files not present in the original archive.
 
         Note: Random access on gzip or bzip2 compressed tar archives is
         no good idea. These formats are supported *only* for backwards
@@ -101,6 +105,11 @@ class Extractor:
         not be used for scanned comic books. So, we cheat and ignore the
         ordering applied with this method on such archives.
         """
+        if extracted:
+            self._files = files
+            for file in files:
+                self._extracted[file] = True
+            return
         if self._type in (GZIP, BZIP2):
             self._files = [x for x in self._files if x in files]
         else:

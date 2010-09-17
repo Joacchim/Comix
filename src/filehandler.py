@@ -229,6 +229,7 @@ class FileHandler:
         while gtk.events_pending():
             gtk.main_iteration(False)
 
+        unknown_files = []
         # If <path> is an archive we create an Extractor for it and set the
         # files in it with file endings indicating image files or comments
         # as the ones to be extracted.
@@ -238,38 +239,23 @@ class FileHandler:
             files = self._extractor.get_files()
             image_files = filter(self._image_re.search, files)
             alphanumeric_sort(image_files)
+            comment_files = filter(self._comment_re.search, files)
+            # Allow managing sub-archives
+            unknown_files = \
+                filter(lambda i: i not in image_files + comment_files, files)
             self._image_files = \
                 [os.path.join(self._tmp_dir, f) for f in image_files]
-            comment_files = filter(self._comment_re.search, files)
             self._comment_files = \
                 [os.path.join(self._tmp_dir, f) for f in comment_files]
             for name, full_path in zip(image_files, self._image_files):
                 self._name_table[full_path] = name
             for name, full_path in zip(comment_files, self._comment_files):
                 self._name_table[full_path] = name
+            for name in unknown_files:
+                self._name_table[self._tmp_dir + name] = name
 
-            if start_page <= 0:
-                if self._window.is_double_page:
-                    self._current_image_index = self.get_number_of_pages() - 2
-                else:
-                    self._current_image_index = self.get_number_of_pages() - 1
-            else:
-                self._current_image_index = start_page - 1
-            self._current_image_index = max(0, self._current_image_index)
+            self._redo_priority_ordering(start_page, image_files)
 
-            depth = self._window.is_double_page and 2 or 1
-            priority_ordering = (
-                range(self._current_image_index,
-                    self._current_image_index + depth * 2) +
-                range(self._current_image_index - depth,
-                    self._current_image_index)[::-1])
-            priority_ordering = [image_files[p] for p in priority_ordering
-                if 0 <= p <= self.get_number_of_pages() - 1]
-            for i, name in enumerate(priority_ordering):
-                image_files.remove(name)
-                image_files.insert(i, name)
-
-            self._extractor.set_files(image_files + comment_files)
             self._extractor.extract()
         # If <path> is an image we scan its directory for more images.
         else:
@@ -281,8 +267,43 @@ class FileHandler:
             self._image_files.sort(locale.strcoll)
             self._current_image_index = self._image_files.index(path)
 
+        # Manage subarchive
+        if unknown_files:
+            has_subarchive = False
+            for (i, name) in enumerate(unknown_files):
+                f = self._tmp_dir + name
+                self._wait_on_file(f)
+                if archive.archive_mime_type(f) is not None:
+                    self._open_subarchive(os.path.dirname(f),
+                                          os.path.basename(f))
+                    has_subarchive = True
+            # Allows to avoid any behaviour changes if there was no subarchive..
+            if has_subarchive:
+                # Now, get all files, and move them into the temp directory
+                # while renaming them to avoid any sorting error.
+                self._image_files = []
+                tmpdir_len = len(self._tmp_dir)
+                extracted_files = []
+                for file in get_next_file(self._tmp_dir):
+                    dst = file[tmpdir_len:].replace("/", "_")
+                    extracted_files.append(dst)
+                    dst = self._tmp_dir + dst
+                    shutil.move(file, dst)
+                    self._image_files.append(dst)
+                self._comment_files = \
+                    filter(self._comment_re.search, self._image_files)
+                self._image_files = \
+                    filter(self._image_re.search, self._image_files)
+                alphanumeric_sort(self._image_files)
+                self._name_table.clear()
+                for full_path in self._image_files + self._comment_files:
+                    self._name_table[full_path] = os.path.basename(full_path)
+                self._extractor.set_files(extracted_files, True)
+                #redo calculation of current_index from start_page
+                self._redo_priority_ordering(start_page, self._image_files)
+
         if not self._image_files:
-            self._window.statusbar.set_message(_("No images in '%s'") %
+            self._window.statusbar.set_message(_("No images or subarchives in '%s'") %
                 os.path.basename(path))
             self.file_loaded = False
         else:
@@ -293,6 +314,46 @@ class FileHandler:
         self._window.ui_manager.set_sensitivities()
         self._window.new_page()
         self._window.ui_manager.recent.add(path)
+
+    def _redo_priority_ordering(self, start_page, list):
+        if start_page <= 0:
+            if self._window.is_double_page:
+                self._current_image_index = self.get_number_of_pages() - 2
+            else:
+                self._current_image_index = self.get_number_of_pages() - 1
+        else:
+            self._current_image_index = start_page - 1
+        self._current_image_index = max(0, self._current_image_index)
+
+        depth = self._window.is_double_page and 2 or 1
+        priority_ordering = (
+            range(self._current_image_index,
+                self._current_image_index + depth * 2) +
+            range(self._current_image_index - depth,
+                self._current_image_index)[::-1])
+        priority_ordering = [list[p] for p in priority_ordering
+            if 0 <= p <= self.get_number_of_pages() - 1]
+        for i, name in enumerate(priority_ordering):
+            list.remove(name)
+            list.insert(i, name)
+
+    def _open_subarchive(self, dir, path):
+        """Allows to recursively extract all subarchives"""
+        extractor = archive.Extractor()
+        condition = extractor.setup(dir + "/" + path, dir)
+        sub_files = extractor.get_files()
+        alphanumeric_sort(sub_files)
+        extractor.set_files(sub_files)
+        extractor.extract()
+        for name in sub_files:
+            condition.acquire()
+            while not extractor.is_ready(name):
+                condition.wait()
+            condition.release()
+            name = dir + "/" + name
+            if archive.archive_mime_type(name) is not None:
+                self._open_subarchive(os.path.dirname(name), os.path.basename(name))
+        os.remove(dir + "/" + path)
 
     def close_file(self, *args):
         """Run tasks for "closing" the currently opened file(s)."""
@@ -578,3 +639,10 @@ def alphanumeric_sort(filenames):
 
     rec = re.compile("\d+|\D+")
     filenames.sort(key=lambda s: map(_format_substring, rec.findall(s)))
+
+def get_next_file(dir_name):
+    """Yields the next file in the whole file hierarchy
+       with dir_name as the top"""
+    for (dir, dirs, files) in os.walk(dir_name):
+        for file in files:
+            yield dir + '/' + file
