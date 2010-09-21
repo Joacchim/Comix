@@ -40,7 +40,7 @@ class Statusbar(gtk.Statusbar):
         if right_dimensions is not None:
             self._resolution += ', %dx%d (%.1f%%)' % right_dimensions
 
-    
+
     def set_root(self, root):
         """Set the name of the root (directory or archive)."""
         self._root = encoding.to_unicode(root)

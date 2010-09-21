@@ -283,7 +283,7 @@ class EventHandler:
             self._window.glass.set_lens_cursor(event.x, event.y)
         else:
             self._window.cursor_handler.refresh()
-        
+
     def drag_n_drop_event(self, widget, context, x, y, selection, drag_id,
       eventtime):
         """Handle drag-n-drop events on the main layout area."""

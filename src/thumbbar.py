@@ -49,7 +49,7 @@ class ThumbnailSidebar(gtk.HBox):
 
         self.pack_start(self._layout)
         self.pack_start(self._scroll)
-        
+
         self._treeview.connect_after('drag_begin', self._drag_begin)
         self._treeview.connect('drag_data_get', self._drag_data_get)
         self._selection.connect('changed', self._selection_event)
@@ -135,7 +135,7 @@ class ThumbnailSidebar(gtk.HBox):
             self._layout.set_size(0, self._height)
         self._stop_update = True
         self.update_select()
-    
+
     def _get_selected_row(self):
         """Return the index of the currently selected row."""
         try:

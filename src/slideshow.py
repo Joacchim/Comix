@@ -6,7 +6,7 @@ from preferences import prefs
 
 
 class Slideshow:
-    
+
     """Slideshow handler that manages starting and stopping of slideshows."""
 
     def __init__(self, window):

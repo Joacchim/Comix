@@ -19,7 +19,7 @@ _dialog = None
 
 
 class _EditArchiveDialog(gtk.Dialog):
-    
+
     """The _EditArchiveDialog lets users edit archives (or directories) by
     reordering images and removing and adding images or other files. The
     result can be saved as a ZIP archive.
@@ -42,7 +42,7 @@ class _EditArchiveDialog(gtk.Dialog):
         self.resize(min(gtk.gdk.screen_get_default().get_width() - 50, 750),
             min(gtk.gdk.screen_get_default().get_height() - 50, 600))
         self.connect('response', self._response)
-        
+
         self._image_area = _ImageArea(self)
         self._other_area = _OtherArea(self)
 
@@ -136,14 +136,14 @@ class _EditArchiveDialog(gtk.Dialog):
 
 
 class _ImageArea(gtk.ScrolledWindow):
-    
+
     """The area used for displaying and handling image files."""
-    
+
     def __init__(self, edit_dialog):
         gtk.ScrolledWindow.__init__(self)
         self._edit_dialog = edit_dialog
         self.set_policy(gtk.POLICY_AUTOMATIC, gtk.POLICY_AUTOMATIC)
-        
+
         # The ListStore layout is (thumbnail, basename, full path).
         self._liststore = gtk.ListStore(gtk.gdk.Pixbuf, str, str)
         self._iconview = gtk.IconView(self._liststore)
@@ -210,7 +210,7 @@ class _ImageArea(gtk.ScrolledWindow):
         for path in paths:
             iterator = self._liststore.get_iter(path)
             self._liststore.remove(iterator)
-    
+
     def _button_press(self, iconview, event):
         """Handle mouse button presses on the thumbnail area."""
         path = iconview.get_path_at_pos(int(event.x), int(event.y))
@@ -245,9 +245,9 @@ class _ImageArea(gtk.ScrolledWindow):
 
 
 class _OtherArea(gtk.VBox):
-    
+
     """The area used for displaying and handling non-image files."""
-    
+
     def __init__(self, edit_dialog):
         gtk.VBox.__init__(self)
         self._edit_dialog = edit_dialog
@@ -259,7 +259,7 @@ class _OtherArea(gtk.VBox):
         info.set_alignment(0.5, 0.5)
         info.set_line_wrap(True)
         self.pack_start(info, False, False, 10)
-        
+
         # The ListStore layout is (basename, size, full path).
         self._liststore = gtk.ListStore(str, str, str)
         self._treeview = gtk.TreeView(self._liststore)
@@ -288,7 +288,7 @@ class _OtherArea(gtk.VBox):
             ('remove', gtk.STOCK_REMOVE, _('Remove from archive'), None, None,
                 self._remove_file)])
         self._ui_manager.insert_action_group(actiongroup, 0)
-    
+
     def fetch_comments(self):
         """Load all comments in the archive."""
         for num in xrange(1,

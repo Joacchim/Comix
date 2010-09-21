@@ -27,7 +27,7 @@ _DRAG_EXTERNAL_ID, _DRAG_BOOK_ID, _DRAG_COLLECTION_ID = range(3)
 
 
 class _LibraryDialog(gtk.Window):
-    
+
     """The library window. Automatically creates and uses a new
     librarybackend.LibraryBackend when opened.
     """
@@ -37,7 +37,7 @@ class _LibraryDialog(gtk.Window):
         self.resize(prefs['lib window width'], prefs['lib window height'])
         self.set_title(_('Library'))
         self.connect('delete_event', self.close)
-        
+
         self.filter_string = None
         self._file_handler = file_handler
         self._statusbar = gtk.Statusbar()
@@ -46,7 +46,7 @@ class _LibraryDialog(gtk.Window):
         self.book_area = _BookArea(self)
         self.control_area = _ControlArea(self)
         self.collection_area = _CollectionArea(self)
-        
+
         table = gtk.Table(2, 2, False)
         table.attach(self.collection_area, 0, 1, 0, 1, gtk.FILL,
             gtk.EXPAND|gtk.FILL)
@@ -65,7 +65,7 @@ class _LibraryDialog(gtk.Window):
             return
         self.close()
         self._file_handler.open_file(path)
-                
+
     def set_status_message(self, message):
         """Set a specific message on the statusbar, replacing whatever was
         there earlier.
@@ -103,11 +103,11 @@ class _LibraryDialog(gtk.Window):
 
 
 class _CollectionArea(gtk.ScrolledWindow):
-    
+
     """The _CollectionArea is the sidebar area in the library where
     different collections are displayed in a tree.
     """
-    
+
     def __init__(self, library):
         gtk.ScrolledWindow.__init__(self)
         self._library = library
@@ -132,7 +132,7 @@ class _CollectionArea(gtk.ScrolledWindow):
         column = gtk.TreeViewColumn(None, cellrenderer, markup=0)
         self._treeview.append_column(column)
         self.add(self._treeview)
-        
+
         self._ui_manager = gtk.UIManager()
         ui_description = """
         <ui>
@@ -154,7 +154,7 @@ class _CollectionArea(gtk.ScrolledWindow):
             ('remove', gtk.STOCK_REMOVE, _('Remove collection...'), None, None,
                 self._remove_collection)])
         self._ui_manager.insert_action_group(actiongroup, 0)
-        
+
         self.display_collections()
 
     def get_current_collection(self):
@@ -173,7 +173,7 @@ class _CollectionArea(gtk.ScrolledWindow):
         Any row that was expanded before the call will have it's
         corresponding new row also expanded after the call.
         """
-        
+
         def _recursive_add(parent_iter, supercoll):
             for coll in self._library.backend.get_collections_in_collection(
               supercoll):
@@ -186,16 +186,16 @@ class _CollectionArea(gtk.ScrolledWindow):
             collection = treestore.get_value(iterator, 1)
             if collection == prefs['last library collection']:
                 # Reset to trigger update of book area.
-                prefs['last library collection'] = None 
+                prefs['last library collection'] = None
                 self._treeview.expand_to_path(path)
                 self._treeview.set_cursor(path)
             elif collection in expanded_collections:
-                self._treeview.expand_to_path(path) 
+                self._treeview.expand_to_path(path)
 
         def _expanded_rows_accumulator(treeview, path):
             collection = self._get_collection_at_path(path)
             expanded_collections.append(collection)
-        
+
         expanded_collections = []
         self._treeview.map_expanded_rows(_expanded_rows_accumulator)
         self._treestore.clear()
@@ -252,7 +252,7 @@ class _CollectionArea(gtk.ScrolledWindow):
         rename_dialog.format_secondary_text(
             _('Please enter a new name for the selected collection.'))
         rename_dialog.set_default_response(gtk.RESPONSE_OK)
-        
+
         box = gtk.HBox() # To get nice line-ups with the padding.
         rename_dialog.vbox.pack_start(box)
         entry = gtk.Entry()
@@ -260,7 +260,7 @@ class _CollectionArea(gtk.ScrolledWindow):
         entry.set_activates_default(True)
         box.pack_start(entry, True, True, 6)
         box.show_all()
-        
+
         response = rename_dialog.run()
         new_name = entry.get_text()
         rename_dialog.destroy()
@@ -274,7 +274,7 @@ class _CollectionArea(gtk.ScrolledWindow):
                     message = '%s %s' % (message,
                         _('A collection by that name already exists.'))
                 self._library.set_status_message(message)
-    
+
     def _duplicate_collection(self, action):
         """Duplicate the currently selected collection."""
         collection = self.get_current_collection()
@@ -320,7 +320,7 @@ class _CollectionArea(gtk.ScrolledWindow):
         """
         self._library.set_status_message('')
         drop_row = treeview.get_dest_row_at_pos(x, y)
-        if drop_row is None: # Drop "after" the last row. 
+        if drop_row is None: # Drop "after" the last row.
             dest_path, pos = ((len(self._treestore) - 1,),
                 gtk.TREE_VIEW_DROP_AFTER)
         else:
@@ -343,7 +343,7 @@ class _CollectionArea(gtk.ScrolledWindow):
                     self._library.backend.remove_book_from_collection(book,
                         src_collection)
                     self._library.book_area.remove_book_at_path(int(path_str))
-                
+
     def _drag_motion(self, treeview, context, x, y, *args):
         """Set the library statusbar text when hovering a drag-n-drop over
         a collection (either books or from the collection area itself).
@@ -408,7 +408,7 @@ class _CollectionArea(gtk.ScrolledWindow):
             else:
                 src_name = self._library.backend.get_collection_name(
                     src_collection)
-                message = (_("Move books from '%(source collection)s' to '%(destination collection)s'.") % 
+                message = (_("Move books from '%(source collection)s' to '%(destination collection)s'.") %
                     {'source collection': src_name,
                     'destination collection': dest_name})
         self._set_acceptable_drop(True)
@@ -442,17 +442,17 @@ class _CollectionArea(gtk.ScrolledWindow):
 
 
 class _BookArea(gtk.ScrolledWindow):
-    
+
     """The _BookArea is the central area in the library where the book
     covers are displayed.
     """
-    
+
     def __init__(self, library):
         gtk.ScrolledWindow.__init__(self)
         self._library = library
         self._stop_update = False
         self.set_policy(gtk.POLICY_AUTOMATIC, gtk.POLICY_AUTOMATIC)
-        
+
         self._liststore = gtk.ListStore(gtk.gdk.Pixbuf, int) # (Cover, ID).
         self._iconview = gtk.IconView(self._liststore)
         self._iconview.set_pixbuf_column(0)
@@ -499,7 +499,7 @@ class _BookArea(gtk.ScrolledWindow):
 
     def close(self):
         """Run clean-up tasks for the _BookArea prior to closing."""
-        
+
         # We must unselect all or we will trigger selection_changed events
         # when closing with multiple books selected.
         self._iconview.unselect_all()
@@ -640,15 +640,15 @@ class _BookArea(gtk.ScrolledWindow):
         """Handle key presses on the _BookArea."""
         if event.keyval == gtk.keysyms.Delete:
             self._remove_books_from_collection()
-        
+
     def _drag_begin(self, iconview, context):
         """Create a cursor image for drag-n-drop from the library.
 
-        This method relies on implementation details regarding PIL's 
+        This method relies on implementation details regarding PIL's
         drawing functions and default font to produce good looking results.
         If those are changed in a future release of PIL, this method might
         produce bad looking output (e.g. non-centered text).
-        
+
         It's also used with connect_after() to overwrite the cursor
         automatically created when using enable_model_drag_source(), so in
         essence it's a hack, but at least it works.
@@ -665,7 +665,7 @@ class _BookArea(gtk.ScrolledWindow):
             max(0, cover.get_height() // 2), gtk.gdk.INTERP_TILES)
         cover = image.add_border(cover, 1, 0xFFFFFFFF)
         cover = image.add_border(cover, 1)
-        
+
         if num_books > 1:
             cover_width = cover.get_width()
             cover_height = cover.get_height()
@@ -725,11 +725,11 @@ class _BookArea(gtk.ScrolledWindow):
 
 
 class _ControlArea(gtk.HBox):
-    
+
     """The _ControlArea is the bottom area of the library window where
     information is displayed and controls such as buttons resides.
     """
-    
+
     def __init__(self, library):
         self._library = library
         gtk.HBox.__init__(self, False, 12)
@@ -856,7 +856,7 @@ class _ControlArea(gtk.HBox):
         add_dialog.format_secondary_text(
             _('Please enter a name for the new collection.'))
         add_dialog.set_default_response(gtk.RESPONSE_OK)
-        
+
         box = gtk.HBox() # To get nice line-ups with the padding.
         add_dialog.vbox.pack_start(box)
         entry = gtk.Entry()
@@ -864,7 +864,7 @@ class _ControlArea(gtk.HBox):
         entry.set_activates_default(True)
         box.pack_start(entry, True, True, 6)
         box.show_all()
-        
+
         response = add_dialog.run()
         name = entry.get_text()
         add_dialog.destroy()
@@ -901,9 +901,9 @@ class _ControlArea(gtk.HBox):
 
 
 class _AddBooksProgressDialog(gtk.Dialog):
-    
+
     """Dialog with a ProgressBar that adds books to the library."""
-    
+
     def __init__(self, library, paths, collection):
         """Adds the books at <paths> to the library, and also to the
         <collection>, unless it is None.
@@ -962,7 +962,7 @@ class _AddBooksProgressDialog(gtk.Dialog):
     def _response(self, *args):
         self._destroy = True
         self.destroy()
-        
+
 
 def open_dialog(action, window):
     global _dialog

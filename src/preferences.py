@@ -72,7 +72,7 @@ _dialog = None
 
 
 class _PreferencesDialog(gtk.Dialog):
-    
+
     """The preferences dialog where most (but not all) settings that are
     saved between sessions are presented to the user.
     """
@@ -89,7 +89,7 @@ class _PreferencesDialog(gtk.Dialog):
         self.vbox.pack_start(notebook)
         self.set_border_width(4)
         notebook.set_border_width(6)
-        
+
         # ----------------------------------------------------------------
         # The "Appearance" tab.
         # ----------------------------------------------------------------
@@ -124,7 +124,7 @@ class _PreferencesDialog(gtk.Dialog):
         thumb_number_button.connect('toggled', self._check_button_cb,
             'show page numbers on thumbnails')
         page.add_row(thumb_number_button)
-        
+
         page.new_section(_('Magnifying Glass'))
         label = gtk.Label('%s:' % _('Magnifying glass size (in pixels)'))
         adjustment = gtk.Adjustment(prefs['lens size'], 50, 400, 1, 10)
@@ -163,7 +163,7 @@ class _PreferencesDialog(gtk.Dialog):
             _('Use a grey checkered background for transparent images. If this preference is unset, the background is plain white instead.'))
         page.add_row(checkered_bg_button)
         notebook.append_page(page, gtk.Label(_('Appearance')))
-        
+
         # ----------------------------------------------------------------
         # The "Behaviour" tab.
         # ----------------------------------------------------------------
@@ -277,7 +277,7 @@ class _PreferencesDialog(gtk.Dialog):
         zoom_combo.append_text(_('Fit height mode'))
         zoom_combo.append_text(_('Manual zoom mode'))
         # Change this if the combobox entries are reordered.
-        zoom_combo.set_active(prefs['default zoom mode']) 
+        zoom_combo.set_active(prefs['default zoom mode'])
         zoom_combo.connect('changed', self._combo_box_cb)
         page.add_row(label, zoom_combo)
 
@@ -377,12 +377,12 @@ class _PreferencesDialog(gtk.Dialog):
 
 
 class _PreferencePage(gtk.VBox):
-    
+
     """The _PreferencePage is a conveniece class for making one "page"
     in a preferences-style dialog that contains one or more
     _PreferenceSections.
     """
-    
+
     def __init__(self, right_column_width):
         """Create a new page where any possible right columns have the
         width request <right_column_width>.
@@ -391,7 +391,7 @@ class _PreferencePage(gtk.VBox):
         self.set_border_width(12)
         self._right_column_width = right_column_width
         self._section = None
-    
+
     def new_section(self, header):
         """Start a new section in the page, with the header text from
         <header>.
@@ -415,12 +415,12 @@ class _PreferencePage(gtk.VBox):
 
 
 class _PreferenceSection(gtk.VBox):
-    
+
     """The _PreferenceSection is a convenience class for making one
     "section" of a preference-style dialog, e.g. it has a bold header
     and a number of rows which are indented with respect to that header.
     """
-    
+
     def __init__(self, header, right_column_width=150):
         """Contruct a new section with the header set to the text in
         <header>, and the width request of the (possible) right columns

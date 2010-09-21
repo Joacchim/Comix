@@ -44,7 +44,7 @@ class MainUI(gtk.UIManager):
             ('zoom_out', gtk.STOCK_ZOOM_OUT, _('Zoom _out'),
                 'KP_Subtract', None, window.manual_zoom_out),
             ('zoom_original', gtk.STOCK_ZOOM_100, _('O_riginal size'),
-                '<Control>0', None, window.manual_zoom_original),  
+                '<Control>0', None, window.manual_zoom_original),
             ('close', gtk.STOCK_CLOSE, _('_Close'),
                 '<Control>w', None, window.file_handler.close_file),
             ('quit', gtk.STOCK_QUIT, _('_Quit'),
@@ -96,7 +96,7 @@ class MainUI(gtk.UIManager):
                 '<Control>S', None, window.slideshow.toggle),
             ('lens', 'comix-lens', _('Magnifying _glass'),
                 'g', None, window.glass.toggle)])
-        
+
         # Note: Don't change the default value for the radio buttons unless
         # also fixing the code for setting the correct one on start-up.
         self._actiongroup.add_radio_actions([
@@ -280,7 +280,7 @@ class MainUI(gtk.UIManager):
         # Is there no built-in way to do this?
         self.get_widget('/Tool/expander').set_expand(True)
         self.get_widget('/Tool/expander').set_sensitive(False)
-        
+
         self.get_widget('/Tool/first_page').set_tooltip_text(_('First page'))
         self.get_widget('/Tool/previous_page').set_tooltip_text(
             _('Previous page'))

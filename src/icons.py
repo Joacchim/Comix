@@ -27,7 +27,7 @@ def load_icons():
               ('fitwidth.png',               'comix-fitwidth'),
               ('fitheight.png',              'comix-fitheight'),
               ('fitmanual.png',              'comix-fitmanual'))
-    
+
     icon_path = None
     # Some heuristics to find the path to the icon image files.
     base = os.path.dirname(os.path.dirname(os.path.realpath(sys.argv[0])))
@@ -42,7 +42,7 @@ def load_icons():
                 break
     if icon_path is None:
         return
-    
+
     # Load window title icon.
     pixbuf = gtk.gdk.pixbuf_new_from_file(os.path.join(icon_path,
         '16x16/comix.png'))

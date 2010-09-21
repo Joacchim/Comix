@@ -92,7 +92,7 @@ class FileHandler:
         first_wanted = max(0, first_wanted)
         last_wanted = min(self.get_number_of_pages(), last_wanted)
         wanted_pixbufs = range(first_wanted, last_wanted)
-        
+
         # Remove old pixbufs.
         for page in set(self._raw_pixbufs) - set(wanted_pixbufs):
             del self._raw_pixbufs[page]
@@ -100,7 +100,7 @@ class FileHandler:
             gc.collect(0)
         else:
             gc.collect()
-        
+
         # Cache new pixbufs if they are not already cached.
         for wanted in wanted_pixbufs:
             self._get_pixbuf(wanted)
@@ -114,7 +114,7 @@ class FileHandler:
         old_page = self.get_current_page()
         viewed = self._window.displayed_double() and 2 or 1
         if self.get_current_page() + viewed > self.get_number_of_pages():
-            if (prefs['auto open next archive'] and 
+            if (prefs['auto open next archive'] and
               self.archive_type is not None):
                 self._open_next_archive()
             return False
@@ -184,7 +184,7 @@ class FileHandler:
           not prefs['no double page for wide images'] or
           self.get_current_page() == self.get_number_of_pages()):
             return False
-        
+
         page1 = self._get_pixbuf(self._current_image_index)
         if page1.get_width() > page1.get_height():
             return True
@@ -194,8 +194,8 @@ class FileHandler:
         return False
 
     def open_file(self, path, start_page=1):
-        """Open the file pointed to by <path>. 
-        
+        """Open the file pointed to by <path>.
+
         If <start_page> is not set we set the current
         page to 1 (first page), if it is set we set the current page to the
         value of <start_page>. If <start_page> is non-positive it means the
@@ -221,7 +221,7 @@ class FileHandler:
             self._window.statusbar.set_message(
                 _('Could not open %s: Unknown file type.') % path)
             return False
-        
+
         # We close the previously opened file.
         self._window.cursor_handler.set_cursor_type(cursor.WAIT)
         if self.file_loaded:
@@ -530,14 +530,14 @@ class FileHandler:
 
     def _get_forward_step_length(self):
         """Return the step length for switching pages forwards."""
-        if (self._window.displayed_double() and 
+        if (self._window.displayed_double() and
           prefs['double step in double page mode']):
             return 2
         return 1
 
     def _get_backward_step_length(self):
         """Return the step length for switching pages backwards."""
-        if (self._window.is_double_page and 
+        if (self._window.is_double_page and
           prefs['double step in double page mode']):
             return 2
         return 1

@@ -5,7 +5,7 @@ import subprocess
 
 
 class Process:
-    
+
     """The subprocess and popen2 modules in Python are broken (see issue
     #1336). The problem (i.e. complete crash) they can cause happen fairly
     often (once is too often) in Comix when calling "rar" or "unrar" to
@@ -21,7 +21,7 @@ class Process:
         """
         self._args = args
         self._proc = None
-    
+
     def _exec(self):
         """Spawns the process, and returns its stdout.
         (NOTE: separate function to make python2.4 exception syntax happy)

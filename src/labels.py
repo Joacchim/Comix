@@ -5,11 +5,11 @@ import pango
 
 
 class FormattedLabel(gtk.Label):
-    
+
     """FormattedLabel keeps a label always formatted with some pango weight,
     style and scale, even when new text is set using set_text().
     """
-    
+
     def __init__(self, text='', weight=pango.WEIGHT_NORMAL,
       style=pango.STYLE_NORMAL, scale=pango.SCALE_MEDIUM):
         gtk.Label.__init__(self, text)
@@ -32,16 +32,16 @@ class FormattedLabel(gtk.Label):
 
 
 class BoldLabel(FormattedLabel):
-    
+
     """A FormattedLabel that is always bold and otherwise normal."""
-    
+
     def __init__(self, text=''):
         FormattedLabel.__init__(self, text, weight=pango.WEIGHT_BOLD)
 
 
 class ItalicLabel(FormattedLabel):
-    
+
     """A FormattedLabel that is always italic and otherwise normal."""
-    
+
     def __init__(self, text=''):
         FormattedLabel.__init__(self, text, style=pango.STYLE_ITALIC)

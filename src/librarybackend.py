@@ -20,13 +20,13 @@ _cover_dir = os.path.join(constants.DATA_DIR, 'library_covers')
 
 
 class LibraryBackend:
-    
+
     """The LibraryBackend handles the storing and retrieval of library
     data to and from disk.
     """
 
     def __init__(self):
-        
+
         def row_factory(cursor, row):
             """Return rows as sequences only when they have more than
             one element.

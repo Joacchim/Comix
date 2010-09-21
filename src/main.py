@@ -251,7 +251,7 @@ class MainWindow(gtk.Window):
                 else:
                     total_width += right_unscaled_x
                     total_height += right_unscaled_y
-                total_width += 2 # For the 2 px gap between images. 
+                total_width += 2 # For the 2 px gap between images.
                 scaled_width = int(self._manual_zoom * total_width / 100)
                 scaled_height = int(self._manual_zoom * total_height / 100)
                 scale_up = True
@@ -275,7 +275,7 @@ class MainWindow(gtk.Window):
                 right_pixbuf.get_width()) / 2
             y_padding = (area_height - max(left_pixbuf.get_height(),
                 right_pixbuf.get_height())) / 2
-            
+
             if left_rotation in (90, 270):
                 left_scale_percent = (100.0 * left_pixbuf.get_width() /
                     left_unscaled_y)
@@ -315,7 +315,7 @@ class MainWindow(gtk.Window):
                 if rotation in (90, 270):
                     scaled_width, scaled_height = scaled_height, scaled_width
                 scale_up = True
-            
+
             pixbuf = image.fit_in_rectangle(pixbuf, scaled_width,
                 scaled_height, scale_up=scale_up, rotation=rotation)
             if prefs['horizontal flip']:
@@ -328,7 +328,7 @@ class MainWindow(gtk.Window):
             self.right_image.clear()
             x_padding = (area_width - pixbuf.get_width()) / 2
             y_padding = (area_height - pixbuf.get_height()) / 2
-            
+
             if rotation in (90, 270):
                 scale_percent = 100.0 * pixbuf.get_width() / unscaled_y
             else:
@@ -339,7 +339,7 @@ class MainWindow(gtk.Window):
             self.statusbar.set_resolution((unscaled_x, unscaled_y,
                 scale_percent))
             self.statusbar.set_filename(self.file_handler.get_page_filename())
-        
+
         if prefs['smart bg']:
             bg_colour = image.get_most_common_edge_colour(
                 self.left_image.get_pixbuf())
@@ -692,7 +692,7 @@ class MainWindow(gtk.Window):
         directly.
         """
         self._main_layout.window.set_cursor(mode)
-        return False 
+        return False
 
     def update_title(self):
         """Set the title acording to current state."""
