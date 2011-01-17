@@ -59,6 +59,8 @@ class MainUI(gtk.UIManager):
                 None, None, window.flip_horizontally),
             ('flip_vert', 'comix-flip-vertical', _('Flip _vertically'),
                 None, None, window.flip_vertically),
+            ('extract_page', None, _('Extract page...'),
+                None, None, window.extract_page),
             ('menu_zoom', 'comix-zoom', _('Manual _Zoom')),
             ('menu_recent', None, _('Open _recent')),
             ('menu_bookmarks', None, _('_Bookmarks')),
@@ -159,6 +161,7 @@ class MainUI(gtk.UIManager):
                     <menuitem action="library" />
                     <separator />
                     <menuitem action="edit_archive" />
+                    <menuitem action="extract_page" />
                     <separator />
                     <menuitem action="properties" />
                     <menuitem action="comments" />
@@ -240,6 +243,8 @@ class MainUI(gtk.UIManager):
                 <menuitem action="fit_width_mode" />
                 <menuitem action="fit_height_mode" />
                 <menuitem action="fit_manual_mode" />
+                <separator />
+                <menuitem action="extract_page" />
                 <separator />
                 <menu action="menu_transform">
                     <menuitem action="rotate_90" />
