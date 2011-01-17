@@ -267,6 +267,10 @@ class EventHandler:
             self._window.cursor_handler.set_cursor_type(cursor.NORMAL)
             self._window.popup.popup(None, None, None, event.button,
                 event.time)
+        elif event.button == 8:  # Mouse "back" button
+            self._window.previous_page()
+        elif event.button == 9:  # Mouse "forward" button
+            self._window.next_page()
 
     def mouse_release_event(self, widget, event):
         """Handle mouse button release events on the main layout area."""
