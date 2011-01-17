@@ -125,17 +125,7 @@ def run():
     icons.load_icons()
 
     if len(args) >= 1:
-        param_path = os.path.abspath(args[0])
-        if os.path.isdir(param_path):
-            dir_files = os.listdir(param_path)
-            dir_files.sort(locale.strcoll)
-            for filename in dir_files:
-                full_path = os.path.join(param_path, filename)
-                if filehandler.is_image_file(full_path):
-                    open_path = full_path
-                    break
-        else:
-            open_path = param_path
+        open_path = os.path.abspath(args[0])  # try to open whatever it is.
     elif preferences.prefs['auto load last file']:
         open_path = preferences.prefs['path to last file']
         open_page = preferences.prefs['page of last file']

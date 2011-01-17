@@ -203,21 +203,24 @@ class FileHandler:
 
         Return True if the file is successfully loaded.
         """
+        dir_path = None
         # If the given <path> is invalid we update the statusbar.
-        if os.path.isdir(path):
-            self._window.statusbar.set_message(
-                _('Could not open %s: Is a directory.') % path)
-            return False
-        if not os.path.isfile(path):
-            self._window.statusbar.set_message(
-                _('Could not open %s: No such file.') % path)
-            return False
+        # (bad idea if it's permanently hidden; but no better way nearby)
         if not os.access(path, os.R_OK):
             self._window.statusbar.set_message(
                 _('Could not open %s: Permission denied.') % path)
             return False
+        if os.path.isdir(path):
+            dir_path = path  # handle it as a directory later.
+            # likely, can also check `os.access(path, os.X_OK)` instead of
+            # getting 'unknown type'.
+        elif not os.path.isfile(path):  # ...not dir or normal file.
+            self._window.statusbar.set_message(
+                _('Could not open %s: No such file.') % path)
+            return False
         self.archive_type = archive.archive_mime_type(path)
-        if self.archive_type is None and not is_image_file(path):
+        if self.archive_type is None and not is_image_file(path) and \
+          not dir_path:
             self._window.statusbar.set_message(
                 _('Could not open %s: Unknown file type.') % path)
             return False
@@ -257,15 +260,19 @@ class FileHandler:
             self._redo_priority_ordering(start_page, image_files)
 
             self._extractor.extract()
-        # If <path> is an image we scan its directory for more images.
         else:
-            self._base_path = os.path.dirname(path)
-            for f in os.listdir(self._base_path):
+            # If <path> is an image we scan its directory for more (or for
+            # any at all if <path> is directory).
+            self._base_path = dir_path if dir_path else os.path.dirname(path)
+            # Not necessary to sort *all* of it, but whatever.
+            for f in list_dir_sorted(self._base_path):
                 fpath = os.path.join(self._base_path, f)
                 if is_image_file(fpath):
                     self._image_files.append(fpath)
-            self._image_files.sort(locale.strcoll)
-            self._current_image_index = self._image_files.index(path)
+            if dir_path:
+                self._redo_priority_ordering(start_page, self._image_files)
+            else:
+                self._current_image_index = self._image_files.index(path)
 
         # Manage subarchive
         if unknown_files:
@@ -547,8 +554,7 @@ class FileHandler:
         archive in that archive's directory listing, sorted alphabetically.
         """
         arch_dir = os.path.dirname(self._base_path)
-        files = os.listdir(arch_dir)
-        files.sort(locale.strcoll)
+        files = list_dir_sorted(arch_dir)
         try:
             current_index = files.index(os.path.basename(self._base_path))
         except ValueError:
@@ -564,8 +570,7 @@ class FileHandler:
         archive in that archive's directory listing, sorted alphabetically.
         """
         arch_dir = os.path.dirname(self._base_path)
-        files = os.listdir(arch_dir)
-        files.sort(locale.strcoll)
+        files = os.list_dir_sorted(arch_dir)
         try:
             current_index = files.index(os.path.basename(self._base_path))
         except ValueError:
@@ -639,6 +644,14 @@ def alphanumeric_sort(filenames):
 
     rec = re.compile("\d+|\D+")
     filenames.sort(key=lambda s: map(_format_substring, rec.findall(s)))
+
+def list_dir_sorted(dir):
+    """ Helper for listing the directory contents with the preferred
+    sorting.  """
+    files = os.listdir(dir)
+    # files.sort(locale.strcoll)
+    alphanumeric_sort(files)
+    return files
 
 def get_next_file(dir_name):
     """Yields the next file in the whole file hierarchy
