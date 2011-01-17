@@ -385,10 +385,12 @@ class MainWindow(gtk.Window):
     def next_page(self, *args):
         if self.file_handler.next_page():
             self.new_page()
+            self.slideshow.update_delay()
 
     def previous_page(self, *args):
         if self.file_handler.previous_page():
             self.new_page(at_bottom=True)
+            self.slideshow.update_delay()
 
     def first_page(self, *args):
         if self.file_handler.first_page():
