@@ -14,6 +14,15 @@ import preferences
 from preferences import prefs
 
 
+def _valwarp(cur, max, tolerance=3):
+    """ Helper function for wrapping the cursor around the screen when it
+    comes within `tolerance` to a border. """
+    if cur < tolerance:
+        return cur + (max - 2 * tolerance)
+    if (max - cur) < tolerance:
+        return cur - (max - 2 * tolerance)
+    return cur
+
 class EventHandler:
 
     def __init__(self, window):
@@ -276,8 +285,18 @@ class EventHandler:
             self._window.cursor_handler.set_cursor_type(cursor.GRAB)
             self._window.scroll(self._last_pointer_pos_x - event.x_root,
                                 self._last_pointer_pos_y - event.y_root)
-            self._last_pointer_pos_x = event.x_root
-            self._last_pointer_pos_y = event.y_root
+
+            # Cursor wrapping stuff. See:
+            # https://sourceforge.net/tracker/?func=detail&aid=2988441&group_id=146377&atid=764987
+            disp = gtk.gdk.display_get_default()
+            scr = disp.get_default_screen()
+            new_x = _valwarp(event.x_root, scr.get_width())
+            new_y = _valwarp(event.y_root, scr.get_height())
+            if (new_x != event.x_root) or (new_y != event.y_root):
+                disp.warp_pointer(scr, int(new_x), int(new_y))
+
+            self._last_pointer_pos_x = new_x
+            self._last_pointer_pos_y = new_y
             self._drag_timer = event.time
         elif self._window.actiongroup.get_action('lens').get_active():
             self._window.glass.set_lens_cursor(event.x, event.y)
