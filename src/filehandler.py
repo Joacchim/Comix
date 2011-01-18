@@ -109,7 +109,7 @@ class FileHandler:
         """Set up filehandler to the next page. Return True if this results
         in a new page.
         """
-        if not self.file_loaded:
+        if not self.file_loaded and not self._base_path:
             return False
         old_page = self.get_current_page()
         viewed = self._window.displayed_double() and 2 or 1
@@ -125,7 +125,7 @@ class FileHandler:
         """Set up filehandler to the previous page. Return True if this
         results in a new page.
         """
-        if not self.file_loaded:
+        if not self.file_loaded and not self._base_path:
             return False
         if self.get_current_page() == 1:
             if (prefs['auto open next archive'] and
