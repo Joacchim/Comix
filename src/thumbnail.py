@@ -169,7 +169,16 @@ def _uri_to_thumbpath(uri, dst_dir):
 
 def _get_pixbuf128(path):
     try:
-        return gtk.gdk.pixbuf_new_from_file_at_size(path, 128, 128)
+        if "gif" not in path[-3:].lower():
+            return gtk.gdk.pixbuf_new_from_file_at_size(path, 128, 128)
+        else:
+            thumb = gtk.gdk.PixbufAnimation(path).get_static_image()
+            width = thumb.get_width()
+            height = thumb.get_height()
+            if width > height:
+                return thumb.scale_simple(128, int(max(height * 128 / width, 1)), gtk.gdk.INTERP_TILES)
+            else:
+                return thumb.scale_simple(int(max(width * 128 / height, 1)), 128, gtk.gdk.INTERP_TILES)
     except Exception:
         return None
 

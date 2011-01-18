@@ -57,8 +57,17 @@ class FileHandler:
         if index not in self._raw_pixbufs:
             self._wait_on_page(index + 1)
             try:
-                self._raw_pixbufs[index] = gtk.gdk.pixbuf_new_from_file(
-                    self._image_files[index])
+                """ Check for gif in the name of the file.  If it is a gif,
+                and the user wishes GIFs to be animated, load it as a
+                PixbufAnimation and make sure that it actually is animated. 
+                If it isn't animated, load a pixbuf instead.  """
+                if not (prefs['animate gifs'] or prefs['animate']) \
+                    or "gif" not in self._image_files[index][-3:].lower():
+                    self._raw_pixbufs[index] = gtk.gdk.pixbuf_new_from_file(self._image_files[index])
+                else:
+                    self._raw_pixbufs[index] = gtk.gdk.PixbufAnimation(self._image_files[index])
+                    if self._raw_pixbufs[index].is_static_image():
+                        self._raw_pixbufs[index] = self._raw_pixbufs[index].get_static_image()
             except Exception:
                 self._raw_pixbufs[index] = self._get_missing_image()
         return self._raw_pixbufs[index]
@@ -514,8 +523,18 @@ class FileHandler:
             thumb = thumbnail.get_thumbnail(path, create)
         else:
             try:
-                thumb = gtk.gdk.pixbuf_new_from_file_at_size(path, width,
-                    height)
+                if "gif" not in path[-3:].lower():
+                    thumb = gtk.gdk.pixbuf_new_from_file_at_size(path, width, height)
+                else:
+                    thumb = gtk.gdk.PixbufAnimation(path).get_static_image()
+                    src_width = thumb.get_width()
+                    src_height = thumb.get_height()
+                    if float(src_width) / width > float(src_height) / height:
+                        thumb = thumb.scale_simple(width,
+                            int(max(src_height * width / src_width, 1)), gtk.gdk.INTERP_TILES)
+                    else:
+                        thumb = thumb.scale_simple(int(max(src_width * height / src_height, 1)),
+                            height, gtk.gdk.INTERP_TILES)
             except Exception:
                 thumb = None
         if thumb is None:

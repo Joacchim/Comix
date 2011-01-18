@@ -84,6 +84,7 @@ def print_help():
     print '  -h, --help              Show this help and exit.'
     print '  -f, --fullscreen        Start the application in fullscreen mode.'
     print '  -l, --library           Show the library on startup.'
+    print '  -a, --animate-gifs      Play animations in GIF files.'
     sys.exit(1)
 
 
@@ -100,13 +101,14 @@ def run():
         gettext.install('comix', os.path.join(base_dir, 'share/locale'),
             unicode=True)
 
+    animate_gifs = False
     fullscreen = False
     show_library = False
     open_path = None
     open_page = 1
     try:
-        opts, args = getopt.gnu_getopt(sys.argv[1:], 'fhl',
-            ['fullscreen', 'help', 'library'])
+        opts, args = getopt.gnu_getopt(sys.argv[1:], 'fhla',
+            ['fullscreen', 'help', 'library', 'animate-gifs'])
     except getopt.GetoptError:
         print_help()
     for opt, value in opts:
@@ -116,6 +118,8 @@ def run():
             fullscreen = True
         elif opt in ('-l', '--library'):
             show_library = True
+        if opt in ('-a', '--animate-gifs'):
+            animate_gifs = True
 
     if not os.path.exists(constants.DATA_DIR):
         os.makedirs(constants.DATA_DIR, 0700)
@@ -131,7 +135,8 @@ def run():
         open_path = preferences.prefs['path to last file']
         open_page = preferences.prefs['page of last file']
 
-    window = main.MainWindow(fullscreen=fullscreen, show_library=show_library,
+    window = main.MainWindow(animate_gifs=animate_gifs,
+        fullscreen=fullscreen, show_library=show_library,
         open_path=open_path, open_page=open_page)
     deprecated.check_for_deprecated_files(window)
     

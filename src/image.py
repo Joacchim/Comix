@@ -9,7 +9,8 @@ import ImageStat
 from preferences import prefs
 
 
-def fit_in_rectangle(src, width, height, scale_up=False, rotation=0):
+def fit_in_rectangle(src, width, height, scale_up=False, rotation=0,
+  animated=False):
     """Scale (and return) a pixbuf so that it fits in a rectangle with
     dimensions <width> x <height>. A negative <width> or <height>
     means an unbounded dimension - both cannot be negative.
@@ -21,7 +22,13 @@ def fit_in_rectangle(src, width, height, scale_up=False, rotation=0):
     given rectangle.
 
     If <src> has an alpha channel it gets a checkboard background.
+
+    If <src> is an <animated> image (PixbufAnimation) it will be returned
+    unchanged. There is no way to resize PixbufAnimation objects currently.
     """
+# TODO: Fix the animated stuff. Eventually PixbufAnimation resizing should be  possible.
+    if animated:
+        return src
     # "Unbounded" really means "bounded to 10000 px" - for simplicity.
     # Comix would probably choke on larger images anyway.
     if width < 0:
@@ -71,7 +78,7 @@ def fit_in_rectangle(src, width, height, scale_up=False, rotation=0):
 
 
 def fit_2_in_rectangle(src1, src2, width, height, scale_up=False,
-  rotation1=0, rotation2=0):
+  rotation1=0, rotation2=0, animated1=False, animated2=False):
     """Scale two pixbufs so that they fit together (side-by-side) into a
     rectangle with dimensions <width> x <height>, with a 2 px gap.
     If one pixbuf does not use all of its allotted space, the other one
@@ -80,6 +87,11 @@ def fit_2_in_rectangle(src1, src2, width, height, scale_up=False,
 
     The pixbufs are rotated according to the angles in <rotation1> and
     <rotation2> before they are scaled.
+
+    If <src1> or <src2> is <animated#> (a PixbufAnimation), it won't be altered.
+    If the other image is not animated, it will be resized so that both
+    can be displayed well.
+
 
     See fit_in_rectangle() for more info on the parameters.
     """
@@ -98,27 +110,34 @@ def fit_2_in_rectangle(src1, src2, width, height, scale_up=False,
     src1_height = src1.get_height()
     src2_width = src2.get_width()
     src2_height = src2.get_height()
-    if rotation1 in (90, 270):
+# TODO: Fix the animated stuff. Eventually PixbufAnimation resizing should be  possible.
+    if not animated1 and rotation1 in (90, 270):
         src1_width, src1_height = src1_height, src1_width
-    if rotation2 in (90, 270):
+    if not animated2 and rotation2 in (90, 270):
         src2_width, src2_height = src2_height, src2_width
 
     total_width = src1_width + src2_width
     alloc_width_src1 = max(src1_width * width / total_width, 1)
     alloc_width_src2 = max(src2_width * width / total_width, 1)
-    needed_width_src1 = round(src1_width *
-        min(height / float(src1_height), alloc_width_src1 / float(src1_width)))
-    needed_width_src2 = round(src2_width *
-        min(height / float(src2_height), alloc_width_src2 / float(src2_width)))
+    if not animated1:
+        needed_width_src1 = round(src1_width *
+            min(height / float(src1_height), alloc_width_src1 / float(src1_width)))
+    else:
+        needed_width_src1 = src1_width
+    if not animated2:
+        needed_width_src2 = round(src2_width *
+            min(height / float(src2_height), alloc_width_src2 / float(src2_width)))
+    else:
+        needed_width_src2 = src2_width
     if needed_width_src1 < alloc_width_src1:
         alloc_width_src2 += alloc_width_src1 - needed_width_src1
     elif needed_width_src1 >= alloc_width_src1:
         alloc_width_src1 += alloc_width_src2 - needed_width_src2
 
     return (fit_in_rectangle(src1, int(alloc_width_src1), height,
-                             scale_up, rotation1),
+                             scale_up, rotation1, animated1),
             fit_in_rectangle(src2, int(alloc_width_src2), height,
-                             scale_up, rotation2))
+                             scale_up, rotation2, animated2))
 
 
 def add_border(pixbuf, thickness, colour=0x000000FF):
@@ -142,6 +161,8 @@ def get_most_common_edge_colour(pixbuf):
     Note: This could be done more cleanly with subpixbuf(), but that
     doesn't work as expected together with get_pixels().
     """
+    if isinstance(pixbuf, gtk.gdk.PixbufAnimation):
+        pixbuf = pixbuf.get_static_image()
     width = pixbuf.get_width()
     height = pixbuf.get_height()
     top_edge = gtk.gdk.Pixbuf(gtk.gdk.COLORSPACE_RGB, True, 8, width, 1)
@@ -215,6 +236,8 @@ def get_implied_rotation(pixbuf):
     be rotated in order to be displayed "correctly". E.g. a photograph taken
     by a camera that is held sideways might store this fact in its EXIF data,       and the pixbuf loader will set the orientation option correspondingly.
     """
+    if isinstance(pixbuf, gtk.gdk.PixbufAnimation):
+        pixbuf = pixbuf.get_static_image()
     orientation = pixbuf.get_option('orientation')
     if orientation == '3':
         return 180

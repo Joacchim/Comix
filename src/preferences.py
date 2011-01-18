@@ -24,6 +24,8 @@ prefs = {
     'bg colour': (5000, 5000, 5000),
     'checkered bg for transparent images': True,
     'cache': True,
+    'animate gifs': False,
+    'animate': False,
     'stretch': False,
     'default double page': False,
     'default fullscreen': False,
@@ -247,6 +249,15 @@ class _PreferencesDialog(gtk.Dialog):
         cache_button.set_tooltip_text(
             _('Cache the images that are next to the currently viewed image in order to speed up browsing. Since the speed improvements are quite big, it is recommended that you have this preference set, unless you are running short on free RAM.'))
         page.add_row(cache_button)
+
+        page.new_section(_('Image Animation'))
+        gif_button = gtk.CheckButton(_('Play GIF image animations.'))
+        gif_button.set_active(prefs['animate gifs'])
+        gif_button.connect('toggled', self._check_button_cb, 'animate gifs')
+        gif_button.set_tooltip_text(    # TODO: Change if PixbufAnimation gets resizing
+            _('Play animations for GIF files, if there is one. If this is set, animated GIF images will not be resized.'))
+        page.add_row(gif_button)
+
         notebook.append_page(page, gtk.Label(_('Behaviour')))
 
         # ----------------------------------------------------------------

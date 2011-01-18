@@ -30,7 +30,7 @@ class MainWindow(gtk.Window):
     program when closed.
     """
 
-    def __init__(self, fullscreen=False, show_library=False, open_path=None,
+    def __init__(self, animate_gifs=False, fullscreen=False, show_library=False, open_path=None,
             open_page=1):
         gtk.Window.__init__(self, gtk.WINDOW_TOPLEVEL)
 
@@ -158,6 +158,7 @@ class MainWindow(gtk.Window):
             prefs['rotation'] = 0
             prefs['vertical flip'] = False
             prefs['horizontal flip'] = False
+        prefs['animate'] = animate_gifs
 
         self.add(table)
         table.show()
@@ -204,6 +205,14 @@ class MainWindow(gtk.Window):
                 priority=gobject.PRIORITY_HIGH_IDLE)
 
     def _draw_image(self, at_bottom, scroll):
+        def pixb_process(pixbuf):
+            """ Small helper for common stuff to few pixbufs. """
+            if prefs['horizontal flip']:
+                pixbuf = pixbuf.flip(horizontal=True)
+            if prefs['vertical flip']:
+                pixbuf = pixbuf.flip(horizontal=False)
+            pixbuf = self.enhancer.enhance(pixbuf)
+            return pixbuf
         self._waiting_for_redraw = False
         self._display_active_widgets()
         if not self.file_handler.file_loaded:
@@ -220,11 +229,16 @@ class MainWindow(gtk.Window):
         scale_up = prefs['stretch']
         self.is_virtual_double_page = \
             self.file_handler.get_virtual_double_page()
-
+        # TODO: If and when it becomes possible to resize (and do other things)
+        #       to PixbufAnimation objects, change these hacks to make them work
+        #       correctly. All the conditionals about animated are part of this
         if self.displayed_double():
             left_pixbuf, right_pixbuf = self.file_handler.get_pixbufs()
             if self.is_manga_mode:
                 right_pixbuf, left_pixbuf = left_pixbuf, right_pixbuf
+            #instead of modifying returns, just do two extra calls here
+            left_animated = isinstance(left_pixbuf, gtk.gdk.PixbufAnimation)
+            right_animated = isinstance(right_pixbuf, gtk.gdk.PixbufAnimation)
             left_unscaled_x = left_pixbuf.get_width()
             left_unscaled_y = left_pixbuf.get_height()
             right_unscaled_x = right_pixbuf.get_width()
@@ -233,19 +247,21 @@ class MainWindow(gtk.Window):
             left_rotation = prefs['rotation']
             right_rotation = prefs['rotation']
             if prefs['auto rotate from exif']:
-                left_rotation += image.get_implied_rotation(left_pixbuf)
-                left_rotation = left_rotation % 360
-                right_rotation += image.get_implied_rotation(right_pixbuf)
-                right_rotation = right_rotation % 360
+                if not left_animated:
+                    left_rotation += image.get_implied_rotation(left_pixbuf)
+                    left_rotation = left_rotation % 360
+                if not right_animated:
+                    right_rotation += image.get_implied_rotation(right_pixbuf)
+                    right_rotation = right_rotation % 360
 
             if self.zoom_mode == preferences.ZOOM_MODE_MANUAL:
-                if left_rotation in (90, 270):
+                if not left_animated and left_rotation in (90, 270):
                     total_width = left_unscaled_y
                     total_height = left_unscaled_x
                 else:
                     total_width = left_unscaled_x
                     total_height = left_unscaled_y
-                if right_rotation in (90, 270):
+                if not right_animated and right_rotation in (90, 270):
                     total_width += right_unscaled_y
                     total_height += right_unscaled_x
                 else:
@@ -259,30 +275,31 @@ class MainWindow(gtk.Window):
             left_pixbuf, right_pixbuf = image.fit_2_in_rectangle(
                 left_pixbuf, right_pixbuf, scaled_width, scaled_height,
                 scale_up=scale_up, rotation1=left_rotation,
-                rotation2=right_rotation)
-            if prefs['horizontal flip']:
-                left_pixbuf = left_pixbuf.flip(horizontal=True)
-                right_pixbuf = right_pixbuf.flip(horizontal=True)
-            if prefs['vertical flip']:
-                left_pixbuf = left_pixbuf.flip(horizontal=False)
-                right_pixbuf = right_pixbuf.flip(horizontal=False)
-            left_pixbuf = self.enhancer.enhance(left_pixbuf)
-            right_pixbuf = self.enhancer.enhance(right_pixbuf)
+                rotation2=right_rotation, animated1=left_animated,
+                animated2=right_animated)
+            if not left_animated:
+                pixb_process(left_pixbuf)
+                self.left_image.set_from_pixbuf(left_pixbuf)
+            else:
+                self.left_image.set_from_animation(left_pixbuf)
+            if not right_animated:
+                pixb_process(right_pixbuf)
+                self.right_image.set_from_pixbuf(right_pixbuf)
+            else:
+                self.right_image.set_from_animation(right_pixbuf)
 
-            self.left_image.set_from_pixbuf(left_pixbuf)
-            self.right_image.set_from_pixbuf(right_pixbuf)
             x_padding = (area_width - left_pixbuf.get_width() -
                 right_pixbuf.get_width()) / 2
             y_padding = (area_height - max(left_pixbuf.get_height(),
                 right_pixbuf.get_height())) / 2
 
-            if left_rotation in (90, 270):
+            if not left_animated and left_rotation in (90, 270):
                 left_scale_percent = (100.0 * left_pixbuf.get_width() /
                     left_unscaled_y)
             else:
                 left_scale_percent = (100.0 * left_pixbuf.get_width() /
                     left_unscaled_x)
-            if right_rotation in (90, 270):
+            if not right_animated and right_rotation in (90, 270):
                 right_scale_percent = (100.0 * right_pixbuf.get_width() /
                     right_unscaled_y)
             else:
@@ -294,6 +311,11 @@ class MainWindow(gtk.Window):
             self.statusbar.set_resolution(
                 (left_unscaled_x, left_unscaled_y, left_scale_percent),
                 (right_unscaled_x, right_unscaled_y, right_scale_percent))
+
+            if prefs['smart bg']:
+                bg_colour = image.get_most_common_edge_colour(left_pixbuf)
+                self.set_bg_colour(bg_colour)
+
             left_filename, right_filename = \
                 self.file_handler.get_page_filename(double=True)
             if self.is_manga_mode:
@@ -301,35 +323,38 @@ class MainWindow(gtk.Window):
             self.statusbar.set_filename(left_filename + ', ' + right_filename)
         else:
             pixbuf = self.file_handler.get_pixbufs(single=True)
+            #instead of modifying returns, just do an extra single call here
+            animated = isinstance(pixbuf, gtk.gdk.PixbufAnimation)
             unscaled_x = pixbuf.get_width()
             unscaled_y = pixbuf.get_height()
 
             rotation = prefs['rotation']
-            if prefs['auto rotate from exif']:
+            if not animated and prefs['auto rotate from exif']:
                 rotation += image.get_implied_rotation(pixbuf)
                 rotation = rotation % 360
 
             if self.zoom_mode == preferences.ZOOM_MODE_MANUAL:
-                scaled_width = int(self._manual_zoom * unscaled_x / 100)
-                scaled_height = int(self._manual_zoom * unscaled_y / 100)
-                if rotation in (90, 270):
-                    scaled_width, scaled_height = scaled_height, scaled_width
+                if not animated:
+                    scaled_width = int(self._manual_zoom * unscaled_x / 100)
+                    scaled_height = int(self._manual_zoom * unscaled_y / 100)
+                    if rotation in (90, 270):
+                        scaled_width, scaled_height = scaled_height, scaled_width
                 scale_up = True
 
             pixbuf = image.fit_in_rectangle(pixbuf, scaled_width,
-                scaled_height, scale_up=scale_up, rotation=rotation)
-            if prefs['horizontal flip']:
-                pixbuf = pixbuf.flip(horizontal=True)
-            if prefs['vertical flip']:
-                pixbuf = pixbuf.flip(horizontal=False)
-            pixbuf = self.enhancer.enhance(pixbuf)
+                scaled_height, scale_up=scale_up, rotation=rotation,
+                animated=animated)
+            if not animated:
+                pixbuf = pixb_process(pixbuf)
+                self.left_image.set_from_pixbuf(pixbuf)
+            else:
+                self.left_image.set_from_animation(pixbuf)
 
-            self.left_image.set_from_pixbuf(pixbuf)
             self.right_image.clear()
             x_padding = (area_width - pixbuf.get_width()) / 2
             y_padding = (area_height - pixbuf.get_height()) / 2
 
-            if rotation in (90, 270):
+            if not animated and rotation in (90, 270):
                 scale_percent = 100.0 * pixbuf.get_width() / unscaled_y
             else:
                 scale_percent = 100.0 * pixbuf.get_width() / unscaled_x
@@ -340,10 +365,9 @@ class MainWindow(gtk.Window):
                 scale_percent))
             self.statusbar.set_filename(self.file_handler.get_page_filename())
 
-        if prefs['smart bg']:
-            bg_colour = image.get_most_common_edge_colour(
-                self.left_image.get_pixbuf())
-            self.set_bg_colour(bg_colour)
+            if prefs['smart bg']:
+                bg_colour = image.get_most_common_edge_colour(pixbuf)
+                self.set_bg_colour(bg_colour)
 
         self._image_box.window.freeze_updates()
         self._main_layout.move(self._image_box, max(0, x_padding),
