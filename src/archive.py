@@ -6,12 +6,16 @@ import re
 import zipfile
 import tarfile
 import threading
+try:
+    from py7zlib import Archive7z
+except ImportError:
+    Archive7z = None  # ignore it.
 
 import gtk
 
 import process
 
-ZIP, RAR, TAR, GZIP, BZIP2 = range(5)
+ZIP, RAR, TAR, GZIP, BZIP2, SEVENZIP = range(6)
 
 _rar_exec = None
 
@@ -74,6 +78,13 @@ class Extractor:
             self._files = [name.rstrip(os.linesep) for name in fd.readlines()]
             fd.close()
             proc.wait()
+        elif self._type == SEVENZIP:
+            if not Archive7z:  # lib import failed
+                print '! Non-supported archive format:', src
+                print '  ... because pylzma is not installed.'
+                return None
+            self._szfile = Archive7z(open(src,'rb'));
+            self._files = self._szfile.getnames()
         else:
             print '! Non-supported archive format:', src
             return None
@@ -167,12 +178,15 @@ class Extractor:
             self.close()
             sys.exit(0)
         try:
-            if self._type == ZIP:
+            if self._type in (ZIP, SEVENZIP):
                 dst_path = os.path.join(self._dst, name)
                 if not os.path.exists(os.path.dirname(dst_path)):
                     os.makedirs(os.path.dirname(dst_path))
                 new = open(dst_path, 'wb')
-                new.write(self._zfile.read(name))
+                if self._type == ZIP:
+                    new.write(self._zfile.read(name))
+                elif self._type == SEVENZIP:
+                    new.write(self._szfile.getmember(name).read())
                 new.close()
             elif self._type in (TAR, GZIP, BZIP2):
                 if os.path.normpath(os.path.join(self._dst, name)).startswith(
@@ -305,6 +319,8 @@ def archive_mime_type(path):
                 return TAR
             if magic == 'Rar!':
                 return RAR
+            if magic == '7z\xbc\xaf':
+                return SEVENZIP
     except Exception:
         print '! Error while reading', path
     return None
@@ -316,7 +332,9 @@ def get_name(archive_type):
             TAR:   _('Tar archive'),
             GZIP:  _('Gzip compressed tar archive'),
             BZIP2: _('Bzip2 compressed tar archive'),
-            RAR:   _('RAR archive')}[archive_type]
+            RAR:   _('RAR archive'),
+            SEVENZIP: _('7-Zip archive'),
+           }[archive_type]
 
 
 def get_archive_info(path):
