@@ -570,7 +570,7 @@ class FileHandler:
         archive in that archive's directory listing, sorted alphabetically.
         """
         arch_dir = os.path.dirname(self._base_path)
-        files = os.list_dir_sorted(arch_dir)
+        files = list_dir_sorted(arch_dir)
         try:
             current_index = files.index(os.path.basename(self._base_path))
         except ValueError:
