@@ -279,6 +279,18 @@ class EventHandler:
           event.x_root == self._pressed_pointer_pos_x and
           event.y_root == self._pressed_pointer_pos_y):
             self._window.next_page()
+        elif event.button == 1 and self._window.zoom_mode == preferences.ZOOM_MODE_BEST:
+            # Change page by touchscreen-useful flicking. See
+            # https://sourceforge.net/tracker/?func=detail&aid=3016790&group_id=146377&atid=764987
+            evx = event.x_root - self._pressed_pointer_pos_x
+            evy = event.y_root - self._pressed_pointer_pos_y
+            if max(abs(evx), abs(evy)) > 20:  # flicked, perhaps
+                if self._window.is_manga_mode:
+                    evx *= -1  # reversed horizontal perspective on next/prev.
+                if (evx if abs(evx) > abs(evy) else evy) < 0:
+                    self._window.next_page()
+                else:
+                    self._window.previous_page()
         if event.button == 2:
             self._window.actiongroup.get_action('lens').set_active(False)
 
@@ -286,6 +298,9 @@ class EventHandler:
         """Handle mouse pointer movement events."""
         event = _get_latest_event_of_same_type(event)
         if 'GDK_BUTTON1_MASK' in event.state.value_names:
+            if self._window.zoom_mode == preferences.ZOOM_MODE_BEST:
+                return  # nothig to drag, obviously. Allow flicking, also.
+
             self._window.cursor_handler.set_cursor_type(cursor.GRAB)
             self._window.scroll(self._last_pointer_pos_x - event.x_root,
                                 self._last_pointer_pos_y - event.y_root)
