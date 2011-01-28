@@ -47,6 +47,7 @@ prefs = {
     'hide all in fullscreen': True,
     'stored hide all values': (True, True, True, True, True),
     'path of last browsed in filechooser': constants.HOME_DIR,
+    'last path in save filechooser': './',
     'last filter in main filechooser': 0,
     'last filter in library filechooser': 1,
     'show menubar': True,

@@ -826,9 +826,16 @@ class MainWindow(gtk.Window):
             gtk.STOCK_CANCEL, gtk.RESPONSE_REJECT))
         save_dialog.set_current_name(suggested_name.encode('utf-8'))
 
+        # ? filechooser.py:93 uses `try`. But can this really fail?
+        if os.path.isdir(prefs['last path in save filechooser']):
+            save_dialog.set_current_folder(
+                prefs['last path in save filechooser'])
+
         if save_dialog.run() == gtk.RESPONSE_ACCEPT and save_dialog.get_filename():
             shutil.copy(self.file_handler.get_path_to_page(),
                 save_dialog.get_filename().decode('utf-8'))
+            prefs['last path in save filechooser'] = \
+                save_dialog.get_current_folder();
 
         save_dialog.destroy()
 
