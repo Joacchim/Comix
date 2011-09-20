@@ -94,6 +94,19 @@ def _get_new_archive_thumbnail(path, dst_dir):
     files = extractor.get_files()
     wanted = _guess_cover(files)
     if wanted is None:
+        """ Then check for subarchives and extract only the first... """
+        sub_re = re.compile(r'\.(tar|gz|bz2|rar|zip|7z)\s*$', re.I)
+        subs = filter(sub_re.search, files)
+        if subs:
+            subarchive = extractor.set_files([subs[0]])
+            extractor.extract()
+            condition.acquire()
+            while not extractor.is_ready(subs[0]):
+                condition.wait()
+            condition.release()
+            subpath = os.path.join(tmpdir, subs[0])
+            """ Recursively try to find an image to use as cover """
+            return _get_new_archive_thumbnail(subpath, dst_dir)
         return None
     extractor.set_files([wanted])
     extractor.extract()
