@@ -1,3 +1,9 @@
+Comix 4.0.6
+
+    - Support p7zip extraction tool.
+
+    - Add support of many image formats by PIL/Pillow.
+
 Comix 4.0.5
     
     - Added a Ukrainian translation by Олександр Заяц.
