@@ -39,6 +39,7 @@ FILES = (('src/about.py', 'share/comix/src'),
          ('src/archive.py', 'share/comix/src'),
          ('src/bookmark.py', 'share/comix/src'),
          ('src/comix.py', 'share/comix/src'),
+         ('src/comicthumb.py', 'share/comix/src'),
          ('src/comment.py', 'share/comix/src'),
          ('src/constants.py', 'share/comix/src'),
          ('src/cursor.py', 'share/comix/src'),
@@ -101,10 +102,13 @@ FILES = (('src/about.py', 'share/comix/src'),
          ('images/comix.svg', 'share/icons/hicolor/scalable/apps'))
 
 # Symlinks to be created, as (target, symlink)
-LINKS = (('../share/comix/src/comix.py', 'bin/comix'),)
+LINKS = (
+    ('../share/comix/src/comix.py', 'bin/comix'),
+    ('../share/comix/src/comicthumb.py', 'bin/comicthumb'),
+)
 
 # Mime files to be installed, as (source file, destination directory)
-MIME_FILES = (('mime/comicthumb', 'bin'),
+MIME_FILES = (
               ('mime/comicthumb.1.gz', 'share/man/man1'),
               ('mime/comix.xml', 'share/mime/packages'),
               ('mime/icons/16x16/application-x-cbz.png',
@@ -124,19 +128,29 @@ MIME_LINKS = (('application-x-cbz.png',
               ('application-x-cbz.png',
                'share/icons/hicolor/16x16/mimetypes/application-x-cbt.png'),
               ('application-x-cbz.png',
+               'share/icons/hicolor/16x16/mimetypes/application-x-cb7.png'),
+              ('application-x-cbz.png',
                'share/icons/hicolor/22x22/mimetypes/application-x-cbr.png'),
               ('application-x-cbz.png',
                'share/icons/hicolor/22x22/mimetypes/application-x-cbt.png'),
+              ('application-x-cbz.png',
+               'share/icons/hicolor/22x22/mimetypes/application-x-cb7.png'),
               ('application-x-cbz.png',
                'share/icons/hicolor/24x24/mimetypes/application-x-cbr.png'),
               ('application-x-cbz.png',
                'share/icons/hicolor/24x24/mimetypes/application-x-cbt.png'),
               ('application-x-cbz.png',
+               'share/icons/hicolor/24x24/mimetypes/application-x-cb7.png'),
+              ('application-x-cbz.png',
                'share/icons/hicolor/32x32/mimetypes/application-x-cbr.png'),
               ('application-x-cbz.png',
                'share/icons/hicolor/32x32/mimetypes/application-x-cbt.png'),
               ('application-x-cbz.png',
+               'share/icons/hicolor/32x32/mimetypes/application-x-cb7.png'),
+              ('application-x-cbz.png',
                'share/icons/hicolor/48x48/mimetypes/application-x-cbr.png'),
+              ('application-x-cbz.png',
+               'share/icons/hicolor/48x48/mimetypes/application-x-cb7.png'),
               ('application-x-cbz.png',
                'share/icons/hicolor/48x48/mimetypes/application-x-cbt.png'))
 
