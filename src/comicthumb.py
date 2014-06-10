@@ -7,7 +7,7 @@ comicthumb is dependent on the Python Imaging Library (PIL).
 comicthumb was originally written by Christoph Wolk, this version was
 re-written from scratch for Comix 4 by Pontus Ekberg. 
 
-Supported formats: ZIP, RAR and tar (.cbz, .cbr, .cbt)
+Supported formats: ZIP, RAR, 7Z and tar (.cbz, .cbr, .cb7, .cbt)
 
 Usage: comicthumb INFILE OUTFILE [SIZE]
 """
