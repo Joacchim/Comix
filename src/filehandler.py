@@ -18,7 +18,7 @@ import encoding
 import image
 from preferences import prefs
 import thumbnail
-
+from image import get_supported_format_extensions_preg
 
 class FileHandler:
 
@@ -47,7 +47,9 @@ class FileHandler:
         self._name_table = {}
         self._extractor = archive.Extractor()
         self._condition = None
-        self._image_re = re.compile(r'\.(jpg|jpeg|png|gif|tif|tiff|bmp)\s*$', re.I)
+
+        self._image_re = re.compile('\.('+'|'.join(get_supported_format_extensions_preg())+')\s*$', re.I)
+
         self.update_comment_extensions()
 
     def _get_pixbuf(self, index):

@@ -14,12 +14,12 @@ except ImportError:
 import gtk
 
 import process
+from image import get_supported_format_extensions_preg
 
 ZIP, RAR, TAR, GZIP, BZIP2, SEVENZIP = range(6)
 
 _rar_exec = None
 _7z_exec = None
-
 
 class Extractor:
 
@@ -417,7 +417,7 @@ def get_archive_info(path):
     """Return a tuple (mime, num_pages, size) with info about the archive
     at <path>, or None if <path> doesn't point to a supported archive.
     """
-    image_re = re.compile(r'\.(jpg|jpeg|png|gif|tif|tiff|bmp)\s*$', re.I)
+    image_re = re.compile('\.('+'|'.join(get_supported_format_extensions_preg())+')\s*$', re.I)
     extractor = Extractor()
     extractor.setup(path, None)
     mime = extractor.get_mime_type()
