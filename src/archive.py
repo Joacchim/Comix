@@ -18,6 +18,7 @@ import process
 ZIP, RAR, TAR, GZIP, BZIP2, SEVENZIP = range(6)
 
 _rar_exec = None
+_7z_exec = None
 
 
 class Extractor:
@@ -73,24 +74,88 @@ class Extractor:
                     dialog.run()
                     dialog.destroy()
                     return None
-            proc = process.Process([_rar_exec, 'vb', '--', src])
+            proc = process.Process([_rar_exec, 'vb', '-p-', '--', src])
             fd = proc.spawn()
             self._files = [name.rstrip(os.linesep) for name in fd.readlines()]
             fd.close()
             proc.wait()
         elif self._type == SEVENZIP:
+
             if not Archive7z:  # lib import failed
-                print '! Non-supported archive format:', src
-                print '  ... because pylzma is not installed.'
+                print ': pylzma is not installed... will try 7z tool...'
+            elif not _7z_exec:
+                self._szfile = Archive7z(open(src,'rb'))
+                self._files = self._szfile.getnames()
+
+            global _7z_exec
+            if _7z_exec is None:
+                _7z_exec = _get_7z_exec()
+            if _7z_exec is None:
+                print '! Could not find 7Z file extractor.'
+            else:
+                proc = process.Process([_7z_exec, 'l', '-bd', '-slt', '-p-', src])
+                fd = proc.spawn()
+                self._files = self._process_7z_names(fd)
+                fd.close()
+                proc.wait()
+
+            if not _7z_exec and not Archive7z:
+                dialog = gtk.MessageDialog(None, 0, gtk.MESSAGE_WARNING,
+                    gtk.BUTTONS_CLOSE,
+                    _("Could not find 7Z file extractor!"))
+                dialog.format_secondary_markup(
+                    _("You need either the <i>pylzma</i> or the <i>p7zip</i> program installed in order to read 7Z (.cb7) files."))
+                dialog.run()
+                dialog.destroy()
                 return None
-            self._szfile = Archive7z(open(src,'rb'));
-            self._files = self._szfile.getnames()
+
         else:
             print '! Non-supported archive format:', src
             return None
 
         self._setupped = True
         return self._condition
+
+    def _process_7z_names(self, fd):
+        START = "----------"
+        names = []
+        started = False
+        item = {}
+
+        while True:
+
+            try:
+                line = fd.readline()
+            except:
+                break
+
+            if line:
+                line = line.rstrip(os.linesep)
+                try:
+                    # For non-ascii files names
+                    line = line.decode("utf-8")
+                except:
+                    pass
+
+                if line.startswith(START):
+                    started = True
+                    item = {}
+                    continue
+
+                if started:
+                    if line == "":
+                        if item["Attributes"].find("D") == -1:
+                            names.append(item["Path"])
+                        item = {}
+                    else:
+                        key = line.split("=")[0].strip()
+                        value = "=".join(line.split("=")[1:]).strip()
+                        item[key] = value
+            else:
+                break
+
+        return names
+
 
     def get_files(self):
         """Return a list of names of all the files the extractor is currently
@@ -186,7 +251,17 @@ class Extractor:
                 if self._type == ZIP:
                     new.write(self._zfile.read(name))
                 elif self._type == SEVENZIP:
-                    new.write(self._szfile.getmember(name).read())
+                    if Archive7z is not None:
+                        new.write(self._szfile.getmember(name).read())
+                    else:
+                        if _7z_exec is not None:
+                            proc = process.Process([_7z_exec, 'x', '-bd', '-p-',
+                                '-o'+self._dst, '-y', self._src, name])
+                            proc.spawn()
+                            proc.wait()
+                        else:
+                            print '! Could not find 7Z file extractor.'
+
                 new.close()
             elif self._type in (TAR, GZIP, BZIP2):
                 if os.path.normpath(os.path.join(self._dst, name)).startswith(
@@ -359,6 +434,15 @@ def _get_rar_exec():
     no such executable is found.
     """
     for command in ('unrar', 'rar'):
+        if process.Process([command]).spawn() is not None:
+            return command
+    return None
+
+def _get_7z_exec():
+    """Return the name of the RAR file extractor executable, or None if
+    no such executable is found.
+    """
+    for command in ('7z', '7za', '7zr'):
         if process.Process([command]).spawn() is not None:
             return command
     return None
