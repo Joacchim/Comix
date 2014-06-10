@@ -1,3 +1,8 @@
+Comix 4.0.7
+
+    - Support 7z in comicthumb tool.
+    - Add mime for 7z comic book archives
+
 Comix 4.0.6
 
     - Support p7zip extraction tool.

@@ -6,6 +6,7 @@ import re
 import zipfile
 import tarfile
 import threading
+import cStringIO
 try:
     from py7zlib import Archive7z
 except ImportError:
@@ -288,6 +289,30 @@ class Extractor:
         self._extracted[name] = True
         self._condition.notify()
         self._condition.release()
+
+    def extract_file_io(self, chosen):
+        """Extract the file named <name> to the destination directory,
+        mark the file as "ready", then signal a notify() on the Condition
+        returned by setup().
+        """
+
+        if self._type == ZIP:
+            return cStringIO.StringIO(self._zfile.read(chosen))
+        elif self._type in [TAR, GZIP, BZIP2]:
+            return cStringIO.StringIO(self._tfile.extractfile(chosen).read())
+        elif self._type == RAR:
+            proc = process.Process([_rar_exec, 'p', '-inul', '-p-', '--',
+                self._src, chosen])
+            fobj = proc.spawn()
+            return cStringIO.StringIO(fobj.read())
+        elif self._type == SEVENZIP:
+            if Archive7z is not None:
+                return cStringIO.StringIO(self._szfile.getmember(chosen).read())
+            elif _7z_exec is not None:
+                proc = process.Process([_7z_exec, 'e', '-bd', '-p-', '-so',
+                    self._src, chosen])
+                fobj = proc.spawn()
+                return cStringIO.StringIO(fobj.read())
 
 
 class Packer:
