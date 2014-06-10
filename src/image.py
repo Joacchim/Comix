@@ -8,6 +8,39 @@ import ImageStat
 
 from preferences import prefs
 
+def get_supported_format_extensions_preg():
+    """
+    Return list of image extensions for ues in REGEX
+
+    PIL 1.1.7 can support not only common image formats
+    """
+
+    formats = [
+        "jpg", "jpeg?",
+        "png",
+        "bmp",
+        "tiff?",
+        "gif",
+        "eps", "dcx", "msp",
+        "pcx", "ppm", "xbm", "xpm",
+        "cur", "ico", "fl[ic]",
+        "pcd", "psd", "tga",
+        "fpx", "wal", "sgi"
+    ]
+    try:
+        import Image
+        if hasattr(Image, "PILLOW_VERSION"):
+            # It's PIL fork with more image formats
+            # like Jpeg2000, WebP
+            # Support status is unknown. We can only try to load images...
+            formats.extend([
+                "j2[kp]", "jp[2x]",
+                "webp"
+            ])
+    except:
+        pass
+    return formats
+
 
 def fit_in_rectangle(src, width, height, scale_up=False, rotation=0,
   animated=False):
