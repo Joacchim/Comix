@@ -1,3 +1,8 @@
+Comix 4.0.8
+
+    - Support mobi format.
+    - Fix support of Pillow (PIL fork)
+
 Comix 4.0.7
 
     - Support 7z in comicthumb tool.
