@@ -7,7 +7,7 @@ comicthumb is dependent on the Python Imaging Library (PIL).
 comicthumb was originally written by Christoph Wolk, this version was
 re-written from scratch for Comix 4 by Pontus Ekberg. 
 
-Supported formats: ZIP, RAR, 7Z and tar (.cbz, .cbr, .cb7, .cbt)
+Supported formats: ZIP, RAR, 7Z, mobi and tar (.cbz, .cbr, .cb7, .cbt)
 
 Usage: comicthumb INFILE OUTFILE [SIZE]
 """
@@ -15,11 +15,17 @@ Usage: comicthumb INFILE OUTFILE [SIZE]
 import sys
 
 try:
-    import Image
+    from PIL import Image
 except ImportError:
-    print '! Could not import the Image module (PIL).'
-    print __doc__
-    sys.exit(1)
+    Image = None
+
+if Image is None:
+    try:
+        import Image
+    except ImportError:
+        print '! Could not import the Image module (PIL).'
+        print __doc__
+        sys.exit(1)
 
 
 from archive import Extractor

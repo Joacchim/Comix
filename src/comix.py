@@ -52,18 +52,26 @@ except ImportError:
     sys.exit(1)
 
 try:
-    import Image
+    from PIL import Image
+except ImportError:
+    Image = None
+
+if Image is None:
+    try:
+        import Image
+    except ImportError:
+        print 'Python Imaging Library (PIL) version 1.1.5 or higher or Pillow is required.'
+        print 'No version of the Python Imaging Library was found on your',
+        print 'system.'
+        sys.exit(1)
+
+try:
     assert Image.VERSION >= '1.1.5'
 except AssertionError:
     print "You don't have the required version of the Python Imaging",
     print 'Library (PIL) installed.'
     print 'Installed PIL version is: %s' % Image.VERSION
     print 'Required PIL version is: 1.1.5 or higher'
-    sys.exit(1)
-except ImportError:
-    print 'Python Imaging Library (PIL) 1.1.5 or higher is required.'
-    print 'No version of the Python Imaging Library was found on your',
-    print 'system.'
     sys.exit(1)
 
 import constants
