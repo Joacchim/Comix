@@ -1,9 +1,15 @@
 """histogram.py - Draw histograms (RGB) from pixbufs."""
 
 import gtk
-import Image
-import ImageDraw
-import ImageOps
+
+try:
+    from PIL import Image
+    from PIL import ImageDraw
+    from PIL import ImageOps
+except:
+    import Image
+    import ImageDraw
+    import ImageOps
 
 import image
 

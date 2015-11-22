@@ -1,10 +1,17 @@
 """image.py - Various image manipulations."""
 
 import gtk
-import Image
-import ImageEnhance
-import ImageOps
-import ImageStat
+
+try:
+    from PIL import Image
+    from PIL import ImageEnhance
+    from PIL import ImageOps
+    from PIL import ImageStat
+except:
+    import Image
+    import ImageEnhance
+    import ImageOps
+    import ImageStat
 
 from preferences import prefs
 
@@ -27,18 +34,14 @@ def get_supported_format_extensions_preg():
         "pcd", "psd", "tga",
         "fpx", "wal", "sgi"
     ]
-    try:
-        import Image
-        if hasattr(Image, "PILLOW_VERSION"):
-            # It's PIL fork with more image formats
-            # like Jpeg2000, WebP
-            # Support status is unknown. We can only try to load images...
-            formats.extend([
-                "j2[kp]", "jp[2x]",
-                "webp"
-            ])
-    except:
-        pass
+    if hasattr(Image, "PILLOW_VERSION"):
+        # It's PIL fork with more image formats
+        # like Jpeg2000, WebP
+        # Support status is unknown. We can only try to load images...
+        formats.extend([
+            "j2[kp]", "jp[2x]",
+            "webp"
+        ])
     return formats
 
 
