@@ -11,13 +11,14 @@ try:
     from py7zlib import Archive7z
 except ImportError:
     Archive7z = None  # ignore it.
+import mobiunpack
 
 import gtk
 
 import process
 from image import get_supported_format_extensions_preg
 
-ZIP, RAR, TAR, GZIP, BZIP2, SEVENZIP = range(6)
+ZIP, RAR, TAR, GZIP, BZIP2, SEVENZIP, MOBI = range(7)
 
 _rar_exec = None
 _7z_exec = None
@@ -109,6 +110,14 @@ class Extractor:
                     _("You need either the <i>pylzma</i> or the <i>p7zip</i> program installed in order to read 7Z (.cb7) files."))
                 dialog.run()
                 dialog.destroy()
+                return None
+        elif self._type == MOBI:
+            self._mobifile = None
+            try:
+                self._mobifile = mobiunpack.MobiFile(src)
+                self._files = self._mobifile.getnames()
+            except mobiunpack.unpackException as e:
+                print '! Failed to unpack MobiPocket:', e
                 return None
 
         else:
@@ -229,6 +238,8 @@ class Extractor:
             self._zfile.close()
         elif self._type in (TAR, GZIP, BZIP2):
             self._tfile.close()
+        elif self._type == MOBI and self._mobifile is not None:
+            self._mobifile.close()
 
     def _thread_extract(self):
         """Extract the files in the file list one by one."""
@@ -279,6 +290,9 @@ class Extractor:
                     proc.wait()
                 else:
                     print '! Could not find RAR file extractor.'
+            elif self._type == MOBI:
+                    dst_path = os.path.join(self._dst, name)
+                    self._mobifile.extract(name, dst_path)
         except Exception:
             # Better to ignore any failed extractions (e.g. from a corrupt
             # archive) than to crash here and leave the main thread in a
@@ -411,6 +425,8 @@ def archive_mime_type(path):
                 return ZIP
             fd = open(path, 'rb')
             magic = fd.read(4)
+            fd.seek(60)
+            magic2 = fd.read(8)
             fd.close()
             if tarfile.is_tarfile(path) and os.path.getsize(path) > 0:
                 if magic.startswith('BZh'):
@@ -422,6 +438,8 @@ def archive_mime_type(path):
                 return RAR
             if magic == '7z\xbc\xaf':
                 return SEVENZIP
+            if magic2 == 'BOOKMOBI':
+                return MOBI
     except Exception:
         print '! Error while reading', path
     return None
@@ -435,6 +453,7 @@ def get_name(archive_type):
             BZIP2: _('Bzip2 compressed tar archive'),
             RAR:   _('RAR archive'),
             SEVENZIP: _('7-Zip archive'),
+            MOBI:  _('MobiPocket file'),
            }[archive_type]
 
 
