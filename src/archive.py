@@ -90,7 +90,7 @@ class Extractor:
                 if _7z_exec is None:
                     _7z_exec = _get_7z_exec()
             else:
-                self._szfile = Archive7z(open(src,'rb'))
+                self._szfile = Archive7z(open(src,'rb'),'-')
                 self._files = self._szfile.getnames()
 
             if _7z_exec is None:
@@ -262,7 +262,7 @@ class Extractor:
                     os.makedirs(os.path.dirname(dst_path))
                 new = open(dst_path, 'wb')
                 if self._type == ZIP:
-                    new.write(self._zfile.read(name))
+                    new.write(self._zfile.read(name, '-'))
                 elif self._type == SEVENZIP:
                     if Archive7z is not None:
                         new.write(self._szfile.getmember(name).read())

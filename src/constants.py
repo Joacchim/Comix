@@ -4,7 +4,7 @@ import os
 
 import portability
 
-VERSION = '4.0.8'
+VERSION = '4.0.9'
 HOME_DIR = portability.get_home_directory()
 CONFIG_DIR = portability.get_config_directory()
 DATA_DIR = portability.get_data_directory()

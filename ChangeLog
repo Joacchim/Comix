@@ -1,3 +1,7 @@
+Comix 4.0.9
+
+    - Quick fix opening encrypted archives (with password).
+
 Comix 4.0.8
 
     - Support mobi format.
