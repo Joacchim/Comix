@@ -82,7 +82,7 @@ class Extractor:
             fd.close()
             proc.wait()
         elif self._type == SEVENZIP:
-            global _7z_exec
+            global _7z_exec, Archive7z
 
             if not Archive7z:  # lib import failed
                 print ': pylzma is not installed... will try 7z tool...'
@@ -90,8 +90,14 @@ class Extractor:
                 if _7z_exec is None:
                     _7z_exec = _get_7z_exec()
             else:
-                self._szfile = Archive7z(open(src,'rb'),'-')
-                self._files = self._szfile.getnames()
+                try:
+                    self._szfile = Archive7z(open(src,'rb'),'-')
+                    self._files = self._szfile.getnames()
+                except:
+                    Archive7z = None
+                    # pylzma can fail on new 7z
+                    if _7z_exec is None:
+                        _7z_exec = _get_7z_exec()
 
             if _7z_exec is None:
                 print '! Could not find 7Z file extractor.'

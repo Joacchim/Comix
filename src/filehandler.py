@@ -41,7 +41,7 @@ class FileHandler:
         self._base_path = None
         self._tmp_dir = tempfile.mkdtemp(prefix='comix.', suffix=os.sep)
         self._image_files = []
-        self._current_image_index = None
+        self._current_image_index = 0
         self._comment_files = []
         self._raw_pixbufs = {}
         self._name_table = {}
@@ -386,7 +386,7 @@ class FileHandler:
         self.file_loaded = False
         self._base_path = None
         self._image_files = []
-        self._current_image_index = None
+        self._current_image_index = 0
         self._comment_files = []
         self._name_table.clear()
         self._raw_pixbufs.clear()
