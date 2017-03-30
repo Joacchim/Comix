@@ -249,8 +249,35 @@ class Extractor:
 
     def _thread_extract(self):
         """Extract the files in the file list one by one."""
-        for name in self._files:
-            self._extract_file(name)
+        # Extract 7z and rar whole archive - if it SOLID - extract one file is SLOW
+        if self._type in (SEVENZIP,) and _7z_exec is not None:
+            cmd = [_7z_exec, 'x', '-bd', '-p-',
+                '-o'+self._dst, '-y', self._src]
+            proc = process.Process(cmd)
+            proc.spawn()
+            proc.wait()
+            self._condition.acquire()
+            for name in self._files:
+                self._extracted[name] = True
+            self._condition.notify()
+            self._condition.release()
+        if self._type in (RAR,) and _rar_exec is not None:
+            cwd = os.getcwd()
+            os.chdir(self._dst)
+            cmd = [_rar_exec, 'x', '-kb', '-p-',
+                        '-o-', '-inul', '--', self._src]
+            proc = process.Process(cmd)
+            proc.spawn()
+            proc.wait()
+            os.chdir(cwd)
+            self._condition.acquire()
+            for name in self._files:
+                self._extracted[name] = True
+            self._condition.notify()
+            self._condition.release()
+        else:
+            for name in self._files:
+                self._extract_file(name)
         self.close()
 
     def _extract_file(self, name):
@@ -290,15 +317,18 @@ class Extractor:
                     print '! Non-local tar member:', name, '\n'
             elif self._type == RAR:
                 if _rar_exec is not None:
+                    cwd = os.getcwd()
+                    os.chdir(self._dst)
                     proc = process.Process([_rar_exec, 'x', '-kb', '-p-',
-                        '-o-', '-inul', '--', self._src, name, self._dst])
+                        '-o-', '-inul', '--', self._src, name])
                     proc.spawn()
                     proc.wait()
+                    os.chdir(cwd)
                 else:
                     print '! Could not find RAR file extractor.'
             elif self._type == MOBI:
-                    dst_path = os.path.join(self._dst, name)
-                    self._mobifile.extract(name, dst_path)
+                dst_path = os.path.join(self._dst, name)
+                self._mobifile.extract(name, dst_path)
         except Exception:
             # Better to ignore any failed extractions (e.g. from a corrupt
             # archive) than to crash here and leave the main thread in a
@@ -315,6 +345,9 @@ class Extractor:
         mark the file as "ready", then signal a notify() on the Condition
         returned by setup().
         """
+
+        if os.path.exists(os.path.join(self._dst, chosen)):
+            cStringIO.StringIO(open(os.path.join(self._dst, chosen), 'rb').read())
 
         if self._type == ZIP:
             return cStringIO.StringIO(self._zfile.read(chosen))
