@@ -1,3 +1,18 @@
+Comix 4.0.12
+
+    - Fix loading not RGB(a) images
+    - Pillow 4.2 changed api
+
+Comix 4.0.11
+
+    - speedup 7z and rar extraction - extract all files,
+      if archive solid - extract one file is SLOW
+
+Comix 4.0.10
+
+    - fix load of lzma/7z archives - new version 7z generates archives not compatible with old pylzma
+    - fix load of thumbnails if no images loaded of archive not opened
+
 Comix 4.0.9
 
     - Quick fix opening encrypted archives (with password).
