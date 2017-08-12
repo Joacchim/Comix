@@ -68,10 +68,13 @@ class _AboutDialog(gtk.Dialog):
         '\n\n' +
         '<small>Copyright © 2005-2009 Pontus Ekberg\n\n' +
         'herrekberg@users.sourceforge.net\n' +
-        'http://comix.sourceforge.net</small>\n'
-        '<small>Copyright © 2010-2015 David Pineau\n\n' +
+        'http://comix.sourceforge.net</small>\n' +
+        '<small>Copyright © 2010-2017 David Pineau\n\n' +
         'dav.pineau@gmail.com\n' +
-        'https://github.com/Joacchim/Comix</small>\n'
+        'https://github.com/Joacchim/Comix</small>\n' +
+        '<small>Copyright © 2014-2017 Sergey Dryabzhinsky\n\n' +
+        'sergey.dryabzhinksy@gmail.com\n' +
+        'https://github.com/sergey-dryabzhinksy/Comix</small>\n' +
         '\n'+_('Image processing library')+': %s\n' % ImageVersion
         )
         box.pack_start(label, True, True, 0)

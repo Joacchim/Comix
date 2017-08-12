@@ -2,10 +2,12 @@
 
 """comicthumb - Thumbnailer for comic book archives, bundled with Comix.
 
-comicthumb is dependent on the Python Imaging Library (PIL).
+comicthumb depends on either of:
+ - Python Imaging Library (PIL)
+ - Pillow
 
-comicthumb was originally written by Christoph Wolk, this version was
-re-written from scratch for Comix 4 by Pontus Ekberg. 
+comicthumb was originally written by Christoph Wolk, rewritten by Pontus Ekberg
+for Comix 4, and later reworked by Sergey Dryabzhinsky.
 
 Supported formats: ZIP, RAR, 7Z, mobi and tar (.cbz, .cbr, .cb7, .cbt)
 
