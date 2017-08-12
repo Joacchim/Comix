@@ -14,6 +14,10 @@ msgstr ""
 msgid "Comix is licensed under the GNU General Public License."
 msgstr ""
 
+#: src/about.py:72
+msgid "Image processing library"
+msgstr ""
+
 #: src/about.py:83
 msgid "Developer"
 msgstr ""

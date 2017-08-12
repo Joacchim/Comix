@@ -41,7 +41,7 @@ class FileHandler:
         self._base_path = None
         self._tmp_dir = tempfile.mkdtemp(prefix='comix.', suffix=os.sep)
         self._image_files = []
-        self._current_image_index = None
+        self._current_image_index = 0
         self._comment_files = []
         self._raw_pixbufs = {}
         self._name_table = {}
@@ -58,6 +58,7 @@ class FileHandler:
         """
         if index not in self._raw_pixbufs:
             self._wait_on_page(index + 1)
+            pxb_err = False
             try:
                 """ Check for gif in the name of the file.  If it is a gif,
                 and the user wishes GIFs to be animated, load it as a
@@ -71,7 +72,14 @@ class FileHandler:
                     if self._raw_pixbufs[index].is_static_image():
                         self._raw_pixbufs[index] = self._raw_pixbufs[index].get_static_image()
             except Exception:
-                self._raw_pixbufs[index] = self._get_missing_image()
+                pxb_err = True
+
+            if pxb_err:
+                try:
+                    im = image.Image.open( self._image_files[index] )
+                    self._raw_pixbufs[index] = image.pil_to_pixbuf( im )
+                except Exception:
+                    self._raw_pixbufs[index] = self._get_missing_image()
         return self._raw_pixbufs[index]
 
     def get_pixbufs(self, single=False):
@@ -378,7 +386,7 @@ class FileHandler:
         self.file_loaded = False
         self._base_path = None
         self._image_files = []
-        self._current_image_index = None
+        self._current_image_index = 0
         self._comment_files = []
         self._name_table.clear()
         self._raw_pixbufs.clear()

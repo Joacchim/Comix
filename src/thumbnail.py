@@ -15,7 +15,11 @@ import shutil
 import tempfile
 
 import gtk
-import Image
+
+try:
+    from PIL import Image
+except:
+    import Image
 
 import archive
 import constants
@@ -97,7 +101,7 @@ def _get_new_archive_thumbnail(path, dst_dir):
     wanted = _guess_cover(files)
     if wanted is None:
         """ Then check for subarchives and extract only the first... """
-        sub_re = re.compile(r'\.(tar|gz|bz2|rar|zip|7z)\s*$', re.I)
+        sub_re = re.compile(r'\.(tar|gz|bz2|rar|zip|7z|mobi)\s*$', re.I)
         subs = filter(sub_re.search, files)
         if subs:
             subarchive = extractor.set_files([subs[0]])
@@ -195,6 +199,19 @@ def _get_pixbuf128(path):
             else:
                 return thumb.scale_simple(int(max(width * 128 / height, 1)), 128, gtk.gdk.INTERP_TILES)
     except Exception:
+        pass
+
+    # Try imaging
+    try:
+        im = Image.open(path)
+        width = im.size[0]
+        height = im.size[1]
+        if width > height:
+            im.resize(128, int(max(height * 128 / width, 1)))
+        else:
+            im.resize(int(max(width * 128 / height, 1)), 128)
+        return image.pil_to_pixbuf(im)
+    except:
         return None
 
 
