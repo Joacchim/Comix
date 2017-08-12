@@ -6,6 +6,7 @@ import re
 import zipfile
 import tarfile
 import threading
+import cStringIO
 try:
     from py7zlib import Archive7z
 except ImportError:
@@ -81,7 +82,7 @@ class Extractor:
             fd.close()
             proc.wait()
         elif self._type == SEVENZIP:
-            global _7z_exec
+            global _7z_exec, Archive7z
 
             if not Archive7z:  # lib import failed
                 print ': pylzma is not installed... will try 7z tool...'
@@ -89,8 +90,14 @@ class Extractor:
                 if _7z_exec is None:
                     _7z_exec = _get_7z_exec()
             else:
-                self._szfile = Archive7z(open(src,'rb'))
-                self._files = self._szfile.getnames()
+                try:
+                    self._szfile = Archive7z(open(src,'rb'),'-')
+                    self._files = self._szfile.getnames()
+                except:
+                    Archive7z = None
+                    # pylzma can fail on new 7z
+                    if _7z_exec is None:
+                        _7z_exec = _get_7z_exec()
 
             if _7z_exec is None:
                 print '! Could not find 7Z file extractor.'
@@ -242,8 +249,35 @@ class Extractor:
 
     def _thread_extract(self):
         """Extract the files in the file list one by one."""
-        for name in self._files:
-            self._extract_file(name)
+        # Extract 7z and rar whole archive - if it SOLID - extract one file is SLOW
+        if self._type in (SEVENZIP,) and _7z_exec is not None:
+            cmd = [_7z_exec, 'x', '-bd', '-p-',
+                '-o'+self._dst, '-y', self._src]
+            proc = process.Process(cmd)
+            proc.spawn()
+            proc.wait()
+            self._condition.acquire()
+            for name in self._files:
+                self._extracted[name] = True
+            self._condition.notify()
+            self._condition.release()
+        if self._type in (RAR,) and _rar_exec is not None:
+            cwd = os.getcwd()
+            os.chdir(self._dst)
+            cmd = [_rar_exec, 'x', '-kb', '-p-',
+                        '-o-', '-inul', '--', self._src]
+            proc = process.Process(cmd)
+            proc.spawn()
+            proc.wait()
+            os.chdir(cwd)
+            self._condition.acquire()
+            for name in self._files:
+                self._extracted[name] = True
+            self._condition.notify()
+            self._condition.release()
+        else:
+            for name in self._files:
+                self._extract_file(name)
         self.close()
 
     def _extract_file(self, name):
@@ -261,7 +295,7 @@ class Extractor:
                     os.makedirs(os.path.dirname(dst_path))
                 new = open(dst_path, 'wb')
                 if self._type == ZIP:
-                    new.write(self._zfile.read(name))
+                    new.write(self._zfile.read(name, '-'))
                 elif self._type == SEVENZIP:
                     if Archive7z is not None:
                         new.write(self._szfile.getmember(name).read())
@@ -283,15 +317,18 @@ class Extractor:
                     print '! Non-local tar member:', name, '\n'
             elif self._type == RAR:
                 if _rar_exec is not None:
+                    cwd = os.getcwd()
+                    os.chdir(self._dst)
                     proc = process.Process([_rar_exec, 'x', '-kb', '-p-',
-                        '-o-', '-inul', '--', self._src, name, self._dst])
+                        '-o-', '-inul', '--', self._src, name])
                     proc.spawn()
                     proc.wait()
+                    os.chdir(cwd)
                 else:
                     print '! Could not find RAR file extractor.'
             elif self._type == MOBI:
-                    dst_path = os.path.join(self._dst, name)
-                    self._mobifile.extract(name, dst_path)
+                dst_path = os.path.join(self._dst, name)
+                self._mobifile.extract(name, dst_path)
         except Exception:
             # Better to ignore any failed extractions (e.g. from a corrupt
             # archive) than to crash here and leave the main thread in a
@@ -302,6 +339,33 @@ class Extractor:
         self._extracted[name] = True
         self._condition.notify()
         self._condition.release()
+
+    def extract_file_io(self, chosen):
+        """Extract the file named <name> to the destination directory,
+        mark the file as "ready", then signal a notify() on the Condition
+        returned by setup().
+        """
+
+        if os.path.exists(os.path.join(self._dst, chosen)):
+            cStringIO.StringIO(open(os.path.join(self._dst, chosen), 'rb').read())
+
+        if self._type == ZIP:
+            return cStringIO.StringIO(self._zfile.read(chosen))
+        elif self._type in [TAR, GZIP, BZIP2]:
+            return cStringIO.StringIO(self._tfile.extractfile(chosen).read())
+        elif self._type == RAR:
+            proc = process.Process([_rar_exec, 'p', '-inul', '-p-', '--',
+                self._src, chosen])
+            fobj = proc.spawn()
+            return cStringIO.StringIO(fobj.read())
+        elif self._type == SEVENZIP:
+            if Archive7z is not None:
+                return cStringIO.StringIO(self._szfile.getmember(chosen).read())
+            elif _7z_exec is not None:
+                proc = process.Process([_7z_exec, 'e', '-bd', '-p-', '-so',
+                    self._src, chosen])
+                fobj = proc.spawn()
+                return cStringIO.StringIO(fobj.read())
 
 
 class Packer:

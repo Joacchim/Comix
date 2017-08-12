@@ -10,6 +10,11 @@
         <comment xml:lang="en">Comic Book Archive (RAR compressed)</comment>
         <glob pattern="*.cbr"/> 
     </mime-type>
+    <mime-type type="application/x-cb7">
+        <sub-class-of type="application/x-7z-compressed"/>
+        <comment xml:lang="en">Comic Book Archive (7Z compressed)</comment>
+        <glob pattern="*.cb7"/>
+    </mime-type>
     <mime-type type="application/x-cbt">
         <sub-class-of type="application/x-compressed-tar"/>
         <sub-class-of type="application/x-bzip-compressed-tar"/>

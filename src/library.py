@@ -8,8 +8,13 @@ from xml.sax.saxutils import escape as xmlescape
 import gtk
 import gobject
 import pango
-import Image
-import ImageDraw
+
+try:
+    from PIL import Image
+    from PIL import ImageDraw
+except:
+    import Image
+    import ImageDraw
 
 import archive
 import encoding
