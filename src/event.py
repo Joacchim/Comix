@@ -24,8 +24,7 @@ def _valwarp(cur, max, tolerance=3):
     return cur
 
 
-class EventHandler:
-
+class EventHandler(object):
     def __init__(self, window):
         self._window = window
         self._last_pointer_pos_x = 0

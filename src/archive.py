@@ -26,7 +26,7 @@ _rar_exec = None
 _7z_exec = None
 
 
-class Extractor:
+class Extractor(object):
     """Extractor is a threaded class for extracting different archive formats.
 
     The Extractor can be loaded with paths to archives (currently ZIP, tar,
@@ -75,7 +75,7 @@ class Extractor:
                                                _("Could not find RAR file extractor!"))
                     dialog.format_secondary_markup(
                             _(
-                                "You need either the <i>rar</i> or the <i>unrar</i> program installed in order to read RAR (.cbr) files."))
+                                    "You need either the <i>rar</i> or the <i>unrar</i> program installed in order to read RAR (.cbr) files."))
                     dialog.run()
                     dialog.destroy()
                     return None
@@ -117,7 +117,7 @@ class Extractor:
                                            _("Could not find 7Z file extractor!"))
                 dialog.format_secondary_markup(
                         _(
-                            "You need either the <i>pylzma</i> or the <i>p7zip</i> program installed in order to read 7Z (.cb7) files."))
+                                "You need either the <i>pylzma</i> or the <i>p7zip</i> program installed in order to read 7Z (.cb7) files."))
                 dialog.run()
                 dialog.destroy()
                 return None
@@ -371,7 +371,7 @@ class Extractor:
                 return cStringIO.StringIO(fobj.read())
 
 
-class Packer:
+class Packer(object):
     """Packer is a threaded class for packing files into ZIP archives.
 
     It would be straight-forward to add support for more archive types,

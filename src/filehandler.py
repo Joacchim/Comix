@@ -20,7 +20,7 @@ from src.image import get_supported_format_extensions_preg
 from src.preferences import prefs
 
 
-class FileHandler:
+class FileHandler(object):
     """The FileHandler keeps track of images, pages, caches and reads files.
 
     When the Filehandler's methods refer to pages, they are indexed from 1,

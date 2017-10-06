@@ -10,7 +10,7 @@ from src import image
 from src.preferences import prefs
 
 
-class MagnifyingGlass:
+class MagnifyingGlass(object):
     """The MagnifyingGlass creates cursors from the raw pixbufs containing
     the unscaled data for the currently displayed images. It does this by
     looking at the cursor position and calculating what image data to put

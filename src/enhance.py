@@ -11,7 +11,7 @@ from src import image
 _dialog = None
 
 
-class ImageEnhancer:
+class ImageEnhancer(object):
     """The ImageEnhancer keeps track of the "enhancement" values and performs
     these enhancements on pixbufs. Changes to the ImageEnhancer's values
     can be made using an _EnhanceImageDialog.

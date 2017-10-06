@@ -7,8 +7,7 @@ import gtk
 NORMAL, GRAB, WAIT = range(3)
 
 
-class CursorHandler:
-
+class CursorHandler(object):
     def __init__(self, window):
         self._window = window
         self._timer_id = None

@@ -5,7 +5,7 @@ import gc
 import subprocess
 
 
-class Process:
+class Process(object):
     """The subprocess and popen2 modules in Python are broken (see issue
     #1336). The problem (i.e. complete crash) they can cause happen fairly
     often (once is too often) in Comix when calling "rar" or "unrar" to

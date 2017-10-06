@@ -13,7 +13,7 @@ _db_path = os.path.join(constants.DATA_DIR, 'library.db')
 _cover_dir = os.path.join(constants.DATA_DIR, 'library_covers')
 
 
-class LibraryBackend:
+class LibraryBackend(object):
     """The LibraryBackend handles the storing and retrieval of library
     data to and from disk.
     """

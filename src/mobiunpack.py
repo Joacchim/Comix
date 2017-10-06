@@ -13,7 +13,7 @@ class unpackException(Exception):
     pass
 
 
-class Sectionizer:
+class Sectionizer(object):
     def __init__(self, f):
         self.f = f
         header = self.f.read(78)
@@ -30,7 +30,7 @@ class Sectionizer:
         return self.f.read(limit)
 
 
-class MobiFile:
+class MobiFile(object):
     def __init__(self, filename):
         f = open(filename, 'rb')
         try:

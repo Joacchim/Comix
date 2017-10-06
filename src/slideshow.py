@@ -6,7 +6,7 @@ import gobject
 from src.preferences import prefs
 
 
-class Slideshow:
+class Slideshow(object):
     """Slideshow handler that manages starting and stopping of slideshows."""
 
     def __init__(self, window):

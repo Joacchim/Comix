@@ -143,7 +143,7 @@ class _Bookmark(gtk.ImageMenuItem):
                 self._archive_type)
 
 
-class _BookmarksStore:
+class _BookmarksStore(object):
     """The _BookmarksStore is a backend for both the bookmarks menu and dialog.
     Changes in the _BookmarksStore is mirrored in both.
     """
