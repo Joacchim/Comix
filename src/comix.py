@@ -130,9 +130,9 @@ def run():
             animate_gifs = True
 
     if not os.path.exists(constants.DATA_DIR):
-        os.makedirs(constants.DATA_DIR, 0700)
+        os.makedirs(constants.DATA_DIR, 0o700)
     if not os.path.exists(constants.CONFIG_DIR):
-        os.makedirs(constants.CONFIG_DIR, 0700)
+        os.makedirs(constants.CONFIG_DIR, 0o700)
     deprecated.move_files_to_xdg_dirs()
     preferences.read_preferences_file()
     icons.load_icons()

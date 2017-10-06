@@ -163,10 +163,10 @@ def _create_thumbnail(path, dst_dir, image_path=None):
     }
     try:
         if not os.path.isdir(dst_dir):
-            os.makedirs(dst_dir, 0700)
+            os.makedirs(dst_dir, 0o700)
         pixbuf.save(thumbpath + '-comixtemp', 'png', tEXt_data)
         os.rename(thumbpath + '-comixtemp', thumbpath)
-        os.chmod(thumbpath, 0600)
+        os.chmod(thumbpath, 0o600)
     except Exception:
         print '! thumbnail.py: Could not write', thumbpath, '\n'
     return pixbuf
