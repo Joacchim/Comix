@@ -18,7 +18,7 @@ from PIL import Image
 from src import archive
 from src import constants
 from src import filehandler
-from src.image import get_supported_format_extensions_preg
+from src.image import get_supported_format_extensions_preg, pil_to_pixbuf
 
 _thumbdir = os.path.join(constants.HOME_DIR, '.thumbnails/normal')
 
@@ -203,7 +203,7 @@ def _get_pixbuf128(path):
             im.resize(128, int(max(height * 128 / width, 1)))
         else:
             im.resize(int(max(width * 128 / height, 1)), 128)
-        return image.pil_to_pixbuf(im)
+        return pil_to_pixbuf(im)
     except:
         return None
 
