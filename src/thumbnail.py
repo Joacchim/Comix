@@ -3,29 +3,22 @@ freedesktop.org "standard" at http://jens.triq.net/thumbnail-spec/
 
 Only normal size (i.e. 128x128 px) thumbnails are supported.
 """
+from __future__ import absolute_import
 
 import os
-from urllib import pathname2url, url2pathname
-try: # The md5 module is deprecated as of Python 2.5, replaced by hashlib.
-    from hashlib import md5
-except ImportError:
-    from md5 import new as md5
 import re
 import shutil
 import tempfile
+from hashlib import md5
+from urllib import pathname2url
 
 import gtk
+from PIL import Image
 
-try:
-    from PIL import Image
-except:
-    import Image
-
-import archive
-import constants
-import filehandler
-
-from image import get_supported_format_extensions_preg
+from src import archive
+from src import constants
+from src import filehandler
+from src.image import get_supported_format_extensions_preg
 
 _thumbdir = os.path.join(constants.HOME_DIR, '.thumbnails/normal')
 

@@ -1,19 +1,13 @@
 """image.py - Various image manipulations."""
+from __future__ import absolute_import
 
 import gtk
 
-try:
-    from PIL import Image
-    from PIL import ImageEnhance
-    from PIL import ImageOps
-    from PIL import ImageStat
-except:
-    import Image
-    import ImageEnhance
-    import ImageOps
-    import ImageStat
+from PIL import Image
+from PIL import ImageEnhance
+from PIL import ImageOps
 
-from preferences import prefs
+from src.preferences import prefs
 
 def get_supported_format_extensions_preg():
     """

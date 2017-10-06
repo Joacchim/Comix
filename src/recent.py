@@ -1,10 +1,11 @@
 """recent.py - Recent files handler."""
+from __future__ import absolute_import
 
 import urllib
 
 import gtk
 
-import preferences
+from src import preferences
 
 
 class RecentFilesMenu(gtk.RecentChooserMenu):

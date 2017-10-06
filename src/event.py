@@ -3,15 +3,15 @@
 Logically this isn't really a separate module from main.py, but it is
 given its own file for the sake of readability.
 """
+from __future__ import absolute_import
 
 import urllib
 
 import gtk
-import gobject
 
-import cursor
-import preferences
-from preferences import prefs
+from src import cursor
+from src import preferences
+from src.preferences import prefs
 
 
 def _valwarp(cur, max, tolerance=3):

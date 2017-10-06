@@ -1,9 +1,11 @@
 """icons.py - Load Comix specific icons."""
+from __future__ import absolute_import
 
 import os
 import sys
 
 import gtk
+
 
 def load_icons():
     _icons = (('gimp-flip-horizontal.png',   'comix-flip-horizontal'),

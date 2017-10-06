@@ -1,4 +1,5 @@
 """labels.py - gtk.Label convenience classes."""
+from __future__ import absolute_import
 
 import gtk
 import pango

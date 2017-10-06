@@ -1,21 +1,22 @@
 """properties.py - Properties dialog."""
+from __future__ import absolute_import
 
 import os
-import time
 import stat
+import time
+
+import gtk
+
+from src import archive
+from src import encoding
+from src import image
+from src import labels
+
 try:
     import pwd
 except ImportError:
     # Running on non-Unix machine.
     pass
-
-import gtk
-import pango
-
-import archive
-import encoding
-import image
-import labels
 
 _dialog = None
 

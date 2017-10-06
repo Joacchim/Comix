@@ -1,8 +1,9 @@
 """slideshow.py - Slideshow handler."""
+from __future__ import absolute_import
 
 import gobject
 
-from preferences import prefs
+from src.preferences import prefs
 
 
 class Slideshow:

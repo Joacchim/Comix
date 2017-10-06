@@ -13,25 +13,20 @@ Supported formats: ZIP, RAR, 7Z, mobi and tar (.cbz, .cbr, .cb7, .cbt)
 
 Usage: comicthumb INFILE OUTFILE [SIZE]
 """
+from __future__ import absolute_import
 
 import sys
 
 try:
     from PIL import Image
 except ImportError:
-    Image = None
-
-if Image is None:
-    try:
-        import Image
-    except ImportError:
-        print('! Could not import the Image module (PIL).')
-        print(__doc__)
-        sys.exit(1)
+    print('! Could not import the Image module (PIL).')
+    print(__doc__)
+    sys.exit(1)
 
 
-from archive import Extractor
-from thumbnail import _guess_cover as guess_cover
+from src.archive import Extractor
+from src.thumbnail import _guess_cover as guess_cover
 
 if __name__ == '__main__':
     try:

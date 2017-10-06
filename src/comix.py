@@ -20,12 +20,13 @@ Copyright (C) 2005-2009 Pontus Ekberg
 # You should have received a copy of the GNU General Public License
 # along with this program; if not, write to the Free Software
 # -------------------------------------------------------------------------
+from __future__ import absolute_import
 
-import os
-import sys
-import gettext
 import getopt
+import gettext
+import os
 import signal
+import sys
 
 #Check for PyGTK and PIL dependencies.
 try:
@@ -52,33 +53,15 @@ except ImportError:
 try:
     from PIL import Image
 except ImportError:
-    Image = None
-
-if Image is None:
-    try:
-        import Image
-    except ImportError:
-        print('Python Imaging Library (PIL) version 1.1.5 or higher or Pillow is required.')
-        print('No version of the Python Imaging Library was found on your', end=' ')
-        print('system.')
-        sys.exit(1)
-
-try:
-    assert Image.VERSION >= '1.1.5'
-except AssertionError:
-    print("You don't have the required version of the Python Imaging " 
-          "Library (PIL) installed.")
-    print('Installed PIL version is: {}'.format(Image.VERSION))
-    print('Required PIL version is: 1.1.5 or higher')
+    print('Python Imaging Library (PIL) version 1.1.5 or higher or Pillow is required.')
+    print('No version of the Python Imaging Library was found on your system.')
     sys.exit(1)
 
-import constants
-import deprecated
-import filehandler
-import locale
-import main
-import icons
-import preferences
+from src import constants
+from src import deprecated
+from src import main
+from src import icons
+from src import preferences
 
 
 def print_help():

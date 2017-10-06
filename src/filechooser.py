@@ -1,15 +1,16 @@
 """filechooser.py - Custom FileChooserDialog implementations."""
+from __future__ import absolute_import
 
 import os
 
 import gtk
 import pango
 
-import encoding
-import image
-import labels
-from preferences import prefs
-import thumbnail
+from src import encoding
+from src import image
+from src import labels
+from src import thumbnail
+from src.preferences import prefs
 
 _main_filechooser_dialog = None
 _library_filechooser_dialog = None

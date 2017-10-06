@@ -2,8 +2,12 @@
 
 Based on code from mobiunpack by Charles M. Hannum et al.
 """
+from __future__ import absolute_import
 
-import struct, imghdr, re
+import imghdr
+import re
+import struct
+
 
 class unpackException(Exception):
     pass

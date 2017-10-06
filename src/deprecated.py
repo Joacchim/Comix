@@ -1,11 +1,12 @@
 """deprecated.py - Clean up deprecated Comix files."""
+from __future__ import absolute_import
 
 import os
 import shutil
 
 import gtk
 
-import constants
+from src import constants
 
 
 class _CleanerDialog(gtk.MessageDialog):

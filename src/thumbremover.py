@@ -1,21 +1,18 @@
 """thumbremover.py - Thumbnail maintenance module for Comix.
 Removes and cleans up outdated and orphaned thumbnails.
 """
+from __future__ import absolute_import
 
 import os
 import urllib
 
 import gtk
 import pango
+from PIL import Image
 
-try:
-    from PIL import Image
-except:
-    import Image
-
-import encoding
-import labels
-import constants
+from src import constants
+from src import encoding
+from src import labels
 
 _dialog = None
 _thumb_base = os.path.join(constants.HOME_DIR, '.thumbnails')

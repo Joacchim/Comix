@@ -1,19 +1,13 @@
 """librarybackend.py - Comic book library backend using sqlite."""
+from __future__ import absolute_import
 
 import os
-try:
-    from sqlite3 import dbapi2
-except ImportError:
-    try:
-        from pysqlite2 import dbapi2
-    except ImportError:
-        print('! Could neither find pysqlite2 nor sqlite3.')
-        dbapi2 = None
+from sqlite3 import dbapi2
 
-import archive
-import constants
-import encoding
-import thumbnail
+from src import archive
+from src import constants
+from src import encoding
+from src import thumbnail
 
 _db_path = os.path.join(constants.DATA_DIR, 'library.db')
 _cover_dir = os.path.join(constants.DATA_DIR, 'library_covers')

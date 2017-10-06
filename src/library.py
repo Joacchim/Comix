@@ -1,28 +1,24 @@
 """library.py - Comic book library."""
+from __future__ import absolute_import
 
-import os
 import gc
+import os
 import urllib
 from xml.sax.saxutils import escape as xmlescape
 
-import gtk
 import gobject
+import gtk
 import pango
+from PIL import Image
+from PIL import ImageDraw
 
-try:
-    from PIL import Image
-    from PIL import ImageDraw
-except:
-    import Image
-    import ImageDraw
-
-import archive
-import encoding
-import filechooser
-import labels
-import librarybackend
-from preferences import prefs
-import image
+from src import archive
+from src import encoding
+from src import filechooser
+from src import image
+from src import labels
+from src import librarybackend
+from src.preferences import prefs
 
 _dialog = None
 # The "All books" collection is not a real collection stored in the library,

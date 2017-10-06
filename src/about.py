@@ -1,21 +1,18 @@
 # -*- coding: utf-8 -*-
 """about.py - About dialog."""
+from __future__ import absolute_import
 
 import os
 import sys
 
 import gtk
-import pango
+from PIL import Image
 
-import constants
-import labels
+from src import constants
+from src import labels
 
-try:
-    from PIL import Image
-    ImageVersion = "Pillow-%s" % Image.PILLOW_VERSION
-except:
-    import Image
-    ImageVersion = "Imaging-%s" % Image.VERSION
+ImageVersion = "Pillow-%s" % Image.PILLOW_VERSION
+
 
 _dialog = None
 

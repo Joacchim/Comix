@@ -1,22 +1,23 @@
 """archive.py - Archive handling (extract/create) for Comix."""
+from __future__ import absolute_import
 
-import sys
 import os
 import re
-import zipfile
+import sys
 import tarfile
 import threading
+import zipfile
+
 import cStringIO
+import gtk
 try:
     from py7zlib import Archive7z
 except ImportError:
     Archive7z = None  # ignore it.
-import mobiunpack
 
-import gtk
-
-import process
-from image import get_supported_format_extensions_preg
+from src import mobiunpack
+from src import process
+from src.image import get_supported_format_extensions_preg
 
 ZIP, RAR, TAR, GZIP, BZIP2, SEVENZIP, MOBI = range(7)
 

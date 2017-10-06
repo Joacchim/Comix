@@ -1,20 +1,15 @@
 """thumbbar.py - Thumbnail sidebar for main window."""
+from __future__ import absolute_import
 
 import urllib
 
-import gtk
 import gobject
+import gtk
+from PIL import Image
+from PIL import ImageDraw
 
-try:
-    from PIL import Image
-    from PIL import ImageDraw
-except:
-    import Image
-    import ImageDraw
-
-import image
-from preferences import prefs
-import thumbnail
+from src import image
+from src.preferences import prefs
 
 
 class ThumbnailSidebar(gtk.HBox):

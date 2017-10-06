@@ -1,27 +1,27 @@
 """main.py - Main window."""
+from __future__ import absolute_import
 
-import sys
 import os
 import shutil
+import sys
 import threading
 
-import gtk
 import gobject
+import gtk
 
-import constants
-import cursor
-import encoding
-import enhance
-import event
-import filehandler
-import image
-import lens
-import preferences
-from preferences import prefs
-import ui
-import slideshow
-import status
-import thumbbar
+from src import cursor
+from src import encoding
+from src import enhance
+from src import event
+from src import filehandler
+from src import image
+from src import lens
+from src import preferences
+from src import slideshow
+from src import status
+from src import thumbbar
+from src import ui
+from src.preferences import prefs
 
 
 class MainWindow(gtk.Window):

@@ -1,17 +1,12 @@
 """histogram.py - Draw histograms (RGB) from pixbufs."""
+from __future__ import absolute_import
 
-import gtk
+from PIL import Image
+from PIL import ImageDraw
+from PIL import ImageOps
 
-try:
-    from PIL import Image
-    from PIL import ImageDraw
-    from PIL import ImageOps
-except:
-    import Image
-    import ImageDraw
-    import ImageOps
 
-import image
+from src import image
 
 
 def draw_histogram(pixbuf, height=170, fill=170, text=True):

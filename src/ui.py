@@ -3,21 +3,21 @@
 Logically this isn't really a separate module from main.py, but it is
 given it's own file for the sake of readability.
 """
+from __future__ import absolute_import
 
 import gtk
 
-import about
-import bookmark
-import comment
-import edit
-import enhance
-import filechooser
-import filehandler
-import library
-import preferences
-import properties
-import recent
-import thumbremover
+from src import about
+from src import bookmark
+from src import comment
+from src import edit
+from src import enhance
+from src import filechooser
+from src import library
+from src import preferences
+from src import properties
+from src import recent
+from src import thumbremover
 
 
 class MainUI(gtk.UIManager):

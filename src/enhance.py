@@ -1,11 +1,13 @@
 """enhance.py - Image enhancement handler and dialog (e.g. contrast,
 brightness etc.)
 """
+from __future__ import absolute_import
+
 
 import gtk
 
-import histogram
-import image
+from src import histogram
+from src import image
 
 _dialog = None
 

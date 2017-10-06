@@ -1,24 +1,24 @@
 """filehandler.py - File handler."""
+from __future__ import absolute_import
 
-import os
-import sys
-import shutil
-import locale
-import tempfile
 import gc
-import shutil
-import threading
+import os
 import re
+import shutil
+import sys
+import tempfile
+import threading
 
 import gtk
 
-import archive
-import cursor
-import encoding
-import image
-from preferences import prefs
-import thumbnail
-from image import get_supported_format_extensions_preg
+from src import archive
+from src import cursor
+from src import encoding
+from src import image
+from src import thumbnail
+from src.image import get_supported_format_extensions_preg
+from src.preferences import prefs
+
 
 class FileHandler:
 

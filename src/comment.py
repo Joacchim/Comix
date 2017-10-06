@@ -1,11 +1,11 @@
 """comment.py - Comments dialog."""
+from __future__ import absolute_import
 
 import os
 
 import gtk
-import pango
 
-import encoding
+from src import encoding
 
 _dialog = None
 

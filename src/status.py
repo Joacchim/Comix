@@ -1,8 +1,9 @@
 """status.py - Statusbar for main window."""
+from __future__ import absolute_import
 
 import gtk
 
-import encoding
+from src import encoding
 
 
 class Statusbar(gtk.Statusbar):

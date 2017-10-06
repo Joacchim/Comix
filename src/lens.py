@@ -1,12 +1,13 @@
 """lens.py - Magnifying glass."""
+from __future__ import absolute_import
+
 
 import math
 
+from src import cursor
 import gtk
-
-import cursor
-from preferences import prefs
-import image
+from src import image
+from src.preferences import prefs
 
 
 class MagnifyingGlass:

@@ -1,13 +1,13 @@
 """bookmark.py - Bookmarks handler (including menu and dialog)."""
+from __future__ import absolute_import
 
 import os
+
 import cPickle
-
-import gtk
 import gobject
+import gtk
 
-import constants
-import constants
+from src import constants
 
 _pickle_path = os.path.join(constants.DATA_DIR, 'bookmarks.pickle')
 

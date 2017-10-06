@@ -1,13 +1,13 @@
 """preferences.py - Preference handler."""
+from __future__ import absolute_import
 
 import os
+
 import cPickle
-
 import gtk
-import pango
 
-import constants
-import labels
+from src import constants
+from src import labels
 
 ZOOM_MODE_BEST = 0
 ZOOM_MODE_WIDTH = 1

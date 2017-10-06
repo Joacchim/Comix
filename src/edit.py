@@ -1,19 +1,18 @@
 """edit.py - Archive editor."""
+from __future__ import absolute_import
 
 import os
 import tempfile
 
 import gobject
 import gtk
-import pango
 
-import archive
-import cursor
-import encoding
-import filechooser
-import filehandler
-import image
-import thumbnail
+from src import archive
+from src import encoding
+from src import filechooser
+from src import filehandler
+from src import image
+from src import thumbnail
 
 _dialog = None
 
