@@ -1,3 +1,4 @@
+# coding=utf-8
 """main.py - Main window."""
 from __future__ import absolute_import
 

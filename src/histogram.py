@@ -1,3 +1,4 @@
+# coding=utf-8
 """histogram.py - Draw histograms (RGB) from pixbufs."""
 from __future__ import absolute_import
 

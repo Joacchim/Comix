@@ -1,3 +1,4 @@
+# coding=utf-8
 """cursor.py - Cursor handler."""
 from __future__ import absolute_import
 

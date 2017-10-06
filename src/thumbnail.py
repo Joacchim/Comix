@@ -1,3 +1,4 @@
+# coding=utf-8
 """thumbnail.py - Thumbnail module for Comix implementing (most of) the
 freedesktop.org "standard" at http://jens.triq.net/thumbnail-spec/
 

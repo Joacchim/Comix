@@ -1,3 +1,4 @@
+# coding=utf-8
 """thumbbar.py - Thumbnail sidebar for main window."""
 from __future__ import absolute_import
 

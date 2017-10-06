@@ -1,3 +1,4 @@
+# coding=utf-8
 """comment.py - Comments dialog."""
 from __future__ import absolute_import
 

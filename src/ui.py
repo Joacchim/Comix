@@ -1,3 +1,4 @@
+# coding=utf-8
 """ui.py - UI definitions for main window.
 
 Logically this isn't really a separate module from main.py, but it is

@@ -1,4 +1,4 @@
-# -*- coding: utf-8 -*-
+# coding=utf-8
 """about.py - About dialog."""
 from __future__ import absolute_import
 

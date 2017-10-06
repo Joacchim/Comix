@@ -1,3 +1,4 @@
+# coding=utf-8
 """slideshow.py - Slideshow handler."""
 from __future__ import absolute_import
 

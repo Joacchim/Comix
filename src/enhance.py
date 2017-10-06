@@ -1,3 +1,4 @@
+# coding=utf-8
 """enhance.py - Image enhancement handler and dialog (e.g. contrast,
 brightness etc.)
 """

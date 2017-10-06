@@ -1,3 +1,4 @@
+# coding=utf-8
 """properties.py - Properties dialog."""
 from __future__ import absolute_import
 

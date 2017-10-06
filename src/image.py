@@ -1,3 +1,4 @@
+# coding=utf-8
 """image.py - Various image manipulations."""
 from __future__ import absolute_import
 

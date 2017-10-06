@@ -1,3 +1,4 @@
+# coding=utf-8
 """lens.py - Magnifying glass."""
 from __future__ import absolute_import
 

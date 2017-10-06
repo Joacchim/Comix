@@ -1,3 +1,4 @@
+# coding=utf-8
 """event.py - Event handling (keyboard, mouse, etc.) for the main window.
 
 Logically this isn't really a separate module from main.py, but it is

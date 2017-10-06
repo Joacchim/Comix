@@ -1,3 +1,4 @@
+# coding=utf-8
 """library.py - Comic book library."""
 from __future__ import absolute_import
 

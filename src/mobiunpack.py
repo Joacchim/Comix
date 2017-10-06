@@ -1,3 +1,4 @@
+# coding=utf-8
 """mobiunpack.py - MobiPocket handling (extract pictures) for Comix.
 
 Based on code from mobiunpack by Charles M. Hannum et al.

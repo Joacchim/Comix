@@ -1,3 +1,4 @@
+# coding=utf-8
 """recent.py - Recent files handler."""
 from __future__ import absolute_import
 

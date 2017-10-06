@@ -1,4 +1,5 @@
 #!/usr/bin/env python
+# coding=utf-8
 
 """comicthumb - Thumbnailer for comic book archives, bundled with Comix.
 

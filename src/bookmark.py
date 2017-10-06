@@ -1,3 +1,4 @@
+# coding=utf-8
 """bookmark.py - Bookmarks handler (including menu and dialog)."""
 from __future__ import absolute_import
 

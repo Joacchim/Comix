@@ -1,3 +1,4 @@
+# coding=utf-8
 """thumbremover.py - Thumbnail maintenance module for Comix.
 Removes and cleans up outdated and orphaned thumbnails.
 """

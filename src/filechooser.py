@@ -1,3 +1,4 @@
+# coding=utf-8
 """filechooser.py - Custom FileChooserDialog implementations."""
 from __future__ import absolute_import
 

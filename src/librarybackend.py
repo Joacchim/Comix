@@ -1,3 +1,4 @@
+# coding=utf-8
 """librarybackend.py - Comic book library backend using sqlite."""
 from __future__ import absolute_import
 

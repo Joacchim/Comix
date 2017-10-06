@@ -1,3 +1,4 @@
+# coding=utf-8
 """deprecated.py - Clean up deprecated Comix files."""
 from __future__ import absolute_import
 

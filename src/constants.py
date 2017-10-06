@@ -1,3 +1,4 @@
+# coding=utf-8
 """constants.py - Miscellaneous constants."""
 from __future__ import absolute_import
 

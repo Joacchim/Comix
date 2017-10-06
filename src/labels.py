@@ -1,3 +1,4 @@
+# coding=utf-8
 """labels.py - gtk.Label convenience classes."""
 from __future__ import absolute_import
 
