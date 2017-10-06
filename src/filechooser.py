@@ -17,7 +17,6 @@ _library_filechooser_dialog = None
 
 
 class _ComicFileChooserDialog(gtk.Dialog):
-
     """We roll our own FileChooserDialog because the one in GTK seems
     buggy with the preview widget. The <action> argument dictates what type
     of filechooser dialog we want (i.e. it is gtk.FILE_CHOOSER_ACTION_OPEN
@@ -38,11 +37,11 @@ class _ComicFileChooserDialog(gtk.Dialog):
         if action == gtk.FILE_CHOOSER_ACTION_OPEN:
             title = _('Open')
             buttons = (gtk.STOCK_CANCEL, gtk.RESPONSE_CANCEL,
-                gtk.STOCK_OPEN, gtk.RESPONSE_OK)
+                       gtk.STOCK_OPEN, gtk.RESPONSE_OK)
         else:
             title = _('Save')
             buttons = (gtk.STOCK_CANCEL, gtk.RESPONSE_CANCEL,
-                gtk.STOCK_SAVE, gtk.RESPONSE_OK)
+                       gtk.STOCK_SAVE, gtk.RESPONSE_OK)
 
         gtk.Dialog.__init__(self, title, None, 0, buttons)
         self.set_default_response(gtk.RESPONSE_OK)
@@ -55,7 +54,7 @@ class _ComicFileChooserDialog(gtk.Dialog):
         self.filechooser.set_border_width(6)
         self.connect('response', self._response)
         self.filechooser.connect('file_activated', self._response,
-            gtk.RESPONSE_OK)
+                                 gtk.RESPONSE_OK)
 
         preview_box = gtk.VBox(False, 10)
         preview_box.set_size_request(130, 0)
@@ -64,7 +63,7 @@ class _ComicFileChooserDialog(gtk.Dialog):
         preview_box.pack_start(self._preview_image, False, False)
         self.filechooser.set_preview_widget(preview_box)
         self._namelabel = labels.FormattedLabel(weight=pango.WEIGHT_BOLD,
-            scale=pango.SCALE_SMALL)
+                                                scale=pango.SCALE_SMALL)
         self._namelabel.set_ellipsize(pango.ELLIPSIZE_MIDDLE)
         preview_box.pack_start(self._namelabel, False, False)
         self._sizelabel = labels.FormattedLabel(scale=pango.SCALE_SMALL)
@@ -80,26 +79,26 @@ class _ComicFileChooserDialog(gtk.Dialog):
         self.filechooser.add_filter(ffilter)
 
         self.add_filter(_('All Archives'), ('application/x-zip',
-            'application/zip', 'application/x-rar', 'application/x-tar',
-            'application/x-gzip', 'application/x-bzip2', 'application/x-cbz',
-            'application/x-cbr', 'application/x-cbt'))
+                                            'application/zip', 'application/x-rar', 'application/x-tar',
+                                            'application/x-gzip', 'application/x-bzip2', 'application/x-cbz',
+                                            'application/x-cbr', 'application/x-cbt'))
         self.add_filter(_('ZIP archives'),
-            ('application/x-zip', 'application/zip', 'application/x-cbz'))
+                        ('application/x-zip', 'application/zip', 'application/x-cbz'))
         self.add_filter(_('RAR archives'),
-            ('application/x-rar', 'application/x-cbr'))
+                        ('application/x-rar', 'application/x-cbr'))
         self.add_filter(_('Tar archives'),
-            ('application/x-tar', 'application/x-gzip',
-            'application/x-bzip2', 'application/x-cbt'))
+                        ('application/x-tar', 'application/x-gzip',
+                         'application/x-bzip2', 'application/x-cbt'))
 
         try:
             if (self.__class__._last_activated_file is not None
-                    and os.path.isfile(self.__class__._last_activated_file)):
+                and os.path.isfile(self.__class__._last_activated_file)):
                 self.filechooser.set_filename(
-                    self.__class__._last_activated_file)
+                        self.__class__._last_activated_file)
             elif os.path.isdir(prefs['path of last browsed in filechooser']):
                 self.filechooser.set_current_folder(
-                    prefs['path of last browsed in filechooser'])
-        except Exception: # E.g. broken prefs values.
+                        prefs['path of last browsed in filechooser'])
+        except Exception:  # E.g. broken prefs values.
             pass
         self.show_all()
 
@@ -134,13 +133,13 @@ class _ComicFileChooserDialog(gtk.Dialog):
             # FileChooser.set_do_overwrite_confirmation() doesn't seem to
             # work on our custom dialog, so we use a simple alternative.
             if (self._action == gtk.FILE_CHOOSER_ACTION_SAVE
-              and os.path.exists(paths[0])):
+                and os.path.exists(paths[0])):
                 overwrite_dialog = gtk.MessageDialog(None, 0,
-                    gtk.MESSAGE_QUESTION, gtk.BUTTONS_OK_CANCEL,
-                    _("A file named '%s' already exists. Do you want to replace it?") %
-                    os.path.basename(paths[0]))
+                                                     gtk.MESSAGE_QUESTION, gtk.BUTTONS_OK_CANCEL,
+                                                     _("A file named '%s' already exists. Do you want to replace it?") %
+                                                     os.path.basename(paths[0]))
                 overwrite_dialog.format_secondary_text(
-                    _('Replacing it will overwrite its contents.'))
+                        _('Replacing it will overwrite its contents.'))
                 response = overwrite_dialog.run()
                 overwrite_dialog.destroy()
                 if response != gtk.RESPONSE_OK:
@@ -165,9 +164,9 @@ class _ComicFileChooserDialog(gtk.Dialog):
                 pixbuf = image.add_border(pixbuf, 1)
                 self._preview_image.set_from_pixbuf(pixbuf)
                 self._namelabel.set_text(encoding.to_unicode(
-                    os.path.basename(path)))
+                        os.path.basename(path)))
                 self._sizelabel.set_text(
-                    '%.1f KiB' % (os.stat(path).st_size / 1024.0))
+                        '%.1f KiB' % (os.stat(path).st_size / 1024.0))
         else:
             self._preview_image.clear()
             self._namelabel.set_text('')
@@ -175,7 +174,6 @@ class _ComicFileChooserDialog(gtk.Dialog):
 
 
 class _MainFileChooserDialog(_ComicFileChooserDialog):
-
     """The normal filechooser dialog used with the "Open" menu item."""
 
     def __init__(self, window):
@@ -202,15 +200,15 @@ class _MainFileChooserDialog(_ComicFileChooserDialog):
             # with it. It only happens the second time a dialog is created
             # though, which is very strange.
             self.filechooser.set_filter(filters[
-                prefs['last filter in main filechooser']])
+                                            prefs['last filter in main filechooser']])
         except:
             self.filechooser.set_filter(filters[0])
 
     def files_chosen(self, paths):
         if paths:
-            try: # For some reason this fails sometimes (GTK+ bug?)
+            try:  # For some reason this fails sometimes (GTK+ bug?)
                 filter_index = self.filechooser.list_filters().index(
-                    self.filechooser.get_filter())
+                        self.filechooser.get_filter())
                 prefs['last filter in main filechooser'] = filter_index
             except:
                 pass
@@ -219,8 +217,8 @@ class _MainFileChooserDialog(_ComicFileChooserDialog):
         else:
             _close_main_filechooser_dialog()
 
-class _LibraryFileChooserDialog(_ComicFileChooserDialog):
 
+class _LibraryFileChooserDialog(_ComicFileChooserDialog):
     """The filechooser dialog used when adding books to the library."""
 
     def __init__(self, library):
@@ -229,13 +227,13 @@ class _LibraryFileChooserDialog(_ComicFileChooserDialog):
         self.set_transient_for(library)
         self.filechooser.set_select_multiple(True)
         self.filechooser.connect('current_folder_changed',
-            self._set_collection_name)
+                                 self._set_collection_name)
 
         self._collection_button = gtk.CheckButton(
-            '%s:' % _('Automatically add the books to this collection'),
-            False)
+                '%s:' % _('Automatically add the books to this collection'),
+                False)
         self._collection_button.set_active(
-            prefs['auto add books into collections'])
+                prefs['auto add books into collections'])
         self._comboentry = gtk.combo_box_entry_new_text()
         self._comboentry.child.set_activates_default(True)
         for collection in self._library.backend.get_all_collections():
@@ -256,7 +254,7 @@ class _LibraryFileChooserDialog(_ComicFileChooserDialog):
             # with it. It only happens the second time a dialog is created
             # though, which is very strange.
             self.filechooser.set_filter(filters[
-                prefs['last filter in library filechooser']])
+                                            prefs['last filter in library filechooser']])
         except Exception:
             self.filechooser.set_filter(filters[1])
 
@@ -272,14 +270,14 @@ class _LibraryFileChooserDialog(_ComicFileChooserDialog):
             if self._collection_button.get_active():
                 prefs['auto add books into collections'] = True
                 collection_name = self._comboentry.get_active_text()
-                if not collection_name: # No empty-string names.
+                if not collection_name:  # No empty-string names.
                     collection_name = None
             else:
                 prefs['auto add books into collections'] = False
                 collection_name = None
-            try: # For some reason this fails sometimes (GTK+ bug?)
+            try:  # For some reason this fails sometimes (GTK+ bug?)
                 filter_index = self.filechooser.list_filters().index(
-                    self.filechooser.get_filter())
+                        self.filechooser.get_filter())
                 prefs['last filter in library filechooser'] = filter_index
             except Exception:
                 pass
@@ -290,7 +288,6 @@ class _LibraryFileChooserDialog(_ComicFileChooserDialog):
 
 
 class StandAloneFileChooserDialog(_ComicFileChooserDialog):
-
     """A simple filechooser dialog that is designed to be used with the
     gtk.Dialog.run() method. The <action> dictates what type of filechooser
     dialog we want (i.e. save or open). If the type is an open-dialog, we

@@ -3,7 +3,6 @@ brightness etc.)
 """
 from __future__ import absolute_import
 
-
 import gtk
 
 from src import histogram
@@ -13,7 +12,6 @@ _dialog = None
 
 
 class ImageEnhancer:
-
     """The ImageEnhancer keeps track of the "enhancement" values and performs
     these enhancements on pixbufs. Changes to the ImageEnhancer's values
     can be made using an _EnhanceImageDialog.
@@ -30,10 +28,10 @@ class ImageEnhancer:
     def enhance(self, pixbuf):
         """Return an "enhanced" version of <pixbuf>."""
         if (self.brightness != 1.0 or self.contrast != 1.0 or
-          self.saturation != 1.0 or self.sharpness != 1.0 or
-          self.autocontrast):
+                    self.saturation != 1.0 or self.sharpness != 1.0 or
+                self.autocontrast):
             return image.enhance(pixbuf, self.brightness, self.contrast,
-                self.saturation, self.sharpness, self.autocontrast)
+                                 self.saturation, self.sharpness, self.autocontrast)
         return pixbuf
 
     def signal_update(self):
@@ -44,7 +42,6 @@ class ImageEnhancer:
 
 
 class _EnhanceImageDialog(gtk.Dialog):
-
     """A gtk.Dialog which allows modification of the values belonging to
     an ImageEnhancer.
     """
@@ -52,7 +49,7 @@ class _EnhanceImageDialog(gtk.Dialog):
     def __init__(self, window):
         gtk.Dialog.__init__(self, _('Enhance image'), window, 0)
         self.add_buttons(_('Defaults'), gtk.RESPONSE_NO,
-            gtk.STOCK_OK, gtk.RESPONSE_OK)
+                         gtk.STOCK_OK, gtk.RESPONSE_OK)
         self.set_has_separator(False)
         self.set_resizable(False)
         self.connect('response', self._response)
@@ -127,7 +124,7 @@ class _EnhanceImageDialog(gtk.Dialog):
         self._autocontrast_button = \
             gtk.CheckButton(_('Automatically adjust contrast.'))
         self._autocontrast_button.set_tooltip_text(
-            _('Automatically adjust contrast (both lightness and darkness), separately for each colour band.'))
+                _('Automatically adjust contrast (both lightness and darkness), separately for each colour band.'))
         vbox.pack_start(self._autocontrast_button, False, False, 2)
         self._autocontrast_button.connect('toggled', self._change_values)
 
@@ -139,7 +136,7 @@ class _EnhanceImageDialog(gtk.Dialog):
         self._autocontrast_button.set_active(self._enhancer.autocontrast)
         self._block = False
         self._contrast_scale.set_sensitive(
-            not self._autocontrast_button.get_active())
+                not self._autocontrast_button.get_active())
 
         self.show_all()
 
@@ -148,7 +145,7 @@ class _EnhanceImageDialog(gtk.Dialog):
         pixbuf = image.get_pixbuf()
         if pixbuf is not None:
             self._hist_image.set_from_pixbuf(histogram.draw_histogram(pixbuf,
-                text=False))
+                                                                      text=False))
 
     def clear_histogram(self):
         """Clear the histogram in the dialog."""
@@ -163,7 +160,7 @@ class _EnhanceImageDialog(gtk.Dialog):
         self._enhancer.sharpness = self._sharpness_scale.get_value() + 1
         self._enhancer.autocontrast = self._autocontrast_button.get_active()
         self._contrast_scale.set_sensitive(
-            not self._autocontrast_button.get_active())
+                not self._autocontrast_button.get_active())
         self._enhancer.signal_update()
 
     def _response(self, dialog, response):

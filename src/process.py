@@ -6,13 +6,13 @@ import subprocess
 
 
 class Process:
-
     """The subprocess and popen2 modules in Python are broken (see issue
     #1336). The problem (i.e. complete crash) they can cause happen fairly
     often (once is too often) in Comix when calling "rar" or "unrar" to
     extract specific files from archives. We roll our own very simple
     process spawning module here instead.
     """
+
     # TODO: I can no longer reproduce the issue. Check if this version of
     # process.py still solves it.
 
@@ -38,7 +38,7 @@ class Process:
         file-like object linked to the spawned process' stdout.
         """
         try:
-            gc.disable() # Avoid Python issue #1336!
+            gc.disable()  # Avoid Python issue #1336!
             return self._exec()
         finally:
             gc.enable()

@@ -13,7 +13,6 @@ from src import labels
 
 ImageVersion = "Pillow-%s" % Image.PILLOW_VERSION
 
-
 _dialog = None
 
 
@@ -21,7 +20,7 @@ class _AboutDialog(gtk.Dialog):
 
     def __init__(self, window):
         gtk.Dialog.__init__(self, _('About'), window, 0,
-            (gtk.STOCK_CLOSE, gtk.RESPONSE_CLOSE))
+                            (gtk.STOCK_CLOSE, gtk.RESPONSE_CLOSE))
         self.set_has_separator(False)
         self.set_resizable(False)
         self.connect('response', _close_dialog)
@@ -53,26 +52,26 @@ class _AboutDialog(gtk.Dialog):
             print('! Could not find the icon file "comix.svg"\n')
         label = gtk.Label()
         label.set_markup(
-        '<big><big><big><big><b><span foreground="#333333">Com</span>' +
-        '<span foreground="#79941b">ix</span> <span foreground="#333333">' +
-        constants.VERSION +
-        '</span></b></big></big></big></big>\n\n' +
-        _('Comix is an image viewer specifically designed to handle comic books.') +
-        '\n' +
-        _('It reads ZIP, RAR and tar archives, as well as plain image files.') +
-        '\n\n' +
-        _('Comix is licensed under the GNU General Public License.') +
-        '\n\n' +
-        '<small>Copyright © 2005-2009 Pontus Ekberg\n\n' +
-        'herrekberg@users.sourceforge.net\n' +
-        'http://comix.sourceforge.net</small>\n' +
-        '<small>Copyright © 2010-2017 David Pineau\n\n' +
-        'dav.pineau@gmail.com\n' +
-        'https://github.com/Joacchim/Comix</small>\n' +
-        '<small>Copyright © 2014-2017 Sergey Dryabzhinsky\n\n' +
-        'sergey.dryabzhinksy@gmail.com\n' +
-        'https://github.com/sergey-dryabzhinksy/Comix</small>\n' +
-        '\n'+_('Image processing library')+': %s\n' % ImageVersion
+                '<big><big><big><big><b><span foreground="#333333">Com</span>' +
+                '<span foreground="#79941b">ix</span> <span foreground="#333333">' +
+                constants.VERSION +
+                '</span></b></big></big></big></big>\n\n' +
+                _('Comix is an image viewer specifically designed to handle comic books.') +
+                '\n' +
+                _('It reads ZIP, RAR and tar archives, as well as plain image files.') +
+                '\n\n' +
+                _('Comix is licensed under the GNU General Public License.') +
+                '\n\n' +
+                '<small>Copyright © 2005-2009 Pontus Ekberg\n\n' +
+                'herrekberg@users.sourceforge.net\n' +
+                'http://comix.sourceforge.net</small>\n' +
+                '<small>Copyright © 2010-2017 David Pineau\n\n' +
+                'dav.pineau@gmail.com\n' +
+                'https://github.com/Joacchim/Comix</small>\n' +
+                '<small>Copyright © 2014-2017 Sergey Dryabzhinsky\n\n' +
+                'sergey.dryabzhinksy@gmail.com\n' +
+                'https://github.com/sergey-dryabzhinksy/Comix</small>\n' +
+                '\n' + _('Image processing library') + ': %s\n' % ImageVersion
         )
         box.pack_start(label, True, True, 0)
         label.set_justify(gtk.JUSTIFY_CENTER)
@@ -92,35 +91,35 @@ class _AboutDialog(gtk.Dialog):
         hbox.pack_start(left_box, False, False)
         hbox.pack_start(right_box, False, False)
         for nice_person, description in (
-          ('Pontus Ekberg', _('Developer')),
-          ('Emfox Zhou', _('Simplified Chinese translation')),
-          ('Xie Yanbo', _('Simplified Chinese translation')),
-          ('Manuel Quiñones', _('Spanish translation')),
-          ('Marcelo Góes', _('Brazilian Portuguese translation')),
-          ('Christoph Wolk', _('German translation and Nautilus thumbnailer')),
-          ('Chris Leick', _('German translation')),
-          ('Raimondo Giammanco', _('Italian translation')),
-          ('GhePeU', _('Italian translation')),
-          ('Arthur Nieuwland', _('Dutch translation')),
-          ('Achraf Cherti', _('French translation')),
-          ('Benoît H.', _('French translation')),
-          ('Kamil Leduchowski', _('Polish translation')),
-          ('Darek Jakoniuk', _('Polish translation')),
-          ('Paul Chatzidimitriou', _('Greek translation')),
-          ('Carles Escrig Royo', _('Catalan translation')),
-          ('Hsin-Lin Cheng', _('Traditional Chinese translation')),
-          ('Wayne Su', _('Traditional Chinese translation')),
-          ('Mamoru Tasaka', _('Japanese translation')),
-          ('Ernő Drabik', _('Hungarian translation')),
-          ('Artyom Smirnov', _('Russian translation')),
-          ('Adrian C.', _('Croatian translation')),
-          ('김민기', _('Korean translation')),
-          ('Maryam Sanaat', _('Persian translation')),
-          ('Andhika Padmawan', _('Indonesian translation')),
-          ('Jan Nekvasil', _('Czech translation')),
-          ('Олександр Заяц', _('Ukrainian translation')),
-          ('Roxerio Roxo Carrillo', _('Galician translation')),
-          ('Victor Castillejo', _('Icon design'))):
+                ('Pontus Ekberg', _('Developer')),
+                ('Emfox Zhou', _('Simplified Chinese translation')),
+                ('Xie Yanbo', _('Simplified Chinese translation')),
+                ('Manuel Quiñones', _('Spanish translation')),
+                ('Marcelo Góes', _('Brazilian Portuguese translation')),
+                ('Christoph Wolk', _('German translation and Nautilus thumbnailer')),
+                ('Chris Leick', _('German translation')),
+                ('Raimondo Giammanco', _('Italian translation')),
+                ('GhePeU', _('Italian translation')),
+                ('Arthur Nieuwland', _('Dutch translation')),
+                ('Achraf Cherti', _('French translation')),
+                ('Benoît H.', _('French translation')),
+                ('Kamil Leduchowski', _('Polish translation')),
+                ('Darek Jakoniuk', _('Polish translation')),
+                ('Paul Chatzidimitriou', _('Greek translation')),
+                ('Carles Escrig Royo', _('Catalan translation')),
+                ('Hsin-Lin Cheng', _('Traditional Chinese translation')),
+                ('Wayne Su', _('Traditional Chinese translation')),
+                ('Mamoru Tasaka', _('Japanese translation')),
+                ('Ernő Drabik', _('Hungarian translation')),
+                ('Artyom Smirnov', _('Russian translation')),
+                ('Adrian C.', _('Croatian translation')),
+                ('김민기', _('Korean translation')),
+                ('Maryam Sanaat', _('Persian translation')),
+                ('Andhika Padmawan', _('Indonesian translation')),
+                ('Jan Nekvasil', _('Czech translation')),
+                ('Олександр Заяц', _('Ukrainian translation')),
+                ('Roxerio Roxo Carrillo', _('Galician translation')),
+                ('Victor Castillejo', _('Icon design'))):
             name_label = labels.BoldLabel('%s:' % nice_person)
             name_label.set_alignment(1.0, 1.0)
             left_box.pack_start(name_label, True, True)

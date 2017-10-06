@@ -14,7 +14,7 @@ class _CommentsDialog(gtk.Dialog):
 
     def __init__(self, window):
         gtk.Dialog.__init__(self, _('Comments'), window, 0,
-            (gtk.STOCK_CLOSE, gtk.RESPONSE_CLOSE))
+                            (gtk.STOCK_CLOSE, gtk.RESPONSE_CLOSE))
         self.set_has_separator(False)
         self.set_resizable(True)
         self.connect('response', _close_dialog)

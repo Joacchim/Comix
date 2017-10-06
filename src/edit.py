@@ -18,7 +18,6 @@ _dialog = None
 
 
 class _EditArchiveDialog(gtk.Dialog):
-
     """The _EditArchiveDialog lets users edit archives (or directories) by
     reordering images and removing and adding images or other files. The
     result can be saved as a ZIP archive.
@@ -26,8 +25,8 @@ class _EditArchiveDialog(gtk.Dialog):
 
     def __init__(self, window):
         gtk.Dialog.__init__(self, _('Edit archive'), window, gtk.DIALOG_MODAL,
-            (gtk.STOCK_CANCEL, gtk.RESPONSE_CANCEL))
-        self.kill = False # Dialog is killed.
+                            (gtk.STOCK_CANCEL, gtk.RESPONSE_CANCEL))
+        self.kill = False  # Dialog is killed.
         self.file_handler = window.file_handler
         self._window = window
         self._save_button = self.add_button(gtk.STOCK_SAVE_AS, gtk.RESPONSE_OK)
@@ -35,11 +34,11 @@ class _EditArchiveDialog(gtk.Dialog):
         # RESPONSE_HELP we automatically get the button placed at the left.
         self._import_button = self.add_button(_('Import'), gtk.RESPONSE_HELP)
         self._import_button.set_image(gtk.image_new_from_stock(gtk.STOCK_ADD,
-            gtk.ICON_SIZE_BUTTON))
+                                                               gtk.ICON_SIZE_BUTTON))
         self.set_has_separator(False)
         self.set_border_width(4)
         self.resize(min(gtk.gdk.screen_get_default().get_width() - 50, 750),
-            min(gtk.gdk.screen_get_default().get_height() - 50, 600))
+                    min(gtk.gdk.screen_get_default().get_height() - 50, 600))
         self.connect('response', self._response)
 
         self._image_area = _ImageArea(self)
@@ -61,7 +60,7 @@ class _EditArchiveDialog(gtk.Dialog):
         self._import_button.set_sensitive(False)
         self.window.set_cursor(gtk.gdk.Cursor(gtk.gdk.WATCH))
         self._image_area.fetch_images()
-        if self.kill: # fetch_images() allows pending events to be handled.
+        if self.kill:  # fetch_images() allows pending events to be handled.
             return False
         self._other_area.fetch_comments()
         self.window.set_cursor(None)
@@ -79,14 +78,14 @@ class _EditArchiveDialog(gtk.Dialog):
         other_files = self._other_area.get_file_listing()
         try:
             tmp_path = tempfile.mkstemp(
-                suffix='.%s' % os.path.basename(archive_path),
-                prefix='tmp.', dir=os.path.dirname(archive_path))[1]
+                    suffix='.%s' % os.path.basename(archive_path),
+                    prefix='tmp.', dir=os.path.dirname(archive_path))[1]
             fail = False
         except:
             fail = True
         if not fail:
             packer = archive.Packer(image_files, other_files, tmp_path,
-                os.path.splitext(os.path.basename(archive_path))[0])
+                                    os.path.splitext(os.path.basename(archive_path))[0])
             packer.pack()
             packing_success = packer.wait()
             if packing_success:
@@ -97,9 +96,9 @@ class _EditArchiveDialog(gtk.Dialog):
         if fail:
             self.window.set_cursor(None)
             dialog = gtk.MessageDialog(self._window, 0, gtk.MESSAGE_ERROR,
-                gtk.BUTTONS_CLOSE, _("The new archive could not be saved!"))
+                                       gtk.BUTTONS_CLOSE, _("The new archive could not be saved!"))
             dialog.format_secondary_text(
-                _("The original files have not been removed."))
+                    _("The original files have not been removed."))
             dialog.run()
             dialog.destroy()
             self.set_sensitive(True)
@@ -107,19 +106,19 @@ class _EditArchiveDialog(gtk.Dialog):
     def _response(self, dialog, response):
         if response == gtk.RESPONSE_OK:
             dialog = filechooser.StandAloneFileChooserDialog(
-                gtk.FILE_CHOOSER_ACTION_SAVE)
+                    gtk.FILE_CHOOSER_ACTION_SAVE)
             src_path = self.file_handler.get_path_to_base()
             dialog.set_current_directory(os.path.dirname(src_path))
             dialog.set_save_name('%s.cbz' % os.path.splitext(
-                os.path.basename(src_path))[0])
+                    os.path.basename(src_path))[0])
             dialog.filechooser.set_extra_widget(gtk.Label(
-                _('Archives are stored as ZIP files.')))
+                    _('Archives are stored as ZIP files.')))
             dialog.run()
             paths = dialog.get_paths()
             dialog.destroy()
             if paths:
                 self._pack_archive(paths[0])
-        elif response == gtk.RESPONSE_HELP: # Actually "Import"
+        elif response == gtk.RESPONSE_HELP:  # Actually "Import"
             dialog = filechooser.StandAloneFileChooserDialog()
             dialog.run()
             paths = dialog.get_paths()
@@ -135,7 +134,6 @@ class _EditArchiveDialog(gtk.Dialog):
 
 
 class _ImageArea(gtk.ScrolledWindow):
-
     """The area used for displaying and handling image files."""
 
     def __init__(self, edit_dialog):
@@ -167,19 +165,19 @@ class _ImageArea(gtk.ScrolledWindow):
         actiongroup = gtk.ActionGroup('comix-edit-archive-image-area')
         actiongroup.add_actions([
             ('remove', gtk.STOCK_REMOVE, _('Remove from archive'), None, None,
-                self._remove_pages)])
+             self._remove_pages)])
         self._ui_manager.insert_action_group(actiongroup, 0)
 
     def fetch_images(self):
         """Load all the images in the archive or directory."""
         for page in xrange(1,
-          self._edit_dialog.file_handler.get_number_of_pages() + 1):
+                           self._edit_dialog.file_handler.get_number_of_pages() + 1):
             thumb = self._edit_dialog.file_handler.get_thumbnail(
-                page, 67, 100, create=False)
+                    page, 67, 100, create=False)
             thumb = image.add_border(thumb, 1, 0x555555FF)
             path = self._edit_dialog.file_handler.get_path_to_page(page)
             self._liststore.append([thumb,
-                encoding.to_unicode(os.path.basename(path)), path])
+                                    encoding.to_unicode(os.path.basename(path)), path])
             if page % 10 == 0:
                 while gtk.events_pending():
                     gtk.main_iteration(False)
@@ -191,7 +189,7 @@ class _ImageArea(gtk.ScrolledWindow):
         thumb = thumbnail.get_thumbnail(path, create=False)
         if thumb is None:
             thumb = self.render_icon(gtk.STOCK_MISSING_IMAGE,
-                gtk.ICON_SIZE_DIALOG)
+                                     gtk.ICON_SIZE_DIALOG)
         thumb = image.fit_in_rectangle(thumb, 67, 100)
         thumb = image.add_border(thumb, 1, 0x555555FF)
         self._liststore.append([thumb, os.path.basename(path), path])
@@ -220,7 +218,7 @@ class _ImageArea(gtk.ScrolledWindow):
                 iconview.unselect_all()
                 iconview.select_path(path)
             self._ui_manager.get_widget('/Popup').popup(None, None, None,
-                event.button, event.time)
+                                                        event.button, event.time)
 
     def _key_press(self, iconview, event):
         """Handle key presses on the thumbnail area."""
@@ -237,14 +235,13 @@ class _ImageArea(gtk.ScrolledWindow):
         # context.set_icon_pixmap() seems to cause crashes, so we do a
         # quick and dirty conversion to pixbuf.
         pointer = gtk.gdk.Pixbuf(gtk.gdk.COLORSPACE_RGB, True, 8,
-            *pixmap.get_size())
+                                 *pixmap.get_size())
         pointer = pointer.get_from_drawable(pixmap, iconview.get_colormap(),
-            0, 0, 0, 0, *pixmap.get_size())
+                                            0, 0, 0, 0, *pixmap.get_size())
         context.set_icon_pixbuf(pointer, -5, -5)
 
 
 class _OtherArea(gtk.VBox):
-
     """The area used for displaying and handling non-image files."""
 
     def __init__(self, edit_dialog):
@@ -254,7 +251,8 @@ class _OtherArea(gtk.VBox):
         scrolled = gtk.ScrolledWindow()
         scrolled.set_policy(gtk.POLICY_AUTOMATIC, gtk.POLICY_AUTOMATIC)
         self.pack_start(scrolled)
-        info = gtk.Label(_('Please note that the only files that are automatically added to this list are those files in archives that Comix recognizes as comments.'))
+        info = gtk.Label(_(
+            'Please note that the only files that are automatically added to this list are those files in archives that Comix recognizes as comments.'))
         info.set_alignment(0.5, 0.5)
         info.set_line_wrap(True)
         self.pack_start(info, False, False, 10)
@@ -285,13 +283,13 @@ class _OtherArea(gtk.VBox):
         actiongroup = gtk.ActionGroup('comix-edit-archive-other-area')
         actiongroup.add_actions([
             ('remove', gtk.STOCK_REMOVE, _('Remove from archive'), None, None,
-                self._remove_file)])
+             self._remove_file)])
         self._ui_manager.insert_action_group(actiongroup, 0)
 
     def fetch_comments(self):
         """Load all comments in the archive."""
         for num in xrange(1,
-          self._edit_dialog.file_handler.get_number_of_comments() + 1):
+                          self._edit_dialog.file_handler.get_number_of_comments() + 1):
             path = self._edit_dialog.file_handler.get_comment_name(num)
             size = '%.1f KiB' % (os.stat(path).st_size / 1024.0)
             self._liststore.append([os.path.basename(path), size, path])
@@ -322,7 +320,7 @@ class _OtherArea(gtk.VBox):
         path = path[0]
         if event.button == 3:
             self._ui_manager.get_widget('/Popup').popup(None, None, None,
-                event.button, event.time)
+                                                        event.button, event.time)
 
     def _key_press(self, iconview, event):
         """Handle key presses on the area."""

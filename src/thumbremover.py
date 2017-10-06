@@ -23,10 +23,10 @@ class _ThumbnailMaintenanceDialog(gtk.Dialog):
     def __init__(self, window):
         self._num_thumbs = 0
         gtk.Dialog.__init__(self, _('Thumbnail maintenance'), window, 0,
-            (gtk.STOCK_CLOSE, gtk.RESPONSE_CLOSE))
+                            (gtk.STOCK_CLOSE, gtk.RESPONSE_CLOSE))
         button = self.add_button(_('Cleanup'), gtk.RESPONSE_OK)
         button.set_image(gtk.image_new_from_stock(
-            gtk.STOCK_CLEAR, gtk.ICON_SIZE_BUTTON))
+                gtk.STOCK_CLEAR, gtk.ICON_SIZE_BUTTON))
         self.set_has_separator(False)
         self.set_resizable(False)
         self.set_border_width(4)
@@ -40,13 +40,14 @@ class _ThumbnailMaintenanceDialog(gtk.Dialog):
         label.set_alignment(0, 0.5)
         attrlist = label.get_attributes()
         attrlist.insert(pango.AttrScale(pango.SCALE_LARGE, 0,
-            len(label.get_text())))
+                                        len(label.get_text())))
         label.set_attributes(attrlist)
         main_box.pack_start(label, False, False, 2)
         main_box.pack_start(gtk.HSeparator(), False, False, 5)
 
         label = labels.ItalicLabel(
-            _('Thumbnails for files (such as image files and comic book archives) are stored in your home directory. Many different applications use and create these thumbnails, but sometimes thumbnails remain even though the original files have been removed - wasting space. This dialog can cleanup your stored thumbnails by removing orphaned and outdated thumbnails.'))
+                _(
+                    'Thumbnails for files (such as image files and comic book archives) are stored in your home directory. Many different applications use and create these thumbnails, but sometimes thumbnails remain even though the original files have been removed - wasting space. This dialog can cleanup your stored thumbnails by removing orphaned and outdated thumbnails.'))
         label.set_alignment(0, 0.5)
         label.set_line_wrap(True)
         main_box.pack_start(label, False, False, 10)
@@ -80,7 +81,7 @@ class _ThumbnailMaintenanceDialog(gtk.Dialog):
         right_box.pack_start(self._size_thumbs_label, True, True)
 
         label = labels.ItalicLabel(
-            _('Do you want to cleanup orphaned and outdated thumbnails now?'))
+                _('Do you want to cleanup orphaned and outdated thumbnails now?'))
         label.set_alignment(0, 0.5)
         main_box.pack_start(label, False, False, 10)
 
@@ -117,7 +118,7 @@ class _ThumbnailRemover(gtk.Dialog):
         self._total_thumbs = total_thumbs
         self._destroy = False
         gtk.Dialog.__init__(self, _('Removing thumbnails'), parent, 0,
-            (gtk.STOCK_STOP, gtk.RESPONSE_CLOSE))
+                            (gtk.STOCK_STOP, gtk.RESPONSE_CLOSE))
         self.set_size_request(400, -1)
         self.set_has_separator(False)
         self.set_resizable(False)
@@ -172,7 +173,7 @@ class _ThumbnailRemover(gtk.Dialog):
                 iteration += 1
                 entry_path = os.path.join(dir_path, entry)
                 if not os.path.isfile(entry_path) or not os.access(entry_path,
-                  os.W_OK | os.R_OK):
+                                                                   os.W_OK | os.R_OK):
                     continue
                 try:
                     im_info = Image.open(entry_path).info
@@ -189,7 +190,7 @@ class _ThumbnailRemover(gtk.Dialog):
                         src_mtime = None
                 # Thumb is orphaned, outdated or invalid.
                 if (broken or not os.path.isfile(src_path) or
-                  src_mtime != thumb_mtime):
+                            src_mtime != thumb_mtime):
                     size = os.stat(entry_path).st_size
                     try:
                         os.remove(entry_path)
@@ -204,7 +205,7 @@ class _ThumbnailRemover(gtk.Dialog):
                     else:
                         src_path = encoding.to_unicode(src_path)
                     removing_label.set_text(_("Removed thumbnail for '%s'") %
-                        src_path)
+                                            src_path)
                 if iteration % 50 == 0:
                     bar.set_fraction(min(1, iteration / self._total_thumbs))
                 while gtk.events_pending():

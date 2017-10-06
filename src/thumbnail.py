@@ -145,13 +145,13 @@ def _create_thumbnail(path, dst_dir, image_path=None):
     width = str(width)
     height = str(height)
     tEXt_data = {
-        'tEXt::Thumb::URI':           uri,
-        'tEXt::Thumb::MTime':         mtime,
-        'tEXt::Thumb::Size':          size,
-        'tEXt::Thumb::Mimetype':      mime,
-        'tEXt::Thumb::Image::Width':  width,
+        'tEXt::Thumb::URI': uri,
+        'tEXt::Thumb::MTime': mtime,
+        'tEXt::Thumb::Size': size,
+        'tEXt::Thumb::Mimetype': mime,
+        'tEXt::Thumb::Image::Width': width,
         'tEXt::Thumb::Image::Height': height,
-        'tEXt::Software':             'Comix %s' % constants.VERSION
+        'tEXt::Software': 'Comix %s' % constants.VERSION
     }
     try:
         if not os.path.isdir(dst_dir):
@@ -215,7 +215,7 @@ def _guess_cover(files):
 
     alphanumeric_sort(files)
 
-    ext_re = re.compile('\.('+'|'.join(get_supported_format_extensions_preg())+')\s*$', re.I)
+    ext_re = re.compile('\.(' + '|'.join(get_supported_format_extensions_preg()) + ')\s*$', re.I)
 
     front_re = re.compile('(cover|front)', re.I)
     images = filter(ext_re.search, files)

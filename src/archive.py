@@ -1,6 +1,7 @@
 """archive.py - Archive handling (extract/create) for Comix."""
 from __future__ import absolute_import
 
+import cStringIO
 import os
 import re
 import sys
@@ -8,8 +9,8 @@ import tarfile
 import threading
 import zipfile
 
-import cStringIO
 import gtk
+
 try:
     from py7zlib import Archive7z
 except ImportError:
@@ -24,8 +25,8 @@ ZIP, RAR, TAR, GZIP, BZIP2, SEVENZIP, MOBI = range(7)
 _rar_exec = None
 _7z_exec = None
 
-class Extractor:
 
+class Extractor:
     """Extractor is a threaded class for extracting different archive formats.
 
     The Extractor can be loaded with paths to archives (currently ZIP, tar,
@@ -70,10 +71,11 @@ class Extractor:
                 if _rar_exec is None:
                     print('! Could not find RAR file extractor.')
                     dialog = gtk.MessageDialog(None, 0, gtk.MESSAGE_WARNING,
-                        gtk.BUTTONS_CLOSE,
-                        _("Could not find RAR file extractor!"))
+                                               gtk.BUTTONS_CLOSE,
+                                               _("Could not find RAR file extractor!"))
                     dialog.format_secondary_markup(
-                        _("You need either the <i>rar</i> or the <i>unrar</i> program installed in order to read RAR (.cbr) files."))
+                            _(
+                                "You need either the <i>rar</i> or the <i>unrar</i> program installed in order to read RAR (.cbr) files."))
                     dialog.run()
                     dialog.destroy()
                     return None
@@ -92,7 +94,7 @@ class Extractor:
                     _7z_exec = _get_7z_exec()
             else:
                 try:
-                    self._szfile = Archive7z(open(src,'rb'),'-')
+                    self._szfile = Archive7z(open(src, 'rb'), '-')
                     self._files = self._szfile.getnames()
                 except:
                     Archive7z = None
@@ -111,10 +113,11 @@ class Extractor:
 
             if not _7z_exec and not Archive7z:
                 dialog = gtk.MessageDialog(None, 0, gtk.MESSAGE_WARNING,
-                    gtk.BUTTONS_CLOSE,
-                    _("Could not find 7Z file extractor!"))
+                                           gtk.BUTTONS_CLOSE,
+                                           _("Could not find 7Z file extractor!"))
                 dialog.format_secondary_markup(
-                    _("You need either the <i>pylzma</i> or the <i>p7zip</i> program installed in order to read 7Z (.cb7) files."))
+                        _(
+                            "You need either the <i>pylzma</i> or the <i>p7zip</i> program installed in order to read 7Z (.cb7) files."))
                 dialog.run()
                 dialog.destroy()
                 return None
@@ -124,7 +127,7 @@ class Extractor:
                 self._mobifile = mobiunpack.MobiFile(src)
                 self._files = self._mobifile.getnames()
             except mobiunpack.unpackException as e:
-                print('! Failed to unpack MobiPocket: {}'.format( e))
+                print('! Failed to unpack MobiPocket: {}'.format(e))
                 return None
 
         else:
@@ -173,7 +176,6 @@ class Extractor:
                 break
 
         return names
-
 
     def get_files(self):
         """Return a list of names of all the files the extractor is currently
@@ -253,7 +255,7 @@ class Extractor:
         # Extract 7z and rar whole archive - if it SOLID - extract one file is SLOW
         if self._type in (SEVENZIP,) and _7z_exec is not None:
             cmd = [_7z_exec, 'x', '-bd', '-p-',
-                '-o'+self._dst, '-y', self._src]
+                   '-o' + self._dst, '-y', self._src]
             proc = process.Process(cmd)
             proc.spawn()
             proc.wait()
@@ -266,7 +268,7 @@ class Extractor:
             cwd = os.getcwd()
             os.chdir(self._dst)
             cmd = [_rar_exec, 'x', '-kb', '-p-',
-                        '-o-', '-inul', '--', self._src]
+                   '-o-', '-inul', '--', self._src]
             proc = process.Process(cmd)
             proc.spawn()
             proc.wait()
@@ -303,7 +305,7 @@ class Extractor:
                     else:
                         if _7z_exec is not None:
                             proc = process.Process([_7z_exec, 'x', '-bd', '-p-',
-                                '-o'+self._dst, '-y', self._src, name])
+                                                    '-o' + self._dst, '-y', self._src, name])
                             proc.spawn()
                             proc.wait()
                         else:
@@ -312,7 +314,7 @@ class Extractor:
                 new.close()
             elif self._type in (TAR, GZIP, BZIP2):
                 if os.path.normpath(os.path.join(self._dst, name)).startswith(
-                  self._dst):
+                        self._dst):
                     self._tfile.extract(name, self._dst)
                 else:
                     print('! Non-local tar member: {}\n'.format(name))
@@ -321,7 +323,7 @@ class Extractor:
                     cwd = os.getcwd()
                     os.chdir(self._dst)
                     proc = process.Process([_rar_exec, 'x', '-kb', '-p-',
-                        '-o-', '-inul', '--', self._src, name])
+                                            '-o-', '-inul', '--', self._src, name])
                     proc.spawn()
                     proc.wait()
                     os.chdir(cwd)
@@ -356,7 +358,7 @@ class Extractor:
             return cStringIO.StringIO(self._tfile.extractfile(chosen).read())
         elif self._type == RAR:
             proc = process.Process([_rar_exec, 'p', '-inul', '-p-', '--',
-                self._src, chosen])
+                                    self._src, chosen])
             fobj = proc.spawn()
             return cStringIO.StringIO(fobj.read())
         elif self._type == SEVENZIP:
@@ -364,13 +366,12 @@ class Extractor:
                 return cStringIO.StringIO(self._szfile.getmember(chosen).read())
             elif _7z_exec is not None:
                 proc = process.Process([_7z_exec, 'e', '-bd', '-p-', '-so',
-                    self._src, chosen])
+                                        self._src, chosen])
                 fobj = proc.spawn()
                 return cStringIO.StringIO(fobj.read())
 
 
 class Packer:
-
     """Packer is a threaded class for packing files into ZIP archives.
 
     It would be straight-forward to add support for more archive types,
@@ -420,7 +421,7 @@ class Packer:
             return
         used_names = []
         pattern = '%%0%dd - %s%%s' % (len(str(len(self._image_files))),
-            self._base_name)
+                                      self._base_name)
         for i, path in enumerate(self._image_files):
             filename = pattern % (i + 1, os.path.splitext(path)[1])
             try:
@@ -485,21 +486,21 @@ def archive_mime_type(path):
 
 def get_name(archive_type):
     """Return a text representation of an archive type."""
-    return {ZIP:   _('ZIP archive'),
-            TAR:   _('Tar archive'),
-            GZIP:  _('Gzip compressed tar archive'),
+    return {ZIP: _('ZIP archive'),
+            TAR: _('Tar archive'),
+            GZIP: _('Gzip compressed tar archive'),
             BZIP2: _('Bzip2 compressed tar archive'),
-            RAR:   _('RAR archive'),
+            RAR: _('RAR archive'),
             SEVENZIP: _('7-Zip archive'),
-            MOBI:  _('MobiPocket file'),
-           }[archive_type]
+            MOBI: _('MobiPocket file'),
+            }[archive_type]
 
 
 def get_archive_info(path):
     """Return a tuple (mime, num_pages, size) with info about the archive
     at <path>, or None if <path> doesn't point to a supported archive.
     """
-    image_re = re.compile('\.('+'|'.join(get_supported_format_extensions_preg())+')\s*$', re.I)
+    image_re = re.compile('\.(' + '|'.join(get_supported_format_extensions_preg()) + ')\s*$', re.I)
     extractor = Extractor()
     extractor.setup(path, None)
     mime = extractor.get_mime_type()
@@ -520,6 +521,7 @@ def _get_rar_exec():
         if process.Process([command]).spawn() is not None:
             return command
     return None
+
 
 def _get_7z_exec():
     """Return the name of the RAR file extractor executable, or None if

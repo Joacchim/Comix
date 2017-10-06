@@ -1,9 +1,9 @@
 """preferences.py - Preference handler."""
 from __future__ import absolute_import
 
+import cPickle
 import os
 
-import cPickle
 import gtk
 
 from src import constants
@@ -75,7 +75,6 @@ _dialog = None
 
 
 class _PreferencesDialog(gtk.Dialog):
-
     """The preferences dialog where most (but not all) settings that are
     saved between sessions are presented to the user.
     """
@@ -83,7 +82,7 @@ class _PreferencesDialog(gtk.Dialog):
     def __init__(self, window):
         self._window = window
         gtk.Dialog.__init__(self, _('Preferences'), window, 0,
-            (gtk.STOCK_CLOSE, gtk.RESPONSE_CLOSE))
+                            (gtk.STOCK_CLOSE, gtk.RESPONSE_CLOSE))
         self.connect('response', self._response)
         self.set_has_separator(False)
         self.set_resizable(True)
@@ -99,18 +98,18 @@ class _PreferencesDialog(gtk.Dialog):
         page = _PreferencePage(80)
         page.new_section(_('Background'))
         fixed_bg_button = gtk.RadioButton(None, '%s:' %
-            _('Use this colour as background'))
+                                          _('Use this colour as background'))
         fixed_bg_button.set_tooltip_text(
-            _('Always use this selected colour as the background colour.'))
+                _('Always use this selected colour as the background colour.'))
         color_button = gtk.ColorButton(gtk.gdk.Color(*prefs['bg colour']))
         color_button.connect('color_set', self._color_button_cb)
         page.add_row(fixed_bg_button, color_button)
         dynamic_bg_button = gtk.RadioButton(fixed_bg_button,
-            _('Use dynamic background colour.'))
+                                            _('Use dynamic background colour.'))
         dynamic_bg_button.set_active(prefs['smart bg'])
         dynamic_bg_button.connect('toggled', self._check_button_cb, 'smart bg')
         dynamic_bg_button.set_tooltip_text(
-            _('Automatically pick a background colour that fits the viewed image.'))
+                _('Automatically pick a background colour that fits the viewed image.'))
         page.add_row(dynamic_bg_button)
 
         page.new_section(_('Thumbnails'))
@@ -118,14 +117,14 @@ class _PreferencesDialog(gtk.Dialog):
         adjustment = gtk.Adjustment(prefs['thumbnail size'], 20, 128, 1, 10)
         thumb_size_spinner = gtk.SpinButton(adjustment)
         thumb_size_spinner.connect('value_changed', self._spinner_cb,
-            'thumbnail size')
+                                   'thumbnail size')
         page.add_row(label, thumb_size_spinner)
         thumb_number_button = gtk.CheckButton(
-            _('Show page numbers on thumbnails.'))
+                _('Show page numbers on thumbnails.'))
         thumb_number_button.set_active(
-            prefs['show page numbers on thumbnails'])
+                prefs['show page numbers on thumbnails'])
         thumb_number_button.connect('toggled', self._check_button_cb,
-            'show page numbers on thumbnails')
+                                    'show page numbers on thumbnails')
         page.add_row(thumb_number_button)
 
         page.new_section(_('Magnifying Glass'))
@@ -133,18 +132,18 @@ class _PreferencesDialog(gtk.Dialog):
         adjustment = gtk.Adjustment(prefs['lens size'], 50, 400, 1, 10)
         glass_size_spinner = gtk.SpinButton(adjustment)
         glass_size_spinner.connect('value_changed', self._spinner_cb,
-            'lens size')
+                                   'lens size')
         glass_size_spinner.set_tooltip_text(
-            _('Set the size of the magnifying glass. It is a square with a side of this many pixels.'))
+                _('Set the size of the magnifying glass. It is a square with a side of this many pixels.'))
         page.add_row(label, glass_size_spinner)
         label = gtk.Label('%s:' % _('Magnification factor'))
         adjustment = gtk.Adjustment(prefs['lens magnification'], 1.1, 10.0,
-            0.1, 1.0)
+                                    0.1, 1.0)
         glass_magnification_spinner = gtk.SpinButton(adjustment, digits=1)
         glass_magnification_spinner.connect('value_changed', self._spinner_cb,
-            'lens magnification')
+                                            'lens magnification')
         glass_magnification_spinner.set_tooltip_text(
-            _('Set the magnification factor of the magnifying glass.'))
+                _('Set the magnification factor of the magnifying glass.'))
         page.add_row(label, glass_magnification_spinner)
 
         page.new_section(_('Image scaling'))
@@ -152,18 +151,20 @@ class _PreferencesDialog(gtk.Dialog):
         stretch_button.set_active(prefs['stretch'])
         stretch_button.connect('toggled', self._check_button_cb, 'stretch')
         stretch_button.set_tooltip_text(
-            _('Stretch images to a size that is larger than their original size if the current zoom mode requests it. If this preference is unset, images are never scaled to be larger than their original size.'))
+                _(
+                    'Stretch images to a size that is larger than their original size if the current zoom mode requests it. If this preference is unset, images are never scaled to be larger than their original size.'))
         page.add_row(stretch_button)
 
         page.new_section(_('Transparency'))
         checkered_bg_button = gtk.CheckButton(
-            _('Use checkered background for transparent images.'))
+                _('Use checkered background for transparent images.'))
         checkered_bg_button.set_active(
-            prefs['checkered bg for transparent images'])
+                prefs['checkered bg for transparent images'])
         checkered_bg_button.connect('toggled', self._check_button_cb,
-            'checkered bg for transparent images')
+                                    'checkered bg for transparent images')
         checkered_bg_button.set_tooltip_text(
-            _('Use a grey checkered background for transparent images. If this preference is unset, the background is plain white instead.'))
+                _(
+                    'Use a grey checkered background for transparent images. If this preference is unset, the background is plain white instead.'))
         page.add_row(checkered_bg_button)
         notebook.append_page(page, gtk.Label(_('Appearance')))
 
@@ -173,74 +174,79 @@ class _PreferencesDialog(gtk.Dialog):
         page = _PreferencePage(150)
         page.new_section(_('Scroll'))
         smart_space_button = gtk.CheckButton(
-            _('Use smart space key scrolling.'))
+                _('Use smart space key scrolling.'))
         smart_space_button.set_active(prefs['smart space scroll'])
         smart_space_button.connect('toggled', self._check_button_cb,
-            'smart space scroll')
+                                   'smart space scroll')
         smart_space_button.set_tooltip_text(
-            _('Use smart scrolling with the space key. Normally the space key scrolls only right down (or up when shift is pressed), but with this preference set it also scrolls sideways and so tries to follow the natural reading order of the comic book.'))
+                _(
+                    'Use smart scrolling with the space key. Normally the space key scrolls only right down (or up when shift is pressed), but with this preference set it also scrolls sideways and so tries to follow the natural reading order of the comic book.'))
         page.add_row(smart_space_button)
 
         flip_with_wheel_button = gtk.CheckButton(
-            _('Flip pages when scrolling off the edges of the page.'))
+                _('Flip pages when scrolling off the edges of the page.'))
         flip_with_wheel_button.set_active(prefs['flip with wheel'])
         flip_with_wheel_button.connect('toggled', self._check_button_cb,
-            'flip with wheel')
+                                       'flip with wheel')
         flip_with_wheel_button.set_tooltip_text(
-            _('Flip pages when scrolling "off the page" with the scroll wheel or with the arrow keys. It takes three consecutive "steps" with the scroll wheel or the arrow keys for the pages to be flipped.'))
+                _(
+                    'Flip pages when scrolling "off the page" with the scroll wheel or with the arrow keys. It takes three consecutive "steps" with the scroll wheel or the arrow keys for the pages to be flipped.'))
         page.add_row(flip_with_wheel_button)
 
         page.new_section(_('Double page mode'))
         step_length_button = gtk.CheckButton(
-            _('Flip two pages in double page mode.'))
+                _('Flip two pages in double page mode.'))
         step_length_button.set_active(prefs['double step in double page mode'])
         step_length_button.connect('toggled', self._check_button_cb,
-            'double step in double page mode')
+                                   'double step in double page mode')
         step_length_button.set_tooltip_text(
-            _('Flip two pages, instead of one, each time we flip pages in double page mode.'))
+                _('Flip two pages, instead of one, each time we flip pages in double page mode.'))
         page.add_row(step_length_button)
         virtual_double_button = gtk.CheckButton(
-            _('Show only one wide image in double page mode.'))
+                _('Show only one wide image in double page mode.'))
         virtual_double_button.set_active(
-            prefs['no double page for wide images'])
+                prefs['no double page for wide images'])
         virtual_double_button.connect('toggled', self._check_button_cb,
-            'no double page for wide images')
+                                      'no double page for wide images')
         virtual_double_button.set_tooltip_text(
-            _("Display only one image in double page mode, if the image's width exceeds its height. The result of this is that scans that span two pages are displayed properly (i.e. alone) also in double page mode."))
+                _(
+                    "Display only one image in double page mode, if the image's width exceeds its height. The result of this is that scans that span two pages are displayed properly (i.e. alone) also in double page mode."))
         page.add_row(virtual_double_button)
 
         page.new_section(_('Files'))
         auto_open_next_button = gtk.CheckButton(
-            _('Automatically open the next archive.'))
+                _('Automatically open the next archive.'))
         auto_open_next_button.set_active(prefs['auto open next archive'])
         auto_open_next_button.connect('toggled', self._check_button_cb,
-            'auto open next archive')
+                                      'auto open next archive')
         auto_open_next_button.set_tooltip_text(
-            _('Automatically open the next archive in the directory when flipping past the last page, or the previous archive when flipping past the first page.'))
+                _(
+                    'Automatically open the next archive in the directory when flipping past the last page, or the previous archive when flipping past the first page.'))
         page.add_row(auto_open_next_button)
         auto_open_last_button = gtk.CheckButton(
-            _('Automatically open the last viewed file on startup.'))
+                _('Automatically open the last viewed file on startup.'))
         auto_open_last_button.set_active(prefs['auto load last file'])
         auto_open_last_button.connect('toggled', self._check_button_cb,
-            'auto load last file')
+                                      'auto load last file')
         auto_open_last_button.set_tooltip_text(
-            _('Automatically open, on startup, the file that was open when Comix was last closed.'))
+                _('Automatically open, on startup, the file that was open when Comix was last closed.'))
         page.add_row(auto_open_last_button)
         store_recent_button = gtk.CheckButton(
-            _('Store information about recently opened files.'))
+                _('Store information about recently opened files.'))
         store_recent_button.set_active(prefs['store recent file info'])
         store_recent_button.connect('toggled', self._check_button_cb,
-            'store recent file info')
+                                    'store recent file info')
         store_recent_button.set_tooltip_text(
-            _('Add information about all files opened from within Comix to the shared recent files list.'))
+                _('Add information about all files opened from within Comix to the shared recent files list.'))
         page.add_row(store_recent_button)
         create_thumbs_button = gtk.CheckButton(
-            _('Store thumbnails for opened files.'))
+                _('Store thumbnails for opened files.'))
         create_thumbs_button.set_active(prefs['create thumbnails'])
         create_thumbs_button.connect('toggled', self._check_button_cb,
-            'create thumbnails')
+                                     'create thumbnails')
         create_thumbs_button.set_tooltip_text(
-            _('Store thumbnails for opened files according to the freedesktop.org specification. These thumbnails are shared by many other applications, such as most file managers.'))
+                _(
+                    'Store thumbnails for opened files according to the freedesktop.org specification. These thumbnails are shared by many other applications, such as most file managers.'))
         page.add_row(create_thumbs_button)
 
         page.new_section(_('Cache'))
@@ -248,15 +254,17 @@ class _PreferencesDialog(gtk.Dialog):
         cache_button.set_active(prefs['cache'])
         cache_button.connect('toggled', self._check_button_cb, 'cache')
         cache_button.set_tooltip_text(
-            _('Cache the images that are next to the currently viewed image in order to speed up browsing. Since the speed improvements are quite big, it is recommended that you have this preference set, unless you are running short on free RAM.'))
+                _(
+                    'Cache the images that are next to the currently viewed image in order to speed up browsing. Since the speed improvements are quite big, it is recommended that you have this preference set, unless you are running short on free RAM.'))
         page.add_row(cache_button)
 
         page.new_section(_('Image Animation'))
         gif_button = gtk.CheckButton(_('Play GIF image animations.'))
         gif_button.set_active(prefs['animate gifs'])
         gif_button.connect('toggled', self._check_button_cb, 'animate gifs')
-        gif_button.set_tooltip_text(    # TODO: Change if PixbufAnimation gets resizing
-            _('Play animations for GIF files, if there is one. If this is set, animated GIF images will not be resized.'))
+        gif_button.set_tooltip_text(  # TODO: Change if PixbufAnimation gets resizing
+                _(
+                    'Play animations for GIF files, if there is one. If this is set, animated GIF images will not be resized.'))
         page.add_row(gif_button)
 
         notebook.append_page(page, gtk.Label(_('Behaviour')))
@@ -267,20 +275,20 @@ class _PreferencesDialog(gtk.Dialog):
         page = _PreferencePage(180)
         page.new_section(_('Default modes'))
         double_page_button = gtk.CheckButton(
-            _('Use double page mode by default.'))
+                _('Use double page mode by default.'))
         double_page_button.set_active(prefs['default double page'])
         double_page_button.connect('toggled', self._check_button_cb,
-            'default double page')
+                                   'default double page')
         page.add_row(double_page_button)
         fullscreen_button = gtk.CheckButton(_('Use fullscreen by default.'))
         fullscreen_button.set_active(prefs['default fullscreen'])
         fullscreen_button.connect('toggled', self._check_button_cb,
-            'default fullscreen')
+                                  'default fullscreen')
         page.add_row(fullscreen_button)
         manga_button = gtk.CheckButton(_('Use manga mode by default.'))
         manga_button.set_active(prefs['default manga mode'])
         manga_button.connect('toggled', self._check_button_cb,
-            'default manga mode')
+                             'default manga mode')
         page.add_row(manga_button)
         label = gtk.Label('%s:' % _('Default zoom mode'))
         zoom_combo = gtk.combo_box_new_text()
@@ -295,19 +303,19 @@ class _PreferencesDialog(gtk.Dialog):
 
         page.new_section(_('Fullscreen'))
         hide_in_fullscreen_button = gtk.CheckButton(
-            _('Automatically hide all toolbars in fullscreen.'))
+                _('Automatically hide all toolbars in fullscreen.'))
         hide_in_fullscreen_button.set_active(prefs['hide all in fullscreen'])
         hide_in_fullscreen_button.connect('toggled', self._check_button_cb,
-            'hide all in fullscreen')
+                                          'hide all in fullscreen')
         page.add_row(hide_in_fullscreen_button)
 
         page.new_section(_('Slideshow'))
         label = gtk.Label('%s:' % _('Slideshow delay (in seconds)'))
         adjustment = gtk.Adjustment(prefs['slideshow delay'] / 1000.0,
-            0.5, 3600.0, 0.1, 1)
+                                    0.5, 3600.0, 0.1, 1)
         delay_spinner = gtk.SpinButton(adjustment, digits=1)
         delay_spinner.connect('value_changed', self._spinner_cb,
-            'slideshow delay')
+                              'slideshow delay')
         page.add_row(label, delay_spinner)
 
         page.new_section(_('Comments'))
@@ -317,17 +325,18 @@ class _PreferencesDialog(gtk.Dialog):
         extensions_entry.connect('activate', self._entry_cb)
         extensions_entry.connect('focus_out_event', self._entry_cb)
         extensions_entry.set_tooltip_text(
-            _('Treat all files found within archives, that have one of these file endings, as comments.'))
+                _('Treat all files found within archives, that have one of these file endings, as comments.'))
         page.add_row(label, extensions_entry)
 
         page.new_section(_('Rotation'))
         auto_rotate_button = gtk.CheckButton(
-            _('Automatically rotate images according to their metadata.'))
+                _('Automatically rotate images according to their metadata.'))
         auto_rotate_button.set_active(prefs['auto rotate from exif'])
         auto_rotate_button.connect('toggled', self._check_button_cb,
-            'auto rotate from exif')
+                                   'auto rotate from exif')
         auto_rotate_button.set_tooltip_text(
-            _('Automatically rotate images when an orientation is specified in the image metadata, such as in an Exif tag.'))
+                _(
+                    'Automatically rotate images when an orientation is specified in the image metadata, such as in an Exif tag.'))
         page.add_row(auto_rotate_button)
         notebook.append_page(page, gtk.Label(_('Display')))
         self.show_all()
@@ -341,10 +350,10 @@ class _PreferencesDialog(gtk.Dialog):
             else:
                 self._window.draw_image(scroll=False)
         elif preference in ('stretch', 'checkered bg for transparent images',
-          'no double page for wide images', 'auto rotate from exif'):
+                            'no double page for wide images', 'auto rotate from exif'):
             self._window.draw_image(scroll=False)
         elif (preference == 'hide all in fullscreen' and
-          self._window.is_fullscreen):
+                  self._window.is_fullscreen):
             self._window.draw_image(scroll=False)
         elif preference == 'show page numbers on thumbnails':
             self._window.thumbnailsidebar.clear()
@@ -389,7 +398,6 @@ class _PreferencesDialog(gtk.Dialog):
 
 
 class _PreferencePage(gtk.VBox):
-
     """The _PreferencePage is a conveniece class for making one "page"
     in a preferences-style dialog that contains one or more
     _PreferenceSections.
@@ -427,7 +435,6 @@ class _PreferencePage(gtk.VBox):
 
 
 class _PreferenceSection(gtk.VBox):
-
     """The _PreferenceSection is a convenience class for making one
     "section" of a preference-style dialog, e.g. it has a bold header
     and a number of rows which are indented with respect to that header.

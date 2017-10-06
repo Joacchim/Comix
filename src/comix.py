@@ -28,14 +28,17 @@ import os
 import signal
 import sys
 
-#Check for PyGTK and PIL dependencies.
+# Check for PyGTK and PIL dependencies.
 try:
     import pygtk
+
     pygtk.require('2.0')
     import gtk
+
     assert gtk.gtk_version >= (2, 12, 0)
     assert gtk.pygtk_version >= (2, 12, 0)
     import gobject
+
     gobject.threads_init()
 except AssertionError:
     print("You don't have the required versions of GTK+ and/or PyGTK "
@@ -85,10 +88,10 @@ def run():
     base_dir = os.path.dirname(os.path.dirname(exec_path))
     if os.path.isdir(os.path.join(base_dir, 'messages')):
         gettext.install('comix', os.path.join(base_dir, 'messages'),
-            unicode=True)
+                        unicode=True)
     else:
         gettext.install('comix', os.path.join(base_dir, 'share/locale'),
-            unicode=True)
+                        unicode=True)
 
     animate_gifs = False
     fullscreen = False
@@ -97,7 +100,7 @@ def run():
     open_page = 1
     try:
         opts, args = getopt.gnu_getopt(sys.argv[1:], 'fhla',
-            ['fullscreen', 'help', 'library', 'animate-gifs'])
+                                       ['fullscreen', 'help', 'library', 'animate-gifs'])
     except getopt.GetoptError:
         print_help()
     for opt, value in opts:
@@ -125,17 +128,18 @@ def run():
         open_page = preferences.prefs['page of last file']
 
     window = main.MainWindow(animate_gifs=animate_gifs,
-        fullscreen=fullscreen, show_library=show_library,
-        open_path=open_path, open_page=open_page)
+                             fullscreen=fullscreen, show_library=show_library,
+                             open_path=open_path, open_page=open_page)
     deprecated.check_for_deprecated_files(window)
-    
+
     def sigterm_handler(signal, frame):
         gobject.idle_add(window.terminate_program)
+
     signal.signal(signal.SIGTERM, sigterm_handler)
 
     try:
         gtk.main()
-    except KeyboardInterrupt: # Will not always work because of threading.
+    except KeyboardInterrupt:  # Will not always work because of threading.
         window.terminate_program()
 
 

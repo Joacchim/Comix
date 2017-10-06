@@ -1,9 +1,9 @@
 """bookmark.py - Bookmarks handler (including menu and dialog)."""
 from __future__ import absolute_import
 
+import cPickle
 import os
 
-import cPickle
 import gobject
 import gtk
 
@@ -13,7 +13,6 @@ _pickle_path = os.path.join(constants.DATA_DIR, 'bookmarks.pickle')
 
 
 class BookmarksMenu(gtk.Menu):
-
     """BookmarksMenu extends gtk.Menu with convenience methods relating to
     bookmarks. It contains fixed items for adding bookmarks etc. as well
     as dynamic items corresponding to the current bookmarks.
@@ -26,11 +25,11 @@ class BookmarksMenu(gtk.Menu):
         self._actiongroup = gtk.ActionGroup('comix-bookmarks')
         self._actiongroup.add_actions([
             ('add_bookmark', 'comix-add-bookmark', _('_Add bookmark'),
-                '<Control>d', None, self._add_current_to_bookmarks),
+             '<Control>d', None, self._add_current_to_bookmarks),
             ('edit_bookmarks', None, _('_Edit bookmarks...'),
-                '<Control>b', None, self._edit_bookmarks),
+             '<Control>b', None, self._edit_bookmarks),
             ('clear_bookmarks', gtk.STOCK_CLEAR, _('_Clear bookmarks...'),
-                None, None, self._clear_bookmarks)])
+             None, None, self._clear_bookmarks)])
         self._separator = gtk.SeparatorMenuItem()
 
         action = self._actiongroup.get_action('add_bookmark')
@@ -74,10 +73,10 @@ class BookmarksMenu(gtk.Menu):
         dialog.
         """
         choice_dialog = gtk.MessageDialog(self._window, 0,
-            gtk.MESSAGE_QUESTION, gtk.BUTTONS_YES_NO,
-            _('Clear all bookmarks?'))
+                                          gtk.MESSAGE_QUESTION, gtk.BUTTONS_YES_NO,
+                                          _('Clear all bookmarks?'))
         choice_dialog.format_secondary_text(
-            _('All stored bookmarks will be removed. Are you sure that you want to continue?'))
+                _('All stored bookmarks will be removed. Are you sure that you want to continue?'))
         response = choice_dialog.run()
         choice_dialog.destroy()
         if response == gtk.RESPONSE_YES:
@@ -96,7 +95,6 @@ class BookmarksMenu(gtk.Menu):
 
 
 class _Bookmark(gtk.ImageMenuItem):
-
     """_Bookmark represents one bookmark. It extends the gtk.ImageMenuItem
     and is thus put directly in the bookmarks menu.
     """
@@ -142,11 +140,10 @@ class _Bookmark(gtk.ImageMenuItem):
         re-created using the values in the tuple.
         """
         return (self._name, self._path, self._page, self._numpages,
-            self._archive_type)
+                self._archive_type)
 
 
 class _BookmarksStore:
-
     """The _BookmarksStore is a backend for both the bookmarks menu and dialog.
     Changes in the _BookmarksStore is mirrored in both.
     """
@@ -172,7 +169,7 @@ class _BookmarksStore:
     def add_bookmark_by_values(self, name, path, page, numpages, archive_type):
         """Create a bookmark and add it to the store and the menu."""
         bookmark = _Bookmark(self._file_handler, name, path, page, numpages,
-            archive_type)
+                             archive_type)
         self.add_bookmark(bookmark)
 
     def add_bookmark(self, bookmark):
@@ -197,7 +194,7 @@ class _BookmarksStore:
                 self.remove_bookmark(bookmark)
                 break
         return self.add_bookmark_by_values(name, path, page, numpages,
-            archive_type)
+                                           archive_type)
 
     def clear_bookmarks(self):
         """Remove all bookmarks from the store and the menu."""
@@ -222,13 +219,12 @@ class _BookmarksStore:
 
 
 class _BookmarksDialog(gtk.Dialog):
-
     """_BookmarksDialog lets the user remove and/or rearrange bookmarks."""
 
     def __init__(self, window, bookmarks_store):
         gtk.Dialog.__init__(self, _('Edit bookmarks'), window, gtk.DIALOG_MODAL,
-            (gtk.STOCK_REMOVE, gtk.RESPONSE_NO, gtk.STOCK_CLOSE,
-            gtk.RESPONSE_CLOSE))
+                            (gtk.STOCK_REMOVE, gtk.RESPONSE_NO, gtk.STOCK_CLOSE,
+                             gtk.RESPONSE_CLOSE))
         self._bookmarks_store = bookmarks_store
 
         self.set_has_separator(False)
@@ -243,7 +239,7 @@ class _BookmarksDialog(gtk.Dialog):
         self.vbox.pack_start(scrolled)
 
         self._liststore = gtk.ListStore(gtk.gdk.Pixbuf, gobject.TYPE_STRING,
-            gobject.TYPE_STRING, _Bookmark)
+                                        gobject.TYPE_STRING, _Bookmark)
         self._treeview = gtk.TreeView(self._liststore)
         self._treeview.set_rules_hint(True)
         self._treeview.set_reorderable(True)

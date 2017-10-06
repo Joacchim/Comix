@@ -13,7 +13,6 @@ from src.preferences import prefs
 
 
 class ThumbnailSidebar(gtk.HBox):
-
     """A thumbnail sidebar including scrollbar for the main window."""
 
     def __init__(self, window):
@@ -27,7 +26,7 @@ class ThumbnailSidebar(gtk.HBox):
         self._treeview = gtk.TreeView(self._liststore)
 
         self._treeview.enable_model_drag_source(gtk.gdk.BUTTON1_MASK,
-            [('text/uri-list', 0, 0)], gtk.gdk.ACTION_COPY)
+                                                [('text/uri-list', 0, 0)], gtk.gdk.ACTION_COPY)
 
         self._column = gtk.TreeViewColumn(None)
         cellrenderer = gtk.CellRendererPixbuf()
@@ -87,8 +86,8 @@ class ThumbnailSidebar(gtk.HBox):
     def load_thumbnails(self):
         """Load the thumbnails, if it is appropriate to do so."""
         if (self._loaded or not self._window.file_handler.file_loaded or
-          not prefs['show thumbnails'] or prefs['hide all'] or
-          (self._window.is_fullscreen and prefs['hide all in fullscreen'])):
+                not prefs['show thumbnails'] or prefs['hide all'] or
+                (self._window.is_fullscreen and prefs['hide all in fullscreen'])):
             return
 
         self._loaded = True
@@ -103,11 +102,11 @@ class ThumbnailSidebar(gtk.HBox):
         if not self._loaded:
             return
         self._selection.select_path(
-            self._window.file_handler.get_current_page() - 1)
+                self._window.file_handler.get_current_page() - 1)
         rect = self._treeview.get_background_area(
-            self._window.file_handler.get_current_page() - 1, self._column)
+                self._window.file_handler.get_current_page() - 1, self._column)
         if (rect.y < self._vadjust.get_value() or rect.y + rect.height >
-          self._vadjust.get_value() + self._vadjust.page_size):
+                self._vadjust.get_value() + self._vadjust.page_size):
             value = rect.y + (rect.height // 2) - (self._vadjust.page_size // 2)
             value = max(0, value)
             value = min(self._vadjust.upper - self._vadjust.page_size, value)
@@ -121,7 +120,7 @@ class ThumbnailSidebar(gtk.HBox):
         self._stop_update = False
         for i in range(1, self._window.file_handler.get_number_of_pages() + 1):
             pixbuf = self._window.file_handler.get_thumbnail(i,
-                prefs['thumbnail size'], prefs['thumbnail size'], create)
+                                                             prefs['thumbnail size'], prefs['thumbnail size'], create)
             if prefs['show page numbers on thumbnails']:
                 _add_page_number(pixbuf, i)
             pixbuf = image.add_border(pixbuf, 1)
@@ -131,7 +130,7 @@ class ThumbnailSidebar(gtk.HBox):
             if self._stop_update:
                 return
             self._height += self._treeview.get_background_area(i - 1,
-                self._column).height
+                                                               self._column).height
             self._layout.set_size(0, self._height)
         self._stop_update = True
         self.update_select()
@@ -180,9 +179,9 @@ class ThumbnailSidebar(gtk.HBox):
         # context.set_icon_pixmap() seems to cause crashes, so we do a
         # quick and dirty conversion to pixbuf.
         pointer = gtk.gdk.Pixbuf(gtk.gdk.COLORSPACE_RGB, True, 8,
-            *pixmap.get_size())
+                                 *pixmap.get_size())
         pointer = pointer.get_from_drawable(pixmap, treeview.get_colormap(),
-            0, 0, 0, 0, *pixmap.get_size())
+                                            0, 0, 0, 0, *pixmap.get_size())
         context.set_icon_pixbuf(pointer, -5, -5)
 
 

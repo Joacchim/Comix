@@ -24,7 +24,6 @@ except ImportError:
     print(__doc__)
     sys.exit(1)
 
-
 from src.archive import Extractor
 from src.thumbnail import _guess_cover as guess_cover
 
