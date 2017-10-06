@@ -11,11 +11,11 @@ import constants
 import labels
 
 try:
-	from PIL import Image
-	ImageVersion = "Pillow-%s" % Image.PILLOW_VERSION
+    from PIL import Image
+    ImageVersion = "Pillow-%s" % Image.PILLOW_VERSION
 except:
-	import Image
-	ImageVersion = "Imaging-%s" % Image.VERSION
+    import Image
+    ImageVersion = "Imaging-%s" % Image.VERSION
 
 _dialog = None
 
