@@ -7,7 +7,7 @@ except ImportError:
     try:
         from pysqlite2 import dbapi2
     except ImportError:
-        print '! Could neither find pysqlite2 nor sqlite3.'
+        print('! Could neither find pysqlite2 nor sqlite3.')
         dbapi2 = None
 
 import archive
@@ -78,11 +78,11 @@ class LibraryBackend:
             path = self._con.execute('''select path from Book
                 where id = ?''', (book,)).fetchone()
         except Exception:
-            print '! Non-existant book #%d' % book
+            print('! Non-existant book #{:d}'.format(book))
             return None
         thumb = thumbnail.get_thumbnail(path, create=True, dst_dir=_cover_dir)
         if thumb is None:
-            print '! Could not get cover for %s' % path
+            print('! Could not get cover for {}'.format(path))
         return thumb
 
     def get_book_path(self, book):
@@ -202,7 +202,7 @@ class LibraryBackend:
                     values (?, ?, ?, ?, ?)''',
                     (name, path, pages, format, size))
         except dbapi2.Error:
-            print '! Could not add book %s to the library' % path
+            print('! Could not add book {} to the library'.format(path))
             return False
         if collection is not None:
             book = self._con.execute('''select id from Book
@@ -219,7 +219,7 @@ class LibraryBackend:
                 (name) values (?)''', (name,))
             return True
         except dbapi2.Error:
-            print '! Could not add collection %s' % name
+            print('! Could not add collection {}'.format(name))
         return False
 
     def add_book_to_collection(self, book, collection):
@@ -230,8 +230,8 @@ class LibraryBackend:
         except dbapi2.DatabaseError: # E.g. book already in collection.
             pass
         except dbapi2.Error:
-            print '! Could not add book %s to collection %s' % (book,
-                collection)
+            print('! Could not add book {} to collection {}'.format(book,
+                                                                    collection))
 
     def add_collection_to_collection(self, subcollection, supercollection):
         """Put <subcollection> into <supercollection>, or put
@@ -257,7 +257,7 @@ class LibraryBackend:
         except dbapi2.DatabaseError: # E.g. name taken.
             pass
         except dbapi2.Error:
-            print '! Could not rename collection to %s' % name
+            print('! Could not rename collection to {}'.format(name))
         return False
 
     def duplicate_collection(self, collection):

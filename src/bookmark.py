@@ -164,8 +164,8 @@ class _BookmarksStore:
                     self.add_bookmark_by_values(*pack)
                 fd.close()
             except Exception:
-                print '! bookmark.py: Could not parse', _pickle_path
-                print '! bookmark.py: Deleting corrupt bookmarks file.\n'
+                print('! bookmark.py: Could not parse'.format(_pickle_path))
+                print('! bookmark.py: Deleting corrupt bookmarks file.\n')
                 os.remove(_pickle_path)
                 self.clear_bookmarks()
 

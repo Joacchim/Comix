@@ -973,7 +973,7 @@ def open_dialog(action, window):
     global _dialog
     if _dialog is None:
         if librarybackend.dbapi2 is None:
-            print '! You need an sqlite wrapper to use the library.'
+            print('! You need an sqlite wrapper to use the library.')
         else:
             _dialog = _LibraryDialog(window)
     else:

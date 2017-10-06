@@ -491,7 +491,7 @@ def read_preferences_file():
             old_prefs = cPickle.load(config)
             config.close()
         except Exception:
-            print '! Corrupt preferences file "%s", deleting...' % _config_path
+            print('! Corrupt preferences file "{}", deleting...'.format(_config_path))
             if config is not None:
                 config.close()
             os.remove(_config_path)

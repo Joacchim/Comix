@@ -808,7 +808,7 @@ class MainWindow(gtk.Window):
         for thread in threading.enumerate():
             if thread is not threading.currentThread():
                 thread.join()
-        print 'Bye!'
+        print('Bye!')
         sys.exit(0)
 
     def extract_page(self, *args):

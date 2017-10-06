@@ -157,7 +157,7 @@ MIME_LINKS = (('application-x-cbz.png',
 
 def info():
     """Print usage info and exit."""
-    print __doc__
+    print(__doc__)
     sys.exit(1)
 
 def install(src, dst):
@@ -172,9 +172,10 @@ def install(src, dst):
         if not os.path.isdir(os.path.dirname(dst)):
             os.makedirs(os.path.dirname(dst))
         shutil.copy(src, dst)
-        print 'Installed', dst
+        print('Installed '.format(dst))
     except Exception:
-        print 'Could not install', dst
+        print('Could not install'.format(dst))
+
 
 def uninstall(path):
     """Remove the file or directory at <path>, which is relative to the 
@@ -188,9 +189,10 @@ def uninstall(path):
             shutil.rmtree(path)
         else:
             return
-        print 'Removed', path
+        print('Removed'.format(path))
     except Exception:
-        print 'Could not remove', path
+        print('Could not remove'.format(path))
+
 
 def make_link(src, link):
     """Create a symlink <link> pointing to <src>. The <link> path is relative
@@ -204,57 +206,57 @@ def make_link(src, link):
         if not os.path.exists(os.path.dirname(link)):
             os.makedirs(os.path.dirname(link))
         os.symlink(src, link)
-        print 'Symlinked', link
+        print('Symlinked'.format(link))
     except:
-        print 'Could not create symlink', link
+        print('Could not create symlink'.format(link))
+
 
 def check_dependencies():
     """Check for required and recommended dependencies."""
     required_found = True
     recommended_found = True
-    print 'Checking dependencies ...\n'
-    print 'Required dependencies:'
+    print('Checking dependencies ...\n')
+    print('Required dependencies:')
     # Should also check the PyGTK version. To do that we have to load the
     # gtk module though, which normally can't be done while using `sudo`.
     try:
         import pygtk
-        print '    PyGTK ........................ OK'
+        print('    PyGTK ........................ OK')
     except ImportError:
-        print '    !!! PyGTK .................... Not found'
+        print('    !!! PyGTK .................... Not found')
         required_found = False
     try:
         import Image
         assert Image.VERSION >= '1.1.5'
-        print '    Python Imaging Library ....... OK'
+        print('    Python Imaging Library ....... OK')
     except ImportError:
-        print '    !!! Python Imaging Library ... Not found'
+        print('    !!! Python Imaging Library ... Not found')
         required_found = False
     except AssertionError:
-        print '    !!! Python Imaging Library ... version', Image.VERSION,
-        print 'found'
-        print '    !!! Python Imaging Library 1.1.5 or higher is required'
+        print('    !!! Python Imaging Library ... version {} found'.format(Image.VERSION))
+        print('    !!! Python Imaging Library 1.1.5 or higher is required')
         required_found = False
-    print '\nRecommended dependencies:'
+    print('\nRecommended dependencies:')
     # rar/unrar is only a requirement to read RAR (.cbr) files.
     rar = False
     for path in os.getenv('PATH').split(':'):
         if (os.path.isfile(os.path.join(path, 'unrar')) or
             os.path.isfile(os.path.join(path, 'rar'))):
-            print '    rar/unrar .................... OK'
+            print('    rar/unrar .................... OK')
             rar = True
             break
     if not rar:
-        print '    !!! rar/unrar ................ Not found'
+        print('    !!! rar/unrar ................ Not found')
         recommended_found = False
     if not required_found:
-        print '\nCould not find all required dependencies!'
-        print 'Please install them and try again.'
+        print('\nCould not find all required dependencies!')
+        print('Please install them and try again.')
         sys.exit(1)
     if not recommended_found:
-        print '\nNote that not all recommeded dependencies were found.'
-        print 'Comix has still been installed, but will not be able to'
-        print 'use all its functions until they are installed.'
-    print
+        print('\nNote that not all recommeded dependencies were found.')
+        print('Comix has still been installed, but will not be able to')
+        print('use all its functions until they are installed.')
+    print("\n")
 
 
 # ---------------------------------------------------------------------------
@@ -268,7 +270,7 @@ for opt, value in opts:
     if opt == '--dir':
         install_dir = value
         if not os.path.isdir(install_dir):
-            print '\n!!! Error:', install_dir, 'does not exist.' 
+            print('\n!!! Error: {} does not exist.'.format(install_dir))
             info()
     elif opt == '--no-mime':
         install_mime = False
@@ -278,9 +280,9 @@ for opt, value in opts:
 # ---------------------------------------------------------------------------
 if args == ['install']:
     check_dependencies()
-    print 'Installing Comix to', install_dir, '...\n'
+    print('Installing Comix to {} ...\n'.format(install_dir))
     if not os.access(install_dir, os.W_OK):
-        print 'You do not have write permissions to', install_dir
+        print('You do not have write permissions to {}'.format(install_dir))
         sys.exit(1)
     for src, dst in FILES:
         install(src, dst)
@@ -296,23 +298,22 @@ if args == ['install']:
             make_link(src, link)
         os.popen('update-mime-database "%s"' % 
             os.path.join(install_dir, 'share/mime'))
-        print '\nUpdated mime database (added .cbz, .cbr and .cbt file types.)'
+        print('\nUpdated mime database (added .cbz, .cbr and .cbt file types.)')
         schema = os.path.join(source_dir, 'mime/comicbook.schemas')
         os.popen('GCONF_CONFIG_SOURCE=$(gconftool-2 --get-default-source) '
                  'gconftool-2 --makefile-install-rule "%s" 2>/dev/null' %
                     schema)
-        print '\nRegistered comic archive thumbnailer in gconf (if available).'
-        print 'The thumbnailer is only supported by some file managers,',
-        print 'such as Nautilus'
-        print 'and Thunar.'
-        print 'You might have to restart the file manager for the thumbnailer',
-        print 'to be activated.'
+        print('\nRegistered comic archive thumbnailer in gconf (if available).')
+        print('The thumbnailer is only supported by some file '
+              'managers such as Nautilus and Thunar. You might'
+              ' have to restart the file manager for the '
+              'thumbnailer to be activated.')
     os.utime(os.path.join(install_dir, 'share/icons/hicolor'), None)
 # ---------------------------------------------------------------------------
 # Uninstall Comix.
 # ---------------------------------------------------------------------------
 elif args == ['uninstall']:
-    print 'Uninstalling Comix from', install_dir, '...\n'
+    print('Uninstalling Comix from {}...\n'.format(install_dir))
     uninstall('share/comix')
     uninstall('share/man/man1/comix.1.gz')
     uninstall('share/applications/comix.desktop')
@@ -335,10 +336,10 @@ elif args == ['uninstall']:
     uninstall('share/pixmaps/comix.png')
     uninstall('share/pixmaps/comix')
     uninstall('/tmp/comix')
-    
-    print '\nThere might still be files in ~/.comix/ left on your system.'
-    print 'Please remove that directory manually if you do not plan to'
-    print 'install Comix again later.'
+
+    print('\nThere might still be files in ~/.comix/ left on your system.')
+    print('Please remove that directory manually if you do not plan '
+          'to install Comix again later.')
 else:
     info()
 

@@ -67,7 +67,7 @@ class Extractor:
             if _rar_exec is None:
                 _rar_exec = _get_rar_exec()
                 if _rar_exec is None:
-                    print '! Could not find RAR file extractor.'
+                    print('! Could not find RAR file extractor.')
                     dialog = gtk.MessageDialog(None, 0, gtk.MESSAGE_WARNING,
                         gtk.BUTTONS_CLOSE,
                         _("Could not find RAR file extractor!"))
@@ -85,7 +85,7 @@ class Extractor:
             global _7z_exec, Archive7z
 
             if not Archive7z:  # lib import failed
-                print ': pylzma is not installed... will try 7z tool...'
+                print(': pylzma is not installed... will try 7z tool...')
 
                 if _7z_exec is None:
                     _7z_exec = _get_7z_exec()
@@ -100,7 +100,7 @@ class Extractor:
                         _7z_exec = _get_7z_exec()
 
             if _7z_exec is None:
-                print '! Could not find 7Z file extractor.'
+                print('! Could not find 7Z file extractor.')
             elif not Archive7z:
                 proc = process.Process([_7z_exec, 'l', '-bd', '-slt', '-p-', src])
                 fd = proc.spawn()
@@ -123,11 +123,11 @@ class Extractor:
                 self._mobifile = mobiunpack.MobiFile(src)
                 self._files = self._mobifile.getnames()
             except mobiunpack.unpackException as e:
-                print '! Failed to unpack MobiPocket:', e
+                print('! Failed to unpack MobiPocket: {}'.format( e))
                 return None
 
         else:
-            print '! Non-supported archive format:', src
+            print('! Non-supported archive format:'.format(src))
             return None
 
         self._setupped = True
@@ -306,7 +306,7 @@ class Extractor:
                             proc.spawn()
                             proc.wait()
                         else:
-                            print '! Could not find 7Z file extractor.'
+                            print('! Could not find 7Z file extractor.')
 
                 new.close()
             elif self._type in (TAR, GZIP, BZIP2):
@@ -314,7 +314,7 @@ class Extractor:
                   self._dst):
                     self._tfile.extract(name, self._dst)
                 else:
-                    print '! Non-local tar member:', name, '\n'
+                    print('! Non-local tar member: {}\n'.format(name))
             elif self._type == RAR:
                 if _rar_exec is not None:
                     cwd = os.getcwd()
@@ -325,7 +325,7 @@ class Extractor:
                     proc.wait()
                     os.chdir(cwd)
                 else:
-                    print '! Could not find RAR file extractor.'
+                    print('! Could not find RAR file extractor.')
             elif self._type == MOBI:
                 dst_path = os.path.join(self._dst, name)
                 self._mobifile.extract(name, dst_path)
@@ -415,7 +415,7 @@ class Packer:
         try:
             zfile = zipfile.ZipFile(self._archive_path, 'w')
         except Exception:
-            print '! Could not create archive', self._archive_path
+            print('! Could not create archive'.format(self._archive_path))
             return
         used_names = []
         pattern = '%%0%dd - %s%%s' % (len(str(len(self._image_files))),
@@ -425,8 +425,7 @@ class Packer:
             try:
                 zfile.write(path, filename, zipfile.ZIP_STORED)
             except Exception:
-                print '! Could not add file %s to add to %s, aborting...' % (
-                    path, self._archive_path)
+                print('! Could not add file {} to add to {}, aborting...'.format(path, self._archive_path))
                 zfile.close()
                 try:
                     os.remove(self._archive_path)
@@ -441,8 +440,7 @@ class Packer:
             try:
                 zfile.write(path, filename, zipfile.ZIP_DEFLATED)
             except Exception:
-                print '! Could not add file %s to add to %s, aborting...' % (
-                    path, self._archive_path)
+                print('! Could not add file {} to add to {}, aborting...'.format(path, self._archive_path))
                 zfile.close()
                 try:
                     os.remove(self._archive_path)
@@ -480,7 +478,7 @@ def archive_mime_type(path):
             if magic2 == 'BOOKMOBI':
                 return MOBI
     except Exception:
-        print '! Error while reading', path
+        print('! Error while reading '.format(path))
     return None
 
 

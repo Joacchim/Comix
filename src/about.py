@@ -53,7 +53,7 @@ class _AboutDialog(gtk.Dialog):
             icon.set_from_pixbuf(pixbuf)
             box.pack_start(icon, False, False, 10)
         except Exception:
-            print '! Could not find the icon file "comix.svg"\n'
+            print('! Could not find the icon file "comix.svg"\n')
         label = gtk.Label()
         label.set_markup(
         '<big><big><big><big><b><span foreground="#333333">Com</span>' +

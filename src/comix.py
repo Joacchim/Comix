@@ -37,18 +37,16 @@ try:
     import gobject
     gobject.threads_init()
 except AssertionError:
-    print "You don't have the required versions of GTK+ and/or PyGTK",
-    print 'installed.'
-    print 'Installed GTK+ version is: %s' % (
-        '.'.join([str(n) for n in gtk.gtk_version]))
-    print 'Required GTK+ version is: 2.12.0 or higher\n'
-    print 'Installed PyGTK version is: %s' % (
-        '.'.join([str(n) for n in gtk.pygtk_version]))
-    print 'Required PyGTK version is: 2.12.0 or higher'
+    print("You don't have the required versions of GTK+ and/or PyGTK "
+          "installed.")
+    print('Installed GTK+ version is: {}'.format('.'.join([str(n) for n in gtk.gtk_version])))
+    print('Required GTK+ version is: 2.12.0 or higher\n')
+    print('Installed PyGTK version is: {}'.format('.'.join([str(n) for n in gtk.pygtk_version])))
+    print('Required PyGTK version is: 2.12.0 or higher')
     sys.exit(1)
 except ImportError:
-    print 'PyGTK version 2.12.0 or higher is required to run Comix.'
-    print 'No version of PyGTK was found on your system.'
+    print('PyGTK version 2.12.0 or higher is required to run Comix.')
+    print('No version of PyGTK was found on your system.')
     sys.exit(1)
 
 try:
@@ -60,18 +58,18 @@ if Image is None:
     try:
         import Image
     except ImportError:
-        print 'Python Imaging Library (PIL) version 1.1.5 or higher or Pillow is required.'
-        print 'No version of the Python Imaging Library was found on your',
-        print 'system.'
+        print('Python Imaging Library (PIL) version 1.1.5 or higher or Pillow is required.')
+        print('No version of the Python Imaging Library was found on your', end=' ')
+        print('system.')
         sys.exit(1)
 
 try:
     assert Image.VERSION >= '1.1.5'
 except AssertionError:
-    print "You don't have the required version of the Python Imaging",
-    print 'Library (PIL) installed.'
-    print 'Installed PIL version is: %s' % Image.VERSION
-    print 'Required PIL version is: 1.1.5 or higher'
+    print("You don't have the required version of the Python Imaging " 
+          "Library (PIL) installed.")
+    print('Installed PIL version is: {}'.format(Image.VERSION))
+    print('Required PIL version is: 1.1.5 or higher')
     sys.exit(1)
 
 import constants
@@ -85,14 +83,14 @@ import preferences
 
 def print_help():
     """Print the command-line help text and exit."""
-    print 'Usage:'
-    print '  comix [OPTION...] [PATH]'
-    print '\nView images and comic book archives.\n'
-    print 'Options:'
-    print '  -h, --help              Show this help and exit.'
-    print '  -f, --fullscreen        Start the application in fullscreen mode.'
-    print '  -l, --library           Show the library on startup.'
-    print '  -a, --animate-gifs      Play animations in GIF files.'
+    print('Usage:')
+    print('  comix [OPTION...] [PATH]')
+    print('\nView images and comic book archives.\n')
+    print('Options:')
+    print('  -h, --help              Show this help and exit.')
+    print('  -f, --fullscreen        Start the application in fullscreen mode.')
+    print('  -l, --library           Show the library on startup.')
+    print('  -a, --animate-gifs      Play animations in GIF files.')
     sys.exit(1)
 
 
