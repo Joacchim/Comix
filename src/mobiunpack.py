@@ -30,7 +30,7 @@ class Sectionizer:
 
 class MobiFile:
     def __init__(self, filename):
-        f = file(filename, 'rb')
+        f = open(filename, 'rb')
         try:
             self.file = f
             self.sect = Sectionizer(self.file)
@@ -49,7 +49,7 @@ class MobiFile:
 
     def getnames(self):
         names = []
-        for i in xrange(self.firstimg, self.sect.num_sections):
+        for i in range(self.firstimg, self.sect.num_sections):
             header = self.sect.loadSection(i, 32)
             imgtype = imghdr.what(None, header)
             if imgtype is not None:

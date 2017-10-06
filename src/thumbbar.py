@@ -119,7 +119,7 @@ class ThumbnailSidebar(gtk.HBox):
         else:
             create = prefs['create thumbnails']
         self._stop_update = False
-        for i in xrange(1, self._window.file_handler.get_number_of_pages() + 1):
+        for i in range(1, self._window.file_handler.get_number_of_pages() + 1):
             pixbuf = self._window.file_handler.get_thumbnail(i,
                 prefs['thumbnail size'], prefs['thumbnail size'], create)
             if prefs['show page numbers on thumbnails']:

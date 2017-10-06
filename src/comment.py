@@ -36,7 +36,7 @@ class _CommentsDialog(gtk.Dialog):
         tag_table = gtk.TextTagTable()
         tag_table.add(tag)
 
-        for num in xrange(1, window.file_handler.get_number_of_comments() + 1):
+        for num in range(1, window.file_handler.get_number_of_comments() + 1):
             page = gtk.VBox(False)
             page.set_border_width(8)
             scrolled = gtk.ScrolledWindow()

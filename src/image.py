@@ -211,7 +211,7 @@ def get_most_common_edge_colour(pixbuf):
             colour_count[colour] = colour_count.setdefault(colour, 0) + count
     max_count = 0
     most_common_colour = None
-    for colour, count in colour_count.iteritems():
+    for colour, count in colour_count.items():
         if count > max_count:
             max_count = count
             most_common_colour = colour
