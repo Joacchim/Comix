@@ -17,7 +17,6 @@ from PIL import Image
 
 from src import archive
 from src import constants
-from src import filehandler
 from src.image import get_supported_format_extensions_preg, pil_to_pixbuf
 
 _thumbdir = os.path.join(constants.HOME_DIR, '.thumbnails/normal')
@@ -212,7 +211,9 @@ def _guess_cover(files):
     """Return the filename within <files> that is the most likely to be the
     cover of an archive using some simple heuristics.
     """
-    filehandler.alphanumeric_sort(files)
+    from src.filehandler import alphanumeric_sort
+
+    alphanumeric_sort(files)
 
     ext_re = re.compile('\.('+'|'.join(get_supported_format_extensions_preg())+')\s*$', re.I)
 
