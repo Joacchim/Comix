@@ -28,9 +28,7 @@ class ImageEnhancer(object):
 
     def enhance(self, pixbuf):
         """Return an "enhanced" version of <pixbuf>."""
-        if (self.brightness != 1.0 or self.contrast != 1.0 or
-                    self.saturation != 1.0 or self.sharpness != 1.0 or
-                self.autocontrast):
+        if any([self.brightness != 1.0, self.contrast != 1.0, self.saturation != 1.0, self.sharpness != 1.0, self.autocontrast]):
             return image.enhance(pixbuf, self.brightness, self.contrast,
                                  self.saturation, self.sharpness, self.autocontrast)
         return pixbuf

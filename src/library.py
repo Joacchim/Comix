@@ -216,8 +216,7 @@ class _CollectionArea(gtk.ScrolledWindow):
         currently selected one in the sidebar, if it has been changed.
         """
         collection = self.get_current_collection()
-        if (collection is None or
-                    collection == prefs['last library collection']):
+        if collection is None or collection == prefs['last library collection']:
             return
         prefs['last library collection'] = collection
         gobject.idle_add(self._library.book_area.display_covers, collection)
@@ -229,9 +228,10 @@ class _CollectionArea(gtk.ScrolledWindow):
         choice_dialog = gtk.MessageDialog(self._library, 0,
                                           gtk.MESSAGE_QUESTION, gtk.BUTTONS_YES_NO,
                                           _('Remove collection from the library?'))
-        choice_dialog.format_secondary_text(
-                _(
-                    'The selected collection will be removed from the library (but the books and subcollections in it will remain). Are you sure that you want to continue?'))
+        choice_dialog.format_secondary_text(_('The selected collection will be removed '
+                                              'from the library (but the books and '
+                                              'subcollections in it will remain). Are '
+                                              'you sure that you want to continue?'))
         response = choice_dialog.run()
         choice_dialog.destroy()
         if response == gtk.RESPONSE_YES:
@@ -270,8 +270,7 @@ class _CollectionArea(gtk.ScrolledWindow):
                 self.display_collections()
             else:
                 message = _("Could not change the name to '%s'.") % new_name
-                if (self._library.backend.get_collection_by_name(new_name)
-                    is not None):
+                if self._library.backend.get_collection_by_name(new_name) is not None:
                     message = '%s %s' % (message,
                                          _('A collection by that name already exists.'))
                 self._library.set_status_message(message)
@@ -372,8 +371,7 @@ class _CollectionArea(gtk.ScrolledWindow):
             if pos in (gtk.TREE_VIEW_DROP_BEFORE, gtk.TREE_VIEW_DROP_AFTER):
                 dest_collection = self._library.backend.get_supercollection(
                         dest_collection)
-            if (_COLLECTION_ALL in (src_collection, dest_collection) or
-                        src_collection == dest_collection):
+            if _COLLECTION_ALL in (src_collection, dest_collection) or src_collection == dest_collection:
                 self._set_acceptable_drop(False)
                 self._library.set_status_message('')
                 return
@@ -397,8 +395,7 @@ class _CollectionArea(gtk.ScrolledWindow):
                 self._library.set_status_message('')
                 return
             dest_collection = self._get_collection_at_path(dest_path)
-            if (src_collection == dest_collection or
-                        dest_collection == _COLLECTION_ALL):
+            if src_collection == dest_collection or dest_collection == _COLLECTION_ALL:
                 self._set_acceptable_drop(False)
                 self._library.set_status_message('')
                 return
@@ -596,9 +593,10 @@ class _BookArea(gtk.ScrolledWindow):
         choice_dialog = gtk.MessageDialog(self._library, 0,
                                           gtk.MESSAGE_QUESTION, gtk.BUTTONS_YES_NO,
                                           _('Remove books from the library?'))
-        choice_dialog.format_secondary_text(
-                _(
-                    'The selected books will be removed from the library (but the original files will be untouched). Are you sure that you want to continue?'))
+        choice_dialog.format_secondary_text(_('The selected books will be removed '
+                                              'from the library (but the original '
+                                              'files will be untouched). Are you sure '
+                                              'that you want to continue?'))
         response = choice_dialog.run()
         choice_dialog.destroy()
         if response == gtk.RESPONSE_YES:
@@ -771,9 +769,10 @@ class _ControlArea(gtk.HBox):
         hbox.pack_start(label, False, False)
         search_entry = gtk.Entry()
         search_entry.connect('activate', self._filter_books)
-        search_entry.set_tooltip_text(
-                _(
-                    'Display only those books that have the specified text string in their full path. The search is not case sensitive.'))
+        search_entry.set_tooltip_text(_('Display only those books that have '
+                                        'the specified text string in their '
+                                        'full path. The search is not case '
+                                        'sensitive.'))
         hbox.pack_start(search_entry, True, True, 6)
         label = gtk.Label('%s:' % _('Cover size'))
         hbox.pack_start(label, False, False, 6)
@@ -819,11 +818,11 @@ class _ControlArea(gtk.HBox):
             name = self._library.backend.get_book_name(book)
             dir_path = os.path.dirname(
                     self._library.backend.get_book_path(book))
-            format = self._library.backend.get_book_format(book)
+            format_ = self._library.backend.get_book_format(book)
             pages = self._library.backend.get_book_pages(book)
             size = self._library.backend.get_book_size(book)
         else:
-            name = dir_path = format = pages = size = None
+            name = dir_path = format_ = pages = size = None
         if len(selected) == 1:
             self._open_button.set_sensitive(True)
         if name is not None:
@@ -834,8 +833,8 @@ class _ControlArea(gtk.HBox):
             self._pageslabel.set_text(_('%d pages') % pages)
         else:
             self._pageslabel.set_text('')
-        if format is not None and size is not None:
-            self._filelabel.set_text('%s, %s' % (archive.get_name(format),
+        if format_ is not None and size is not None:
+            self._filelabel.set_text('%s, %s' % (archive.get_name(format_),
                                                  '%.1f MiB' % (size / 1048576.0)))
         else:
             self._filelabel.set_text('')
@@ -877,8 +876,7 @@ class _ControlArea(gtk.HBox):
             else:
                 message = _("Could not add a new collection called '%s'.") % (
                     name)
-                if (self._library.backend.get_collection_by_name(name)
-                    is not None):
+                if self._library.backend.get_collection_by_name(name) is not None:
                     message = '%s %s' % (message,
                                          _('A collection by that name already exists.'))
                 self._library.set_status_message(message)

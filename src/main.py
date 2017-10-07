@@ -684,8 +684,7 @@ class MainWindow(gtk.Window):
         of the main layout area.
         """
         width, height = self.get_size()
-        if not prefs['hide all'] and not (self.is_fullscreen and
-                                              prefs['hide all in fullscreen']):
+        if not prefs['hide all'] and not (self.is_fullscreen and prefs['hide all in fullscreen']):
             if prefs['show toolbar']:
                 height -= self.toolbar.size_request()[1]
             if prefs['show statusbar']:
@@ -711,7 +710,7 @@ class MainWindow(gtk.Window):
         x, y = self._main_layout.get_pointer()
         x += self._hadjust.get_value()
         y += self._vadjust.get_value()
-        return (x, y)
+        return x, y
 
     def set_cursor(self, mode):
         """Set the cursor on the main layout area to <mode>. You should
@@ -750,8 +749,7 @@ class MainWindow(gtk.Window):
         """Hide and/or show main window widgets depending on the current
         state.
         """
-        if not prefs['hide all'] and not (self.is_fullscreen and
-                                              prefs['hide all in fullscreen']):
+        if not prefs['hide all'] and not (self.is_fullscreen and prefs['hide all in fullscreen']):
             if prefs['show toolbar']:
                 self.toolbar.show_all()
             else:
@@ -764,16 +762,13 @@ class MainWindow(gtk.Window):
                 self.menubar.show_all()
             else:
                 self.menubar.hide_all()
-            if (prefs['show scrollbar'] and
-                        self.zoom_mode == preferences.ZOOM_MODE_WIDTH):
+            if prefs['show scrollbar'] and self.zoom_mode == preferences.ZOOM_MODE_WIDTH:
                 self._vscroll.show_all()
                 self._hscroll.hide_all()
-            elif (prefs['show scrollbar'] and
-                          self.zoom_mode == preferences.ZOOM_MODE_HEIGHT):
+            elif prefs['show scrollbar'] and self.zoom_mode == preferences.ZOOM_MODE_HEIGHT:
                 self._vscroll.hide_all()
                 self._hscroll.show_all()
-            elif (prefs['show scrollbar'] and
-                          self.zoom_mode == preferences.ZOOM_MODE_MANUAL):
+            elif prefs['show scrollbar'] and self.zoom_mode == preferences.ZOOM_MODE_MANUAL:
                 self._vscroll.show_all()
                 self._hscroll.show_all()
             else:
@@ -836,6 +831,6 @@ class MainWindow(gtk.Window):
             shutil.copy(self.file_handler.get_path_to_page(),
                         save_dialog.get_filename().decode('utf-8'))
             prefs['last path in save filechooser'] = \
-                save_dialog.get_current_folder();
+                save_dialog.get_current_folder()
 
         save_dialog.destroy()

@@ -133,8 +133,7 @@ class FileHandler(object):
         old_page = self.get_current_page()
         viewed = self._window.displayed_double() and 2 or 1
         if self.get_current_page() + viewed > self.get_number_of_pages():
-            if (prefs['auto open next archive'] and
-                        self.archive_type is not None):
+            if prefs['auto open next archive'] and self.archive_type is not None:
                 self._open_next_archive()
             return False
         self._current_image_index += self._get_forward_step_length()
@@ -147,15 +146,14 @@ class FileHandler(object):
         if not self.file_loaded and not self._base_path:
             return False
         if self.get_current_page() == 1:
-            if (prefs['auto open next archive'] and
-                        self.archive_type is not None):
+            if prefs['auto open next archive'] and self.archive_type is not None:
                 self._open_previous_archive()
             return False
         old_page = self.get_current_page()
         step = self._get_backward_step_length()
         step = min(self._current_image_index, step)
         self._current_image_index -= step
-        if (step == 2 and self.get_virtual_double_page()):
+        if step == 2 and self.get_virtual_double_page():
             self._current_image_index += 1
         return old_page != self.get_current_page()
 
@@ -179,7 +177,7 @@ class FileHandler(object):
         offset = self._window.is_double_page and 2 or 1
         offset = min(self.get_number_of_pages(), offset)
         self._current_image_index = self.get_number_of_pages() - offset
-        if (offset == 2 and self.get_virtual_double_page()):
+        if offset == 2 and self.get_virtual_double_page():
             self._current_image_index += 1
         return old_page != self.get_current_page()
 
@@ -199,9 +197,7 @@ class FileHandler(object):
         preference is set, and one of the two images that should normally
         be displayed has a width that exceeds its height).
         """
-        if (not self._window.is_double_page or
-                not prefs['no double page for wide images'] or
-                    self.get_current_page() == self.get_number_of_pages()):
+        if not self._window.is_double_page or not prefs['no double page for wide images'] or self.get_current_page() == self.get_number_of_pages():
             return False
 
         page1 = self._get_pixbuf(self._current_image_index)
@@ -310,11 +306,11 @@ class FileHandler(object):
                 self._image_files = []
                 tmpdir_len = len(self._tmp_dir)
                 extracted_files = []
-                for file in get_next_file(self._tmp_dir):
-                    dst = file[tmpdir_len:].replace("/", "_")
+                for each_file in get_next_file(self._tmp_dir):
+                    dst = each_file[tmpdir_len:].replace("/", "_")
                     extracted_files.append(dst)
                     dst = self._tmp_dir + dst
-                    shutil.move(file, dst)
+                    shutil.move(each_file, dst)
                     self._image_files.append(dst)
                 self._comment_files = \
                     filter(self._comment_re.search, self._image_files)
@@ -341,7 +337,7 @@ class FileHandler(object):
         self._window.new_page()
         self._window.ui_manager.recent.add(path)
 
-    def _redo_priority_ordering(self, start_page, list):
+    def _redo_priority_ordering(self, start_page, lst):
         if start_page <= 0:
             if self._window.is_double_page:
                 self._current_image_index = self.get_number_of_pages() - 2
@@ -357,16 +353,16 @@ class FileHandler(object):
                   self._current_image_index + depth * 2) +
             range(self._current_image_index - depth,
                   self._current_image_index)[::-1])
-        priority_ordering = [list[p] for p in priority_ordering
+        priority_ordering = [lst[p] for p in priority_ordering
                              if 0 <= p <= self.get_number_of_pages() - 1]
         for i, name in enumerate(priority_ordering):
-            list.remove(name)
-            list.insert(i, name)
+            lst.remove(name)
+            lst.insert(i, name)
 
-    def _open_subarchive(self, dir, path):
+    def _open_subarchive(self, dir_name, path):
         """Allows to recursively extract all subarchives"""
         extractor = archive.Extractor()
-        condition = extractor.setup(dir + "/" + path, dir)
+        condition = extractor.setup(dir_name + "/" + path, dir_name)
         sub_files = extractor.get_files()
         alphanumeric_sort(sub_files)
         extractor.set_files(sub_files)
@@ -376,10 +372,10 @@ class FileHandler(object):
             while not extractor.is_ready(name):
                 condition.wait()
             condition.release()
-            name = dir + "/" + name
+            name = dir_name + "/" + name
             if archive.archive_mime_type(name) is not None:
                 self._open_subarchive(os.path.dirname(name), os.path.basename(name))
-        os.remove(dir + "/" + path)
+        os.remove(dir_name + "/" + path)
 
     def close_file(self, *args):
         """Run tasks for "closing" the currently opened file(s)."""
@@ -506,8 +502,8 @@ class FileHandler(object):
         self._wait_on_page(page)
         info = gtk.gdk.pixbuf_get_file_info(self.get_path_to_page(page))
         if info is not None:
-            return (info[1], info[2])
-        return (0, 0)
+            return info[1], info[2]
+        return 0, 0
 
     def get_mime_name(self, page=None):
         """Return a string with the name of the mime type of <page>. If
@@ -676,10 +672,10 @@ def alphanumeric_sort(filenames):
     filenames.sort(key=lambda s: map(_format_substring, rec.findall(s)))
 
 
-def list_dir_sorted(dir):
+def list_dir_sorted(dir_name):
     """ Helper for listing the directory contents with the preferred
     sorting.  """
-    files = os.listdir(dir)
+    files = os.listdir(dir_name)
     # files.sort(locale.strcoll)
     alphanumeric_sort(files)
     return files
@@ -688,6 +684,6 @@ def list_dir_sorted(dir):
 def get_next_file(dir_name):
     """Yields the next file in the whole file hierarchy
        with dir_name as the top"""
-    for (dir, dirs, files) in os.walk(dir_name):
-        for file in files:
-            yield dir + '/' + file
+    for (a_dir, dirs, files) in os.walk(dir_name):
+        for each_file in files:
+            yield a_dir + '/' + each_file

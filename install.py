@@ -20,17 +20,17 @@ Options:
                              x-cbt and x-cbr archive files.
 """
 
-import os
-import sys
 import getopt
+import os
 import shutil
+import sys
 
 source_dir = os.path.dirname(os.path.realpath(__file__))
 install_dir = '/usr/local/'
 install_mime = True
 
 TRANSLATIONS = ('ca', 'cs', 'de', 'es', 'fr', 'gl', 'hr', 'hu', 'id', 'ja',
-    'ko', 'pl', 'pt_BR', 'ru', 'sv', 'uk', 'zh_CN', 'zh_TW')
+                'ko', 'pl', 'pt_BR', 'ru', 'sv', 'uk', 'zh_CN', 'zh_TW')
 
 # These translations have not yet been updated for Comix 4:
 # 'de', 'it', 'nl', 'el', 'fa'
@@ -111,18 +111,18 @@ LINKS = (
 
 # Mime files to be installed, as (source file, destination directory)
 MIME_FILES = (
-              ('mime/comicthumb.1.gz', 'share/man/man1'),
-              ('mime/comix.xml', 'share/mime/packages'),
-              ('mime/icons/16x16/application-x-cbz.png',
-                'share/icons/hicolor/16x16/mimetypes'),
-              ('mime/icons/22x22/application-x-cbz.png',
-                'share/icons/hicolor/22x22/mimetypes'),
-              ('mime/icons/24x24/application-x-cbz.png',
-                'share/icons/hicolor/24x24/mimetypes'),
-              ('mime/icons/32x32/application-x-cbz.png',
-                'share/icons/hicolor/32x32/mimetypes'),
-              ('mime/icons/48x48/application-x-cbz.png',
-                'share/icons/hicolor/48x48/mimetypes'))
+    ('mime/comicthumb.1.gz', 'share/man/man1'),
+    ('mime/comix.xml', 'share/mime/packages'),
+    ('mime/icons/16x16/application-x-cbz.png',
+     'share/icons/hicolor/16x16/mimetypes'),
+    ('mime/icons/22x22/application-x-cbz.png',
+     'share/icons/hicolor/22x22/mimetypes'),
+    ('mime/icons/24x24/application-x-cbz.png',
+     'share/icons/hicolor/24x24/mimetypes'),
+    ('mime/icons/32x32/application-x-cbz.png',
+     'share/icons/hicolor/32x32/mimetypes'),
+    ('mime/icons/48x48/application-x-cbz.png',
+     'share/icons/hicolor/48x48/mimetypes'))
 
 # Mime symlinks to be created, as (target, symlink)
 MIME_LINKS = (('application-x-cbz.png',
@@ -156,10 +156,12 @@ MIME_LINKS = (('application-x-cbz.png',
               ('application-x-cbz.png',
                'share/icons/hicolor/48x48/mimetypes/application-x-cbt.png'))
 
+
 def info():
     """Print usage info and exit."""
     print(__doc__)
     sys.exit(1)
+
 
 def install(src, dst):
     """Copy <src> to <dst>. The <src> path is relative to the source_dir and
@@ -242,7 +244,7 @@ def check_dependencies():
     rar = False
     for path in os.getenv('PATH').split(':'):
         if (os.path.isfile(os.path.join(path, 'unrar')) or
-            os.path.isfile(os.path.join(path, 'rar'))):
+                os.path.isfile(os.path.join(path, 'rar'))):
             print('    rar/unrar .................... OK')
             rar = True
             break
@@ -289,7 +291,7 @@ if args == ['install']:
         install(src, dst)
     for lang in TRANSLATIONS:
         install(os.path.join('messages', lang, 'LC_MESSAGES/comix.mo'),
-            os.path.join('share/locale/', lang, 'LC_MESSAGES'))
+                os.path.join('share/locale/', lang, 'LC_MESSAGES'))
     for src, link in LINKS:
         make_link(src, link)
     if install_mime:
@@ -297,13 +299,13 @@ if args == ['install']:
             install(src, dst)
         for src, link in MIME_LINKS:
             make_link(src, link)
-        os.popen('update-mime-database "%s"' % 
-            os.path.join(install_dir, 'share/mime'))
+        os.popen('update-mime-database "%s"' %
+                 os.path.join(install_dir, 'share/mime'))
         print('\nUpdated mime database (added .cbz, .cbr and .cbt file types.)')
         schema = os.path.join(source_dir, 'mime/comicbook.schemas')
         os.popen('GCONF_CONFIG_SOURCE=$(gconftool-2 --get-default-source) '
                  'gconftool-2 --makefile-install-rule "%s" 2>/dev/null' %
-                    schema)
+                 schema)
         print('\nRegistered comic archive thumbnailer in gconf (if available).')
         print('The thumbnailer is only supported by some file '
               'managers such as Nautilus and Thunar. You might'
@@ -332,7 +334,7 @@ elif args == ['uninstall']:
         uninstall(os.path.join(path, os.path.basename(src)))
     for _, link in MIME_LINKS:
         uninstall(link)
-    
+
     # These are from old versions of Comix, we try to remove them anyway.
     uninstall('share/pixmaps/comix.png')
     uninstall('share/pixmaps/comix')
@@ -343,4 +345,3 @@ elif args == ['uninstall']:
           'to install Comix again later.')
 else:
     info()
-

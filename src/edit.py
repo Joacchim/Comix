@@ -171,8 +171,7 @@ class _ImageArea(gtk.ScrolledWindow):
 
     def fetch_images(self):
         """Load all the images in the archive or directory."""
-        for page in xrange(1,
-                           self._edit_dialog.file_handler.get_number_of_pages() + 1):
+        for page in range(1, self._edit_dialog.file_handler.get_number_of_pages() + 1):
             thumb = self._edit_dialog.file_handler.get_thumbnail(
                     page, 67, 100, create=False)
             thumb = image.add_border(thumb, 1, 0x555555FF)
@@ -252,8 +251,9 @@ class _OtherArea(gtk.VBox):
         scrolled = gtk.ScrolledWindow()
         scrolled.set_policy(gtk.POLICY_AUTOMATIC, gtk.POLICY_AUTOMATIC)
         self.pack_start(scrolled)
-        info = gtk.Label(_(
-            'Please note that the only files that are automatically added to this list are those files in archives that Comix recognizes as comments.'))
+        info = gtk.Label(_('Please note that the only files that are '
+                           'automatically added to this list are those '
+                           'files in archives that Comix recognizes as comments.'))
         info.set_alignment(0.5, 0.5)
         info.set_line_wrap(True)
         self.pack_start(info, False, False, 10)
@@ -289,8 +289,7 @@ class _OtherArea(gtk.VBox):
 
     def fetch_comments(self):
         """Load all comments in the archive."""
-        for num in xrange(1,
-                          self._edit_dialog.file_handler.get_number_of_comments() + 1):
+        for num in range(1, self._edit_dialog.file_handler.get_number_of_comments() + 1):
             path = self._edit_dialog.file_handler.get_comment_name(num)
             size = '%.1f KiB' % (os.stat(path).st_size / 1024.0)
             self._liststore.append([os.path.basename(path), size, path])

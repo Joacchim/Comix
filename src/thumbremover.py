@@ -46,9 +46,15 @@ class _ThumbnailMaintenanceDialog(gtk.Dialog):
         main_box.pack_start(label, False, False, 2)
         main_box.pack_start(gtk.HSeparator(), False, False, 5)
 
-        label = labels.ItalicLabel(
-                _(
-                    'Thumbnails for files (such as image files and comic book archives) are stored in your home directory. Many different applications use and create these thumbnails, but sometimes thumbnails remain even though the original files have been removed - wasting space. This dialog can cleanup your stored thumbnails by removing orphaned and outdated thumbnails.'))
+        label = labels.ItalicLabel(_('Thumbnails for files (such as image '
+                                     'files and comic book archives) are stored '
+                                     'in your home directory. Many different '
+                                     'applications use and create these thumbnails,'
+                                     ' but sometimes thumbnails remain even though '
+                                     'the original files have been removed - wasting '
+                                     'space. This dialog can cleanup your stored '
+                                     'thumbnails by removing orphaned and outdated '
+                                     'thumbnails.'))
         label.set_alignment(0, 0.5)
         label.set_line_wrap(True)
         main_box.pack_start(label, False, False, 10)
@@ -190,8 +196,7 @@ class _ThumbnailRemover(gtk.Dialog):
                     except Exception:
                         src_mtime = None
                 # Thumb is orphaned, outdated or invalid.
-                if (broken or not os.path.isfile(src_path) or
-                            src_mtime != thumb_mtime):
+                if broken or not os.path.isfile(src_path) or src_mtime != thumb_mtime:
                     size = os.stat(entry_path).st_size
                     try:
                         os.remove(entry_path)

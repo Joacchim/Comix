@@ -15,13 +15,13 @@ from src import preferences
 from src.preferences import prefs
 
 
-def _valwarp(cur, max, tolerance=3):
+def _valwarp(cur, max_, tolerance=3):
     """ Helper function for wrapping the cursor around the screen when it
     comes within `tolerance` to a border. """
     if cur < tolerance:
-        return cur + (max - 2 * tolerance)
-    if (max - cur) < tolerance:
-        return cur - (max - 2 * tolerance)
+        return cur + (max_ - 2 * tolerance)
+    if (max_ - cur) < tolerance:
+        return cur - (max_ - 2 * tolerance)
     return cur
 
 
@@ -38,8 +38,7 @@ class EventHandler(object):
         """Handle events from resizing and moving the main window."""
         if not self._window.is_fullscreen:
             prefs['window x'], prefs['window y'] = self._window.get_position()
-        if (event.width != self._window.width or
-                    event.height != self._window.height):
+        if event.width != self._window.width or event.height != self._window.height:
             if not self._window.is_fullscreen:
                 prefs['window width'] = event.width
                 prefs['window height'] = event.height
@@ -97,8 +96,7 @@ class EventHandler(object):
             self._window.actiongroup.get_action('zoom_in').activate()
         elif event.keyval == gtk.keysyms.minus:
             self._window.actiongroup.get_action('zoom_out').activate()
-        elif (event.keyval in (gtk.keysyms._0, gtk.keysyms.KP_0) and
-                      'GDK_CONTROL_MASK' in event.state.value_names):
+        elif event.keyval in (gtk.keysyms._0, gtk.keysyms.KP_0) and 'GDK_CONTROL_MASK' in event.state.value_names:
             self._window.actiongroup.get_action('zoom_original').activate()
 
         # ----------------------------------------------------------------
@@ -143,8 +141,7 @@ class EventHandler(object):
             y_step = int(y_step * 0.9)
             if self._window.is_manga_mode:
                 x_step *= -1
-            if ('GDK_SHIFT_MASK' in event.state.value_names or
-                        event.keyval == gtk.keysyms.KP_Home):
+            if 'GDK_SHIFT_MASK' in event.state.value_names or event.keyval == gtk.keysyms.KP_Home:
                 if prefs['smart space scroll']:
                     if self._window.displayed_double():
                         if self._window.is_on_first_page():
@@ -214,12 +211,13 @@ class EventHandler(object):
         # We kill the signals here for the Up, Down, Space and Enter keys,
         # or they will start fiddling with the thumbnail selector (bad).
         # ----------------------------------------------------------------
-        if (event.keyval in (gtk.keysyms.Up, gtk.keysyms.Down,
-                             gtk.keysyms.space, gtk.keysyms.KP_Enter, gtk.keysyms.KP_Up,
-                             gtk.keysyms.KP_Down, gtk.keysyms.KP_Home, gtk.keysyms.KP_End,
-                             gtk.keysyms.KP_Page_Up, gtk.keysyms.KP_Page_Down) or
-                (event.keyval == gtk.keysyms.Return and not
-                    'GDK_MOD1_MASK' in event.state.value_names)):
+
+        _ignored_keys = (gtk.keysyms.Up, gtk.keysyms.Down,
+                         gtk.keysyms.space, gtk.keysyms.KP_Enter, gtk.keysyms.KP_Up,
+                         gtk.keysyms.KP_Down, gtk.keysyms.KP_Home, gtk.keysyms.KP_End,
+                         gtk.keysyms.KP_Page_Up, gtk.keysyms.KP_Page_Down)
+
+        if event.keyval in _ignored_keys or (event.keyval == gtk.keysyms.Return and 'GDK_MOD1_MASK' not in event.state.value_names):
             self._window.emit_stop_by_name('key_press_event')
             return True
 
@@ -276,9 +274,7 @@ class EventHandler(object):
     def mouse_release_event(self, widget, event):
         """Handle mouse button release events on the main layout area."""
         self._window.cursor_handler.set_cursor_type(cursor.NORMAL)
-        if (event.button == 1 and
-                    event.x_root == self._pressed_pointer_pos_x and
-                    event.y_root == self._pressed_pointer_pos_y):
+        if event.button == 1 and event.x_root == self._pressed_pointer_pos_x and event.y_root == self._pressed_pointer_pos_y:
             self._window.next_page()
         elif event.button == 1 and self._window.zoom_mode == preferences.ZOOM_MODE_BEST:
             # Change page by touchscreen-useful flicking. See
@@ -327,7 +323,7 @@ class EventHandler(object):
                           eventtime):
         """Handle drag-n-drop events on the main layout area."""
         # The drag source is inside Comix itself, so we ignore.
-        if (context.get_source_widget() is not None):
+        if context.get_source_widget() is not None:
             return
         uris = selection.get_uris()
         if not uris:

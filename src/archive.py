@@ -74,9 +74,9 @@ class Extractor(object):
                     dialog = gtk.MessageDialog(None, 0, gtk.MESSAGE_WARNING,
                                                gtk.BUTTONS_CLOSE,
                                                _("Could not find RAR file extractor!"))
-                    dialog.format_secondary_markup(
-                            _(
-                                    "You need either the <i>rar</i> or the <i>unrar</i> program installed in order to read RAR (.cbr) files."))
+                    dialog.format_secondary_markup(_("You need either the <i>rar</i> or the"
+                                                     " <i>unrar</i> program installed in order "
+                                                     "to read RAR (.cbr) files."))
                     dialog.run()
                     dialog.destroy()
                     return None
@@ -116,9 +116,9 @@ class Extractor(object):
                 dialog = gtk.MessageDialog(None, 0, gtk.MESSAGE_WARNING,
                                            gtk.BUTTONS_CLOSE,
                                            _("Could not find 7Z file extractor!"))
-                dialog.format_secondary_markup(
-                        _(
-                                "You need either the <i>pylzma</i> or the <i>p7zip</i> program installed in order to read 7Z (.cb7) files."))
+                dialog.format_secondary_markup(_("You need either the <i>pylzma</i> "
+                                                 "or the <i>p7zip</i> program installed "
+                                                 "in order to read 7Z (.cb7) files."))
                 dialog.run()
                 dialog.destroy()
                 return None
@@ -204,8 +204,8 @@ class Extractor(object):
         """
         if extracted:
             self._files = files
-            for file in files:
-                self._extracted[file] = True
+            for each_file in files:
+                self._extracted[each_file] = True
             return
         if self._type in (GZIP, BZIP2):
             self._files = [x for x in self._files if x in files]
@@ -410,7 +410,7 @@ class Packer(object):
         """Block until the packer thread has finished. Return True if the
         packer finished its work successfully.
         """
-        if self._pack_thread != None:
+        if self._pack_thread is not None:
             self._pack_thread.join()
         return self._packing_successful
 
@@ -511,7 +511,7 @@ def get_archive_info(path):
     extractor.close()
     num_pages = len(filter(image_re.search, files))
     size = os.stat(path).st_size
-    return (mime, num_pages, size)
+    return mime, num_pages, size
 
 
 def _get_rar_exec():

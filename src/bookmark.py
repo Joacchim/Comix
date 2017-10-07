@@ -134,7 +134,7 @@ class _Bookmark(gtk.ImageMenuItem):
         stock = self.get_image().get_stock()
         pixbuf = self.render_icon(*stock)
         page = '%d / %d' % (self._page, self._numpages)
-        return (pixbuf, self._name, page, self)
+        return pixbuf, self._name, page, self
 
     def pack(self):
         """Return a tuple suitable for pickling. The bookmark can be fully

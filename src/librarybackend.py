@@ -181,7 +181,7 @@ class LibraryBackend(object):
         info = archive.get_archive_info(path)
         if info is None:
             return False
-        format, pages, size = info
+        format_, pages, size = info
         thumbnail.get_thumbnail(path, create=True, dst_dir=_cover_dir)
         old = self._con.execute('''SELECT id FROM Book
             WHERE path = ?''', (path,)).fetchone()
@@ -189,12 +189,12 @@ class LibraryBackend(object):
             if old is not None:
                 self._con.execute('''UPDATE Book SET
                     name = ?, pages = ?, format = ?, size = ?
-                    WHERE path = ?''', (name, pages, format, size, path))
+                    WHERE path = ?''', (name, pages, format_, size, path))
             else:
                 self._con.execute('''INSERT INTO Book
                     (name, path, pages, format, size)
                     VALUES (?, ?, ?, ?, ?)''',
-                                  (name, path, pages, format, size))
+                                  (name, path, pages, format_, size))
         except dbapi2.Error:
             print('! Could not add book {} to the library'.format(path))
             return False

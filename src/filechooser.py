@@ -92,8 +92,7 @@ class _ComicFileChooserDialog(gtk.Dialog):
                          'application/x-bzip2', 'application/x-cbt'))
 
         try:
-            if (self.__class__._last_activated_file is not None
-                and os.path.isfile(self.__class__._last_activated_file)):
+            if self.__class__._last_activated_file is not None and os.path.isfile(self.__class__._last_activated_file):
                 self.filechooser.set_filename(
                         self.__class__._last_activated_file)
             elif os.path.isdir(prefs['path of last browsed in filechooser']):
@@ -133,8 +132,7 @@ class _ComicFileChooserDialog(gtk.Dialog):
                 return
             # FileChooser.set_do_overwrite_confirmation() doesn't seem to
             # work on our custom dialog, so we use a simple alternative.
-            if (self._action == gtk.FILE_CHOOSER_ACTION_SAVE
-                and os.path.exists(paths[0])):
+            if self._action == gtk.FILE_CHOOSER_ACTION_SAVE and os.path.exists(paths[0]):
                 overwrite_dialog = gtk.MessageDialog(None, 0,
                                                      gtk.MESSAGE_QUESTION, gtk.BUTTONS_OK_CANCEL,
                                                      _("A file named '%s' already exists. Do you want to replace it?") %

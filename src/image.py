@@ -272,7 +272,8 @@ def get_implied_rotation(pixbuf):
 
     The implied rotation is the angle (in degrees) that the raw pixbuf should
     be rotated in order to be displayed "correctly". E.g. a photograph taken
-    by a camera that is held sideways might store this fact in its EXIF data,       and the pixbuf loader will set the orientation option correspondingly.
+    by a camera that is held sideways might store this fact in its EXIF data,
+    and the pixbuf loader will set the orientation option correspondingly.
     """
     if isinstance(pixbuf, gtk.gdk.PixbufAnimation):
         pixbuf = pixbuf.get_static_image()
