@@ -10,6 +10,12 @@ from src import encoding
 
 _dialog = None
 
+# Compatibility
+try:
+    range = xrange  # Python2
+except NameError:
+    pass
+
 
 class _CommentsDialog(gtk.Dialog):
 

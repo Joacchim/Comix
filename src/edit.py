@@ -17,6 +17,12 @@ from src import thumbnail
 
 _dialog = None
 
+# Compatibility
+try:
+    range = xrange  # Python2
+except NameError:
+    pass
+
 
 class _EditArchiveDialog(gtk.Dialog):
     """The _EditArchiveDialog lets users edit archives (or directories) by

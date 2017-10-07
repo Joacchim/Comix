@@ -20,6 +20,12 @@ from src import thumbnail
 from src.image import get_supported_format_extensions_preg
 from src.preferences import prefs
 
+# Compatibility
+try:
+    range = xrange  # Python2
+except NameError:
+    pass
+
 
 class FileHandler(object):
     """The FileHandler keeps track of images, pages, caches and reads files.
@@ -197,7 +203,8 @@ class FileHandler(object):
         preference is set, and one of the two images that should normally
         be displayed has a width that exceeds its height).
         """
-        if not self._window.is_double_page or not prefs['no double page for wide images'] or self.get_current_page() == self.get_number_of_pages():
+        if not self._window.is_double_page or not prefs[
+            'no double page for wide images'] or self.get_current_page() == self.get_number_of_pages():
             return False
 
         page1 = self._get_pixbuf(self._current_image_index)

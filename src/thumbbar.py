@@ -12,6 +12,12 @@ from PIL import ImageDraw
 from src import image
 from src.preferences import prefs
 
+# Compatibility
+try:
+    range = xrange  # Python2
+except NameError:
+    pass
+
 
 class ThumbnailSidebar(gtk.HBox):
     """A thumbnail sidebar including scrollbar for the main window."""

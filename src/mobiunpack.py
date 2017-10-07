@@ -9,6 +9,12 @@ import imghdr
 import re
 import struct
 
+# Compatibility
+try:
+    range = xrange  # Python2
+except NameError:
+    pass
+
 
 class unpackException(Exception):
     pass
