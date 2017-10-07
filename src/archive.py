@@ -204,8 +204,8 @@ class Extractor(object):
         """
         if extracted:
             self._files = files
-            for each_file in files:
-                self._extracted[each_file] = True
+            for filename in files:
+                self._extracted[filename] = True
             return
         if self._type in (GZIP, BZIP2):
             self._files = [x for x in self._files if x in files]

@@ -306,11 +306,11 @@ class FileHandler(object):
                 self._image_files = []
                 tmpdir_len = len(self._tmp_dir)
                 extracted_files = []
-                for each_file in get_next_file(self._tmp_dir):
-                    dst = each_file[tmpdir_len:].replace("/", "_")
+                for filename in get_next_file(self._tmp_dir):
+                    dst = filename[tmpdir_len:].replace("/", "_")
                     extracted_files.append(dst)
                     dst = self._tmp_dir + dst
-                    shutil.move(each_file, dst)
+                    shutil.move(filename, dst)
                     self._image_files.append(dst)
                 self._comment_files = \
                     filter(self._comment_re.search, self._image_files)
@@ -685,5 +685,5 @@ def get_next_file(dir_name):
     """Yields the next file in the whole file hierarchy
        with dir_name as the top"""
     for (a_dir, dirs, files) in os.walk(dir_name):
-        for each_file in files:
-            yield a_dir + '/' + each_file
+        for filename in files:
+            yield a_dir + '/' + filename
