@@ -132,7 +132,7 @@ class Extractor(object):
                 return None
 
         else:
-            print('! Non-supported archive format:'.format(src))
+            print('! Non-supported archive format: {}'.format(src))
             return None
 
         self._setupped = True
@@ -418,7 +418,7 @@ class Packer(object):
         try:
             zfile = zipfile.ZipFile(self._archive_path, 'w')
         except Exception:
-            print('! Could not create archive'.format(self._archive_path))
+            print('! Could not create archive {}'.format(self._archive_path))
             return
         used_names = []
         pattern = '%%0%dd - %s%%s' % (len(str(len(self._image_files))),
@@ -481,7 +481,7 @@ def archive_mime_type(path):
             if magic2 == 'BOOKMOBI':
                 return MOBI
     except Exception:
-        print('! Error while reading '.format(path))
+        print('! Error while reading {}'.format(path))
     return None
 
 

@@ -35,7 +35,7 @@ class _CleanerDialog(gtk.MessageDialog):
                     else:
                         os.remove(path)
                 except Exception:
-                    print('! Could not remove'.format(path))
+                    print('! Could not remove {}'.format(path))
         self.destroy()
 
 
