@@ -193,8 +193,8 @@ msgstr "Коментарі"
 
 #: src/comment.py:53
 #, python-format
-msgid "Could not read %s"
-msgstr "Не можу прочитати %s"
+msgid "Could not read {}"
+msgstr "Не можу прочитати {}"
 
 #: src/deprecated.py:16
 msgid "There are deprecated files left on your computer."
@@ -324,8 +324,8 @@ msgstr "Tar архіви"
 
 #: src/filechooser.py:139
 #, python-format
-msgid "A file named '%s' already exists. Do you want to replace it?"
-msgstr "Файл з ім’ям '%s' вже існує. Хочете його замінити?"
+msgid "A file named '{}' already exists. Do you want to replace it?"
+msgstr "Файл з ім’ям '{}' вже існує. Хочете його замінити?"
 
 #: src/filechooser.py:142
 msgid "Replacing it will overwrite its contents."
@@ -349,28 +349,28 @@ msgstr "Автоматично додати книжки до цієї коле�
 
 #: src/filehandler.py:209
 #, python-format
-msgid "Could not open %s: Is a directory."
-msgstr "Не можу відкрити %s: Є каталогом."
+msgid "Could not open {}: Is a directory."
+msgstr "Не можу відкрити {}: Є каталогом."
 
 #: src/filehandler.py:213
 #, python-format
-msgid "Could not open %s: No such file."
-msgstr "Не можу відкрити %s: Нема такого файла."
+msgid "Could not open {}: No such file."
+msgstr "Не можу відкрити {}: Нема такого файла."
 
 #: src/filehandler.py:217
 #, python-format
-msgid "Could not open %s: Permission denied."
-msgstr "Не можу відкрити %s: Доступ заборонено."
+msgid "Could not open {}: Permission denied."
+msgstr "Не можу відкрити {}: Доступ заборонено."
 
 #: src/filehandler.py:222
 #, python-format
-msgid "Could not open %s: Unknown file type."
-msgstr "Не можу відкрити %s: Невідомий тип файлу"
+msgid "Could not open {}: Unknown file type."
+msgstr "Не можу відкрити {}: Невідомий тип файлу"
 
 #: src/filehandler.py:285
 #, python-format
-msgid "No images in '%s'"
-msgstr "Немає зображень у '%s'"
+msgid "No images in '{}'"
+msgstr "Немає зображень у '{}'"
 
 #: src/filehandler.py:413
 msgid "Unknown filetype"
@@ -422,8 +422,8 @@ msgstr "Будь ласка введіть нове ім’я для обран�
 
 #: src/library.py:271
 #, python-format
-msgid "Could not change the name to '%s'."
-msgstr "Не можу змінити ім’я на '%s'."
+msgid "Could not change the name to '{}'."
+msgstr "Не можу змінити ім’я на '{}'."
 
 #: src/library.py:275 src/library.py:882
 msgid "A collection by that name already exists."
@@ -440,22 +440,22 @@ msgstr "Корінь"
 #: src/library.py:386
 #, python-format
 msgid ""
-"Put the collection '%(subcollection)s' in the collection '%(supercollection)"
+"Put the collection '{subcollection}' in the collection '{supercollection}"
 "s'."
 msgstr ""
-"Покласти колекцію '%(subcollection)s' в колекцію '%(supercollection)s'."
+"Покласти колекцію '{subcollection}' в колекцію '{supercollection}'."
 
 #: src/library.py:407
 #, python-format
-msgid "Add books to '%s'."
-msgstr "Додати книжки до '%s'."
+msgid "Add books to '{}'."
+msgstr "Додати книжки до '{}'."
 
 #: src/library.py:411
 #, python-format
 msgid ""
-"Move books from '%(source collection)s' to '%(destination collection)s'."
+"Move books from '{source collection}' to '{destination collection}'."
 msgstr ""
-"Перемістити книжки з '%(source collection)s' до '%(destination collection)s'."
+"Перемістити книжки з '{source collection}' до '{destination collection}'."
 
 #: src/library.py:493
 msgid "Remove from this collection"
@@ -467,8 +467,8 @@ msgstr "Видалити з бібліотеки…"
 
 #: src/library.py:589
 #, python-format
-msgid "Removed %(num)d book(s) from '%(collection)s'."
-msgstr "Видалено %(num)d книг(а, и) з '%(collection)s'."
+msgid "Removed {num} book(s) from '{collection}'."
+msgstr "Видалено {num} книг(а, и) з '{collection}'."
 
 #: src/library.py:598
 msgid "Remove books from the library?"
@@ -484,8 +484,8 @@ msgstr ""
 
 #: src/library.py:610
 #, python-format
-msgid "Removed %d book(s) from the library."
-msgstr "Видалено %d книг(а, и) з бібліотеки."
+msgid "Removed {} book(s) from the library."
+msgstr "Видалено {} книг(а, и) з бібліотеки."
 
 #: src/library.py:770
 msgid "Search"
@@ -525,8 +525,8 @@ msgstr "Відкрити обрану книгу."
 
 #: src/library.py:833 src/properties.py:118
 #, python-format
-msgid "%d pages"
-msgstr "%d сторінок"
+msgid "{} pages"
+msgstr "{} сторінок"
 
 #: src/library.py:855
 msgid "Add new collection?"
@@ -542,8 +542,8 @@ msgstr "Нова колекція"
 
 #: src/library.py:877
 #, python-format
-msgid "Could not add a new collection called '%s'."
-msgstr "Не можу додати нову колекцію з ім’ям '%s'."
+msgid "Could not add a new collection called '{}'."
+msgstr "Не можу додати нову колекцію з ім’ям '{}'."
 
 #: src/library.py:911
 msgid "Adding books"
@@ -555,8 +555,8 @@ msgstr "Книжки додані"
 
 #: src/library.py:953
 #, python-format
-msgid "Adding '%s'..."
-msgstr "Додаю '%s'…"
+msgid "Adding '{}'..."
+msgstr "Додаю '{}'…"
 
 #: src/main.py:704
 msgid "SLIDESHOW"
@@ -885,8 +885,8 @@ msgstr "Властивості"
 
 #: src/properties.py:119
 #, python-format
-msgid "%d comments"
-msgstr "%d коментар(я, ів)"
+msgid "{} comments"
+msgstr "{} коментар(я, ів)"
 
 #: src/properties.py:129 src/properties.py:164
 msgid "Location"
@@ -976,8 +976,8 @@ msgstr "Загальний розмір видалених мініатюр"
 
 #: src/thumbremover.py:195
 #, python-format
-msgid "Removed thumbnail for '%s'"
-msgstr "Видалена мініатюра для '%s'"
+msgid "Removed thumbnail for '{}'"
+msgstr "Видалена мініатюра для '{}'"
 
 #: src/ui.py:34
 msgid "_Next page"

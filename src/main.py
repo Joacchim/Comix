@@ -723,18 +723,16 @@ class MainWindow(gtk.Window):
     def update_title(self):
         """Set the title acording to current state."""
         if self.displayed_double():
-            title = encoding.to_unicode('[%d,%d / %d]  %s - Comix' % (
-                self.file_handler.get_current_page(),
-                self.file_handler.get_current_page() + 1,
-                self.file_handler.get_number_of_pages(),
-                self.file_handler.get_pretty_current_filename()))
+            title = encoding.to_unicode('[{:d},{:d} / {:d}]  {} - Comix'.format(self.file_handler.get_current_page(),
+                                                                                self.file_handler.get_current_page() + 1,
+                                                                                self.file_handler.get_number_of_pages(),
+                                                                                self.file_handler.get_pretty_current_filename()))
         else:
-            title = encoding.to_unicode('[%d / %d]  %s - Comix' % (
-                self.file_handler.get_current_page(),
-                self.file_handler.get_number_of_pages(),
-                self.file_handler.get_pretty_current_filename()))
+            title = encoding.to_unicode('[{:d} / {:d}]  {} - Comix'.format(self.file_handler.get_current_page(),
+                                                                           self.file_handler.get_number_of_pages(),
+                                                                           self.file_handler.get_pretty_current_filename()))
         if self.slideshow.is_running():
-            title = '[%s] %s' % (_('SLIDESHOW'), title)
+            title = '[{}] {}'.format(_('SLIDESHOW'), title)
         self.set_title(title)
 
     def set_bg_colour(self, colour):

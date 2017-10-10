@@ -299,13 +299,12 @@ if args == ['install']:
             install(src, dst)
         for src, link in MIME_LINKS:
             make_link(src, link)
-        os.popen('update-mime-database "%s"' %
-                 os.path.join(install_dir, 'share/mime'))
+        os.popen('update-mime-database "{}"'.format(os.path.join(install_dir, 'share/mime')))
         print('\nUpdated mime database (added .cbz, .cbr and .cbt file types.)')
         schema = os.path.join(source_dir, 'mime/comicbook.schemas')
         os.popen('GCONF_CONFIG_SOURCE=$(gconftool-2 --get-default-source) '
-                 'gconftool-2 --makefile-install-rule "%s" 2>/dev/null' %
-                 schema)
+                 'gconftool-2 --makefile-install-rule "{}" 2>/dev/null'
+                 .format(schema))
         print('\nRegistered comic archive thumbnailer in gconf (if available).')
         print('The thumbnailer is only supported by some file '
               'managers such as Nautilus and Thunar. You might'

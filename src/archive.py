@@ -421,10 +421,9 @@ class Packer(object):
             print('! Could not create archive {}'.format(self._archive_path))
             return
         used_names = []
-        pattern = '%%0%dd - %s%%s' % (len(str(len(self._image_files))),
-                                      self._base_name)
+        pattern = '{{:0{}d}} - {}{{}}'.format(len(str(len(self._image_files))), self._base_name)
         for i, path in enumerate(self._image_files):
-            filename = pattern % (i + 1, os.path.splitext(path)[1])
+            filename = pattern.format(i + 1, os.path.splitext(path)[1])
             try:
                 zfile.write(path, filename, zipfile.ZIP_STORED)
             except Exception:
@@ -439,7 +438,7 @@ class Packer(object):
         for path in self._other_files:
             filename = os.path.basename(path)
             while filename in used_names:
-                filename = '_%s' % filename
+                filename = '_{}'.format(filename)
             try:
                 zfile.write(path, filename, zipfile.ZIP_DEFLATED)
             except Exception:

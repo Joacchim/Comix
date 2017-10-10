@@ -230,7 +230,7 @@ class FileHandler(object):
         # (bad idea if it's permanently hidden; but no better way nearby)
         if not os.access(path, os.R_OK):
             self._window.statusbar.set_message(
-                    _('Could not open %s: Permission denied.') % path)
+                    _('Could not open {}: Permission denied.').format(path))
             return False
         if os.path.isdir(path):
             dir_path = path  # handle it as a directory later.
@@ -238,13 +238,11 @@ class FileHandler(object):
             # getting 'unknown type'.
         elif not os.path.isfile(path):  # ...not dir or normal file.
             self._window.statusbar.set_message(
-                    _('Could not open %s: No such file.') % path)
+                    _('Could not open {}: No such file.').format(path))
             return False
         self.archive_type = archive.archive_mime_type(path)
-        if self.archive_type is None and not is_image_file(path) and \
-                not dir_path:
-            self._window.statusbar.set_message(
-                    _('Could not open %s: Unknown file type.') % path)
+        if self.archive_type is None and not is_image_file(path) and not dir_path:
+            self._window.statusbar.set_message(_('Could not open {}: Unknown file type.').format(path))
             return False
 
         # We close the previously opened file.
@@ -332,8 +330,8 @@ class FileHandler(object):
                 self._redo_priority_ordering(start_page, self._image_files)
 
         if not self._image_files:
-            self._window.statusbar.set_message(_("No images or subarchives in '%s'") %
-                                               os.path.basename(path))
+            self._window.statusbar.set_message(_("No images or subarchives in '{}'").format(
+                                               os.path.basename(path)))
             self.file_loaded = False
         else:
             self.file_loaded = True
@@ -446,7 +444,7 @@ class FileHandler(object):
         archives by their filename.
         """
         exts = '|'.join(prefs['comment extensions'])
-        self._comment_re = re.compile(r'\.(%s)\s*$' % exts, re.I)
+        self._comment_re = re.compile(r'\.({})\s*$'.format(exts), re.I)
 
     def get_path_to_page(self, page=None):
         """Return the full path to the image file for <page>, or the current

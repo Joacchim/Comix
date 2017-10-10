@@ -72,7 +72,7 @@ class _LibraryDialog(gtk.Window):
         there earlier.
         """
         self._statusbar.pop(0)
-        self._statusbar.push(0, ' %s' % encoding.to_unicode(message))
+        self._statusbar.push(0, u' {}'.format(encoding.to_unicode(message)))
 
     def close(self, *args):
         """Close the library and do required cleanup tasks."""
@@ -199,7 +199,7 @@ class _CollectionArea(gtk.ScrolledWindow):
         expanded_collections = []
         self._treeview.map_expanded_rows(_expanded_rows_accumulator)
         self._treestore.clear()
-        self._treestore.append(None, ['<b>%s</b>' % xmlescape(_('All books')),
+        self._treestore.append(None, ['<b>{}</b>'.format(xmlescape(_('All books'))),
                                       _COLLECTION_ALL])
         _recursive_add(None, None)
         self._treestore.foreach(_expand_and_select)
@@ -269,10 +269,9 @@ class _CollectionArea(gtk.ScrolledWindow):
             if self._library.backend.rename_collection(collection, new_name):
                 self.display_collections()
             else:
-                message = _("Could not change the name to '%s'.") % new_name
+                message = _("Could not change the name to '{}'.").format(new_name)
                 if self._library.backend.get_collection_by_name(new_name) is not None:
-                    message = '%s %s' % (message,
-                                         _('A collection by that name already exists.'))
+                    message = '{} {}'.format(message, _('A collection by that name already exists.'))
                 self._library.set_status_message(message)
 
     def _duplicate_collection(self, action):
@@ -380,10 +379,9 @@ class _CollectionArea(gtk.ScrolledWindow):
             if dest_collection is None:
                 dest_name = _('Root')
             else:
-                dest_name = self._library.backend.get_collection_name(
-                        dest_collection)
-            message = (_("Put the collection '%(subcollection)s' in the collection '%(supercollection)s'.") %
-                       {'subcollection': src_name, 'supercollection': dest_name})
+                dest_name = self._library.backend.get_collection_name(dest_collection)
+            message = _("Put the collection '{subcollection}' in the collection '{supercollection}'.") \
+                .format(subcollection=src_name, supercollection=dest_name)
         else:  # Moving book(s).
             if drop_row is None:
                 self._set_acceptable_drop(False)
@@ -402,13 +400,13 @@ class _CollectionArea(gtk.ScrolledWindow):
             dest_name = self._library.backend.get_collection_name(
                     dest_collection)
             if src_collection == _COLLECTION_ALL:
-                message = _("Add books to '%s'.") % dest_name
+                message = _("Add books to '{}'.").format(dest_name)
             else:
-                src_name = self._library.backend.get_collection_name(
-                        src_collection)
-                message = (_("Move books from '%(source collection)s' to '%(destination collection)s'.") %
-                           {'source collection': src_name,
-                            'destination collection': dest_name})
+                src_name = self._library.backend.get_collection_name(src_collection)
+
+                message = (_("Move books from '{source collection}' to '{destination collection}'.")
+                           .format(**{'source collection': src_name,
+                                      'destination collection': dest_name}))
         self._set_acceptable_drop(True)
         self._library.set_status_message(message)
 
@@ -583,8 +581,7 @@ class _BookArea(gtk.ScrolledWindow):
             self.remove_book_at_path(path)
         coll_name = self._library.backend.get_collection_name(collection)
         self._library.set_status_message(
-                _("Removed %(num)d book(s) from '%(collection)s'.") %
-                {'num': len(selected), 'collection': coll_name})
+                _("Removed {num} book(s) from '{collection}'.").format(num=len(selected), collection=coll_name))
 
     def _remove_books_from_library(self, *args):
         """Remove the currently selected book(s) from the library, and thus
@@ -606,7 +603,7 @@ class _BookArea(gtk.ScrolledWindow):
                 self._library.backend.remove_book(book)
                 self.remove_book_at_path(path)
             self._library.set_status_message(
-                    _('Removed %d book(s) from the library.') % len(selected))
+                    _('Removed {} book(s) from the library.').format(len(selected)))
 
     def _button_press(self, iconview, event):
         """Handle mouse button presses on the _BookArea."""
@@ -765,7 +762,7 @@ class _ControlArea(gtk.HBox):
         self.pack_start(vbox, True, True)
         hbox = gtk.HBox(False)
         vbox.pack_start(hbox, False, False)
-        label = gtk.Label('%s:' % _('Search'))
+        label = gtk.Label('{}:'.format(_('Search')))
         hbox.pack_start(label, False, False)
         search_entry = gtk.Entry()
         search_entry.connect('activate', self._filter_books)
@@ -774,7 +771,7 @@ class _ControlArea(gtk.HBox):
                                         'full path. The search is not case '
                                         'sensitive.'))
         hbox.pack_start(search_entry, True, True, 6)
-        label = gtk.Label('%s:' % _('Cover size'))
+        label = gtk.Label('{}:'.format(_('Cover size')))
         hbox.pack_start(label, False, False, 6)
         adjustment = gtk.Adjustment(prefs['library cover size'], 50, 128, 1,
                                     10, 0)
@@ -830,12 +827,12 @@ class _ControlArea(gtk.HBox):
         else:
             self._namelabel.set_text('')
         if pages is not None:
-            self._pageslabel.set_text(_('%d pages') % pages)
+            self._pageslabel.set_text(_('{} pages').format(pages))
         else:
             self._pageslabel.set_text('')
         if format_ is not None and size is not None:
-            self._filelabel.set_text('%s, %s' % (archive.get_name(format_),
-                                                 '%.1f MiB' % (size / 1048576.0)))
+            self._filelabel.set_text('{}, {}'.format(archive.get_name(format_),
+                                                     '{:.1f} MiB'.format(size / 1048576.0)))
         else:
             self._filelabel.set_text('')
         if dir_path is not None:
@@ -874,11 +871,9 @@ class _ControlArea(gtk.HBox):
                 prefs['last library collection'] = collection
                 self._library.collection_area.display_collections()
             else:
-                message = _("Could not add a new collection called '%s'.") % (
-                    name)
+                message = _("Could not add a new collection called '{}'.") .format(name)
                 if self._library.backend.get_collection_by_name(name) is not None:
-                    message = '%s %s' % (message,
-                                         _('A collection by that name already exists.'))
+                    message = '{} {}'.format(message, _('A collection by that name already exists.'))
                 self._library.set_status_message(message)
 
     def _filter_books(self, entry, *args):
@@ -926,7 +921,7 @@ class _AddBooksProgressDialog(gtk.Dialog):
         hbox.pack_start(left_box, False, False)
         hbox.pack_start(right_box, False, False)
 
-        label = labels.BoldLabel('%s:' % _('Added books'))
+        label = labels.BoldLabel('{}:'.format(_('Added books')))
         label.set_alignment(1.0, 1.0)
         left_box.pack_start(label, True, True)
         number_label = gtk.Label('0')
@@ -947,9 +942,8 @@ class _AddBooksProgressDialog(gtk.Dialog):
         for i, path in enumerate(paths):
             if library.backend.add_book(path, collection):
                 total_added += 1
-                number_label.set_text('%d' % total_added)
-            added_label.set_text(_("Adding '%s'...") %
-                                 encoding.to_unicode(path))
+                number_label.set_text('{:d}'.format(total_added))
+            added_label.set_text(_("Adding '{}'...").format(encoding.to_unicode(path)))
             bar.set_fraction((i + 1) / total_paths)
             while gtk.events_pending():
                 gtk.main_iteration(False)

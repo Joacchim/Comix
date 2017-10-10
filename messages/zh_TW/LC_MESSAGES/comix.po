@@ -198,8 +198,8 @@ msgstr "註解"
 
 #: src/comment.py:53
 #, python-format
-msgid "Could not read %s"
-msgstr "無法讀取 %s"
+msgid "Could not read {}"
+msgstr "無法讀取 {}"
 
 #: src/deprecated.py:16
 msgid "There are deprecated files left on your computer."
@@ -323,8 +323,8 @@ msgstr "TAR 壓縮檔"
 
 #: src/filechooser.py:139
 #, python-format
-msgid "A file named '%s' already exists. Do you want to replace it?"
-msgstr "檔案 %s 已存在，您要替換掉它嗎？"
+msgid "A file named '{}' already exists. Do you want to replace it?"
+msgstr "檔案 {} 已存在，您要替換掉它嗎？"
 
 #: src/filechooser.py:142
 msgid "Replacing it will overwrite its contents."
@@ -348,28 +348,28 @@ msgstr "自動將此書籍加入收藏"
 
 #: src/filehandler.py:209
 #, python-format
-msgid "Could not open %s: Is a directory."
-msgstr "無法開啟 %s：它是目錄。"
+msgid "Could not open {}: Is a directory."
+msgstr "無法開啟 {}：它是目錄。"
 
 #: src/filehandler.py:213
 #, python-format
-msgid "Could not open %s: No such file."
-msgstr "無法開啟 %s：找不到檔案。"
+msgid "Could not open {}: No such file."
+msgstr "無法開啟 {}：找不到檔案。"
 
 #: src/filehandler.py:217
 #, python-format
-msgid "Could not open %s: Permission denied."
-msgstr "無法開啟 %s：沒有權限。"
+msgid "Could not open {}: Permission denied."
+msgstr "無法開啟 {}：沒有權限。"
 
 #: src/filehandler.py:222
 #, python-format
-msgid "Could not open %s: Unknown file type."
-msgstr "無法開啟 %s：不明的檔案類型。"
+msgid "Could not open {}: Unknown file type."
+msgstr "無法開啟 {}：不明的檔案類型。"
 
 #: src/filehandler.py:285
 #, python-format
-msgid "No images in '%s'"
-msgstr "%s 內沒有圖片"
+msgid "No images in '{}'"
+msgstr "{} 內沒有圖片"
 
 #: src/filehandler.py:413
 msgid "Unknown filetype"
@@ -419,8 +419,8 @@ msgstr "請輸入此收藏的新名稱。"
 
 #: src/library.py:271
 #, python-format
-msgid "Could not change the name to '%s'."
-msgstr "無法變更名稱為「%s」。"
+msgid "Could not change the name to '{}'."
+msgstr "無法變更名稱為「{}」。"
 
 #: src/library.py:275 src/library.py:882
 msgid "A collection by that name already exists."
@@ -437,20 +437,20 @@ msgstr "Root"
 #: src/library.py:386
 #, python-format
 msgid ""
-"Put the collection '%(subcollection)s' in the collection '%(supercollection)"
+"Put the collection '{subcollection}' in the collection '{supercollection}"
 "s'."
-msgstr "將收藏 %(subcollection)s 放到 %(supercollection)s 。"
+msgstr "將收藏 {subcollection} 放到 {supercollection} 。"
 
 #: src/library.py:407
 #, python-format
-msgid "Add books to '%s'."
-msgstr "將書籍加入 %s。"
+msgid "Add books to '{}'."
+msgstr "將書籍加入 {}。"
 
 #: src/library.py:411
 #, python-format
 msgid ""
-"Move books from '%(source collection)s' to '%(destination collection)s'."
-msgstr "將書籍從 %(source collection)s 移到 %(destination collection)s 。"
+"Move books from '{source collection}' to '{destination collection}'."
+msgstr "將書籍從 {source collection} 移到 {destination collection} 。"
 
 #: src/library.py:493
 msgid "Remove from this collection"
@@ -462,8 +462,8 @@ msgstr "從此收藏庫移除..."
 
 #: src/library.py:589
 #, python-format
-msgid "Removed %(num)d book(s) from '%(collection)s'."
-msgstr "已移除 %(num)d 本 %(collection)s 收藏的書籍。"
+msgid "Removed {num} book(s) from '{collection}'."
+msgstr "已移除 {num} 本 {collection} 收藏的書籍。"
 
 #: src/library.py:598
 msgid "Remove books from the library?"
@@ -477,8 +477,8 @@ msgstr "這些書籍將從收藏庫中移除，但原始檔案不會受影響。
 
 #: src/library.py:610
 #, python-format
-msgid "Removed %d book(s) from the library."
-msgstr "已從收藏庫移除 %d 本書籍。"
+msgid "Removed {} book(s) from the library."
+msgstr "已從收藏庫移除 {} 本書籍。"
 
 #: src/library.py:770
 msgid "Search"
@@ -516,8 +516,8 @@ msgstr "開啟選取的書籍。"
 
 #: src/library.py:833 src/properties.py:118
 #, python-format
-msgid "%d pages"
-msgstr "%d 頁"
+msgid "{} pages"
+msgstr "{} 頁"
 
 #: src/library.py:855
 msgid "Add new collection?"
@@ -533,8 +533,8 @@ msgstr "新收藏"
 
 #: src/library.py:877
 #, python-format
-msgid "Could not add a new collection called '%s'."
-msgstr "無法新增收藏 %s 。"
+msgid "Could not add a new collection called '{}'."
+msgstr "無法新增收藏 {} 。"
 
 #: src/library.py:911
 msgid "Adding books"
@@ -546,8 +546,8 @@ msgstr "已新增書籍"
 
 #: src/library.py:953
 #, python-format
-msgid "Adding '%s'..."
-msgstr "正在新增 %s ..."
+msgid "Adding '{}'..."
+msgstr "正在新增 {} ..."
 
 #: src/main.py:704
 msgid "SLIDESHOW"
@@ -856,8 +856,8 @@ msgstr "屬性"
 
 #: src/properties.py:119
 #, python-format
-msgid "%d comments"
-msgstr "%d 個註解"
+msgid "{} comments"
+msgstr "{} 個註解"
 
 #: src/properties.py:129 src/properties.py:164
 msgid "Location"
@@ -945,8 +945,8 @@ msgstr "已移除的縮圖總大小"
 
 #: src/thumbremover.py:195
 #, python-format
-msgid "Removed thumbnail for '%s'"
-msgstr "已移除 %s 的縮圖"
+msgid "Removed thumbnail for '{}'"
+msgstr "已移除 {} 的縮圖"
 
 #: src/ui.py:34
 msgid "_Next page"

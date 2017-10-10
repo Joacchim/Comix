@@ -80,7 +80,7 @@ class _Page(gtk.VBox):
         hbox.pack_start(left_box, False, False)
         hbox.pack_start(right_box, False, False)
         for desc, value in info:
-            desc_label = labels.BoldLabel('%s:' % desc)
+            desc_label = labels.BoldLabel('{}:'.format(desc))
             desc_label.set_alignment(1.0, 1.0)
             left_box.pack_start(desc_label, True, True)
             value_label = gtk.Label(value)
@@ -116,11 +116,10 @@ class _PropertiesDialog(gtk.Dialog):
             try:
                 stats = os.stat(window.file_handler.get_path_to_base())
                 main_info = (
-                    _('%d pages') % window.file_handler.get_number_of_pages(),
-                    _('%d comments') %
-                    window.file_handler.get_number_of_comments(),
+                    _('{:d} pages').format window.file_handler.get_number_of_pages(),
+                    _('{:d} comments').format(window.file_handler.get_number_of_comments()),
                     archive.get_name(window.file_handler.archive_type),
-                    '%.1f MiB' % (stats.st_size / 1048576.0))
+                    '{:.1f} MiB'.format(stats.st_size / 1048576.0))
                 page.set_main_info(main_info)
                 try:
                     uid = pwd.getpwuid(stats.st_uid)[0]
@@ -153,9 +152,9 @@ class _PropertiesDialog(gtk.Dialog):
             stats = os.stat(path)
             width, height = window.file_handler.get_size()
             main_info = (
-                '%dx%d px' % (width, height),
+                '{:d}x{:d} px'.format(width, height),
                 window.file_handler.get_mime_name(),
-                '%.1f KiB' % (stats.st_size / 1024.0))
+                '{:.1f} KiB'.format(stats.st_size / 1024.0))
             page.set_main_info(main_info)
             try:
                 uid = pwd.getpwuid(stats.st_uid)[0]

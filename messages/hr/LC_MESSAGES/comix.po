@@ -286,8 +286,8 @@ msgstr "Komentari"
 # File: src/comment.py, line: 53
 #: src/comment.py:53
 #, python-format
-msgid "Could not read %s"
-msgstr "Neuspješno čitanje %s"
+msgid "Could not read {}"
+msgstr "Neuspješno čitanje {}"
 
 #
 # File: src/deprecated.py, line: 16
@@ -475,8 +475,8 @@ msgstr "Tar arhive"
 # File: src/filechooser.py, line: 125
 #: src/filechooser.py:139
 #, python-format
-msgid "A file named '%s' already exists. Do you want to replace it?"
-msgstr "Datoteka imena '%s' već postoji. Želite je zamijeniti?"
+msgid "A file named '{}' already exists. Do you want to replace it?"
+msgstr "Datoteka imena '{}' već postoji. Želite je zamijeniti?"
 
 #
 # File: src/filechooser.py, line: 128
@@ -515,36 +515,36 @@ msgstr "Automatski pridodaj knjige ovoj zbirci"
 # File: src/filehandler.py, line: 209
 #: src/filehandler.py:209
 #, python-format
-msgid "Could not open %s: Is a directory."
-msgstr "Nemoguće otvoriti %s: To je direktorij."
+msgid "Could not open {}: Is a directory."
+msgstr "Nemoguće otvoriti {}: To je direktorij."
 
 #
 # File: src/filehandler.py, line: 213
 #: src/filehandler.py:213
 #, python-format
-msgid "Could not open %s: No such file."
-msgstr "Nemoguće otvoriti %s: Datoteka ne postoji."
+msgid "Could not open {}: No such file."
+msgstr "Nemoguće otvoriti {}: Datoteka ne postoji."
 
 #
 # File: src/filehandler.py, line: 217
 #: src/filehandler.py:217
 #, python-format
-msgid "Could not open %s: Permission denied."
-msgstr "Nemoguće otvoriti %s: Pristup odbijen."
+msgid "Could not open {}: Permission denied."
+msgstr "Nemoguće otvoriti {}: Pristup odbijen."
 
 #
 # File: src/filehandler.py, line: 222
 #: src/filehandler.py:222
 #, python-format
-msgid "Could not open %s: Unknown file type."
-msgstr "Nemoguće otvoriti %s: Nepoznat tip datoteke."
+msgid "Could not open {}: Unknown file type."
+msgstr "Nemoguće otvoriti {}: Nepoznat tip datoteke."
 
 #
 # File: src/filehandler.py, line: 285
 #: src/filehandler.py:285
 #, python-format
-msgid "No images in '%s'"
-msgstr "Nema slika u '%s'"
+msgid "No images in '{}'"
+msgstr "Nema slika u '{}'"
 
 #
 # File: src/filehandler.py, line: 411
@@ -621,8 +621,8 @@ msgstr "Unesite novo ime za označenu kolekciju."
 # File: src/library.py, line: 271
 #: src/library.py:271
 #, python-format
-msgid "Could not change the name to '%s'."
-msgstr "Nemoguće promijeniti ime u '%s'."
+msgid "Could not change the name to '{}'."
+msgstr "Nemoguće promijeniti ime u '{}'."
 
 #
 # File: src/library.py, line: 275
@@ -648,25 +648,25 @@ msgstr "Korijen"
 #: src/library.py:386
 #, python-format
 msgid ""
-"Put the collection '%(subcollection)s' in the collection '%(supercollection)"
+"Put the collection '{subcollection}' in the collection '{supercollection}"
 "s'."
-msgstr "Stavi kolekciju '%(subcollection)s' u kolekciju '%(supercollection)s'."
+msgstr "Stavi kolekciju '{subcollection}' u kolekciju '{supercollection}'."
 
 #
 # File: src/library.py, line: 407
 #: src/library.py:407
 #, python-format
-msgid "Add books to '%s'."
-msgstr "Dodaj knjige u '%s'."
+msgid "Add books to '{}'."
+msgstr "Dodaj knjige u '{}'."
 
 #
 # File: src/library.py, line: 411
 #: src/library.py:411
 #, python-format
 msgid ""
-"Move books from '%(source collection)s' to '%(destination collection)s'."
+"Move books from '{source collection}' to '{destination collection}'."
 msgstr ""
-"Premjesti knjige iz '%(source collection)s' u '%(destination collection)s'."
+"Premjesti knjige iz '{source collection}' u '{destination collection}'."
 
 #
 # File: src/library.py, line: 492
@@ -684,8 +684,8 @@ msgstr "Obriši iz biblioteke..."
 # File: src/library.py, line: 588
 #: src/library.py:589
 #, python-format
-msgid "Removed %(num)d book(s) from '%(collection)s'."
-msgstr "Obrisano %(num)d knjiga iz '%(collection)s'."
+msgid "Removed {num} book(s) from '{collection}'."
+msgstr "Obrisano {num} knjiga iz '{collection}'."
 
 #
 # File: src/library.py, line: 597
@@ -707,8 +707,8 @@ msgstr ""
 # File: src/library.py, line: 609
 #: src/library.py:610
 #, python-format
-msgid "Removed %d book(s) from the library."
-msgstr "Obrisano %d knjiga iz biblioteke."
+msgid "Removed {} book(s) from the library."
+msgstr "Obrisano {} knjiga iz biblioteke."
 
 #
 # File: src/library.py, line: 769
@@ -767,8 +767,8 @@ msgstr "Otvori označenu knjigu."
 # File: src/properties.py, line: 113
 #: src/library.py:833 src/properties.py:118
 #, python-format
-msgid "%d pages"
-msgstr "%d stranica"
+msgid "{} pages"
+msgstr "{} stranica"
 
 #
 # File: src/library.py, line: 854
@@ -792,8 +792,8 @@ msgstr "Nova kolekcija"
 # File: src/library.py, line: 876
 #: src/library.py:877
 #, python-format
-msgid "Could not add a new collection called '%s'."
-msgstr "Nemoguće dodati novu kolekciju imena '%s'."
+msgid "Could not add a new collection called '{}'."
+msgstr "Nemoguće dodati novu kolekciju imena '{}'."
 
 #
 # File: src/library.py, line: 910
@@ -811,8 +811,8 @@ msgstr "Dodane knjige"
 # File: src/library.py, line: 952
 #: src/library.py:953
 #, python-format
-msgid "Adding '%s'..."
-msgstr "Dodajem '%s'..."
+msgid "Adding '{}'..."
+msgstr "Dodajem '{}'..."
 
 #
 # File: src/main.py, line: 666
@@ -1271,8 +1271,8 @@ msgstr "Svojstva"
 # File: src/properties.py, line: 114
 #: src/properties.py:119
 #, python-format
-msgid "%d comments"
-msgstr "%d komentara"
+msgid "{} comments"
+msgstr "{} komentara"
 
 #
 # File: src/properties.py, line: 124
@@ -1408,8 +1408,8 @@ msgstr "Ukupna veličina obrisanih sličica"
 # File: src/thumbremover.py, line: 193
 #: src/thumbremover.py:195
 #, python-format
-msgid "Removed thumbnail for '%s'"
-msgstr "Obrisana sličica za '%s'"
+msgid "Removed thumbnail for '{}'"
+msgstr "Obrisana sličica za '{}'"
 
 #
 # File: src/ui.py, line: 34

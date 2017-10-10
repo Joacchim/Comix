@@ -179,7 +179,7 @@ msgstr ""
 
 #: src/comment.py:53
 #, python-format
-msgid "Could not read %s"
+msgid "Could not read {)"
 msgstr ""
 
 #: src/deprecated.py:16
@@ -301,7 +301,7 @@ msgstr ""
 
 #: src/filechooser.py:139
 #, python-format
-msgid "A file named '%s' already exists. Do you want to replace it?"
+msgid "A file named '{)' already exists. Do you want to replace it?"
 msgstr ""
 
 #: src/filechooser.py:142
@@ -326,27 +326,27 @@ msgstr ""
 
 #: src/filehandler.py:209
 #, python-format
-msgid "Could not open %s: Is a directory."
+msgid "Could not open {): Is a directory."
 msgstr ""
 
 #: src/filehandler.py:213
 #, python-format
-msgid "Could not open %s: No such file."
+msgid "Could not open {): No such file."
 msgstr ""
 
 #: src/filehandler.py:217
 #, python-format
-msgid "Could not open %s: Permission denied."
+msgid "Could not open {): Permission denied."
 msgstr ""
 
 #: src/filehandler.py:222
 #, python-format
-msgid "Could not open %s: Unknown file type."
+msgid "Could not open {): Unknown file type."
 msgstr ""
 
 #: src/filehandler.py:285
 #, python-format
-msgid "No images in '%s'"
+msgid "No images in '{)'"
 msgstr ""
 
 #: src/filehandler.py:413
@@ -397,7 +397,7 @@ msgstr ""
 
 #: src/library.py:271
 #, python-format
-msgid "Could not change the name to '%s'."
+msgid "Could not change the name to '{)'."
 msgstr ""
 
 #: src/library.py:275 src/library.py:882
@@ -415,19 +415,19 @@ msgstr ""
 #: src/library.py:386
 #, python-format
 msgid ""
-"Put the collection '%(subcollection)s' in the collection '%(supercollection)"
+"Put the collection '{subcollection}' in the collection '{supercollection}"
 "s'."
 msgstr ""
 
 #: src/library.py:407
 #, python-format
-msgid "Add books to '%s'."
+msgid "Add books to '{)'."
 msgstr ""
 
 #: src/library.py:411
 #, python-format
 msgid ""
-"Move books from '%(source collection)s' to '%(destination collection)s'."
+"Move books from '{source collection}' to '{destination collection}'."
 msgstr ""
 
 #: src/library.py:493
@@ -440,7 +440,7 @@ msgstr ""
 
 #: src/library.py:589
 #, python-format
-msgid "Removed %(num)d book(s) from '%(collection)s'."
+msgid "Removed {num} book(s) from '{collection}'."
 msgstr ""
 
 #: src/library.py:598
@@ -455,7 +455,7 @@ msgstr ""
 
 #: src/library.py:610
 #, python-format
-msgid "Removed %d book(s) from the library."
+msgid "Removed {} book(s) from the library."
 msgstr ""
 
 #: src/library.py:770
@@ -494,7 +494,7 @@ msgstr ""
 
 #: src/library.py:833 src/properties.py:118
 #, python-format
-msgid "%d pages"
+msgid "{} pages"
 msgstr ""
 
 #: src/library.py:855
@@ -511,7 +511,7 @@ msgstr ""
 
 #: src/library.py:877
 #, python-format
-msgid "Could not add a new collection called '%s'."
+msgid "Could not add a new collection called '{)'."
 msgstr ""
 
 #: src/library.py:911
@@ -524,7 +524,7 @@ msgstr ""
 
 #: src/library.py:953
 #, python-format
-msgid "Adding '%s'..."
+msgid "Adding '{)'..."
 msgstr ""
 
 #: src/main.py:704
@@ -824,7 +824,7 @@ msgstr ""
 
 #: src/properties.py:119
 #, python-format
-msgid "%d comments"
+msgid "{} comments"
 msgstr ""
 
 #: src/properties.py:129 src/properties.py:164
@@ -910,7 +910,7 @@ msgstr ""
 
 #: src/thumbremover.py:195
 #, python-format
-msgid "Removed thumbnail for '%s'"
+msgid "Removed thumbnail for '{)'"
 msgstr ""
 
 #: src/ui.py:34

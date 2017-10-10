@@ -85,7 +85,7 @@ class _EditArchiveDialog(gtk.Dialog):
         other_files = self._other_area.get_file_listing()
         try:
             tmp_path = tempfile.mkstemp(
-                    suffix='.%s' % os.path.basename(archive_path),
+                    suffix='.{}'.format(os.path.basename(archive_path)),
                     prefix='tmp.', dir=os.path.dirname(archive_path))[1]
             fail = False
         except:
@@ -116,10 +116,8 @@ class _EditArchiveDialog(gtk.Dialog):
                     gtk.FILE_CHOOSER_ACTION_SAVE)
             src_path = self.file_handler.get_path_to_base()
             dialog.set_current_directory(os.path.dirname(src_path))
-            dialog.set_save_name('%s.cbz' % os.path.splitext(
-                    os.path.basename(src_path))[0])
-            dialog.filechooser.set_extra_widget(gtk.Label(
-                    _('Archives are stored as ZIP files.')))
+            dialog.set_save_name('{}.cbz'.format(os.path.splitext(os.path.basename(src_path))[0]))
+            dialog.filechooser.set_extra_widget(gtk.Label(_('Archives are stored as ZIP files.')))
             dialog.run()
             paths = dialog.get_paths()
             dialog.destroy()
@@ -297,12 +295,12 @@ class _OtherArea(gtk.VBox):
         """Load all comments in the archive."""
         for num in range(1, self._edit_dialog.file_handler.get_number_of_comments() + 1):
             path = self._edit_dialog.file_handler.get_comment_name(num)
-            size = '%.1f KiB' % (os.stat(path).st_size / 1024.0)
+            size = '{:.1f} KiB'.format(os.stat(path).st_size / 1024.0)
             self._liststore.append([os.path.basename(path), size, path])
 
     def add_extra_file(self, path):
         """Add an extra imported file (at <path>) to the list."""
-        size = '%.1f KiB' % (os.stat(path).st_size / 1024.0)
+        size = '{:.1f} KiB'.format(os.stat(path).st_size / 1024.0)
         self._liststore.append([os.path.basename(path), size, path])
 
     def get_file_listing(self):

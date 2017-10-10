@@ -133,10 +133,12 @@ class _ComicFileChooserDialog(gtk.Dialog):
             # FileChooser.set_do_overwrite_confirmation() doesn't seem to
             # work on our custom dialog, so we use a simple alternative.
             if self._action == gtk.FILE_CHOOSER_ACTION_SAVE and os.path.exists(paths[0]):
-                overwrite_dialog = gtk.MessageDialog(None, 0,
-                                                     gtk.MESSAGE_QUESTION, gtk.BUTTONS_OK_CANCEL,
-                                                     _("A file named '%s' already exists. Do you want to replace it?") %
-                                                     os.path.basename(paths[0]))
+                overwrite_dialog = gtk.MessageDialog(None,
+                                                     0,
+                                                     gtk.MESSAGE_QUESTION,
+                                                     gtk.BUTTONS_OK_CANCEL,
+                                                     _("A file named '{}' already exists. "
+                                                       "Do you want to replace it?").format(os.path.basename(paths[0])))
                 overwrite_dialog.format_secondary_text(
                         _('Replacing it will overwrite its contents.'))
                 response = overwrite_dialog.run()
@@ -165,7 +167,7 @@ class _ComicFileChooserDialog(gtk.Dialog):
                 self._namelabel.set_text(encoding.to_unicode(
                         os.path.basename(path)))
                 self._sizelabel.set_text(
-                        '%.1f KiB' % (os.stat(path).st_size / 1024.0))
+                        '{:.1f} KiB'.format(os.stat(path).st_size / 1024.0))
         else:
             self._preview_image.clear()
             self._namelabel.set_text('')
@@ -229,7 +231,7 @@ class _LibraryFileChooserDialog(_ComicFileChooserDialog):
                                  self._set_collection_name)
 
         self._collection_button = gtk.CheckButton(
-                '%s:' % _('Automatically add the books to this collection'),
+                '{}:'.format(_('Automatically add the books to this collection')),
                 False)
         self._collection_button.set_active(
                 prefs['auto add books into collections'])

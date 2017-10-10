@@ -152,7 +152,7 @@ def _create_thumbnail(path, dst_dir, image_path=None):
         'tEXt::Thumb::Mimetype': mime,
         'tEXt::Thumb::Image::Width': width,
         'tEXt::Thumb::Image::Height': height,
-        'tEXt::Software': 'Comix %s' % constants.VERSION
+        'tEXt::Software': 'Comix {}'.format(constants.VERSION)
     }
     try:
         if not os.path.isdir(dst_dir):

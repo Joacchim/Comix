@@ -285,8 +285,8 @@ msgstr "Komentáře"
 # File: src/comment.py, line: 53
 #: src/comment.py:53
 #, python-format
-msgid "Could not read %s"
-msgstr "%s nelze načíst"
+msgid "Could not read {}"
+msgstr "{} nelze načíst"
 
 #
 # File: src/deprecated.py, line: 16
@@ -473,8 +473,8 @@ msgstr "Archivy TAR"
 # File: src/filechooser.py, line: 125
 #: src/filechooser.py:139
 #, python-format
-msgid "A file named '%s' already exists. Do you want to replace it?"
-msgstr "Soubor jménem „%s“ již existuje. Přejete si jej nahradit?"
+msgid "A file named '{}' already exists. Do you want to replace it?"
+msgstr "Soubor jménem „{}“ již existuje. Přejete si jej nahradit?"
 
 #
 # File: src/filechooser.py, line: 128
@@ -513,36 +513,36 @@ msgstr "Automaticky přidat knihy do této sbírky"
 # File: src/filehandler.py, line: 209
 #: src/filehandler.py:209
 #, python-format
-msgid "Could not open %s: Is a directory."
-msgstr "Nelze otevřít %s: Je to složka"
+msgid "Could not open {}: Is a directory."
+msgstr "Nelze otevřít {}: Je to složka"
 
 #
 # File: src/filehandler.py, line: 213
 #: src/filehandler.py:213
 #, python-format
-msgid "Could not open %s: No such file."
-msgstr "Nelze otevřít %s: Soubor neexistuje."
+msgid "Could not open {}: No such file."
+msgstr "Nelze otevřít {}: Soubor neexistuje."
 
 #
 # File: src/filehandler.py, line: 217
 #: src/filehandler.py:217
 #, python-format
-msgid "Could not open %s: Permission denied."
-msgstr "Nelze otevřít %s: Přístup odmítnut."
+msgid "Could not open {}: Permission denied."
+msgstr "Nelze otevřít {}: Přístup odmítnut."
 
 #
 # File: src/filehandler.py, line: 222
 #: src/filehandler.py:222
 #, python-format
-msgid "Could not open %s: Unknown file type."
-msgstr "Nelze otevřít %s: Neznámý typ souboru."
+msgid "Could not open {}: Unknown file type."
+msgstr "Nelze otevřít {}: Neznámý typ souboru."
 
 #
 # File: src/filehandler.py, line: 285
 #: src/filehandler.py:285
 #, python-format
-msgid "No images in '%s'"
-msgstr "„%s“ neobsahuje žádné obrázky"
+msgid "No images in '{}'"
+msgstr "„{}“ neobsahuje žádné obrázky"
 
 #
 # File: src/filehandler.py, line: 411
@@ -619,8 +619,8 @@ msgstr "Prosím vložte nové jméno vybrané sbírky."
 # File: src/library.py, line: 271
 #: src/library.py:271
 #, python-format
-msgid "Could not change the name to '%s'."
-msgstr "Nelze změnit jméno na „%s“."
+msgid "Could not change the name to '{}'."
+msgstr "Nelze změnit jméno na „{}“."
 
 #
 # File: src/library.py, line: 275
@@ -646,25 +646,25 @@ msgstr "Kořen"
 #: src/library.py:386
 #, python-format
 msgid ""
-"Put the collection '%(subcollection)s' in the collection '%(supercollection)"
+"Put the collection '{subcollection}' in the collection '{supercollection}"
 "s'."
-msgstr "Vložit sbírku „%(subcollection)s“ do sbírky „%(supercollection)s“."
+msgstr "Vložit sbírku „{subcollection}“ do sbírky „{supercollection}“."
 
 #
 # File: src/library.py, line: 407
 #: src/library.py:407
 #, python-format
-msgid "Add books to '%s'."
-msgstr "Přidat knihy do „%s“."
+msgid "Add books to '{}'."
+msgstr "Přidat knihy do „{}“."
 
 #
 # File: src/library.py, line: 411
 #: src/library.py:411
 #, python-format
 msgid ""
-"Move books from '%(source collection)s' to '%(destination collection)s'."
+"Move books from '{source collection}' to '{destination collection}'."
 msgstr ""
-"Přesunout knihy z „%(source collection)s“ do „%(destination collection)s“."
+"Přesunout knihy z „{source collection}“ do „{destination collection}“."
 
 #
 # File: src/library.py, line: 492
@@ -682,8 +682,8 @@ msgstr "Odstranit z knihovny…"
 # File: src/library.py, line: 588
 #: src/library.py:589
 #, python-format
-msgid "Removed %(num)d book(s) from '%(collection)s'."
-msgstr "Odstraněno %(num)d knih ze sbírky „%(collection)s“."
+msgid "Removed {num} book(s) from '{collection}'."
+msgstr "Odstraněno {num} knih ze sbírky „{collection}“."
 
 #
 # File: src/library.py, line: 597
@@ -705,8 +705,8 @@ msgstr ""
 # File: src/library.py, line: 609
 #: src/library.py:610
 #, python-format
-msgid "Removed %d book(s) from the library."
-msgstr "Odstraněno %d knih z knihovny."
+msgid "Removed {} book(s) from the library."
+msgstr "Odstraněno {} knih z knihovny."
 
 #
 # File: src/library.py, line: 769
@@ -765,8 +765,8 @@ msgstr "Otevřít vybranou knihu."
 # File: src/properties.py, line: 113
 #: src/library.py:833 src/properties.py:118
 #, python-format
-msgid "%d pages"
-msgstr "%d stránek"
+msgid "{} pages"
+msgstr "{} stránek"
 
 #
 # File: src/library.py, line: 854
@@ -790,8 +790,8 @@ msgstr "Nová sbírka"
 # File: src/library.py, line: 876
 #: src/library.py:877
 #, python-format
-msgid "Could not add a new collection called '%s'."
-msgstr "Nelze přidat novou sbírku jménem „%s“."
+msgid "Could not add a new collection called '{}'."
+msgstr "Nelze přidat novou sbírku jménem „{}“."
 
 #
 # File: src/library.py, line: 910
@@ -809,8 +809,8 @@ msgstr "Přidané knihy"
 # File: src/library.py, line: 952
 #: src/library.py:953
 #, python-format
-msgid "Adding '%s'..."
-msgstr "Přidává se „%s“…"
+msgid "Adding '{}'..."
+msgstr "Přidává se „{}“…"
 
 #
 # File: src/main.py, line: 666
@@ -1267,8 +1267,8 @@ msgstr "Vlastnosti"
 # File: src/properties.py, line: 114
 #: src/properties.py:119
 #, python-format
-msgid "%d comments"
-msgstr "%d komentářů"
+msgid "{} comments"
+msgstr "{} komentářů"
 
 #
 # File: src/properties.py, line: 124
@@ -1404,8 +1404,8 @@ msgstr "Celková velikost odstraněných náhledů"
 # File: src/thumbremover.py, line: 193
 #: src/thumbremover.py:195
 #, python-format
-msgid "Removed thumbnail for '%s'"
-msgstr "Odstraněn náhled pro „%s“"
+msgid "Removed thumbnail for '{}'"
+msgstr "Odstraněn náhled pro „{}“"
 
 #
 # File: src/ui.py, line: 34

@@ -98,8 +98,8 @@ class _PreferencesDialog(gtk.Dialog):
         # ----------------------------------------------------------------
         page = _PreferencePage(80)
         page.new_section(_('Background'))
-        fixed_bg_button = gtk.RadioButton(None, '%s:' %
-                                          _('Use this colour as background'))
+        fixed_bg_button = gtk.RadioButton(None, '{}:'
+                                          .format(_('Use this colour as background')))
         fixed_bg_button.set_tooltip_text(
                 _('Always use this selected colour as the background colour.'))
         color_button = gtk.ColorButton(gtk.gdk.Color(*prefs['bg colour']))
@@ -114,7 +114,7 @@ class _PreferencesDialog(gtk.Dialog):
         page.add_row(dynamic_bg_button)
 
         page.new_section(_('Thumbnails'))
-        label = gtk.Label('%s:' % _('Thumbnail size (in pixels)'))
+        label = gtk.Label('{}:'.format(_('Thumbnail size (in pixels)')))
         adjustment = gtk.Adjustment(prefs['thumbnail size'], 20, 128, 1, 10)
         thumb_size_spinner = gtk.SpinButton(adjustment)
         thumb_size_spinner.connect('value_changed', self._spinner_cb,
@@ -129,7 +129,7 @@ class _PreferencesDialog(gtk.Dialog):
         page.add_row(thumb_number_button)
 
         page.new_section(_('Magnifying Glass'))
-        label = gtk.Label('%s:' % _('Magnifying glass size (in pixels)'))
+        label = gtk.Label('{}:'.format(_('Magnifying glass size (in pixels)')))
         adjustment = gtk.Adjustment(prefs['lens size'], 50, 400, 1, 10)
         glass_size_spinner = gtk.SpinButton(adjustment)
         glass_size_spinner.connect('value_changed', self._spinner_cb,
@@ -137,7 +137,7 @@ class _PreferencesDialog(gtk.Dialog):
         glass_size_spinner.set_tooltip_text(
                 _('Set the size of the magnifying glass. It is a square with a side of this many pixels.'))
         page.add_row(label, glass_size_spinner)
-        label = gtk.Label('%s:' % _('Magnification factor'))
+        label = gtk.Label('{}:'.format(_('Magnification factor')))
         adjustment = gtk.Adjustment(prefs['lens magnification'], 1.1, 10.0,
                                     0.1, 1.0)
         glass_magnification_spinner = gtk.SpinButton(adjustment, digits=1)
@@ -300,7 +300,7 @@ class _PreferencesDialog(gtk.Dialog):
         manga_button.connect('toggled', self._check_button_cb,
                              'default manga mode')
         page.add_row(manga_button)
-        label = gtk.Label('%s:' % _('Default zoom mode'))
+        label = gtk.Label('{}:'.format(_('Default zoom mode')))
         zoom_combo = gtk.combo_box_new_text()
         zoom_combo.append_text(_('Best fit mode'))
         zoom_combo.append_text(_('Fit width mode'))
@@ -320,7 +320,7 @@ class _PreferencesDialog(gtk.Dialog):
         page.add_row(hide_in_fullscreen_button)
 
         page.new_section(_('Slideshow'))
-        label = gtk.Label('%s:' % _('Slideshow delay (in seconds)'))
+        label = gtk.Label('{}:'.format(_('Slideshow delay (in seconds)')))
         adjustment = gtk.Adjustment(prefs['slideshow delay'] / 1000.0,
                                     0.5, 3600.0, 0.1, 1)
         delay_spinner = gtk.SpinButton(adjustment, digits=1)
@@ -329,7 +329,7 @@ class _PreferencesDialog(gtk.Dialog):
         page.add_row(label, delay_spinner)
 
         page.new_section(_('Comments'))
-        label = gtk.Label('%s:' % _('Comment extensions'))
+        label = gtk.Label('{}:'.format(_('Comment extensions')))
         extensions_entry = gtk.Entry()
         extensions_entry.set_text(', '.join(prefs['comment extensions']))
         extensions_entry.connect('activate', self._entry_cb)

@@ -286,8 +286,8 @@ msgstr "注释"
 # File: src/comment.py, line: 53
 #: src/comment.py:53
 #, python-format
-msgid "Could not read %s"
-msgstr "无法读取%s"
+msgid "Could not read {}"
+msgstr "无法读取{}"
 
 #
 # File: src/deprecated.py, line: 16
@@ -469,8 +469,8 @@ msgstr "Tar文件包"
 # File: src/filechooser.py, line: 125
 #: src/filechooser.py:139
 #, python-format
-msgid "A file named '%s' already exists. Do you want to replace it?"
-msgstr "名为“%s”的文件已经存在，你想要覆盖它吗？"
+msgid "A file named '{}' already exists. Do you want to replace it?"
+msgstr "名为“{}”的文件已经存在，你想要覆盖它吗？"
 
 #
 # File: src/filechooser.py, line: 128
@@ -509,36 +509,36 @@ msgstr "自动添加书到这个收藏中"
 # File: src/filehandler.py, line: 209
 #: src/filehandler.py:209
 #, python-format
-msgid "Could not open %s: Is a directory."
-msgstr "无法打开%s：它是一个目录。"
+msgid "Could not open {}: Is a directory."
+msgstr "无法打开{}：它是一个目录。"
 
 #
 # File: src/filehandler.py, line: 213
 #: src/filehandler.py:213
 #, python-format
-msgid "Could not open %s: No such file."
-msgstr "无法打开%s：没有这个文件。"
+msgid "Could not open {}: No such file."
+msgstr "无法打开{}：没有这个文件。"
 
 #
 # File: src/filehandler.py, line: 217
 #: src/filehandler.py:217
 #, python-format
-msgid "Could not open %s: Permission denied."
-msgstr "无法打开%s：权限不足。"
+msgid "Could not open {}: Permission denied."
+msgstr "无法打开{}：权限不足。"
 
 #
 # File: src/filehandler.py, line: 222
 #: src/filehandler.py:222
 #, python-format
-msgid "Could not open %s: Unknown file type."
-msgstr "无法打开%s：未知的文件格式。"
+msgid "Could not open {}: Unknown file type."
+msgstr "无法打开{}：未知的文件格式。"
 
 #
 # File: src/filehandler.py, line: 285
 #: src/filehandler.py:285
 #, python-format
-msgid "No images in '%s'"
-msgstr "“%s”中没有图像文件"
+msgid "No images in '{}'"
+msgstr "“{}”中没有图像文件"
 
 #
 # File: src/filehandler.py, line: 411
@@ -613,8 +613,8 @@ msgstr "请输入收藏要修改成的名称。"
 # File: src/library.py, line: 271
 #: src/library.py:271
 #, python-format
-msgid "Could not change the name to '%s'."
-msgstr "无法修改名称为“%s”。"
+msgid "Could not change the name to '{}'."
+msgstr "无法修改名称为“{}”。"
 
 #
 # File: src/library.py, line: 275
@@ -640,24 +640,24 @@ msgstr "根"
 #: src/library.py:386
 #, python-format
 msgid ""
-"Put the collection '%(subcollection)s' in the collection '%(supercollection)"
+"Put the collection '{subcollection}' in the collection '{supercollection}"
 "s'."
-msgstr "把收藏“%(subcollection)s”放入收藏“%(supercollection)s”中。"
+msgstr "把收藏“{subcollection}”放入收藏“{supercollection}”中。"
 
 #
 # File: src/library.py, line: 407
 #: src/library.py:407
 #, python-format
-msgid "Add books to '%s'."
-msgstr "添加书到“%s”中。"
+msgid "Add books to '{}'."
+msgstr "添加书到“{}”中。"
 
 #
 # File: src/library.py, line: 411
 #: src/library.py:411
 #, python-format
 msgid ""
-"Move books from '%(source collection)s' to '%(destination collection)s'."
-msgstr "把书从“%(source collection)s”移动到“%(destination collection)s”中。"
+"Move books from '{source collection}' to '{destination collection}'."
+msgstr "把书从“{source collection}”移动到“{destination collection}”中。"
 
 #
 # File: src/library.py, line: 492
@@ -675,8 +675,8 @@ msgstr "从收藏库中删除…"
 # File: src/library.py, line: 588
 #: src/library.py:589
 #, python-format
-msgid "Removed %(num)d book(s) from '%(collection)s'."
-msgstr "从“%(collection)s”中删除了%(num)d本书。"
+msgid "Removed {num} book(s) from '{collection}'."
+msgstr "从“{collection}”中删除了{num}本书。"
 
 #
 # File: src/library.py, line: 597
@@ -696,8 +696,8 @@ msgstr "从收藏库中删除选中的书（不会影响原始文件）。你确
 # File: src/library.py, line: 609
 #: src/library.py:610
 #, python-format
-msgid "Removed %d book(s) from the library."
-msgstr "从收藏库中删除了%d本书。"
+msgid "Removed {} book(s) from the library."
+msgstr "从收藏库中删除了{}本书。"
 
 #
 # File: src/library.py, line: 769
@@ -754,8 +754,8 @@ msgstr "打开选中的书。"
 # File: src/properties.py, line: 113
 #: src/library.py:833 src/properties.py:118
 #, python-format
-msgid "%d pages"
-msgstr "共%d页"
+msgid "{} pages"
+msgstr "共{}页"
 
 #
 # File: src/library.py, line: 854
@@ -779,8 +779,8 @@ msgstr "新收藏"
 # File: src/library.py, line: 876
 #: src/library.py:877
 #, python-format
-msgid "Could not add a new collection called '%s'."
-msgstr "无法添加名称为“%s”的新收藏。"
+msgid "Could not add a new collection called '{}'."
+msgstr "无法添加名称为“{}”的新收藏。"
 
 #
 # File: src/library.py, line: 910
@@ -798,8 +798,8 @@ msgstr "已经添加的书"
 # File: src/library.py, line: 952
 #: src/library.py:953
 #, python-format
-msgid "Adding '%s'..."
-msgstr "正在添加“%s”…"
+msgid "Adding '{}'..."
+msgstr "正在添加“{}”…"
 
 #
 # File: src/main.py, line: 666
@@ -1238,8 +1238,8 @@ msgstr "属性"
 # File: src/properties.py, line: 114
 #: src/properties.py:119
 #, python-format
-msgid "%d comments"
-msgstr "%d 个注释"
+msgid "{} comments"
+msgstr "{} 个注释"
 
 #
 # File: src/properties.py, line: 124
@@ -1373,8 +1373,8 @@ msgstr "删除缩略图总大小"
 # File: src/thumbremover.py, line: 193
 #: src/thumbremover.py:195
 #, python-format
-msgid "Removed thumbnail for '%s'"
-msgstr "删除“%s”的缩略图"
+msgid "Removed thumbnail for '{}'"
+msgstr "删除“{}”的缩略图"
 
 #
 # File: src/ui.py, line: 34

@@ -288,8 +288,8 @@ msgstr "Comentaris"
 # File: src/comment.py, line: 53
 #: src/comment.py:53
 #, python-format
-msgid "Could not read %s"
-msgstr "No s'ha pogut llegir %s"
+msgid "Could not read {}"
+msgstr "No s'ha pogut llegir {}"
 
 #
 # File: src/deprecated.py, line: 16
@@ -476,8 +476,8 @@ msgstr "Arxius tar"
 # File: src/filechooser.py, line: 125
 #: src/filechooser.py:139
 #, python-format
-msgid "A file named '%s' already exists. Do you want to replace it?"
-msgstr "Ja existeix un fitxer anomenat '%s'. Voleu substituir-lo?"
+msgid "A file named '{}' already exists. Do you want to replace it?"
+msgstr "Ja existeix un fitxer anomenat '{}'. Voleu substituir-lo?"
 
 #
 # File: src/filechooser.py, line: 128
@@ -516,36 +516,36 @@ msgstr "Afegeix automàticament els llibres a aquesta colecció"
 # File: src/filehandler.py, line: 209
 #: src/filehandler.py:209
 #, python-format
-msgid "Could not open %s: Is a directory."
-msgstr "No s'ha pogut obrir %s: És un directori."
+msgid "Could not open {}: Is a directory."
+msgstr "No s'ha pogut obrir {}: És un directori."
 
 #
 # File: src/filehandler.py, line: 213
 #: src/filehandler.py:213
 #, python-format
-msgid "Could not open %s: No such file."
-msgstr "No s'ha pogut obrir %s: No existeix el fitxer."
+msgid "Could not open {}: No such file."
+msgstr "No s'ha pogut obrir {}: No existeix el fitxer."
 
 #
 # File: src/filehandler.py, line: 217
 #: src/filehandler.py:217
 #, python-format
-msgid "Could not open %s: Permission denied."
-msgstr "No s'ha pogut obrir %s: S'ha denegat el permís."
+msgid "Could not open {}: Permission denied."
+msgstr "No s'ha pogut obrir {}: S'ha denegat el permís."
 
 #
 # File: src/filehandler.py, line: 222
 #: src/filehandler.py:222
 #, python-format
-msgid "Could not open %s: Unknown file type."
-msgstr "No s'ha pogut obrir %s: Tipus de fitxer desconegut."
+msgid "Could not open {}: Unknown file type."
+msgstr "No s'ha pogut obrir {}: Tipus de fitxer desconegut."
 
 #
 # File: src/filehandler.py, line: 285
 #: src/filehandler.py:285
 #, python-format
-msgid "No images in '%s'"
-msgstr "No hi ha imatges a '%s'"
+msgid "No images in '{}'"
+msgstr "No hi ha imatges a '{}'"
 
 #
 # File: src/filehandler.py, line: 411
@@ -622,8 +622,8 @@ msgstr "Introduïu un nom nou per a la col·lecció seleccionada."
 # File: src/library.py, line: 271
 #: src/library.py:271
 #, python-format
-msgid "Could not change the name to '%s'."
-msgstr "No s'ha pogut canviar el nom a '%s'."
+msgid "Could not change the name to '{}'."
+msgstr "No s'ha pogut canviar el nom a '{}'."
 
 #
 # File: src/library.py, line: 275
@@ -649,27 +649,27 @@ msgstr "Arrel"
 #: src/library.py:386
 #, python-format
 msgid ""
-"Put the collection '%(subcollection)s' in the collection '%(supercollection)"
+"Put the collection '{subcollection}' in the collection '{supercollection}"
 "s'."
 msgstr ""
-"Col·loca la col·lecció '%(subcollection)s' en la col·lecció '%"
+"Col·loca la col·lecció '{subcollection}' en la col·lecció '%"
 "(supercollection)s'."
 
 #
 # File: src/library.py, line: 407
 #: src/library.py:407
 #, python-format
-msgid "Add books to '%s'."
-msgstr "Afegeix llibres a '%s'."
+msgid "Add books to '{}'."
+msgstr "Afegeix llibres a '{}'."
 
 #
 # File: src/library.py, line: 411
 #: src/library.py:411
 #, python-format
 msgid ""
-"Move books from '%(source collection)s' to '%(destination collection)s'."
+"Move books from '{source collection}' to '{destination collection}'."
 msgstr ""
-"Mou els llibres de '%(source collection)s' a '%(destination collection)s'."
+"Mou els llibres de '{source collection}' a '{destination collection}'."
 
 #
 # File: src/library.py, line: 492
@@ -687,8 +687,8 @@ msgstr "Elimina de la biblioteca..."
 # File: src/library.py, line: 588
 #: src/library.py:589
 #, python-format
-msgid "Removed %(num)d book(s) from '%(collection)s'."
-msgstr "S'han esborrat %(num)d llibres de '%(collection)s'."
+msgid "Removed {num} book(s) from '{collection}'."
+msgstr "S'han esborrat {num} llibres de '{collection}'."
 
 #
 # File: src/library.py, line: 597
@@ -710,8 +710,8 @@ msgstr ""
 # File: src/library.py, line: 609
 #: src/library.py:610
 #, python-format
-msgid "Removed %d book(s) from the library."
-msgstr "S'han esborrat %d llibres de la biblioteca."
+msgid "Removed {} book(s) from the library."
+msgstr "S'han esborrat {} llibres de la biblioteca."
 
 #
 # File: src/library.py, line: 769
@@ -770,8 +770,8 @@ msgstr "Obre el llibre seleccionat."
 # File: src/properties.py, line: 113
 #: src/library.py:833 src/properties.py:118
 #, python-format
-msgid "%d pages"
-msgstr "%d pàgines"
+msgid "{} pages"
+msgstr "{} pàgines"
 
 #
 # File: src/library.py, line: 854
@@ -795,8 +795,8 @@ msgstr "Nova col·lecció"
 # File: src/library.py, line: 876
 #: src/library.py:877
 #, python-format
-msgid "Could not add a new collection called '%s'."
-msgstr "No s'ha pogut afegir una nova col·lecció amb el nom '%s'."
+msgid "Could not add a new collection called '{}'."
+msgstr "No s'ha pogut afegir una nova col·lecció amb el nom '{}'."
 
 #
 # File: src/library.py, line: 910
@@ -814,8 +814,8 @@ msgstr "Llibres afegits"
 # File: src/library.py, line: 952
 #: src/library.py:953
 #, python-format
-msgid "Adding '%s'..."
-msgstr "Afegint '%s'..."
+msgid "Adding '{}'..."
+msgstr "Afegint '{}'..."
 
 #
 # File: src/main.py, line: 666
@@ -1278,8 +1278,8 @@ msgstr "Propietats"
 # File: src/properties.py, line: 114
 #: src/properties.py:119
 #, python-format
-msgid "%d comments"
-msgstr "%d comentaris"
+msgid "{} comments"
+msgstr "{} comentaris"
 
 #
 # File: src/properties.py, line: 124
@@ -1415,8 +1415,8 @@ msgstr "Mida total de les miniatures esborrades"
 # File: src/thumbremover.py, line: 193
 #: src/thumbremover.py:195
 #, python-format
-msgid "Removed thumbnail for '%s'"
-msgstr "S'ha esborrat la miniatura de '%s'"
+msgid "Removed thumbnail for '{}'"
+msgstr "S'ha esborrat la miniatura de '{}'"
 
 #
 # File: src/ui.py, line: 34
