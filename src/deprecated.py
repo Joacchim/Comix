@@ -1,25 +1,30 @@
+# coding=utf-8
 """deprecated.py - Clean up deprecated Comix files."""
+from __future__ import absolute_import
 
 import os
 import shutil
 
 import gtk
 
-import constants
+from src import constants
 
 
 class _CleanerDialog(gtk.MessageDialog):
 
     def __init__(self, window, paths):
         gtk.MessageDialog.__init__(self, window, 0, gtk.MESSAGE_QUESTION,
-            gtk.BUTTONS_YES_NO,
-            _('There are deprecated files left on your computer.'))
+                                   gtk.BUTTONS_YES_NO,
+                                   _('There are deprecated files left on your computer.'))
 
         self._paths = paths
         self.connect('response', self._response)
 
         self.format_secondary_text(
-            _('Some old files (that were used for storing preferences, the library, bookmarks etc. for older versions of Comix) were found on your computer. If you do not plan on using the older versions of Comix again, you should remove these files in order to save some disk space. Do you want these files to be removed for you now?'))
+                _('Some old files (that were used for storing preferences, the library, bookmarks etc.'
+                  ' for older versions of Comix) were found on your computer. If you do not plan on using '
+                  'the older versions of Comix again, you should remove these files in order to save some '
+                  'disk space. Do you want these files to be removed for you now?'))
 
     def _response(self, dialog, response):
         if response == gtk.RESPONSE_YES:
@@ -30,7 +35,7 @@ class _CleanerDialog(gtk.MessageDialog):
                     else:
                         os.remove(path)
                 except Exception:
-                    print '! Could not remove', path
+                    print('! Could not remove {}'.format(path))
         self.destroy()
 
 
@@ -49,7 +54,7 @@ def move_files_to_xdg_dirs():
                 os.path.join(new_dir, name)):
             try:
                 os.rename(os.path.join(old_dir, name),
-                    os.path.join(new_dir, name))
+                          os.path.join(new_dir, name))
             except Exception:
                 pass
 

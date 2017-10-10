@@ -1,27 +1,33 @@
+# coding=utf-8
 """filehandler.py - File handler."""
+from __future__ import absolute_import
 
-import os
-import sys
-import shutil
-import locale
-import tempfile
 import gc
-import shutil
-import threading
+import os
 import re
+import shutil
+import sys
+import tempfile
+import threading
 
 import gtk
 
-import archive
-import cursor
-import encoding
-import image
-from preferences import prefs
-import thumbnail
-from image import get_supported_format_extensions_preg
+from src import archive
+from src import cursor
+from src import encoding
+from src import image
+from src import thumbnail
+from src.image import get_supported_format_extensions_preg
+from src.preferences import prefs
 
-class FileHandler:
+# Compatibility
+try:
+    range = xrange  # Python2
+except NameError:
+    pass
 
+
+class FileHandler(object):
     """The FileHandler keeps track of images, pages, caches and reads files.
 
     When the Filehandler's methods refer to pages, they are indexed from 1,
@@ -48,7 +54,7 @@ class FileHandler:
         self._extractor = archive.Extractor()
         self._condition = None
 
-        self._image_re = re.compile('\.('+'|'.join(get_supported_format_extensions_preg())+')\s*$', re.I)
+        self._image_re = re.compile('\.(' + '|'.join(get_supported_format_extensions_preg()) + ')\s*$', re.I)
 
         self.update_comment_extensions()
 
@@ -65,7 +71,7 @@ class FileHandler:
                 PixbufAnimation and make sure that it actually is animated. 
                 If it isn't animated, load a pixbuf instead.  """
                 if not (prefs['animate gifs'] or prefs['animate']) \
-                    or "gif" not in self._image_files[index][-3:].lower():
+                        or "gif" not in self._image_files[index][-3:].lower():
                     self._raw_pixbufs[index] = gtk.gdk.pixbuf_new_from_file(self._image_files[index])
                 else:
                     self._raw_pixbufs[index] = gtk.gdk.PixbufAnimation(self._image_files[index])
@@ -76,8 +82,8 @@ class FileHandler:
 
             if pxb_err:
                 try:
-                    im = image.Image.open( self._image_files[index] )
-                    self._raw_pixbufs[index] = image.pil_to_pixbuf( im )
+                    im = image.Image.open(self._image_files[index])
+                    self._raw_pixbufs[index] = image.pil_to_pixbuf(im)
                 except Exception:
                     self._raw_pixbufs[index] = self._get_missing_image()
         return self._raw_pixbufs[index]
@@ -133,8 +139,7 @@ class FileHandler:
         old_page = self.get_current_page()
         viewed = self._window.displayed_double() and 2 or 1
         if self.get_current_page() + viewed > self.get_number_of_pages():
-            if (prefs['auto open next archive'] and
-              self.archive_type is not None):
+            if prefs['auto open next archive'] and self.archive_type is not None:
                 self._open_next_archive()
             return False
         self._current_image_index += self._get_forward_step_length()
@@ -147,15 +152,14 @@ class FileHandler:
         if not self.file_loaded and not self._base_path:
             return False
         if self.get_current_page() == 1:
-            if (prefs['auto open next archive'] and
-              self.archive_type is not None):
+            if prefs['auto open next archive'] and self.archive_type is not None:
                 self._open_previous_archive()
             return False
         old_page = self.get_current_page()
         step = self._get_backward_step_length()
         step = min(self._current_image_index, step)
         self._current_image_index -= step
-        if (step == 2 and self.get_virtual_double_page()):
+        if step == 2 and self.get_virtual_double_page():
             self._current_image_index += 1
         return old_page != self.get_current_page()
 
@@ -179,7 +183,7 @@ class FileHandler:
         offset = self._window.is_double_page and 2 or 1
         offset = min(self.get_number_of_pages(), offset)
         self._current_image_index = self.get_number_of_pages() - offset
-        if (offset == 2 and self.get_virtual_double_page()):
+        if offset == 2 and self.get_virtual_double_page():
             self._current_image_index += 1
         return old_page != self.get_current_page()
 
@@ -199,9 +203,8 @@ class FileHandler:
         preference is set, and one of the two images that should normally
         be displayed has a width that exceeds its height).
         """
-        if (not self._window.is_double_page or
-          not prefs['no double page for wide images'] or
-          self.get_current_page() == self.get_number_of_pages()):
+        if not self._window.is_double_page or not prefs[
+            'no double page for wide images'] or self.get_current_page() == self.get_number_of_pages():
             return False
 
         page1 = self._get_pixbuf(self._current_image_index)
@@ -227,7 +230,7 @@ class FileHandler:
         # (bad idea if it's permanently hidden; but no better way nearby)
         if not os.access(path, os.R_OK):
             self._window.statusbar.set_message(
-                _('Could not open %s: Permission denied.') % path)
+                    _('Could not open %s: Permission denied.') % path)
             return False
         if os.path.isdir(path):
             dir_path = path  # handle it as a directory later.
@@ -235,13 +238,13 @@ class FileHandler:
             # getting 'unknown type'.
         elif not os.path.isfile(path):  # ...not dir or normal file.
             self._window.statusbar.set_message(
-                _('Could not open %s: No such file.') % path)
+                    _('Could not open %s: No such file.') % path)
             return False
         self.archive_type = archive.archive_mime_type(path)
         if self.archive_type is None and not is_image_file(path) and \
-          not dir_path:
+                not dir_path:
             self._window.statusbar.set_message(
-                _('Could not open %s: Unknown file type.') % path)
+                    _('Could not open %s: Unknown file type.') % path)
             return False
 
         # We close the previously opened file.
@@ -310,11 +313,11 @@ class FileHandler:
                 self._image_files = []
                 tmpdir_len = len(self._tmp_dir)
                 extracted_files = []
-                for file in get_next_file(self._tmp_dir):
-                    dst = file[tmpdir_len:].replace("/", "_")
+                for filename in get_next_file(self._tmp_dir):
+                    dst = filename[tmpdir_len:].replace("/", "_")
                     extracted_files.append(dst)
                     dst = self._tmp_dir + dst
-                    shutil.move(file, dst)
+                    shutil.move(filename, dst)
                     self._image_files.append(dst)
                 self._comment_files = \
                     filter(self._comment_re.search, self._image_files)
@@ -325,12 +328,12 @@ class FileHandler:
                 for full_path in self._image_files + self._comment_files:
                     self._name_table[full_path] = os.path.basename(full_path)
                 self._extractor.set_files(extracted_files, True)
-                #redo calculation of current_index from start_page
+                # redo calculation of current_index from start_page
                 self._redo_priority_ordering(start_page, self._image_files)
 
         if not self._image_files:
             self._window.statusbar.set_message(_("No images or subarchives in '%s'") %
-                os.path.basename(path))
+                                               os.path.basename(path))
             self.file_loaded = False
         else:
             self.file_loaded = True
@@ -341,7 +344,7 @@ class FileHandler:
         self._window.new_page()
         self._window.ui_manager.recent.add(path)
 
-    def _redo_priority_ordering(self, start_page, list):
+    def _redo_priority_ordering(self, start_page, lst):
         if start_page <= 0:
             if self._window.is_double_page:
                 self._current_image_index = self.get_number_of_pages() - 2
@@ -354,19 +357,19 @@ class FileHandler:
         depth = self._window.is_double_page and 2 or 1
         priority_ordering = (
             range(self._current_image_index,
-                self._current_image_index + depth * 2) +
+                  self._current_image_index + depth * 2) +
             range(self._current_image_index - depth,
-                self._current_image_index)[::-1])
-        priority_ordering = [list[p] for p in priority_ordering
-            if 0 <= p <= self.get_number_of_pages() - 1]
+                  self._current_image_index)[::-1])
+        priority_ordering = [lst[p] for p in priority_ordering
+                             if 0 <= p <= self.get_number_of_pages() - 1]
         for i, name in enumerate(priority_ordering):
-            list.remove(name)
-            list.insert(i, name)
+            lst.remove(name)
+            lst.insert(i, name)
 
-    def _open_subarchive(self, dir, path):
+    def _open_subarchive(self, dir_name, path):
         """Allows to recursively extract all subarchives"""
         extractor = archive.Extractor()
-        condition = extractor.setup(dir + "/" + path, dir)
+        condition = extractor.setup(dir_name + "/" + path, dir_name)
         sub_files = extractor.get_files()
         alphanumeric_sort(sub_files)
         extractor.set_files(sub_files)
@@ -376,10 +379,10 @@ class FileHandler:
             while not extractor.is_ready(name):
                 condition.wait()
             condition.release()
-            name = dir + "/" + name
+            name = dir_name + "/" + name
             if archive.archive_mime_type(name) is not None:
                 self._open_subarchive(os.path.dirname(name), os.path.basename(name))
-        os.remove(dir + "/" + path)
+        os.remove(dir_name + "/" + path)
 
     def close_file(self, *args):
         """Run tasks for "closing" the currently opened file(s)."""
@@ -496,7 +499,7 @@ class FileHandler:
             name = os.path.basename(self._base_path)
         else:
             name = os.path.join(os.path.basename(self._base_path),
-                os.path.basename(self._image_files[self._current_image_index]))
+                                os.path.basename(self._image_files[self._current_image_index]))
         return encoding.to_unicode(name)
 
     def get_size(self, page=None):
@@ -506,8 +509,8 @@ class FileHandler:
         self._wait_on_page(page)
         info = gtk.gdk.pixbuf_get_file_info(self.get_path_to_page(page))
         if info is not None:
-            return (info[1], info[2])
-        return (0, 0)
+            return info[1], info[2]
+        return 0, 0
 
     def get_mime_name(self, page=None):
         """Return a string with the name of the mime type of <page>. If
@@ -541,10 +544,10 @@ class FileHandler:
                     src_height = thumb.get_height()
                     if float(src_width) / width > float(src_height) / height:
                         thumb = thumb.scale_simple(width,
-                            int(max(src_height * width / src_width, 1)), gtk.gdk.INTERP_TILES)
+                                                   int(max(src_height * width / src_width, 1)), gtk.gdk.INTERP_TILES)
                     else:
                         thumb = thumb.scale_simple(int(max(src_width * height / src_height, 1)),
-                            height, gtk.gdk.INTERP_TILES)
+                                                   height, gtk.gdk.INTERP_TILES)
             except Exception:
                 thumb = None
         if thumb is None:
@@ -567,14 +570,14 @@ class FileHandler:
     def _get_forward_step_length(self):
         """Return the step length for switching pages forwards."""
         if (self._window.displayed_double() and
-          prefs['double step in double page mode']):
+                prefs['double step in double page mode']):
             return 2
         return 1
 
     def _get_backward_step_length(self):
         """Return the step length for switching pages backwards."""
         if (self._window.is_double_page and
-          prefs['double step in double page mode']):
+                prefs['double step in double page mode']):
             return 2
         return 1
 
@@ -613,7 +616,7 @@ class FileHandler:
     def _get_missing_image(self):
         """Return a pixbuf depicting a missing/broken image."""
         return self._window.render_icon(gtk.STOCK_MISSING_IMAGE,
-            gtk.ICON_SIZE_DIALOG)
+                                        gtk.ICON_SIZE_DIALOG)
 
     def _wait_on_page(self, page):
         """Block the running (main) thread until the file corresponding to
@@ -666,6 +669,7 @@ def alphanumeric_sort(filenames):
     such that for an example "1.jpg", "2.jpg", "10.jpg" is a sorted
     ordering.
     """
+
     def _format_substring(s):
         if s.isdigit():
             return int(s)
@@ -674,17 +678,19 @@ def alphanumeric_sort(filenames):
     rec = re.compile("\d+|\D+")
     filenames.sort(key=lambda s: map(_format_substring, rec.findall(s)))
 
-def list_dir_sorted(dir):
+
+def list_dir_sorted(dir_name):
     """ Helper for listing the directory contents with the preferred
     sorting.  """
-    files = os.listdir(dir)
+    files = os.listdir(dir_name)
     # files.sort(locale.strcoll)
     alphanumeric_sort(files)
     return files
 
+
 def get_next_file(dir_name):
     """Yields the next file in the whole file hierarchy
        with dir_name as the top"""
-    for (dir, dirs, files) in os.walk(dir_name):
-        for file in files:
-            yield dir + '/' + file
+    for (a_dir, dirs, files) in os.walk(dir_name):
+        for filename in files:
+            yield a_dir + '/' + filename

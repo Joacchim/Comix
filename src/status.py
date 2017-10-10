@@ -1,8 +1,10 @@
+# coding=utf-8
 """status.py - Statusbar for main window."""
+from __future__ import absolute_import
 
 import gtk
 
-import encoding
+from src import encoding
 
 
 class Statusbar(gtk.Statusbar):
@@ -40,7 +42,6 @@ class Statusbar(gtk.Statusbar):
         if right_dimensions is not None:
             self._resolution += ', %dx%d (%.1f%%)' % right_dimensions
 
-
     def set_root(self, root):
         """Set the name of the root (directory or archive)."""
         self._root = encoding.to_unicode(root)
@@ -53,4 +54,4 @@ class Statusbar(gtk.Statusbar):
         """Set the statusbar to display the current state."""
         self.pop(0)
         self.push(0, ' %s      |      %s      |      %s      |      %s' %
-            (self._page_info, self._resolution, self._root, self._filename))
+                  (self._page_info, self._resolution, self._root, self._filename))

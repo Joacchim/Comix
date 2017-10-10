@@ -1,31 +1,24 @@
+# coding=utf-8
 """thumbnail.py - Thumbnail module for Comix implementing (most of) the
 freedesktop.org "standard" at http://jens.triq.net/thumbnail-spec/
 
 Only normal size (i.e. 128x128 px) thumbnails are supported.
 """
+from __future__ import absolute_import
 
 import os
-from urllib import pathname2url, url2pathname
-try: # The md5 module is deprecated as of Python 2.5, replaced by hashlib.
-    from hashlib import md5
-except ImportError:
-    from md5 import new as md5
 import re
 import shutil
 import tempfile
+from hashlib import md5
+from urllib import pathname2url
 
 import gtk
+from PIL import Image
 
-try:
-    from PIL import Image
-except:
-    import Image
-
-import archive
-import constants
-import filehandler
-
-from image import get_supported_format_extensions_preg
+from src import archive
+from src import constants
+from src.image import get_supported_format_extensions_preg, pil_to_pixbuf
 
 _thumbdir = os.path.join(constants.HOME_DIR, '.thumbnails/normal')
 
@@ -153,22 +146,22 @@ def _create_thumbnail(path, dst_dir, image_path=None):
     width = str(width)
     height = str(height)
     tEXt_data = {
-        'tEXt::Thumb::URI':           uri,
-        'tEXt::Thumb::MTime':         mtime,
-        'tEXt::Thumb::Size':          size,
-        'tEXt::Thumb::Mimetype':      mime,
-        'tEXt::Thumb::Image::Width':  width,
+        'tEXt::Thumb::URI': uri,
+        'tEXt::Thumb::MTime': mtime,
+        'tEXt::Thumb::Size': size,
+        'tEXt::Thumb::Mimetype': mime,
+        'tEXt::Thumb::Image::Width': width,
         'tEXt::Thumb::Image::Height': height,
-        'tEXt::Software':             'Comix %s' % constants.VERSION
+        'tEXt::Software': 'Comix %s' % constants.VERSION
     }
     try:
         if not os.path.isdir(dst_dir):
-            os.makedirs(dst_dir, 0700)
+            os.makedirs(dst_dir, 0o700)
         pixbuf.save(thumbpath + '-comixtemp', 'png', tEXt_data)
         os.rename(thumbpath + '-comixtemp', thumbpath)
-        os.chmod(thumbpath, 0600)
+        os.chmod(thumbpath, 0o600)
     except Exception:
-        print '! thumbnail.py: Could not write', thumbpath, '\n'
+        print('! thumbnail.py: Could not write {}\n'.format(thumbpath))
     return pixbuf
 
 
@@ -210,7 +203,7 @@ def _get_pixbuf128(path):
             im.resize(128, int(max(height * 128 / width, 1)))
         else:
             im.resize(int(max(width * 128 / height, 1)), 128)
-        return image.pil_to_pixbuf(im)
+        return pil_to_pixbuf(im)
     except:
         return None
 
@@ -219,9 +212,11 @@ def _guess_cover(files):
     """Return the filename within <files> that is the most likely to be the
     cover of an archive using some simple heuristics.
     """
-    filehandler.alphanumeric_sort(files)
+    from src.filehandler import alphanumeric_sort
 
-    ext_re = re.compile('\.('+'|'.join(get_supported_format_extensions_preg())+')\s*$', re.I)
+    alphanumeric_sort(files)
+
+    ext_re = re.compile('\.(' + '|'.join(get_supported_format_extensions_preg()) + ')\s*$', re.I)
 
     front_re = re.compile('(cover|front)', re.I)
     images = filter(ext_re.search, files)

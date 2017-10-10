@@ -1,4 +1,6 @@
+# coding=utf-8
 """Portability functions for Comix."""
+from __future__ import absolute_import
 
 import os
 import sys
@@ -27,7 +29,7 @@ def get_config_directory():
         return get_home_directory()
     else:
         base_path = os.getenv('XDG_CONFIG_HOME',
-            os.path.join(get_home_directory(), '.config'))
+                              os.path.join(get_home_directory(), '.config'))
         return os.path.join(base_path, 'comix')
 
 
@@ -43,5 +45,5 @@ def get_data_directory():
         return get_home_directory()
     else:
         base_path = os.getenv('XDG_DATA_HOME',
-            os.path.join(get_home_directory(), '.local/share'))
+                              os.path.join(get_home_directory(), '.local/share'))
         return os.path.join(base_path, 'comix')

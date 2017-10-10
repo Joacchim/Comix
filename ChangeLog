@@ -155,10 +155,10 @@ Comix 3.6.4
     - Added a Russian translation by Artyom Smirnov.
     
     - Added a Croatian translation by Adrian C.
-    	
+
     - Fixed a bug in the thumbnailer, comicthumb, failing to create thumbnails
     for Zip and tar archives.
-    	    
+
     - Some minor changes.
 
 
@@ -322,7 +322,7 @@ Comix 3.4
 Comix 3.3
 
     - Added a slideshow feature.
-    	
+
     - Added RGB colour histogram to the properties dialog. More data will be
     added in future versions.
     

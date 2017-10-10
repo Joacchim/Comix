@@ -1,19 +1,14 @@
+# coding=utf-8
 """image.py - Various image manipulations."""
+from __future__ import absolute_import
 
 import gtk
+from PIL import Image
+from PIL import ImageEnhance
+from PIL import ImageOps
 
-try:
-    from PIL import Image
-    from PIL import ImageEnhance
-    from PIL import ImageOps
-    from PIL import ImageStat
-except:
-    import Image
-    import ImageEnhance
-    import ImageOps
-    import ImageStat
+from src.preferences import prefs
 
-from preferences import prefs
 
 def get_supported_format_extensions_preg():
     """
@@ -46,7 +41,7 @@ def get_supported_format_extensions_preg():
 
 
 def fit_in_rectangle(src, width, height, scale_up=False, rotation=0,
-  animated=False):
+                     animated=False):
     """Scale (and return) a pixbuf so that it fits in a rectangle with
     dimensions <width> x <height>. A negative <width> or <height>
     means an unbounded dimension - both cannot be negative.
@@ -62,7 +57,7 @@ def fit_in_rectangle(src, width, height, scale_up=False, rotation=0,
     If <src> is an <animated> image (PixbufAnimation) it will be returned
     unchanged. There is no way to resize PixbufAnimation objects currently.
     """
-# TODO: Fix the animated stuff. Eventually PixbufAnimation resizing should be  possible.
+    # TODO: Fix the animated stuff. Eventually PixbufAnimation resizing should be  possible.
     if animated:
         return src
     # "Unbounded" really means "bounded to 10000 px" - for simplicity.
@@ -84,10 +79,10 @@ def fit_in_rectangle(src, width, height, scale_up=False, rotation=0,
         if src.get_has_alpha():
             if prefs['checkered bg for transparent images']:
                 src = src.composite_color_simple(src_width, src_height,
-                    gtk.gdk.INTERP_TILES, 255, 8, 0x777777, 0x999999)
+                                                 gtk.gdk.INTERP_TILES, 255, 8, 0x777777, 0x999999)
             else:
                 src = src.composite_color_simple(src_width, src_height,
-                    gtk.gdk.INTERP_TILES, 255, 1024, 0xFFFFFF, 0xFFFFFF)
+                                                 gtk.gdk.INTERP_TILES, 255, 1024, 0xFFFFFF, 0xFFFFFF)
     else:
         if float(src_width) / width > float(src_height) / height:
             height = int(max(src_height * width / src_width, 1))
@@ -97,10 +92,10 @@ def fit_in_rectangle(src, width, height, scale_up=False, rotation=0,
         if src.get_has_alpha():
             if prefs['checkered bg for transparent images']:
                 src = src.composite_color_simple(width, height,
-                    gtk.gdk.INTERP_TILES, 255, 8, 0x777777, 0x999999)
+                                                 gtk.gdk.INTERP_TILES, 255, 8, 0x777777, 0x999999)
             else:
                 src = src.composite_color_simple(width, height,
-                    gtk.gdk.INTERP_TILES, 255, 1024, 0xFFFFFF, 0xFFFFFF)
+                                                 gtk.gdk.INTERP_TILES, 255, 1024, 0xFFFFFF, 0xFFFFFF)
         else:
             src = src.scale_simple(width, height, gtk.gdk.INTERP_TILES)
 
@@ -114,7 +109,7 @@ def fit_in_rectangle(src, width, height, scale_up=False, rotation=0,
 
 
 def fit_2_in_rectangle(src1, src2, width, height, scale_up=False,
-  rotation1=0, rotation2=0, animated1=False, animated2=False):
+                       rotation1=0, rotation2=0, animated1=False, animated2=False):
     """Scale two pixbufs so that they fit together (side-by-side) into a
     rectangle with dimensions <width> x <height>, with a 2 px gap.
     If one pixbuf does not use all of its allotted space, the other one
@@ -138,15 +133,15 @@ def fit_2_in_rectangle(src1, src2, width, height, scale_up=False,
     elif height < 0:
         height = 10000
 
-    width -= 2              # We got a 2 px gap between images
-    width = max(width, 2)   # We need at least 1 px per image
+    width -= 2  # We got a 2 px gap between images
+    width = max(width, 2)  # We need at least 1 px per image
     height = max(height, 1)
 
     src1_width = src1.get_width()
     src1_height = src1.get_height()
     src2_width = src2.get_width()
     src2_height = src2.get_height()
-# TODO: Fix the animated stuff. Eventually PixbufAnimation resizing should be  possible.
+    # TODO: Fix the animated stuff. Eventually PixbufAnimation resizing should be  possible.
     if not animated1 and rotation1 in (90, 270):
         src1_width, src1_height = src1_height, src1_width
     if not animated2 and rotation2 in (90, 270):
@@ -157,12 +152,12 @@ def fit_2_in_rectangle(src1, src2, width, height, scale_up=False,
     alloc_width_src2 = max(src2_width * width / total_width, 1)
     if not animated1:
         needed_width_src1 = round(src1_width *
-            min(height / float(src1_height), alloc_width_src1 / float(src1_width)))
+                                  min(height / float(src1_height), alloc_width_src1 / float(src1_width)))
     else:
         needed_width_src1 = src1_width
     if not animated2:
         needed_width_src2 = round(src2_width *
-            min(height / float(src2_height), alloc_width_src2 / float(src2_width)))
+                                  min(height / float(src2_height), alloc_width_src2 / float(src2_width)))
     else:
         needed_width_src2 = src2_width
     if needed_width_src1 < alloc_width_src1:
@@ -181,11 +176,11 @@ def add_border(pixbuf, thickness, colour=0x000000FF):
     <colour> added.
     """
     canvas = gtk.gdk.Pixbuf(gtk.gdk.COLORSPACE_RGB, True, 8,
-        pixbuf.get_width() + thickness * 2,
-        pixbuf.get_height() + thickness * 2)
+                            pixbuf.get_width() + thickness * 2,
+                            pixbuf.get_height() + thickness * 2)
     canvas.fill(colour)
     pixbuf.copy_area(0, 0, pixbuf.get_width(), pixbuf.get_height(),
-        canvas, thickness, thickness)
+                     canvas, thickness, thickness)
     return canvas
 
 
@@ -217,7 +212,7 @@ def get_most_common_edge_colour(pixbuf):
             colour_count[colour] = colour_count.setdefault(colour, 0) + count
     max_count = 0
     most_common_colour = None
-    for colour, count in colour_count.iteritems():
+    for colour, count in colour_count.items():
         if count > max_count:
             max_count = count
             most_common_colour = colour
@@ -236,8 +231,8 @@ def pil_to_pixbuf(image):
     else:
         raise ValueError("Image object not PIL object? Or not compatible!")
     return gtk.gdk.pixbuf_new_from_data(imagestr, gtk.gdk.COLORSPACE_RGB,
-        IS_RGBA, 8, image.size[0], image.size[1],
-        (IS_RGBA and 4 or 3) * image.size[0])
+                                        IS_RGBA, 8, image.size[0], image.size[1],
+                                        (IS_RGBA and 4 or 3) * image.size[0])
 
 
 def pixbuf_to_pil(pixbuf):
@@ -250,7 +245,7 @@ def pixbuf_to_pil(pixbuf):
 
 
 def enhance(pixbuf, brightness=1.0, contrast=1.0, saturation=1.0,
-  sharpness=1.0, autocontrast=False):
+            sharpness=1.0, autocontrast=False):
     """Return a modified pixbuf from <pixbuf> where the enhancement operations
     corresponding to each argument has been performed. A value of 1.0 means
     no change. If <autocontrast> is True it overrides the <contrast> value,
@@ -277,7 +272,8 @@ def get_implied_rotation(pixbuf):
 
     The implied rotation is the angle (in degrees) that the raw pixbuf should
     be rotated in order to be displayed "correctly". E.g. a photograph taken
-    by a camera that is held sideways might store this fact in its EXIF data,       and the pixbuf loader will set the orientation option correspondingly.
+    by a camera that is held sideways might store this fact in its EXIF data,
+    and the pixbuf loader will set the orientation option correspondingly.
     """
     if isinstance(pixbuf, gtk.gdk.PixbufAnimation):
         pixbuf = pixbuf.get_static_image()

@@ -1,16 +1,17 @@
+# coding=utf-8
 """lens.py - Magnifying glass."""
+from __future__ import absolute_import
 
 import math
 
 import gtk
 
-import cursor
-from preferences import prefs
-import image
+from src import cursor
+from src import image
+from src.preferences import prefs
 
 
-class MagnifyingGlass:
-
+class MagnifyingGlass(object):
     """The MagnifyingGlass creates cursors from the raw pixbufs containing
     the unscaled data for the currently displayed images. It does this by
     looking at the cursor position and calculating what image data to put
@@ -33,7 +34,7 @@ class MagnifyingGlass:
             return
         pixbuf = self._get_lens_pixbuf(x, y)
         cursor = gtk.gdk.Cursor(gtk.gdk.display_get_default(), pixbuf,
-            prefs['lens size'] // 2, prefs['lens size'] // 2)
+                                prefs['lens size'] // 2, prefs['lens size'] // 2)
         self._window.cursor_handler.set_cursor_type(cursor)
 
     def toggle(self, action):
@@ -49,7 +50,7 @@ class MagnifyingGlass:
         where <x> and <y> are the positions of the cursor.
         """
         canvas = gtk.gdk.Pixbuf(gtk.gdk.COLORSPACE_RGB, True, 8,
-            prefs['lens size'], prefs['lens size'])
+                                prefs['lens size'], prefs['lens size'])
         canvas.fill(0x000000bb)
         if self._window.displayed_double():
             if self._window.is_manga_mode:
@@ -61,9 +62,9 @@ class MagnifyingGlass:
             l_image_size = self._window.left_image.size_request()
             r_image_size = self._window.right_image.size_request()
             self._add_subpixbuf(canvas, x, y, l_image_size, l_source_pixbuf,
-                r_image_size[0], left=True)
+                                r_image_size[0], left=True)
             self._add_subpixbuf(canvas, x, y, r_image_size, r_source_pixbuf,
-                l_image_size[0], left=False)
+                                l_image_size[0], left=False)
         else:
             source_pixbuf = self._window.file_handler.get_pixbufs()
             image_size = self._window.left_image.size_request()
@@ -71,7 +72,7 @@ class MagnifyingGlass:
         return image.add_border(canvas, 1)
 
     def _add_subpixbuf(self, canvas, x, y, image_size, source_pixbuf,
-        other_image_width=0, left=True):
+                       other_image_width=0, left=True):
         """Copy a subpixbuf from <source_pixbuf> to <canvas> as it should
         be in the lens if the coordinates <x>, <y> are the mouse pointer
         position on the main window layout area.
@@ -88,11 +89,11 @@ class MagnifyingGlass:
         area_x, area_y = self._window.get_visible_area_size()
         if left:
             padding_x = max(0,
-                (area_x - other_image_width - image_size[0]) // 2)
+                            (area_x - other_image_width - image_size[0]) // 2)
         else:
             padding_x = \
                 (max(0, (area_x - other_image_width - image_size[0]) // 2) +
-                other_image_width + 2)
+                 other_image_width + 2)
         padding_y = max(0, (area_y - image_size[1]) // 2)
         x -= padding_x
         y -= padding_y
@@ -147,21 +148,21 @@ class MagnifyingGlass:
             return
 
         subpixbuf = source_pixbuf.subpixbuf(int(src_x), int(src_y),
-            int(width), int(height))
+                                            int(width), int(height))
         subpixbuf = subpixbuf.scale_simple(
-            int(math.ceil(source_mag * subpixbuf.get_width())),
-            int(math.ceil(source_mag * subpixbuf.get_height())),
-            gtk.gdk.INTERP_TILES)
+                int(math.ceil(source_mag * subpixbuf.get_width())),
+                int(math.ceil(source_mag * subpixbuf.get_height())),
+                gtk.gdk.INTERP_TILES)
 
         if rotation == 90:
             subpixbuf = subpixbuf.rotate_simple(
-                gtk.gdk.PIXBUF_ROTATE_CLOCKWISE)
+                    gtk.gdk.PIXBUF_ROTATE_CLOCKWISE)
         elif rotation == 180:
             subpixbuf = subpixbuf.rotate_simple(
-                gtk.gdk.PIXBUF_ROTATE_UPSIDEDOWN)
+                    gtk.gdk.PIXBUF_ROTATE_UPSIDEDOWN)
         elif rotation == 270:
             subpixbuf = subpixbuf.rotate_simple(
-                gtk.gdk.PIXBUF_ROTATE_COUNTERCLOCKWISE)
+                    gtk.gdk.PIXBUF_ROTATE_COUNTERCLOCKWISE)
         if prefs['horizontal flip']:
             subpixbuf = subpixbuf.flip(horizontal=True)
         if prefs['vertical flip']:
@@ -176,4 +177,4 @@ class MagnifyingGlass:
             dest_y = min(canvas.get_height() - subpixbuf.get_height(), dest_y)
 
         subpixbuf.copy_area(0, 0, subpixbuf.get_width(),
-            subpixbuf.get_height(), canvas, dest_x, dest_y)
+                            subpixbuf.get_height(), canvas, dest_x, dest_y)

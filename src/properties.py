@@ -1,27 +1,28 @@
+# coding=utf-8
 """properties.py - Properties dialog."""
+from __future__ import absolute_import
 
 import os
-import time
 import stat
+import time
+
+import gtk
+
+from src import archive
+from src import encoding
+from src import image
+from src import labels
+
 try:
     import pwd
 except ImportError:
     # Running on non-Unix machine.
     pass
 
-import gtk
-import pango
-
-import archive
-import encoding
-import image
-import labels
-
 _dialog = None
 
 
 class _Page(gtk.VBox):
-
     """A page to put in the gtk.Notebook. Contains info about a file (an
     image or an archive.)
     """
@@ -57,7 +58,7 @@ class _Page(gtk.VBox):
         label = labels.BoldLabel(encoding.to_unicode(filename))
         label.set_alignment(0, 0.5)
         self._mainbox.pack_start(label, False, False)
-        self._mainbox.pack_start(gtk.VBox()) # Just to add space (better way?)
+        self._mainbox.pack_start(gtk.VBox())  # Just to add space (better way?)
 
     def set_main_info(self, info):
         """Set the information in the main info box (below the filename) to
@@ -92,7 +93,7 @@ class _PropertiesDialog(gtk.Dialog):
     def __init__(self, window):
 
         gtk.Dialog.__init__(self, _('Properties'), window, 0,
-            (gtk.STOCK_CLOSE, gtk.RESPONSE_CLOSE))
+                            (gtk.STOCK_CLOSE, gtk.RESPONSE_CLOSE))
 
         self.set_resizable(False)
         self.set_has_separator(False)
@@ -117,7 +118,7 @@ class _PropertiesDialog(gtk.Dialog):
                 main_info = (
                     _('%d pages') % window.file_handler.get_number_of_pages(),
                     _('%d comments') %
-                        window.file_handler.get_number_of_comments(),
+                    window.file_handler.get_number_of_comments(),
                     archive.get_name(window.file_handler.archive_type),
                     '%.1f MiB' % (stats.st_size / 1048576.0))
                 page.set_main_info(main_info)
@@ -127,11 +128,11 @@ class _PropertiesDialog(gtk.Dialog):
                     uid = str(stats.st_uid)
                 secondary_info = (
                     (_('Location'), encoding.to_unicode(os.path.dirname(
-                    window.file_handler.get_path_to_base()))),
+                            window.file_handler.get_path_to_base()))),
                     (_('Accessed'), time.strftime('%Y-%m-%d, %H:%M:%S',
-                    time.localtime(stats.st_atime))),
+                                                  time.localtime(stats.st_atime))),
                     (_('Modified'), time.strftime('%Y-%m-%d, %H:%M:%S',
-                    time.localtime(stats.st_mtime))),
+                                                  time.localtime(stats.st_mtime))),
                     (_('Permissions'), oct(stat.S_IMODE(stats.st_mode))),
                     (_('Owner'), uid))
                 page.set_secondary_info(secondary_info)
@@ -163,9 +164,9 @@ class _PropertiesDialog(gtk.Dialog):
             secondary_info = (
                 (_('Location'), encoding.to_unicode(os.path.dirname(path))),
                 (_('Accessed'), time.strftime('%Y-%m-%d, %H:%M:%S',
-                time.localtime(stats.st_atime))),
+                                              time.localtime(stats.st_atime))),
                 (_('Modified'), time.strftime('%Y-%m-%d, %H:%M:%S',
-                time.localtime(stats.st_mtime))),
+                                              time.localtime(stats.st_mtime))),
                 (_('Permissions'), oct(stat.S_IMODE(stats.st_mode))),
                 (_('Owner'), uid))
             page.set_secondary_info(secondary_info)

@@ -1,4 +1,5 @@
 #!/usr/bin/env python
+# coding=utf-8
 
 """comicthumb - Thumbnailer for comic book archives, bundled with Comix.
 
@@ -13,25 +14,19 @@ Supported formats: ZIP, RAR, 7Z, mobi and tar (.cbz, .cbr, .cb7, .cbt)
 
 Usage: comicthumb INFILE OUTFILE [SIZE]
 """
+from __future__ import absolute_import
 
 import sys
 
 try:
     from PIL import Image
 except ImportError:
-    Image = None
+    print('! Could not import the Image module (PIL).')
+    print(__doc__)
+    sys.exit(1)
 
-if Image is None:
-    try:
-        import Image
-    except ImportError:
-        print '! Could not import the Image module (PIL).'
-        print __doc__
-        sys.exit(1)
-
-
-from archive import Extractor
-from thumbnail import _guess_cover as guess_cover
+from src.archive import Extractor
+from src.thumbnail import _guess_cover as guess_cover
 
 if __name__ == '__main__':
     try:
@@ -42,7 +37,7 @@ if __name__ == '__main__':
         else:
             size = 128
     except:
-        print __doc__
+        print(__doc__)
         sys.exit(1)
     extractor = Extractor()
     extractor.setup(in_path, None)

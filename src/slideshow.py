@@ -1,12 +1,13 @@
+# coding=utf-8
 """slideshow.py - Slideshow handler."""
+from __future__ import absolute_import
 
 import gobject
 
-from preferences import prefs
+from src.preferences import prefs
 
 
-class Slideshow:
-
+class Slideshow(object):
     """Slideshow handler that manages starting and stopping of slideshows."""
 
     def __init__(self, window):

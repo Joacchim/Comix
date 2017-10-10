@@ -1,4 +1,6 @@
+# coding=utf-8
 """cursor.py - Cursor handler."""
+from __future__ import absolute_import
 
 import gobject
 import gtk
@@ -6,8 +8,7 @@ import gtk
 NORMAL, GRAB, WAIT = range(3)
 
 
-class CursorHandler:
-
+class CursorHandler(object):
     def __init__(self, window):
         self._window = window
         self._timer_id = None
@@ -60,7 +61,7 @@ class CursorHandler:
     def _set_hide_timer(self):
         self._kill_timer()
         self._timer_id = gobject.timeout_add(2000, self._window.set_cursor,
-            self._get_hidden_cursor())
+                                             self._get_hidden_cursor())
 
     def _kill_timer(self):
         if self._timer_id is not None:

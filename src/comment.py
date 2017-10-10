@@ -1,20 +1,27 @@
+# coding=utf-8
 """comment.py - Comments dialog."""
+from __future__ import absolute_import
 
 import os
 
 import gtk
-import pango
 
-import encoding
+from src import encoding
 
 _dialog = None
+
+# Compatibility
+try:
+    range = xrange  # Python2
+except NameError:
+    pass
 
 
 class _CommentsDialog(gtk.Dialog):
 
     def __init__(self, window):
         gtk.Dialog.__init__(self, _('Comments'), window, 0,
-            (gtk.STOCK_CLOSE, gtk.RESPONSE_CLOSE))
+                            (gtk.STOCK_CLOSE, gtk.RESPONSE_CLOSE))
         self.set_has_separator(False)
         self.set_resizable(True)
         self.connect('response', _close_dialog)
@@ -36,7 +43,7 @@ class _CommentsDialog(gtk.Dialog):
         tag_table = gtk.TextTagTable()
         tag_table.add(tag)
 
-        for num in xrange(1, window.file_handler.get_number_of_comments() + 1):
+        for num in range(1, window.file_handler.get_number_of_comments() + 1):
             page = gtk.VBox(False)
             page.set_border_width(8)
             scrolled = gtk.ScrolledWindow()
