@@ -116,7 +116,7 @@ class _PropertiesDialog(gtk.Dialog):
             try:
                 stats = os.stat(window.file_handler.get_path_to_base())
                 main_info = (
-                    _('{:d} pages').format window.file_handler.get_number_of_pages(),
+                    _('{:d} pages').format(window.file_handler.get_number_of_pages()),
                     _('{:d} comments').format(window.file_handler.get_number_of_comments()),
                     archive.get_name(window.file_handler.archive_type),
                     '{:.1f} MiB'.format(stats.st_size / 1048576.0))
