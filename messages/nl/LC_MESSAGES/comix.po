@@ -281,7 +281,7 @@ msgstr "Commentaar"
 # File: src/comment.py, line: 53
 #: src/comment.py:53
 #, python-format
-msgid "Could not read %s"
+msgid "Could not read {}"
 msgstr ""
 
 #
@@ -461,7 +461,7 @@ msgstr ""
 # File: src/filechooser.py, line: 125
 #: src/filechooser.py:139
 #, python-format
-msgid "A file named '%s' already exists. Do you want to replace it?"
+msgid "A file named '{}' already exists. Do you want to replace it?"
 msgstr ""
 
 #
@@ -501,35 +501,35 @@ msgstr ""
 # File: src/filehandler.py, line: 209
 #: src/filehandler.py:209
 #, python-format
-msgid "Could not open %s: Is a directory."
+msgid "Could not open {}: Is a directory."
 msgstr ""
 
 #
 # File: src/filehandler.py, line: 213
 #: src/filehandler.py:213
 #, python-format
-msgid "Could not open %s: No such file."
+msgid "Could not open {}: No such file."
 msgstr ""
 
 #
 # File: src/filehandler.py, line: 217
 #: src/filehandler.py:217
 #, python-format
-msgid "Could not open %s: Permission denied."
+msgid "Could not open {}: Permission denied."
 msgstr ""
 
 #
 # File: src/filehandler.py, line: 222
 #: src/filehandler.py:222
 #, python-format
-msgid "Could not open %s: Unknown file type."
+msgid "Could not open {}: Unknown file type."
 msgstr ""
 
 #
 # File: src/filehandler.py, line: 285
 #: src/filehandler.py:285
 #, python-format
-msgid "No images in '%s'"
+msgid "No images in '{}'"
 msgstr ""
 
 #
@@ -605,7 +605,7 @@ msgstr ""
 # File: src/library.py, line: 271
 #: src/library.py:271
 #, python-format
-msgid "Could not change the name to '%s'."
+msgid "Could not change the name to '{}'."
 msgstr ""
 
 #
@@ -632,7 +632,7 @@ msgstr ""
 #: src/library.py:386
 #, python-format
 msgid ""
-"Put the collection '%(subcollection)s' in the collection '%(supercollection)"
+"Put the collection '{subcollection}' in the collection '{supercollection}"
 "s'."
 msgstr ""
 
@@ -640,7 +640,7 @@ msgstr ""
 # File: src/library.py, line: 407
 #: src/library.py:407
 #, python-format
-msgid "Add books to '%s'."
+msgid "Add books to '{}'."
 msgstr ""
 
 #
@@ -648,7 +648,7 @@ msgstr ""
 #: src/library.py:411
 #, python-format
 msgid ""
-"Move books from '%(source collection)s' to '%(destination collection)s'."
+"Move books from '{source collection}' to '{destination collection}'."
 msgstr ""
 
 #
@@ -667,7 +667,7 @@ msgstr ""
 # File: src/library.py, line: 588
 #: src/library.py:589
 #, python-format
-msgid "Removed %(num)d book(s) from '%(collection)s'."
+msgid "Removed {num} book(s) from '{collection}'."
 msgstr ""
 
 #
@@ -688,7 +688,7 @@ msgstr ""
 # File: src/library.py, line: 609
 #: src/library.py:610
 #, python-format
-msgid "Removed %d book(s) from the library."
+msgid "Removed {} book(s) from the library."
 msgstr ""
 
 #
@@ -746,7 +746,7 @@ msgstr ""
 # File: src/properties.py, line: 113
 #: src/library.py:833 src/properties.py:118
 #, python-format
-msgid "%d pages"
+msgid "{} pages"
 msgstr ""
 
 #
@@ -771,7 +771,7 @@ msgstr ""
 # File: src/library.py, line: 876
 #: src/library.py:877
 #, python-format
-msgid "Could not add a new collection called '%s'."
+msgid "Could not add a new collection called '{}'."
 msgstr ""
 
 #
@@ -790,7 +790,7 @@ msgstr ""
 # File: src/library.py, line: 952
 #: src/library.py:953
 #, python-format
-msgid "Adding '%s'..."
+msgid "Adding '{}'..."
 msgstr ""
 
 #
@@ -1217,7 +1217,7 @@ msgstr "Eigenschappen"
 # File: src/properties.py, line: 114
 #: src/properties.py:119
 #, python-format
-msgid "%d comments"
+msgid "{} comments"
 msgstr ""
 
 #
@@ -1349,7 +1349,7 @@ msgstr ""
 # File: src/thumbremover.py, line: 193
 #: src/thumbremover.py:195
 #, python-format
-msgid "Removed thumbnail for '%s'"
+msgid "Removed thumbnail for '{}'"
 msgstr ""
 
 #
@@ -1683,8 +1683,8 @@ msgid "Magnifying glass"
 msgstr ""
 
 #
-#~ msgid "No images in \"%s\""
-#~ msgstr "Geen afbeeldingen in \"%s\""
+#~ msgid "No images in \"{}\""
+#~ msgstr "Geen afbeeldingen in \"{}\""
 
 #
 #~ msgid "Default"
@@ -2087,12 +2087,12 @@ msgstr ""
 #~ msgstr "Bevestig actie"
 
 #
-#~ msgid "Permanently remove %s?"
-#~ msgstr "%s permanent verwijderen?"
+#~ msgid "Permanently remove {}?"
+#~ msgstr "{} permanent verwijderen?"
 
 #
-#~ msgid "Perform lossless JPEG operation on %s?"
-#~ msgstr "JPEG actie zonder kwaliteitsverlies toepassen op %s?"
+#~ msgid "Perform lossless JPEG operation on {}?"
+#~ msgstr "JPEG actie zonder kwaliteitsverlies toepassen op {}?"
 
 #
 #~ msgid "Some images might be trimmed a bit during the operation."
@@ -2101,8 +2101,8 @@ msgstr ""
 #~ "transformatie."
 
 #
-#~ msgid "Permanently convert %s to greyscale?"
-#~ msgstr "%s permanent naar grijswaarden omzetten?"
+#~ msgid "Permanently convert {} to greyscale?"
+#~ msgstr "{} permanent naar grijswaarden omzetten?"
 
 #
 #~ msgid "Location:"

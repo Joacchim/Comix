@@ -22,14 +22,14 @@ class Statusbar(gtk.Statusbar):
         replacing whatever was there earlier.
         """
         self.pop(0)
-        self.push(0, ' %s' % encoding.to_unicode(message))
+        self.push(0, u' {}'.format(encoding.to_unicode(message)))
 
     def set_page_number(self, page, total, double_page=False):
         """Update the page number."""
         if double_page:
-            self._page_info = '%d,%d / %d' % (page, page + 1, total)
+            self._page_info = '{:d},{:d} / {:d}'.format(page, page + 1, total)
         else:
-            self._page_info = '%d / %d' % (page, total)
+            self._page_info = '{:d} / {:d}'.format(page, total)
 
     def set_resolution(self, left_dimensions, right_dimensions=None):
         """Update the resolution data.
@@ -38,9 +38,9 @@ class Statusbar(gtk.Statusbar):
         resolution of an image as well as the currently displayed scale
         in percent.
         """
-        self._resolution = '%dx%d (%.1f%%)' % left_dimensions
+        self._resolution = '{:d}x{:d} ({:.1f}%)'.format(*left_dimensions)
         if right_dimensions is not None:
-            self._resolution += ', %dx%d (%.1f%%)' % right_dimensions
+            self._resolution += ', {:d}x{:d} ({:.1f}%)'.format(*right_dimensions)
 
     def set_root(self, root):
         """Set the name of the root (directory or archive)."""
@@ -53,5 +53,7 @@ class Statusbar(gtk.Statusbar):
     def update(self):
         """Set the statusbar to display the current state."""
         self.pop(0)
-        self.push(0, ' %s      |      %s      |      %s      |      %s' %
-                  (self._page_info, self._resolution, self._root, self._filename))
+        self.push(0, ' {}      |      {}      |      {}      |      {}'.format(self._page_info,
+                                                                               self._resolution,
+                                                                               self._root,
+                                                                               self._filename))

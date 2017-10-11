@@ -117,7 +117,7 @@ class _Bookmark(gtk.ImageMenuItem):
         self.connect('activate', self._load)
 
     def __str__(self):
-        return '%s, (%d / %d)' % (self._name, self._page, self._numpages)
+        return '{}, ({:d} / {:d})'.format(self._name, self._page, self._numpages)
 
     def _load(self, *args):
         """Open the file and page the bookmark represents."""
@@ -133,7 +133,7 @@ class _Bookmark(gtk.ImageMenuItem):
         """
         stock = self.get_image().get_stock()
         pixbuf = self.render_icon(*stock)
-        page = '%d / %d' % (self._page, self._numpages)
+        page = '{:d} / {:d}'.format(self._page, self._numpages)
         return pixbuf, self._name, page, self
 
     def pack(self):

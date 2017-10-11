@@ -66,21 +66,21 @@ class _ThumbnailMaintenanceDialog(gtk.Dialog):
         hbox.pack_start(left_box, False, False)
         hbox.pack_start(right_box, False, False)
 
-        label = labels.BoldLabel('%s:' % _('Thumbnail directory'))
+        label = labels.BoldLabel('{}:'.format(_('Thumbnail directory')))
         label.set_alignment(1.0, 1.0)
         left_box.pack_start(label, True, True)
-        label = gtk.Label('%s' % encoding.to_unicode(_thumb_base))
+        label = gtk.Label(u'{}'.format(encoding.to_unicode(_thumb_base)))
         label.set_alignment(0, 1.0)
         right_box.pack_start(label, True, True)
 
-        label = labels.BoldLabel('%s:' % _('Total number of thumbnails'))
+        label = labels.BoldLabel('{}:'.format(_('Total number of thumbnails')))
         label.set_alignment(1.0, 1.0)
         left_box.pack_start(label, True, True)
         self._num_thumbs_label = gtk.Label(_('Calculating...'))
         self._num_thumbs_label.set_alignment(0, 1.0)
         right_box.pack_start(self._num_thumbs_label, True, True)
 
-        label = labels.BoldLabel('%s:' % _('Total size of thumbnails'))
+        label = labels.BoldLabel('{}:'.format(_('Total size of thumbnails')))
         label.set_alignment(1.0, 1.0)
         left_box.pack_start(label, True, True)
         self._size_thumbs_label = gtk.Label(_('Calculating...'))
@@ -108,8 +108,8 @@ class _ThumbnailMaintenanceDialog(gtk.Dialog):
                     if os.path.isfile(entry_path):
                         self._num_thumbs += 1
                         size_thumbs += os.stat(entry_path).st_size
-        self._num_thumbs_label.set_text('%d' % self._num_thumbs)
-        self._size_thumbs_label.set_text('%.1f MiB' % (size_thumbs / 1048576.0))
+        self._num_thumbs_label.set_text('{:d}'.format(self._num_thumbs))
+        self._size_thumbs_label.set_text('{:.1f} MiB'.format(size_thumbs / 1048576.0))
 
     def _response(self, dialog, response):
         if response == gtk.RESPONSE_OK:
@@ -143,14 +143,14 @@ class _ThumbnailRemover(gtk.Dialog):
         hbox.pack_start(left_box, False, False)
         hbox.pack_start(right_box, False, False)
 
-        label = labels.BoldLabel('%s:' % _('Number of removed thumbnails'))
+        label = labels.BoldLabel('{}:'.format(_('Number of removed thumbnails')))
         label.set_alignment(1.0, 1.0)
         left_box.pack_start(label, True, True)
         number_label = gtk.Label('0')
         number_label.set_alignment(0, 1.0)
         right_box.pack_start(number_label, True, True)
 
-        label = labels.BoldLabel('%s:' % _('Total size of removed thumbnails'))
+        label = labels.BoldLabel('{}:'.format(_('Total size of removed thumbnails')))
         label.set_alignment(1.0, 1.0)
         left_box.pack_start(label, True, True)
         size_label = gtk.Label('0.0 MiB')
@@ -204,14 +204,13 @@ class _ThumbnailRemover(gtk.Dialog):
                         continue
                     removed_thumbs += 1
                     thumbs_size += size
-                    number_label.set_text('%d' % removed_thumbs)
-                    size_label.set_text('%.1f MiB' % (thumbs_size / 1048576.0))
+                    number_label.set_text('{:d}'.format(removed_thumbs))
+                    size_label.set_text('{:.1f} MiB'.format(thumbs_size / 1048576.0))
                     if broken:
                         src_path = '?'
                     else:
                         src_path = encoding.to_unicode(src_path)
-                    removing_label.set_text(_("Removed thumbnail for '%s'") %
-                                            src_path)
+                    removing_label.set_text(_("Removed thumbnail for '{}'".format(src_path)))
                 if iteration % 50 == 0:
                     bar.set_fraction(min(1, iteration / self._total_thumbs))
                 while gtk.events_pending():

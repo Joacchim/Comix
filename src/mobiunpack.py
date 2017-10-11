@@ -27,7 +27,7 @@ class Sectionizer(object):
         self.ident = header[0x3C:0x3C + 8]
         self.num_sections, = struct.unpack_from('>H', header, 76)
         sections = self.f.read(self.num_sections * 8)
-        self.sections = struct.unpack_from('>%dL' % (self.num_sections * 2), sections, 0)[::2] + (0x7fffffff,)
+        self.sections = struct.unpack_from('>{}L'.format(self.num_sections * 2), sections, 0)[::2] + (0x7fffffff,)
 
     def loadSection(self, section, limit=0x7fffffff):
         before, after = self.sections[section:section + 2]
@@ -62,7 +62,7 @@ class MobiFile(object):
             header = self.sect.loadSection(i, 32)
             imgtype = imghdr.what(None, header)
             if imgtype is not None:
-                names.append("image%05d.%s" % (1 + i - self.firstimg, imgtype))
+                names.append("image{:05d}.{}".format(1 + i - self.firstimg, imgtype))
         return names
 
     def extract(self, name, dst):

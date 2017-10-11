@@ -11,7 +11,7 @@ from PIL import Image
 from src import constants
 from src import labels
 
-ImageVersion = "Pillow-%s" % Image.PILLOW_VERSION
+ImageVersion = "Pillow-{}".format(Image.PILLOW_VERSION)
 
 _dialog = None
 
@@ -71,7 +71,7 @@ class _AboutDialog(gtk.Dialog):
                 '<small>Copyright © 2014-2017 Sergey Dryabzhinsky\n\n' +
                 'sergey.dryabzhinksy@gmail.com\n' +
                 'https://github.com/sergey-dryabzhinksy/Comix</small>\n' +
-                '\n' + _('Image processing library') + ': %s\n' % ImageVersion
+                '\n' + _('Image processing library') + ': {}\n'.format(ImageVersion)
         )
         box.pack_start(label, True, True, 0)
         label.set_justify(gtk.JUSTIFY_CENTER)
@@ -120,7 +120,7 @@ class _AboutDialog(gtk.Dialog):
                 ('Олександр Заяц', _('Ukrainian translation')),
                 ('Roxerio Roxo Carrillo', _('Galician translation')),
                 ('Victor Castillejo', _('Icon design'))):
-            name_label = labels.BoldLabel('%s:' % nice_person)
+            name_label = labels.BoldLabel('{}:'.format(nice_person))
             name_label.set_alignment(1.0, 1.0)
             left_box.pack_start(name_label, True, True)
             desc_label = gtk.Label(description)

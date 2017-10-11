@@ -286,8 +286,8 @@ msgstr "Uwagi"
 # File: src/comment.py, line: 53
 #: src/comment.py:53
 #, python-format
-msgid "Could not read %s"
-msgstr "Nie mozna odczytać %s"
+msgid "Could not read {}"
+msgstr "Nie mozna odczytać {}"
 
 #
 # File: src/deprecated.py, line: 16
@@ -475,8 +475,8 @@ msgstr "Archiwa TAR"
 # File: src/filechooser.py, line: 125
 #: src/filechooser.py:139
 #, python-format
-msgid "A file named '%s' already exists. Do you want to replace it?"
-msgstr "Plik o nazwie „%s“ już istnieje. Czy chcesz go nadpisać?"
+msgid "A file named '{}' already exists. Do you want to replace it?"
+msgstr "Plik o nazwie „{}“ już istnieje. Czy chcesz go nadpisać?"
 
 #
 # File: src/filechooser.py, line: 128
@@ -515,36 +515,36 @@ msgstr "Automatycznie dodaj ksiązki do tej kolekcji"
 # File: src/filehandler.py, line: 209
 #: src/filehandler.py:209
 #, python-format
-msgid "Could not open %s: Is a directory."
-msgstr "Nie można otworzyć %s: Jest katalogiem."
+msgid "Could not open {}: Is a directory."
+msgstr "Nie można otworzyć {}: Jest katalogiem."
 
 #
 # File: src/filehandler.py, line: 213
 #: src/filehandler.py:213
 #, python-format
-msgid "Could not open %s: No such file."
-msgstr "Nie można otworzyć %s: Brak pliku."
+msgid "Could not open {}: No such file."
+msgstr "Nie można otworzyć {}: Brak pliku."
 
 #
 # File: src/filehandler.py, line: 217
 #: src/filehandler.py:217
 #, python-format
-msgid "Could not open %s: Permission denied."
-msgstr "Nie można otworzyć %s: Brak dostępu."
+msgid "Could not open {}: Permission denied."
+msgstr "Nie można otworzyć {}: Brak dostępu."
 
 #
 # File: src/filehandler.py, line: 222
 #: src/filehandler.py:222
 #, python-format
-msgid "Could not open %s: Unknown file type."
-msgstr "Nie można otworzyć %s: Nieznany typ pliku."
+msgid "Could not open {}: Unknown file type."
+msgstr "Nie można otworzyć {}: Nieznany typ pliku."
 
 #
 # File: src/filehandler.py, line: 285
 #: src/filehandler.py:285
 #, python-format
-msgid "No images in '%s'"
-msgstr "Brak obrazów w „%s“"
+msgid "No images in '{}'"
+msgstr "Brak obrazów w „{}“"
 
 #
 # File: src/filehandler.py, line: 411
@@ -622,8 +622,8 @@ msgstr "Wpisz nową nazwę dla wybranej kolekcji. "
 # File: src/library.py, line: 271
 #: src/library.py:271
 #, python-format
-msgid "Could not change the name to '%s'."
-msgstr "Nie można zmienić nazwy na „%s“."
+msgid "Could not change the name to '{}'."
+msgstr "Nie można zmienić nazwy na „{}“."
 
 #
 # File: src/library.py, line: 275
@@ -649,25 +649,25 @@ msgstr "Korzeń"
 #: src/library.py:386
 #, python-format
 msgid ""
-"Put the collection '%(subcollection)s' in the collection '%(supercollection)"
+"Put the collection '{subcollection}' in the collection '{supercollection}"
 "s'."
-msgstr "Umieść kolekcję „%(subcollection)s“ w kolekcji „%(supercollection)s“."
+msgstr "Umieść kolekcję „{subcollection}“ w kolekcji „{supercollection}“."
 
 #
 # File: src/library.py, line: 407
 #: src/library.py:407
 #, python-format
-msgid "Add books to '%s'."
-msgstr "Dodaj książki do „%s“."
+msgid "Add books to '{}'."
+msgstr "Dodaj książki do „{}“."
 
 #
 # File: src/library.py, line: 411
 #: src/library.py:411
 #, python-format
 msgid ""
-"Move books from '%(source collection)s' to '%(destination collection)s'."
+"Move books from '{source collection}' to '{destination collection}'."
 msgstr ""
-"Przenieś książki z „%(source collection)s“ do „%(destination collection)s“."
+"Przenieś książki z „{source collection}“ do „{destination collection}“."
 
 #
 # File: src/library.py, line: 492
@@ -685,8 +685,8 @@ msgstr "Usuń z biblioteki…"
 # File: src/library.py, line: 588
 #: src/library.py:589
 #, python-format
-msgid "Removed %(num)d book(s) from '%(collection)s'."
-msgstr "Usuń %(num)d książkę(książki) z „%(collection)s“."
+msgid "Removed {num} book(s) from '{collection}'."
+msgstr "Usuń {num} książkę(książki) z „{collection}“."
 
 #
 # File: src/library.py, line: 597
@@ -708,8 +708,8 @@ msgstr ""
 # File: src/library.py, line: 609
 #: src/library.py:610
 #, python-format
-msgid "Removed %d book(s) from the library."
-msgstr "Usunięto %d książek z biblioteki."
+msgid "Removed {} book(s) from the library."
+msgstr "Usunięto {} książek z biblioteki."
 
 #
 # File: src/library.py, line: 769
@@ -768,8 +768,8 @@ msgstr "Otwórz zaznaczoną książkę."
 # File: src/properties.py, line: 113
 #: src/library.py:833 src/properties.py:118
 #, python-format
-msgid "%d pages"
-msgstr "%d stron"
+msgid "{} pages"
+msgstr "{} stron"
 
 #
 # File: src/library.py, line: 854
@@ -793,8 +793,8 @@ msgstr "Nowa kolekcja"
 # File: src/library.py, line: 876
 #: src/library.py:877
 #, python-format
-msgid "Could not add a new collection called '%s'."
-msgstr "Nie można dodać nowej kolekcji o nazwie „%s“."
+msgid "Could not add a new collection called '{}'."
+msgstr "Nie można dodać nowej kolekcji o nazwie „{}“."
 
 #
 # File: src/library.py, line: 910
@@ -812,8 +812,8 @@ msgstr "Dodane książki"
 # File: src/library.py, line: 952
 #: src/library.py:953
 #, python-format
-msgid "Adding '%s'..."
-msgstr "Dodawanie „%s“…"
+msgid "Adding '{}'..."
+msgstr "Dodawanie „{}“…"
 
 #
 # File: src/main.py, line: 666
@@ -1281,8 +1281,8 @@ msgstr "Właściwości"
 # File: src/properties.py, line: 114
 #: src/properties.py:119
 #, python-format
-msgid "%d comments"
-msgstr "%d komentarze"
+msgid "{} comments"
+msgstr "{} komentarze"
 
 #
 # File: src/properties.py, line: 124
@@ -1418,8 +1418,8 @@ msgstr "Całkowita wielkość usuniętych miniatur"
 # File: src/thumbremover.py, line: 193
 #: src/thumbremover.py:195
 #, python-format
-msgid "Removed thumbnail for '%s'"
-msgstr "Usunięta miniatura dla „%s“"
+msgid "Removed thumbnail for '{}'"
+msgstr "Usunięta miniatura dla „{}“"
 
 #
 # File: src/ui.py, line: 34

@@ -57,7 +57,7 @@ class _CommentsDialog(gtk.Dialog):
             name = os.path.basename(window.file_handler.get_comment_name(num))
             text = window.file_handler.get_comment_text(num)
             if text is None:
-                text = _('Could not read %s') % path
+                text = _('Could not read {}').format(num)
             text_buffer = gtk.TextBuffer(tag_table)
             text_buffer.set_text(encoding.to_unicode(text))
             text_buffer.apply_tag(tag, *text_buffer.get_bounds())
