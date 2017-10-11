@@ -657,8 +657,7 @@ msgid ""
 "Put the collection '{subcollection}' in the collection '{supercollection}"
 "s'."
 msgstr ""
-"Coloca la colección '{subcollection}' dentro de la colección '%"
-"(supercollection)s'."
+"Coloca la colección '{subcollection}' dentro de la colección '{supercollection}'."
 
 #
 # File: src/library.py, line: 407
@@ -674,8 +673,7 @@ msgstr "Agregar libros a '{}'."
 msgid ""
 "Move books from '{source collection}' to '{destination collection}'."
 msgstr ""
-"Mover libros desde la colección '{source collection}' hacia la colección '%"
-"(destination collection)s'."
+"Mover libros desde la colección '{source collection}' hacia la colección '{destination collection}'."
 
 #
 # File: src/library.py, line: 492

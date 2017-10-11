@@ -652,8 +652,7 @@ msgid ""
 "Put the collection '{subcollection}' in the collection '{supercollection}"
 "s'."
 msgstr ""
-"Col·loca la col·lecció '{subcollection}' en la col·lecció '%"
-"(supercollection)s'."
+"Col·loca la col·lecció '{subcollection}' en la col·lecció '{supercollection}'."
 
 #
 # File: src/library.py, line: 407

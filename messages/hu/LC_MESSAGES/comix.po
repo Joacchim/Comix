@@ -444,8 +444,7 @@ msgid ""
 "Put the collection '{subcollection}' in the collection '{supercollection}"
 "s'."
 msgstr ""
-"A '{subcollection}' gyűjtemény áthelyezése a következőbe: '%"
-"(supercollection)s'."
+"A '{subcollection}' gyűjtemény áthelyezése a következőbe: '{supercollection}'."
 
 #: src/library.py:407
 #, python-format
@@ -457,8 +456,7 @@ msgstr "Könyvek hozzáadása a következőhöz: '{}'."
 msgid ""
 "Move books from '{source collection}' to '{destination collection}'."
 msgstr ""
-"Könyvek mozgatása innen: '{source collection}' ide: '%(destination "
-"collection)s'."
+"Könyvek mozgatása innen: '{source collection}' ide: '{destination collection}'."
 
 #: src/library.py:493
 msgid "Remove from this collection"
